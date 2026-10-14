@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-14",
+  "device": "Pixel 9a",
+  "rebootPersistence": {
+    "passed": true,
+    "before": {
+      "time": 1792019188426,
+      "uptimeMillis": 786102936,
+      "noise": {
+        "configuration": "{\"version\":1,\"programs\":[\"Universal\",\"Off just Tinnitus\",\"Noisy\",\"Outdoor\",\"TV\",\"Very Noisy\"],\"quiet\":\"1\",\"middle\":\"3\",\"loud\":\"6\",\"low\":\"-54.5\",\"high\":\"-43.0\",\"margin\":\"1.5\",\"strikes\":\"3\",\"cooldown\":\"60\",\"source\":\"phone\",\"confirmed\":true}"
+      },
+      "sleep": {},
+      "voice": {
+        "responses": "1",
+        "prompts": "1"
+      },
+      "NoiseEnabled": "0",
+      "NoiseMode": "observe",
+      "NoiseSettingsReady": "1",
+      "NoiseLow": "-54.5",
+      "NoiseHigh": "-43.0",
+      "NoiseHysteresis": "1.5",
+      "NoiseStrikeLimit": "3",
+      "NoiseCooldownSeconds": "60",
+      "WakeEnabled": "0",
+      "SleepEnabled": "0",
+      "VoiceResponses": "1",
+      "VoicePrompts": "1",
+      "NoiseLogEnabled": "0",
+      "snapshotSHA256": "a604e86648ff071b79e3e800a660b2479783287b99e82c3b85772053b4cf9f89"
+    },
+    "after": {
+      "time": 1792019520238,
+      "uptimeMillis": 210814,
+      "noise": {
+        "configuration": "{\"version\":1,\"programs\":[\"Universal\",\"Off just Tinnitus\",\"Noisy\",\"Outdoor\",\"TV\",\"Very Noisy\"],\"quiet\":\"1\",\"middle\":\"3\",\"loud\":\"6\",\"low\":\"-54.5\",\"high\":\"-43.0\",\"margin\":\"1.5\",\"strikes\":\"3\",\"cooldown\":\"60\",\"source\":\"phone\",\"confirmed\":true}"
+      },
+      "sleep": {},
+      "voice": {
+        "responses": "1",
+        "prompts": "1"
+      },
+      "NoiseEnabled": "0",
+      "NoiseMode": "observe",
+      "NoiseSettingsReady": "1",
+      "NoiseLow": "-54.5",
+      "NoiseHigh": "-43.0",
+      "NoiseHysteresis": "1.5",
+      "NoiseStrikeLimit": "3",
+      "NoiseCooldownSeconds": "60",
+      "WakeEnabled": "0",
+      "SleepEnabled": "0",
+      "VoiceResponses": "1",
+      "VoicePrompts": "1",
+      "NoiseLogEnabled": "0",
+      "snapshotSHA256": "a604e86648ff071b79e3e800a660b2479783287b99e82c3b85772053b4cf9f89"
+    }
+  },
+  "endurance": {
+    "status": "running; final collection pending",
+    "requestedDurationSeconds": 28800,
+    "mode": "observation only",
+    "initialSummary": {
+      "runId": "1792020060937",
+      "started": 1792020066610,
+      "startedUptime": 757185,
+      "deadline": 1792048860937,
+      "deadlineUptime": 29551512,
+      "ticks": 5,
+      "freshSamples": 5,
+      "failedAttempts": 0,
+      "skippedTicks": 0,
+      "lockedTicks": 3,
+      "chargingTicks": 0,
+      "maxSampleGapMillis": 15849,
+      "maxTickGapMillis": 15941,
+      "lastSampleTime": 1792020129333,
+      "startBattery": {
+        "level": 100,
+        "scale": 100,
+        "plugged": 0,
+        "temperature": 294,
+        "voltage": 4371,
+        "chargeCounterMicroAh": 4740000
+      },
+      "lastBattery": {
+        "level": 100,
+        "scale": 100,
+        "plugged": 0,
+        "temperature": 280,
+        "voltage": 4359,
+        "chargeCounterMicroAh": 4737500
+      },
+      "lastTick": 1792020129701,
+      "lastUptime": 820280,
+      "noiseMode": "observe",
+      "lastError": "",
+      "status": "running"
+    },
+    "deadlineLocal": "2026-10-15T03:21:00.937000-04:00",
+    "collectFrom": "/sdcard/Tasker/sig3-endurance-summary.json",
+    "recovery": "Public SIG3_NoiseStop stops observation; reimport release SIG3_NoisePoll after collecting"
+  },
+  "batteryAttribution": "Total phone use during an instrumented run; no idle comparison yet",
+  "enduranceSmoke": {
+    "runId": "1792019871576",
+    "started": 1792019877627,
+    "startedUptime": 568204,
+    "deadline": 1792019931576,
+    "deadlineUptime": 622151,
+    "ticks": 5,
+    "freshSamples": 5,
+    "failedAttempts": 0,
+    "skippedTicks": 0,
+    "lockedTicks": 0,
+    "chargingTicks": 0,
+    "maxSampleGapMillis": 15917,
+    "maxTickGapMillis": 15893,
+    "lastSampleTime": 1792019940568,
+    "startBattery": {
+      "level": 100,
+      "scale": 100,
+      "plugged": 0,
+      "temperature": 294,
+      "voltage": 4371,
+      "chargeCounterMicroAh": 4750000
+    },
+    "lastBattery": {
+      "level": 100,
+      "scale": 100,
+      "plugged": 0,
+      "temperature": 294,
+      "voltage": 4371,
+      "chargeCounterMicroAh": 4747500
+    },
+    "lastTick": 1792019940788,
+    "lastUptime": 631363,
+    "noiseMode": "observe",
+    "lastError": "",
+    "status": "completed",
+    "stopDelayMillis": 9212
+  },
+  "smokeStoppedState": {
+    "time": 1792019993031,
+    "uptimeMillis": 683611,
+    "noise": {
+      "configuration": "{\"version\":1,\"programs\":[\"Universal\",\"Off just Tinnitus\",\"Noisy\",\"Outdoor\",\"TV\",\"Very Noisy\"],\"quiet\":\"1\",\"middle\":\"3\",\"loud\":\"6\",\"low\":\"-54.5\",\"high\":\"-43.0\",\"margin\":\"1.5\",\"strikes\":\"3\",\"cooldown\":\"60\",\"source\":\"phone\",\"confirmed\":true}"
+    },
+    "sleep": {},
+    "voice": {
+      "responses": "1",
+      "prompts": "1"
+    },
+    "NoiseEnabled": "0",
+    "NoiseMode": "observe",
+    "NoiseSettingsReady": "1",
+    "NoiseLow": "-54.5",
+    "NoiseHigh": "-43.0",
+    "NoiseHysteresis": "1.5",
+    "NoiseStrikeLimit": "3",
+    "NoiseCooldownSeconds": "60",
+    "WakeEnabled": "0",
+    "SleepEnabled": "0",
+    "VoiceResponses": "1",
+    "VoicePrompts": "1",
+    "NoiseLogEnabled": "0",
+    "snapshotSHA256": "a604e86648ff071b79e3e800a660b2479783287b99e82c3b85772053b4cf9f89"
+  }
+}

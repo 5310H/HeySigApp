@@ -1,0 +1,342 @@
+{
+  "date": "2026-10-14",
+  "device": "Pixel 9a",
+  "source": "phone",
+  "units": "uncalibrated noise index",
+  "controlledDispatch": {
+    "passed": [
+      "seed",
+      "observe",
+      "deferred",
+      "middle",
+      "override",
+      "resume",
+      "manual"
+    ],
+    "failure": "",
+    "restoration": {
+      "mode": "restore",
+      "time": 1792012315701,
+      "Family": "Tinnitus",
+      "CommandOK": "1",
+      "Error": "",
+      "Program": "Universal",
+      "Previous": "",
+      "Expected": "",
+      "Observed": "0",
+      "NoiseEnabled": "",
+      "NoiseMode": "",
+      "NoiseStatus": "stopped",
+      "NoiseCandidate": "",
+      "NoiseStrikes": "",
+      "NoiseStableTier": "",
+      "NoiseProposedSlot": "",
+      "NoiseLastSwitchTime": "",
+      "ManualOverride": "",
+      "NoiseSettingsReady": "",
+      "NoiseSettingsStatus": "",
+      "configuration": ""
+    }
+  },
+  "calibration": {
+    "method": "Fixed phone position; snapshots taken before environment transitions; exclude first 15 seconds after stage marker",
+    "settings": {
+      "low": -54.5,
+      "high": -43.0,
+      "margin": 1.5,
+      "strikes": 3,
+      "cooldown": 60
+    },
+    "samples": {
+      "quiet": [
+        -63.0,
+        -62.0,
+        -63.0,
+        -63.0,
+        -63.0,
+        -62.0,
+        -64.0
+      ],
+      "conversation": [
+        -47.0,
+        -45.0,
+        -48.0,
+        -47.0,
+        -48.0,
+        -46.0,
+        -54.0,
+        -46.0,
+        -45.0,
+        -46.0,
+        -44.0,
+        -47.0,
+        -45.0
+      ],
+      "very-noisy": [
+        -40.0,
+        -41.0,
+        -41.0,
+        -40.0,
+        -41.0,
+        -40.0,
+        -39.0,
+        -41.0,
+        -38.0
+      ]
+    },
+    "medians": {
+      "quiet": -63.0,
+      "conversation": -46.0,
+      "very-noisy": -40.0
+    }
+  },
+  "backgroundObservation": {
+    "launcherRecords": 47,
+    "spanSeconds": 732.095,
+    "errors": [],
+    "screenOffRecords": 2,
+    "screenOffIndices": [
+      -59.0,
+      -49.0
+    ],
+    "screenOffErrors": []
+  },
+  "repositoryChecks": {
+    "scriptsPassed": 27,
+    "xmlFiles": 101,
+    "actions": 7115,
+    "staticFailures": 0
+  },
+  "limitations": [
+    "Not calibrated sound-pressure decibels",
+    "Readback does not independently prove acoustic receipt",
+    "Overnight, full reboot, battery impact and real simultaneous microphone use unverified"
+  ],
+  "measuredAutomaticSelections": [
+    {
+      "readings": [
+        -46.0,
+        -46.0,
+        -49.0
+      ],
+      "result": {
+        "time": 1792018036813,
+        "NoisePollSampled": "1",
+        "NoiseLastSampleTime": "1792018034077",
+        "NoiseCalibrationStageTime": "1792017682956",
+        "NoiseSource": "phone",
+        "NoiseMode": "auto",
+        "NoiseRaw": "-49",
+        "NoiseIndex": "-49.0",
+        "NoiseStatus": "selected",
+        "NoiseCandidate": "",
+        "NoiseStrikes": "0",
+        "NoiseProposedSlot": "3",
+        "NoiseEnabled": "1",
+        "VoiceBusy": "0",
+        "WakeEnabled": "0",
+        "ManualOverride": "",
+        "SleepActive": "0",
+        "CommandOK": "1",
+        "Error": "",
+        "Program": "Noisy",
+        "stage": "very-noisy",
+        "foregroundPackage": "com.signia.rta",
+        "locked": false
+      }
+    },
+    {
+      "readings": [
+        -39.0,
+        -35.0,
+        -35.0
+      ],
+      "result": {
+        "time": 1792018149887,
+        "NoisePollSampled": "1",
+        "NoiseLastSampleTime": "1792018147356",
+        "NoiseCalibrationStageTime": "1792017682956",
+        "NoiseSource": "phone",
+        "NoiseMode": "auto",
+        "NoiseRaw": "-35",
+        "NoiseIndex": "-35.0",
+        "NoiseStatus": "selected",
+        "NoiseCandidate": "",
+        "NoiseStrikes": "0",
+        "NoiseProposedSlot": "6",
+        "NoiseEnabled": "1",
+        "VoiceBusy": "0",
+        "WakeEnabled": "0",
+        "ManualOverride": "",
+        "SleepActive": "0",
+        "CommandOK": "1",
+        "Error": "",
+        "Program": "Very Noisy",
+        "stage": "very-noisy",
+        "foregroundPackage": "com.signia.rta",
+        "locked": false
+      }
+    },
+    {
+      "readings": [
+        -38.0,
+        -39.0,
+        -42.0
+      ],
+      "result": {
+        "time": 1792018230250,
+        "NoisePollSampled": "1",
+        "NoiseLastSampleTime": "1792018229339",
+        "NoiseCalibrationStageTime": "1792017682956",
+        "NoiseSource": "phone",
+        "NoiseMode": "auto",
+        "NoiseRaw": "-42",
+        "NoiseIndex": "-42.0",
+        "NoiseStatus": "selected",
+        "NoiseCandidate": "",
+        "NoiseStrikes": "0",
+        "NoiseProposedSlot": "6",
+        "NoiseEnabled": "1",
+        "VoiceBusy": "0",
+        "WakeEnabled": "0",
+        "ManualOverride": "",
+        "SleepActive": "0",
+        "CommandOK": "1",
+        "Error": "",
+        "Program": "Very Noisy",
+        "stage": "very-noisy",
+        "foregroundPackage": "com.signia.rta",
+        "locked": false
+      }
+    },
+    {
+      "readings": [
+        -48.0,
+        -49.0,
+        -47.0
+      ],
+      "result": {
+        "time": 1792018374109,
+        "NoisePollSampled": "1",
+        "NoiseLastSampleTime": "1792018371524",
+        "NoiseCalibrationStageTime": "1792018326793",
+        "NoiseSource": "phone",
+        "NoiseMode": "auto",
+        "NoiseRaw": "-47",
+        "NoiseIndex": "-47.0",
+        "NoiseStatus": "selected",
+        "NoiseCandidate": "",
+        "NoiseStrikes": "0",
+        "NoiseProposedSlot": "3",
+        "NoiseEnabled": "1",
+        "VoiceBusy": "0",
+        "WakeEnabled": "0",
+        "ManualOverride": "",
+        "SleepActive": "0",
+        "CommandOK": "1",
+        "Error": "",
+        "Program": "Noisy",
+        "stage": "conversation",
+        "foregroundPackage": "com.signia.rta",
+        "locked": false
+      }
+    },
+    {
+      "readings": [
+        -65.0,
+        -65.0,
+        -67.0
+      ],
+      "result": {
+        "time": 1792018471493,
+        "NoisePollSampled": "1",
+        "NoiseLastSampleTime": "1792018468946",
+        "NoiseCalibrationStageTime": "1792018326793",
+        "NoiseSource": "phone",
+        "NoiseMode": "auto",
+        "NoiseRaw": "-67",
+        "NoiseIndex": "-67.0",
+        "NoiseStatus": "selected",
+        "NoiseCandidate": "",
+        "NoiseStrikes": "0",
+        "NoiseProposedSlot": "1",
+        "NoiseEnabled": "1",
+        "VoiceBusy": "0",
+        "WakeEnabled": "0",
+        "ManualOverride": "",
+        "SleepActive": "0",
+        "CommandOK": "1",
+        "Error": "",
+        "Program": "Universal",
+        "stage": "conversation",
+        "foregroundPackage": "com.signia.rta",
+        "locked": false
+      }
+    }
+  ],
+  "stageLabelCaution": "Automatic-loop stage was initially very-noisy throughout; category acceptance uses numeric samples and fresh program readback, not that label.",
+  "voiceBusyGate": {
+    "skippedRecords": 4,
+    "allSkipped": true,
+    "sampleTimes": [
+      "1792018502615"
+    ],
+    "resumed": {
+      "time": 1792018559108,
+      "NoisePollSampled": "1",
+      "NoiseLastSampleTime": "1792018558829",
+      "NoiseCalibrationStageTime": "1792018326793",
+      "NoiseSource": "phone",
+      "NoiseMode": "auto",
+      "NoiseRaw": "-64",
+      "NoiseIndex": "-64.0",
+      "NoiseStatus": "collecting quiet 1/3",
+      "NoiseCandidate": "quiet",
+      "NoiseStrikes": "1",
+      "NoiseProposedSlot": "",
+      "NoiseEnabled": "1",
+      "VoiceBusy": "0",
+      "WakeEnabled": "0",
+      "ManualOverride": "",
+      "SleepActive": "0",
+      "CommandOK": "1",
+      "Error": "",
+      "Program": "",
+      "stage": "conversation",
+      "foregroundPackage": "com.signia.rta",
+      "locked": false
+    },
+    "scope": "Injected busy flag; not simultaneous live speech recognition"
+  },
+  "finalRestoration": {
+    "program": "Universal",
+    "volume": "10",
+    "balance": "0",
+    "tinnitus": "0",
+    "originalAidStateMatched": true,
+    "savedRecordExactMatch": true,
+    "savedRecordSHA256": "a604e86648ff071b79e3e800a660b2479783287b99e82c3b85772053b4cf9f89",
+    "noiseEnabled": "0",
+    "measuredConfiguration": {
+      "version": 1,
+      "programs": [
+        "Universal",
+        "Off just Tinnitus",
+        "Noisy",
+        "Outdoor",
+        "TV",
+        "Very Noisy"
+      ],
+      "quiet": "1",
+      "middle": "3",
+      "loud": "6",
+      "low": "-54.5",
+      "high": "-43.0",
+      "margin": "1.5",
+      "strikes": "3",
+      "cooldown": "60",
+      "source": "phone",
+      "confirmed": true
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# What we know so far
+
+October 14, 2026. These results describe the existing HeySig/Tasker setup on the Pixel 9a. The Kotlin app has not been implemented, and must earn its own phone acceptance.
+
+| Area | Existing evidence | Work for the app |
+|---|---|---|
+| Programs | Six configured names; controlled and measured automatic transitions passed fresh Signia readback | Own accessibility service, selectors and serialized executor |
+| Sliders | 28 focused checks passed for occasional use; endpoints, repeats and restoration | Port gestures, geometry checks and no-op/readback behavior |
+| Battery | Existing Signia battery checks work; user confirms audible indications | Own guarded battery workflow; direct request chirp remains unproven |
+| Voice | Prompted commands, spoken results, retry/cancel and independent speech switches accepted | Replace AutoVoice with app speech services; prove background wake separately |
+| Saved settings | Durable snapshots and restore acceptance; exact saved-record hash survives reboot | Versioned durable storage and migration preview |
+| Sleep | Selectable times/programs and live foreground sleep/wake transitions accepted | Native scheduler and configured overnight/reboot acceptance |
+| Noise | Quiet/normal/louder calibration, real switching, manual priority and bounded background checks accepted | Calibrate the app sampler again; preserve hysteresis, confirmation and cooldown |
+| Reboot | Noise choices, speech preferences, off states and saved-record hash survived a full reboot | Verify the same behavior in the new app |
+| Endurance/battery | Eight-hour observation trial started; final results not yet collected in this record | Collect existing evidence, then test app endurance and comparable idle battery use |
+| Watch | Requested; actual watch/platform integration not accepted | Identify watch and validate commands before watch noise sampling |
+| Direct chirps | Command definitions and checksum/control bits verified, 131,072 original-code comparisons | Resolve address/profile, full waveform and actual aid acceptance |
+| iPhone | Shared logic is possible; a usable control path has not been demonstrated | Establish direct/official integration before promising feature parity |
+
+The tested noise choices use an **uncalibrated phone index**, with boundaries −54.5 / −43, margin 1.5, three confirmations and 60-second cooldown. These values belong to the AutoVoice sampler and must not be assumed valid for a new audio implementation.
+
+Only battery requests have expected audible aid feedback. Program/slider readback is evidence of the Signia app state, not independent proof of acoustic receipt. Slider work should remain proportionate to occasional use.
+
+Start with [the implementation plan](plan.md), [architecture boundaries](architecture/boundaries.md), [acceptance records](acceptance/), and [chirp research](../research/acoustic/README.md).
+
+## Evidence provenance
+
+Source: [5310H/HeySig, HeySid3](https://github.com/5310H/HeySig/tree/HeySid3). Milestones: `86842f7` static acoustic validation, `4b96088` measured noise acceptance, `311de13` full reboot persistence and timed-trial setup. Copied acceptance documents retain their historical scope; their claims apply to the old setup, not this app. Links to uncopied historical records point back to HeySig. No proprietary APKs or extracted assemblies were copied.

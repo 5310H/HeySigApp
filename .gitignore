@@ -1,0 +1,25 @@
+# Build and IDE outputs
+.gradle/
+.kotlin/
+**/build/
+.idea/
+*.iml
+local.properties
+.DS_Store
+DerivedData/
+xcuserdata/
+# Signing material and local credentials
+*.jks
+*.keystore
+.env
+.env.*
+# Local proprietary extracts and device captures
+private/
+*.apk
+*.aab
+*.dll
+*.pdb
+# Temporary Python tooling
+__pycache__/
+*.py[cod]
+.venv/
