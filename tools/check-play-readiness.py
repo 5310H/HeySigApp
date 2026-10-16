@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Source-only Play preflight; intentionally fails known development blockers.
+"""Built-manifest Play preflight; does not replace the remaining release gates.
 
 This does not validate an AAB, a privacy policy, health classification, or Play
 approval. Recheck the dated policy floors before preparing each submission.
@@ -42,8 +42,8 @@ def inspect_manifest(path, label, minimum_target):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--phone-manifest', type=Path, default=ROOT / 'androidApp/src/main/AndroidManifest.xml')
-    parser.add_argument('--watch-manifest', type=Path, default=ROOT / 'wearApp/src/main/AndroidManifest.xml')
+    parser.add_argument('--phone-manifest', type=Path, default=ROOT / 'androidApp/build/outputs/bundle/release/validated-manifest.xml')
+    parser.add_argument('--watch-manifest', type=Path, default=ROOT / 'wearApp/build/outputs/bundle/release/validated-manifest.xml')
     args = parser.parse_args()
     blockers = inspect_manifest(args.phone_manifest, 'Phone', 36)
     blockers += inspect_manifest(args.watch_manifest, 'Wear', 35)
@@ -55,12 +55,16 @@ def main():
     ):
         if not any((ROOT / option).is_file() for option in options):
             blockers.append(f'Build: {label} missing; release AAB pipeline not established')
-    print(f'Google Play source preflight — policy floors checked {POLICY_CHECKED}')
+    print(f'Google Play built-manifest preflight — policy floors checked {POLICY_CHECKED}')
     for blocker in blockers:
         print(f'BLOCKED: {blocker}')
+    if not blockers:
+        print('PASS: inspected release manifests and Gradle scaffold checks; remaining manual gates still apply.')
     print('MANUAL: signed release AAB validation, production/no-ADB transport, privacy/Data safety,')
     print('health/medical assessment, accessibility/device tests and Play Console requirements.')
     print('Details: docs/play-store-readiness.md. This is not a Play approval check.')
+    if not args.phone_manifest.is_file() or not args.watch_manifest.is_file():
+        print('Build release candidates and run tools/validate-release-bundles.py first, or supply plain XML release manifests explicitly.')
     return 1 if blockers else 0
 
 

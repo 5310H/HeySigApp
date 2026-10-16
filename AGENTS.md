@@ -23,6 +23,9 @@ successful APK build is not Play approval.
   validation, device tests and the applicable Play Console test track.
 - Validate target SDK against the current official phone and Wear requirements;
   do not just increase the manifest number without testing behavior changes.
+- Phone and non-standalone Wear releases must share the application ID and
+  app-signing identity; use distinct form-factor version codes. Preserve the
+  existing development IDs/signers when changing production packaging.
 - Document actual data flows and third-party recognition/network behavior before
   writing privacy or Data safety claims. Do not claim everything stays on-device
   or that no data is collected without verifying the release configuration.

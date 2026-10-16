@@ -1,0 +1,40 @@
+// Passwords are loaded only from an ignored, owner-readable local file.
+def uploadProperties = new Properties()
+def uploadFile = rootProject.file('private/signing/upload.properties')
+if (uploadFile.isFile()) uploadFile.withInputStream { uploadProperties.load(it) }
+
+android {
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("private/signing/${project.name}-debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        upload {
+            if (uploadFile.isFile()) {
+                storeFile rootProject.file(uploadProperties.getProperty('storeFile'))
+                storePassword uploadProperties.getProperty('storePassword')
+                keyAlias uploadProperties.getProperty('keyAlias')
+                keyPassword uploadProperties.getProperty('keyPassword')
+            }
+        }
+    }
+    buildTypes.release.signingConfig = signingConfigs.upload
+}
+
+def requireUploadSigning = tasks.register('requireUploadSigning') {
+    doLast {
+        if (!uploadFile.isFile() || !['storeFile','storePassword','keyAlias','keyPassword'].every {
+            uploadProperties.getProperty(it)?.trim()
+        }) {
+            throw new GradleException('Release signing is missing. Run python3 tools/setup-signing.py --create-upload-key; never use the debug key for release.')
+        }
+        if (!rootProject.file(uploadProperties.getProperty('storeFile')).isFile()) {
+            throw new GradleException('Upload keystore is missing')
+        }
+    }
+}
+// Lint and source checks need no upload key. Artifact-producing tasks do.
+tasks.matching { it.name in ['signReleaseBundle','packageReleaseBundle','packageRelease','bundleRelease'] }
+    .configureEach { dependsOn(requireUploadSigning) }

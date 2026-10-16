@@ -41,6 +41,7 @@ class HomeActivity : Activity() {
     private var setupChanged: (() -> Boolean)? = null
     private var saveSetupAction: (() -> Unit)? = null
     private var message = "Ready. No command is sent at startup."
+    private var backCallback: android.window.OnBackInvokedCallback? = null
     private var watchBridge: WatchBridge? = null
     private var watchToggle: CheckBox? = null
     private var remoteReply: ((JSONObject) -> Unit)? = null
@@ -55,6 +56,12 @@ class HomeActivity : Activity() {
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         load()
+        if(android.os.Build.VERSION.SDK_INT >= 33) {
+            backCallback = android.window.OnBackInvokedCallback { leavePage() }.also {
+                onBackInvokedDispatcher.registerOnBackInvokedCallback(android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT,it)
+            }
+        }
+        if(android.os.Build.VERSION.SDK_INT >= 30) window.setDecorFitsSystemWindows(false)
         tts = TextToSpeech(this) { code ->
             speechReady = code == TextToSpeech.SUCCESS
             if(speechReady) tts?.language = Locale.US
@@ -67,7 +74,14 @@ class HomeActivity : Activity() {
         pendingText?.let { pendingText = null; route(it) }
     }
     override fun onPause() { noise.stop(); watchBridge?.close(); watchBridge = null; resumed = false; pendingVoice = false; cancelled.set(true); tts?.stop(); super.onPause() }
-    override fun onDestroy() { noise.stop(); cancelled.set(true); tts?.shutdown(); super.onDestroy() }
+    override fun onDestroy() {
+        if(android.os.Build.VERSION.SDK_INT >= 33) backCallback?.let { onBackInvokedDispatcher.unregisterOnBackInvokedCallback(it) }
+        noise.stop(); cancelled.set(true); tts?.shutdown(); super.onDestroy()
+    }
+    @Deprecated("Fallback for Android 10–12; newer versions use OnBackInvokedDispatcher")
+    @android.annotation.SuppressLint("GestureBackNavigation") // API 33+ dispatcher is registered in onCreate; retain the pre-33 framework fallback.
+    override fun onBackPressed() { leavePage() }
+    private fun leavePage() { if(page != "Home") navigate("Home") else finish() }
 
     private fun load() {
         try {
@@ -130,7 +144,7 @@ class HomeActivity : Activity() {
         status = line(message)
         heardStatus = line(if(lastHeard.isEmpty()) "" else "Speech heard: $lastHeard")
         heardStatus.visibility = if(lastHeard.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
-        if(page == "Home") {
+        if(page == "Home" && BuildConfig.DEBUG) {
             val remote = CheckBox(this).apply {
                 text = "Watch Wi-Fi (development)"; isChecked = watchBridge != null
                 setOnCheckedChangeListener { box, enabled ->
@@ -155,7 +169,14 @@ class HomeActivity : Activity() {
         }
         val scroll = ScrollView(this).apply { addView(content, ViewGroup.LayoutParams(-1,-2)) }
         scroll.setOnApplyWindowInsetsListener { view,insets ->
-            view.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom); insets
+            if(android.os.Build.VERSION.SDK_INT >= 30) {
+                val bars = insets.getInsets(android.view.WindowInsets.Type.systemBars() or android.view.WindowInsets.Type.displayCutout() or android.view.WindowInsets.Type.ime())
+                view.setPadding(bars.left,bars.top,bars.right,bars.bottom)
+            } else {
+                @Suppress("DEPRECATION")
+                view.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom)
+            }
+            insets
         }
         setContentView(scroll)
         window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)

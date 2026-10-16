@@ -4,7 +4,7 @@ October 16, 2026. Develop the actual Android application on the Chromebook and r
 
 ## Current manual-core slice
 
-`HomeActivity` is the launcher for version 0.8. `ProtoActivity` remains an internal research screen, with the existing renderer unchanged. The launcher package stays `com.heysig.batteryprototype` to preserve compatible updates; the visible app name is HeySig.
+`HomeActivity` is the launcher for version 0.9, targeting API 36 through the [Gradle pipeline](gradle-release-builds.md). `ProtoActivity` remains a debug-only research screen, with the existing renderer unchanged. The development package stays `com.heysig.batteryprototype` with its preserved signer; production validation candidates use `com.heysig.app` and a separate upload signer.
 
 The experimental [Noise screen](noise-quick-start.md) now provides six ordered program assignments, five thresholds, bounded microphone samples and Observe proposals without playback. Automatic switching remains disabled. Voice has separate saved prompt and response switches; the watch companion has its own local switches.
 
@@ -61,7 +61,7 @@ The first Chromebook manual playback attempts timed out. Targeted AudioTrack log
 
 Version 0.4 changes `SpeakerPlayback` to request transient audio focus, start the stream before writes, feed bounded nonblocking chunks, and poll actual progress. A 50 ms zero tail allows resampling to drain; the command PCM itself remains unchanged. Focus loss, Stop, output changes, write errors and deadlines fail explicitly without replay. Timeout errors include frame/byte counts rather than a generic message.
 
-An opt-in test build uses `HEYSIG_AUDIO_SMOKE=1` with the normal build command. This adds the development `PlaybackSmoke` instrumentation; default builds omit it. After installing that build on the exact target, run `adb -s emulator-5554 shell am instrument -w com.heysig.batteryprototype/com.heysig.app.PlaybackSmoke`. It brings HeySig foreground and plays two zero-only buffers of the normal command length, checks frame completion/speaker routing and rejects an already-cancelled request. It sends no aid command and does not modify requested/saved aid settings. Physical aid reception remains a separate listening test.
+The optional silent-audio diagnostic now lives in the separate Gradle Android test APK. Build `:androidApp:assembleDebugAndroidTest`, install the debug app and test APK on the selected target, then explicitly run `adb -s emulator-5554 shell am instrument -w com.heysig.batteryprototype.test/com.heysig.app.PlaybackSmoke`. It plays two zero-only buffers, checks completion/speaker routing and rejects an already-cancelled request. The default `Api36Smoke` runner uses no audio or microphone. Neither runner is packaged in release artifacts. Physical aid reception remains a separate listening test.
 
 ## Manual voice follow-up (0.5)
 

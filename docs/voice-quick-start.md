@@ -1,6 +1,6 @@
 # HeySig voice quick start
 
-For the native Chromebook Android app, version 0.8. Open HeySig and press **Speak command** for each request. This is push-to-talk; an always-listening Hey Sig wake phrase is not implemented. The same APK/source is being developed for later phone acceptance. The experimental [watch companion](../wearApp/README.md) has passed Wi-Fi status and spoken-reply acceptance; watch-triggered aid controls remain pending. See [six-level noise settings and Observe commands](noise-quick-start.md).
+For the native Chromebook Android app, version 0.9. Open HeySig and press **Speak command** for each request. This is push-to-talk; an always-listening Hey Sig wake phrase is not implemented. The same APK/source is being developed for later phone acceptance. The experimental [watch companion](../wearApp/README.md) has passed Wi-Fi status and spoken-reply acceptance; watch-triggered aid controls remain pending. See [six-level noise settings and Observe commands](noise-quick-start.md).
 
 ## Voice sound switches
 

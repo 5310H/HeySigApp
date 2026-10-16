@@ -1,6 +1,6 @@
 # Android HeySig development build
 
-Version 0.8 launches `com.heysig.app.HomeActivity`: native Home, Setup, Saved, Voice and Noise screens. [Six-level Noise Setup and Observe](../docs/noise-quick-start.md) are experimental; automatic switching is disabled. Voice prompts and spoken responses have independent saved switches. See [Chromebook-first development](../docs/chromebook-development.md) for current functionality, checks and pending phone/watch acceptance. The earlier research Activity remains internal. The build command and APK filename below are retained for compatibility.
+Version 0.9 targets API 36 and launches `com.heysig.app.HomeActivity`: native Home, Setup, Saved, Voice and Noise screens. [Six-level Noise Setup and Observe](../docs/noise-quick-start.md) are experimental; automatic switching is disabled. Voice prompts and spoken responses have independent saved switches. See [Gradle development/release builds](../docs/gradle-release-builds.md) and [Chromebook development](../docs/chromebook-development.md). The earlier research Activity is included only in debug builds. The compatibility build command and APK filename are retained.
 
 See [the code guide](../docs/proto-code-guide.md) for responsibilities, mappings, playback flow, validation and limits. Launcher: `com.heysig.app.HomeActivity`; output: `androidApp/build/heysig-proto.apk`.
 
@@ -34,19 +34,17 @@ For a real test, identify the starting aid program and the intended alternate fi
 
 A minimal foreground research Activity reuses the desktop Kotlin generator. It provides explicit left/right address and profile inputs, separate side buttons, cancellation, and no automatic/background playback. It reads audio/lock/DND state and requires an unlocked screen, normal audio mode, media volume of at least 50%, no detected external audio outputs, and a confirmed built-in speaker route. It does not change phone volume or DND. Leaving the Activity requests cancellation.
 
-This is a debug prototype using platform widgets, not the planned production Compose app. There is no accessibility service, microphone permission, Tasker integration, or endurance instrumentation.
+The research Activity uses platform widgets and has no accessibility service or Tasker integration. Current Home additionally supports opt-in microphone sampling for Noise; that capture requires disclosure and runtime permission.
 
-On this ARM64 Chromebook, the locally installed ARM `aapt`, `zipalign`, and `apksigner` can package the APK without an x86 SDK build-tools binary. The reproducible script also needs JDK/Kotlin, Google's API 35 `android.jar`, and Google R8/D8 9.5.26:
+Use JDK 17, the pinned Gradle wrapper and SDK platform 36. ARM resource-tool setup and signing instructions are in the [Gradle build guide](../docs/gradle-release-builds.md):
 
 ```sh
-HEYSIG_ANDROID_JAR=/tmp/heysig-sdk/android-35/android.jar \
-HEYSIG_ANDROID_RESOURCES_JAR=/tmp/heysig-sdk/android-10/android.jar \
-HEYSIG_D8_JAR=/tmp/heysig-r8-9.5.26.jar tools/build-android-prototype.sh
+bash tools/build-android-prototype.sh
 ```
 
-Output: `androidApp/build/heysig-proto.apk`, signed using a local development key in the ignored build directory. That key is for local testing only. It must be retained for compatible prototype updates; rebuilding after deleting it produces a different signer. No APK is installed by the build script.
+Output: `androidApp/build/heysig-proto.apk`, signed with the preserved local development key under ignored `private/signing/`. Gradle clean does not remove that key. Release bundles use a separate upload key and application identity. No APK is installed by the build script.
 
-Tool sources used for this build:
+Historical tool sources used before the Gradle migration:
 
 - `https://dl.google.com/android/repository/platform-35_r02.zip`, SHA-1 matching Google's package index: `0bb560a90a7a2cbd0dd8348224d518b638fe7949`
 - `https://dl.google.com/dl/android/maven2/com/android/tools/r8/9.5.26/r8-9.5.26.jar`, downloaded SHA-256: `3502f087388ce95bbf5254555927f09385dc2636873964d0bd53f3eaf4fb49ad`
@@ -55,6 +53,6 @@ The active aid addresses/profile and acoustic reception still need device valida
 
 For the user’s no-pairing setup, **Use basic Signia defaults** selects the statically traced basic address-zero case and the startup profile (gain divisor 1.2). This is a manual test preset; try one side and report the audible aid response. It does not assume a Bluetooth pairing or require entering pairing numbers. The preset’s match to the current device remains a test hypothesis.
 
-The older ARM resource packager uses API 29 resource definitions for the platform-only manifest; Kotlin compilation uses API 35 and the manifest still targets 35. API 29 archive: `https://dl.google.com/android/repository/platform-29_r05.zip`, SHA-1 matching Google’s index: `9d8a7e0ffa5168dbca6c60355b9129c6c7572aff`. Compiler selection follows [Google’s Kotlin/D8 compatibility table](https://developer.android.com/build/kotlin-support).
+The earlier shell build used API 29 resources while compiling/targeting 35. The Gradle build now uses platform 36 directly. Historical API 29 archive: `https://dl.google.com/android/repository/platform-29_r05.zip`, SHA-1 `9d8a7e0ffa5168dbca6c60355b9129c6c7572aff` from Google's index.
 
 Startup tracing found that Signia overrides the constructor gain divisor 4 with **1.2**. The basic preset now applies that override; the initial form shows the startup profile with empty addresses; choose a preset or enter your explicit configuration. See [startup findings](../research/acoustic/notes/proto-request-trace-2026-10-14.md).

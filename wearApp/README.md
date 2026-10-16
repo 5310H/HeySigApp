@@ -4,7 +4,7 @@ Native Wear OS prototype for the Pixel Watch 3. It offers Speak command,
 Read status, Check last result, and Stop, with spoken replies. Commands use the
 existing Chromebook app's parser and acoustic playback path.
 
-Version 0.2 adds independent **Voice prompts** and **Spoken responses** switches
+The development companion has independent **Voice prompts** and **Spoken responses** switches
 below Stop. They persist on the watch. Say “voice prompts off/on” or “voice
 responses off/on” to change them locally, even without the relay. The phone has
 its own switches. Text replies remain available when speech is off.
@@ -17,8 +17,10 @@ on port 18765 to the foreground HeySig Android app. The phone is not a bridge.
 Keep HeySig open and explicitly enable its Watch Wi-Fi checkbox. Leaving the
 app disables the bridge; re-enable it on return.
 
-Build with `tools/build-watch-prototype.sh`, using the same Android SDK and D8
-environment variables as the Android prototype build. Output is
+Version 0.3 uses the [pinned Gradle build and separated variants](../docs/gradle-release-builds.md).
+The debug variant retains this relay companion; the release validation candidate
+omits the relay and does not yet implement production pairing. Do not publish it.
+Build with `bash tools/build-watch-prototype.sh`. Output is
 `wearApp/build/heysig-watch.apk`. Install only after pairing ADB with the watch;
 the pairing port and the main Wireless debugging connection port are separate.
 

@@ -40,6 +40,9 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
     }
     private fun capture(seconds: Int, cancel: AtomicBoolean): NoiseMeasurement {
         check(allowed()) { "Capture paused for speech, playback or inactive app" }
+        if(context.checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            throw SecurityException("Allow microphone permission before sampling")
+        }
         val audio = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         check(audio.mode == AudioManager.MODE_NORMAL && !audio.isMicrophoneMute) { "Microphone muted or call audio active" }
         val rate = 16000

@@ -4,11 +4,11 @@ A Kotlin Android acoustic-control prototype and research workspace for a future 
 
 The [coding specification](docs/coding-spec.md) defines screens, functions, data contracts and phone/watch execution flows ([printable PDF](docs/HeySigApp-coding-spec.pdf)).
 
-Google Play release work follows the [dated readiness audit and release gates](docs/play-store-readiness.md). Current APKs are development builds and are not ready for store submission. Run `python3 tools/check-play-readiness.py` to list source-level blockers; this does not replace Play review.
+Google Play release work follows the [dated readiness audit and release gates](docs/play-store-readiness.md). The [Gradle build guide](docs/gradle-release-builds.md) covers preserved development signing, separated release identities, API 36 and signed app-bundle validation. These candidates are not ready for store submission. After bundle validation, run `python3 tools/check-play-readiness.py` for release-manifest checks; this does not replace Play review.
 
 The [HeySigApp program specification](docs/program-spec.md) defines the replacement app, including voice access to every function through both phone and watch.
 
-Start with [how the prototype works](docs/proto-code-guide.md), [Android build/use](androidApp/README.md), and [acceptance evidence](docs/acceptance/). Voice, noise/sleep automation, production setup/storage, watch support and an iPhone implementation remain future work. The earlier accessibility-based replacement plan is retained as historical planning.
+Start with [how the prototype works](docs/proto-code-guide.md), [Android build/use](androidApp/README.md), and [acceptance evidence](docs/acceptance/). Full guided voice setup, automatic noise/sleep control, production setup/storage and watch pairing, and an iPhone implementation remain future work. The earlier accessibility-based replacement plan is retained as historical planning.
 
 Research: [noise adaptation in other hearing aids and proposed HeySig improvements](docs/research/noise-adaptation-2026-10-16.md).
 
@@ -26,7 +26,7 @@ HeySigApp/
 │       ├── commonMain/  Commands, control interfaces, models, settings, automation, protocol
 │       └── commonTest/  Shared logic tests
 ├── iosApp/           Future iPhone client, pending a viable control path
-├── wearApp/          Future watch client, pending device/platform selection
+├── wearApp/          Wear development client and separate release candidate
 ├── research/
 │   └── acoustic/     Chirp notes, reproducible tooling and approved test fixtures
 ├── docs/
@@ -40,7 +40,7 @@ HeySigApp/
 
 Development now targets the actual Android app running in the Chromebook Google Play environment. See [Chromebook-first development and current manual-core scope](docs/chromebook-development.md). `HomeActivity` provides native Home/Setup/Saved/Voice/Noise screens. Experimental [six-level Noise Setup and Observe](docs/noise-quick-start.md) propose programs without playback; automatic noise switching remains pending. Phone and watch each have independent saved switches for voice prompts and spoken responses. Watch parity and full guided voice configuration remain in progress.
 
-`ProtoActivity.kt` retains the earlier foreground research controls. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.
+The debug source set retains `ProtoActivity.kt` and the development watch relay; release builds exclude them. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.
 
 Keep the shared core independent of Android classes. Android services implement its control interfaces; a future iPhone control implementation can reuse the command and decision logic.
 

@@ -14,7 +14,7 @@ Neither app can query the aids in this acoustic setup. HeySig remembers the last
 
 | File | Responsibility |
 |---|---|
-| `androidApp/src/main/kotlin/com/heysig/app/ProtoActivity.kt` | Manual form, input validation, audio preflight, single-request playback, Stop/cancellation, and completed-request labels |
+| `androidApp/src/debug/kotlin/com/heysig/app/ProtoActivity.kt` | Debug-only manual form, input validation, audio preflight, single-request playback, Stop/cancellation, and completed-request labels |
 | `androidApp/src/main/AndroidManifest.xml` | Android launcher, SDK levels, app identity and label |
 | `research/acoustic/kotlin/ProtoRequest.kt` | Explicit waveform profile, command mapping, CRC/bit encoding, PCM generation, WAV wrapping and command-line renderer |
 | `desktopApp/src/main/kotlin/com/heysig/desktop/ProtoWindow.kt` | JVM/Swing battery playback and WAV export using the same renderer |

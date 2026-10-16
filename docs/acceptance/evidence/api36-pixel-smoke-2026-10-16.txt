@@ -1,0 +1,4 @@
+INSTRUMENTATION_RESULT: navigation=Home, Noise and Voice opened; system Back returned Home; no capture or playback
+INSTRUMENTATION_RESULT: result=PASS: target 36; navigation and current-runtime insets; Android SDK 37
+INSTRUMENTATION_RESULT: windowFocusBeforeBack=true
+INSTRUMENTATION_CODE: -1

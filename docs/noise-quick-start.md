@@ -1,4 +1,4 @@
-# Six-level noise setup — development build 0.8
+# Six-level noise setup — development build 0.9
 
 Open **Noise** in the Chromebook Android app. Assign a configured program to
 each noise level, from **1 (quietest)** to **6 (loudest)**. Noise level order is

@@ -1,0 +1,7 @@
+androidApp: PASS — com.heysig.app, target 36, upload signature verified, no development transport/native libraries
+SHA-256: 73ac4acb434ad0342725283afa357fc85a5c482e0b140f44d3716a5693211121
+
+wearApp: PASS — com.heysig.app, target 35, upload signature verified, no development transport/native libraries
+SHA-256: d04bc941259ce31f6ac2c8dc9f43f0296bd628928d11863cec8446e3dc803bc2
+
+Validation candidates only: watch pairing, privacy/health declarations and Play review remain pending.

@@ -5,13 +5,20 @@ source/build audit, not a Play review or medical-device classification.
 Recheck the official links before every submission. The requirements below
 guide phone, Chromebook and Wear development from this point forward.
 
+Build migration update: [pinned Gradle variants and upload signing](gradle-release-builds.md)
+are implemented. Signed phone/Wear bundles passed artifact checks and release
+lint; target-36 navigation/insets/Back checks passed on Android 13 and 17.
+Development transport/research screens are separated from release sources.
+See [migration evidence](acceptance/gradle-api36-2026-10-16.md). Production watch
+pairing and policy/medical work remain release blockers.
+
 ## Current blockers and completion evidence
 
 | Area | Current finding | Required completion evidence |
 |---|---|---|
-| Target SDK | Phone manifest targets 35. Watch targets 35. | New phone submissions/updates currently require API 36; Wear requires 35. Upgrade phone compile/target SDK with Android 16 behavior and device tests. Recheck the dated requirement before upload. |
-| Release build | Shell scripts produce locally signed development APKs. No Gradle release/AAB pipeline exists. Watch is explicitly debuggable. | Pinned Gradle/Android/Kotlin toolchain and wrapper, separated development/release variants, release AABs, non-debuggable production manifests, validated upload signing and Play App Signing. |
-| Watch setup | Provisioning requires ADB, a Linux TLS relay, local certificates and a foreground Chromebook bridge. | A supported user installation/pairing/transport flow without developer tools. Truthful standalone/companion metadata and store description. Test connection failure and recovery without replay. |
+| Target SDK | Gradle compiles both apps with 36; phone targets 36 and Wear targets 35. Insets and Back handling migrated. | Record runtime/device evidence; new phone submissions/updates currently require 36, Wear 35. Recheck the dated requirement before upload. |
+| Release build | Pinned wrapper/Gradle/AGP/Kotlin, debug/release separation, preserved debug keys and a separate local upload key are implemented. | Validate signed AABs, release lint and artifact contents, reproduce on a standard build host, back up upload signing and complete Play App Signing enrollment. |
+| Watch setup | Debug still requires ADB/Linux relay. Release omits this transport and currently displays a pairing-unavailable message. | A supported user installation/pairing/transport flow without developer tools. The watch release candidate is not a functional companion and must not be submitted yet. Test connection failure and recovery without replay. |
 | Privacy | Local preferences, remote speech recognition and development relay flows exist. No published privacy policy or in-app policy entry exists. | An accurate public non-PDF privacy policy, an in-app entry, retention/deletion details, publisher identity/contact and the release-specific Data safety form. |
 | Health functionality | Controls hearing-aid programs/levels; no health-app declaration or regulatory assessment is recorded. | Complete Health apps declaration. Establish intended use, supported devices/countries and whether regulation applies; provide required evidence if regulated. Do not use a non-medical disclaimer as a substitute for assessment. |
 | Microphone | Noise uses RECORD_AUDIO and bounded foreground capture. Speech is delegated to an installed recognition service. | Feature-specific explanation, affirmative user action, runtime permission, denial/revocation and privacy-switch tests. Verify actual recognition providers and network handling. |
@@ -53,13 +60,15 @@ the form's definitions, not guessed from permission names.
 
 1. Keep functional prototype testing separate from submission preparation.
    Preserve current device signing/settings during development. Run
-   `python3 tools/check-play-readiness.py` to expose known source-level blockers;
+   bundle validation followed by `python3 tools/check-play-readiness.py` to inspect decoded release manifests;
    a clean result from that script would not establish full compliance.
-2. Introduce normal Gradle phone/Wear release variants. Remove the development
-   receiver, ADB provisioning, debug-only screens and relay dependencies from
-   production. Do not replace them with an insecure shortcut.
-3. Upgrade the phone to the required SDK and test Android behavior changes.
-   Build/validate signed AABs and configure upload-key/Play App Signing handling.
+2. Initial Gradle phone/Wear variant separation is complete. Keep the
+   development receiver, ADB provisioning, research screen and relay out of
+   production. Implement normal companion pairing before submission.
+3. Initial SDK migration, signed AAB validation and local upload signing are
+   complete, with [device/build evidence](acceptance/gradle-api36-2026-10-16.md).
+   Add exact Android 16 and full release-device acceptance, reproduce on a
+   standard build host, back up the key and complete Play App Signing enrollment.
 4. Implement accurate in-app privacy, disclosures, optional speech and data
    management. Finish production watch navigation/pairing/accessibility.
 5. Complete intended-use/device/country review, health declaration, medical
