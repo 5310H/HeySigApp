@@ -7,4 +7,4 @@
 - `research/acoustic`: experiments and reference comparisons. Confirm addressing, profile, complete waveform and actual aid behavior before promoting a direct-control implementation.
 - `docs/acceptance`: evidence distinguishes app readback from independently verified hearing-aid response. Only battery checks currently have expected audible feedback.
 
-The scaffold deliberately has no build configuration or runtime implementation yet. Dependency versions, app identifiers, minimum OS support and release signing will be set when the first Android feasibility project is created.
+The full replacement app still needs its Gradle/Compose project. Experimental foreground battery prototypes now have standalone build scripts: the Chromebook JVM window and Android Activity share the research PCM generator. The Android prototype uses package `com.heysig.batteryprototype`, minimum API 29, target API 35 and a local debug signer. These choices do not establish production release configuration or hearing-aid acceptance.

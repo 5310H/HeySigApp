@@ -1,0 +1,170 @@
+{
+  "date_local": "2026-10-15",
+  "test_program": "Universal",
+  "final_program": "TV",
+  "final_displayed_volume": 8,
+  "volume_sequence": [
+    8,
+    9,
+    8
+  ],
+  "sound_sharpness_sequence": [
+    0,
+    1,
+    0
+  ],
+  "tinnitus_initial_attempt": [
+    0,
+    2,
+    1
+  ],
+  "tinnitus_corrected_to": 0,
+  "tinnitus_retest_sequence": [
+    0,
+    2,
+    0
+  ],
+  "one_step_tinnitus_precision_passed": false,
+  "all_tested_numeric_start_values_restored": true,
+  "aid_receipt_verified": false,
+  "pcm_captured": false,
+  "audio_format": {
+    "sample_rate_hz": 44100,
+    "channels": 1,
+    "usage": "USAGE_MEDIA",
+    "content_type": "CONTENT_TYPE_UNKNOWN"
+  },
+  "observations": [
+    {
+      "time_utc": "2026-10-16T00:48:46.900713+00:00",
+      "label": "volume-start",
+      "value": 8,
+      "thumb_y": 1313,
+      "selected": [
+        "Selected Volume Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:48:52.996235+00:00",
+      "label": "volume-changed",
+      "value": 9,
+      "thumb_y": 1232,
+      "selected": [
+        "Selected Volume Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:48:57.044984+00:00",
+      "label": "volume-before-restore",
+      "value": 9,
+      "thumb_y": 1232,
+      "selected": [
+        "Selected Volume Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:03.237385+00:00",
+      "label": "volume-restored",
+      "value": 8,
+      "thumb_y": 1313,
+      "selected": [
+        "Selected Volume Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:10.886747+00:00",
+      "label": "balance-start",
+      "value": 0,
+      "thumb_y": 1313,
+      "selected": [
+        "Selected Sound Sharpness Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:17.323619+00:00",
+      "label": "balance-changed",
+      "value": 1,
+      "thumb_y": 1232,
+      "selected": [
+        "Selected Sound Sharpness Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:21.616367+00:00",
+      "label": "balance-before-restore",
+      "value": 1,
+      "thumb_y": 1232,
+      "selected": [
+        "Selected Sound Sharpness Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:27.730271+00:00",
+      "label": "balance-restored",
+      "value": 0,
+      "thumb_y": 1313,
+      "selected": [
+        "Selected Sound Sharpness Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:35.395675+00:00",
+      "label": "tinnitus-start",
+      "value": 0,
+      "thumb_y": 1959,
+      "selected": [
+        "Selected Tinnitus Signal Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:41.708370+00:00",
+      "label": "tinnitus-changed",
+      "value": 2,
+      "thumb_y": 1798,
+      "selected": [
+        "Selected Tinnitus Signal Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:45.726231+00:00",
+      "label": "tinnitus-before-restore",
+      "value": 2,
+      "thumb_y": 1798,
+      "selected": [
+        "Selected Tinnitus Signal Tab"
+      ]
+    },
+    {
+      "time_utc": "2026-10-16T00:49:51.605043+00:00",
+      "label": "tinnitus-restored",
+      "value": 1,
+      "thumb_y": 1878,
+      "selected": [
+        "Selected Tinnitus Signal Tab"
+      ]
+    }
+  ],
+  "frame_counts_by_log": {
+    "signia-log.txt": [
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316,
+      30316
+    ],
+    "tinnitus-retest-log.txt": [
+      30316,
+      30316,
+      30316
+    ]
+  }
+}

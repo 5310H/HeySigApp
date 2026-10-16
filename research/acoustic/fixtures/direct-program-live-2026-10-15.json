@@ -1,0 +1,70 @@
+{
+  "date_local": "2026-10-15",
+  "slot": 2,
+  "slot_label": "Sleep",
+  "command": 65,
+  "qualified_address_tested": 0,
+  "address_is_verified_active": false,
+  "profile": {
+    "sample_rate_hz": 44100,
+    "center_hz": 15360,
+    "spacing_hz": 512,
+    "bit_seconds": 0.0625,
+    "gain_divisor": 1.2,
+    "address_xor": true
+  },
+  "static_mode_attempt": {
+    "playback_completed": true,
+    "user_heard_beeps": false,
+    "user_reported_program_change": false,
+    "route_device_id": 3,
+    "speaker_media_volume": 17,
+    "speaker_media_max_volume": 25,
+    "content_type": "MUSIC"
+  },
+  "signia_positive_control": {
+    "slot": 2,
+    "user_confirmed_beeps": 2,
+    "user_confirmed_sleep": true
+  },
+  "signia_restoration": {
+    "slot": 5,
+    "user_confirmed_beeps": 5,
+    "user_confirmed_tv": true,
+    "displayed_volume": 8
+  },
+  "streaming_variant": {
+    "build_installed": true,
+    "playback_completed": true,
+    "user_heard_beeps": false,
+    "user_reported_program_change": false,
+    "sample_rate_hz": 44100,
+    "channels": 1,
+    "usage": "USAGE_MEDIA",
+    "content_type": "UNKNOWN",
+    "flags": "0xA00 (DEEP_BUFFER + MUTE_HAPTIC)",
+    "route_device_id": 3,
+    "player_started_local": "21:14:24.526",
+    "player_stopped_local": "21:14:25.333"
+  },
+  "latest_address12_acceptance": {
+    "qualified_address": 12,
+    "decoded_from": [
+      "Signia Sleep command 0x41",
+      "Signia TV command 0x44"
+    ],
+    "address_xor": true,
+    "heysig_sleep": {
+      "slot": 2,
+      "user_confirmed_beeps": 2,
+      "user_confirmed_sleep": true
+    },
+    "heysig_tv": {
+      "slot": 5,
+      "user_confirmed_beeps": 5,
+      "user_confirmed_tv": true
+    },
+    "evidence": "decoded-program-captures-2026-10-15.json",
+    "scope": "tested program destination; battery and per-ear addresses not yet accepted"
+  }
+}

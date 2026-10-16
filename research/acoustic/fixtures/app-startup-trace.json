@@ -1,0 +1,105 @@
+{
+  "scope": "Static method identities only; semantic conclusions are manual CIL analysis; no phone configuration or receiver firmware examined.",
+  "assemblies": {
+    "RTA.Maui.Signia.dll": {
+      "sha256": "ac1b8e24d63a9915adb9a0a575208ce55e2f02546af4c40dec2ca01402b03cbd",
+      "methods": [
+        {
+          "type": "RTA.Maui.App",
+          "method": "OnStart",
+          "token": "0x60000c8",
+          "il_sha256": "ca482b3f2bbc0a5021a0d0dce0cdd7f9a72eb77070722127fb26ac4dcbf9ba41"
+        },
+        {
+          "type": ".<<ShowLaunchPage>b__33_0>d",
+          "method": "MoveNext",
+          "token": "0x60000d0",
+          "il_sha256": "1095283fd9426cd09f9c0f8b1cdc90bcd11891b642dccf3e238f6777fe02d1d6"
+        },
+        {
+          "type": "RTA.Maui.MainActivity",
+          "method": "OnCreate",
+          "token": "0x6000147",
+          "il_sha256": "d6eef9d1e7e9ef30994111309ab0225039afe811ef72288533273be9f88182bb"
+        },
+        {
+          "type": "RTA.Maui.Platforms.Android.ApplicationLayer.Bootstrapper.Bootstrapper",
+          "method": "RegisterAcousticClasses",
+          "token": "0x600033d",
+          "il_sha256": "72a00878696055c457b7e3f852437030ad8affac31b976c30562c492addf62d4"
+        }
+      ]
+    },
+    "RTA.Core.dll": {
+      "sha256": "b1dc33feb380c0a23369016389256af821bec9fae382c3af590e6e0f79e44df1",
+      "methods": [
+        {
+          "type": ".<InitializeAsync>d__9",
+          "method": "MoveNext",
+          "token": "0x60014e9",
+          "il_sha256": "79be4259a2f16d9bd59b07c1dfba5c0f13cd82d494c928d55c5873f240fb9326"
+        },
+        {
+          "type": ".<SetAcousticHearingSystem>d__15",
+          "method": "MoveNext",
+          "token": "0x60014eb",
+          "il_sha256": "9150c1c168c8092b0f57ac477ba18149258b3fcf8a62e2fd0ada1824ce56bef4"
+        },
+        {
+          "type": ".<SetBasicHearingSystem>d__10",
+          "method": "MoveNext",
+          "token": "0x60014ed",
+          "il_sha256": "0ccc72fd5021ab1f1ce4c211ecbefa35d91600cd8d7ef608f8f2a941fecbfd8f"
+        },
+        {
+          "type": ".<SetUpHearingSystemIds>d__13",
+          "method": "MoveNext",
+          "token": "0x60014ef",
+          "il_sha256": "ee016ec745def4878b73c68fc05c41401ad236facc75a6aee9555cab41ea52da"
+        },
+        {
+          "type": "RTA.Core.Services.Managers.AppLaunchManager",
+          "method": "InitiateLaunchSequence",
+          "token": "0x600171c",
+          "il_sha256": "7d1afc47d435705b21464c1d048ebbefd840154ca069da71011afce3b1e7bd8e"
+        },
+        {
+          "type": "RTA.Core.Services.Managers.AppLaunchManager",
+          "method": "InitialiseAcousticStream",
+          "token": "0x600171f",
+          "il_sha256": "cd3f3c391360db932d4d41bfb822f66f8a33d5936dda40aca6d5dee34e9baabf"
+        },
+        {
+          "type": "RTA.Core.Services.Managers.AppLaunchManager",
+          "method": "CheckIsPairingCompleted",
+          "token": "0x6001743",
+          "il_sha256": "a91af32081ce65f2c28e62d3d967f7a017053bbe4b9d7d091d495de53db88147"
+        },
+        {
+          "type": ".<GetDeviceStream>d__63",
+          "method": "MoveNext",
+          "token": "0x600177c",
+          "il_sha256": "861f74bf0793b581b3c26136dff6b6ed3b72a21ca99e524f942a8ce7049bed2f"
+        },
+        {
+          "type": ".<NavigateToFirstScreen>d__65",
+          "method": "MoveNext",
+          "token": "0x600177e",
+          "il_sha256": "0524e459c2d950d2f4bbc4ec7e45f281d3215fa7679cbb50c33f11c6720fca06"
+        },
+        {
+          "type": ".<NavigateToHomeScreen>d__71",
+          "method": "MoveNext",
+          "token": "0x6001782",
+          "il_sha256": "d231d57d0dea037e6c6064a9e300ed6281b130d23922c4afb8c22c08ea5cab5f"
+        },
+        {
+          "type": ".<StartServerBackendCheckAsync>d__60",
+          "method": "MoveNext",
+          "token": "0x6001794",
+          "il_sha256": "f7a4ed16fea306c775029a0a03789233fe5bf0c8d20b7829c7910d0f1f979a6b"
+        }
+      ]
+    }
+  }
+}

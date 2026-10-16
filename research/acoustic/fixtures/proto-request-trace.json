@@ -1,0 +1,205 @@
+{
+  "scope": "Static method fingerprints and gain table; no runtime configuration or playback validation",
+  "assemblies": {
+    "RTA.Core.dll": {
+      "sha256": "b1dc33feb380c0a23369016389256af821bec9fae382c3af590e6e0f79e44df1",
+      "methods": [
+        {
+          "type": "<PlayBatteryStatusSound>d__31",
+          "method": "MoveNext",
+          "token": "0x6000f91",
+          "rva": "0x8e9a0",
+          "il_sha256": "c6348045b065bface537d92e0dfbe6dc5e1ea9f881f4ba7d289729ff80e7728b"
+        },
+        {
+          "type": "<PlayBatteryStatusSound>d__26",
+          "method": "MoveNext",
+          "token": "0x6000fa2",
+          "rva": "0x8ef1c",
+          "il_sha256": "5f3803e076c5f18b626b92273c7201713f04873dfe19a310dd80cf560b0347a7"
+        },
+        {
+          "type": "<SetBasicHearingSystem>d__10",
+          "method": "MoveNext",
+          "token": "0x60014ed",
+          "rva": "0xaae54",
+          "il_sha256": "0ccc72fd5021ab1f1ce4c211ecbefa35d91600cd8d7ef608f8f2a941fecbfd8f"
+        },
+        {
+          "type": "<SaveBasicHearingSystem>d__20",
+          "method": "MoveNext",
+          "token": "0x600158a",
+          "rva": "0xacdfc",
+          "il_sha256": "b77441a54b5b05eb402aa9dadd384d30ef2a137bb23726c52d76fea9203b4648"
+        },
+        {
+          "type": "FoundationConfigurationManager",
+          "method": "DefaultConfiguration",
+          "token": "0x6001cf5",
+          "rva": "0xc9dd4",
+          "il_sha256": "02b8ccdf0c1d1ce214026f653d44aa0421be4faa8098b36cbf5c9430dbf2b4af"
+        },
+        {
+          "type": "BrandConverter",
+          "method": "ConvertToBrand",
+          "token": "0x6001dff",
+          "rva": "0xcbc70",
+          "il_sha256": "b509f4f420ffbb1bcc62e8819669c06fdb1c308d4bf768a96ae3965cd3a55e5f"
+        }
+      ]
+    },
+    "WSA.Foundation.Acoustic.dll": {
+      "sha256": "f2cbbc041ec3b2ca9d2c58ef3dc3789484ae4e081974977ecc5aeefb6e9df59b",
+      "methods": [
+        {
+          "type": "Device",
+          "method": ".ctor",
+          "token": "0x6000007",
+          "rva": "0x2100",
+          "il_sha256": "e130d8a0f82d9a7f0666cc615d7a1c890f8e1d89f85da64cbfa67d951dcd4486"
+        },
+        {
+          "type": "Device",
+          "method": "WriteToneAsync",
+          "token": "0x600000b",
+          "rva": "0x223b",
+          "il_sha256": "9e91b11bbafacaa36243fe7d3e3917bc4f599ad39bf792cfa672c4d9a87dca6d"
+        },
+        {
+          "type": "HearingSystem",
+          "method": "WriteToneAsync",
+          "token": "0x600002f",
+          "rva": "0x2924",
+          "il_sha256": "218353436d22b96f2c2db40d3aa88dee96fd0507a686c925f6fab7ba550df7a7"
+        },
+        {
+          "type": "BatteryExtension",
+          "method": "GetBatteryToneId",
+          "token": "0x6000070",
+          "rva": "0x35a3",
+          "il_sha256": "4615277342612a2ed6e6d01c980c08839be04220318606d9fdc09ef4b85edd0f"
+        },
+        {
+          "type": "BatteryExtension",
+          "method": "WriteToneAsync",
+          "token": "0x6000071",
+          "rva": "0x35b3",
+          "il_sha256": "02c8b1e43ae4dccfee8afde6400eb7eae9f5343e07e572a23b31ee862235bf6b"
+        },
+        {
+          "type": "BrandParser",
+          "method": "GetBrandIdentifier",
+          "token": "0x60000dd",
+          "rva": "0x542c",
+          "il_sha256": "7078e234692d5014eb7ff5aaf6b6399f52505686704f870b78aa3b85798f19ad"
+        },
+        {
+          "type": "<GetPersistedArcAddress>d__17",
+          "method": "MoveNext",
+          "token": "0x6000100",
+          "rva": "0x79c0",
+          "il_sha256": "42313a860c316b0b4ba87004fb387bfb20590494239b83acc2b87f0e03a7c814"
+        },
+        {
+          "type": "<WriteStatusToneAsync>d__6",
+          "method": "MoveNext",
+          "token": "0x6000122",
+          "rva": "0x8cfc",
+          "il_sha256": "da484db6ae4a35ccfefa4c34dea9e2e85088a830949fe6963021f1e104952cfc"
+        }
+      ]
+    },
+    "RTA.Maui.Signia.dll": {
+      "sha256": "ac1b8e24d63a9915adb9a0a575208ce55e2f02546af4c40dec2ca01402b03cbd",
+      "methods": [
+        {
+          "type": "Bootstrapper",
+          "method": "RegisterAcousticClasses",
+          "token": "0x600033d",
+          "rva": "0x12815",
+          "il_sha256": "72a00878696055c457b7e3f852437030ad8affac31b976c30562c492addf62d4"
+        }
+      ]
+    },
+    "WSA.Foundation.Audio.dll": {
+      "sha256": "9d2a1bdaf408217f018112c829bdda0147b14159e60077b4c4ba9e750a24acd8",
+      "methods": [
+        {
+          "type": "AcousticConstants",
+          "method": "get_GainArray",
+          "token": "0x6000004",
+          "rva": "0x208a",
+          "il_sha256": "8b54e281a3992989814df89595996f3595d0d641799312805fc24e3fbbf1ce9c"
+        },
+        {
+          "type": "AcousticTone",
+          "method": "GenerateControlTone",
+          "token": "0x6000007",
+          "rva": "0x216c",
+          "il_sha256": "c0e755fd021e690ec8a90c2be00fc9050699129b7389fe0d6ab88cdacf7d3b6f"
+        },
+        {
+          "type": "PulseEncoder",
+          "method": "EncodePulse",
+          "token": "0x6000033",
+          "rva": "0x26d4",
+          "il_sha256": "f8607af4bb40cb7c32e8625207b14fd6b7c6c92f50d03bca2a69346c95698226"
+        },
+        {
+          "type": "ToneGenerationConfigurator",
+          "method": "set_BroadcastLevel",
+          "token": "0x6000036",
+          "rva": "0x2817",
+          "il_sha256": "aacaa930376d235acee3fff8833b8e90af2b4e4a638d341b7c2df2422f27f0be"
+        },
+        {
+          "type": "ToneGenerationParameters",
+          "method": "InitializeToneGeneration",
+          "token": "0x600005e",
+          "rva": "0x2bd8",
+          "il_sha256": "44d98dfdad93d5dee38151669d2c593e973f6e16ffedc5905a22bfbc5716654d"
+        },
+        {
+          "type": "AudioTrackGenerator",
+          "method": "GenerateAudioTrack",
+          "token": "0x600006f",
+          "rva": "0x30ac",
+          "il_sha256": "f2270f934425ec793cd99dd340f65afc9ff9f8c05befbef16eaad0a375bd80a2"
+        },
+        {
+          "type": "AudioTrackGenerator",
+          "method": "GetStream",
+          "token": "0x6000070",
+          "rva": "0x31cd",
+          "il_sha256": "06ec309cfbb87251b79448415f7b76d8f94ab00a47622bb127ff9ef74bca5552"
+        },
+        {
+          "type": "TonePlayingParameters",
+          "method": "SetDefaultValues",
+          "token": "0x6000098",
+          "rva": "0x3bc8",
+          "il_sha256": "a6f1bfe3e95a58db5675dcb3f278005f6175efd5ff106466ef35d3a8a52fcef5"
+        },
+        {
+          "type": "<SendToneAsync>d__6",
+          "method": "MoveNext",
+          "token": "0x60000ae",
+          "rva": "0x3c64",
+          "il_sha256": "e9533941490b4fb08c483d2a7a72d0ab9144ed5750cc385c16acb5361cb4a79e"
+        },
+        {
+          "type": "<PlayToneAsync>d__6",
+          "method": "MoveNext",
+          "token": "0x60000b9",
+          "rva": "0x4428",
+          "il_sha256": "93b93207d024a75806ba561bcd4da5c29087d2fbda5b67fb3107b247112022a7"
+        }
+      ]
+    }
+  },
+  "encoder_gain_divisors": [
+    4.0,
+    2.0,
+    1.2
+  ]
+}

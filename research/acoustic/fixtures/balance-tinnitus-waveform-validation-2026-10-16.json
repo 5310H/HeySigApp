@@ -1,0 +1,55 @@
+{
+  "scope": "Original waveform CIL comparison; UI mapping separately established from Signia captures; no live reception in this check",
+  "dll_sha256": "9d2a1bdaf408217f018112c829bdda0147b14159e60077b4c4ba9e750a24acd8",
+  "cases": [
+    {
+      "request": "balance-4",
+      "command": 44,
+      "address": 12,
+      "maximum_pcm_difference": 0,
+      "kotlin_pcm_sha256": "8b6ae1c73c867b0bc53100b6a195ffbdfbf9e30ec1e5e4ace42015802d123141",
+      "original_pcm_sha256": "8b6ae1c73c867b0bc53100b6a195ffbdfbf9e30ec1e5e4ace42015802d123141"
+    },
+    {
+      "request": "balance0",
+      "command": 32,
+      "address": 12,
+      "maximum_pcm_difference": 0,
+      "kotlin_pcm_sha256": "db8a2dc550614fc12b8c92683cf4ea45449b2528c711b06292a5ff0d60a3bd20",
+      "original_pcm_sha256": "db8a2dc550614fc12b8c92683cf4ea45449b2528c711b06292a5ff0d60a3bd20"
+    },
+    {
+      "request": "balance4",
+      "command": 36,
+      "address": 12,
+      "maximum_pcm_difference": 0,
+      "kotlin_pcm_sha256": "e82f8725111f51629c97e409025d1060bc78ff467c7381f00ec9381c30df590b",
+      "original_pcm_sha256": "e82f8725111f51629c97e409025d1060bc78ff467c7381f00ec9381c30df590b"
+    },
+    {
+      "request": "tinnitus0",
+      "command": 63,
+      "address": 12,
+      "maximum_pcm_difference": 0,
+      "kotlin_pcm_sha256": "f4d82176885221f9c4699521ee82b65f96c02dbb7d074340ccf9abecde26e596",
+      "original_pcm_sha256": "f4d82176885221f9c4699521ee82b65f96c02dbb7d074340ccf9abecde26e596"
+    },
+    {
+      "request": "tinnitus2",
+      "command": 61,
+      "address": 12,
+      "maximum_pcm_difference": 0,
+      "kotlin_pcm_sha256": "ebe7fe2b5887f68e9762ea43f107bbc1eec786519edd4866182d5e8e76cdd3c0",
+      "original_pcm_sha256": "ebe7fe2b5887f68e9762ea43f107bbc1eec786519edd4866182d5e8e76cdd3c0"
+    },
+    {
+      "request": "tinnitus4",
+      "command": 59,
+      "address": 12,
+      "maximum_pcm_difference": 0,
+      "kotlin_pcm_sha256": "6df357c28a69743e633b8309b757f60b16e7d6d9dce33f6f14d28ec2d07d6d39",
+      "original_pcm_sha256": "6df357c28a69743e633b8309b757f60b16e7d6d9dce33f6f14d28ec2d07d6d39"
+    }
+  ],
+  "invalid_requests_rejected": 4
+}

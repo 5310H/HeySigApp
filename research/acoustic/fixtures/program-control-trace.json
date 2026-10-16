@@ -1,0 +1,57 @@
+{
+  "scope": "Static method identities only; semantic conclusions are manual CIL analysis; no phone configuration or receiver firmware examined.",
+  "assemblies": {
+    "Component.RemoteControl.dll": {
+      "sha256": "a987a51062c792b9318bfc3e5e8174f6c7e2bc0c69cde24b57de34198261bed7",
+      "methods": [
+        {
+          "type": ".<>c__DisplayClass13_0",
+          "method": "<InternalWriteAsync>b__3",
+          "token": "0x60007bd",
+          "il_sha256": "c0541a085414c445234bebce8621ae4d1a4606b0742fff0e8a80fcdb9e92d9ef"
+        },
+        {
+          "type": ".<GetCurrentProgram>d__4",
+          "method": "MoveNext",
+          "token": "0x60007c6",
+          "il_sha256": "c04e2ff9ce2ea69b784056114e0e56e4326b1c4ed5609e28b4dee8bdd0be4517"
+        },
+        {
+          "type": ".<GetCurrentProgramIdAsync>d__5",
+          "method": "MoveNext",
+          "token": "0x60007c8",
+          "il_sha256": "52bb8fe49b375cced484fec5370be4175fb22a638fbd0a6dc67d2178bfcda35e"
+        },
+        {
+          "type": ".<InternalWriteAsync>d__13",
+          "method": "MoveNext",
+          "token": "0x60007ca",
+          "il_sha256": "6aacf5397c7eab3c798b83376a5a7743ef6656f1382ba7bf66ee6e9ef339ac01"
+        },
+        {
+          "type": ".<UpdateProgramConfiguration>d__20",
+          "method": "MoveNext",
+          "token": "0x60007d0",
+          "il_sha256": "a852c7c906ced9313c377510519992fe66b6234080040aa16802e5d3481136a6"
+        }
+      ]
+    },
+    "WSA.Foundation.Acoustic.dll": {
+      "sha256": "f2cbbc041ec3b2ca9d2c58ef3dc3789484ae4e081974977ecc5aeefb6e9df59b",
+      "methods": [
+        {
+          "type": ".<WriteAsync>d__10",
+          "method": "MoveNext",
+          "token": "0x60001b6",
+          "il_sha256": "f4a3af49ff0d69e1b1d90e838e2f0621473da70fe58122fae88587f743e277fe"
+        },
+        {
+          "type": ".<WriteAsync>d__11",
+          "method": "MoveNext",
+          "token": "0x60001b8",
+          "il_sha256": "1c8b6ba6f9254ece939972446f44fd3b26ccf19d9b604c77d31ff07ba57c62b4"
+        }
+      ]
+    }
+  }
+}

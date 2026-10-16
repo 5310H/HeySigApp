@@ -1,0 +1,36 @@
+{
+  "start_utc": "2026-10-16T00:53:29.767973+00:00",
+  "old_pid": "16839",
+  "new_pid": "5963",
+  "procedure": "force-stop Signia package, explicit am start -W, observe for 10 seconds then UI dump",
+  "no_controls_pressed_during_launch": true,
+  "before": {
+    "program_header": [
+      "Hearing program TV Active"
+    ],
+    "displayed_values": [
+      "8"
+    ],
+    "selected_tabs": [
+      "Selected Volume Tab"
+    ]
+  },
+  "after": {
+    "program_header": [
+      "Hearing program TV Active"
+    ],
+    "displayed_values": [
+      "8"
+    ],
+    "selected_tabs": [
+      "Selected Volume Tab"
+    ]
+  },
+  "launch_state": "COLD",
+  "activity_total_time_ms": 2503,
+  "activity_wait_time_ms": 2506,
+  "new_process_playback_player_creations": 0,
+  "new_process_frame_completion_logs": 0,
+  "pcm_captured": false,
+  "internal_method_hooks": false
+}

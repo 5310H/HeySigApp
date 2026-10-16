@@ -1,0 +1,56 @@
+{
+  "date_local": "2026-10-16",
+  "program": "Universal",
+  "qualified_address": 12,
+  "address_xor": true,
+  "profile": {
+    "sample_rate": 44100,
+    "center_hz": 15360,
+    "spacing_hz": 512,
+    "bit_seconds": 0.0625,
+    "gain_divisor": 1.2
+  },
+  "sound_sharpness": {
+    "sequence": [
+      0,
+      4,
+      0
+    ],
+    "user_confirmed_change": true,
+    "user_confirmed_restoration": true,
+    "commands": [
+      32,
+      36,
+      32
+    ]
+  },
+  "tinnitus": {
+    "sequence": [
+      0,
+      4,
+      0
+    ],
+    "user_confirmed_change": true,
+    "user_confirmed_restoration": true,
+    "commands": [
+      63,
+      59,
+      63
+    ]
+  },
+  "volume": {
+    "completed_baseline_request": 8,
+    "prior_persisted_request_observed": 15,
+    "user_reported_working": true
+  },
+  "verification": {
+    "android_build_passed": true,
+    "original_cil_waveforms_compared": 6,
+    "invalid_requests_rejected": 4,
+    "physical_state_queried": false,
+    "direct_test_pcm_captured": false,
+    "reference_capture_fixture": "balance-tinnitus-reference-2026-10-16.json",
+    "waveform_fixture": "balance-tinnitus-waveform-validation-2026-10-16.json"
+  },
+  "preparation_note": "A shifted-screen preparation tap produced silence. Actual test requests were made after fresh control-location inspection and each updated the last-completed field. User feedback establishes reception separately."
+}

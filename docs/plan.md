@@ -1,6 +1,6 @@
 # Plan: replace HeySig’s Tasker setup with an app
 
-October 14, 2026. Proposed implementation; app development has not started. The current eight-hour phone observation trial continues independently.
+October 14, 2026. Implementation plan; the full app has not started. Experimental Chromebook/Android battery-audio prototypes now exist separately. The current eight-hour phone observation trial continues independently.
 
 ## Intended result
 

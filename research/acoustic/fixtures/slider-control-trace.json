@@ -1,0 +1,105 @@
+{
+  "scope": "Static method identities only; semantic conclusions are manual CIL analysis; no phone configuration or receiver firmware examined.",
+  "assemblies": {
+    "Component.RemoteControl.dll": {
+      "sha256": "a987a51062c792b9318bfc3e5e8174f6c7e2bc0c69cde24b57de34198261bed7",
+      "methods": [
+        {
+          "type": ".<GetAsync>d__9",
+          "method": "MoveNext",
+          "token": "0x60007fb",
+          "il_sha256": "806b331c0867d0e75406f57b0a2b9b180e494538247add09338fe49de86425f3"
+        },
+        {
+          "type": ".<UpdateSoundBalanceInStorageAsync>d__21",
+          "method": "MoveNext",
+          "token": "0x6000805",
+          "il_sha256": "2713f5d000a6b39de6d786bc1afd1b2a6877fa4d511ece5c1083475929277ab2"
+        },
+        {
+          "type": ".<WriteAsync>d__11",
+          "method": "MoveNext",
+          "token": "0x6000807",
+          "il_sha256": "dbbafd954c77cd254e270ecbc2f2f6332b61656e5228e97e289def63897ac70c"
+        },
+        {
+          "type": ".<GetAsync>d__6",
+          "method": "MoveNext",
+          "token": "0x6000839",
+          "il_sha256": "0ff3b5430395f79876dabf24b355c397dc693467ed357ce8b82b5406d449ad18"
+        },
+        {
+          "type": ".<UpdateTinnitusInStorageAsync>d__20",
+          "method": "MoveNext",
+          "token": "0x6000845",
+          "il_sha256": "dbbc66fa4e6918a50f00e114bd903ecd153d1f348c938a11c3645c1c9db24a4f"
+        },
+        {
+          "type": ".<WriteAsync>d__11",
+          "method": "MoveNext",
+          "token": "0x6000847",
+          "il_sha256": "5fe0bd5491519e622b44ab91aa1df9d91ff5079479c10ca9c94c4f9d91673a05"
+        },
+        {
+          "type": ".<GetAsync>d__12",
+          "method": "MoveNext",
+          "token": "0x6000862",
+          "il_sha256": "88baabe9e0178499a122e93f4e666ccab498f9e45e8fb887590ea605fe2d64fd"
+        },
+        {
+          "type": ".<UpdateVolumeInStorageAsync>d__18",
+          "method": "MoveNext",
+          "token": "0x600086c",
+          "il_sha256": "7eb0b0e9526dda5be7c438661ea67649219b96bcbd63495a2b23c5a2cc077a91"
+        },
+        {
+          "type": ".<WriteAsync>d__16",
+          "method": "MoveNext",
+          "token": "0x600086e",
+          "il_sha256": "839160f3e2e84bfab0d66adee3e42bb2ffafb3e8b51b3a3b43be03d437def140"
+        }
+      ]
+    },
+    "WSA.Foundation.Acoustic.dll": {
+      "sha256": "f2cbbc041ec3b2ca9d2c58ef3dc3789484ae4e081974977ecc5aeefb6e9df59b",
+      "methods": [
+        {
+          "type": ".<WriteAsync>d__6",
+          "method": "MoveNext",
+          "token": "0x60001cc",
+          "il_sha256": "69111cc06de8ed797a59d085485221603b4b6678e6b35ddff83d27999c1bc215"
+        },
+        {
+          "type": ".<WriteAsync>d__7",
+          "method": "MoveNext",
+          "token": "0x60001ce",
+          "il_sha256": "588ad1e9af823058ba0dc3d2a1e504fffc5ca60037799ce2302769356ec4037e"
+        },
+        {
+          "type": ".<WriteAsync>d__7",
+          "method": "MoveNext",
+          "token": "0x60001f4",
+          "il_sha256": "4422874e100c3008043d5e48748d5f06a8964a442cdb89df9c02101b22887e54"
+        },
+        {
+          "type": ".<WriteTinnitusVolumeAsync>d__8",
+          "method": "MoveNext",
+          "token": "0x60001f6",
+          "il_sha256": "a32c13e4501d222c5aa0afe0c348c3c1d04e854e7df132d03887339e8d37e283"
+        },
+        {
+          "type": ".<WriteAsync>d__8",
+          "method": "MoveNext",
+          "token": "0x6000205",
+          "il_sha256": "66355237da226e981120dc11fc850a35d532408d939e83489b2099f92b9ef7c8"
+        },
+        {
+          "type": ".<WriteVolumeAsync>d__9",
+          "method": "MoveNext",
+          "token": "0x6000207",
+          "il_sha256": "22cb9d6403a5111ce163ed0d3301682493ef80c726c34ac41e4e16767eb30abb"
+        }
+      ]
+    }
+  }
+}

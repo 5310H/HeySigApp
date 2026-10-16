@@ -1,0 +1,19 @@
+{
+  "start_utc": "2026-10-16T00:45:08.783080+00:00",
+  "sequence": [
+    "TV",
+    "Universal",
+    "TV"
+  ],
+  "restored_tv": true,
+  "aid_receipt_verified": false,
+  "displayed_volume_start_and_end": 8,
+  "tinnitus_tab_universal": true,
+  "tinnitus_tab_tv": false,
+  "frames_per_observed_change": 30316,
+  "sample_rate_hz": 44100,
+  "channels": 1,
+  "usage": "USAGE_MEDIA",
+  "content_type": "CONTENT_TYPE_UNKNOWN",
+  "exact_pcm_captured": false
+}

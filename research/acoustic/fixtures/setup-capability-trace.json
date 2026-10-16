@@ -1,0 +1,160 @@
+{
+  "scope": "Static method identities only; semantic conclusions are manual CIL analysis; no phone configuration or receiver firmware examined.",
+  "assemblies": {
+    "RTA.Core.dll": {
+      "sha256": "b1dc33feb380c0a23369016389256af821bec9fae382c3af590e6e0f79e44df1",
+      "methods": [
+        {
+          "type": "RTA.Core.ViewModels.ProgramSetup.ProgramConfigurationViewModel",
+          "method": "Confirm",
+          "token": "0x6000b9b",
+          "il_sha256": "bbee6626229b7ff75b4a85028e7ac36ccd8e8db6e49c4b2798e128207517d2fd"
+        },
+        {
+          "type": "RTA.Core.ViewModels.ProgramSetup.ProgramConfigurationViewModel",
+          "method": "ItemTapped",
+          "token": "0x6000b9c",
+          "il_sha256": "40b4e30248e25e06636599eaa0d688e6f2ebce68e6400fbc7b2522b6d438e1f2"
+        },
+        {
+          "type": ".<MigrateConfigurationAsync>d__5",
+          "method": "MoveNext",
+          "token": "0x6001084",
+          "il_sha256": "bc033e473419dd2e450d9f629e93b704b33a6059f7eec37ad889cd60b33595ca"
+        },
+        {
+          "type": "RTA.Core.Services.Utilities.ProgramUtilities",
+          "method": "UpdateProgramSlots",
+          "token": "0x60011d5",
+          "il_sha256": "03f4b7032e1f48085f68193d524ab8b0d132bd80515a395955042877bd7bead1"
+        },
+        {
+          "type": ".<SetAcousticHearingSystem>d__15",
+          "method": "MoveNext",
+          "token": "0x60014eb",
+          "il_sha256": "9150c1c168c8092b0f57ac477ba18149258b3fcf8a62e2fd0ada1824ce56bef4"
+        },
+        {
+          "type": ".<SaveBasicHearingSystem>d__20",
+          "method": "MoveNext",
+          "token": "0x600158a",
+          "il_sha256": "b77441a54b5b05eb402aa9dadd384d30ef2a137bb23726c52d76fea9203b4648"
+        }
+      ]
+    },
+    "WSA.Foundation.Persistency.dll": {
+      "sha256": "634f189f924f852adda21de4e65fe0272f1137c9ac77b58ef8a9885d55d66083",
+      "methods": [
+        {
+          "type": "WSA.Foundation.Persistency.Internal.HearingInstrumentParameterBuilder",
+          "method": "WithTinnitusProgramAtSlots",
+          "token": "0x600001a",
+          "il_sha256": "d02c95cf1a66142fbf7b7ac81262ebf500a1db8c53415dfdcdbd31f7eea472a6"
+        },
+        {
+          "type": "WSA.Foundation.Persistency.Internal.HearingInstrumentParameterBuilder",
+          "method": "AddTinnitusPrograms",
+          "token": "0x6000030",
+          "il_sha256": "cc7fd3ebde21af3ff369f823910595751fb483531490a3d64802132806c2db5f"
+        }
+      ]
+    },
+    "WSA.Foundation.Persistency.Abstractions.dll": {
+      "sha256": "c634bcff4057ee876719c6db29ce09beebf4b254746c039e5324049c337da5cd",
+      "methods": [
+        {
+          "type": "WSA.Foundation.Persistency.Abstractions.Models.HearingInstrumentParameterKey`1",
+          "method": ".ctor",
+          "token": "0x6000031",
+          "il_sha256": "a7c89fa2fb219b006fd45a4b88eb01a63674e47e62b8cd9539641186928b1e53"
+        },
+        {
+          "type": "WSA.Foundation.Persistency.Abstractions.Models.HearingInstrumentParameterKeys",
+          "method": "TinnitusVolumeControlAvailable",
+          "token": "0x6000077",
+          "il_sha256": "45fc40663e496b86f0566649f667164e3b0071dcd5d6ffe9a4f41e3b4d001bbf"
+        }
+      ]
+    },
+    "WSA.Foundation.QrCode.dll": {
+      "sha256": "e6e8d8023172bb08ec7772b4a0d405809c61213127e6c837d86624296eaa3327",
+      "methods": [
+        {
+          "type": ".<ReadInformationAsync>d__5",
+          "method": "MoveNext",
+          "token": "0x600001e",
+          "il_sha256": "34f0dee44b814f7c8027d02adab7b893ad233b612ca9c782b6fb577bf71b1588"
+        }
+      ]
+    },
+    "WSA.Foundation.Acoustic.dll": {
+      "sha256": "f2cbbc041ec3b2ca9d2c58ef3dc3789484ae4e081974977ecc5aeefb6e9df59b",
+      "methods": [
+        {
+          "type": "WSA.Foundation.Acoustic.HearingSystem.Device",
+          "method": ".ctor",
+          "token": "0x6000007",
+          "il_sha256": "e130d8a0f82d9a7f0666cc615d7a1c890f8e1d89f85da64cbfa67d951dcd4486"
+        },
+        {
+          "type": "WSA.Foundation.Acoustic.HearingSystem.Device",
+          "method": "WriteToneAsync",
+          "token": "0x600000b",
+          "il_sha256": "9e91b11bbafacaa36243fe7d3e3917bc4f599ad39bf792cfa672c4d9a87dca6d"
+        },
+        {
+          "type": ".<IsSupportedAsync>d__5",
+          "method": "MoveNext",
+          "token": "0x60001f2",
+          "il_sha256": "1f2ee3e395a5d75e6e612cb5a6e80796cd6ee9bba36523f8ae6239d5f882933b"
+        },
+        {
+          "type": ".<WriteTinnitusVolumeAsync>d__8",
+          "method": "MoveNext",
+          "token": "0x60001f6",
+          "il_sha256": "a32c13e4501d222c5aa0afe0c348c3c1d04e854e7df132d03887339e8d37e283"
+        }
+      ]
+    },
+    "Component.RemoteControl.dll": {
+      "sha256": "a987a51062c792b9318bfc3e5e8174f6c7e2bc0c69cde24b57de34198261bed7",
+      "methods": [
+        {
+          "type": ".<IsSupportedAsync>d__13",
+          "method": "MoveNext",
+          "token": "0x600083f",
+          "il_sha256": "80138dac56c719c6a5835b57e67f433fac88b9e2c77ea0159582a7e9f0f0e1e0"
+        },
+        {
+          "type": ".<IsSupportedAsync>d__8",
+          "method": "MoveNext",
+          "token": "0x6000841",
+          "il_sha256": "b9fc9da5909dbd6f3897721724530581fccf9b0544dcee5b7c2f76dff2490dc1"
+        },
+        {
+          "type": ".<IsTinnitusSupported>d__10",
+          "method": "MoveNext",
+          "token": "0x6000887",
+          "il_sha256": "a0741e36ee83ac88835c7acb51cbcb7995e5df1c883bfab431bbbb545a3646e0"
+        }
+      ]
+    },
+    "WSA.Foundation.Bluetooth.dll": {
+      "sha256": "be731f86feba563075097dd83ea6877f34da48ef5a64b58544b4a47d23d3eea2",
+      "methods": [
+        {
+          "type": ".<GetUpdatedConfigValue>d__2`1",
+          "method": "MoveNext",
+          "token": "0x6000961",
+          "il_sha256": "95a8d40c0dadf3fbd9dabc1f16052cb037499c49ab076cdd2948a78754c30787"
+        },
+        {
+          "type": ".<IsSupportedAsync>d__10",
+          "method": "MoveNext",
+          "token": "0x6000c3f",
+          "il_sha256": "49c6e6d4903d91f5002da516e0c4451549b7ea869739aaf74a93a6743f11deae"
+        }
+      ]
+    }
+  }
+}

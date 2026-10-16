@@ -1,8 +1,8 @@
 # HeySig App
 
-A planned Kotlin Android replacement for the HeySig Tasker setup, with voice, saved settings and optional noise/sleep automation. This repository scaffold contains a plan and directory structure; it is not yet a buildable app.
+A Kotlin Android acoustic-control prototype and research workspace for a future replacement of the HeySig Tasker setup. Direct program, left/right battery, volume, Sound Sharpness and tinnitus requests have passed focused user acceptance on the tested Pixel/hearing-aid setup.
 
-The first version will operate the installed Signia app through an Android accessibility service. Direct hearing-aid chirps are a separate research milestone. No working direct transmitter or equivalent iPhone control path is claimed.
+Start with [how the prototype works](docs/proto-code-guide.md), [Android build/use](androidApp/README.md), and [acceptance evidence](docs/acceptance/). Voice, noise/sleep automation, production setup/storage, watch support and an iPhone implementation remain future work. The earlier accessibility-based replacement plan is retained as historical planning.
 
 ## Directory layout
 
@@ -28,12 +28,16 @@ HeySigApp/
 └── tools/            Development and migration utilities
 ```
 
-## First milestone
+## Current implementation
 
-Create the Gradle project, Android manifest and accessibility service. Read the active Signia program, select another configured program, verify fresh readback and restore the starting selection. Then implement microphone-button voice and the manual controls before continuous wake listening and automation.
+`ProtoActivity.kt` provides foreground manual controls. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.
 
 Keep the shared core independent of Android classes. Android services implement its control interfaces; a future iPhone control implementation can reuse the command and decision logic.
 
 See [current findings and evidence](docs/current-status.md), [the implementation plan](docs/plan.md) and [architecture boundaries](docs/architecture/boundaries.md). The existing HeySig phone endurance trial runs independently of this scaffold.
 
 Existing protocol research and the dependency-free offline packet regression are included under `research/acoustic/`. The existing eight-hour trial is pending final collection; this app scaffold does not run that trial.
+
+## Proto builds
+
+See [Chromebook build and use](desktopApp/README.md) and [Android prototype build](androidApp/README.md). Both reuse the explicit-profile Kotlin renderer. Android exposes all implemented families; the desktop window currently exposes battery playback/export. Offline encoder validation and actual aid reception have separate evidence and scope.

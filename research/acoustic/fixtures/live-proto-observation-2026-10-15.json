@@ -1,0 +1,17 @@
+{
+  "local_date": "2026-10-15",
+  "local_time": "20:42:51 America/New_York",
+  "action": "One Signia left battery button press",
+  "user_confirmed_usual_left_aid_indication": true,
+  "sample_rate_hz": 44100,
+  "mono": true,
+  "frames_delivered": 30316,
+  "pcm_duration_seconds": 0.687437641723356,
+  "usage": "USAGE_MEDIA",
+  "content_type": "CONTENT_TYPE_UNKNOWN",
+  "player_started": "20:42:51.617",
+  "player_stopped": "20:42:52.441",
+  "exact_pcm_captured": false,
+  "active_acoustic_address_captured": false,
+  "raw_diagnostics": "private/signia-live-20261015 (ignored)"
+}
