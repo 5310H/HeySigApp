@@ -2,6 +2,10 @@
 
 A Kotlin Android acoustic-control prototype and research workspace for a future replacement of the HeySig Tasker setup. Direct program, left/right battery, volume, Sound Sharpness and tinnitus requests have passed focused user acceptance on the tested Pixel/hearing-aid setup.
 
+The [coding specification](docs/coding-spec.md) defines screens, functions, data contracts and phone/watch execution flows ([printable PDF](docs/HeySigApp-coding-spec.pdf)).
+
+The [HeySigApp program specification](docs/program-spec.md) defines the replacement app, including voice access to every function through both phone and watch.
+
 Start with [how the prototype works](docs/proto-code-guide.md), [Android build/use](androidApp/README.md), and [acceptance evidence](docs/acceptance/). Voice, noise/sleep automation, production setup/storage, watch support and an iPhone implementation remain future work. The earlier accessibility-based replacement plan is retained as historical planning.
 
 ## Directory layout

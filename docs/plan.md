@@ -1,5 +1,7 @@
 # Plan: replace HeySig’s Tasker setup with an app
 
+Historical accessibility-first plan. The [October 16 program specification](program-spec.md) supersedes its control-path and feature-priority decisions, including first-release phone/watch voice parity.
+
 October 14, 2026. Implementation plan; the full app has not started. Experimental Chromebook/Android battery-audio prototypes now exist separately. The current eight-hour phone observation trial continues independently.
 
 ## Intended result

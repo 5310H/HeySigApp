@@ -1,0 +1,259 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>HeySigApp Coding Specification</title><style>
+@page { size: Letter; margin: .65in .65in .7in;
+ @bottom-left { content: "HeySigApp · Specification · October 16, 2026"; font: 8pt Arial; color: #555; }
+ @bottom-right { content: counter(page) " / " counter(pages); font: 8pt Arial; color: #555; }
+}
+body { font: 10pt/1.38 Arial, sans-serif; color: #18222c; }
+h1 { font-size: 23pt; line-height: 1.15; margin: 0 0 12pt; }
+h3 { font-size: 11pt; margin: 13pt 0 6pt; break-after: avoid; }
+pre { break-inside: avoid; background: #f2f4f6; border: 1px solid #ccd3da; padding: 7pt; white-space: pre-wrap; overflow-wrap: anywhere; font: 8pt/1.3 monospace; }
+pre code { font-size: inherit; }
+h2 { font-size: 14pt; margin: 18pt 0 7pt; border-bottom: 1px solid #aab9c7; padding-bottom: 4pt; break-after: avoid; }
+p { margin: 0 0 8pt; orphans: 3; widows: 3; }
+a { color: #16496d; text-decoration: none; }
+code { font-size: 8.7pt; overflow-wrap: anywhere; }
+table { width: 100%; border-collapse: collapse; margin: 9pt 0 12pt; font-size: 9pt; }
+th,td { border: 1px solid #b8c3cc; text-align: left; vertical-align: top; padding: 5pt; }
+th { background: #e9eff4; font-weight: bold; }
+tr { break-inside: avoid; } thead { display: table-header-group; }
+li { margin-bottom: 5pt; orphans: 2; widows: 2; }
+ul,ol { padding-left: 19pt; }
+</style><body><h1>HeySigApp coding specification</h1>
+<p>October 16, 2026 · Implementation draft v1 · Phone and Pixel Watch 3</p>
+<h2>1. Scope and implementation decisions</h2>
+<p>Build a native Android application and Wear OS companion to replace HeySig3. Every function below requires phone voice and watch voice access. Touch screens are an additional interface. The phone executes all hearing-aid commands through its speaker. The watch sends intents to the phone and receives status; it does not emit aid-control tones.</p>
+<p>The <a href="https://github.com/5310H/HeySigApp/blob/main/docs/program-spec.md">program specification</a> defines product requirements and Tasker parity. This document defines the proposed code contracts, screens and execution rules. These are design decisions to implement; the current <code>ProtoActivity</code> is a working transport experiment, not this application.</p>
+<p>Use Kotlin, Compose, coroutines and StateFlow. Keep pure models, parsing and automation decisions in <code>shared</code>. Android adapters provide audio, microphone, speech, storage, time and Wear communication. Use dependency injection through constructors. ViewModels call use cases; they must not call the PCM generator or AudioTrack directly.</p>
+<p>The acoustic transport has no aid readback or receipt acknowledgment. UI text and replies say “last sent,” “user confirmed,” or “unknown.” Signia is not a live state source. Explicitly separate successful PCM playback from actual aid reception.</p>
+<h3>1.1 Proposed source layout</h3>
+<table><thead><tr><th>Package / file</th><th>Responsibility</th></tr></thead><tbody><tr><td>shared/model/Fitting.kt</td><td>Slot IDs, capabilities, waveform configuration and fitting revision</td></tr><tr><td>shared/model/Command.kt</td><td>Typed control requests, origin and request IDs</td></tr><tr><td>shared/model/RequestedState.kt</td><td>Program-context values and provenance</td></tr><tr><td>shared/model/OperationResult.kt</td><td>Typed stages, outcomes and recovery reasons</td></tr><tr><td>shared/voice/CommandParser.kt</td><td>Pure text-to-intent parsing and ambiguity handling</td></tr><tr><td>shared/voice/ConversationReducer.kt</td><td>Setup/settings conversations and pending confirmations</td></tr><tr><td>shared/control/CommandCoordinator.kt</td><td>Single-owner execution, cancellation and priority</td></tr><tr><td>shared/control/StateReducer.kt</td><td>Apply completed/uncertain operation events</td></tr><tr><td>shared/settings/SnapshotService.kt</td><td>Save, preview and restore plans</td></tr><tr><td>shared/noise/NoiseReducer.kt</td><td>Pure hysteresis, confirmation and cooldown logic</td></tr><tr><td>shared/sleep/SleepPlanner.kt</td><td>Next events, occurrence IDs and clock-change decisions</td></tr><tr><td>androidApp/audio/AcousticTransport.kt</td><td>ProtoRequest adapter and streaming playback</td></tr><tr><td>androidApp/audio/AudioPreflight.kt</td><td>Read-only audio and foreground/lock checks</td></tr><tr><td>androidApp/voice/PhoneVoiceAdapter.kt</td><td>Recognition, TTS and conversation delivery</td></tr><tr><td>androidApp/resources/ResourceArbiter.kt</td><td>Microphone, playback and speech ownership</td></tr><tr><td>androidApp/data/SettingsRepository.kt</td><td>Atomic versioned storage and migrations</td></tr><tr><td>androidApp/noise/PhoneNoiseSampler.kt</td><td>Native microphone index without audio retention</td></tr><tr><td>androidApp/sleep/ScheduleAdapter.kt</td><td>Platform event delivery, cancellation and rescheduling</td></tr><tr><td>androidApp/wear/WearGateway.kt</td><td>Authenticated paired-device messages and deduplication</td></tr><tr><td>androidApp/ui/*Screen.kt</td><td>Layouts and ViewModels defined below</td></tr><tr><td>wearApp/voice/WatchVoiceAdapter.kt</td><td>Watch recognition and replies</td></tr><tr><td>wearApp/ui/*Screen.kt</td><td>Launcher, conversation, status and Stop</td></tr></tbody></table>
+<h2>2. Data contracts</h2>
+<p>The following Kotlin declarations are interface sketches. Use platform-neutral serialization with explicit schema versions. Validate on import, load and command submission; never trust UI validation alone.</p>
+<pre><code>@JvmInline value class SlotId(val value: Int) // require 1..6
+@JvmInline value class RequestId(val value: String) // UUID
+
+enum class Capability { SUPPORTED, UNSUPPORTED, UNKNOWN }
+enum class Control { VOLUME, SHARPNESS, TINNITUS }
+enum class Origin { PHONE_TOUCH, PHONE_VOICE, WATCH_VOICE, NOISE, SLEEP }
+enum class Provenance { TRANSMITTED, USER_CONFIRMED, USER_SUPPLIED }
+
+data class ProgramConfig(
+    val slot: SlotId,
+    val name: String,
+    val aliases: Set&lt;String&gt;,
+    val enabled: Boolean,
+    val tinnitus: Capability
+)
+data class Fitting(
+    val id: String,
+    val revision: Long,
+    val profile: AcousticProfile,
+    val leftAddress: Int,
+    val rightAddress: Int,
+    val controlAddress: Int,
+    val programs: List&lt;ProgramConfig&gt;
+)
+data class KnownValue&lt;T&gt;(
+    val value: T,
+    val provenance: Provenance,
+    val atEpochMillis: Long,
+    val requestId: RequestId?
+)
+data class ProgramValues(
+    val volume: KnownValue&lt;Int&gt;?,
+    val sharpness: KnownValue&lt;Int&gt;?,
+    val tinnitus: KnownValue&lt;Int&gt;?
+)
+data class RequestedState(
+    val fittingRevision: Long,
+    val program: KnownValue&lt;SlotId&gt;?,
+    val values: Map&lt;SlotId, ProgramValues&gt;,
+    val uncertainFields: Set&lt;String&gt;
+)</code></pre>
+<p>Null means unknown, not zero. Unsupported tinnitus is represented by program capability, not a numeric sentinel. Unknown/uncertain state cannot supply a relative-command baseline. Values for an inactive program are historical; selecting it does not establish that its old values are current.</p>
+<p>Store configuration revision separately from label-only updates where possible: changing addresses, waveform profile, slot identity or capability invalidates dependent assumptions. Renaming a display name updates references without pretending the slot changed identity.</p>
+<pre><code>sealed interface AidCommand {
+    data class SelectProgram(val slot: SlotId) : AidCommand
+    data class SetLevel(val control: Control, val value: Int) : AidCommand
+    data class AdjustLevel(val control: Control, val delta: Int) : AidCommand
+    data class Battery(val sides: Set&lt;BatterySide&gt;) : AidCommand
+    data object Restore : AidCommand
+}
+data class CommandEnvelope(
+    val id: RequestId,
+    val origin: Origin,
+    val command: AidCommand,
+    val createdAtEpochMillis: Long,
+    val expiresAtEpochMillis: Long,
+    val expectedFittingRevision: Long
+)
+enum class Outcome {
+    TRANSMITTED, ALREADY_REQUESTED, BUSY, BLOCKED,
+    CANCELLED, FAILED, PARTIAL, UNKNOWN
+}
+data class StageResult(
+    val name: String,
+    val outcome: Outcome,
+    val emittedFrames: Long,
+    val completedAtEpochMillis: Long?
+)
+data class OperationResult(
+    val id: RequestId,
+    val outcome: Outcome,
+    val stages: List&lt;StageResult&gt;,
+    val reason: String?,
+    val recovery: String?,
+    val persistenceError: String?
+)</code></pre>
+<p>Stable reason codes include INVALID_TARGET, UNKNOWN_PROGRAM, UNKNOWN_BASELINE, TINNITUS_UNAVAILABLE, TINNITUS_NOT_CONFIGURED, FITTING_CHANGED, LOCKED, APP_NOT_FOREGROUND, DND_ON, MEDIA_TOO_LOW, EXTERNAL_OUTPUT, AUDIO_MODE_BUSY, PHONE_UNREACHABLE, REQUEST_EXPIRED, PLAYBACK_INTERRUPTED and STORAGE_FAILED. Localize display/speech text outside domain code.</p>
+<h2>3. Phone screen layouts and event behavior</h2>
+<p>Use a single activity with navigation destinations Home, Voice, Programs, Saved settings, Noise, Sleep and Settings. Home has a persistent Stop control while any operation is active; all pages expose a microphone action. Back leaves a settings draft unsaved after offering discard/continue. Configuration Save is atomic. A failed write keeps the draft and reports failure.</p>
+<p>Layouts below specify content order and grouping, not fixed pixel coordinates. Use accessible touch targets, scalable text, explicit labels and TalkBack traversal in visual order. Avoid color-only status. Compact screens scroll; Stop and microphone remain reachable. Landscape uses the same logical groups rather than changing command semantics.</p>
+<h3>3.1 HomeScreen</h3>
+<pre><code>HeySig                    [Voice] [Settings]
+Phone ready / blocked: &lt;reason&gt;     [Details]
+LAST SENT PROGRAM
+Sleep · slot 2 · 10:14 AM
+Aid state not verified
+[Universal] [Sleep] [Noisy]
+[Outdoor]   [TV]    [Very Noisy]
+Volume          [−]  8   [+]   [Set]
+Sound Sharpness [−]  0   [+]   [Set]
+Tinnitus        [−]  0   [+]   [Set]
+[Left battery] [Both batteries] [Right battery]
+[Saved settings] [Noise: Off] [Sleep: Off]
+Operation: idle / stage and progress
+[Microphone]                         [STOP]</code></pre>
+<p>Program buttons come from enabled fitting slots; no hardcoded names. Selected styling means last sent, not aid-confirmed. Unknown program displays “Program unknown — select a program.” Values show “unknown” or “historical” where applicable. Tinnitus displays the capability reason when unavailable. Program selection sends only a program command; it never reapplies stored levels.</p>
+<p>Plus/minus invokes AdjustLevel with delta ±1. Numeric Set opens an integer editor with range and explicit Send. A draggable slider, if included, updates a local draft only; releasing it does not transmit. Send submits one absolute target. Display the old transmitted value until completion and show the pending target separately. Invalid targets disable Send and explain why.</p>
+<p>Repeated settings return ALREADY_REQUESTED and expose Send again. Send again explicitly bypasses local deduplication for that user action and receives a new request ID. Battery requests always execute unless busy/blocked. Stop invokes coordinator.cancel and cancels the current conversation where relevant; it never sends a compensating aid command.</p>
+<p>ViewModel events: SelectProgram(slot), DraftLevel(control,text), SendLevel(control), Adjust(control,delta), Battery(sides), SendAgain(previousTarget), OpenVoice, Stop, Open(destination). State: fitting, requestedState, audioReadiness, operation, automationSummary and local editor drafts.</p>
+<h3>3.2 VoiceScreen</h3>
+<pre><code>Voice command             Source: phone / watch
+Ready / Listening / Understanding / Clarifying
+Heard: “set sleep time to ten”
+HeySig: “Ten AM or ten PM?”
+[Suggested answers, also speakable]
+[Listen / Retry] [Repeat] [Back] [Cancel]
+Result: &lt;plain-language final outcome&gt;</code></pre>
+<p>Show transcript only for the current session unless diagnostics are explicitly enabled. Listening starts only on user action or an enabled accepted wake trigger. Unknown speech offers Retry/Cancel. Retry performs fresh recognition. Show and speak clarification choices; Cancel/timeout discards draft changes. The same conversation reducer serves phone and watch. Voice can open any page, read every field, edit every setting and activate each action defined in this spec.</p>
+<h3>3.3 ProgramsScreen and FittingScreen</h3>
+<p>Programs list shows slot number, editable name, enabled flag, aliases and tinnitus capability. Row opens ProgramEdit with Name, Aliases, Enabled and Tinnitus supported/unsupported/unknown; Save and Cancel. Duplicate/ambiguous aliases fail Save with the conflicting slots named.</p>
+<p>Fitting screen groups Addresses (control/left/right), waveform profile, program mapping and validation status. Profile initially uses the tested values only after user review: 44100 Hz, base 15360 Hz, spacing 512 Hz, bitSeconds 0.0625, gainDivisor 1.2, address-XOR on. Tested address 12 is offered as this user&#x27;s setup, never a generic default.</p>
+<p>Advanced profile edits show a confirmation summary and invalidate fitting validation. Validate profile constraints through AcousticProfile before persistence. Addresses accept decimal or explicit 0x hexadecimal, range 0..255. A guided test requires selecting a configured program, explicit Send test, and user response Heard expected response / No response / Unsure. Record feedback without claiming electronic acknowledgment. No automatic address scans or max-level tests.</p>
+<p>Voice sequence: “configure program two” → read fields → “name Sleep” → “tinnitus supported” → “review” → read draft → “save” → commit. “Set aid address to twelve” asks whether common/control or individual side; “use twelve for all” proposes all three and requires confirmation. Permission setup uses spoken Android instructions where system UI interaction is required.</p>
+<h3>3.4 SavedSettingsScreen</h3>
+<p>Show saved program, known/unknown levels, tinnitus capability, fitting revision, provenance and saved time. Actions: Save requested settings, Restore, Enter external settings, Export, Import. Save does not interrogate aids or Signia. Unknown fields remain unknown.</p>
+<p>Restore opens preview listing stages to send and fields to skip. Incomplete record requires “Restore known values” confirmation. A fitting mismatch blocks before any stage. During restore show each stage Pending / Transmitting / Transmitted / Skipped / Failed. Stop leaves completed stages visible; retain the original snapshot. Do not label partial restoration success.</p>
+<p>Enter external settings is a draft editor with program and optional levels; voice asks each field and accepts “unknown.” Saving marks supplied fields USER_SUPPLIED. Export/import initiates a system picker with spoken guidance; import parses and previews before replacing data. Cancel leaves all records unchanged.</p>
+<h3>3.5 NoiseScreen</h3>
+<pre><code>Noise                     Source: phone microphone
+[Off] [Observe] [Automatic]       [Stop]
+Index: −46.2   Sample age: 4 s   [Sample now]
+Classified: Noisy → program 3
+Candidate: Noisy 2/3 · Cooldown: 14 s
+Blocked by: override / sleep / microphone / none
+[Calibrate] [Settings] [Read status]</code></pre>
+<p>Settings fields: Quiet role, optional Noisy role, Very noisy role, low/high thresholds, hysteresis, confirmations (1..20), cooldownSeconds, captureSeconds, waitSeconds and freshnessLimitSeconds. Initial timing choices 60/5/10 seconds; thresholds require new native-sampler measurement. Require finite numeric values, low &lt; high, margin &gt; 0, 2×margin &lt; high−low, confirmations 1..20 and positive timing values. Initial supported timing bounds: cooldown 0..3600, capture 1..10, wait 1..300, freshness 2..900 seconds; freshness must exceed capture + wait. These are proposed app bounds, not inherited protocol limits.</p>
+<p>Save stops sampling, clears candidates and leaves mode Off. Automatic remains unavailable until fitting roles and calibration direction are confirmed. Observe never sends commands. Stop prevents further decisions immediately, then releases any active capture. Sample now reports busy if capture resources are unavailable.</p>
+<p>Calibrate wizard: explain index → capture quiet → capture typical → capture loud → read results → confirm larger index means louder → propose thresholds → review/save. Do not auto-enable switching. Unsuitable/nonseparated measurements require another capture or explicit manual thresholds; never label them calibrated sound-pressure dB.</p>
+<p>Voice supports all fields, role choices, raw sample, mode changes, candidate/cooldown queries, calibration steps and Stop. “Start automatic noise” reads current roles and asks confirmation if configuration has not yet been reviewed in this session.</p>
+<h3>3.6 SleepScreen</h3>
+<p>Fields: Enabled, Sleep program, Sleep local time, Wake program, Wake local time, runtime Sleep-active status, next scheduled event and last event outcome. Actions: Save choices, Enable, Disable, Sleep now, Wake now, Read schedule.</p>
+<p>Programs are required enabled slots; times use LocalTime and must differ. Display 22:00/07:00 suggestions without saving until confirmed. Save disables schedules and clears sleep-active. Enable schedules future occurrences only. Sleep now/Wake now require enabled valid configuration and no override. Bare “sleep” invokes Sleep now; “program Sleep” invokes direct program selection.</p>
+<p>Voice time parsing accepts 24-hour values and explicit AM/PM. “Ten” is ambiguous: ask AM/PM. “Tomorrow” is not a recurring daily time and must be clarified. Show timezone explicitly. Failures show missed/deferred status without replaying later.</p>
+<h3>3.7 SettingsScreen and DiagnosticsScreen</h3>
+<p>Voice settings: prompts on/off, results on/off, reply device (initiating device/phone/watch), optional wake enabled on each device. Automation controls: override on/off, Cancel automation and Resume reviewed modes. Data controls: export/import configuration, mark requested state unknown and delete diagnostics. Destructive deletion/reset requires a read-back confirmation; Back/Cancel preserves data.</p>
+<p>Readiness page shows fitting validity, phone unlocked/foreground, DND, media level/required level, audio mode and detected output conflicts. Check audio reads only; it sends no tones and changes no Android settings. Diagnostics shows recent bounded events and last operation stages; Explain failure produces the same recovery message on screen and voice.</p>
+<h2>4. Watch layouts and delivery</h2>
+<h3>4.1 Launcher and conversation</h3>
+<pre><code>HeySig
+Phone: reachable / unavailable
+[Speak command]
+[Read status] [Stop]</code></pre>
+<p>Tile provides Speak and Stop entry points. Main watch screen adds current last-sent program and automation summaries. Conversation screen shows Listening, recognized text, clarification prompt and response options with large Listen/Cancel actions. Long option lists are read in short groups with “next choices” and “repeat”; no phone-only settings step is allowed except required Android system interaction.</p>
+<p>Watch captures recognition, then forwards the recognized text and conversation ID. Phone parses and executes; watch speaks final replies locally by default. Phone speech is selected only by explicit reply preference. If watch TTS is unavailable show text/haptic status and offer spoken phone output when feasible; do not silently lose the result.</p>
+<h3>4.2 Message contract</h3>
+<pre><code>data class VoiceRequest(
+    val requestId: String,
+    val conversationId: String,
+    val text: String,
+    val createdAt: Long,
+    val expiresAt: Long,
+    val expectedConfigRevision: Long
+)
+data class VoiceReply(
+    val requestId: String,
+    val sequence: Long,
+    val phase: String, // RECEIVED, CLARIFY, RUNNING, FINAL
+    val displayText: String,
+    val spokenText: String?,
+    val result: OperationResult?
+)</code></pre>
+<p>Only paired/authorized watch nodes may submit requests. Use a 30-second delivery expiry as an initial design value, checked against the receiving phone clock with clock-offset handling at connection setup; if time agreement is unavailable, require a fresh live session before control. Persist command IDs/outcomes for deduplication across restart. Retain at most 256 records for 24 hours; expired unseen requests never execute. IDs whose execution was interrupted return UNKNOWN and require an explicit new user request.</p>
+<p>Send the same request ID when retrying delivery, not a new control request. Repeated ID returns stored progress/result without replay. Sequence numbers suppress old replies. Watch may show “Phone has not replied” after five seconds but must not infer failed playback or automatically resend as a new command. Reconnection retrieves result by ID; it does not enqueue old speech for later execution. Settings conversations also reject stale revisions.</p>
+<p>Stop has its own ID and identifies the target operation/session. It bypasses normal busy rejection. A disconnected watch says Stop could not reach the phone; it must not claim cancellation.</p>
+<h2>5. Function contracts and execution</h2>
+<h3>5.1 Public application functions</h3>
+<table><thead><tr><th>Function</th><th>Inputs</th><th>Return and required behavior</th></tr></thead><tbody><tr><td>parseCommand(text,context)</td><td>Text, active conversation, fitting aliases</td><td>Parsed(intent), Clarify(options), Cancel or Unsupported; pure, no side effects</td></tr><tr><td>reduceConversation(state,event)</td><td>Current draft and response</td><td>New state plus effects; never persist before explicit Save/Confirm</td></tr><tr><td>submit(envelope)</td><td>Validated ID/origin/target/revision</td><td>Operation handle or Busy/Blocked; starts at most one operation</td></tr><tr><td>cancel(operationId)</td><td>Target ID</td><td>Cancellation acknowledgment plus eventual final result; stop pending stages</td></tr><tr><td>getStatus()</td><td>None</td><td>Requested state, runtime modes, readiness, ages and provenance; no playback</td></tr><tr><td>setProgram(slot,force)</td><td>Enabled fitted slot, resend flag</td><td>Map slot → PCM; update program only after full transmission</td></tr><tr><td>setLevel(control,value,force)</td><td>Known program and valid level</td><td>Capability/range checks, one absolute command, update that field only</td></tr><tr><td>adjustLevel(control,delta)</td><td>Delta ±1</td><td>Resolve from valid same-context baseline; reject unknown/out-of-range</td></tr><tr><td>checkBattery(sides)</td><td>Nonempty left/right set</td><td>Left then right; stage results, no numeric battery state</td></tr><tr><td>saveSnapshot()</td><td>Current requested state</td><td>Atomic record or storage error; preserve unknown fields</td></tr><tr><td>previewRestore()</td><td>Existing snapshot and fitting</td><td>Validated stages, skipped fields, mismatch errors; no audio</td></tr><tr><td>restore(planToken)</td><td>Confirmed plan bound to revision</td><td>Serialized stages; revalidate before each stage; preserve snapshot</td></tr><tr><td>saveFitting(draft,revision)</td><td>Valid draft + expected revision</td><td>Atomic update, dependent invalidation and automation stop</td></tr><tr><td>configureNoise(draft)</td><td>Valid settings</td><td>Atomic update, mode Off and candidates reset</td></tr><tr><td>startNoise(mode)</td><td>Observe/Automatic</td><td>Validate configuration/resources; start exactly one loop</td></tr><tr><td>stopNoise()</td><td>None</td><td>Stop future decisions immediately, release capture, clear candidate</td></tr><tr><td>setOverride(enabled)</td><td>Boolean</td><td>Persist preference, clear pending noise; enabling blocks sleep/noise</td></tr><tr><td>configureSleep(draft)</td><td>Programs and local times</td><td>Atomic update, disable schedule, clear sleep-active</td></tr><tr><td>enableSleep(enabled)</td><td>Boolean</td><td>Validate and arm/disarm future events; no immediate selection</td></tr><tr><td>requestSleepState(state)</td><td>Asleep/Awake</td><td>Guard enabled/override; select configured program then update runtime state</td></tr><tr><td>checkAudio()</td><td>Current platform state</td><td>Ready or ordered blocking reasons; read-only</td></tr><tr><td>markUnknown(fields)</td><td>Explicit affected scope</td><td>Clear current assumptions, keep historical log and saved record</td></tr></tbody></table>
+<p>All public functions return domain results rather than throwing raw Android errors to the UI. Internal exceptions become typed failures while preserving cause details in bounded diagnostics. A cancellation exception must still run resource cleanup and finalize uncertain playback state.</p>
+<h3>5.2 Coordinator algorithm</h3>
+<ol><li>Validate expiry, expected fitting revision and target. Reject invalid/busy work before allocating playback resources. Queries and Stop remain available.</li><li>Resolve a typed plan. Normalize relative changes into absolute targets before playback; bind the plan to program/fitting context.</li><li>Reject local repeated targets as ALREADY_REQUESTED unless force was explicitly requested. No repeat suppression for battery.</li><li>Acquire the shared resource arbiter, pause existing capture/listening, and recheck audio/fitting/program context. A confirmation dialog never owns playback resources.</li><li>Persist an operation-start journal entry before emitting audio. Failure to establish the journal blocks transmission, avoiding untracked duplicate work after restart.</li><li>Render the stage through the validated PCM adapter; stream through built-in speaker. Track submitted and played frames. A successful write alone is insufficient: wait for the full frame count and normal completion.</li><li>Emit stage completion and update only its requested-state field. Persist requested state; report a write failure separately if playback already completed. Never replay to fix storage.</li><li>Between stages observe cancellation and recheck guards/revision. For both batteries use a validated separation; initially configure one second after completion, pending physical acceptance. Restore uses the same configurable stage gap, not an assumed aid acknowledgment.</li><li>Finalize operation journal/result, release AudioTrack/focus/resources in finally, and resume only modes that were previously enabled and remain valid. Clear automation candidate history after interrupted resource ownership.</li></ol>
+<p>Default stage timeout is max(5 seconds, PCM duration + 3 seconds); no unbounded playback wait. A later stage never begins after timeout. Mark partially emitted state uncertain. On startup, unfinished journal entries become UNKNOWN and active modes become Off; no playback resume.</p>
+<h3>5.3 Acoustic adapter contract</h3>
+<pre><code>interface AidTransport {
+    suspend fun transmit(
+        stage: AcousticStage,
+        onProgress: (playedFrames: Long) -&gt; Unit
+    ): PlaybackResult
+    suspend fun stop()
+}
+interface AudioPreflight {
+    fun inspect(): AudioReadiness
+}</code></pre>
+<p>Reuse the existing ProtoRequest encoder unchanged behind the adapter until PCM regression gates pass. Commands: program = 0x40 + slot − 1; volume = 0x1f − value; sharpness = 0x20 + (value AND 15); tinnitus = 0x3f − value; left battery 0x80; right 0x81. These mappings apply to the tested fitting/platform, not every Signia model.</p>
+<p>Use controlAddress for program/levels, leftAddress/rightAddress for battery. Validate address and profile independently. Stream signed little-endian mono PCM16 at the configured sample rate through the proven media playback path. Do not change audio gain/profile parameters based on environmental noise. Phone volume, DND and incompatible outputs produce instructions, not automatic changes.</p>
+<p>The initial release retains the prototype&#x27;s unlocked/foreground constraint until separate locked/background tests qualify a revised policy. Watch commands and schedule events report this block honestly. Signia itself need not be open.</p>
+<h2>6. State transitions and automation functions</h2>
+<h3>6.1 Command and conversation states</h3>
+<table><thead><tr><th>Current state</th><th>Event</th><th>Next state / action</th></tr></thead><tbody><tr><td>Idle</td><td>Valid request</td><td>Preflight → Rendering → Playing</td></tr><tr><td>Playing</td><td>Full completion</td><td>Persisting → Transmitted</td></tr><tr><td>Playing</td><td>Stop/timeout/output loss</td><td>Stopping → Cancelled/Failed; affected field uncertain</td></tr><tr><td>Any active operation</td><td>Another control</td><td>Return Busy without replacing active operation</td></tr><tr><td>Awaiting clarification</td><td>Response</td><td>Update draft or dispatch resolved intent</td></tr><tr><td>Awaiting confirmation</td><td>Confirm</td><td>Revalidate revision then commit/submit</td></tr><tr><td>Any conversation</td><td>Cancel/timeout</td><td>End; discard unsaved draft; no aid command</td></tr><tr><td>Startup</td><td>Unfinished operation journal</td><td>Mark Unknown; do not replay</td></tr></tbody></table>
+<p>Manual program transmission enables override; failed/blocked selection does not. A manual program command takes priority over pending noise/sleep work, but does not interrupt already emitting audio automatically. Stop is explicit. Override blocks both sleep and noise; releasing it does not enable either mode. Sleep-active suppresses noise. Manual level commands do not implicitly enable program override; this matches the specific manual-program priority rule.</p>
+<h3>6.2 NoiseReducer</h3>
+<pre><code>fun reduceNoise(
+    state: NoiseState,
+    event: NoiseEvent,
+    settings: NoiseSettings,
+    nowMonotonicMillis: Long
+): NoiseDecision
+// decision = next state + None | Propose(slot) | RequestProgram(slot)</code></pre>
+<p>NoiseState contains mode, classified band, candidate slot/count, last fresh sample time, last transmission time and blocking reason. NoiseEvent includes FreshSample(index), CaptureFailed, SamplingGap, GuardBlocked, ManualOverrideChanged, SleepChanged, CommandCompleted and Stop. Reducer performs no Android work.</p>
+<p>Convert the sampler index once into “larger means louder.” Initial band: below L quiet, L through H middle, above H loud. From quiet enter middle above L+M and loud above H+M; from middle enter quiet below L−M or loud above H+M; from loud enter middle below H−M and quiet below L−M. Equality stays in the current band. Check outer-band jumps first. If middle role is absent, middle samples clear candidates.</p>
+<p>Count consecutive fresh samples for the same target; a target change restarts at one. Once confirmations and cooldown qualify, Observe emits Propose; Automatic emits RequestProgram. When the target is already last requested, emit no transmission and do not extend cooldown. A failed/blocked request, stale gap, Stop, override, sleep or microphone interruption clears pending count. Cooldown uses monotonic time and starts after completed transmission only. After cooldown expiry require a new confirmation sequence; do not retain pre-cooldown strikes.</p>
+<p>Sampler uses one bounded capture at a time; wait cadence starts after capture completion. Exclude any capture overlapping speech or command tones. Native index calculation, microphone source and hardware gain behavior must be documented and calibrated before shipping Automatic. A concrete initial implementation is RMS over PCM samples, converted to 20×log10(max(rms,epsilon)) relative to full scale; epsilon prevents log(0). Do not reuse AutoVoice thresholds or label the value SPL. Invalid/empty captures are failures, not silence samples.</p>
+<h3>6.3 SleepPlanner</h3>
+<pre><code>fun nextOccurrences(
+    settings: SleepSettings,
+    now: Instant,
+    zone: TimeZone
+): List&lt;ScheduledOccurrence&gt;
+suspend fun handleOccurrence(id: String): OperationResult</code></pre>
+<p>Occurrence identity includes fitting/schedule revision, local date and event type. Use the current timezone to plan the next sleep and wake. In a DST repeated time choose the first occurrence only; in a nonexistent local time mark that day&#x27;s event skipped. Recompute on timezone/clock changes, cancelling old platform registrations first. Keep processed occurrence IDs so a broadcast cannot execute twice.</p>
+<p>At delivery reload persisted configuration, verify enabled/revision/time validity and that the occurrence is due and not already processed. Initial lateness tolerance: 60 seconds; beyond it record missed and do not transmit. Within it all normal guards still apply. Blocked/busy events are missed, not queued. A successful sleep command sets SleepActive; successful wake clears it. No state update for failed or partial playback. Disable/Save explicitly clears suppression.</p>
+<p>Platform scheduling APIs and permissions are implementation feasibility work. If the OS cannot provide the required timing, expose “schedule unavailable” and recovery guidance; do not show Enabled after registration fails. On restart retain saved choices and last event history but leave runtime scheduling off for explicit resume.</p>
+<h2>7. Voice intents and guided function coverage</h2>
+<p>Every screen event maps to a typed AppIntent. Control intents use AidCommand; settings intents update conversation drafts. Maintain one registry containing canonical phrases, aliases, parameter types, required context, confirmation policy and reply templates. Generate help from this registry so phone/watch behavior cannot drift.</p>
+<table><thead><tr><th>Intent family</th><th>Required phrases and dialog behavior</th></tr></thead><tbody><tr><td>Navigation/help</td><td>“open noise settings,” “list programs,” “help with sleep,” “repeat,” “back,” “cancel”</td></tr><tr><td>Programs</td><td>“program two,” “set program to Sleep,” “current program,” “send again”</td></tr><tr><td>Levels</td><td>“volume ten,” “balance minus three,” “tin four,” mute/max/soft/sharp, current queries, up/down</td></tr><tr><td>Batteries</td><td>“battery check,” “check left battery,” “check right battery”</td></tr><tr><td>Snapshots</td><td>“save settings,” “what is saved,” “restore settings,” “enter external settings”</td></tr><tr><td>Fitting</td><td>“configure aids,” “set control address twelve,” “rename program two,” “set tinnitus availability”</td></tr><tr><td>Noise</td><td>“noise sample,” “observe noise,” “automatic noise,” “stop noise,” “calibrate noise,” edit/read every field</td></tr><tr><td>Sleep</td><td>“configure sleep,” “sleep at ten PM,” “wake at seven AM,” enable/disable, sleep/wake now</td></tr><tr><td>Priority</td><td>“override on/off/toggle,” “manual/automatic mode,” “cancel automation,” “resume automation”</td></tr><tr><td>Voice</td><td>“prompts off,” “spoken results on,” “reply on watch,” “start/stop Hey Sig listening”</td></tr><tr><td>Recovery/data</td><td>“check phone audio,” “explain last failure,” “mark settings unknown,” import/export/delete diagnostics</td></tr></tbody></table>
+<p>Normalize whitespace/case, preserve configured program punctuation, accept one trailing sentence punctuation character, and resolve numeric words including minus/negative. Match exact configured names/aliases before broad keywords. “Program Sleep” always means program selection; bare “sleep” means sleep-state action. Do not use a generic language model to guess unrecognized aid-control targets. Ambiguous input becomes Clarify without playback.</p>
+<p>Example full watch conversation: “Configure noise” → “Choose quiet program” → “Universal” → “Choose noisy program” → “Noisy” → “Choose very noisy program” → “Very Noisy” → review thresholds/calibration → “Save” → “Saved. Noise automation is off.” Follow the same reducer on phone. Editing only one field should not force reentry of every other valid field.</p>
+<p>For setup/security/system limitations, say exactly which device needs interaction: “Unlock your phone and open HeySig, then say try again.” Watch voice access remains available to status/settings even if playback is blocked. Never translate a blocked action into silent success.</p>
+<h2>8. Storage, permissions and failure recovery</h2>
+<p>Use versioned records for fitting, voice preferences, noise settings/calibration, sleep settings, requested state, snapshot and operation journal. Repository mutations require expected revision to prevent stale watch/phone drafts overwriting newer edits. On conflict return the current revision and ask the user to review again.</p>
+<p>Write a temporary record in the same private directory, flush and atomically replace. Keep the last valid backup where supported. A malformed/unsupported schema loads no guessed defaults into active automation; report recovery, retain the original for export and leave affected functions disabled. Settings saves and automation-state changes must be serialized with dependent invalidations.</p>
+<p>Microphone, speech service availability, notification/background operation, watch connection and scheduling permissions have separate readiness states. Explain why each is needed at the feature entry point. Denial must not block unrelated manual controls. Permission revocation stops affected resources and marks modes stopped. Never claim granting permissions can be completed by an app voice command alone.</p>
+<p>Keep logs bounded (initial 256 KiB rolling numeric/event log plus last 256 operation records). Store no microphone audio or persistent recognition transcript by default. Export strips secrets/device identifiers unless explicitly included. Diagnostic deletion affects diagnostics only, not fitting or restoration records.</p>
+<h2>9. Implementation sequence and test specification</h2>
+<p>Build in vertical phone/watch slices rather than completing phone functions and deferring watch parity:</p>
+<ol><li>Shared models, storage, fitting review, Home screen, coordinator and validated PCM adapter. Phone/watch push-to-talk can select programs and request battery.</li><li>Level controls, status provenance, snapshots and their full voice dialogs. Add screens and explicit restore-stage reporting.</li><li>Settings, fitting edits, voice preference changes and recovery/export dialogs on both devices. Complete watch deduplication/reconnect tests.</li><li>Native noise sampling, calibration, observation, then Automatic and priority tests.</li><li>Sleep scheduling, lifecycle recovery, locked/background feasibility and combined resource tests.</li><li>Optional hands-free wake, endurance and release packaging. Wake detection implementation/license remains a decision requiring validation, not an assumed OS capability.</li></ol>
+<table><thead><tr><th>Test ID</th><th>Action</th><th>Required result</th></tr></thead><tbody><tr><td>C01</td><td>Phone and watch say “program two”</td><td>One slot-2 transmission, last-sent Sleep; record user beep feedback separately</td></tr><tr><td>C02</td><td>Repeat C01, then “send again”</td><td>No-op first; exactly one new transmission on explicit resend</td></tr><tr><td>C03</td><td>Set volume with unknown program</td><td>Ask program; no PCM until resolved</td></tr><tr><td>C04</td><td>Set known volume then relative up</td><td>Correct absolute mapping; out-of-range rejected</td></tr><tr><td>C05</td><td>Unsupported/unknown tinnitus</td><td>No command; unavailable/configure capability response</td></tr><tr><td>C06</td><td>Both batteries, Stop after left</td><td>No right playback; result reports left stage and cancellation</td></tr><tr><td>C07</td><td>DND/low media/external route</td><td>Block with device-specific instruction; no audio configuration mutation</td></tr><tr><td>C08</td><td>Kill process during transmission</td><td>Restart shows uncertain field; no replay</td></tr><tr><td>S01</td><td>Restore incomplete snapshot</td><td>Preview skipped fields, explicit confirmation, exact serialized known stages</td></tr><tr><td>S02</td><td>Storage failure after playback</td><td>Report transmitted plus save failure; preserve previous record</td></tr><tr><td>V01</td><td>Every screen field/action by both voice paths</td><td>Same typed effect and understandable local reply</td></tr><tr><td>V02</td><td>Ambiguous time/name, Cancel, silence</td><td>Clarification/discard; no unintended write or playback</td></tr><tr><td>W01</td><td>Duplicate request, late reply, reconnect</td><td>One execution; ordered result recovery; no stale queued command</td></tr><tr><td>W02</td><td>Watch disconnected during Stop</td><td>State cancellation not confirmed; retrieve phone result later</td></tr><tr><td>N01</td><td>Boundary oscillation and outer-band jump</td><td>Exact hysteresis/confirmation behavior specified in section 6</td></tr><tr><td>N02</td><td>Voice/tones overlap sampling</td><td>Capture excluded, candidate reset, previous mode resumes safely</td></tr><tr><td>N03</td><td>Override/sleep/gap/cooldown</td><td>No premature switch; require fresh sequence</td></tr><tr><td>T01</td><td>DST/timezone/duplicate delivery</td><td>One valid occurrence or explicit skipped status; never double play</td></tr><tr><td>T02</td><td>Restart or delayed blocked event</td><td>No automatic replay; choices retained, modes visibly Off/missed</td></tr><tr><td>R01</td><td>Eight-hour observe and automatic trials</td><td>Detect crashes/restarts/gaps; bounded memory; final stop recorded</td></tr></tbody></table>
+<p>Unit tests target parser ambiguity, reducers, validation, snapshots, scheduling and priority. Audio regression tests compare generated PCM to frozen evidence. Device acceptance tests cover actual recognition, watch transport, audio routes, user aid response, interrupted stages and no-ADB operation. Mocked success never substitutes for these physical checks.</p>
+<p>Release checklist: every described function has implemented screen and phone/watch voice coverage; no current-state claims without provenance; no Tasker/plugin runtime dependency; permissions and recovery work; source builds reproducibly; limitations match measured locked/background/wake capability. iPhone and watch-to-aid playback are outside this implementation.</p></body></html>
