@@ -82,5 +82,12 @@ fun main() {
     check(session.requested.program == 5) // Planning cannot claim transmission.
     plan.forEach { session.completed(it) }
     check(session.requested == session.snapshot)
-    println("PASS: $phraseCases voice phrase cases plus fitting, context, ranges, tinnitus and restore planning")
+    check(VoicePreference.parse("voice prompts off") == VoicePreference(true,false))
+    check(VoicePreference.parse("Turn spoken responses on!") == VoicePreference(false,true))
+    check(VoicePreference.parse("set voice responses off") == VoicePreference(false,false))
+    check(VoicePreference.parse("turn off voice prompts") == VoicePreference(true,false))
+    check(VoicePreference.parse("turn on spoken responses") == VoicePreference(false,true))
+    check(VoicePreference.parse("voice prompts on off") == null)
+    check(VoicePreference.parse("volume off") == null)
+    println("PASS: $phraseCases voice phrase cases plus fitting, context, ranges, tinnitus, restore planning and voice preferences")
 }

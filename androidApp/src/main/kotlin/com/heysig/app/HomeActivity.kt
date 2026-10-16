@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.heysig.control.*
 import com.heysig.research.*
+import com.heysig.noise.*
 import org.json.JSONObject
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicBoolean
@@ -40,7 +41,16 @@ class HomeActivity : Activity() {
     private var setupChanged: (() -> Boolean)? = null
     private var saveSetupAction: (() -> Unit)? = null
     private var message = "Ready. No command is sent at startup."
+    private var watchBridge: WatchBridge? = null
+    private var watchToggle: CheckBox? = null
+    private var remoteReply: ((JSONObject) -> Unit)? = null
+    private var commandOrigin: String? = null
+    private var confirmationOrigin: String? = null
+    private val remotePrefs by lazy { getSharedPreferences("heysig-watch-results",MODE_PRIVATE) }
+    private fun remoteResult(phase: String, text: String) = JSONObject().put("phase",phase).put("text",text)
     private val profile = AcousticProfile(44100,15360,512,0.0625,1.2,true)
+    private val noise by lazy { NoiseFeature(this,{ fitting?.programs.orEmpty() },
+        { resumed && !busy.get() && !pendingVoice && tts?.isSpeaking != true },{ text,speak -> tell(text,speak) }) }
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -51,13 +61,13 @@ class HomeActivity : Activity() {
         }
         show("Home")
     }
-    override fun onResume() { super.onResume(); resumed = true }
+    override fun onResume() { super.onResume(); resumed = true; watchToggle?.isChecked = watchBridge != null }
     override fun onPostResume() {
         super.onPostResume()
         pendingText?.let { pendingText = null; route(it) }
     }
-    override fun onPause() { resumed = false; pendingVoice = false; cancelled.set(true); tts?.stop(); super.onPause() }
-    override fun onDestroy() { cancelled.set(true); tts?.shutdown(); super.onDestroy() }
+    override fun onPause() { noise.stop(); watchBridge?.close(); watchBridge = null; resumed = false; pendingVoice = false; cancelled.set(true); tts?.stop(); super.onPause() }
+    override fun onDestroy() { noise.stop(); cancelled.set(true); tts?.shutdown(); super.onDestroy() }
 
     private fun load() {
         try {
@@ -107,26 +117,41 @@ class HomeActivity : Activity() {
         } else show(target)
     }
     private fun show(destination: String = page) {
+        try { noise.detachEditor() } catch(e:Exception) { tell("Noise draft: ${e.message}. Correct the field or discard noise changes."); return }
         page = destination
         setupChanged = null; saveSetupAction = null
         content = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(24,24,24,24) }
         line("HeySig • $page").textSize = 25f
-        line("Acoustic controls • last sent is remembered; aid state cannot be queried.")
+        line("Hearing-aid controls • experimental noise observation")
         val nav = LinearLayout(this)
-        listOf("Home","Setup","Saved","Voice").forEach { target ->
+        listOf("Home","Setup","Saved","Voice","Noise").forEach { target ->
             nav.addView(Button(this).apply { text = target; isEnabled = !busy.get(); setOnClickListener { navigate(target) } }, LinearLayout.LayoutParams(0,-2,1f))
         }; content.addView(nav)
         status = line(message)
         heardStatus = line(if(lastHeard.isEmpty()) "" else "Speech heard: $lastHeard")
         heardStatus.visibility = if(lastHeard.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
+        if(page == "Home") {
+            val remote = CheckBox(this).apply {
+                text = "Watch Wi-Fi (development)"; isChecked = watchBridge != null
+                setOnCheckedChangeListener { box, enabled ->
+                    if(enabled) {
+                        if(getSharedPreferences("heysig-watch-dev",MODE_PRIVATE).getString("token",null) == null) {
+                            box.isChecked = false; tell("Set up the Chromebook watch relay first")
+                        } else try { watchBridge = WatchBridge(this@HomeActivity) { request, reply -> runOnUiThread { try { receiveWatch(request,reply) } catch(e:Exception) { reply(remoteResult("FAILED","Watch request could not be processed")) } } }; tell("Watch Wi-Fi ready while HeySig stays open") }
+                        catch(e:Exception) { box.isChecked = false; tell("Watch bridge could not start: ${e.message}") }
+                    } else { watchBridge?.close(); watchBridge = null }
+                }
+            }; watchToggle = remote; content.addView(remote)
+        }
         button("Speak command") { beginVoice() }
-        button("Stop") { pendingProgram = null; pendingRestore = null; pendingVoice = false; cancelled.set(true); tell("Stop requested. Already emitted tones cannot be undone.") }
+        button("Stop") { noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; pendingVoice = false; cancelled.set(true); tell("Stop requested. Already emitted tones cannot be undone.") }
         if(page == "Setup") button("Save reviewed setup",!busy.get()) { saveSetupAction?.invoke() }
         when(page) {
             "Home" -> home()
             "Setup" -> setup()
             "Saved" -> snapshot()
             "Voice" -> voicePage()
+            "Noise" -> noise.render(content)
         }
         val scroll = ScrollView(this).apply { addView(content, ViewGroup.LayoutParams(-1,-2)) }
         scroll.setOnApplyWindowInsetsListener { view,insets ->
@@ -139,7 +164,7 @@ class HomeActivity : Activity() {
     private fun stateText(state: RequestedState) = "Program: ${programLabel(state.program)}\n" +
         LevelControl.entries.joinToString("\n") { "$it: ${state.levels[it]?.toString() ?: "unknown"}" }
     private fun home() {
-        line(if(fitting == null) "Save your aid setup before sending commands." else "LAST SENT\n${stateText(requested)}\nAid receipt is unverified.")
+        line(if(fitting == null) "Save your aid setup before sending commands." else "LAST SENT\n${stateText(requested)}")
         fitting?.programs?.forEach { program -> button("${program.slot}. ${program.name}",!busy.get()) { dispatch(ManualRequest.SelectProgram(program.slot)) } }
         for(control in LevelControl.entries) {
             line(when(control) { LevelControl.SHARPNESS -> "Sound Sharpness (balance)"; else -> control.name.lowercase().replaceFirstChar { it.uppercase() } })
@@ -212,7 +237,7 @@ class HomeActivity : Activity() {
                 if(changed) edit.remove("requested").remove("saved").putBoolean("pending",false)
                 check(edit.commit()) { "Setup could not be saved; previous setup retained" }
                 fitting = next
-                if(changed) { requested = RequestedState(); saved = null }
+                if(changed) { noise.fittingChanged(); requested = RequestedState(); saved = null }
                 message = "Setup saved. ${if(changed) "Previous request/snapshot assumptions cleared." else "Setup unchanged."} No playback."
                 show("Home")
             } catch(e:Exception) { tell("Setup: ${e.message}",true) }
@@ -233,21 +258,35 @@ class HomeActivity : Activity() {
         if(page == "Saved") show()
     }
     private fun voicePage() {
-        val results = CheckBox(this).apply {
-            text = "Speak playback completion"; isChecked = prefs.getBoolean("spokenResults",true)
-            setOnCheckedChangeListener { _, checked -> prefs.edit().putBoolean("spokenResults",checked).apply() }
-        }; content.addView(results)
+        for((label,key) in listOf("Voice prompts (confirmation and guidance)" to "voicePrompts","Spoken responses (status, results and errors)" to "spokenResponses")) {
+            content.addView(CheckBox(this).apply {
+                text = label; isChecked = voiceEnabled(key)
+                setOnCheckedChangeListener { box,checked ->
+                    if(!prefs.edit().putBoolean(key,checked).commit()) { box.isChecked = !checked; tell("Could not save voice setting") }
+                    if(!checked) tts?.stop()
+                }
+            })
+        }
+        line("Saved separately on this device and the watch. Text replies remain visible. Say voice prompts off/on or voice responses off/on. The installed speech-recognition service may have its own sounds.")
         line("Speak on this Chromebook using the Android speech service. Recognition may use the service's network connection. Cancel sends nothing. Typed commands exercise the same parser.")
         val input = EditText(this).apply { hint = "program two / volume ten / current tin"; setSingleLine(); content.addView(this) }
         button("Run typed command",!busy.get()) { route(input.text.toString()) }
-        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • save settings • restore settings • cancel.\nWatch transport, guided setup voice, schedules and noise are not implemented in this first slice.")
+        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, noise sample, observe noise, noise status, stop noise. Automatic switching, calibration wizard and schedules remain pending. Watch Wi-Fi is experimental.")
     }
+    private fun voiceEnabled(key:String) = prefs.getBoolean(key,if(key == "spokenResponses") prefs.getBoolean("spokenResults",true) else true)
     private fun tell(text: String, speak: Boolean = false) {
         message = text
+        val fromWatch = remoteReply != null
+        val prompt = pendingProgram != null || pendingRestore != null || text.startsWith("Noise settings.") || text.startsWith("Draft noise")
+        if(!busy.get() && remoteReply != null) {
+            val reply = remoteReply; remoteReply = null
+            reply?.invoke(remoteResult(if(pendingProgram != null || pendingRestore != null) "CLARIFY" else "FINAL",text).put("prompt",prompt))
+        }
         if(::status.isInitialized) status.text = text
-        if(speak && speechReady && resumed && !busy.get()) tts?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-result")
+        if(speak && !fromWatch && speechReady && resumed && !busy.get() && voiceEnabled(if(prompt) "voicePrompts" else "spokenResponses")) tts?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-result")
     }
     private fun beginVoice() {
+        noise.stop()
         tts?.stop()
         if(busy.get()) { pendingVoice = true; cancelled.set(true); tell("Stopping playback before voice input"); return }
         launchVoice()
@@ -258,7 +297,7 @@ class HomeActivity : Activity() {
             startActivityForResult(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE,"en-US")
-                putExtra(RecognizerIntent.EXTRA_PROMPT,"HeySig: say a command")
+                if(voiceEnabled("voicePrompts")) putExtra(RecognizerIntent.EXTRA_PROMPT,"HeySig: say a command")
             },401)
         } catch(e:Exception) { tell("Speech service unavailable. Use typed commands on Voice.",true) }
     }
@@ -274,13 +313,57 @@ class HomeActivity : Activity() {
             // Do not guess between conflicting recognized targets.
             val fit = fitting
             if(fit == null) { tell("Save aid setup first"); return }
-            val parsed = alternatives.map { VoiceCommands.parse(it,fit) }.filter { it !is AppIntent.Unsupported }.distinct()
+            val parsed = alternatives.map { voiceIdentity(it,fit) }.filter { it !is AppIntent.Unsupported }.distinct()
             if(parsed.size > 1) tell("Speech alternatives disagree. Please say the exact program or level again.",true)
-            else if(alternatives.isNotEmpty()) pendingText = alternatives.firstOrNull { VoiceCommands.parse(it,fit) == parsed.firstOrNull() } ?: alternatives[0]
+            else if(alternatives.isNotEmpty()) pendingText = alternatives.firstOrNull { voiceIdentity(it,fit) == parsed.firstOrNull() } ?: alternatives[0]
         }
     }
-    private fun route(text: String) {
+    private fun receiveWatch(request: JSONObject, callback: (JSONObject) -> Unit) {
+        if(!resumed || watchBridge == null) { callback(remoteResult("BLOCKED","Open HeySig and enable Watch Wi-Fi")); return }
+        val id = request.getString("id")
+        remotePrefs.getString(id,null)?.let { callback(JSONObject(it)); return }
+        val record: (JSONObject) -> Unit = { result ->
+            val editor = remotePrefs.edit().putString(id,result.toString())
+            val old = remotePrefs.all.keys.filter { it != id }.sorted()
+            if(old.size >= 128) old.take(old.size-127).forEach { editor.remove(it) }
+            if(!editor.commit()) callback(remoteResult("UNKNOWN","App result could not be stored; do not automatically retry")) else callback(result)
+        }
+        val text = request.getString("text")
+        if(text.lowercase() == "status") { record(remoteResult("FINAL", "Last sent. ${stateText(requested)}")); return }
+        if(text.trim().lowercase() in listOf("stop","cancel")) {
+            noise.stop(); tts?.stop()
+            cancelled.set(true); pendingProgram = null; pendingRestore = null
+            record(remoteResult("FINAL","Stop requested; already emitted tones cannot be undone")); return
+        }
+        if(busy.get() || remoteReply != null) { record(remoteResult("BUSY","HeySig is busy. Wait for its result or say Stop")); return }
+        if(page == "Setup") { record(remoteResult("BLOCKED","Return to Home after reviewing and saving Setup")); return }
+        if(!remotePrefs.edit().putString(id,remoteResult("UNKNOWN","An earlier request started; do not replay automatically").toString()).commit()) {
+            callback(remoteResult("BLOCKED","Cannot journal watch command")); return
+        }
+        val origin = request.getString("conversation")
+        val alternatives = request.optJSONArray("alternatives")
+        if(pendingProgram == null && pendingRestore == null && alternatives != null && fitting != null) {
+            val intents = (0 until minOf(5,alternatives.length())).map { voiceIdentity(alternatives.getString(it),fitting!!) }.filter { it !is AppIntent.Unsupported }.distinct()
+            if(intents.size > 1) { record(remoteResult("CLARIFY","Speech alternatives disagree. Say the exact program or number again")); return }
+        }
+        remoteReply = record; commandOrigin = origin
+        try { lastHeard = "Watch: $text"; route(text,origin) }
+        catch(e:Exception) { remoteReply = null; record(remoteResult("FAILED","Watch command could not be processed")) }
+        finally { commandOrigin = null }
+    }
+    private fun voiceIdentity(text:String,fit:Fitting): Any = VoicePreference.parse(text) ?: NoiseVoice.parse(text) ?: VoiceCommands.parse(text,fit)
+    private fun route(text: String, origin: String? = null) {
+        VoicePreference.parse(text)?.let { preference ->
+            if(!prefs.edit().putBoolean(preference.key,preference.enabled).commit()) { tell("Could not save voice setting"); return }
+            tts?.stop(); tell(preference.description,true)
+            if(page == "Voice") show()
+            return
+        }
         val fit = fitting ?: run { tell("Save aid setup first",true); return }
+        if(text.trim().lowercase() in listOf("stop","cancel")) { noise.stop(); tts?.stop(); cancelled.set(true); pendingProgram = null; pendingRestore = null; tell("Cancelled"); return }
+        if((pendingRestore != null || pendingProgram != null) && origin != confirmationOrigin) {
+            tell("Complete or cancel the existing confirmation on the device that started it",true); return
+        }
         if((pendingRestore != null || pendingProgram != null) && SystemClock.elapsedRealtime() > confirmationDeadline) {
             pendingRestore = null; pendingProgram = null
             tell("Confirmation expired. Please request the action again.",true); return
@@ -304,11 +387,16 @@ class HomeActivity : Activity() {
         }
         if(text.trim().equals("stop",true) || text.trim().equals("cancel",true)) { cancelled.set(true); tell("Cancelled"); return }
         if(busy.get()) { tell("Busy; wait or Stop"); return }
+        NoiseVoice.parse(text)?.let { command ->
+            if(command == NoiseCommand.Open && origin == null) { navigate("Noise") }
+            noise.handle(command)
+            return
+        }
         when(val intent = VoiceCommands.parse(text,fit)) {
             is AppIntent.Control -> dispatch(intent.request)
             is AppIntent.ClarifyProgram -> clarifyProgram(intent.slot)
-            is AppIntent.ReadLevel -> tell("Last sent ${intent.control.name.lowercase()}: ${requested.levels[intent.control]?.toString() ?: "unknown"}. Aid state not verified.",true)
-            AppIntent.ReadProgram -> tell("Last sent program: ${programLabel(requested.program)}. Aid state not verified.",true)
+            is AppIntent.ReadLevel -> tell("Last sent ${intent.control.name.lowercase()}: ${requested.levels[intent.control]?.toString() ?: "unknown"}.",true)
+            AppIntent.ReadProgram -> tell("Last sent program: ${programLabel(requested.program)}.",true)
             AppIntent.ListPrograms -> tell(fit.programs.joinToString(". ") { "${it.slot}: ${it.name}" },true)
             AppIntent.SaveSettings -> saveRequested()
             AppIntent.RestoreSettings -> confirmRestore()
@@ -317,9 +405,10 @@ class HomeActivity : Activity() {
         }
     }
     private fun clarifyProgram(slot: Int) {
-        pendingProgram = slot; pendingRestore = null
+        pendingProgram = slot; pendingRestore = null; confirmationOrigin = commandOrigin
         confirmationDeadline = SystemClock.elapsedRealtime() + 60000
         tell("Did you mean ${programLabel(slot)}? Say yes or cancel.",true)
+        if(commandOrigin != null) return
         android.app.AlertDialog.Builder(this).setTitle("Confirm program")
             .setMessage("Did you mean ${programLabel(slot)}? Nothing has been sent.")
             .setNegativeButton("Cancel") { _,_ -> pendingProgram = null }
@@ -331,11 +420,12 @@ class HomeActivity : Activity() {
         val source = saved ?: run { tell("No saved settings",true); return }
         val slot = source.program ?: run { tell("Saved program unknown",true); return }
         val plan = listOf<ManualRequest>(ManualRequest.SelectProgram(slot)) + LevelControl.entries.mapNotNull { key -> source.levels[key]?.let { ManualRequest.SetLevel(key,it) } }
-        pendingRestore = plan; pendingProgram = null
+        pendingRestore = plan; pendingProgram = null; confirmationOrigin = commandOrigin
         confirmationDeadline = SystemClock.elapsedRealtime() + 60000
         tell("Restore ${stateText(source)}. Unknown fields will be skipped. Say confirm restore or cancel.",true)
+        if(commandOrigin != null) return
         android.app.AlertDialog.Builder(this).setTitle("Restore known requests?")
-            .setMessage("${stateText(source)}\nUnknown fields are skipped; aid reception cannot be verified.")
+            .setMessage("${stateText(source)}\nUnknown fields are skipped.")
             .setNegativeButton("Cancel") { _,_ -> pendingRestore = null }
             .setNeutralButton("Speak answer") { _,_ -> beginVoice() }
             .setPositiveButton("Restore") { _,_ -> pendingRestore = null; if(SystemClock.elapsedRealtime() <= confirmationDeadline) execute(plan,true) else tell("Confirmation expired; nothing sent",true) }
@@ -351,13 +441,14 @@ class HomeActivity : Activity() {
             is ManualRequest.Battery -> false
         }
         if(same && !force) {
-            repeatRequest = request; message = "Already last requested. Aid state is unverified. Use Send last target again or say send again."
+            repeatRequest = request; message = "Already last requested. Use Send last target again or say send again."
             show(); tell(message,true); return
         }
         repeatRequest = null
         execute(listOf(request),false)
     }
     private fun execute(plan: List<ManualRequest>,restoring: Boolean) {
+        noise.stop()
         val fit = fitting ?: run { tell("Save setup first"); return }
         if(!resumed) { tell("Open HeySig before sending a command"); return }
         if(busy.get()) { tell("Busy; wait or Stop"); return }
@@ -368,7 +459,7 @@ class HomeActivity : Activity() {
             check(prefs.edit().putBoolean("pending",true).commit()) { "Cannot journal command; no playback" }
         } catch(e:Exception) { tell("Blocked: ${e.message}",true); return }
         if(!busy.compareAndSet(false,true)) return
-        cancelled.set(false); tts?.stop(); message = "Transmitting… aid receipt unverified"; show()
+        cancelled.set(false); tts?.stop(); message = "Transmitting…"; show()
         Thread({
             val completed = mutableListOf<String>()
             var result: String
@@ -408,7 +499,7 @@ class HomeActivity : Activity() {
                 if(!restoring && requested.program != null && plan.any { it !is ManualRequest.Battery }) {
                     if(prefs.edit().putString("saved",encode(requested)).commit()) saved = requested else durable = false
                 }
-                result = "Played: ${completed.joinToString()}. Aid receipt unverified."
+                result = "Played: ${completed.joinToString()}."
             } catch(e:Exception) { result = "${if(completed.isEmpty()) "No completed stages" else "Completed: ${completed.joinToString()}"}. ${e.message}. Current aid state may be uncertain." }
             finally {
                 durable = prefs.edit().putString("requested",encode(requested)).putBoolean("pending",false).commit() && durable
@@ -417,10 +508,12 @@ class HomeActivity : Activity() {
             if(!durable) result += " Storage failed; remembered state may not survive restart."
             runOnUiThread {
                 message = result
+                val watchReply = remoteReply; remoteReply = null
+                watchReply?.invoke(remoteResult("FINAL",result))
                 if(!isDestroyed) {
                     show()
                     if(pendingVoice && resumed) launchVoice()
-                    else if(resumed && prefs.getBoolean("spokenResults",true)) tell(result,true)
+                    else if(watchReply == null && resumed) tell(result,true)
                 }
             }
         },"heysig-manual").start()

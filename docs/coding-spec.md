@@ -200,13 +200,13 @@ Enter external settings is a draft editor with program and optional levels; voic
 Noise                     Source: phone microphone
 [Off] [Observe] [Automatic]       [Stop]
 Index: −46.2   Sample age: 4 s   [Sample now]
-Classified: Noisy → program 3
-Candidate: Noisy 2/3 · Cooldown: 14 s
+Classified: Noise level 4 → program 3
+Candidate: Program 3 2/3 · Cooldown: 14 s
 Blocked by: override / sleep / microphone / none
 [Calibrate] [Settings] [Read status]
 ```
 
-Settings fields: Quiet role, optional Noisy role, Very noisy role, low/high thresholds, hysteresis, confirmations (1..20), cooldownSeconds, captureSeconds, waitSeconds and freshnessLimitSeconds. Initial timing choices 60/5/10 seconds; thresholds require new native-sampler measurement. Require finite numeric values, low < high, margin > 0, 2×margin < high−low, confirmations 1..20 and positive timing values. Initial supported timing bounds: cooldown 0..3600, capture 1..10, wait 1..300, freshness 2..900 seconds; freshness must exceed capture + wait. These are proposed app bounds, not inherited protocol limits.
+Settings fields: six ordered rows labeled Noise level 1 (quietest) through Noise level 6 (loudest), each containing a fitted program choice or Unused; five increasing thresholds; hysteresis; confirmations (1..20); cooldownSeconds; captureSeconds; waitSeconds; and freshnessLimitSeconds. Program slot numbers do not determine noise order. Repeated program assignments are valid. Initial timing choices 60/5/10 seconds; thresholds require new native-sampler measurement. Require exactly six optional program assignments, exactly five finite strictly increasing thresholds, margin > 0, 2×margin smaller than every adjacent threshold gap, confirmations 1..20 and valid timing values. Automatic requires at least one valid assigned program. Initial supported timing bounds: cooldown 0..3600, capture 1..10, wait 1..300, freshness 2..900 seconds; freshness must exceed capture + wait. These are proposed app bounds, not inherited protocol limits.
 
 Save stops sampling, clears candidates and leaves mode Off. Automatic remains unavailable until fitting roles and calibration direction are confirmed. Observe never sends commands. Stop prevents further decisions immediately, then releases any active capture. Sample now reports busy if capture resources are unavailable.
 
@@ -224,7 +224,7 @@ Voice time parsing accepts 24-hour values and explicit AM/PM. “Ten” is ambig
 
 ### 3.7 SettingsScreen and DiagnosticsScreen
 
-Voice settings: prompts on/off, results on/off, reply device (initiating device/phone/watch), optional wake enabled on each device. Automation controls: override on/off, Cancel automation and Resume reviewed modes. Data controls: export/import configuration, mark requested state unknown and delete diagnostics. Destructive deletion/reset requires a read-back confirmation; Back/Cancel preserves data.
+Voice settings: separate Voice prompts and Spoken responses switches, saved per device and editable through “voice prompts off/on” and “voice responses off/on.” Prompts control confirmation/guidance speech; responses control status/results/errors. Both off preserves visible text and recognition input. Disabling speech stops the current utterance; recognition-service sounds remain outside these switches. Upgrade the earlier phone playback-completion preference as the initial response preference. Reply device (initiating device/phone/watch) and optional wake enabled on each device remain separate settings. Automation controls: override on/off, Cancel automation and Resume reviewed modes. Data controls: export/import configuration, mark requested state unknown and delete diagnostics. Destructive deletion/reset requires a read-back confirmation; Back/Cancel preserves data.
 
 Readiness page shows fitting validity, phone unlocked/foreground, DND, media level/required level, audio mode and detected output conflicts. Check audio reads only; it sends no tones and changes no Android settings. Diagnostics shows recent bounded events and last operation stages; Explain failure produces the same recovery message on screen and voice.
 
@@ -367,7 +367,7 @@ fun reduceNoise(
 
 NoiseState contains mode, classified band, candidate slot/count, last fresh sample time, last transmission time and blocking reason. NoiseEvent includes FreshSample(index), CaptureFailed, SamplingGap, GuardBlocked, ManualOverrideChanged, SleepChanged, CommandCompleted and Stop. Reducer performs no Android work.
 
-Convert the sampler index once into “larger means louder.” Initial band: below L quiet, L through H middle, above H loud. From quiet enter middle above L+M and loud above H+M; from middle enter quiet below L−M or loud above H+M; from loud enter middle below H−M and quiet below L−M. Equality stays in the current band. Check outer-band jumps first. If middle role is absent, middle samples clear candidates.
+Convert the sampler index once into “larger means louder.” Store six optional program slots and five strictly increasing boundaries. For initial classification start at level 1 and advance for each boundary strictly exceeded; equality belongs to the lower level. From an existing level, advance while index > next boundary + margin, or retreat while index < previous boundary − margin. Equality at a hysteresis edge retains the current level. Large jumps classify directly to the final qualifying level and never emit intermediate program requests. An unused level clears candidates and emits no proposal or request. Confirmation is counted by target program, so moving between adjacent levels mapped to the same program preserves consecutive confirmation.
 
 Count consecutive fresh samples for the same target; a target change restarts at one. Once confirmations and cooldown qualify, Observe emits Propose; Automatic emits RequestProgram. When the target is already last requested, emit no transmission and do not extend cooldown. A failed/blocked request, stale gap, Stop, override, sleep or microphone interruption clears pending count. Cooldown uses monotonic time and starts after completed transmission only. After cooldown expiry require a new confirmation sequence; do not retain pre-cooldown strikes.
 
@@ -405,12 +405,12 @@ Every screen event maps to a typed AppIntent. Control intents use AidCommand; se
 | Noise | “noise sample,” “observe noise,” “automatic noise,” “stop noise,” “calibrate noise,” edit/read every field |
 | Sleep | “configure sleep,” “sleep at ten PM,” “wake at seven AM,” enable/disable, sleep/wake now |
 | Priority | “override on/off/toggle,” “manual/automatic mode,” “cancel automation,” “resume automation” |
-| Voice | “prompts off,” “spoken results on,” “reply on watch,” “start/stop Hey Sig listening” |
+| Voice | “voice prompts off,” “voice responses on,” “reply on watch,” “start/stop Hey Sig listening” |
 | Recovery/data | “check phone audio,” “explain last failure,” “mark settings unknown,” import/export/delete diagnostics |
 
 Normalize whitespace/case, preserve configured program punctuation, accept one trailing sentence punctuation character, and resolve numeric words including minus/negative. Match exact configured names/aliases before broad keywords. “Program Sleep” always means program selection; bare “sleep” means sleep-state action. Do not guess unrecognized aid-control targets. Ambiguous input becomes Clarify without playback. Optional local-model interpretation follows the proposal, validation and confirmation gates in section 10.
 
-Example full watch conversation: “Configure noise” → “Choose quiet program” → “Universal” → “Choose noisy program” → “Noisy” → “Choose very noisy program” → “Very Noisy” → review thresholds/calibration → “Save” → “Saved. Noise automation is off.” Follow the same reducer on phone. Editing only one field should not force reentry of every other valid field.
+Example full watch conversation: “Configure noise” → “Choose program for noise level one, the quietest” → “Universal” → choose programs or Unused for levels two through six → review five thresholds/calibration → “Save” → “Saved. Noise automation is off.” Support individual edits such as “Assign program three to noise level five,” “Leave noise level four unused,” and “Read noise assignments.” Distinguish noise level from program slot explicitly; clarify ambiguous numbers. Follow the same reducer on phone. Editing only one field should not force reentry of every other valid field.
 
 For setup/security/system limitations, say exactly which device needs interaction: “Unlock your phone and open HeySig, then say try again.” Watch voice access remains available to status/settings even if playback is blocked. Never translate a blocked action into silent success.
 

@@ -4,7 +4,9 @@ October 16, 2026. Develop the actual Android application on the Chromebook and r
 
 ## Current manual-core slice
 
-`HomeActivity` is the launcher for version 0.3. `ProtoActivity` remains an internal research screen, with the existing renderer unchanged. The launcher package stays `com.heysig.batteryprototype` to preserve compatible updates; the visible app name is HeySig.
+`HomeActivity` is the launcher for version 0.8. `ProtoActivity` remains an internal research screen, with the existing renderer unchanged. The launcher package stays `com.heysig.batteryprototype` to preserve compatible updates; the visible app name is HeySig.
+
+The experimental [Noise screen](noise-quick-start.md) now provides six ordered program assignments, five thresholds, bounded microphone samples and Observe proposals without playback. Automatic switching remains disabled. Voice has separate saved prompt and response switches; the watch companion has its own local switches.
 
 - Home provides configured program buttons, explicit volume/Sound Sharpness/tinnitus targets, left/right/both battery requests, Stop, read-only audio checks and marking requested state unknown.
 - Setup saves explicit control/left/right addresses, names for up to six slots and per-program tinnitus capability. User-tested address 12 and known names are editable suggestions requiring Save. Unknown tinnitus capability blocks its control.
@@ -24,7 +26,10 @@ The renderer's existing validated profile remains 44100 Hz / center 15360 Hz / s
 | `androidApp/.../HomeActivity.kt` | Current native screen flow, private preferences, speech adapter and manual orchestration |
 | `androidApp/.../SpeakerPlayback.kt` | Read-only audio preflight and bounded speaker streaming |
 | `research/acoustic/kotlin/ProtoRequest.kt` | Existing command-to-PCM renderer; unchanged in this slice |
-| `shared/.../noise/NoiseMeasurement.kt` | Deferred bounded PCM statistics foundation; not connected to UI, microphone or program control |
+| `shared/.../noise/NoiseMeasurement.kt` | Bounded relative digital PCM statistics without recording retention |
+| `shared/.../noise/NoiseObserve.kt` | Six-level settings, hysteresis, target confirmations and explicit noise voice edits |
+| `androidApp/.../PhoneNoiseSampler.kt` | Foreground, bounded built-in microphone capture with cancellation and route checks |
+| `androidApp/.../NoiseFeature.kt` | Noise draft editor, private persistence, Sample and Observe; no playback dependency |
 
 Paths abbreviated with `...` refer to the corresponding `src/commonMain/kotlin/com/heysig` or `src/main/kotlin/com/heysig/app` directories. The platform-free session is also a local development/test harness; Android orchestration remains an initial activity implementation to be moved behind the specified coordinator as further features are added.
 
@@ -32,7 +37,7 @@ Configuration uses private preferences `heysig-core-v1`, separate from research 
 
 ## Build and local checks
 
-Run `bash tools/check-manual.sh` for shared fitting, ranges, tinnitus, command parsing and restore-plan checks. `bash tools/check-noise.sh` checks the deferred relative digital measurement foundation without microphone capture. Existing renderer regression: `python3 research/acoustic/tests/check_packet.py`.
+Run `bash tools/check-manual.sh` for shared fitting, ranges, tinnitus, command parsing, voice preferences and restore-plan checks. `bash tools/check-noise.sh` checks relative digital measurement, six-level validation, hysteresis, unused/repeated targets, stale samples and noise voice edits without microphone capture. Existing renderer regression: `python3 research/acoustic/tests/check_packet.py`.
 
 Build using the environment variables in [Android build instructions](../androidApp/README.md). Output remains `androidApp/build/heysig-proto.apk` for development compatibility. Builds do not install or play commands automatically. Keep the local signer for compatible upgrades.
 
@@ -48,7 +53,7 @@ Do not assign a single “99% complete” percentage based on desktop tests. Tra
 
 The full phone/watch product is **not complete**. Native watch transport is not implemented in this slice. Wear dependency metadata download and phone-package inspection were declined during this session; work continued locally without those accesses. No phone/watch installation or aid playback is claimed from the Chromebook smoke tests.
 
-Guided voice editing of fitting/settings, complete alias/relative-command support, independent prompt/result preferences, preference import/export, production background lifecycle, schedules, noise observation/automation and optional language assistance remain tracked in the [coding specification](coding-spec.md). Getting Sig3's useful phone/watch behavior working precedes the noise/AI phases. A system speech prompt is not a wake-word listener.
+Guided voice editing of fitting/settings, complete alias/relative-command support, preference import/export, production background lifecycle, schedules, automatic noise switching and optional language assistance remain tracked in the [coding specification](coding-spec.md). Six-level Noise Setup/Observe and independent prompt/response preferences are development features requiring device acceptance. A system speech prompt is not a wake-word listener.
 
 ## Playback timeout investigation
 

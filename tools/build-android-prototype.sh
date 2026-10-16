@@ -18,7 +18,7 @@ Path('androidApp/build/smoke').mkdir(exist_ok=True)
 Path('androidApp/build/smoke/AndroidManifest.xml').write_text(source)
 PYSMOKE
 fi
-kotlinc research/acoustic/kotlin/ProtoRequest.kt shared/src/commonMain/kotlin/com/heysig/control/*.kt androidApp/src/main/kotlin/com/heysig/app/*.kt "${extra_sources[@]}" -classpath "$HEYSIG_ANDROID_JAR" -jvm-target 1.8 -include-runtime -d androidApp/build/prototype.jar
+kotlinc research/acoustic/kotlin/ProtoRequest.kt shared/src/commonMain/kotlin/com/heysig/control/*.kt shared/src/commonMain/kotlin/com/heysig/noise/*.kt androidApp/src/main/kotlin/com/heysig/app/*.kt "${extra_sources[@]}" -classpath "$HEYSIG_ANDROID_JAR" -jvm-target 1.8 -include-runtime -d androidApp/build/prototype.jar
 java -cp "$HEYSIG_D8_JAR" com.android.tools.r8.D8 --min-api 29 --lib "$HEYSIG_ANDROID_JAR" --output androidApp/build/dex androidApp/build/prototype.jar
 aapt package -f -M "$manifest_path" -I "$HEYSIG_ANDROID_RESOURCES_JAR" -F androidApp/build/unsigned.apk
 python3 - <<'PY'

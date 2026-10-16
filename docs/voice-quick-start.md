@@ -1,6 +1,12 @@
 # HeySig voice quick start
 
-For the native Chromebook Android app, version 0.5. Open HeySig and press **Speak command** for each request. This is push-to-talk; an always-listening Hey Sig wake phrase is not implemented. The same APK/source is being developed for later phone acceptance; native watch transport remains future work.
+For the native Chromebook Android app, version 0.8. Open HeySig and press **Speak command** for each request. This is push-to-talk; an always-listening Hey Sig wake phrase is not implemented. The same APK/source is being developed for later phone acceptance. The experimental [watch companion](../wearApp/README.md) has passed Wi-Fi status and spoken-reply acceptance; watch-triggered aid controls remain pending. See [six-level noise settings and Observe commands](noise-quick-start.md).
+
+## Voice sound switches
+
+On Chromebook/phone, open **Voice**. On the watch, scroll below Stop. **Voice prompts** controls confirmation guidance; **Spoken responses** controls status, results and errors. Each device saves its own choices independently. Both may be off; text replies remain visible. Saying “voice responses off” turns off its own spoken acknowledgement. Turn responses back on by voice or touch.
+
+Say “voice prompts off,” “voice prompts on,” “voice responses off,” or “voice responses on.” These settings do not change media volume or hearing-aid levels. The installed recognition service may still provide its own sounds. The previous phone “Speak playback completion” preference is used as the initial response setting when upgrading.
 
 ## Everyday commands
 

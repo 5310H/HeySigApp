@@ -1,6 +1,6 @@
 # Android HeySig development build
 
-Version 0.5 launches `com.heysig.app.HomeActivity`: native Home, Setup, Saved and Voice screens. See [Chromebook-first development](../docs/chromebook-development.md) for current functionality, checks and pending phone/watch acceptance. The earlier research Activity remains internal. The build command and APK filename below are retained for compatibility.
+Version 0.8 launches `com.heysig.app.HomeActivity`: native Home, Setup, Saved, Voice and Noise screens. [Six-level Noise Setup and Observe](../docs/noise-quick-start.md) are experimental; automatic switching is disabled. Voice prompts and spoken responses have independent saved switches. See [Chromebook-first development](../docs/chromebook-development.md) for current functionality, checks and pending phone/watch acceptance. The earlier research Activity remains internal. The build command and APK filename below are retained for compatibility.
 
 See [the code guide](../docs/proto-code-guide.md) for responsibilities, mappings, playback flow, validation and limits. Launcher: `com.heysig.app.HomeActivity`; output: `androidApp/build/heysig-proto.apk`.
 

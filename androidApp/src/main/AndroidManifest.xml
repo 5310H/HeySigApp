@@ -1,10 +1,15 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.heysig.batteryprototype" android:versionCode="5" android:versionName="0.5">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.heysig.batteryprototype" android:versionCode="8" android:versionName="0.8">
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="35" />
     <queries>
         <intent><action android:name="android.speech.RecognitionService" /></intent>
         <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
     </queries>
     <application android:label="HeySig" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false">
+        <receiver android:name="com.heysig.app.WatchBridgeSetup" android:exported="true" android:permission="android.permission.DUMP">
+            <intent-filter><action android:name="com.heysig.PAIR_WATCH_BRIDGE" /></intent-filter>
+        </receiver>
         <activity android:name="com.heysig.app.ProtoActivity" android:exported="false" />
         <activity android:name="com.heysig.app.HomeActivity" android:exported="true">
             <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
