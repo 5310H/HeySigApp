@@ -85,3 +85,15 @@ Identify the actual watch and supported platform first. Start with remote progra
 Produce an installable, signed Android build with versioned configuration, permission/recovery guidance and an export/backup option. Verify fresh installation, upgrade, permission revocation, reboot, busy/interrupted commands, changed Signia layouts and operation without ADB. Disable the old controller during the acceptance period; retire Tasker/plugins after feature acceptance, retaining their exports for rollback. If publishing publicly, review current store requirements for accessibility and microphone/background use at release time.
 
 **First build:** manual program controls, current-value reads, battery check and microphone-button voice, followed by occasional sliders and restore settings. Add wake listening and automation after the replacement control path has passed its feasibility gate. Watch and iPhone work follow demonstrated phone reliability and platform control capability.
+
+## Current addendum: phased voice improvement
+
+Future implementation uses `main`; retain `proto` as the saved prototype snapshot. The current [program specification](program-spec.md) and [coding specification](coding-spec.md#10-phased-voice-improvement) define the accepted direction:
+
+- V1: establish phone/watch recognition baselines and supported vocabulary/alternative handling alongside core voice work.
+- V2: add explicitly confirmed local correction mappings and voice-accessible review/forget/reset.
+- V3: evaluate updates with per-device metrics, opted-in examples, held-out regressions and rollback.
+- V4: benchmark an optional phone-side local LLM without executing its proposals.
+- V5: integrate only after measured benefit, with ordinary validation, explicit confirmation, cancellation and deterministic fallback.
+
+V1–V3 strengthen required voice parity. V4–V5 are optional gates; no LLM dependency for exact commands, Stop or core release acceptance. These phases do not imply continuous retraining of Android's speech model. Rebuild both printable specifications after documentation updates with `python3 tools/build-spec-pdf.py` and `python3 tools/build-spec-pdf.py --coding`.

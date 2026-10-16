@@ -8,6 +8,8 @@ The [HeySigApp program specification](docs/program-spec.md) defines the replacem
 
 Start with [how the prototype works](docs/proto-code-guide.md), [Android build/use](androidApp/README.md), and [acceptance evidence](docs/acceptance/). Voice, noise/sleep automation, production setup/storage, watch support and an iPhone implementation remain future work. The earlier accessibility-based replacement plan is retained as historical planning.
 
+Research: [noise adaptation in other hearing aids and proposed HeySig improvements](docs/research/noise-adaptation-2026-10-16.md).
+
 ## Directory layout
 
 ```text
@@ -34,7 +36,9 @@ HeySigApp/
 
 ## Current implementation
 
-`ProtoActivity.kt` provides foreground manual controls. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.
+Development now targets the actual Android app running in the Chromebook Google Play environment. See [Chromebook-first development and current manual-core scope](docs/chromebook-development.md). `HomeActivity` provides the first native Home/Setup/Saved/Voice screens; watch parity and full guided voice configuration remain in progress.
+
+`ProtoActivity.kt` retains the earlier foreground research controls. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.
 
 Keep the shared core independent of Android classes. Android services implement its control interfaces; a future iPhone control implementation can reuse the command and decision logic.
 

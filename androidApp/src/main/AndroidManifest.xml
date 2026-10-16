@@ -1,7 +1,12 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.heysig.batteryprototype" android:versionCode="2" android:versionName="0.2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.heysig.batteryprototype" android:versionCode="5" android:versionName="0.5">
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="35" />
-    <application android:label="HeySig Proto" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false">
-        <activity android:name="com.heysig.app.ProtoActivity" android:exported="true">
+    <queries>
+        <intent><action android:name="android.speech.RecognitionService" /></intent>
+        <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
+    </queries>
+    <application android:label="HeySig" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false">
+        <activity android:name="com.heysig.app.ProtoActivity" android:exported="false" />
+        <activity android:name="com.heysig.app.HomeActivity" android:exported="true">
             <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
         </activity>
     </application>

@@ -185,3 +185,15 @@ Required logic/lifecycle tests include unknown baselines, repeated request/resen
 Run eight-hour observation and automatic-mode trials with explicit stop/restart detection, sample gaps, bounded memory and battery measurements; compare an equivalent idle baseline before attributing battery use to sampling. Test wake listening separately and then in supported combinations. A crashed or stale run is interrupted, not completed.
 
 Release requires no Tasker/plugins for accepted functions, successful fresh install/upgrade/configuration recovery, both voice paths complete, clear known limitations, and evidence for each advertised operating condition. iPhone and direct watch-to-aid playback remain separate future projects.
+
+## Phases for voice improvement and optional local language assistance
+
+These phases supplement the phone/watch implementation gates above. V1–V3 improve the required voice experience; V4–V5 are optional and do not replace core voice support. See [coding specification section 10](coding-spec.md#10-phased-voice-improvement) for contracts, screens, storage, promotion gates and test cases.
+
+1. **V1 — Recognition baseline and vocabulary.** Measure real phone/watch performance, detect on-device/service capabilities, provide program/control vocabulary hints where supported and handle conflicting recognition alternatives through clarification.
+2. **V2 — Personal corrections.** Learn only explicitly confirmed phrase/context mappings locally. Support voice review, edit, forget and reset from both devices. Correcting an interpretation never silently reverses or replays an aid command. This personalizes interpretation; it does not retrain Android's speech model.
+3. **V3 — Measured ongoing improvement.** Keep numeric metrics by device and command family. Save text examples only after explicit opt-in. Compare candidate changes against a held-out corpus, reject dispatch/ambiguity regressions, and support version rollback. Raw audio and general conversation history are not collected by default.
+4. **V4 — Local LLM experiment.** Benchmark an optional small phone-side model for unfamiliar phrasing, clarification and grounded error explanations. Include watch-origin requests. Measure accuracy, latency, memory, power and offline behavior before selecting a runtime/model; run initially without executing model proposals.
+5. **V5 — Validated integration.** Keep exact commands fast and deterministic. Treat the LLM as an intent proposer behind schema/context validation and explicit confirmation for LLM-only aid changes. It cannot bypass numeric limits, fitting capabilities, unknown baselines or audio safeguards. Missing models, timeouts and disabled assistance preserve the normal voice path.
+
+Voice settings must expose recognition readiness, personal corrections, example/metric controls and optional model status/download/removal through both phone and watch. Wake listening remains separately enabled and tested. Confirmed phrase mappings are an opt-in exception to default non-retention of recognition text; provide review/deletion and a bounded local store.

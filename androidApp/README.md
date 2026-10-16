@@ -1,6 +1,10 @@
-# Android acoustic proto
+# Android HeySig development build
 
-See [the code guide](../docs/proto-code-guide.md) for responsibilities, mappings, playback flow, validation and limits. Launcher: `com.heysig.app.ProtoActivity`; output: `androidApp/build/heysig-proto.apk`.
+Version 0.5 launches `com.heysig.app.HomeActivity`: native Home, Setup, Saved and Voice screens. See [Chromebook-first development](../docs/chromebook-development.md) for current functionality, checks and pending phone/watch acceptance. The earlier research Activity remains internal. The build command and APK filename below are retained for compatibility.
+
+See [the code guide](../docs/proto-code-guide.md) for responsibilities, mappings, playback flow, validation and limits. Launcher: `com.heysig.app.HomeActivity`; output: `androidApp/build/heysig-proto.apk`.
+
+Start with the [voice command quick guide](../docs/voice-quick-start.md). Representative live Chromebook program, level and save/restore results are recorded in [manual-control acceptance](../docs/acceptance/chromebook-manual-controls-2026-10-16.md).
 
 ## Sound Sharpness and tinnitus controls
 

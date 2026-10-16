@@ -408,7 +408,7 @@ Every screen event maps to a typed AppIntent. Control intents use AidCommand; se
 | Voice | “prompts off,” “spoken results on,” “reply on watch,” “start/stop Hey Sig listening” |
 | Recovery/data | “check phone audio,” “explain last failure,” “mark settings unknown,” import/export/delete diagnostics |
 
-Normalize whitespace/case, preserve configured program punctuation, accept one trailing sentence punctuation character, and resolve numeric words including minus/negative. Match exact configured names/aliases before broad keywords. “Program Sleep” always means program selection; bare “sleep” means sleep-state action. Do not use a generic language model to guess unrecognized aid-control targets. Ambiguous input becomes Clarify without playback.
+Normalize whitespace/case, preserve configured program punctuation, accept one trailing sentence punctuation character, and resolve numeric words including minus/negative. Match exact configured names/aliases before broad keywords. “Program Sleep” always means program selection; bare “sleep” means sleep-state action. Do not guess unrecognized aid-control targets. Ambiguous input becomes Clarify without playback. Optional local-model interpretation follows the proposal, validation and confirmation gates in section 10.
 
 Example full watch conversation: “Configure noise” → “Choose quiet program” → “Universal” → “Choose noisy program” → “Noisy” → “Choose very noisy program” → “Very Noisy” → review thresholds/calibration → “Save” → “Saved. Noise automation is off.” Follow the same reducer on phone. Editing only one field should not force reentry of every other valid field.
 
@@ -461,3 +461,78 @@ Build in vertical phone/watch slices rather than completing phone functions and 
 Unit tests target parser ambiguity, reducers, validation, snapshots, scheduling and priority. Audio regression tests compare generated PCM to frozen evidence. Device acceptance tests cover actual recognition, watch transport, audio routes, user aid response, interrupted stages and no-ADB operation. Mocked success never substitutes for these physical checks.
 
 Release checklist: every described function has implemented screen and phone/watch voice coverage; no current-state claims without provenance; no Tasker/plugin runtime dependency; permissions and recovery work; source builds reproducibly; limitations match measured locked/background/wake capability. iPhone and watch-to-aid playback are outside this implementation.
+
+## 10. Phased voice improvement
+
+Implement these phases on `main`. V1–V3 strengthen the mandatory phone/watch voice implementation in section 9; V4–V5 are optional enhancements and must not delay or replace core voice parity. Recognition converts sound to text; interpretation converts text to an intent. Correction learning improves local interpretation and vocabulary, not the weights of Android's speech model.
+
+### V1. Establish recognition baseline and vocabulary support
+
+Add `RecognitionAdapter`, `RecognitionCapabilities`, `RecognitionHypothesis` and `VoiceEvaluationRunner`. Each adapter reports on-device availability, offline-language/model readiness, phrase-hint support, alternatives and confidence availability. Missing confidence is unknown, not zero or certainty. Probe actual phone/watch services rather than assuming identical support. Offer explicit download/setup guidance when supported; never silently change offline preference to cloud recognition.
+
+Build phrase hints from enabled program names, confirmed aliases and HeySig control vocabulary. Refresh after fitting/alias changes. Evaluate multiple returned hypotheses through the deterministic parser. If valid alternatives disagree on program, number, sign or action, ask clarification; never select the most permissive interpretation. Keep recognition and command execution separately measurable.
+
+Deliverables: adapter contracts, vocabulary builder, capability/status UI, phone/watch baseline corpus and numeric aggregate evaluation. Voice settings adds Recognition mode (on-device preferred / on-device required / disclosed system service), Recognition readiness and Test recognition. Voice can read/change these fields through both devices.
+
+Exit gate: every core command family has live phone and watch samples, including program names, tinnitus, negative sharpness, numbers and cancellation. Record device/service/version, quiet/noisy conditions, expected intent, first-attempt intent accuracy, clarification/correction rate and latency. Report each device separately. Tests require no aid playback merely to score recognition.
+
+### V2. Learn explicitly confirmed personal corrections
+
+Add `CorrectionRepository` and `CorrectionService`. A voice correction such as “No, I said Sleep” enters clarification, displays/speaks the proposed mapping, and asks “Remember this correction?” A generic Yes to an execution confirmation is not consent to store a correction. Correcting interpretation does not undo earlier playback: report what already transmitted and ask before issuing a new command. Never automatically replay after a correction.
+
+A correction record contains ID, normalized mistaken phrase, canonical intent template or alias, applicability context (device source, fitting ID/revision and conversation field), explicit confirmation time, enabled flag and schema version. Parameterized corrections cannot invent numeric values or signs. Prefer narrow exact phrase/context matching; do not learn a broad substring rule from one example. If an existing exact valid command conflicts, require explicit alias review or reject the correction. Ambiguous corrections remain inactive.
+
+Store confirmed mapping text locally only after opt-in; raw audio is never required. This is a narrow exception to default non-retention of recognition transcripts: retain only the confirmed phrase mapping, not conversation history. Cap at 200 mappings initially; do not silently evict user-confirmed mappings. Ask the user to review when full. Export/import corrections is separately selectable and requires preview.
+
+Add Voice settings → Personal corrections: Enabled, List/read mappings, Edit, Forget one, Clear all and Export/import. Voice phrases include “remember that correction,” “list my corrections,” “forget that correction,” and “reset learned phrases.” Clear all requires confirmation; Cancel preserves mappings. Fitting identity changes invalidate dependent corrections until reviewed. Phone/watch share the phone-owned repository, retaining source context where useful.
+
+Exit gate: explicit consent, restart persistence, device/context scoping, conflict rejection, revision invalidation and voice deletion pass on phone/watch. Forgotten mappings stop affecting interpretation immediately. Replayed test phrases show improvement without changing accepted numeric/program commands incorrectly.
+
+### V3. Continuous evaluation and controlled improvement
+
+Add a versioned `VoiceEvaluationCase` corpus and `VoiceMetricsRepository`. Record aggregate counts by source, command family and resolver version: attempts, correct first intents, unsupported intents, clarification, explicit correction, cancellation and latency. A lack of user complaint does not label an interpretation correct. Ground truth comes from explicit correction/confirmation or a deliberately scored test. Distinguish user satisfaction from actual aid reception.
+
+Default operation stores numeric aggregates and resolver versions without transcripts/audio. An opt-in “add this example to voice tests” workflow previews the exact text, expected intent and context before saving a local example. Allow voice review, deletion and explicit sanitized export. Keep a held-out set apart from examples used to add aliases/corrections; score proposed updates against both sets.
+
+Promote parser/alias/model changes only after comparing the same baseline and held-out cases. Zero unintended dispatches on the ambiguity, numeric/sign and conflicting-target test set is mandatory; improvement in one family must not conceal a regression in another or on the watch. Report first-attempt accuracy, false dispatch count, clarification rate and p50/p95 latency with sample counts. Establish numerical performance budgets from V1 measurements before selecting an LLM. Version changes and allow rollback/reset. Do not automatically rewrite parser rules or train a model from unreviewed live speech.
+
+Exit gate: a reproducible before/after report for phone/watch, a tested rollback, aggregate deletion/reset and regression checks. Continuous improvement means a repeatable review-and-measure process; it does not promise that recognition gets better after every utterance.
+
+### V4. Optional local LLM feasibility experiment
+
+Run a small language model on the phone for unfamiliar wording, clarification drafts and explanation of structured errors. The watch forwards its recognized text through the same phone-side interpreter. Keep deterministic exact commands and Stop on the fast path. Local LLM support is off by default until qualified; core commands work without a model, network or completed model download.
+
+Evaluate a maintained Android-capable runtime such as LiteRT-LM; select the exact runtime, model, quantization and license after testing on the user's Pixel. Model installation is an explicit download with size, storage and offline behavior disclosed. Verify model integrity, loading failures, available memory, cold/warm latency, battery use, thermal behavior and microphone/audio contention. Do not assume the Pixel's built-in assistant model is available to this app.
+
+Deliverables: `IntentInterpreter`, `LocalLlmInterpreter`, `ModelManager`, benchmark report and a decision to accept, defer or reject. Runtime and model versions must be pinned for reproducibility. Compare with the deterministic resolver on held-out natural-language cases. No model-selected command executes during initial evaluation: show its proposal only. Inspect proposals such as “one step softer” for required volume-versus-sharpness clarification.
+
+Exit gate: measurable natural-language benefit over V3, acceptable measured device resource use and latency budgets, no regression in exact commands, clean timeout/cancellation/unload, and full offline testing after installation. If gates fail, keep V1–V3 and document the result.
+
+### V5. Validated optional interpretation integration
+
+Pipeline: recognition hypotheses → exact parser and confirmed contextual corrections → optional LLM proposal → schema/context validation → clarification/confirmation when required → existing coordinator. The LLM has no AudioTrack, repository-write, permission or aid-command execution access. It cannot change fitting capability, invent a baseline, reinterpret actual last-sent state as verified, or override preflight.
+
+`IntentInterpreter.propose(input,context)` returns `Proposal(intent,evidence)`, `Clarify(options)`, `Unsupported` or `Unavailable`. Context contains configured names/aliases, relevant conversation draft and structured status, not arbitrary raw logs. Require a bounded schema with allowlisted intent types and parameters. Validate ranges, program/capability, revision and baseline in normal code after interpretation. Reject malformed/unknown fields and missing parameters. Model-generated confidence is not evidence of correctness. Cap inference at five seconds initially; timeout/unavailable returns deterministic help or clarification and never a guessed command.
+
+An LLM-only aid-changing proposal must first be read back and explicitly confirmed. Ambiguous numeric values, signs, program names or control families always require clarification. Settings proposals update drafts and still require Save. Help/error explanations may be conversational but must be grounded in structured result facts; never manufacture successful reception or battery percentage.
+
+Voice settings adds Local language assistance on/off, Model status, Download/remove model and Read performance status. Turning it off stops pending inference and preserves ordinary voice operation. Model removal requires confirmation. Phone and watch must report missing model/disconnection/timeout clearly. Stop cancels inference immediately; delayed output from a cancelled or expired session is discarded.
+
+Exit gate: full phone/watch end-to-end tests, schema/fitting/range and ambiguous-number rejection, no duplicate dispatch on retries, cancellation under load, no inference during acoustic playback and no command-state changes when the model fails. Document accepted hardware and exact model/runtime versions. Local LLM interpretation does not imply speech-model retraining or hands-free wake capability.
+
+### 10.1 Additional acceptance cases
+
+| Test ID | Scenario | Expected result |
+|---|---|---|
+| VI01 | Program renamed; hint service unsupported | Vocabulary refreshes; deterministic resolver remains usable; no false support claim |
+| VI02 | Hypotheses disagree: volume four / fourteen | Clarification before dispatch |
+| VI03 | “No, I said Sleep” after TV transmitted | Report prior transmission; confirm new action and separate learning consent |
+| VI04 | Learn/forget a watch-context correction | Persist only confirmed scope; forgetting immediately restores baseline behavior |
+| VI05 | Fitting changes or correction conflicts | Invalidate/review mapping; no guessed target |
+| VI06 | Compare candidate against held-out corpus | Report phone/watch metrics and reject regressions |
+| VI07 | Model missing, timeout, memory failure | Existing voice path remains usable; no aid command from failed inference |
+| VI08 | LLM proposes invalid number or unsupported tinnitus | Normal validation rejects; model cannot bypass guards |
+| VI09 | Cancel while inference running, then late answer | Discard answer; no execution or saved draft |
+| VI10 | Disable assistance and delete examples | No model calls; chosen local data removed; ordinary settings retained |
+
+Technical references for implementation evaluation: [Android SpeechRecognizer](https://developer.android.com/reference/android/speech/SpeechRecognizer), [RecognizerIntent options](https://developer.android.com/reference/android/speech/RecognizerIntent) and [Google LiteRT-LM](https://github.com/google-ai-edge/LiteRT-LM). Service/device support and runtime APIs must be rechecked during implementation.
