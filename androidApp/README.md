@@ -56,3 +56,5 @@ For the user’s no-pairing setup, **Use basic Signia defaults** selects the sta
 The earlier shell build used API 29 resources while compiling/targeting 35. The Gradle build now uses platform 36 directly. Historical API 29 archive: `https://dl.google.com/android/repository/platform-29_r05.zip`, SHA-1 `9d8a7e0ffa5168dbca6c60355b9129c6c7572aff` from Google's index.
 
 Startup tracing found that Signia overrides the constructor gain divisor 4 with **1.2**. The basic preset now applies that override; the initial form shows the startup profile with empty addresses; choose a preset or enter your explicit configuration. See [startup findings](../research/acoustic/notes/proto-request-trace-2026-10-14.md).
+
+Optional [hands-free sessions](../docs/hands-free-quick-start.md) start explicitly on the unlocked phone, then support bounded command recognition and the existing validated transport while locked. Local wake detection, Off/Pause/End, notification/Quick Settings controls and a default-off shake trigger are implemented. No session starts after installation/reboot; physical wake, lock, gesture and battery acceptance remain pending.

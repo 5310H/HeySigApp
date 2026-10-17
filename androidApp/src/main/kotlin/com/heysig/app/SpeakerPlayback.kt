@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /** Speaker-only transport. Returning normally means playback completed, never aid receipt. */
 class SpeakerPlayback(private val context: Context) {
-    fun inspect(): AudioDeviceInfo {
-        check((context.getSystemService(Context.POWER_SERVICE) as PowerManager).isInteractive &&
-            !(context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked) { "Turn on and unlock this device" }
+    fun inspect(allowLocked: Boolean = false): AudioDeviceInfo {
+        check(allowLocked || ((context.getSystemService(Context.POWER_SERVICE) as PowerManager).isInteractive &&
+            !(context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked)) { "Turn on and unlock this device" }
         check((context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).currentInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) { "Turn off Do Not Disturb" }
         val audio = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         check(audio.mode == AudioManager.MODE_NORMAL) { "Call or communication audio is active" }
@@ -27,10 +27,10 @@ class SpeakerPlayback(private val context: Context) {
     }
     data class PlaybackReport(val commandFrames: Int, val playedFrames: Long, val elapsedMillis: Long)
 
-    fun play(pcm: ByteArray, rate: Int, cancelled: AtomicBoolean): PlaybackReport {
+    fun play(pcm: ByteArray, rate: Int, cancelled: AtomicBoolean, allowLocked: Boolean = false): PlaybackReport {
         require(pcm.isNotEmpty() && pcm.size % 2 == 0) { "PCM must contain complete mono PCM16 frames" }
         require(rate in 8000..192000)
-        val speaker = inspect()
+        val speaker = inspect(allowLocked)
         check(!cancelled.get()) { "Stopped" }
         val audio = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val attributes = AudioAttributes.Builder().setLegacyStreamType(AudioManager.STREAM_MUSIC).build()

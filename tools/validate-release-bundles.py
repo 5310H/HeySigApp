@@ -6,6 +6,8 @@ This does not authorize or perform a Play upload, or certify Play readiness.
 import argparse
 import base64
 import hashlib
+import json
+import struct
 import os
 from pathlib import Path
 import re
@@ -74,7 +76,11 @@ def main():
             'com.google.android.gms.wearable.BIND_LISTENER') for item in manifest.iter('action')),
             f'{module}: background watch listener is not part of this foreground design')
         permissions = [item.get(ANDROID+'name') for item in manifest.findall('uses-permission')]
-        expected_permissions = {'android.permission.RECORD_AUDIO'} if module == 'androidApp' else set()
+        expected_permissions = {
+            'android.permission.RECORD_AUDIO', 'android.permission.FOREGROUND_SERVICE',
+            'android.permission.FOREGROUND_SERVICE_MICROPHONE', 'android.permission.POST_NOTIFICATIONS',
+            'android.permission.WAKE_LOCK', 'android.permission.VIBRATE'
+        } if module == 'androidApp' else {'android.permission.VIBRATE'}
         if module == 'androidApp':
             # AndroidX Core's app-private compatibility permission is signature-only,
             # not a runtime grant or new microphone/background capability.
@@ -89,15 +95,38 @@ def main():
         with zipfile.ZipFile(bundle) as archive:
             names = archive.namelist()
             require(not any(name.endswith(('.keystore','.jks','pairing.json')) for name in names), 'Private configuration packaged')
-            require(not any(name.endswith('.so') for name in names), 'Native dependencies require page-size/ABI review')
+            native = {name for name in names if name.endswith('.so')}
+            if module == 'androidApp':
+                integrity = json.loads((ROOT/'third_party/sherpa-onnx/integrity.json').read_text())
+                expected_native = {'base/lib/'+name.removeprefix('jni/'): digest for name,digest in integrity['native'].items()}
+                require(native == set(expected_native), 'Unexpected or missing wake native libraries/ABIs')
+                for name in native:
+                    data = archive.read(name)
+                    require(hashlib.sha256(data).hexdigest() == expected_native[name], f'Unexpected native bytes: {name}')
+                    bits = data[4]
+                    offset = struct.unpack_from('<Q' if bits == 2 else '<I', data, 32 if bits == 2 else 28)[0]
+                    size,count = struct.unpack_from('<HH',data,54 if bits == 2 else 42)
+                    for index in range(count):
+                        program = struct.unpack_from('<IIQQQQQQ' if bits == 2 else '<IIIIIIII',data,offset+size*index)
+                        if program[0] == 1:
+                            require(program[-1] >= 16384, f'Native library lacks 16 KB ELF alignment: {name}')
+                for name,digest in integrity['assets'].items():
+                    require(hashlib.sha256(archive.read('base/assets/handsfree/'+name)).hexdigest() == digest, f'Wake asset checksum mismatch: {name}')
+                services = {item.get(ANDROID+'name'): item for item in app.findall('service')}
+                foreground = services.get('com.heysig.app.voice.HandsFreeService')
+                require(foreground is not None and foreground.get(ANDROID+'exported') == 'false' and foreground.get(ANDROID+'foregroundServiceType') in ('microphone','0x00000080'), 'Hands-free service must be private and microphone-typed')
+                tile = services.get('com.heysig.app.voice.HandsFreeTile')
+                require(tile is not None and tile.get(ANDROID+'permission') == 'android.permission.BIND_QUICK_SETTINGS_TILE', 'Quick Settings tile must be system-permission protected')
+            else:
+                require(not native, 'Watch unexpectedly contains native dependencies')
             dex = b''.join(archive.read(name) for name in names if name.endswith('.dex'))
             require(b'WatchBridgeSetup' not in dex and b'ProtoActivity' not in dex, 'Development classes packaged')
             require(b'heysig-watch-loopback' not in dex and b'pairing.json' not in dex, 'Development relay packaged')
             require(b'heysig_phone_v1' in dex, f'{module}: production companion capability missing')
         output_manifest = bundle.parent / 'validated-manifest.xml'
         output_manifest.write_bytes(manifest_bytes)
-        reports.append(f'{module}: PASS — {application}, target {target}, upload signature verified, no development transport/native libraries\nSHA-256: {hashlib.sha256(bundle.read_bytes()).hexdigest()}')
-    text = '\n\n'.join(reports)+'\n\nValidation candidates only: physical watch acceptance, public privacy policy, health declarations and Play review remain pending.\n'
+        reports.append(f'{module}: PASS — {application}, target {target}, upload signature verified, development transport excluded; native library/ABI checks passed\nSHA-256: {hashlib.sha256(bundle.read_bytes()).hexdigest()}')
+    text = '\n\n'.join(reports)+'\n\nValidation candidates only: physical hands-free/watch acceptance, public privacy policy, health declarations and Play review remain pending.\n'
     print(text)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)

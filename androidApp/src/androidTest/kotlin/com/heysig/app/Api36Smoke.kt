@@ -50,16 +50,32 @@ class Api36Smoke : Instrumentation() {
             focusWindow()
             fun capture(name: String) {
                 if(!captureScreens) return
-                waitForIdleSync()
-                runOnMainSync {
-                    val root = screen.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
-                    val bitmap = android.graphics.Bitmap.createBitmap(root.width,root.height,android.graphics.Bitmap.Config.ARGB_8888)
-                    root.draw(android.graphics.Canvas(bitmap))
-                    val directory = java.io.File(targetContext.getExternalFilesDir(null),"ui-previews").apply { mkdirs() }
-                    java.io.File(directory,"$name.png").outputStream().use { bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,it) }
-                    bitmap.recycle()
+                val deadline=android.os.SystemClock.uptimeMillis()+5000
+                while(android.os.SystemClock.uptimeMillis()<deadline) {
+                    waitForIdleSync()
+                    var captured=false
+                    var failure: Throwable?=null
+                    runOnMainSync {
+                        try {
+                            val root=screen.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
+                            if(root.width>0 && root.height>0) {
+                                val bitmap=android.graphics.Bitmap.createBitmap(root.width,root.height,android.graphics.Bitmap.Config.ARGB_8888)
+                                try {
+                                    root.draw(android.graphics.Canvas(bitmap))
+                                    val directory=java.io.File(targetContext.getExternalFilesDir(null),"ui-previews").apply { mkdirs() }
+                                    java.io.File(directory,"$name.png").outputStream().use { check(bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,it)) }
+                                    captured=true
+                                } finally { bitmap.recycle() }
+                            }
+                        } catch(error: Throwable) { failure=error }
+                    }
+                    failure?.let { throw it }
+                    if(captured) return
+                    android.os.SystemClock.sleep(20)
                 }
+                error("View did not finish layout for screenshot: $name")
             }
+
             fun open(label:String) {
                 runOnMainSync {
                     descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
@@ -184,6 +200,8 @@ class Api36Smoke : Instrumentation() {
                 }
                 result.putString("roundWatch","PASS: real compact watch home in isolated 192dp round contexts at font scales 1 and 2; Speak/Stop/More, 48dp targets and no ellipses; hardware acceptance pending")
             }
+            HandsFreeAcceptance.run(targetContext)
+            result.putString("handsFree","PASS: isolated shared executor serializes locked-session playback, journals before transport, rejects inactive sessions/storage failure and never replays interrupted state; native keyword model decodes silence without capture")
             // Version-1 migration and release lock use isolated preferences and a playback spy.
             runOnMainSync {
                 val store = targetContext.getSharedPreferences("acceptance-isolated-noise",0)

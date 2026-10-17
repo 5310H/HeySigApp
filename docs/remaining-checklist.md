@@ -48,6 +48,10 @@ Noise acceptance evidence: _pending physical testing_. Latest completed
 [automated/build/device checks](acceptance/noise-calibration-automation-2026-10-16.md)
 remain separate from these unchecked items.
 
+Optional hands-free and default-off shake controls are implemented and installed;
+see the [October 17 record](acceptance/hands-free-2026-10-17.md). The physical
+items below remain unchecked.
+
 ## 2. Phone/watch and everyday-use acceptance
 
 Follow the [production companion matrix](production-watch-connection.md).
@@ -62,6 +66,10 @@ user's fitting or change aid settings merely to test screens or installation.
   and independent prompts/responses on/off combinations.
 - [ ] Test actual recognition and TTS providers, offline/network behavior,
   cancellation, permission failures and speech-off visible status.
+- [ ] Accept hands-free locked-phone wake accuracy/false triggers, Off/Pause/End,
+  permission revocation, notification/tile controls, watch interaction and battery
+  behavior, deliberate shake/accidental motion and haptic acknowledgement on
+  both devices using the [hands-free design](architecture/hands-free-session.md).
 - [ ] Review the full UI with TalkBack, large text and real round watches;
   verify scrolling, touch targets, Back/swipe-back, keyboard and state retention.
 - [ ] Test clean installation and upgrades on disposable release installations,
@@ -115,8 +123,8 @@ They require their own implementation and acceptance before being advertised.
 - [ ] Implement and accept native sleep scheduling, including overnight/reboot
   behavior; keep this separate from Noise's protected Sleep-program priority.
 - [ ] Establish a viable iPhone control path before committing to an iPhone client.
-- [ ] Review any background/wake-listening design separately before implementing
-  background microphone capture or automatic operation outside the foreground.
+- [ ] Finish physical acceptance of the separately reviewed hands-free session.
+  Background noise automation remains separate and source-locked.
 
 ## Evidence entry template
 

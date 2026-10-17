@@ -54,7 +54,8 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
         val rate = 16000
         val minimum = AudioRecord.getMinBufferSize(rate,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT)
         check(minimum > 0) { "Microphone format unavailable" }
-        val recorder = AudioRecord(MediaRecorder.AudioSource.MIC,rate,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT,maxOf(minimum,4096))
+        check(MicrophoneLease.acquire { cancel.get() }) { "Microphone busy or capture cancelled" }
+        val recorder = try { AudioRecord(MediaRecorder.AudioSource.MIC,rate,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT,maxOf(minimum,4096)) } catch(e: Exception) { MicrophoneLease.release();throw e }
         try {
             check(recorder.state == AudioRecord.STATE_INITIALIZED) { "Microphone could not initialize" }
             val microphone = audio.getDevices(AudioManager.GET_DEVICES_INPUTS).firstOrNull { it.type == android.media.AudioDeviceInfo.TYPE_BUILTIN_MIC }
@@ -77,6 +78,6 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
             }
             check(!cancel.get() && allowed()) { "Capture interrupted; sample discarded" }
             return accumulator.measurement()
-        } finally { runCatching { recorder.stop() }; recorder.release() }
+        } finally { runCatching { recorder.stop() };runCatching { recorder.release() };MicrophoneLease.release() }
     }
 }

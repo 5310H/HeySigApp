@@ -29,3 +29,20 @@ device and explicitly confirmed. Deleting local fitting data
 does not send commands or change the aids. Saved restoration records survive
 the narrower history-clear operation. Do not run destructive data-clear
 acceptance against the user's existing fitting; use isolated test storage.
+
+## October 17 hands-free change (release review required)
+
+An explicitly started microphone foreground service now supports on-device
+Hey Sig keyword detection and bounded command recognition while locked. Wake
+PCM is memory-only and the app adds no audio/transcript history. Recognition
+prefers the Android on-device service, with a disclosed installed-provider
+fallback that may transmit command audio; provider/network behavior must be
+verified on the final release. TTS choices remain independent. The new native
+engine/model ship with notices and pinned hashes. Hands-free disclosure/watch
+choices are local; session state/deadlines are not persisted or restarted.
+The already-selected watch can send commands and listening controls during the
+live session using the existing bounded result journal. Off retains this
+foreground control session; End closes it. Update microphone-FGS declarations,
+privacy policy and device/false-trigger/battery evidence before submission.
+
+Optional shake activation processes acceleration in memory only; separate phone/watch On/Off choices are local/exportable/deleted with app data. No motion history or sensor analytics is added. Phone gesture is limited to listening On; watch gesture is activity-only. VIBRATE is added on both devices for a short acknowledgement. Physical false-trigger and battery trials remain pending.

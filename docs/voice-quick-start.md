@@ -46,3 +46,9 @@ Keep the app open/unlocked, DND off, device media volume at least halfway, and u
 Recognition uses the installed Android speech service, which may use its network connection. Speech text is shown for the current session, not saved as a transcript. Physical aid response remains separate from playback completion.
 
 See [actual acceptance results](acceptance/chromebook-manual-controls-2026-10-16.md) and [development scope](chromebook-development.md).
+
+## Optional hands-free and locked-phone commands
+
+See the [hands-free quick start](hands-free-quick-start.md) for the explicit
+phone session, Hey Sig, Off/Pause/End, Quick Settings tile and watch controls.
+Normal prompted speech remains available without enabling hands-free.

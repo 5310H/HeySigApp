@@ -1,0 +1,4 @@
+INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+INSTRUMENTATION_CODE: 0
+
+Scoped HeySig crash diagnostic: Bitmap.createBitmap rejected width/height zero in Api36Smoke.capture (line 56). Screenshot helper now waits for nonzero layout and reports failures on the instrumentation thread. Android font scale restored; real fitting/noise preference digests unchanged. Product command/model checks had passed at normal size.

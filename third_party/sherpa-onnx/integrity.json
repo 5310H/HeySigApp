@@ -1,0 +1,30 @@
+{
+  "engineVersion": "1.13.8",
+  "engineSha256": "633c24321e06b1fe79feafa03ea16cbc0f8a286641e2da3559bac91bdb13bd96",
+  "modelArchiveSha256": "68447f4fbc67e70eee3a93961f36e81e98f47aef73ce7e7ca00885c6cd3616a6",
+  "native": {
+    "jni/arm64-v8a/libonnxruntime.so": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+    "jni/arm64-v8a/libsherpa-onnx-c-api.so": "c85e2382e2ca12b0513826be926eaccfea896b4cbf568182e287671ba526f80d",
+    "jni/arm64-v8a/libsherpa-onnx-cxx-api.so": "5eabb2bcf5a8af66aeab37431c09fab4a9c65cdebf02bd7e50f8c589044bd70e",
+    "jni/arm64-v8a/libsherpa-onnx-jni.so": "3c6492ea91ea68fd3b72b9495efdde6dd913f6b58c387e3b07389cf335f4d26f",
+    "jni/armeabi-v7a/libonnxruntime.so": "7a8f17a707e52e0ac3a026be319272876d9eae61f4bb19585292772d785f7744",
+    "jni/armeabi-v7a/libsherpa-onnx-c-api.so": "2294b9cc929ca0d22c5da52864ec8176f8fd119a739c9d594384763f6101d33f",
+    "jni/armeabi-v7a/libsherpa-onnx-cxx-api.so": "c5517f3ce8a6f84f18bd0f814331c6069140d59df60030581cb83308572d8da7",
+    "jni/armeabi-v7a/libsherpa-onnx-jni.so": "3d6b6daf6d23162dceb1df91ac075a42a09b60fafb5f9400cba22562f10a1dc0",
+    "jni/x86/libonnxruntime.so": "fcb6cd80415f7951e58fdd8158a238946dce3710d5fee492b67174d5131f9eee",
+    "jni/x86/libsherpa-onnx-c-api.so": "fc08ee45be6eaafde43e128f22f130aec4ef2c5362e44d95f7ae54e9ad6e752e",
+    "jni/x86/libsherpa-onnx-cxx-api.so": "f7677ec51867f2774b3e6749e1d44fedc6973077a10d251ba54f695c1377fa24",
+    "jni/x86/libsherpa-onnx-jni.so": "04831b079ebd68557b6e9605f90be1dc76118973ee1aef5a75cc0d0889dc3778",
+    "jni/x86_64/libonnxruntime.so": "087e84297cad64acb823c3d901d6e0cc934e91add7cdb20da802cd1c0bea5c3e",
+    "jni/x86_64/libsherpa-onnx-c-api.so": "631ca2828e47b61d8afe4b3c75a157423cbafaba6f8c0db89c27d21f1b173d9a",
+    "jni/x86_64/libsherpa-onnx-cxx-api.so": "09cd2ea23b15ae3234b0b4678fbef14639c58792dd36d2cd435c030dc030c5d0",
+    "jni/x86_64/libsherpa-onnx-jni.so": "1dc24c88fb364f1022a5217b70ab3bc3c9cae3120ae2e1ed358e1f68ed120b04"
+  },
+  "assets": {
+    "decoder.onnx": "63a22dd60f40fff082ac3e09afa507f6787da36df76ded2fbe145fa233e22c21",
+    "encoder.onnx": "408bbd740838c42d5bf6d1c5b80b3c88b616c7860b92d980328b5b068c76ae48",
+    "joiner.onnx": "190d4067b4cc20b72a42a1916e69d92052000fb7051a427ebb1bc72a69207dc1",
+    "tokens.txt": "2d3f32311f9b692b964da3c90e830258d3e78e013cb0c992dbfb15cd5a1a71b0",
+    "keywords.txt": "6bd3785435b5cee454a4748f2f151fe458a06d5a461fec1d84b81cefd6c7e934"
+  }
+}

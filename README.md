@@ -55,3 +55,5 @@ Existing protocol research and the dependency-free offline packet regression are
 ## Proto builds
 
 See [Chromebook build and use](desktopApp/README.md) and [Android prototype build](androidApp/README.md). Both reuse the explicit-profile Kotlin renderer. Android exposes all implemented families; the desktop window currently exposes battery playback/export. Offline encoder validation and actual aid reception have separate evidence and scope.
+
+Optional [hands-free sessions](docs/hands-free-quick-start.md) now add local Hey Sig detection, locked-phone manual commands, watch On/Pause/Off/End controls and separate default-off shake choices. Watch shake currently requires HeySig open; real wake/gesture/battery acceptance remains pending. See the [October 17 implementation and acceptance record](docs/acceptance/hands-free-2026-10-17.md).

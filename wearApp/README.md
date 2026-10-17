@@ -1,6 +1,6 @@
 # HeySig Wear app
 
-Release candidates now use the [normal Android/Wear pairing flow](../docs/production-watch-connection.md), with selected-node Data Layer messages, typed/voice commands, result lookup and privacy/data controls. Google Play services may use encrypted Google-server routing. The phone must stay open and unlocked; the watch never emits aid tones. Hardware acceptance is pending.
+Release candidates now use the [normal Android/Wear pairing flow](../docs/production-watch-connection.md), with selected-node Data Layer messages, typed/voice commands, result lookup and privacy/data controls. Google Play services may use encrypted Google-server routing. The ordinary connection requires the phone open and unlocked. An explicitly started [hands-free phone session](../docs/hands-free-quick-start.md) additionally supports locked-phone commands and watch On/Pause/Off/End controls. The watch never emits aid tones. Hardware acceptance is pending.
 
 The remainder of this guide describes the separate, preserved development relay.
 
@@ -11,7 +11,7 @@ Read status, Check last result, and Stop, with spoken replies. Commands use the
 existing Chromebook app's parser and acoustic playback path.
 
 The development companion has independent **Voice prompts** and **Spoken responses** switches
-below Stop. They persist on the watch. Say “voice prompts off/on” or “voice
+in More → Speech options. They persist on the watch. Say “voice prompts off/on” or “voice
 responses off/on” to change them locally, even without the relay. The phone has
 its own switches. Text replies remain available when speech is off.
 
@@ -21,7 +21,9 @@ The watch connects over Wi-Fi to a pinned TLS relay on Chromebook Linux port
 8765. The relay forwards authenticated requests through an ADB loopback forward
 on port 18765 to the foreground HeySig Android app. The phone is not a bridge.
 Keep HeySig open and explicitly enable its Watch Wi-Fi checkbox. Leaving the
-app disables the bridge; re-enable it on return.
+app disables that foreground bridge; re-enable it on return. Alternatively, an
+explicit hands-free session owns the same authenticated development bridge
+while the phone is locked, until End or expiry.
 
 Version 0.3 uses the [pinned Gradle build and separated variants](../docs/gradle-release-builds.md).
 The debug variant retains this relay companion; the release validation candidate
@@ -61,4 +63,9 @@ requests and spoken status with an audible reply passed
 [device acceptance on 2026-10-16](../docs/acceptance/watch-status-2026-10-16.md).
 Hearing-aid operation through this watch route still requires device acceptance.
 This is a development relay, not a
-background production service. Tiles and voice-driven setup are not implemented.
+background production service. Wear tiles and fully voice-driven setup are not implemented.
+
+More → Shake to speak adds a separate default-off gesture choice. Three deliberate
+shakes use the existing Speak action with a short vibration, only while HeySig
+is resumed. Sleeping-watch activation and physical gesture/haptic acceptance
+remain pending.

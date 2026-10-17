@@ -1,11 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-feature android:name="android.hardware.microphone" android:required="false" />
     <queries>
         <intent><action android:name="android.speech.RecognitionService" /></intent>
         <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
     </queries>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:label="HeySig" android:theme="@style/HeySigTheme" android:allowBackup="false" android:fullBackupContent="false" android:dataExtractionRules="@xml/data_extraction_rules" android:usesCleartextTraffic="false" android:enableOnBackInvokedCallback="true">
+        <service android:name="com.heysig.app.voice.HandsFreeTile" android:exported="true" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE" android:label="HeySig listening" android:icon="@drawable/ic_launcher_foreground">
+            <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
+        </service>
+        <service android:name="com.heysig.app.voice.HandsFreeService" android:exported="false" android:foregroundServiceType="microphone" android:stopWithTask="true" />
         <activity android:name="com.heysig.app.HomeActivity" android:exported="true" android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
         </activity>

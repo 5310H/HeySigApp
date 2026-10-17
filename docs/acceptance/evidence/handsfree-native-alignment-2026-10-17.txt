@@ -1,0 +1,2 @@
+debug: 16 pinned native libraries; ELF and APK ZIP alignment >=16 KB. Runtime/device acceptance pending.
+release: 16 pinned native libraries; ELF and APK ZIP alignment >=16 KB. Runtime/device acceptance pending.

@@ -48,6 +48,20 @@ class WatchActivity : Activity() {
         speech = TextToSpeech(this) { speechReady = it == TextToSpeech.SUCCESS; if(speechReady) speech?.language = Locale.US }
         render()
     }
+    private val shake by lazy { ShakeTrigger(this) {
+        if(active) { ShakeTrigger.acknowledge(this); primaryShake() }
+    } }
+    private fun primaryShake() { findViewById<android.view.View>(android.R.id.content)?.let { primaryForShake?.performClick() } }
+    private var primaryForShake: Button?=null
+    private fun shakeOptions() {
+        val choices=getSharedPreferences("heysig-gesture",MODE_PRIVATE)
+        android.app.AlertDialog.Builder(this).setTitle("Shake to speak")
+            .setMessage("Three deliberate shakes start Speak while HeySig is open. A short vibration acknowledges the gesture. Sleeping-watch activation is not supported. Movement may trigger speech accidentally.")
+            .setPositiveButton(if(choices.getBoolean("shake",false)) "Turn Off" else "Turn On") { _,_ ->
+                val enabled=!choices.getBoolean("shake",false)
+                if(choices.edit().putBoolean("shake",enabled).commit()) { shake.stop();if(enabled && active) shake.start() }
+            }.setNegativeButton("Cancel",null).show()
+    }
     private var lastStatus = "Ready"
     private fun render() {
         val home = WatchStyle.home(this,WatchStyle.Labels(R.string.speak,R.string.stop,R.string.more,R.string.speech_off,R.string.connect,R.string.speak_command),lastStatus,
@@ -67,12 +81,13 @@ class WatchActivity : Activity() {
                 generation++; connection?.disconnect(); working.set(false)
                 send("stop",listOf("stop"))
             },{ more() })
-        status=home.status; setContentView(home.view)
+        primaryForShake=home.primary; status=home.status; setContentView(home.view)
     }
     private fun more() {
         android.app.AlertDialog.Builder(this).setTitle("More")
-            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status")) { _,index ->
+            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status","Hands-free","Shake to speak")) { _,index ->
                 when(index) {
+                    5 -> shakeOptions()
                     0 -> send("status",listOf("status"))
                     1 -> lastRequest?.let { fetchResult(it) } ?: reply("No previous request")
                     2 -> {
@@ -85,15 +100,23 @@ class WatchActivity : Activity() {
                                 if(!value) speech?.stop()
                             }.setPositiveButton("Done",null).setOnDismissListener { render() }.show()
                     }
+                    4 -> {
+                        val commands=arrayOf("hands free on","pause listening for 30 minutes","hands free off","hands free status","end hands free session")
+                        android.app.AlertDialog.Builder(this).setTitle("Phone hands-free")
+                            .setItems(arrayOf("On","Pause 30 minutes","Off","Status","End session")) { _,item -> send(commands[item],listOf(commands[item])) }
+                            .setNegativeButton("Close",null).show()
+                    }
                     3 -> android.app.AlertDialog.Builder(this).setTitle("Development connection")
                         .setMessage((if(File(filesDir,"pairing.json").exists()) "Chromebook relay configured." else "Setup needed from Chromebook.")+"\n"+lastStatus)
                         .setPositiveButton("Close",null).show()
                 }
             }.setNegativeButton("Close",null).show()
     }
-    override fun onResume() { super.onResume(); active = true }
+    override fun onResume() { super.onResume(); active = true
+        if(getSharedPreferences("heysig-gesture",MODE_PRIVATE).getBoolean("shake",false)) shake.start() }
     override fun onPostResume() { super.onPostResume(); deferred?.let { deferred=null; it() } }
     override fun onPause() {
+        shake.stop()
         active = false; generation++; connection?.disconnect(); working.set(false); speech?.stop()
         super.onPause()
     }

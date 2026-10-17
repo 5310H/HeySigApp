@@ -1,0 +1,326 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+
+> Configure project :androidApp
+WARNING: The option setting 'android.aapt2FromMavenOverride=/tmp/heysig-arm-tools/build-tools/aapt2' is experimental.
+
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:compileKotlin
+> Task :shared:compileJava NO-SOURCE
+> Task :shared:processResources NO-SOURCE
+> Task :shared:classes UP-TO-DATE
+> Task :shared:jar
+> Task :shared:compileTestKotlin
+> Task :shared:compileTestJava UP-TO-DATE
+> Task :shared:processTestResources NO-SOURCE
+> Task :shared:testClasses UP-TO-DATE
+> Task :shared:test
+> Task :androidApp:verifyWakeEngine
+> Task :androidApp:preBuild
+> Task :androidApp:preDebugBuild
+> Task :androidApp:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :androidApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :androidApp:generateDebugBuildConfig UP-TO-DATE
+> Task :androidApp:checkDebugAarMetadata UP-TO-DATE
+> Task :androidApp:processDebugNavigationResources UP-TO-DATE
+> Task :androidApp:compileDebugNavigationResources UP-TO-DATE
+> Task :androidApp:generateDebugResValues UP-TO-DATE
+> Task :androidApp:mapDebugSourceSetPaths UP-TO-DATE
+> Task :androidApp:generateDebugResources UP-TO-DATE
+> Task :androidApp:mergeDebugResources UP-TO-DATE
+> Task :androidApp:packageDebugResources UP-TO-DATE
+> Task :androidApp:parseDebugLocalResources UP-TO-DATE
+> Task :androidApp:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :androidApp:extractDeepLinksDebug UP-TO-DATE
+> Task :androidApp:processDebugMainManifest UP-TO-DATE
+> Task :androidApp:processDebugManifest UP-TO-DATE
+> Task :androidApp:processDebugManifestForPackage UP-TO-DATE
+> Task :androidApp:processDebugResources UP-TO-DATE
+> Task :androidApp:compileDebugKotlin
+> Task :androidApp:javaPreCompileDebug UP-TO-DATE
+> Task :androidApp:compileDebugJavaWithJavac UP-TO-DATE
+> Task :androidApp:mergeDebugShaders UP-TO-DATE
+> Task :androidApp:compileDebugShaders NO-SOURCE
+> Task :androidApp:generateDebugAssets UP-TO-DATE
+> Task :androidApp:mergeDebugAssets UP-TO-DATE
+> Task :androidApp:compressDebugAssets UP-TO-DATE
+> Task :androidApp:processDebugJavaRes UP-TO-DATE
+> Task :androidApp:mergeDebugJavaResource
+> Task :androidApp:checkDebugDuplicateClasses UP-TO-DATE
+> Task :androidApp:desugarDebugFileDependencies UP-TO-DATE
+> Task :androidApp:mergeExtDexDebug UP-TO-DATE
+> Task :androidApp:mergeLibDexDebug
+> Task :androidApp:dexBuilderDebug
+> Task :androidApp:mergeProjectDexDebug
+> Task :androidApp:mergeDebugJniLibFolders UP-TO-DATE
+> Task :androidApp:mergeDebugNativeLibs UP-TO-DATE
+> Task :androidApp:stripDebugDebugSymbols UP-TO-DATE
+> Task :androidApp:validateSigningDebug UP-TO-DATE
+> Task :androidApp:writeDebugAppMetadata UP-TO-DATE
+> Task :androidApp:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :androidApp:packageDebug
+> Task :androidApp:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :androidApp:assembleDebug
+> Task :androidApp:bundleDebugClassesToCompileJar
+> Task :androidApp:preDebugAndroidTestBuild SKIPPED
+> Task :androidApp:processDebugAndroidTestManifest UP-TO-DATE
+> Task :androidApp:generateDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :androidApp:checkDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :androidApp:processDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :androidApp:compileDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :androidApp:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :androidApp:mapDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :androidApp:generateDebugAndroidTestResources UP-TO-DATE
+> Task :androidApp:mergeDebugAndroidTestResources UP-TO-DATE
+> Task :androidApp:processDebugAndroidTestResources UP-TO-DATE
+> Task :androidApp:compileDebugAndroidTestKotlin
+> Task :androidApp:javaPreCompileDebugAndroidTest UP-TO-DATE
+> Task :androidApp:compileDebugAndroidTestJavaWithJavac UP-TO-DATE
+> Task :androidApp:mergeDebugAndroidTestShaders UP-TO-DATE
+> Task :androidApp:compileDebugAndroidTestShaders NO-SOURCE
+> Task :androidApp:generateDebugAndroidTestAssets UP-TO-DATE
+> Task :androidApp:mergeDebugAndroidTestAssets UP-TO-DATE
+> Task :androidApp:compressDebugAndroidTestAssets UP-TO-DATE
+> Task :androidApp:processDebugAndroidTestJavaRes UP-TO-DATE
+> Task :androidApp:mergeDebugAndroidTestJavaResource UP-TO-DATE
+> Task :androidApp:checkDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :androidApp:desugarDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :androidApp:mergeExtDexDebugAndroidTest UP-TO-DATE
+> Task :androidApp:mergeLibDexDebugAndroidTest UP-TO-DATE
+> Task :androidApp:dexBuilderDebugAndroidTest
+> Task :androidApp:mergeProjectDexDebugAndroidTest
+> Task :androidApp:mergeDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :androidApp:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :androidApp:stripDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :androidApp:validateSigningDebugAndroidTest UP-TO-DATE
+> Task :androidApp:writeDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :androidApp:packageDebugAndroidTest
+> Task :androidApp:createDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+> Task :androidApp:assembleDebugAndroidTest
+> Task :wearApp:preBuild UP-TO-DATE
+> Task :wearApp:preDebugBuild UP-TO-DATE
+> Task :wearApp:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :wearApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :wearApp:generateDebugBuildConfig UP-TO-DATE
+> Task :wearApp:checkDebugAarMetadata UP-TO-DATE
+> Task :wearApp:processDebugNavigationResources UP-TO-DATE
+> Task :wearApp:compileDebugNavigationResources UP-TO-DATE
+> Task :wearApp:generateDebugResValues UP-TO-DATE
+> Task :wearApp:mapDebugSourceSetPaths UP-TO-DATE
+> Task :wearApp:generateDebugResources UP-TO-DATE
+> Task :wearApp:mergeDebugResources UP-TO-DATE
+> Task :wearApp:packageDebugResources UP-TO-DATE
+> Task :wearApp:parseDebugLocalResources UP-TO-DATE
+> Task :wearApp:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :wearApp:extractDeepLinksDebug UP-TO-DATE
+> Task :wearApp:processDebugMainManifest UP-TO-DATE
+> Task :wearApp:processDebugManifest UP-TO-DATE
+> Task :wearApp:processDebugManifestForPackage UP-TO-DATE
+> Task :wearApp:processDebugResources UP-TO-DATE
+> Task :wearApp:compileDebugKotlin
+> Task :wearApp:javaPreCompileDebug UP-TO-DATE
+> Task :wearApp:compileDebugJavaWithJavac UP-TO-DATE
+> Task :wearApp:mergeDebugShaders UP-TO-DATE
+> Task :wearApp:compileDebugShaders NO-SOURCE
+> Task :wearApp:generateDebugAssets UP-TO-DATE
+> Task :wearApp:mergeDebugAssets UP-TO-DATE
+> Task :wearApp:compressDebugAssets UP-TO-DATE
+> Task :wearApp:processDebugJavaRes UP-TO-DATE
+> Task :wearApp:mergeDebugJavaResource
+> Task :wearApp:checkDebugDuplicateClasses UP-TO-DATE
+> Task :wearApp:desugarDebugFileDependencies UP-TO-DATE
+> Task :wearApp:mergeExtDexDebug UP-TO-DATE
+> Task :wearApp:mergeLibDexDebug
+> Task :wearApp:dexBuilderDebug
+> Task :wearApp:mergeProjectDexDebug
+> Task :wearApp:mergeDebugJniLibFolders UP-TO-DATE
+> Task :wearApp:mergeDebugNativeLibs NO-SOURCE
+> Task :wearApp:stripDebugDebugSymbols NO-SOURCE
+> Task :wearApp:validateSigningDebug UP-TO-DATE
+> Task :wearApp:writeDebugAppMetadata UP-TO-DATE
+> Task :wearApp:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :wearApp:packageDebug
+> Task :wearApp:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :wearApp:assembleDebug
+> Task :androidApp:preReleaseBuild
+> Task :androidApp:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :androidApp:mergeReleaseNativeLibs UP-TO-DATE
+> Task :androidApp:stripReleaseDebugSymbols UP-TO-DATE
+> Task :androidApp:extractReleaseNativeSymbolTables UP-TO-DATE
+> Task :androidApp:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :androidApp:buildKotlinToolingMetadata UP-TO-DATE
+> Task :androidApp:checkReleaseDuplicateClasses UP-TO-DATE
+> Task :androidApp:generateReleaseBuildConfig UP-TO-DATE
+> Task :androidApp:checkReleaseAarMetadata UP-TO-DATE
+> Task :androidApp:processReleaseNavigationResources UP-TO-DATE
+> Task :androidApp:compileReleaseNavigationResources UP-TO-DATE
+> Task :androidApp:generateReleaseResValues UP-TO-DATE
+> Task :androidApp:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :androidApp:generateReleaseResources UP-TO-DATE
+> Task :androidApp:mergeReleaseResources UP-TO-DATE
+> Task :androidApp:packageReleaseResources UP-TO-DATE
+> Task :androidApp:parseReleaseLocalResources UP-TO-DATE
+> Task :androidApp:createReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :androidApp:extractDeepLinksRelease UP-TO-DATE
+> Task :androidApp:processReleaseMainManifest UP-TO-DATE
+> Task :androidApp:processReleaseManifest UP-TO-DATE
+> Task :androidApp:processReleaseManifestForPackage UP-TO-DATE
+> Task :androidApp:processReleaseResources UP-TO-DATE
+> Task :androidApp:compileReleaseKotlin
+> Task :androidApp:javaPreCompileRelease UP-TO-DATE
+> Task :androidApp:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :androidApp:mergeReleaseArtProfile UP-TO-DATE
+> Task :androidApp:expandReleaseArtProfileWildcards
+> Task :androidApp:extractProguardFiles UP-TO-DATE
+> Task :androidApp:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :androidApp:processReleaseJavaRes UP-TO-DATE
+> Task :androidApp:mergeReleaseJavaResource
+> Task :androidApp:mergeReleaseStartupProfile UP-TO-DATE
+> Task :androidApp:minifyReleaseWithR8
+> Task :androidApp:compileReleaseArtProfile
+> Task :androidApp:mergeReleaseShaders UP-TO-DATE
+> Task :androidApp:compileReleaseShaders NO-SOURCE
+> Task :androidApp:generateReleaseAssets UP-TO-DATE
+> Task :androidApp:mergeReleaseAssets UP-TO-DATE
+> Task :androidApp:compressReleaseAssets UP-TO-DATE
+> Task :androidApp:extractReleaseVersionControlInfo UP-TO-DATE
+> Task :androidApp:generateReleaseLintVitalReportModel
+> Task :androidApp:lintVitalAnalyzeRelease
+> Task :androidApp:lintVitalReportRelease SKIPPED
+> Task :androidApp:lintVitalRelease SKIPPED
+> Task :androidApp:optimizeReleaseResources UP-TO-DATE
+> Task :androidApp:requireUploadSigning
+> Task :androidApp:collectReleaseDependencies UP-TO-DATE
+> Task :androidApp:sdkReleaseDependencyData UP-TO-DATE
+> Task :androidApp:validateSigningRelease UP-TO-DATE
+> Task :androidApp:writeReleaseAppMetadata UP-TO-DATE
+> Task :androidApp:writeReleaseSigningConfigVersions UP-TO-DATE
+> Task :androidApp:packageRelease
+> Task :androidApp:createReleaseApkListingFileRedirect UP-TO-DATE
+> Task :androidApp:assembleRelease
+> Task :wearApp:preReleaseBuild UP-TO-DATE
+> Task :wearApp:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :wearApp:mergeReleaseNativeLibs NO-SOURCE
+> Task :wearApp:stripReleaseDebugSymbols NO-SOURCE
+> Task :wearApp:extractReleaseNativeSymbolTables NO-SOURCE
+> Task :wearApp:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :wearApp:buildKotlinToolingMetadata UP-TO-DATE
+> Task :wearApp:checkReleaseDuplicateClasses UP-TO-DATE
+> Task :wearApp:generateReleaseBuildConfig UP-TO-DATE
+> Task :wearApp:checkReleaseAarMetadata UP-TO-DATE
+> Task :wearApp:processReleaseNavigationResources UP-TO-DATE
+> Task :wearApp:compileReleaseNavigationResources UP-TO-DATE
+> Task :wearApp:generateReleaseResValues UP-TO-DATE
+> Task :wearApp:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :wearApp:generateReleaseResources UP-TO-DATE
+> Task :wearApp:mergeReleaseResources UP-TO-DATE
+> Task :wearApp:packageReleaseResources UP-TO-DATE
+> Task :wearApp:parseReleaseLocalResources UP-TO-DATE
+> Task :wearApp:createReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :wearApp:extractDeepLinksRelease UP-TO-DATE
+> Task :wearApp:processReleaseMainManifest UP-TO-DATE
+> Task :wearApp:processReleaseManifest UP-TO-DATE
+> Task :wearApp:processReleaseManifestForPackage UP-TO-DATE
+> Task :wearApp:processReleaseResources UP-TO-DATE
+> Task :wearApp:compileReleaseKotlin
+> Task :wearApp:javaPreCompileRelease UP-TO-DATE
+> Task :wearApp:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :wearApp:mergeReleaseArtProfile UP-TO-DATE
+> Task :wearApp:expandReleaseArtProfileWildcards
+> Task :wearApp:extractProguardFiles UP-TO-DATE
+> Task :wearApp:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :wearApp:processReleaseJavaRes UP-TO-DATE
+> Task :wearApp:mergeReleaseJavaResource
+> Task :wearApp:mergeReleaseStartupProfile UP-TO-DATE
+> Task :wearApp:minifyReleaseWithR8
+> Task :wearApp:compileReleaseArtProfile
+> Task :wearApp:mergeReleaseShaders UP-TO-DATE
+> Task :wearApp:compileReleaseShaders NO-SOURCE
+> Task :wearApp:generateReleaseAssets UP-TO-DATE
+> Task :wearApp:mergeReleaseAssets UP-TO-DATE
+> Task :wearApp:compressReleaseAssets UP-TO-DATE
+> Task :wearApp:extractReleaseVersionControlInfo UP-TO-DATE
+> Task :wearApp:generateReleaseLintVitalReportModel
+> Task :wearApp:lintVitalAnalyzeRelease
+> Task :wearApp:lintVitalReportRelease SKIPPED
+> Task :wearApp:lintVitalRelease SKIPPED
+> Task :wearApp:optimizeReleaseResources UP-TO-DATE
+> Task :wearApp:requireUploadSigning
+> Task :wearApp:collectReleaseDependencies UP-TO-DATE
+> Task :wearApp:sdkReleaseDependencyData UP-TO-DATE
+> Task :wearApp:validateSigningRelease UP-TO-DATE
+> Task :wearApp:writeReleaseAppMetadata UP-TO-DATE
+> Task :wearApp:writeReleaseSigningConfigVersions UP-TO-DATE
+> Task :wearApp:packageRelease
+> Task :wearApp:createReleaseApkListingFileRedirect UP-TO-DATE
+> Task :wearApp:assembleRelease
+> Task :androidApp:generateDebugAndroidTestLintModel
+> Task :androidApp:generateDebugLintReportModel
+> Task :androidApp:preDebugUnitTestBuild
+> Task :androidApp:generateDebugUnitTestLintModel
+> Task :androidApp:lintAnalyzeDebug
+> Task :androidApp:lintAnalyzeDebugAndroidTest
+> Task :androidApp:lintAnalyzeDebugUnitTest
+
+> Task :androidApp:lintReportDebug
+Wrote HTML report to file:///home/kjgerhart/HeySigApp/androidApp/build/reports/lint-results-debug.html
+
+> Task :androidApp:lintDebug
+> Task :wearApp:bundleDebugClassesToCompileJar
+> Task :wearApp:preDebugAndroidTestBuild SKIPPED
+> Task :wearApp:generateDebugAndroidTestResValues
+> Task :wearApp:generateDebugAndroidTestLintModel
+> Task :wearApp:generateDebugLintReportModel
+> Task :wearApp:preDebugUnitTestBuild UP-TO-DATE
+> Task :wearApp:generateDebugUnitTestLintModel
+> Task :wearApp:lintAnalyzeDebug
+> Task :wearApp:lintAnalyzeDebugAndroidTest
+> Task :wearApp:lintAnalyzeDebugUnitTest
+
+> Task :wearApp:lintReportDebug
+Wrote HTML report to file:///home/kjgerhart/HeySigApp/wearApp/build/reports/lint-results-debug.html
+
+> Task :wearApp:lintDebug
+> Task :androidApp:processApplicationManifestReleaseForBundle UP-TO-DATE
+> Task :androidApp:bundleReleaseResources UP-TO-DATE
+> Task :androidApp:buildReleasePreBundle
+> Task :androidApp:configureReleaseDependencies UP-TO-DATE
+> Task :androidApp:parseReleaseIntegrityConfig UP-TO-DATE
+> Task :androidApp:packageReleaseBundle
+> Task :androidApp:signReleaseBundle
+> Task :androidApp:produceReleaseBundleIdeListingFile
+> Task :androidApp:createReleaseBundleListingFileRedirect UP-TO-DATE
+> Task :androidApp:bundleRelease
+> Task :androidApp:generateReleaseLintReportModel
+> Task :androidApp:bundleReleaseClassesToCompileJar
+> Task :androidApp:preReleaseUnitTestBuild
+> Task :androidApp:generateReleaseUnitTestLintModel
+> Task :androidApp:lintAnalyzeRelease
+> Task :androidApp:lintAnalyzeReleaseUnitTest
+
+> Task :androidApp:lintReportRelease
+Wrote HTML report to file:///home/kjgerhart/HeySigApp/androidApp/build/reports/lint-results-release.html
+
+> Task :androidApp:lintRelease
+> Task :wearApp:processApplicationManifestReleaseForBundle UP-TO-DATE
+> Task :wearApp:bundleReleaseResources UP-TO-DATE
+> Task :wearApp:buildReleasePreBundle
+> Task :wearApp:configureReleaseDependencies UP-TO-DATE
+> Task :wearApp:parseReleaseIntegrityConfig UP-TO-DATE
+> Task :wearApp:packageReleaseBundle
+> Task :wearApp:signReleaseBundle
+> Task :wearApp:produceReleaseBundleIdeListingFile
+> Task :wearApp:createReleaseBundleListingFileRedirect UP-TO-DATE
+> Task :wearApp:bundleRelease
+> Task :wearApp:generateReleaseLintReportModel
+> Task :wearApp:bundleReleaseClassesToCompileJar
+> Task :wearApp:preReleaseUnitTestBuild UP-TO-DATE
+> Task :wearApp:generateReleaseUnitTestLintModel
+> Task :wearApp:lintAnalyzeRelease
+> Task :wearApp:lintAnalyzeReleaseUnitTest
+> Task :wearApp:lintReportRelease UP-TO-DATE
+> Task :wearApp:lintRelease
+> Task :releaseCandidates
+
+BUILD SUCCESSFUL in 26m 48s
+255 actionable tasks: 79 executed, 176 up-to-date

@@ -1,5 +1,6 @@
 import java.util.Properties
 import java.net.URI
+import java.security.MessageDigest
 
 plugins { id("com.android.application"); kotlin("android") }
 apply(from = rootProject.file("gradle/app-signing.gradle"))
@@ -49,8 +50,11 @@ android {
     lint { abortOnError = true; checkReleaseBuilds = true }
 }
 kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8) } }
+val wakeEngine by configurations.creating
 dependencies {
     implementation(project(":shared"))
+    add(wakeEngine.name,"com.k2fsa:sherpa-onnx:1.13.8@aar")
+    implementation(files(wakeEngine))
     implementation("androidx.core:core:1.17.0")
     "releaseImplementation"("com.google.android.gms:play-services-wearable:20.0.1")
 }
@@ -59,3 +63,14 @@ androidComponents {
         variant.outputs.forEach { it.versionCode.set(1_000_009) }
     }
 }
+
+// Pin the official release bytes, independently of changing repository metadata.
+val verifyWakeEngine by tasks.registering {
+    inputs.files(wakeEngine)
+    doLast {
+        val file=wakeEngine.singleFile
+        val digest=MessageDigest.getInstance("SHA-256").digest(file.readBytes()).joinToString("") { "%02x".format(it) }
+        check(digest=="633c24321e06b1fe79feafa03ea16cbc0f8a286641e2da3559bac91bdb13bd96") { "Unexpected wake engine artifact; refusing build" }
+    }
+}
+tasks.named("preBuild") { dependsOn(verifyWakeEngine) }

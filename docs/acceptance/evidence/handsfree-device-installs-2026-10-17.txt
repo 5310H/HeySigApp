@@ -1,0 +1,2 @@
+androidApp: compatible development update installed; signing identity, fitting/preferences/pairing preserved; listening remains Off; no microphone or aid command. APK SHA-256: 2bbcc91a1eca95d4b8d058d1c8ca5304a675880a07524552640ea44210135d3c
+wearApp: compatible development update installed; signing identity, fitting/preferences/pairing preserved; listening remains Off; no microphone or aid command. APK SHA-256: 8e67b9cdceac6915147c076de212af681b041745b24e567d298916144ef76096

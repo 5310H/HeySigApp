@@ -19,6 +19,7 @@ import com.google.android.gms.wearable.Wearable
 import com.heysig.companion.CompanionSafety
 import com.heysig.companion.PrivacyNotice
 import com.heysig.control.VoicePreference
+import com.heysig.voice.HandsFreeCompanion
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Locale
@@ -32,6 +33,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private data class Awaiting(val node: String, val timeout: Runnable, val reply: (JSONObject) -> Unit)
     private val pending = mutableMapOf<String,Awaiting>()
     private var phone: String? = null
+    private var rpcPath=CompanionSafety.PATH
     private var active = false
     private var listening = false
     private var listener: MessageClient.OnMessageReceivedListener? = null
@@ -51,6 +53,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         phone = prefs.getString("phone",null)
+        rpcPath=prefs.getString("connectionPath",CompanionSafety.PATH)!!
         speech = TextToSpeech(this) { speechReady = it == TextToSpeech.SUCCESS; if(speechReady) speech?.language = Locale.US }
         render()
     }
@@ -60,6 +63,20 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private fun button(text: String, action: () -> Unit) {
         layout.addView(Button(this).apply { this.text = text; minHeight = (48*resources.displayMetrics.density).toInt(); setOnClickListener { action() } })
     }
+    private val shake by lazy { ShakeTrigger(this) {
+        if(active) { ShakeTrigger.acknowledge(this); primaryShake() }
+    } }
+    private fun primaryShake() { findViewById<android.view.View>(android.R.id.content)?.let { primaryForShake?.performClick() } }
+    private var primaryForShake: Button?=null
+    private fun shakeOptions() {
+        val choices=getSharedPreferences("heysig-gesture",MODE_PRIVATE)
+        android.app.AlertDialog.Builder(this).setTitle("Shake to speak")
+            .setMessage("Three deliberate shakes start Speak while HeySig is open. A short vibration acknowledges the gesture. Sleeping-watch activation is not supported. Movement may trigger speech accidentally.")
+            .setPositiveButton(if(choices.getBoolean("shake",false)) "Turn Off" else "Turn On") { _,_ ->
+                val enabled=!choices.getBoolean("shake",false)
+                if(choices.edit().putBoolean("shake",enabled).commit()) { shake.stop();if(enabled && active) shake.start() }
+            }.setNegativeButton("Cancel",null).show()
+    }
     private var lastStatus = "Disconnected"
     private fun render() {
         val home = WatchStyle.home(this,WatchStyle.Labels(R.string.speak,R.string.stop,R.string.more,R.string.speech_off,R.string.connect,R.string.speak_command),lastStatus,
@@ -67,14 +84,15 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             { if(working) reply("Wait or press Stop") else if(!ready) connect() else speechConsent() },
             { generation++; abandon(); working=false; speech?.stop(); send("stop",listOf("stop")) },
             { more() },connected=ready)
-        primary=home.primary
+        primaryForShake=home.primary; primary=home.primary
         status = home.status
         setContentView(home.view)
     }
     private fun more() {
-        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status")
+        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Hands-free","Shake to speak")
         AlertDialog.Builder(this).setTitle("More").setItems(items) { _,index ->
             when(index) {
+                10 -> shakeOptions()
                 2 -> connect()
                 0 -> send("status",listOf("status"))
                 1 -> {
@@ -94,6 +112,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
                     else try { startActivity(Intent(Intent.ACTION_VIEW,android.net.Uri.parse(BuildConfig.PRIVACY_POLICY_URL))) }
                     catch(e:Exception) { reply("Open Privacy and data on your phone to view the public policy") }
                 7 -> { disconnect(); reply("Disconnected. No command will replay.") }
+                9 -> handsFreeControls()
                 8 -> AlertDialog.Builder(this).setTitle("Status").setMessage(lastStatus).setPositiveButton("Close",null).show()
             }
         }.setNegativeButton("Close",null).show()
@@ -110,6 +129,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     }
     override fun onResume() {
         super.onResume(); active = true
+        if(getSharedPreferences("heysig-gesture",MODE_PRIVATE).getBoolean("shake",false)) shake.start()
         lastStatus = getString(R.string.watch_disconnected); status.text = lastStatus; primary.setText(R.string.connect)
         val current = ++listenerGeneration
         val receiver = MessageClient.OnMessageReceivedListener { event ->
@@ -135,6 +155,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         }
     }
     override fun onPause() {
+        shake.stop()
         active = false; listenerGeneration++; disconnect(false); listener?.let { messages.removeListener(it) }; listener = null; listening = false; speech?.stop()
         super.onPause()
     }
@@ -149,28 +170,37 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         primary.setText(if(ready) R.string.speak else R.string.connect)
         if(active && speechReady && prefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",false)) speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-result")
     }
+    private fun handsFreeControls() {
+        val commands=arrayOf("hands free on","pause listening for 30 minutes","hands free off","hands free status","end hands free session")
+        AlertDialog.Builder(this).setTitle("Phone hands-free")
+            .setItems(arrayOf("On","Pause 30 minutes","Off","Status","End session")) { _,index -> send(commands[index],listOf(commands[index])) }
+            .setNegativeButton("Close",null).show()
+    }
     private fun connect() {
         if(!active || !listening) { reply("Connection is starting; try Connect phone again"); return }
         disconnect()
-        val current = generation
-        Wearable.getCapabilityClient(this).getCapability(CompanionSafety.CAPABILITY,CapabilityClient.FILTER_REACHABLE)
-            .addOnSuccessListener { capability ->
-                if(!active || current != generation) return@addOnSuccessListener
-                val nodes = capability.nodes.sortedBy { it.displayName }
-                if(nodes.isEmpty()) { reply("No enabled phone found. Pair this watch normally and install HeySig on both devices. On the phone, open Watch connection and enable this watch."); return@addOnSuccessListener }
-                AlertDialog.Builder(this).setTitle("Choose phone")
-                    .setItems(nodes.map { it.displayName }.toTypedArray()) { _,index ->
-                        val node = nodes[index]
-                        if(!active) return@setItems
-                        disconnect()
-                        phone = node.id
-                        if(!prefs.edit().putString("phone",node.id).putString("phoneLabel",node.displayName).commit()) { reply("Could not save phone selection"); return@setItems }
-                        rpc(JSONObject().put("op","hello")) {
-                            ready = it.optString("phase") == "READY"
-                            reply(it.optString("text","Connection not ready"))
-                        }
-                    }.show()
-            }.addOnFailureListener { if(active) reply("Could not discover phone. Check watch pairing and Google Play services.") }
+        val current=generation
+        fun choose(nodes: List<com.google.android.gms.wearable.Node>,path: String) {
+            if(!active || current!=generation) return
+            if(nodes.isEmpty()) { reply("No enabled phone found. Start a hands-free session on the paired phone, or open Watch connection and enable this watch.");return }
+            AlertDialog.Builder(this).setTitle("Choose phone")
+                .setItems(nodes.map { it.displayName }.toTypedArray()) { _,index ->
+                    if(!active || current!=generation) return@setItems
+                    val node=nodes[index];disconnect();phone=node.id;rpcPath=path
+                    if(!prefs.edit().putString("phone",node.id).putString("phoneLabel",node.displayName).putString("connectionPath",path).commit()) { reply("Could not save phone selection");return@setItems }
+                    rpc(JSONObject().put("op","hello")) {
+                        ready=it.optString("phase")=="READY";reply(it.optString("text","Connection not ready"))
+                    }
+                }.show()
+        }
+        fun ordinary() {
+            Wearable.getCapabilityClient(this).getCapability(CompanionSafety.CAPABILITY,CapabilityClient.FILTER_REACHABLE)
+                .addOnSuccessListener { choose(it.nodes.sortedBy { node -> node.displayName },CompanionSafety.PATH) }
+                .addOnFailureListener { if(active && current==generation) reply("Could not discover phone. Check pairing and Google Play services.") }
+        }
+        Wearable.getCapabilityClient(this).getCapability(HandsFreeCompanion.CAPABILITY,CapabilityClient.FILTER_REACHABLE)
+            .addOnSuccessListener { if(it.nodes.isNotEmpty()) choose(it.nodes.sortedBy { node -> node.displayName },HandsFreeCompanion.PATH) else ordinary() }
+            .addOnFailureListener { ordinary() }
     }
     private fun rpc(body: JSONObject, callback: (JSONObject) -> Unit) {
         val node = phone
@@ -188,14 +218,14 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         handler.postDelayed(timeout,30000)
         val data = body.put("rpc",id).toString().toByteArray(Charsets.UTF_8)
         if(data.size > CompanionSafety.MAX_BYTES) { pending.remove(id); handler.removeCallbacks(timeout); callback(JSONObject().put("phase","BLOCKED").put("text","Command too large")); return }
-        messages.sendMessage(node,CompanionSafety.PATH,data).addOnFailureListener {
+        messages.sendMessage(node,rpcPath,data).addOnFailureListener {
             val request = pending.remove(id)
             handler.removeCallbacks(timeout)
             if(request != null && active && current == generation) { ready = false; request.reply(JSONObject().put("phase","UNKNOWN").put("text","Phone disconnected. Reconnect and check the last result. No retry.")) }
         }
     }
     override fun onMessageReceived(event: MessageEvent) {
-        if(!active || event.path != CompanionSafety.PATH || event.data.size !in 1..CompanionSafety.MAX_BYTES) return
+        if(!active || event.path != rpcPath || event.data.size !in 1..CompanionSafety.MAX_BYTES) return
         try {
             val answer = JSONObject(String(event.data,Charsets.UTF_8))
             val id = answer.getString("rpc")
@@ -292,9 +322,9 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             .setPositiveButton("Close",null)
             .setNeutralButton("Export") { _,_ ->
                 AlertDialog.Builder(this).setTitle("Export watch data?")
-                    .setMessage("Saves phone selection, request identifiers and speech choices to your chosen provider, which may upload them. Delete exported copies separately.")
+                    .setMessage("Saves phone selection, request identifiers, shake and speech choices to your chosen provider, which may upload them. Delete exported copies separately.")
                     .setNegativeButton("Cancel",null).setPositiveButton("Choose location") { _,_ ->
-                        exportDocument = JSONObject(prefs.all).toString(2)
+                        exportDocument = JSONObject(prefs.all).put("gestureChoices",JSONObject(getSharedPreferences("heysig-gesture",MODE_PRIVATE).all)).toString(2)
                         try { startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply { type = "application/json"; addCategory(Intent.CATEGORY_OPENABLE); putExtra(Intent.EXTRA_TITLE,"heysig-watch-data.json") },42) }
                         catch(e:Exception) { exportDocument = null; reply("No document provider available; use Android app settings to manage local data") }
                     }.show()
@@ -302,7 +332,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             .setNegativeButton("Delete local data") { _,_ ->
                 if(working) { reply("Wait for the result or Stop before deleting watch data"); return@setNegativeButton }
                 AlertDialog.Builder(this).setTitle("Delete watch data?")
-                    .setMessage("Android will close HeySig and erase its private data and permission choices on this watch, including phone selection, request identifiers and speech choices. Does not change the aids or remove phone/provider/exported data.")
+                    .setMessage("Android will close HeySig and erase its private data and permission choices on this watch, including phone selection, request identifiers, shake and speech choices. Does not change the aids or remove phone/provider/exported data.")
                     .setNegativeButton("Keep data",null).setPositiveButton("Delete") { _,_ ->
                         disconnect(); deferred = null; exportDocument = null; speech?.stop()
                         val manager = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager

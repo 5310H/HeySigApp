@@ -106,3 +106,26 @@ publisher contact and privacy-policy hosting; supported aid models/fittings;
 medical-device assessment and any applicable approvals; upload-key custody and
 Play Console declaration/test results. These are release prerequisites, not
 reasons to stop implementing or testing the authorized development work.
+
+## October 17 hands-free background design change
+
+The owner requested locked-phone commands and watch listening controls.
+See [the separately reviewed design](architecture/hands-free-session.md).
+New phone permissions are FOREGROUND_SERVICE, FOREGROUND_SERVICE_MICROPHONE,
+POST_NOTIFICATIONS, WAKE_LOCK and VIBRATE; microphone access remains explicitly opt-in.
+Watch adds VIBRATE for gesture acknowledgement.
+No background boot restart/listener component is added. A live, non-sticky,
+bounded microphone foreground session owns capture and selected-watch control.
+The single validated executor is shared with foreground controls. Off releases
+the microphone; End also ends foreground/watch authority. The wake engine now
+introduces native dependencies: validate pinned bytes, 16 KB ELF and APK ZIP
+alignment and actual supported devices, rather than retaining the previous
+no-native-libraries assumption. New microphone foreground-service declarations
+and updated data-flow disclosures are required before Play submission.
+
+Current Android constraints consulted October 17:
+https://developer.android.com/develop/background-work/services/fgs/restrictions-bg-start
+and https://developer.android.com/develop/background-work/services/fgs/service-types
+The Play foreground-service declaration requirements are at
+https://support.google.com/googleplay/android-developer/answer/13392821
+These sources do not establish approval for this implementation.

@@ -392,6 +392,7 @@ class NoiseFeature(
         } catch(e:Exception) { tell("Noise: ${e.message}",true) }
     }
     private fun start(repeat:Boolean, calibrationSample:Boolean = false, preview:Boolean = false, automaticMode:Boolean = false) {
+        com.heysig.app.voice.HandsFreeService.running?.control(com.heysig.voice.HandsFreeControl.OFF)
         readEditor?.let { draft = it() }
         check(mode == "Off") { "Noise capture already active; Stop first" }
         if(preview || automaticMode) {
