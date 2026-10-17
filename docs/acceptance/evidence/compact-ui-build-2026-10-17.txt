@@ -1,0 +1,17 @@
+Compact UI and ear icon validation — October 17, 2026
+Pinned Gradle 8.13 / AGP 8.13.2 / Kotlin 2.2.10 / JDK 17
+BUILD SUCCESSFUL in 12m 15s; 231 actionable tasks: 98 executed, 133 up-to-date.
+Tasks: shared:test; phone/watch assembleDebug and assembleRelease; phone assembleDebugAndroidTest; releaseCandidates (full release lint and signed bundles).
+No Java/Kotlin compiler deprecation warnings reported.
+
+androidApp: 0 lint errors, 3 warnings
+UnusedAttribute: Attribute `enableOnBackInvokedCallback` is only used in API level 33 and higher (current min is 29)
+GradleDependency: A newer version of androidx.core:core than 1.17.0 is available: 1.19.1
+ObsoleteSdkInt: This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 29. Merge all the resources in this folder into `mipmap-anydpi`.
+wearApp: 0 lint errors, 1 warnings
+ObsoleteSdkInt: This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 30. Merge all the resources in this folder into `mipmap-anydpi`.
+
+ARM host uses its local experimental AAPT2 override.
+Compatibility warnings remain visible and are explained in the acceptance record.
+Development APK aliases refreshed after unchanged signing-certificate verification.
+No aid commands, microphone captures, Play upload or physical watch acceptance.

@@ -42,6 +42,7 @@ class NoiseFeature(
     private var generation = 0
     private var runtime: TextView? = null
     private var calibrationRuntime: TextView? = null
+    private var refreshCalibration: (() -> Unit)? = null
     private fun automaticSettings() = settings.copy(sleepProgram=settings.sleepProgram ?:
         programs().firstOrNull { it.name.trim().equals("sleep",true) }?.slot)
     private fun fittingSignature() = programs().sortedBy { it.slot }.joinToString("|") { "${it.slot}:${it.name}" }
@@ -87,14 +88,40 @@ class NoiseFeature(
     fun detachEditor() {
         // Preserve invalid text by refusing navigation until it is fixed or discarded.
         readEditor?.let { draft = it() }
-        readEditor = null; refreshEditor = null; runtime = null; calibrationRuntime = null
+        readEditor = null; refreshEditor = null; runtime = null; calibrationRuntime = null; refreshCalibration = null
     }
     fun stop() {
         generation++; sampler.stop(); quietUntil = 0L; mode = "Off"; observation = NoiseObservation(); automatic = NoiseAutomaticState(); update()
     }
     fun fittingChanged() { stop(); stored = false; loadError = "Program fitting changed; review and save noise settings" }
     private fun label(slot: Int?) = if(slot == null) "Unused" else programs().find { it.slot == slot }?.let { "${it.name} (program $slot)" } ?: "Unavailable program $slot"
-    private fun update() { runtime?.text = status(); calibrationRuntime?.text = calibrationText()+"\n"+detail }
+    private fun update() {
+        runtime?.apply { text=summary(); contentDescription=status() }
+        calibrationRuntime?.text=calibrationProgress()
+        refreshCalibration?.invoke()
+    }
+    private fun calibrationProgress(): String {
+        val level=calibration.levels.indexOfFirst { it.size < 3 }
+        val progress=when {
+            calibrating && level >= 0 -> "Level ${level+1} of 6 · ${calibration.levels[level].size}/3 samples"
+            calibrating -> "18 samples ready to review"
+            draft != settings && calibrated(draft) -> "Ready to save"
+            calibrated() -> "Calibration saved"
+            else -> "Not calibrated"
+        }
+        val extra=when {
+            mode == "Calibration sample" -> "In progress · Stop to cancel"
+            detail == "No samples yet" || detail.startsWith("Prepare level") || detail.startsWith("Captured level") -> ""
+            else -> detail
+        }
+        return if(extra.isEmpty()) progress else activity.getString(R.string.two_lines,progress,extra)
+    }
+    private fun summary(): String = buildString {
+        append(mode)
+        measurement?.let { if(it.flags.isEmpty()) append(" · %.1f dBFS".format(java.util.Locale.US,it.rmsDbfs)) else append(" · sample rejected") }
+        observation.target?.let { append("\n${label(it)} · ${observation.count}/${settings.confirmations}") }
+        if(detail != "No samples yet") append("\n$detail")
+    }
     fun status(): String {
         val age = observation.lastSampleMillis?.let { (SystemClock.elapsedRealtime()-it)/1000 }
         return "Noise: $mode • Source: this device's built-in microphone\n$detail\n" +
@@ -103,7 +130,9 @@ class NoiseFeature(
             (observation.proposed?.takeIf { mode == "Observe" || mode == "Automatic preview" }?.let { "Would select ${label(it)}. No command sent.\n" } ?: "") +
             calibrationText()+if(NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED) "\nAutomatic requires reviewed calibration and an open, unlocked app." else "\nAutomatic switching remains locked pending physical acceptance."
     }
-    fun render(content: LinearLayout) {
+    fun render(content: LinearLayout, page: String = "Noise", navigate: (String) -> Unit = {}) {
+        val firstView = content.childCount
+        val calibrationButtons=mutableMapOf<String,Button>()
         var target = content
         fun line(text:String) = TextView(activity).apply {
             this.text = text; PhoneStyle.text(this,16f,color=PhoneStyle.secondary)
@@ -111,23 +140,29 @@ class NoiseFeature(
         }
         fun button(text:String,action:()->Unit) = Button(activity).also {
             it.text = text; PhoneStyle.action(it); it.setOnClickListener { action() }; target.addView(it)
+            calibrationButtons[text]=it
         }
         fun group(title:String,build:()->Unit) {
-            val parent = target; target = PhoneStyle.card(activity,parent)
+            val parent = target; target = PhoneStyle.card(activity,parent).also { it.tag = title }
             try { PhoneStyle.heading(activity,target,title); build() } finally { target = parent }
         }
         group("Noise observation") {
-            runtime = line(status())
+            runtime = line(summary()).apply { maxLines=3; ellipsize=android.text.TextUtils.TruncateAt.END; contentDescription=status() }
             PhoneStyle.action(button("Start Observe") { handle(NoiseCommand.Observe) },"primary")
             button("Sample now") { handle(NoiseCommand.Sample) }
             PhoneStyle.action(button("Stop noise") { stop(); tell("Noise stopped",false) },"danger")
-            button("Start Automatic") { handle(NoiseCommand.Automatic) }.isEnabled = NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED
-            button("Preview Automatic") { runCatching { start(true,preview=true) }.onFailure { tell("Noise: ${it.message}",false) } }
-            line("Observe and Preview never send commands. Preview includes confirmation, cooldown and priority guards. Automatic remains locked pending physical acceptance.")
+            val sample=checkNotNull(calibrationButtons["Sample now"])
+            val stop=checkNotNull(calibrationButtons["Stop noise"])
+            target.removeView(sample); target.removeView(stop)
+            val row=LinearLayout(activity)
+            row.addView(sample,LinearLayout.LayoutParams(0,-2,1f).apply { marginEnd=PhoneStyle.dp(activity,6) })
+            row.addView(stop,LinearLayout.LayoutParams(0,-2,1f))
+            target.addView(row)
+            line("Proposals only. Automatic is locked.")
         }
         group("Guided calibration") {
-            calibrationRuntime = line(calibrationText()+"\n"+detail)
-            line("Measure six everyday environments from quietest to loudest, using three samples per level. Keep this device in the same position. Do not create loud sounds or increase sound to unsafe levels. Stay quiet while capturing. This measures a relative microphone index, not hearing safety or sound-pressure dB.")
+            calibrationRuntime = line(calibrationProgress())
+            line("18 samples · 3 per level. Use comfortable everyday sounds.")
             button("Start new calibration") {
                 android.app.AlertDialog.Builder(activity).setTitle("Measure six listening levels?")
                     .setMessage("This replaces only unfinished calibration samples. Saved settings stay unchanged until you apply and save. Use naturally occurring, comfortable environments; if six levels cannot be separated, keep using Observe.")
@@ -237,10 +272,10 @@ class NoiseFeature(
         refreshEditor = {
             sleepPicker.setSelection(choices.indexOf(draft.sleepProgram).coerceAtLeast(0))
             pickers.forEachIndexed { i,picker -> picker.setSelection(choices.indexOf(draft.programs[i]).coerceAtLeast(0)) }
-            boundaries.forEachIndexed { i,field -> field.setText(draft.boundaries[i].toString()) }
-            margin.setText(draft.margin.toString()); confirmations.setText(draft.confirmations.toString())
-            cooldown.setText(draft.cooldownSeconds.toString()); capture.setText(draft.captureSeconds.toString())
-            wait.setText(draft.waitSeconds.toString()); freshness.setText(draft.freshnessSeconds.toString())
+            boundaries.forEachIndexed { i,field -> field.setText(activity.getString(R.string.decimal_value,draft.boundaries[i].toString())) }
+            margin.setText(activity.getString(R.string.decimal_value,draft.margin.toString())); confirmations.setText(activity.getString(R.string.integer_value,draft.confirmations.toString()))
+            cooldown.setText(activity.getString(R.string.integer_value,draft.cooldownSeconds.toString())); capture.setText(activity.getString(R.string.integer_value,draft.captureSeconds.toString()))
+            wait.setText(activity.getString(R.string.integer_value,draft.waitSeconds.toString())); freshness.setText(activity.getString(R.string.integer_value,draft.freshnessSeconds.toString()))
         }
         fun edited() {
             if(mode != "Off" && runCatching { readEditor?.invoke() != settings }.getOrDefault(true)) {
@@ -260,6 +295,52 @@ class NoiseFeature(
         } }
         PhoneStyle.action(button("Save noise settings") { handle(NoiseCommand.Save) },"primary")
         button("Discard noise changes") { handle(NoiseCommand.Discard) }
+        // Construct once per route so draft reading/validation is unchanged; show only its task.
+        for(i in 0 until content.childCount) {
+            val child = content.getChildAt(i)
+            val title = child.tag as? String
+            val buttonText = (child as? Button)?.text?.toString()
+            val visible = when(page) {
+                "Noise" -> title == "Noise observation"
+                "NoiseCalibration" -> title == "Guided calibration" || buttonText in listOf("Save noise settings","Discard noise changes")
+                "NoiseSetup" -> title == "Your listening levels" || title?.startsWith("Level ") == true || title == "Protect Sleep" || buttonText in listOf("Save noise settings","Discard noise changes")
+                "NoiseMeasure" -> child === advanced || buttonText in listOf("Save noise settings","Discard noise changes")
+                else -> false
+            }
+            // Headers/status outside this adapter are owned by HomeActivity.
+            if(i >= firstView) child.visibility = if(visible) android.view.View.VISIBLE else android.view.View.GONE
+        }
+        if(page == "Noise") {
+            val setup=button("Noise setup") { navigate("NoiseSetup") }
+            val calibrate=button("Calibrate") { navigate("NoiseCalibration") }
+            content.removeView(setup); content.removeView(calibrate)
+            val row=LinearLayout(activity)
+            row.addView(setup,LinearLayout.LayoutParams(0,-2,1f).apply { marginEnd=PhoneStyle.dp(activity,6) })
+            row.addView(calibrate,LinearLayout.LayoutParams(0,-2,1f))
+            content.addView(row)
+            button("Details & preview") { navigate("NoiseDetails") }
+        }
+        if(page == "NoiseSetup") button("Measurement settings") { navigate("NoiseMeasure") }
+        refreshCalibration = {
+            val complete=calibration.levels.all { it.size == 3 }
+            fun show(label:String, visible:Boolean) { calibrationButtons[label]?.visibility=if(visible) android.view.View.VISIBLE else android.view.View.GONE }
+            show("Start new calibration",!calibrating)
+            show("Capture next calibration sample",calibrating && !complete)
+            calibrationButtons["Capture next calibration sample"]?.isEnabled=mode == "Off"
+            show("Review calibration thresholds",calibrating && complete)
+            show("Cancel calibration",calibrating)
+            if(page == "NoiseCalibration") {
+                show("Save noise settings",draft != settings)
+                show("Discard noise changes",draft != settings)
+            }
+        }
+        refreshCalibration?.invoke()
+        if(page == "NoiseDetails") {
+            line(status())
+            button("Preview Automatic") { runCatching { start(true,preview=true) }.onFailure { tell("Noise: ${it.message}",false) } }
+            button("Start Automatic") { handle(NoiseCommand.Automatic) }.isEnabled = NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED
+        }
+
     }
     fun handle(command: NoiseCommand) {
         try {
@@ -272,7 +353,7 @@ class NoiseFeature(
                     check(NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED) { "Automatic switching is locked pending physical acceptance. Use Preview Automatic on the phone; it sends no commands." }
                     start(true,automaticMode=true)
                 }
-                NoiseCommand.Discard -> { stop(); draft = settings; proof = savedProof; refreshEditor?.invoke(); tell("Noise draft discarded",true) }
+                NoiseCommand.Discard -> { stop(); draft = settings; proof = savedProof; refreshEditor?.invoke(); update(); tell("Noise draft discarded",true) }
                 NoiseCommand.Save -> {
                     draft.validate(programs().map { it.slot }.toSet())
                     val json = JSONObject().put("version",1).put("fitting",fittingSignature()).put("programs",JSONArray(draft.programs.map { it ?: JSONObject.NULL }))
@@ -288,7 +369,7 @@ class NoiseFeature(
                 is NoiseCommand.Assign -> {
                     require(command.slot == null || programs().any { it.slot == command.slot }) { "Configure that program in Setup first" }
                     stop(); draft = draft.copy(programs=draft.programs.toMutableList().also { it[command.level-1] = command.slot })
-                    refreshEditor?.invoke(); tell("Draft noise level ${command.level}: ${label(command.slot)}. Say save noise settings when reviewed.",true)
+                    refreshEditor?.invoke(); update(); tell("Draft noise level ${command.level}: ${label(command.slot)}. Say save noise settings when reviewed.",true)
                 }
                 is NoiseCommand.SetField -> {
                     val value = command.value
@@ -304,7 +385,7 @@ class NoiseFeature(
                         "freshness" -> draft.copy(freshnessSeconds=value.toInt())
                         else -> draft.copy(boundaries=draft.boundaries.toMutableList().also { it[command.field.removePrefix("threshold ").toInt()-1]=value })
                     }
-                    refreshEditor?.invoke(); tell("Draft noise ${command.field}: $value. Say save noise settings when reviewed.",true)
+                    refreshEditor?.invoke(); update(); tell("Draft noise ${command.field}: $value. Say save noise settings when reviewed.",true)
                 }
                 NoiseCommand.Observe, NoiseCommand.Sample -> start(command == NoiseCommand.Observe)
             }

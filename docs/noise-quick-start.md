@@ -1,6 +1,6 @@
 # Six-level noise setup
 
-Open **Noise**. Assign configured programs from **level 1 (quietest)** through
+Open **Noise → Noise setup**. Assign configured programs from **level 1 (quietest)** through
 **level 6 (loudest)**. Several levels may use the same program. Unused levels
 make no proposal and clear confirmation. Noise order is independent of program
 slot numbers. Choose your **Protected Sleep program** if you have one (programs named Sleep
@@ -12,7 +12,7 @@ preview never enters or leaves it. Ordinary Observe can still describe it.
 The default thresholds are illustrative. Calibrate on the device that will do
 the sampling; a watch requests measurements from the phone, not its own mic.
 
-1. Review the assignments and capture settings, then choose **Start new calibration**.
+1. Review the assignments and capture settings, then open **Noise → Calibrate** and choose **Start new calibration**.
 2. Place this device consistently in a naturally occurring, comfortable quiet
    environment. Choose **Capture next calibration sample** three times.
 3. Follow the displayed progress through levels 2–6, using progressively louder
@@ -20,7 +20,7 @@ the sampling; a watch requests measurements from the phone, not its own mic.
    ten seconds for settling, and takes five seconds by default.
 4. Choose **Review calibration thresholds**. Review the 18 relative index values
    and five suggested thresholds, then **Apply to draft**.
-5. Review assignments and choose **Save noise settings**. Saving leaves noise Off.
+5. Review assignments and choose **Save noise settings** in the calibration page or Noise setup. Saving leaves noise Off.
 
 Do not generate loud sounds or increase sound to unsafe levels to obtain six
 levels. If their measured ranges cannot be separated by the hysteresis margin,

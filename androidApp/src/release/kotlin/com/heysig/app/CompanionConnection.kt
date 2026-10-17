@@ -38,7 +38,7 @@ class CompanionConnection(
         if(returning && gate == null) report("Watch connection is off. Enable the selected watch before connecting.")
     }
     private fun refreshStatus() {
-        connectionStatus?.text = "Watch: ${prefs.getString("label","none selected")}\n${if(enabled) "Enabled while this phone stays open and unlocked" else "Off — enable before connecting on the watch"}"
+        connectionStatus?.text = activity.getString(R.string.watch_status,prefs.getString("label","none selected"),if(enabled) "Enabled while this phone stays open and unlocked" else "Off — enable before connecting on the watch")
     }
     fun accepts(node: String) = enabled && selected == node
 

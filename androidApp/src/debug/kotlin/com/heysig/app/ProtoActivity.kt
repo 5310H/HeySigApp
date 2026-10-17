@@ -95,8 +95,9 @@ class ProtoActivity : Activity() {
         layout.addView(Button(this).apply { text = "Stop"; setOnClickListener { cancelled.set(true) } })
         status = TextView(this).apply { text = "Ready. Startup profile shown; addresses are required." }; layout.addView(status)
         val scroll = ScrollView(this).apply { addView(layout, ViewGroup.LayoutParams(-1,-2)) }
-        scroll.setOnApplyWindowInsetsListener { view, insets ->
-            view.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom); insets
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(scroll) { view, insets ->
+            val bars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars() or androidx.core.view.WindowInsetsCompat.Type.ime())
+            view.setPadding(bars.left,bars.top,bars.right,bars.bottom); insets
         }
         setContentView(scroll)
         layout.requestFocus()

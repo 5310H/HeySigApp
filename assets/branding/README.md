@@ -1,0 +1,1 @@
+Ear artwork supplied by the project owner from `ear_logo.svg`. The launcher adaptation keeps the two original ear paths and removes the T, bees and subtitle. The original file is unchanged. Android vectors use the same paths, centered within the adaptive icon safe area on a dark background.

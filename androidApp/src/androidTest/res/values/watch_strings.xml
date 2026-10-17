@@ -1,0 +1,8 @@
+<resources>
+    <string name="speak">Speak</string>
+    <string name="stop">Stop</string>
+    <string name="more">More</string>
+    <string name="speech_off">Speech off</string>
+    <string name="connect">Connect</string>
+    <string name="speak_command">Speak command</string>
+</resources>

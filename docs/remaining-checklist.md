@@ -1,12 +1,16 @@
 # HeySig remaining work checklist
 
-Updated October 16, 2026. Check an item only after its result is recorded with
+Updated October 17, 2026. Check an item only after its result is recorded with
 build/commit, device/OS, date and an acceptance-record link. A build or preview
 pass does not establish physical aid reception or Play approval.
 
 Noise implementation and its automated/build checks are complete. Real
 Automatic remains source-locked. Existing fitting, saved restoration settings
 and historical acceptance evidence must be preserved throughout testing.
+
+The compact phone/watch layout and ear launcher are documented in the
+[October 17 acceptance record](acceptance/compact-ui-and-ear-icon-2026-10-17.md).
+Physical-device and release gates below remain separate.
 
 ## 1. Noise — next priority
 

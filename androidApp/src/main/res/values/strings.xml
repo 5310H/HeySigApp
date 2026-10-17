@@ -1,0 +1,11 @@
+<resources>
+    <string name="speak">Speak</string>
+    <string name="stop">Stop</string>
+    <string name="development_relay">Watch Wi-Fi (development)</string>
+    <string name="heard">Heard: %1$s</string>
+    <string name="two_lines">%1$s\n%2$s</string>
+    <string name="integer_value">%1$s</string>
+    <string name="decimal_value">%1$s</string>
+    <string name="watch_status">Watch: %1$s\n%2$s</string>
+    <string name="info">Info</string>
+</resources>

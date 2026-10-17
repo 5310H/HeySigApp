@@ -40,20 +40,20 @@ class WatchActivity : Activity() {
     @Volatile private var generation = 0
     private var deferred: (() -> Unit)? = null
     private val voicePrefs by lazy { getPreferences(MODE_PRIVATE) }
-    private var promptToggle: CheckBox? = null
-    private var responseToggle: CheckBox? = null
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         lastRequest = getPreferences(MODE_PRIVATE).getString("lastRequest",null)
+        lastStatus = if(File(filesDir,"pairing.json").exists()) "Ready" else "Setup needed"
         speech = TextToSpeech(this) { speechReady = it == TextToSpeech.SUCCESS; if(speechReady) speech?.language = Locale.US }
-        val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(36,24,36,36) }
-        layout.addView(TextView(this).apply { text = "HeySig Watch"; textSize = 22f })
-        status = TextView(this).apply { text = if(File(filesDir,"pairing.json").exists()) "Ready. Connect to Chromebook Wi-Fi." else "Setup needed from Chromebook."; textSize = 16f }
-        layout.addView(status)
-        fun button(text:String, action:()->Unit) { layout.addView(Button(this).apply { this.text = text; setOnClickListener { action() } }) }
-        button("Speak command") {
-            if(working.get()) { reply("Wait for the current result or press Stop"); return@button }
+        render()
+    }
+    private var lastStatus = "Ready"
+    private fun render() {
+        val home = WatchStyle.home(this,WatchStyle.Labels(R.string.speak,R.string.stop,R.string.more,R.string.speech_off,R.string.connect,R.string.speak_command),lastStatus,
+            !voicePrefs.getBoolean("voicePrompts",true) && !voicePrefs.getBoolean("spokenResponses",true),
+            speakAction@ {
+            if(working.get()) { reply("Wait for the current result or press Stop"); return@speakAction }
             speech?.stop()
             try {
                 startActivityForResult(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
@@ -62,27 +62,34 @@ class WatchActivity : Activity() {
                     if(voicePrefs.getBoolean("voicePrompts",true)) putExtra(RecognizerIntent.EXTRA_PROMPT,"HeySig command")
                 },41)
             } catch(e:Exception) { reply("Watch speech service unavailable") }
-        }
-        button("Read status") { send("status",listOf("status")) }
-        button("Check last result") { lastRequest?.let { fetchResult(it) } ?: reply("No previous request") }
-        button("Stop") {
-            generation++; connection?.disconnect(); working.set(false)
-            // A fresh Stop request may be sent, but the interrupted original is never replayed.
-            send("stop",listOf("stop"))
-        }
-        fun toggle(label:String,key:String): CheckBox = CheckBox(this).apply {
-            text = label; isChecked = voicePrefs.getBoolean(key,true)
-            setOnCheckedChangeListener { _,enabled ->
-                if(!voicePrefs.edit().putBoolean(key,enabled).commit()) { status.text = "Could not save voice setting" }
-                if(!enabled) speech?.stop()
-            }
-            layout.addView(this)
-        }
-        promptToggle = toggle("Voice prompts","voicePrompts")
-        responseToggle = toggle("Spoken responses","spokenResponses")
-        WatchStyle.prepareColumn(layout)
-        WatchStyle.polish(layout)
-        setContentView(ScrollView(this).apply { isVerticalScrollBarEnabled = false; setBackgroundColor(android.graphics.Color.BLACK); addView(layout) })
+
+            },{
+                generation++; connection?.disconnect(); working.set(false)
+                send("stop",listOf("stop"))
+            },{ more() })
+        status=home.status; setContentView(home.view)
+    }
+    private fun more() {
+        android.app.AlertDialog.Builder(this).setTitle("More")
+            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status")) { _,index ->
+                when(index) {
+                    0 -> send("status",listOf("status"))
+                    1 -> lastRequest?.let { fetchResult(it) } ?: reply("No previous request")
+                    2 -> {
+                        val keys=arrayOf("voicePrompts","spokenResponses")
+                        android.app.AlertDialog.Builder(this).setTitle("Speech")
+                            .setMultiChoiceItems(arrayOf("Voice prompts","Spoken responses"),keys.map { voicePrefs.getBoolean(it,true) }.toBooleanArray()) { dialog,item,value ->
+                                if(!voicePrefs.edit().putBoolean(keys[item],value).commit()) {
+                                    (dialog as android.app.AlertDialog).listView.setItemChecked(item,!value); reply("Could not save speech choice")
+                                }
+                                if(!value) speech?.stop()
+                            }.setPositiveButton("Done",null).setOnDismissListener { render() }.show()
+                    }
+                    3 -> android.app.AlertDialog.Builder(this).setTitle("Development connection")
+                        .setMessage((if(File(filesDir,"pairing.json").exists()) "Chromebook relay configured." else "Setup needed from Chromebook.")+"\n"+lastStatus)
+                        .setPositiveButton("Close",null).show()
+                }
+            }.setNegativeButton("Close",null).show()
     }
     override fun onResume() { super.onResume(); active = true }
     override fun onPostResume() { super.onPostResume(); deferred?.let { deferred=null; it() } }
@@ -106,7 +113,7 @@ class WatchActivity : Activity() {
         }
     }
     private fun reply(text:String, prompt:Boolean = false) {
-        status.text = text
+        lastStatus=text; status.text = text
         if(active && speechReady && voicePrefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",true)) speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-watch-result")
     }
     private fun withWifi(action:(Network)->JSONObject): JSONObject {
@@ -173,7 +180,7 @@ class WatchActivity : Activity() {
             if(alternatives.any { VoicePreference.parse(it) != preference }) { reply("Speech alternatives disagree. Say voice prompts or voice responses, then on or off"); return }
             if(!voicePrefs.edit().putBoolean(preference.key,preference.enabled).commit()) { reply("Could not save voice setting"); return }
             speech?.stop()
-            if(preference.prompts) promptToggle?.isChecked = preference.enabled else responseToggle?.isChecked = preference.enabled
+            render()
             reply(preference.description,preference.prompts)
             return
         }

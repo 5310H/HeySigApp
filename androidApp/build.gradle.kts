@@ -51,6 +51,7 @@ android {
 kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8) } }
 dependencies {
     implementation(project(":shared"))
+    implementation("androidx.core:core:1.17.0")
     "releaseImplementation"("com.google.android.gms:play-services-wearable:20.0.1")
 }
 androidComponents {

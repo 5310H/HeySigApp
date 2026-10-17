@@ -75,6 +75,16 @@ def main():
             f'{module}: background watch listener is not part of this foreground design')
         permissions = [item.get(ANDROID+'name') for item in manifest.findall('uses-permission')]
         expected_permissions = {'android.permission.RECORD_AUDIO'} if module == 'androidApp' else set()
+        if module == 'androidApp':
+            # AndroidX Core's app-private compatibility permission is signature-only,
+            # not a runtime grant or new microphone/background capability.
+            internal_permission = application + '.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+            expected_permissions.add(internal_permission)
+            # bundletool dumps the signature enum as numeric 0x00000002.
+            require(any(item.get(ANDROID+'name') == internal_permission and
+                        item.get(ANDROID+'protectionLevel') in ('signature', '2', '0x2', '0x00000002')
+                        for item in manifest.findall('permission')),
+                    'Phone: AndroidX internal permission must remain signature-only')
         require(set(permissions) == expected_permissions, f'{module}: unexpected release permissions {permissions}')
         with zipfile.ZipFile(bundle) as archive:
             names = archive.namelist()

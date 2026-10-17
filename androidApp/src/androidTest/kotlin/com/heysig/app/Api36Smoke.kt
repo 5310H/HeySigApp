@@ -68,20 +68,44 @@ class Api36Smoke : Instrumentation() {
                 waitForIdleSync()
             }
             capture("home")
-            open("Noise")
             runOnMainSync {
-                val buttons = descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
-                check(buttons.any { it.text == "Start new calibration" })
-                check(buttons.any { it.text == "Capture next calibration sample" })
-                check(buttons.any { it.text == "Review calibration thresholds" })
-                check(buttons.any { it.text == "Preview Automatic" })
-                check(buttons.first { it.text == "Start Automatic" }.isEnabled == false)
+                val buttons=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>().filter { it.isShown }
+                buttons.forEach { button ->
+                    val visible=android.graphics.Rect()
+                    check(button.getGlobalVisibleRect(visible) && visible.height() >= button.height-1) { "Home action requires scrolling: ${button.text}" }
+                }
+            }
+            open("Volume")
+            runOnMainSync {
+                descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.SeekBar>().first().let { it.progress=(it.progress+1).coerceAtMost(it.max) }
+            }
+            capture("volume")
+            open("‹ Back")
+            open("Noise")
+            capture("noise")
+            open("Calibrate")
+            runOnMainSync {
+                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                    .any { it.text == "Start new calibration" && it.isShown })
+            }
+            capture("calibration")
+            open("‹ Back")
+            open("Noise setup")
+            runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>()
                     .any { it.contentDescription == "Protected Sleep program" })
-                check(!com.heysig.noise.NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
-                result.putString("noiseControls","PASS: calibration, preview and protected Sleep controls present; physical acceptance gate locked; no sampling or playback")
             }
-            capture("noise")
+            open("Measurement settings")
+            open("‹ Back")
+            open("‹ Back")
+            open("Details & preview")
+            runOnMainSync {
+                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                    .first { it.text == "Start Automatic" }.isEnabled == false)
+                check(!com.heysig.noise.NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
+                result.putString("noiseControls","PASS: focused overview, calibration, assignments, measurements and preview routes; Automatic locked; no capture/playback")
+            }
+            open("‹ Back")
             open("Settings")
             capture("settings")
             open("Voice & speech")
@@ -112,7 +136,7 @@ class Api36Smoke : Instrumentation() {
                 waitForIdleSync()
                 runOnMainSync {
                     home = descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.TextView>()
-                        .any { it.text.toString() == "Your hearing" }
+                        .any { it.text.toString() == "HeySig" }
                 }
                 if(!home) Thread.sleep(50)
             }
@@ -120,7 +144,7 @@ class Api36Smoke : Instrumentation() {
             result.putString("navigation","Home, Noise, Settings, Voice, Privacy and Watch opened; Back returned through Settings to Home; no capture or playback")
             runOnMainSync {
                 val minimum = (48*screen.resources.displayMetrics.density).toInt()
-                val buttons = descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                val buttons = descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>().filter { it.isShown }
                 check(buttons.all { it.measuredHeight >= minimum }) { "A control is below the 48dp touch target" }
                 result.putString("layout","PASS: native controls at least 48dp; font scale ${screen.resources.configuration.fontScale}; width ${screen.resources.configuration.screenWidthDp}dp")
             }
@@ -130,22 +154,24 @@ class Api36Smoke : Instrumentation() {
                         fontScale = scale; screenWidthDp = 192; screenHeightDp = 192
                         screenLayout = (screenLayout and android.content.res.Configuration.SCREENLAYOUT_ROUND_MASK.inv()) or android.content.res.Configuration.SCREENLAYOUT_ROUND_YES
                     }
-                    val context = android.view.ContextThemeWrapper(screen.createConfigurationContext(configuration),android.R.style.Theme_Material_NoActionBar)
-                    val column = android.widget.LinearLayout(context).apply { orientation = android.widget.LinearLayout.VERTICAL }
-                    com.heysig.watch.WatchStyle.prepareColumn(column)
-                    column.addView(android.widget.TextView(context).apply { text = "HeySig" })
-                    val speak = Button(context).apply { text = "Speak command"; column.addView(this) }
-                    val stop = Button(context).apply { text = "Stop"; column.addView(this) }
-                    column.addView(android.widget.CheckBox(context).apply { text = "Spoken responses" })
-                    com.heysig.watch.WatchStyle.polish(column)
-                    val viewport = android.widget.ScrollView(context).apply { setBackgroundColor(android.graphics.Color.BLACK); addView(column) }
+                    val context = android.view.ContextThemeWrapper(this@Api36Smoke.context.createConfigurationContext(configuration),android.R.style.Theme_Material_NoActionBar)
+                    fun label(name: String) = context.resources.getIdentifier(name,"string",context.packageName).also { check(it != 0) }
+                    val labels = com.heysig.watch.WatchStyle.Labels(label("speak"),label("stop"),label("more"),label("speech_off"),label("connect"),label("speak_command"))
+                    val home = com.heysig.watch.WatchStyle.home(context,labels,"Ready",true,{},{},{})
+                    val viewport = home.view
                     val size = (192*context.resources.displayMetrics.density).toInt()
                     val spec = View.MeasureSpec.makeMeasureSpec(size,View.MeasureSpec.EXACTLY)
                     viewport.measure(spec,spec); viewport.layout(0,0,size,size)
                     val minimum = (48*context.resources.displayMetrics.density).toInt()
-                    check(listOf(speak,stop).all { it.measuredHeight >= minimum && it.measuredWidth >= minimum })
-                    check(column.paddingLeft == com.heysig.watch.WatchStyle.dp(context,32))
-                    check(listOf(speak,stop).all { control -> (0 until control.layout.lineCount).all { control.layout.getEllipsisCount(it) == 0 } })
+                    val actions = descendants(viewport).filterIsInstance<Button>()
+                    check(actions.map { it.text.toString() }.toSet() == setOf("Speak","Stop","More"))
+                    check(actions.all { it.measuredHeight >= minimum && it.measuredWidth >= minimum })
+                    check(actions.all { control -> (0 until control.layout.lineCount).all { control.layout.getEllipsisCount(it) == 0 } })
+                    check(actions.all { action ->
+                        val bounds=android.graphics.Rect(0,0,action.width,action.height)
+                        viewport.offsetDescendantRectToMyCoords(action,bounds)
+                        bounds.top >= 0 && bounds.bottom <= size
+                    }) { "Watch home action needs scrolling at font scale $scale" }
                     if(captureScreens) {
                         val bitmap = android.graphics.Bitmap.createBitmap(size,size,android.graphics.Bitmap.Config.ARGB_8888)
                         val canvas = android.graphics.Canvas(bitmap)
@@ -156,7 +182,7 @@ class Api36Smoke : Instrumentation() {
                         bitmap.recycle()
                     }
                 }
-                result.putString("roundWatch","PASS: isolated 192dp round native-style contexts at font scales 1 and 2; 48dp targets and no text ellipses; actual Wear device acceptance pending")
+                result.putString("roundWatch","PASS: real compact watch home in isolated 192dp round contexts at font scales 1 and 2; Speak/Stop/More, 48dp targets and no ellipses; hardware acceptance pending")
             }
             // Version-1 migration and release lock use isolated preferences and a playback spy.
             runOnMainSync {

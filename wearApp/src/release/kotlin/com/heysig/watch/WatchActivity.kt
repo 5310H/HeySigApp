@@ -43,11 +43,10 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private var deferred: (() -> Unit)? = null
     private var exportDocument: String? = null
     private lateinit var status: TextView
+    private lateinit var primary: Button
     private lateinit var layout: LinearLayout
     private var speech: TextToSpeech? = null
     private var speechReady = false
-    private var promptToggle: CheckBox? = null
-    private var responseToggle: CheckBox? = null
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -61,69 +60,57 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private fun button(text: String, action: () -> Unit) {
         layout.addView(Button(this).apply { this.text = text; minHeight = (48*resources.displayMetrics.density).toInt(); setOnClickListener { action() } })
     }
+    private var lastStatus = "Disconnected"
     private fun render() {
-        val side = if(resources.configuration.isScreenRound) 36 else 16
-        val density = resources.displayMetrics.density
-        layout = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding((side*density).toInt(),(48*density).toInt(),(side*density).toInt(),(48*density).toInt())
-            setBackgroundColor(Color.BLACK)
-        }
-        label("HeySig",22f)
-        status = TextView(this).apply { text = "Connection off. Open HeySig on your paired phone, enable this watch, then Connect phone here."; textSize = 16f; setTextColor(Color.WHITE); accessibilityLiveRegion = android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
-        layout.addView(status)
-        label("Selected phone: ${prefs.getString("phoneLabel","none")}")
-        label("Commands and replies use Google Play services. Keep HeySig open on your phone. Details in Privacy and data.")
-        button("Connect phone") { connect() }
-        button("Speak command") { if(working) reply("Wait or press Stop") else speechConsent() }
-        button("Read status") { send("status",listOf("status")) }
-        button("Check last result") {
-            val id = prefs.getString("lastRequest",null)
-            val node = prefs.getString("lastNode",null)
-            if(id == null || node != phone) reply("No retained request for this phone")
-            else if(!ready) reply("Connect the selected phone first")
-            else rpc(JSONObject().put("op","result").put("id",id)) { reply(it.optString("text","No confirmed result")) }
-        }
-        button("Stop") {
-            // Stop is a NEW bounded request. The interrupted command is never resubmitted.
-            generation++; abandon(); working = false; speech?.stop()
-            send("stop",listOf("stop"))
-        }
-        label("Typed commands use the same phone validation as speech.")
-        val input = EditText(this).apply { hint = "program two / volume ten"; setTextColor(Color.WHITE); setHintTextColor(Color.LTGRAY); setSingleLine(); this@WatchActivity.layout.addView(this) }
-        button("Send typed command") { send(input.text.toString(),listOf(input.text.toString())) }
-        button("Clear display") { input.text.clear(); reply("Display cleared. Saved preferences and phone result history are unchanged.") }
-        label(PrivacyNotice.SYNTHESIS)
-        fun toggle(text: String, key: String): CheckBox = CheckBox(this).apply {
-            this.text = text; setTextColor(Color.WHITE); minHeight = (48*density).toInt()
-            isChecked = prefs.getBoolean(key,false)
-            var reverting = false
-            setOnCheckedChangeListener { box,checked ->
-                if(reverting) return@setOnCheckedChangeListener
-                if(!prefs.edit().putBoolean(key,checked).commit()) {
-                    reverting = true; box.isChecked = !checked; reverting = false
-                    reply("Could not save speech choice")
+        val home = WatchStyle.home(this,WatchStyle.Labels(R.string.speak,R.string.stop,R.string.more,R.string.speech_off,R.string.connect,R.string.speak_command),lastStatus,
+            !prefs.getBoolean("voicePrompts",false) && !prefs.getBoolean("spokenResponses",false),
+            { if(working) reply("Wait or press Stop") else if(!ready) connect() else speechConsent() },
+            { generation++; abandon(); working=false; speech?.stop(); send("stop",listOf("stop")) },
+            { more() },connected=ready)
+        primary=home.primary
+        status = home.status
+        setContentView(home.view)
+    }
+    private fun more() {
+        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status")
+        AlertDialog.Builder(this).setTitle("More").setItems(items) { _,index ->
+            when(index) {
+                2 -> connect()
+                0 -> send("status",listOf("status"))
+                1 -> {
+                    val id = prefs.getString("lastRequest",null)
+                    if(id == null || prefs.getString("lastNode",null) != phone) reply("No retained request for this phone")
+                    else if(!ready) reply("Connect the selected phone first")
+                    else rpc(JSONObject().put("op","result").put("id",id)) { reply(it.optString("text","No confirmed result")) }
                 }
-                if(!checked) speech?.stop()
+                3 -> {
+                    val input = EditText(this).apply { hint="Command"; setSingleLine(); setTextColor(Color.WHITE) }
+                    AlertDialog.Builder(this).setTitle("Type command").setView(input)
+                        .setNegativeButton("Cancel",null).setPositiveButton("Send") { _,_ -> send(input.text.toString(),listOf(input.text.toString())) }.show()
+                }
+                4 -> speechOptions()
+                5 -> privacy()
+                6 -> if(BuildConfig.PRIVACY_POLICY_URL.isEmpty()) reply("Public policy/contact is not configured yet; required before store submission.")
+                    else try { startActivity(Intent(Intent.ACTION_VIEW,android.net.Uri.parse(BuildConfig.PRIVACY_POLICY_URL))) }
+                    catch(e:Exception) { reply("Open Privacy and data on your phone to view the public policy") }
+                7 -> { disconnect(); reply("Disconnected. No command will replay.") }
+                8 -> AlertDialog.Builder(this).setTitle("Status").setMessage(lastStatus).setPositiveButton("Close",null).show()
             }
-            this@WatchActivity.layout.addView(this)
-        }
-        promptToggle = toggle("Voice prompts","voicePrompts")
-        responseToggle = toggle("Spoken responses","spokenResponses")
-        button("Privacy and data") { privacy() }
-        button("Public privacy policy") {
-            if(BuildConfig.PRIVACY_POLICY_URL.isEmpty()) reply("Public policy/contact is not configured yet; required before store submission.")
-            else try { startActivity(Intent(Intent.ACTION_VIEW,android.net.Uri.parse(BuildConfig.PRIVACY_POLICY_URL))) }
-            catch(e:Exception) { reply("Open Privacy and data on your phone to view the public policy") }
-        }
-        button("Disconnect") { disconnect(); reply("Disconnected. No command will replay.") }
-        WatchStyle.prepareColumn(layout)
-        WatchStyle.polish(layout)
-        setContentView(ScrollView(this).apply { isVerticalScrollBarEnabled = false; setBackgroundColor(Color.BLACK); addView(layout,ViewGroup.LayoutParams(-1,-2)) })
+        }.setNegativeButton("Close",null).show()
+    }
+    private fun speechOptions() {
+        val keys = arrayOf("voicePrompts","spokenResponses")
+        AlertDialog.Builder(this).setTitle("Speech")
+            .setMultiChoiceItems(arrayOf("Voice prompts","Spoken responses"),keys.map { prefs.getBoolean(it,false) }.toBooleanArray()) { dialog,index,value ->
+                if(!prefs.edit().putBoolean(keys[index],value).commit()) {
+                    (dialog as AlertDialog).listView.setItemChecked(index,!value); reply("Could not save speech choice")
+                }
+                if(!value) speech?.stop()
+            }.setPositiveButton("Done",null).setOnDismissListener { render() }.show()
     }
     override fun onResume() {
         super.onResume(); active = true
-        status.text = "Not connected. Tap Connect phone."
+        lastStatus = getString(R.string.watch_disconnected); status.text = lastStatus; primary.setText(R.string.connect)
         val current = ++listenerGeneration
         val receiver = MessageClient.OnMessageReceivedListener { event ->
             if(active && current == listenerGeneration) onMessageReceived(event)
@@ -143,7 +130,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         // A prior submitted request is never resubmitted.
         rpc(JSONObject().put("op","hello")) {
             ready = it.optString("phase") == "READY"
-            if(ready) { status.text = "Phone connected. Review the recognized command."; action() }
+            if(ready) { lastStatus=getString(R.string.watch_connected); status.text=lastStatus; primary.setText(R.string.speak); action() }
             else reply(it.optString("text","Reconnect the phone before speaking"))
         }
     }
@@ -158,7 +145,8 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         if(resetConversation) conversation = UUID.randomUUID().toString()
     }
     private fun reply(text: String, prompt: Boolean = false) {
-        status.text = text
+        lastStatus = text; status.text = text
+        primary.setText(if(ready) R.string.speak else R.string.connect)
         if(active && speechReady && prefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",false)) speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-result")
     }
     private fun connect() {
@@ -226,7 +214,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             if(alternatives.any { VoicePreference.parse(it) != local }) { reply("Speech alternatives disagree"); return }
             if(!prefs.edit().putBoolean(local.key,local.enabled).commit()) { reply("Could not save speech choice"); return }
             speech?.stop()
-            if(local.prompts) promptToggle?.isChecked = local.enabled else responseToggle?.isChecked = local.enabled
+            render()
             reply(local.description,local.prompts); return
         }
         if(!active || !ready) { reply("Connect phone first"); return }
@@ -236,7 +224,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         val current = generation
         val deadline = SystemClock.elapsedRealtime()+15000
         working = true
-        status.text = "Preparing request…"
+        lastStatus=getString(R.string.preparing_request); status.text=lastStatus
         rpc(JSONObject().put("op","prepare").put("id",id)) { lease ->
             if(!active || current != generation) return@rpc
             if(lease.optString("phase") != "LEASE" || SystemClock.elapsedRealtime() >= deadline) {
@@ -247,7 +235,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             if(!stopping && !prefs.edit().putString("lastRequest",id).putString("lastNode",phone).commit()) {
                 working = false; reply("Could not remember request; nothing sent"); return@rpc
             }
-            status.text = "Sending requested command…"
+            lastStatus=getString(R.string.sending_request); status.text=lastStatus
             rpc(JSONObject().put("op","command").put("id",id).put("conversation",conversation)
                 .put("token",lease.getString("token")).put("text",text).put("alternatives",JSONArray(alternatives))) { answer ->
                 working = false

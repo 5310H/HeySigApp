@@ -26,8 +26,7 @@ object WatchStyle {
                 view.setPadding(dp(context,10),dp(context,10),dp(context,10),dp(context,10))
             }
             is Button -> {
-                val primary = view.text.toString() in listOf("Speak command","Speak")
-                if(primary) { view.text = "Speak"; view.contentDescription = "Speak command" }
+                val primary = view.text.toString() in listOf("Speak command","Speak","Connect")
                 val danger = view.text.toString() == "Stop"
                 view.isAllCaps = false; view.textSize = 15f
                 view.typeface = Typeface.create("sans-serif",Typeface.BOLD)
@@ -49,13 +48,45 @@ object WatchStyle {
                 view.setTextColor(muted)
                 view.setLineSpacing(dp(context,3).toFloat(),1f)
                 if(view.text.toString() in listOf("HeySig","HeySig Watch")) {
-                    view.text = "HeySig"; view.textSize = minOf(26f,36f/context.resources.configuration.fontScale); view.setTextColor(Color.WHITE)
+                    view.textSize = minOf(26f,36f/context.resources.configuration.fontScale); view.setTextColor(Color.WHITE)
                     view.typeface = Typeface.create("sans-serif",Typeface.BOLD)
                     view.isAccessibilityHeading = true
                 }
             }
         }
         if(view is ViewGroup) for(index in 0 until view.childCount) polish(view.getChildAt(index))
+    }
+    data class Labels(val speak: Int, val stop: Int, val more: Int, val speechOff: Int, val connect: Int, val speakCommand: Int)
+    data class Home(val view: ScrollView, val status: TextView, val primary: Button)
+    /** The real home layout is also exercised on isolated round displays by instrumentation. */
+    fun home(context: Context, labels: Labels, initialStatus: String, speechOff: Boolean, speak: () -> Unit, stop: () -> Unit, more: () -> Unit, connected: Boolean = true): Home {
+        val column = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL; gravity = android.view.Gravity.CENTER_HORIZONTAL
+            val horizontal = if(resources.configuration.isScreenRound) 32 else 16
+            setPadding(dp(context,horizontal),dp(context,12),dp(context,horizontal),dp(context,12))
+            setBackgroundColor(Color.BLACK)
+        }
+        val status = TextView(context).apply {
+            text = initialStatus; setTextColor(muted); textSize = minOf(14f,20f/resources.configuration.fontScale)
+            maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.END; gravity = android.view.Gravity.CENTER
+            accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
+        }; column.addView(status,LinearLayout.LayoutParams(-1,-2))
+        if(speechOff) column.addView(TextView(context).apply {
+            text = context.getString(labels.speechOff); setTextColor(muted)
+            textSize = minOf(11f,14f/resources.configuration.fontScale); gravity = android.view.Gravity.CENTER
+        },LinearLayout.LayoutParams(-1,-2))
+        fun action(label:Int, invoke:()->Unit) = Button(context).apply {
+            setText(label); setOnClickListener { invoke() }; polish(this)
+            textSize = minOf(15f,22f/resources.configuration.fontScale)
+            setPadding(dp(context,4),dp(context,4),dp(context,4),dp(context,4))
+        }
+        val primary=action(if(connected) labels.speak else labels.connect,speak).apply { if(connected) contentDescription=context.getString(labels.speakCommand) }
+        column.addView(primary)
+        val row = LinearLayout(context)
+        row.addView(action(labels.stop,stop),LinearLayout.LayoutParams(0,-2,1f).apply { marginEnd=dp(context,4) })
+        row.addView(action(labels.more,more),LinearLayout.LayoutParams(0,-2,1f))
+        column.addView(row,LinearLayout.LayoutParams(-1,-2))
+        return Home(ScrollView(context).apply { isVerticalScrollBarEnabled=false; setBackgroundColor(Color.BLACK); addView(column) },status,primary)
     }
     fun prepareColumn(column: LinearLayout) {
         val context = column.context

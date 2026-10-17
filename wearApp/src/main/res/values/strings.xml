@@ -1,0 +1,12 @@
+<resources>
+    <string name="speak">Speak</string>
+    <string name="speak_command">Speak command</string>
+    <string name="stop">Stop</string>
+    <string name="more">More</string>
+    <string name="watch_disconnected">Disconnected · More to connect</string>
+    <string name="watch_connected">Phone connected</string>
+    <string name="preparing_request">Preparing request…</string>
+    <string name="sending_request">Sending requested command…</string>
+    <string name="speech_off">Speech off</string>
+    <string name="connect">Connect</string>
+</resources>
