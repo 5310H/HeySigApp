@@ -9,8 +9,9 @@ Build migration update: [pinned Gradle variants and upload signing](gradle-relea
 are implemented. Signed phone/Wear bundles passed artifact checks and release
 lint; target-36 navigation/insets/Back checks passed on Android 13 and 17.
 Development transport/research screens are separated from release sources.
-See [migration evidence](acceptance/gradle-api36-2026-10-16.md). Production watch
-pairing and policy/medical work remain release blockers.
+See [migration evidence](acceptance/gradle-api36-2026-10-16.md). The [production Data Layer connection](production-watch-connection.md) and in-app
+privacy/data controls are now implemented for validation. Hardware pairing
+acceptance, verified policy publication and policy/medical work remain release blockers.
 
 ## Current blockers and completion evidence
 
@@ -18,8 +19,8 @@ pairing and policy/medical work remain release blockers.
 |---|---|---|
 | Target SDK | Gradle compiles both apps with 36; phone targets 36 and Wear targets 35. Insets and Back handling migrated. | Record runtime/device evidence; new phone submissions/updates currently require 36, Wear 35. Recheck the dated requirement before upload. |
 | Release build | Pinned wrapper/Gradle/AGP/Kotlin, debug/release separation, preserved debug keys and a separate local upload key are implemented. | Validate signed AABs, release lint and artifact contents, reproduce on a standard build host, back up upload signing and complete Play App Signing enrollment. |
-| Watch setup | Debug still requires ADB/Linux relay. Release omits this transport and currently displays a pairing-unavailable message. | A supported user installation/pairing/transport flow without developer tools. The watch release candidate is not a functional companion and must not be submitted yet. Test connection failure and recovery without replay. |
-| Privacy | Local preferences, remote speech recognition and development relay flows exist. No published privacy policy or in-app policy entry exists. | An accurate public non-PDF privacy policy, an in-app entry, retention/deletion details, publisher identity/contact and the release-specific Data safety form. |
+| Watch setup | Debug retains the separate ADB/Linux relay. Release now implements selected-node Wear OS Data Layer setup with foreground-only command grants; hardware acceptance is pending. | Accept the documented no-developer-tools setup on real paired devices. Test connection failure/recovery and confirmations without replay before submission. |
+| Privacy | In-app privacy notices, speech disclosure, per-device deletion/export and bounded production result history are implemented. Public policy identity/contact/hosting are not yet supplied; see the policy draft and data inventory. | An accurate public non-PDF privacy policy, an in-app entry, retention/deletion details, publisher identity/contact and the release-specific Data safety form. |
 | Health functionality | Controls hearing-aid programs/levels; no health-app declaration or regulatory assessment is recorded. | Complete Health apps declaration. Establish intended use, supported devices/countries and whether regulation applies; provide required evidence if regulated. Do not use a non-medical disclaimer as a substitute for assessment. |
 | Microphone | Noise uses RECORD_AUDIO and bounded foreground capture. Speech is delegated to an installed recognition service. | Feature-specific explanation, affirmative user action, runtime permission, denial/revocation and privacy-switch tests. Verify actual recognition providers and network handling. |
 | Quality/accessibility | Development UI; round-watch clipping and state-preservation risks need production work. | Core Android and Wear quality checklist, usable round layouts, large fonts, at least 48dp Wear touch targets, black watch background, swipe-back/state retention and appropriate launch assets. |
@@ -45,7 +46,7 @@ functions; its legal classification has not been determined.
 | Noise microphone | PCM is processed in memory into scalar statistics, with no recording file or upload in PhoneNoiseSampler/NoiseAccumulator. Capture stops on leaving the Activity. | Verify final merged permissions, background behavior and all dependencies. Test denial/revocation and Android microphone privacy controls. |
 | Voice recognition | ACTION_RECOGNIZE_SPEECH invokes an installed service that may use a network connection. | Identify supported provider behavior and accurately explain it; do not advertise offline-only speech without evidence. |
 | Phone state | Private preferences contain fitting, last-sent state, snapshots, noise settings and voice preferences. | Final retention/delete/export controls, backup behavior and any additional SDK data flows. |
-| Watch commands | Text and alternatives cross a pinned TLS connection to the development relay, then an authenticated ADB-forwarded loopback connection to the app. | Replace development provisioning/transport for release and audit production authentication, encryption and retention. |
+| Watch commands | Text and alternatives cross a pinned TLS connection to the development relay, then an authenticated ADB-forwarded loopback connection to the app. | Release uses package/signer-restricted Google Data Layer messages, which may use encrypted Google-server routing. Verify SDK/provider behavior and physical setup; see production-watch-connection.md. |
 | Request history | Relay SQLite stores command-body digests and final reply text; final replies can include settings or echoed speech. Phone/watch keep request IDs/results/preferences. | Bounded retention/deletion and truthful disclosure of any text/settings retained. Do not claim that speech-derived content can never be persisted. |
 
 Google requires truthful disclosures of personal/sensitive data handling and
@@ -64,13 +65,13 @@ the form's definitions, not guessed from permission names.
    a clean result from that script would not establish full compliance.
 2. Initial Gradle phone/Wear variant separation is complete. Keep the
    development receiver, ADB provisioning, research screen and relay out of
-   production. Implement normal companion pairing before submission.
+   production. Accept the implemented Data Layer companion setup on physical devices before submission.
 3. Initial SDK migration, signed AAB validation and local upload signing are
    complete, with [device/build evidence](acceptance/gradle-api36-2026-10-16.md).
    Add exact Android 16 and full release-device acceptance, reproduce on a
    standard build host, back up the key and complete Play App Signing enrollment.
-4. Implement accurate in-app privacy, disclosures, optional speech and data
-   management. Finish production watch navigation/pairing/accessibility.
+4. Validate the implemented in-app privacy, disclosures, optional speech and data
+   management. Publish the verified policy and finish watch physical acceptance/accessibility.
 5. Complete intended-use/device/country review, health declaration, medical
    assessment and verified privacy/Data safety/store-listing content.
 6. Run release-variant tests: clean install/upgrade, no-ADB operation, denial and

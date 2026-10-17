@@ -1,4 +1,10 @@
-# HeySig watch development companion
+# HeySig Wear app
+
+Release candidates now use the [normal Android/Wear pairing flow](../docs/production-watch-connection.md), with selected-node Data Layer messages, typed/voice commands, result lookup and privacy/data controls. Google Play services may use encrypted Google-server routing. The phone must stay open and unlocked; the watch never emits aid tones. Hardware acceptance is pending.
+
+The remainder of this guide describes the separate, preserved development relay.
+
+## HeySig watch development companion
 
 Native Wear OS prototype for the Pixel Watch 3. It offers Speak command,
 Read status, Check last result, and Stop, with spoken replies. Commands use the
@@ -19,7 +25,7 @@ app disables the bridge; re-enable it on return.
 
 Version 0.3 uses the [pinned Gradle build and separated variants](../docs/gradle-release-builds.md).
 The debug variant retains this relay companion; the release validation candidate
-omits the relay and does not yet implement production pairing. Do not publish it.
+omits the relay and implements a [foreground Data Layer connection](../docs/production-watch-connection.md). Physical pairing acceptance and verified public privacy policy publication are still required before submission.
 Build with `bash tools/build-watch-prototype.sh`. Output is
 `wearApp/build/heysig-watch.apk`. Install only after pairing ADB with the watch;
 the pairing port and the main Wireless debugging connection port are separate.

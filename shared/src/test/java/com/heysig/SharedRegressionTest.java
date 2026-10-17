@@ -3,6 +3,9 @@ package com.heysig;
 import org.junit.Test;
 
 public class SharedRegressionTest {
+    @Test public void companionSafety() {
+        com.heysig.companion.CompanionSafetyCheckKt.main();
+    }
     @Test public void manualControlsAndVoice() {
         com.heysig.control.ManualControlCheckKt.main();
     }

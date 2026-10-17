@@ -8,7 +8,7 @@ Google Play release work follows the [dated readiness audit and release gates](d
 
 The [HeySigApp program specification](docs/program-spec.md) defines the replacement app, including voice access to every function through both phone and watch.
 
-Start with [how the prototype works](docs/proto-code-guide.md), [Android build/use](androidApp/README.md), and [acceptance evidence](docs/acceptance/). Full guided voice setup, automatic noise/sleep control, production setup/storage and watch pairing, and an iPhone implementation remain future work. The earlier accessibility-based replacement plan is retained as historical planning.
+Start with [how the prototype works](docs/proto-code-guide.md), [Android build/use](androidApp/README.md), and [acceptance evidence](docs/acceptance/). Full guided voice setup, automatic noise/sleep control, production setup/storage and watch pairing acceptance, and an iPhone implementation remain future work. The earlier accessibility-based replacement plan is retained as historical planning.
 
 Research: [noise adaptation in other hearing aids and proposed HeySig improvements](docs/research/noise-adaptation-2026-10-16.md).
 
@@ -38,7 +38,7 @@ HeySigApp/
 
 ## Current implementation
 
-Development now targets the actual Android app running in the Chromebook Google Play environment. See [Chromebook-first development and current manual-core scope](docs/chromebook-development.md). `HomeActivity` provides native Home/Setup/Saved/Voice/Noise screens. Experimental [six-level Noise Setup and Observe](docs/noise-quick-start.md) propose programs without playback; automatic noise switching remains pending. Phone and watch each have independent saved switches for voice prompts and spoken responses. Watch parity and full guided voice configuration remain in progress.
+Development now targets the actual Android app running in the Chromebook Google Play environment. See [Chromebook-first development and current manual-core scope](docs/chromebook-development.md). `HomeActivity` provides native Home/Setup/Saved/Voice/Noise screens. Experimental [six-level Noise Setup and Observe](docs/noise-quick-start.md) propose programs without playback; automatic noise switching remains pending. Phone and watch each have independent saved switches for voice prompts and spoken responses. Release candidates now include a [foreground Data Layer watch connection](docs/production-watch-connection.md) and Privacy and data controls. Physical pairing acceptance and [public policy finalization](docs/privacy-policy-draft.md) remain pending. Watch parity and full guided voice configuration remain in progress.
 
 The debug source set retains `ProtoActivity.kt` and the development watch relay; release builds exclude them. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.
 

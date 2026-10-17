@@ -1,5 +1,19 @@
+import java.util.Properties
+import java.net.URI
+
 plugins { id("com.android.application"); kotlin("android") }
 apply(from = rootProject.file("gradle/app-signing.gradle"))
+
+
+val releasePublic = Properties().apply {
+    rootProject.file("gradle/release-public.properties").inputStream().use { load(it) }
+}
+val privacyPolicyUrl = releasePublic.getProperty("privacyPolicyUrl", "").trim()
+require(privacyPolicyUrl.isEmpty() || runCatching {
+    val uri = URI(privacyPolicyUrl)
+    uri.scheme == "https" && uri.host != null && uri.userInfo == null && uri.fragment == null &&
+        privacyPolicyUrl.none { it == '\"' || it == '\\' || it.isWhitespace() }
+}.getOrDefault(false)) { "Use a public HTTPS privacy policy URL" }
 
 android {
     namespace = "com.heysig.watch"
@@ -13,6 +27,7 @@ android {
         versionName = "0.3"
     }
     buildFeatures { buildConfig = true }
+    defaultConfig { buildConfigField("String", "PRIVACY_POLICY_URL", "\"$privacyPolicyUrl\"") }
     buildTypes {
         debug { applicationIdSuffix = ".watchdev" }
         release {
@@ -22,8 +37,6 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    sourceSets.getByName("main").java.srcDir("../shared/src/commonMain/kotlin/com/heysig/control")
-    sourceSets.getByName("main").java.include("VoicePreference.kt", "com/heysig/**/*.kt")
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -31,6 +44,10 @@ android {
     lint { abortOnError = true; checkReleaseBuilds = true }
 }
 kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8) } }
+dependencies {
+    implementation(project(":shared"))
+    "releaseImplementation"("com.google.android.gms:play-services-wearable:20.0.1")
+}
 androidComponents {
     onVariants(selector().withBuildType("release")) { variant ->
         variant.outputs.forEach { it.versionCode.set(2_000_003) }

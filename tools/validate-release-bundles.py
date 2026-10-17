@@ -61,11 +61,18 @@ def main():
         require(app is not None and app.get(ANDROID+'debuggable','false') == 'false', f'{module}: missing application or debuggable release')
         require(app.get(ANDROID+'testOnly','false') == 'false', f'{module}: test-only release')
         require(app.get(ANDROID+'usesCleartextTraffic') == 'false', f'{module}: cleartext must be explicitly disabled')
+        require(app.get(ANDROID+'allowBackup') == 'false', f'{module}: app backup must remain disabled')
+        require(app.get(ANDROID+'dataExtractionRules') is not None, f'{module}: data extraction exclusions missing')
         if module == 'androidApp':
             require(app.get(ANDROID+'enableOnBackInvokedCallback') == 'true', 'Phone: predictive Back must be explicitly enabled for older supported runtimes')
         for element in manifest.iter():
             require(not any(name in element.get(ANDROID+'name','') for name in ('WatchBridgeSetup','ProtoActivity','PlaybackSmoke','Api36Smoke')), 'Development component in bundle manifest')
         require(manifest.find('instrumentation') is None, f'{module}: instrumentation packaged in release')
+        require(not any(item.get(ANDROID+'name') in (
+            'com.google.android.gms.wearable.MESSAGE_RECEIVED',
+            'com.google.android.gms.wearable.REQUEST_RECEIVED',
+            'com.google.android.gms.wearable.BIND_LISTENER') for item in manifest.iter('action')),
+            f'{module}: background watch listener is not part of this foreground design')
         permissions = [item.get(ANDROID+'name') for item in manifest.findall('uses-permission')]
         expected_permissions = {'android.permission.RECORD_AUDIO'} if module == 'androidApp' else set()
         require(set(permissions) == expected_permissions, f'{module}: unexpected release permissions {permissions}')
@@ -76,10 +83,11 @@ def main():
             dex = b''.join(archive.read(name) for name in names if name.endswith('.dex'))
             require(b'WatchBridgeSetup' not in dex and b'ProtoActivity' not in dex, 'Development classes packaged')
             require(b'heysig-watch-loopback' not in dex and b'pairing.json' not in dex, 'Development relay packaged')
+            require(b'heysig_phone_v1' in dex, f'{module}: production companion capability missing')
         output_manifest = bundle.parent / 'validated-manifest.xml'
         output_manifest.write_bytes(manifest_bytes)
         reports.append(f'{module}: PASS — {application}, target {target}, upload signature verified, no development transport/native libraries\nSHA-256: {hashlib.sha256(bundle.read_bytes()).hexdigest()}')
-    text = '\n\n'.join(reports)+'\n\nValidation candidates only: watch pairing, privacy/health declarations and Play review remain pending.\n'
+    text = '\n\n'.join(reports)+'\n\nValidation candidates only: physical watch acceptance, public privacy policy, health declarations and Play review remain pending.\n'
     print(text)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)

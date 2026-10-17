@@ -112,11 +112,16 @@ development relay, research Activity, instrumentation, private configuration
 and native libraries. It writes each decoded bundle manifest beside the AAB
 for further inspection. It is not a privacy, medical or Play approval check.
 
-The production watch artifact deliberately does not contain the Linux/ADB
-relay client. It currently displays that pairing is unavailable in this test
-build. It must not be submitted as a functional companion until normal pairing
-and controls are implemented and accepted. The development watch keeps its
-existing relay behavior.
+The production watch artifact deliberately excludes the Linux/ADB relay client.
+It now uses the [foreground Wear Data Layer connection](production-watch-connection.md),
+which requires physical pairing/recovery acceptance before submission. The
+development watch keeps its existing relay behavior.
+
+Public policy fields live in `gradle/release-public.properties`. Set only real,
+owner-verified publisher/contact information and the published HTTPS policy URL.
+Empty fields keep candidate builds possible and show an unavailable-policy
+message; they do not satisfy the privacy release gate. See the
+[policy draft](privacy-policy-draft.md) and [data inventory](data-safety-review.md).
 
 ## Runtime migration checks
 
@@ -126,7 +131,8 @@ python3 tools/run-device-smoke.py --device DEVICE
 ```
 
 Choose each device explicitly. The runner checks installed target 36, opens
-Home/Noise/Voice, sends system Back and verifies current-runtime insets. It
+Home/Noise/Voice/Privacy/Watch, tests journal cap/expiry/deletion only in isolated
+preferences, sends system Back and verifies current-runtime insets. It
 does not request microphone access or play hearing-aid commands. Do not run
 `connectedDebugAndroidTest` indiscriminately when the watch is also connected.
 The helper fails on a runner failure even when ADB's instrumentation command

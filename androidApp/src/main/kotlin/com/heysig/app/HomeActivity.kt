@@ -11,6 +11,7 @@ import android.widget.*
 import com.heysig.control.*
 import com.heysig.research.*
 import com.heysig.noise.*
+import com.heysig.companion.PrivacyNotice
 import org.json.JSONObject
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicBoolean
@@ -47,6 +48,18 @@ class HomeActivity : Activity() {
     private var remoteReply: ((JSONObject) -> Unit)? = null
     private var commandOrigin: String? = null
     private var confirmationOrigin: String? = null
+    private var activeRemoteNode: String? = null
+    private var exportDocument: String? = null
+    private val watchHistory by lazy { WatchHistory(this) }
+    private val companionDelegate = lazy { CompanionConnection(this,
+        { node,request,reply -> receiveWatch(request,reply,node) },
+        { node,id -> watchHistory.get(node,id) },
+        {
+            if(activeRemoteNode != null) cancelled.set(true)
+            if(confirmationOrigin?.startsWith("paired:") == true) { pendingProgram = null; pendingRestore = null }
+        },{ text -> tell(text) }) }
+    private val companion by companionDelegate
+    private fun disconnectCompanion() { if(companionDelegate.isInitialized()) companion.close() }
     private val remotePrefs by lazy { getSharedPreferences("heysig-watch-results",MODE_PRIVATE) }
     private fun remoteResult(phase: String, text: String) = JSONObject().put("phase",phase).put("text",text)
     private val profile = AcousticProfile(44100,15360,512,0.0625,1.2,true)
@@ -68,15 +81,18 @@ class HomeActivity : Activity() {
         }
         show("Home")
     }
-    override fun onResume() { super.onResume(); resumed = true; watchToggle?.isChecked = watchBridge != null }
+    override fun onResume() {
+        super.onResume(); resumed = true; if(companionDelegate.isInitialized()) companion.resume(); watchToggle?.isChecked = watchBridge != null
+        runCatching { watchHistory.prune() }.onFailure { tell("Watch history could not be expired; watch commands remain blocked until storage works") }
+    }
     override fun onPostResume() {
         super.onPostResume()
         pendingText?.let { pendingText = null; route(it) }
     }
-    override fun onPause() { noise.stop(); watchBridge?.close(); watchBridge = null; resumed = false; pendingVoice = false; cancelled.set(true); tts?.stop(); super.onPause() }
+    override fun onPause() { noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); watchBridge?.close(); watchBridge = null; resumed = false; pendingVoice = false; cancelled.set(true); tts?.stop(); super.onPause() }
     override fun onDestroy() {
         if(android.os.Build.VERSION.SDK_INT >= 33) backCallback?.let { onBackInvokedDispatcher.unregisterOnBackInvokedCallback(it) }
-        noise.stop(); cancelled.set(true); tts?.shutdown(); super.onDestroy()
+        noise.stop(); disconnectCompanion(); exportDocument = null; cancelled.set(true); tts?.shutdown(); super.onDestroy()
     }
     @Deprecated("Fallback for Android 10–12; newer versions use OnBackInvokedDispatcher")
     @android.annotation.SuppressLint("GestureBackNavigation") // API 33+ dispatcher is registered in onCreate; retain the pre-33 framework fallback.
@@ -137,10 +153,13 @@ class HomeActivity : Activity() {
         content = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(24,24,24,24) }
         line("HeySig • $page").textSize = 25f
         line("Hearing-aid controls • experimental noise observation")
+        line("Speech: prompts ${if(voiceEnabled("voicePrompts")) "on" else "off"} • responses ${if(voiceEnabled("spokenResponses")) "on" else "off"}")
         val nav = LinearLayout(this)
         listOf("Home","Setup","Saved","Voice","Noise").forEach { target ->
             nav.addView(Button(this).apply { text = target; isEnabled = !busy.get(); setOnClickListener { navigate(target) } }, LinearLayout.LayoutParams(0,-2,1f))
         }; content.addView(nav)
+        button("Watch connection",!busy.get()) { navigate("Watch") }
+        button("Privacy and data",!busy.get()) { navigate("Privacy") }
         status = line(message)
         heardStatus = line(if(lastHeard.isEmpty()) "" else "Speech heard: $lastHeard")
         heardStatus.visibility = if(lastHeard.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
@@ -166,6 +185,8 @@ class HomeActivity : Activity() {
             "Saved" -> snapshot()
             "Voice" -> voicePage()
             "Noise" -> noise.render(content)
+            "Watch" -> { if(resumed) companion.resume(); companion.render(content) }
+            "Privacy" -> privacyPage()
         }
         val scroll = ScrollView(this).apply { addView(content, ViewGroup.LayoutParams(-1,-2)) }
         scroll.setOnApplyWindowInsetsListener { view,insets ->
@@ -279,11 +300,17 @@ class HomeActivity : Activity() {
         if(page == "Saved") show()
     }
     private fun voicePage() {
+        line(PrivacyNotice.SYNTHESIS)
         for((label,key) in listOf("Voice prompts (confirmation and guidance)" to "voicePrompts","Spoken responses (status, results and errors)" to "spokenResponses")) {
             content.addView(CheckBox(this).apply {
                 text = label; isChecked = voiceEnabled(key)
+                var reverting = false
                 setOnCheckedChangeListener { box,checked ->
-                    if(!prefs.edit().putBoolean(key,checked).commit()) { box.isChecked = !checked; tell("Could not save voice setting") }
+                    if(reverting) return@setOnCheckedChangeListener
+                    if(!prefs.edit().putBoolean(key,checked).commit()) {
+                        reverting = true; box.isChecked = !checked; reverting = false
+                        tell("Could not save voice setting")
+                    }
                     if(!checked) tts?.stop()
                 }
             })
@@ -292,15 +319,67 @@ class HomeActivity : Activity() {
         line("Speak on this Chromebook using the Android speech service. Recognition may use the service's network connection. Cancel sends nothing. Typed commands exercise the same parser.")
         val input = EditText(this).apply { hint = "program two / volume ten / current tin"; setSingleLine(); content.addView(this) }
         button("Run typed command",!busy.get()) { route(input.text.toString()) }
-        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, noise sample, observe noise, noise status, stop noise. Automatic switching, calibration wizard and schedules remain pending. Watch Wi-Fi is experimental.")
+        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, noise sample, observe noise, noise status, stop noise. Automatic switching, calibration wizard and schedules remain pending. Use Watch connection for companion setup.")
     }
-    private fun voiceEnabled(key:String) = prefs.getBoolean(key,if(key == "spokenResponses") prefs.getBoolean("spokenResults",true) else true)
+    private fun privacyPage() {
+        PrivacyNotice.sections.forEach { (title,text) -> line(title).textSize = 21f; line(text) }
+        if(BuildConfig.DEBUG) line("Development build: the optional Linux/ADB relay has separate command/reply storage on that computer. This phone can also retain up to 128 legacy development replies until cleared; the 24-hour production rule does not apply to those old records. Clear heard text and watch history removes phone-side replies. Phone deletion does not delete computer relay records. This transport is excluded from production.")
+        button("Open public privacy policy") {
+            if(BuildConfig.PRIVACY_POLICY_URL.isEmpty()) tell("Public policy is not configured yet. Publisher contact and hosting must be supplied before release.")
+            else try { startActivity(Intent(Intent.ACTION_VIEW,android.net.Uri.parse(BuildConfig.PRIVACY_POLICY_URL))) }
+            catch(e:Exception) { tell("No browser could open the policy") }
+        }
+        button("Clear heard text and watch history",!busy.get()) {
+            if(busy.get() || remoteReply != null) { tell("Wait for the current result or Stop before clearing history"); return@button }
+            disconnectCompanion(); noise.stop(); tts?.stop()
+            pendingText = null; lastHeard = ""; pendingProgram = null; pendingRestore = null
+            val cleared = watchHistory.clear() && remotePrefs.edit().clear().commit()
+            message = if(cleared) "Heard text and phone watch history cleared. Saved fitting and restoration settings retained. Clear watch data separately on the watch." else "Some history could not be cleared; try again"
+            show()
+        }
+        button("Export local app data",!busy.get()) {
+            android.app.AlertDialog.Builder(this).setTitle("Export private settings?")
+                .setMessage("The JSON file contains hearing-aid setup, requested settings, noise configuration and retained watch replies. Save it only to a location you trust. A chosen cloud provider may upload it. Pairing secrets are excluded. HeySig cannot delete exported copies.")
+                .setNegativeButton("Cancel",null).setPositiveButton("Choose location") { _,_ ->
+                    if(busy.get() || remoteReply != null) { tell("Wait for the current result before exporting"); return@setPositiveButton }
+                    try {
+                        val document = JSONObject().put("format","heysig-local-export-v1")
+                            .put("createdAt",System.currentTimeMillis())
+                            .put("settings",JSONObject(prefs.all))
+                            .put("noise",JSONObject(getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).all))
+                            .put("companionSelection",JSONObject(getSharedPreferences("heysig-companion",MODE_PRIVATE).all))
+                            .put("watchResults",watchHistory.export())
+                        exportDocument = document.toString(2)
+                        startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                            type = "application/json"; addCategory(Intent.CATEGORY_OPENABLE)
+                            putExtra(Intent.EXTRA_TITLE,"heysig-data.json")
+                        },403)
+                    } catch(e:Exception) { exportDocument = null; tell("Export could not start") }
+                }.show()
+        }
+        button("Delete local app data",!busy.get()) {
+            android.app.AlertDialog.Builder(this).setTitle("Delete this device's HeySig data?")
+                .setMessage("Android will close HeySig and erase this app's private data, including fitting, requested settings, saved restoration record, noise configuration, watch selection/history and speech choices, and reset its permissions. You will need Setup again. No command is sent to the aids. Watch, relay, provider and exported copies must be deleted separately.")
+                .setNegativeButton("Keep data",null).setPositiveButton("Delete local data") { _,_ ->
+                    if(busy.get() || remoteReply != null) { tell("Wait for the current result or Stop before deleting data"); return@setPositiveButton }
+                    noise.stop(); disconnectCompanion(); watchBridge?.close(); watchBridge = null; tts?.stop()
+                    pendingVoice = false; pendingText = null; lastHeard = ""; exportDocument = null
+                    val manager = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager
+                    if(!manager.clearApplicationUserData()) tell("Android could not clear local data. Use the app's Android storage settings.")
+                }.show()
+        }
+        button("Open microphone permission settings") {
+            startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,android.net.Uri.parse("package:$packageName")))
+        }
+    }
+    private fun voiceEnabled(key:String) = prefs.getBoolean(key,if(key == "spokenResponses") prefs.getBoolean("spokenResults",BuildConfig.DEBUG) else BuildConfig.DEBUG)
     private fun tell(text: String, speak: Boolean = false) {
         message = text
         val fromWatch = remoteReply != null
         val prompt = pendingProgram != null || pendingRestore != null || text.startsWith("Noise settings.") || text.startsWith("Draft noise")
         if(!busy.get() && remoteReply != null) {
             val reply = remoteReply; remoteReply = null
+            activeRemoteNode = null
             reply?.invoke(remoteResult(if(pendingProgram != null || pendingRestore != null) "CLARIFY" else "FINAL",text).put("prompt",prompt))
         }
         if(::status.isInitialized) status.text = text
@@ -314,6 +393,15 @@ class HomeActivity : Activity() {
     }
     private fun launchVoice() {
         pendingVoice = false
+        if(!prefs.getBoolean("speechDisclosureV1",false)) {
+            android.app.AlertDialog.Builder(this).setTitle("Optional speech recognition")
+                .setMessage(PrivacyNotice.SPEECH).setNegativeButton("Not now",null)
+                .setPositiveButton("Continue") { _,_ ->
+                    if(prefs.edit().putBoolean("speechDisclosureV1",true).commit()) launchVoice()
+                    else tell("Could not save speech choice")
+                }.show()
+            return
+        }
         try {
             startActivityForResult(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
@@ -325,6 +413,16 @@ class HomeActivity : Activity() {
     @Deprecated("Platform recognition result adapter")
     override fun onActivityResult(requestCode:Int,resultCode:Int,data:Intent?) {
         super.onActivityResult(requestCode,resultCode,data)
+        if(requestCode == 403) {
+            val document = exportDocument; exportDocument = null
+            if(resultCode == RESULT_OK && document != null && data?.data != null) {
+                try {
+                    checkNotNull(contentResolver.openOutputStream(data.data!!,"wt")).use { it.write(document.toByteArray(Charsets.UTF_8)) }
+                    tell("Export saved to your chosen location. Delete that copy separately when no longer needed.")
+                } catch(e:Exception) { tell("Export could not be saved") }
+            }
+            return
+        }
         if(requestCode == 401 && resultCode == RESULT_OK) {
             val alternatives = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).orEmpty()
             if(alternatives.isNotEmpty()) {
@@ -339,15 +437,19 @@ class HomeActivity : Activity() {
             else if(alternatives.isNotEmpty()) pendingText = alternatives.firstOrNull { voiceIdentity(it,fit) == parsed.firstOrNull() } ?: alternatives[0]
         }
     }
-    private fun receiveWatch(request: JSONObject, callback: (JSONObject) -> Unit) {
-        if(!resumed || watchBridge == null) { callback(remoteResult("BLOCKED","Open HeySig and enable Watch Wi-Fi")); return }
+    private fun receiveWatch(request: JSONObject, callback: (JSONObject) -> Unit, node: String? = null) {
+        if(!resumed || (if(node == null) watchBridge == null else !companion.accepts(node))) { callback(remoteResult("BLOCKED","Open HeySig and enable its watch connection")); return }
         val id = request.getString("id")
-        remotePrefs.getString(id,null)?.let { callback(JSONObject(it)); return }
+        if(node == null) remotePrefs.getString(id,null)?.let { callback(JSONObject(it)); return }
+        else watchHistory.get(node,id)?.let { callback(it); return }
         val record: (JSONObject) -> Unit = { result ->
-            val editor = remotePrefs.edit().putString(id,result.toString())
-            val old = remotePrefs.all.keys.filter { it != id }.sorted()
-            if(old.size >= 128) old.take(old.size-127).forEach { editor.remove(it) }
-            if(!editor.commit()) callback(remoteResult("UNKNOWN","App result could not be stored; do not automatically retry")) else callback(result)
+            val stored = if(node != null) watchHistory.put(node,id,result) else {
+                val editor = remotePrefs.edit().putString(id,result.toString())
+                val old = remotePrefs.all.keys.filter { it != id }.sorted()
+                if(old.size >= 128) old.take(old.size-127).forEach { editor.remove(it) }
+                editor.commit()
+            }
+            if(!stored) callback(remoteResult("UNKNOWN","App result could not be stored; do not automatically retry")) else callback(result)
         }
         val text = request.getString("text")
         if(text.lowercase() == "status") { record(remoteResult("FINAL", "Last sent. ${stateText(requested)}")); return }
@@ -358,18 +460,24 @@ class HomeActivity : Activity() {
         }
         if(busy.get() || remoteReply != null) { record(remoteResult("BUSY","HeySig is busy. Wait for its result or say Stop")); return }
         if(page == "Setup") { record(remoteResult("BLOCKED","Return to Home after reviewing and saving Setup")); return }
-        if(!remotePrefs.edit().putString(id,remoteResult("UNKNOWN","An earlier request started; do not replay automatically").toString()).commit()) {
+        if(node != null && NoiseVoice.parse(text) in listOf(NoiseCommand.Sample,NoiseCommand.Observe) &&
+            (!getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).getBoolean("microphoneDisclosureV1",false) ||
+                checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != android.content.pm.PackageManager.PERMISSION_GRANTED)) {
+            record(remoteResult("BLOCKED","On the phone, open Noise and review microphone use and permission before requesting watch noise capture.")); return
+        }
+        val started = remoteResult("UNKNOWN","An earlier request started; do not replay automatically")
+        if(!(if(node == null) remotePrefs.edit().putString(id,started.toString()).commit() else watchHistory.put(node,id,started))) {
             callback(remoteResult("BLOCKED","Cannot journal watch command")); return
         }
-        val origin = request.getString("conversation")
+        val origin = (if(node != null) "paired:$node:" else "") + request.getString("conversation")
         val alternatives = request.optJSONArray("alternatives")
         if(pendingProgram == null && pendingRestore == null && alternatives != null && fitting != null) {
             val intents = (0 until minOf(5,alternatives.length())).map { voiceIdentity(alternatives.getString(it),fitting!!) }.filter { it !is AppIntent.Unsupported }.distinct()
             if(intents.size > 1) { record(remoteResult("CLARIFY","Speech alternatives disagree. Say the exact program or number again")); return }
         }
-        remoteReply = record; commandOrigin = origin
+        remoteReply = record; commandOrigin = origin; activeRemoteNode = node
         try { lastHeard = "Watch: $text"; route(text,origin) }
-        catch(e:Exception) { remoteReply = null; record(remoteResult("FAILED","Watch command could not be processed")) }
+        catch(e:Exception) { remoteReply = null; activeRemoteNode = null; record(remoteResult("FAILED","Watch command could not be processed")) }
         finally { commandOrigin = null }
     }
     private fun voiceIdentity(text:String,fit:Fitting): Any = VoicePreference.parse(text) ?: NoiseVoice.parse(text) ?: VoiceCommands.parse(text,fit)
@@ -529,7 +637,7 @@ class HomeActivity : Activity() {
             if(!durable) result += " Storage failed; remembered state may not survive restart."
             runOnUiThread {
                 message = result
-                val watchReply = remoteReply; remoteReply = null
+                val watchReply = remoteReply; remoteReply = null; activeRemoteNode = null
                 watchReply?.invoke(remoteResult("FINAL",result))
                 if(!isDestroyed) {
                     show()
