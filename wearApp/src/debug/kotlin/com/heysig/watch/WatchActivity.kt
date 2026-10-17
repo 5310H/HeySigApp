@@ -80,7 +80,9 @@ class WatchActivity : Activity() {
         }
         promptToggle = toggle("Voice prompts","voicePrompts")
         responseToggle = toggle("Spoken responses","spokenResponses")
-        setContentView(ScrollView(this).apply { addView(layout) })
+        WatchStyle.prepareColumn(layout)
+        WatchStyle.polish(layout)
+        setContentView(ScrollView(this).apply { isVerticalScrollBarEnabled = false; setBackgroundColor(android.graphics.Color.BLACK); addView(layout) })
     }
     override fun onResume() { super.onResume(); active = true }
     override fun onPostResume() { super.onPostResume(); deferred?.let { deferred=null; it() } }

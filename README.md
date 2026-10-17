@@ -38,6 +38,8 @@ HeySigApp/
 
 ## Current implementation
 
+The [native UI refresh](docs/ui-refresh.md) adds four-tab phone navigation, grouped cards, explicit Send sliders and a matching dark watch style. Existing fitting, saved settings and transport behavior are preserved.
+
 Development now targets the actual Android app running in the Chromebook Google Play environment. See [Chromebook-first development and current manual-core scope](docs/chromebook-development.md). `HomeActivity` provides native Home/Setup/Saved/Voice/Noise screens. Experimental [six-level Noise Setup and Observe](docs/noise-quick-start.md) propose programs without playback; automatic noise switching remains pending. Phone and watch each have independent saved switches for voice prompts and spoken responses. Release candidates now include a [foreground Data Layer watch connection](docs/production-watch-connection.md) and Privacy and data controls. Physical pairing acceptance and [public policy finalization](docs/privacy-policy-draft.md) remain pending. Watch parity and full guided voice configuration remain in progress.
 
 The debug source set retains `ProtoActivity.kt` and the development watch relay; release builds exclude them. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.

@@ -28,6 +28,8 @@ android {
         testInstrumentationRunner = "com.heysig.app.Api36Smoke"
     }
     buildFeatures { buildConfig = true }
+    // Exercise the native watch style on isolated round-display contexts; never ship it in the phone app.
+    sourceSets.getByName("androidTest").java.srcDir("../wearApp/src/main/kotlin")
     defaultConfig {
         buildConfigField("String", "PRIVACY_POLICY_URL", "\"$privacyPolicyUrl\"")
     }

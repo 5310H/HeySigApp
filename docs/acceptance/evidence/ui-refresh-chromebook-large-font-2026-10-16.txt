@@ -1,0 +1,9 @@
+INSTRUMENTATION_RESULT: displayId=0
+INSTRUMENTATION_RESULT: layout=PASS: native controls at least 48dp; font scale 2.0; width 412dp
+INSTRUMENTATION_RESULT: limitation=Android 16 runtime coverage still pending
+INSTRUMENTATION_RESULT: navigation=Home, Noise, Settings, Voice, Privacy and Watch opened; Back returned through Settings to Home; no capture or playback
+INSTRUMENTATION_RESULT: privacy=PASS: isolated journal cap/expiry/corruption/deletion; unrelated fitting retained; real fitting untouched
+INSTRUMENTATION_RESULT: result=PASS: target 36; navigation and current-runtime insets; Android SDK 33
+INSTRUMENTATION_RESULT: roundWatch=PASS: isolated 192dp round native-style contexts at font scales 1 and 2; 48dp targets and no text ellipses; actual Wear device acceptance pending
+INSTRUMENTATION_RESULT: windowFocusBeforeBack=true
+INSTRUMENTATION_CODE: -1

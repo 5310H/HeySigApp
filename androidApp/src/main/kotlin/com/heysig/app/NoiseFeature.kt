@@ -71,30 +71,71 @@ class NoiseFeature(
             "Automatic switching is not enabled in this build."
     }
     fun render(content: LinearLayout) {
-        fun line(text:String) = TextView(activity).apply { this.text = text; textSize = 17f; content.addView(this) }
-        fun button(text:String,action:()->Unit) { content.addView(Button(activity).apply { this.text = text; setOnClickListener { action() } }) }
-        runtime = line(status())
-        button("Sample now") { handle(NoiseCommand.Sample) }
-        button("Start Observe") { handle(NoiseCommand.Observe) }
-        button("Stop noise") { stop(); tell("Noise stopped",false) }
-        line("Assign programs to noise levels 1 (quietest) through 6 (loudest). Repeated programs and unused levels are allowed. Thresholds below are illustrative until measured on this device. Save before observing. Leaving the app stops capture.")
-        loadError?.let { line("Stored settings need review: $it. Save reviewed settings before Observe.") }
+        var target = content
+        fun line(text:String) = TextView(activity).apply {
+            this.text = text; PhoneStyle.text(this,16f,color=PhoneStyle.secondary)
+            setPadding(0,PhoneStyle.dp(activity,4),0,PhoneStyle.dp(activity,10)); target.addView(this)
+        }
+        fun button(text:String,action:()->Unit) = Button(activity).also {
+            it.text = text; PhoneStyle.action(it); it.setOnClickListener { action() }; target.addView(it)
+        }
+        fun group(title:String,build:()->Unit) {
+            val parent = target; target = PhoneStyle.card(activity,parent)
+            try { PhoneStyle.heading(activity,target,title); build() } finally { target = parent }
+        }
+        group("Noise observation") {
+            runtime = line(status())
+            PhoneStyle.action(button("Start Observe") { handle(NoiseCommand.Observe) },"primary")
+            button("Sample now") { handle(NoiseCommand.Sample) }
+            PhoneStyle.action(button("Stop noise") { stop(); tell("Noise stopped",false) },"danger")
+            line("Observe suggests a program without sending any commands. Automatic switching is unavailable.")
+        }
+        group("Your listening levels") {
+            line("Assign programs from quietest (1) to loudest (6). Reuse a program or leave a level unused. Save your choices before observing.")
+            loadError?.let { line("Review needed: $it") }
+        }
         val choices = listOf<Int?>(null) + programs().map { it.slot } + draft.programs.filterNotNull().filter { slot -> programs().none { it.slot == slot } }.distinct()
         val pickers = (1..6).map { level ->
-            line("Noise level $level${if(level==1) " — quietest" else if(level==6) " — loudest" else ""}")
-            Spinner(activity).apply {
-                adapter = ArrayAdapter(activity,android.R.layout.simple_spinner_dropdown_item,choices.map { label(it) })
-                setSelection(choices.indexOf(draft.programs[level-1]).coerceAtLeast(0)); content.addView(this)
+            var picker: Spinner? = null
+            group("Level $level${if(level == 1) " · Quietest" else if(level == 6) " · Loudest" else ""}") {
+                picker = Spinner(activity).apply {
+                    contentDescription = "Program for noise level $level"
+                    adapter = ArrayAdapter(activity,android.R.layout.simple_spinner_dropdown_item,choices.map { label(it) })
+                    setSelection(choices.indexOf(draft.programs[level-1]).coerceAtLeast(0)); target.addView(this)
+                }
+            }
+            checkNotNull(picker)
+        }
+        val advanced = LinearLayout(activity).apply { orientation = LinearLayout.VERTICAL; visibility = android.view.View.GONE }
+        val expand = button("Show measurement settings") { advanced.visibility = if(advanced.visibility == android.view.View.VISIBLE) android.view.View.GONE else android.view.View.VISIBLE }
+        expand.setOnClickListener {
+            val opening = advanced.visibility != android.view.View.VISIBLE
+            advanced.visibility = if(opening) android.view.View.VISIBLE else android.view.View.GONE
+            expand.text = if(opening) "Hide measurement settings" else "Show measurement settings"
+        }
+        content.addView(advanced)
+        target = advanced
+        fun field(label:String,value:Any): EditText {
+            line(label)
+            return EditText(activity).apply {
+                contentDescription = label; setSingleLine(); setText(value.toString()); target.addView(this)
+                inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL or android.text.InputType.TYPE_NUMBER_FLAG_SIGNED
             }
         }
-        fun field(label:String,value:Any): EditText { line(label); return EditText(activity).apply { setSingleLine(); setText(value.toString()); content.addView(this) } }
-        val boundaries = draft.boundaries.mapIndexed { i,value -> field("Threshold ${i+1}: between levels ${i+1} and ${i+2}",value) }
-        val margin = field("Hysteresis margin",draft.margin)
-        val confirmations = field("Consecutive confirmations (1–20)",draft.confirmations)
-        val cooldown = field("Cooldown seconds (reserved for Automatic)",draft.cooldownSeconds)
-        val capture = field("Capture seconds (1–10)",draft.captureSeconds)
-        val wait = field("Wait seconds (1–300)",draft.waitSeconds)
-        val freshness = field("Freshness limit seconds (must exceed capture + wait)",draft.freshnessSeconds)
+        var boundaries = emptyList<EditText>()
+        lateinit var margin: EditText; lateinit var confirmations: EditText; lateinit var cooldown: EditText
+        lateinit var capture: EditText; lateinit var wait: EditText; lateinit var freshness: EditText
+        group("Measurement settings") {
+            line("Thresholds are illustrative until calibrated on this device. These are relative microphone levels, not sound-pressure dB.")
+            boundaries = draft.boundaries.mapIndexed { i,value -> field("Threshold ${i+1} · levels ${i+1} and ${i+2}",value) }
+            margin = field("Hysteresis margin",draft.margin)
+            confirmations = field("Consecutive confirmations (1–20)",draft.confirmations)
+            cooldown = field("Cooldown seconds (reserved for Automatic)",draft.cooldownSeconds)
+            capture = field("Capture seconds (1–10)",draft.captureSeconds)
+            wait = field("Wait seconds (1–300)",draft.waitSeconds)
+            freshness = field("Freshness limit seconds (must exceed capture + wait)",draft.freshnessSeconds)
+        }
+        target = content
         readEditor = {
             NoiseSettings(pickers.map { choices[it.selectedItemPosition] },boundaries.map { it.text.toString().toDoubleOrNull() ?: error("Enter numeric thresholds") },
                 margin.text.toString().toDoubleOrNull() ?: error("Enter a numeric margin"),
@@ -111,9 +152,8 @@ class NoiseFeature(
             cooldown.setText(draft.cooldownSeconds.toString()); capture.setText(draft.captureSeconds.toString())
             wait.setText(draft.waitSeconds.toString()); freshness.setText(draft.freshnessSeconds.toString())
         }
-        button("Save noise settings") { handle(NoiseCommand.Save) }
+        PhoneStyle.action(button("Save noise settings") { handle(NoiseCommand.Save) },"primary")
         button("Discard noise changes") { handle(NoiseCommand.Discard) }
-        line("Voice: assign program three to noise level five; leave noise level four unused; set noise threshold one to minus sixty; save noise settings; observe noise; noise status; stop noise.")
     }
     fun handle(command: NoiseCommand) {
         try {

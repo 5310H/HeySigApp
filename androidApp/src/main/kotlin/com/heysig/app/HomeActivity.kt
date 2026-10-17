@@ -41,7 +41,9 @@ class HomeActivity : Activity() {
     private var page = "Home"
     private var setupChanged: (() -> Boolean)? = null
     private var saveSetupAction: (() -> Unit)? = null
-    private var message = "Ready. No command is sent at startup."
+    private var message = "Ready. Nothing is sent until you ask."
+    private var speechSummary: TextView? = null
+    private fun speechStatusText() = "Prompts ${if(voiceEnabled("voicePrompts")) "on" else "off"} · Spoken replies ${if(voiceEnabled("spokenResponses")) "on" else "off"}"
     private var backCallback: android.window.OnBackInvokedCallback? = null
     private var watchBridge: WatchBridge? = null
     private var watchToggle: CheckBox? = null
@@ -97,7 +99,9 @@ class HomeActivity : Activity() {
     @Deprecated("Fallback for Android 10–12; newer versions use OnBackInvokedDispatcher")
     @android.annotation.SuppressLint("GestureBackNavigation") // API 33+ dispatcher is registered in onCreate; retain the pre-33 framework fallback.
     override fun onBackPressed() { leavePage() }
-    private fun leavePage() { if(page != "Home") navigate("Home") else finish() }
+    private fun leavePage() {
+        when(page) { "Setup", "Voice", "Watch", "Privacy" -> navigate("Settings"); "Home" -> finish(); else -> navigate("Home") }
+    }
 
     private fun load() {
         try {
@@ -132,10 +136,24 @@ class HomeActivity : Activity() {
             if(json.has(key.name)) key to json.getInt(key.name) else null
         }.toMap())
     }
-    private fun line(text: String) = TextView(this).also { it.text = text; it.textSize = 17f; it.setPadding(0,8,0,8); content.addView(it) }
+    private fun line(text: String) = TextView(this).also {
+        PhoneStyle.text(it,16f,color=PhoneStyle.secondary); it.text = text
+        it.setPadding(0,PhoneStyle.dp(this,4),0,PhoneStyle.dp(this,10)); content.addView(it)
+    }
     private fun button(text: String, enabled: Boolean = true, action: () -> Unit) = Button(this).also {
         it.text = text; it.isEnabled = enabled
+        PhoneStyle.action(it,if(text.startsWith("Delete")) "danger" else "secondary")
         it.setOnClickListener { action() }; content.addView(it)
+    }
+    private fun section(title: String, detail: String? = null, compact: Boolean = false, build: () -> Unit) {
+        val parent = content
+        content = PhoneStyle.card(this,parent)
+        try {
+            val heading = PhoneStyle.heading(this,content,title)
+            if(compact) PhoneStyle.text(heading,13f,true,PhoneStyle.secondary)
+            detail?.let { line(it) }
+            build()
+        } finally { content = parent }
     }
     private fun navigate(target: String) {
         if(page == "Setup" && target != "Setup" && setupChanged?.invoke() == true) {
@@ -150,99 +168,237 @@ class HomeActivity : Activity() {
         try { noise.detachEditor() } catch(e:Exception) { tell("Noise draft: ${e.message}. Correct the field or discard noise changes."); return }
         page = destination
         setupChanged = null; saveSetupAction = null
-        content = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(24,24,24,24) }
-        line("HeySig • $page").textSize = 25f
-        line("Hearing-aid controls • experimental noise observation")
-        line("Speech: prompts ${if(voiceEnabled("voicePrompts")) "on" else "off"} • responses ${if(voiceEnabled("spokenResponses")) "on" else "off"}")
-        val nav = LinearLayout(this)
-        listOf("Home","Setup","Saved","Voice","Noise").forEach { target ->
-            nav.addView(Button(this).apply { text = target; isEnabled = !busy.get(); setOnClickListener { navigate(target) } }, LinearLayout.LayoutParams(0,-2,1f))
-        }; content.addView(nav)
-        button("Watch connection",!busy.get()) { navigate("Watch") }
-        button("Privacy and data",!busy.get()) { navigate("Privacy") }
-        status = line(message)
-        heardStatus = line(if(lastHeard.isEmpty()) "" else "Speech heard: $lastHeard")
-        heardStatus.visibility = if(lastHeard.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
-        if(page == "Home" && BuildConfig.DEBUG) {
+        val root = FrameLayout(this).apply { setBackgroundColor(PhoneStyle.background) }
+        val shell = object : LinearLayout(this) {
+            override fun onMeasure(widthSpec: Int, heightSpec: Int) {
+                val width = minOf(android.view.View.MeasureSpec.getSize(widthSpec),PhoneStyle.dp(context,760))
+                super.onMeasure(android.view.View.MeasureSpec.makeMeasureSpec(width,android.view.View.MeasureSpec.EXACTLY),heightSpec)
+            }
+        }.apply { orientation = LinearLayout.VERTICAL }
+        root.addView(shell,FrameLayout.LayoutParams(-1,-1,android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL))
+        content = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(PhoneStyle.dp(this@HomeActivity,22),PhoneStyle.dp(this@HomeActivity,18),PhoneStyle.dp(this@HomeActivity,22),PhoneStyle.dp(this@HomeActivity,12))
+        }
+        line("HEYSIG").apply { PhoneStyle.text(this,12f,true,PhoneStyle.blue); letterSpacing = .15f }
+        val title = when(page) {
+            "Home" -> "Your hearing"
+            "Noise" -> "Sound & noise"
+            "Saved" -> "Saved settings"
+            "Setup" -> "Aid setup"
+            "Voice" -> "Voice & speech"
+            "Watch" -> "Watch connection"
+            "Privacy" -> "Privacy & data"
+            else -> "Settings"
+        }
+        line(title).apply { PhoneStyle.text(this,minOf(34f,56f/resources.configuration.fontScale),true); isAccessibilityHeading = true }
+        line(when(page) {
+            "Home" -> "Your listening controls, all in one place."
+            "Noise" -> "Understand your surroundings. Stay in control."
+            "Saved" -> "Keep a familiar starting point."
+            "Settings" -> "Make HeySig work your way."
+            else -> "Your preferences, on your terms."
+        }).apply { if(resources.configuration.fontScale > 1.3f) visibility = android.view.View.GONE }
+        val statusCard = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(PhoneStyle.dp(context,4),PhoneStyle.dp(context,4),PhoneStyle.dp(context,4),PhoneStyle.dp(context,12))
+            content.addView(this)
+        }
+        status = TextView(this).apply {
+            text = message; PhoneStyle.text(this,14f,color=PhoneStyle.secondary)
+            accessibilityLiveRegion = android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
+            statusCard.addView(this)
+        }
+        heardStatus = TextView(this).apply {
+            text = if(lastHeard.isEmpty()) "" else "Heard: $lastHeard"
+            PhoneStyle.text(this,14f,color=PhoneStyle.secondary)
+            visibility = if(lastHeard.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
+            statusCard.addView(this)
+        }
+        when(page) {
+            "Home" -> home()
+            "Setup" -> section("Your hearing-aid setup") { setup() }
+            "Saved" -> section("Your saved snapshot") { snapshot() }
+            "Voice" -> section("Voice & speech") { voicePage() }
+            "Noise" -> noise.render(content)
+            "Watch" -> section("Your watch") { if(resumed) companion.resume(); companion.render(content) }
+            "Privacy" -> privacyPage()
+            "Settings" -> settingsPage()
+        }
+        PhoneStyle.polish(content)
+        val scroll = ScrollView(this).apply {
+            isFillViewport = true; isVerticalScrollBarEnabled = false
+            addView(content,ViewGroup.LayoutParams(-1,-2))
+        }
+        shell.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
+        val actions = LinearLayout(this).apply {
+            setPadding(PhoneStyle.dp(context,18),PhoneStyle.dp(context,8),PhoneStyle.dp(context,18),PhoneStyle.dp(context,4))
+        }
+        val speak = Button(this).apply { text = "Speak command"; setOnClickListener { beginVoice() }; PhoneStyle.action(this,"primary") }
+        val stop = Button(this).apply {
+            text = "Stop"; PhoneStyle.action(this,"danger")
+            setOnClickListener { noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; pendingVoice = false; cancelled.set(true); tell("Stop requested. Already emitted tones cannot be undone.") }
+        }
+        actions.addView(speak,LinearLayout.LayoutParams(0,-2,2f).apply { marginEnd = PhoneStyle.dp(this@HomeActivity,10) })
+        actions.addView(stop,LinearLayout.LayoutParams(0,-2,1f))
+        shell.addView(actions)
+        val speechLabel = TextView(this).apply {
+            text = speechStatusText()
+            PhoneStyle.text(this,12f,color=PhoneStyle.secondary); gravity = android.view.Gravity.CENTER
+            setPadding(PhoneStyle.dp(context,12),0,PhoneStyle.dp(context,12),PhoneStyle.dp(context,6))
+        }; speechSummary = speechLabel; shell.addView(speechLabel)
+        val tabs = listOf("Home","Noise","Saved","Settings")
+        val selected = if(page in tabs) page else "Settings"
+        val navigation = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(android.graphics.Color.WHITE) }
+        val count = if(resources.configuration.fontScale > 1.3f && resources.configuration.screenWidthDp < 600 && resources.configuration.screenHeightDp > 480) 2 else 4
+        tabs.chunked(count).forEach { rowTabs ->
+            val row = LinearLayout(this)
+            rowTabs.forEach { target ->
+                val active = selected == target
+                val tab = Button(this).apply {
+                    text = target; isEnabled = !busy.get(); tag = "navigation"
+                    PhoneStyle.text(this,12f,active,if(active) PhoneStyle.blue else PhoneStyle.secondary)
+                    isAllCaps = false; minHeight = PhoneStyle.dp(context,68); minimumHeight = minHeight
+                    setPadding(PhoneStyle.dp(context,4),PhoneStyle.dp(context,8),PhoneStyle.dp(context,4),PhoneStyle.dp(context,8))
+                    background = PhoneStyle.shape(context,android.graphics.Color.WHITE,0)
+                    setCompoundDrawables(null,PhoneStyle.icon(context,target,if(active) PhoneStyle.blue else PhoneStyle.secondary),null,null)
+                    compoundDrawablePadding = PhoneStyle.dp(context,5)
+                    alpha = if(isEnabled) 1f else .45f
+                    isSelected = active; contentDescription = "$target${if(active) ", selected" else ""}"
+                    setOnClickListener { navigate(target) }
+                }
+                row.addView(tab,LinearLayout.LayoutParams(0,-2,1f))
+            }; navigation.addView(row)
+        }; shell.addView(navigation)
+        root.setOnApplyWindowInsetsListener { view,insets ->
+            if(android.os.Build.VERSION.SDK_INT >= 30) {
+                val bars = insets.getInsets(android.view.WindowInsets.Type.systemBars() or android.view.WindowInsets.Type.displayCutout() or android.view.WindowInsets.Type.ime())
+                view.setPadding(bars.left,bars.top,bars.right,bars.bottom)
+                val keyboardVisible = insets.isVisible(android.view.WindowInsets.Type.ime())
+                navigation.visibility = if(keyboardVisible) android.view.View.GONE else android.view.View.VISIBLE
+                speechLabel.visibility = if(keyboardVisible) android.view.View.GONE else android.view.View.VISIBLE
+            } else {
+                @Suppress("DEPRECATION")
+                view.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom)
+            }; insets
+        }
+        setContentView(root)
+        root.requestApplyInsets()
+        window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    }
+    private fun settingsPage() {
+        section("Your preferences") {
+            button("Aid setup") { navigate("Setup") }
+            button("Voice & speech") { navigate("Voice") }
+            button("Watch connection") { navigate("Watch") }
+            button("Privacy and data") { navigate("Privacy") }
+        }
+        section("Device & assistance") {
+            line("Only completed requests are remembered. HeySig cannot read changes made directly on your aids or in another app.")
+            button("Check device audio",!busy.get()) { try { player.inspect(); tell("Speaker audio checks passed. No command sent.",true) } catch(e:Exception) { tell("Blocked: ${e.message}",true) } }
+            button("Mark aid settings unknown",!busy.get()) {
+                requested = RequestedState()
+                message = if(prefs.edit().putString("requested",encode(requested)).commit()) "Requested state cleared; saved restoration record retained." else "Could not save unknown state"
+                show()
+            }
+        }
+        if(BuildConfig.DEBUG) section("Development connection") {
+            line("Optional Chromebook relay. Normal phone/watch pairing is available in the release candidate.")
             val remote = CheckBox(this).apply {
                 text = "Watch Wi-Fi (development)"; isChecked = watchBridge != null
-                setOnCheckedChangeListener { box, enabled ->
+                setOnCheckedChangeListener { box,enabled ->
                     if(enabled) {
                         if(getSharedPreferences("heysig-watch-dev",MODE_PRIVATE).getString("token",null) == null) {
                             box.isChecked = false; tell("Set up the Chromebook watch relay first")
-                        } else try { watchBridge = WatchBridge(this@HomeActivity) { request, reply -> runOnUiThread { try { receiveWatch(request,reply) } catch(e:Exception) { reply(remoteResult("FAILED","Watch request could not be processed")) } } }; tell("Watch Wi-Fi ready while HeySig stays open") }
-                        catch(e:Exception) { box.isChecked = false; tell("Watch bridge could not start: ${e.message}") }
+                        } else try {
+                            watchBridge = WatchBridge(this@HomeActivity) { request,reply -> runOnUiThread { try { receiveWatch(request,reply) } catch(e:Exception) { reply(remoteResult("FAILED","Watch request could not be processed")) } } }
+                            tell("Watch Wi-Fi ready while HeySig stays open")
+                        } catch(e:Exception) { box.isChecked = false; tell("Watch bridge could not start: ${e.message}") }
                     } else { watchBridge?.close(); watchBridge = null }
                 }
             }; watchToggle = remote; content.addView(remote)
         }
-        button("Speak command") { beginVoice() }
-        button("Stop") { noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; pendingVoice = false; cancelled.set(true); tell("Stop requested. Already emitted tones cannot be undone.") }
-        if(page == "Setup") button("Save reviewed setup",!busy.get()) { saveSetupAction?.invoke() }
-        when(page) {
-            "Home" -> home()
-            "Setup" -> setup()
-            "Saved" -> snapshot()
-            "Voice" -> voicePage()
-            "Noise" -> noise.render(content)
-            "Watch" -> { if(resumed) companion.resume(); companion.render(content) }
-            "Privacy" -> privacyPage()
-        }
-        val scroll = ScrollView(this).apply { addView(content, ViewGroup.LayoutParams(-1,-2)) }
-        scroll.setOnApplyWindowInsetsListener { view,insets ->
-            if(android.os.Build.VERSION.SDK_INT >= 30) {
-                val bars = insets.getInsets(android.view.WindowInsets.Type.systemBars() or android.view.WindowInsets.Type.displayCutout() or android.view.WindowInsets.Type.ime())
-                view.setPadding(bars.left,bars.top,bars.right,bars.bottom)
-            } else {
-                @Suppress("DEPRECATION")
-                view.setPadding(insets.systemWindowInsetLeft,insets.systemWindowInsetTop,insets.systemWindowInsetRight,insets.systemWindowInsetBottom)
-            }
-            insets
-        }
-        setContentView(scroll)
-        window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
-    private fun programLabel(slot: Int?) = fitting?.programs?.find { it.slot == slot }?.let { "${it.name}, slot ${it.slot}" } ?: "unknown"
+    private fun programLabel(slot: Int?) = fitting?.programs?.find { it.slot == slot }?.let { "${it.name}, program ${it.slot}" } ?: "unknown"
     private fun stateText(state: RequestedState) = "Program: ${programLabel(state.program)}\n" +
-        LevelControl.entries.joinToString("\n") { "$it: ${state.levels[it]?.toString() ?: "unknown"}" }
+        LevelControl.entries.joinToString("\n") { "${when(it) { LevelControl.VOLUME -> "Volume"; LevelControl.SHARPNESS -> "Sound sharpness"; LevelControl.TINNITUS -> "Tinnitus" }}: ${state.levels[it]?.toString() ?: "not set"}" }
     private fun home() {
-        line(if(fitting == null) "Save your aid setup before sending commands." else "LAST SENT\n${stateText(requested)}")
-        fitting?.programs?.forEach { program -> button("${program.slot}. ${program.name}",!busy.get()) { dispatch(ManualRequest.SelectProgram(program.slot)) } }
-        for(control in LevelControl.entries) {
-            line(when(control) { LevelControl.SHARPNESS -> "Sound Sharpness (balance)"; else -> control.name.lowercase().replaceFirstChar { it.uppercase() } })
-            val values = control.range.toList()
-            val picker = Spinner(this).apply {
-                adapter = ArrayAdapter(this@HomeActivity,android.R.layout.simple_spinner_dropdown_item,values.map { "$it" })
-                setSelection(values.indexOf(requested.levels[control] ?: if(control == LevelControl.VOLUME) 8 else 0)); isEnabled = !busy.get()
-            }; content.addView(picker)
-            val supported = control != LevelControl.TINNITUS || fitting?.programs?.find { it.slot == requested.program }?.tinnitus == TinnitusCapability.SUPPORTED
-            button("Send ${control.name.lowercase()}", !busy.get() && fitting != null && requested.program != null && supported) {
-                dispatch(ManualRequest.SetLevel(control,values[picker.selectedItemPosition]))
-            }
-            if(control == LevelControl.TINNITUS) {
-                val program = fitting?.programs?.find { it.slot == requested.program }
-                line(when(program?.tinnitus) {
-                    TinnitusCapability.SUPPORTED -> "${program.name}: tinnitus support confirmed in saved setup."
-                    TinnitusCapability.UNSUPPORTED -> "${program.name}: tinnitus unavailable in saved setup."
-                    TinnitusCapability.UNKNOWN -> "${program.name}: tinnitus support unknown. Confirm and Save in Setup."
-                    null -> "Select a program before setting tinnitus."
-                })
+        section("Last requested",compact=true) {
+            line(fitting?.programs?.find { it.slot == requested.program }?.name ?: "No program selected").apply { PhoneStyle.text(this,27f,true) }
+            line("Not a live reading from the aids.")
+            if(fitting == null) {
+                line("Set up your hearing aids once to unlock your controls.")
+                PhoneStyle.action(button("Set up hearing aids") { navigate("Setup") },"primary")
             }
         }
-        repeatRequest?.let { request -> button("Send last target again",!busy.get()) { dispatch(request,true) } }
-        button("Check left battery",!busy.get() && fitting != null) { dispatch(ManualRequest.Battery(true,false)) }
-        button("Check both batteries",!busy.get() && fitting != null) { dispatch(ManualRequest.Battery(true,true)) }
-        button("Check right battery",!busy.get() && fitting != null) { dispatch(ManualRequest.Battery(false,true)) }
-        button("Check device audio",!busy.get()) { try { player.inspect(); tell("Speaker audio checks passed. No command sent.",true) } catch(e:Exception) { tell("Blocked: ${e.message}",true) } }
-        button("Mark aid settings unknown",!busy.get()) {
-            requested = RequestedState()
-            if(!prefs.edit().putString("requested",encode(requested)).commit()) message = "Could not save unknown state" else message = "Requested state cleared; saved restoration record retained."
-            show()
+        if(fitting != null) section("Programs","Choose a listening program.") {
+            val programs = fitting!!.programs
+            val columns = if(resources.configuration.screenWidthDp < 360 || resources.configuration.fontScale > 1.3f) 1 else 2
+            programs.chunked(columns).forEach { group ->
+                val row = LinearLayout(this)
+                group.forEach { program ->
+                    val selected = requested.program == program.slot
+                    val choice = Button(this).apply {
+                        text = "${program.name}${if(selected) " ✓" else ""}\nProgram ${program.slot}"
+                        contentDescription = "${program.name}, program ${program.slot}${if(selected) ", last requested" else ""}"
+                        isEnabled = !busy.get(); isSelected = selected
+                        PhoneStyle.action(this,if(selected) "selected" else "program")
+                        gravity = android.view.Gravity.START or android.view.Gravity.CENTER_VERTICAL
+                        minHeight = PhoneStyle.dp(context,88)
+                        setOnClickListener { dispatch(ManualRequest.SelectProgram(program.slot)) }
+                    }
+                    row.addView(choice,LinearLayout.LayoutParams(0,-2,1f).apply { marginEnd = PhoneStyle.dp(this@HomeActivity,5); bottomMargin = PhoneStyle.dp(this@HomeActivity,8) })
+                }
+                if(group.size < columns) row.addView(android.view.View(this),LinearLayout.LayoutParams(0,1,1f))
+                content.addView(row)
+            }
+        }
+        if(fitting != null) for(control in LevelControl.entries) {
+            val title = when(control) { LevelControl.VOLUME -> "Volume"; LevelControl.SHARPNESS -> "Sound sharpness"; LevelControl.TINNITUS -> "Tinnitus" }
+            val supported = control != LevelControl.TINNITUS || fitting?.programs?.find { it.slot == requested.program }?.tinnitus == TinnitusCapability.SUPPORTED
+            val enabled = !busy.get() && requested.program != null && supported
+            section(title) {
+                val last = requested.levels[control]
+                line("Last requested: ${last?.toString() ?: "not set"}")
+                var draft = last ?: if(control == LevelControl.VOLUME) 8 else 0
+                val value = line(draft.toString()).apply { PhoneStyle.text(this,30f,true) }
+                val slider = SeekBar(this).apply {
+                    max = control.range.last-control.range.first
+                    progress = draft-control.range.first; isEnabled = enabled
+                    minHeight = PhoneStyle.dp(context,48)
+                    progressTintList = android.content.res.ColorStateList.valueOf(PhoneStyle.blue)
+                    thumbTintList = android.content.res.ColorStateList.valueOf(PhoneStyle.blue)
+                    contentDescription = "$title, chosen level $draft"
+                    setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(bar: SeekBar, progress: Int, fromUser: Boolean) {
+                            draft = control.range.first+progress; value.text = draft.toString()
+                            bar.contentDescription = "$title, chosen level $draft"
+                        }
+                        override fun onStartTrackingTouch(bar: SeekBar) = Unit
+                        override fun onStopTrackingTouch(bar: SeekBar) = Unit
+                    })
+                }; content.addView(slider,LinearLayout.LayoutParams(-1,-2))
+                line("${control.range.first} – ${control.range.last} · Changes are sent only when you tap Send.")
+                PhoneStyle.action(button("Send ${title.lowercase()}",enabled) { dispatch(ManualRequest.SetLevel(control,draft)) },"primary")
+                if(!enabled) line(if(requested.program == null) "Choose a program first." else if(!supported) "Tinnitus support needs confirmation for this program in Aid setup." else "Wait for the current request or tap Stop.")
+            }
+        }
+        repeatRequest?.let { request -> section("Repeat a request") { button("Send last target again",!busy.get()) { dispatch(request,true) } } }
+        if(fitting != null) section("Battery indications","Ask your aids for their usual battery indication.") {
+            button("Check both batteries",!busy.get()) { dispatch(ManualRequest.Battery(true,true)) }
+            button("Check left battery",!busy.get()) { dispatch(ManualRequest.Battery(true,false)) }
+            button("Check right battery",!busy.get()) { dispatch(ManualRequest.Battery(false,true)) }
         }
     }
     private fun setup() {
         line("Review and save. For your tested fitting, addresses were 12. This is not a universal default. Blank program names disable those slots. Tinnitus support must be confirmed per program.")
-        fun field(label: String, value: String): EditText { line(label); return EditText(this).apply { setSingleLine(); setText(value); content.addView(this) } }
+        fun field(label: String, value: String): EditText {
+            val caption = line(label)
+            return EditText(this).apply {
+                id = android.view.View.generateViewId(); caption.labelFor = id
+                setSingleLine(); setText(value); content.addView(this)
+            }
+        }
         val control = field("Program/level address",fitting?.controlAddress?.toString() ?: "12")
         val left = field("Left battery address",fitting?.leftAddress?.toString() ?: "12")
         val right = field("Right battery address",fitting?.rightAddress?.toString() ?: "12")
@@ -253,11 +409,11 @@ class HomeActivity : Activity() {
             names.add(field("Program $slot",existing?.name ?: if(fitting == null) defaults[slot-1] else ""))
             line("Tinnitus availability, slot $slot")
             capabilities.add(Spinner(this).apply {
+                contentDescription = "Tinnitus availability for program $slot"
                 adapter = ArrayAdapter(this@HomeActivity,android.R.layout.simple_spinner_dropdown_item,TinnitusCapability.entries.map { it.name.lowercase() })
                 setSelection((existing?.tinnitus ?: TinnitusCapability.UNKNOWN).ordinal); content.addView(this)
             })
         }
-        line("Validated waveform: 44100 Hz • 15360 Hz center • 512 Hz spacing • 0.0625 s bit • divisor 1.2 • address-XOR on. Other profiles remain in the research prototype.")
         setupChanged = {
             val existing = fitting
             existing == null || control.text.toString().trim() != existing.controlAddress.toString() ||
@@ -300,6 +456,7 @@ class HomeActivity : Activity() {
         if(page == "Saved") show()
     }
     private fun voicePage() {
+        PhoneStyle.heading(this,content,"Spoken feedback")
         line(PrivacyNotice.SYNTHESIS)
         for((label,key) in listOf("Voice prompts (confirmation and guidance)" to "voicePrompts","Spoken responses (status, results and errors)" to "spokenResponses")) {
             content.addView(CheckBox(this).apply {
@@ -311,18 +468,20 @@ class HomeActivity : Activity() {
                         reverting = true; box.isChecked = !checked; reverting = false
                         tell("Could not save voice setting")
                     }
+                    speechSummary?.text = speechStatusText()
                     if(!checked) tts?.stop()
                 }
             })
         }
         line("Saved separately on this device and the watch. Text replies remain visible. Say voice prompts off/on or voice responses off/on. The installed speech-recognition service may have its own sounds.")
-        line("Speak on this Chromebook using the Android speech service. Recognition may use the service's network connection. Cancel sends nothing. Typed commands exercise the same parser.")
-        val input = EditText(this).apply { hint = "program two / volume ten / current tin"; setSingleLine(); content.addView(this) }
+        line("Use your installed speech service, or type a command below. Recognition may use the service's network connection. Cancel sends nothing.")
+        PhoneStyle.heading(this,content,"Type a command")
+        val input = EditText(this).apply { hint = "Try: program two"; setSingleLine(); content.addView(this) }
         button("Run typed command",!busy.get()) { route(input.text.toString()) }
         line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, noise sample, observe noise, noise status, stop noise. Automatic switching, calibration wizard and schedules remain pending. Use Watch connection for companion setup.")
     }
     private fun privacyPage() {
-        PrivacyNotice.sections.forEach { (title,text) -> line(title).textSize = 21f; line(text) }
+        PrivacyNotice.sections.forEach { (title,text) -> section(title) { line(text) } }
         if(BuildConfig.DEBUG) line("Development build: the optional Linux/ADB relay has separate command/reply storage on that computer. This phone can also retain up to 128 legacy development replies until cleared; the 24-hour production rule does not apply to those old records. Clear heard text and watch history removes phone-side replies. Phone deletion does not delete computer relay records. This transport is excluded from production.")
         button("Open public privacy policy") {
             if(BuildConfig.PRIVACY_POLICY_URL.isEmpty()) tell("Public policy is not configured yet. Publisher contact and hosting must be supplied before release.")
@@ -484,6 +643,7 @@ class HomeActivity : Activity() {
     private fun route(text: String, origin: String? = null) {
         VoicePreference.parse(text)?.let { preference ->
             if(!prefs.edit().putBoolean(preference.key,preference.enabled).commit()) { tell("Could not save voice setting"); return }
+            speechSummary?.text = speechStatusText()
             tts?.stop(); tell(preference.description,true)
             if(page == "Voice") show()
             return

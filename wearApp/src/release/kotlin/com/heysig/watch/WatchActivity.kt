@@ -73,7 +73,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         status = TextView(this).apply { text = "Connection off. Open HeySig on your paired phone, enable this watch, then Connect phone here."; textSize = 16f; setTextColor(Color.WHITE); accessibilityLiveRegion = android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
         layout.addView(status)
         label("Selected phone: ${prefs.getString("phoneLabel","none")}")
-        label("Watch messages can include command words and hearing-aid settings. Google Play services may route encrypted messages through Google servers. Read Privacy and data below. Keep the phone app open and unlocked.")
+        label("Commands and replies use Google Play services. Keep HeySig open on your phone. Details in Privacy and data.")
         button("Connect phone") { connect() }
         button("Speak command") { if(working) reply("Wait or press Stop") else speechConsent() }
         button("Read status") { send("status",listOf("status")) }
@@ -117,11 +117,13 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             catch(e:Exception) { reply("Open Privacy and data on your phone to view the public policy") }
         }
         button("Disconnect") { disconnect(); reply("Disconnected. No command will replay.") }
-        setContentView(ScrollView(this).apply { setBackgroundColor(Color.BLACK); addView(layout,ViewGroup.LayoutParams(-1,-2)) })
+        WatchStyle.prepareColumn(layout)
+        WatchStyle.polish(layout)
+        setContentView(ScrollView(this).apply { isVerticalScrollBarEnabled = false; setBackgroundColor(Color.BLACK); addView(layout,ViewGroup.LayoutParams(-1,-2)) })
     }
     override fun onResume() {
         super.onResume(); active = true
-        status.text = "Connection off. Select Connect phone; pending commands are never replayed."
+        status.text = "Not connected. Tap Connect phone."
         val current = ++listenerGeneration
         val receiver = MessageClient.OnMessageReceivedListener { event ->
             if(active && current == listenerGeneration) onMessageReceived(event)

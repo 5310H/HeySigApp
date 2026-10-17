@@ -11,14 +11,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--device', required=True, help='Exact authorized ADB serial/IP:port')
     parser.add_argument('--report', type=Path)
+    parser.add_argument('--screenshots', action='store_true', help='Capture local UI previews in the development app external files directory')
     args = parser.parse_args()
     for apk in ('androidApp/build/outputs/apk/debug/androidApp-debug.apk',
                 'androidApp/build/outputs/apk/androidTest/debug/androidApp-debug-androidTest.apk'):
         completed = subprocess.run(['adb','-s',args.device,'install','-r',str(ROOT/apk)],capture_output=True,text=True)
         if completed.returncode or 'Success' not in completed.stdout:
             raise SystemExit('Development/test APK install failed; existing app was not uninstalled.')
-    completed = subprocess.run(['adb','-s',args.device,'shell','am','instrument','-w',
-        'com.heysig.batteryprototype.test/com.heysig.app.Api36Smoke'],capture_output=True,text=True)
+    command = ['adb','-s',args.device,'shell','am','instrument','-w']
+    if args.screenshots:
+        command += ['-e','screenshots','true']
+    command += ['com.heysig.batteryprototype.test/com.heysig.app.Api36Smoke']
+    completed = subprocess.run(command,capture_output=True,text=True)
     output = completed.stdout+completed.stderr
     print(output)
     if args.report:
