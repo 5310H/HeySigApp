@@ -7,7 +7,7 @@ provider behavior are still unverified. See [policy draft](privacy-policy-draft.
 | Flow | Release implementation | Retention/control | Form review |
 |---|---|---|---|
 | Hearing-aid setup/settings | Private phone preferences; used to render validated tone requests | Until local deletion/uninstall; export optional | Assess health/device/settings categories from intended use; avoid classifying by permission alone |
-| Noise microphone | Bounded foreground PCM to in-memory scalar statistics; no file/network writer in this feature | Discarded after capture; Stop/onPause; Android permission controls | Distinguish local-only noise processing from off-device speech |
+| Noise microphone | Bounded foreground PCM to in-memory scalar statistics; no recording or audio uploader | PCM discarded after capture; optional 18 scalar calibration values and microphone/capture configuration saved locally with settings; Stop/onPause and Android permission controls | Distinguish local-only noise processing from off-device speech |
 | Recognition audio | Delegated ACTION_RECOGNIZE_SPEECH on either device | Controlled by selected provider, not HeySig | Verify provider and retention/network behavior on supported devices; do not claim offline-only |
 | Recognized words | Transient phone memory; watch sends words/alternatives to phone via MessageClient | No command-body logging; clear display/local data | Assess ephemeral processing and user-initiated transfer under current form definitions |
 | Watch transport | Data Layer SDK 20.0.1; package/signer-restricted, encrypted routing; may use Google servers | Nonpersistent MessageClient; no DataItems, retries or app backend | Review Google SDK data disclosures plus paired-device transport; no blanket no-collection claim |

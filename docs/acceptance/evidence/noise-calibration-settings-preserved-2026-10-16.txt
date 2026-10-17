@@ -1,0 +1,1 @@
+PASS: real heysig-core-v1 and heysig-noise-v1 before/after SHA-256 comparisons match the pre-update baseline. No raw preference contents were printed or committed. Original font scale 1.0 retained after final run. No microphone capture or aid command was performed.

@@ -1,0 +1,7 @@
+Command: python3 tools/watch-relay/check_relay.py; git diff --check
+Exit: 0
+......
+----------------------------------------------------------------------
+Ran 6 tests in 1.833s
+
+OK

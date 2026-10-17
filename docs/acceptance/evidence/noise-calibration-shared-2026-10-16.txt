@@ -1,0 +1,7 @@
+Command: bash tools/check-noise.sh
+Exit: 0
+PASS: RMS scaling, chunk boundaries, frame variation, clipping, DC, zero, short and bounded captures
+PASS: six-level validation, edge equality, hysteresis, repeated/unused targets, jumps, stale gaps and voice settings
+PASS: scalar six-level calibration, rejected overlap, readiness gates, confirmation, cooldown, no-op, failure and stale completion
+
+The final Gradle shared suite additionally covers delivery-age boundaries and clock rollback.

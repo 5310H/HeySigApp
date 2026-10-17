@@ -14,7 +14,7 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
     private var worker: Thread? = null
     @Volatile private var cancellation = AtomicBoolean(true)
     @Synchronized fun stop() { cancellation.set(true) }
-    @Synchronized fun start(settings: NoiseSettings, repeat: Boolean, report: (NoiseMeasurement?,String?) -> Unit): Boolean {
+    @Synchronized fun start(settings: NoiseSettings, repeat: Boolean, report: (NoiseMeasurement?,String?,Long) -> Unit): Boolean {
         if(worker?.isAlive == true) return false
         val cancel = AtomicBoolean(false); cancellation = cancel
         worker = Thread({
@@ -26,9 +26,9 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
                     if(cancel.get()) break
                     try {
                         val value = capture(settings.captureSeconds,cancel)
-                        if(!cancel.get()) report(value,null)
+                        if(!cancel.get()) report(value,null,SystemClock.elapsedRealtime())
                     } catch(e:Exception) {
-                        if(!cancel.get()) report(null,e.message ?: "Microphone capture failed")
+                        if(!cancel.get()) report(null,e.message ?: "Microphone capture failed",SystemClock.elapsedRealtime())
                     }
                     if(!repeat) break
                     val until = SystemClock.elapsedRealtime()+settings.waitSeconds*1000L
@@ -37,6 +37,12 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
             } finally { cancel.set(true) }
         },"heysig-noise-observe").apply { start() }
         return true
+    }
+    fun sourceIdentity(): String {
+        val audio = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val device = audio.getDevices(AudioManager.GET_DEVICES_INPUTS).firstOrNull { it.type == android.media.AudioDeviceInfo.TYPE_BUILTIN_MIC }
+            ?: error("Built-in microphone unavailable")
+        return "${android.os.Build.FINGERPRINT}|${device.productName}|MIC|16000|PCM16|mono"
     }
     private fun capture(seconds: Int, cancel: AtomicBoolean): NoiseMeasurement {
         check(allowed()) { "Capture paused for speech, playback or inactive app" }
@@ -51,8 +57,9 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
         val recorder = AudioRecord(MediaRecorder.AudioSource.MIC,rate,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT,maxOf(minimum,4096))
         try {
             check(recorder.state == AudioRecord.STATE_INITIALIZED) { "Microphone could not initialize" }
-            check(recorder.setPreferredDevice(audio.getDevices(AudioManager.GET_DEVICES_INPUTS).firstOrNull { it.type == android.media.AudioDeviceInfo.TYPE_BUILTIN_MIC }
-                ?: error("Built-in microphone unavailable"))) { "Microphone route unavailable" }
+            val microphone = audio.getDevices(AudioManager.GET_DEVICES_INPUTS).firstOrNull { it.type == android.media.AudioDeviceInfo.TYPE_BUILTIN_MIC }
+                ?: error("Built-in microphone unavailable")
+            check(recorder.setPreferredDevice(microphone)) { "Microphone route unavailable" }
             val accumulator = NoiseAccumulator(rate,seconds)
             val buffer = ShortArray(1024)
             var total = 0
@@ -65,7 +72,7 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
                 val count = recorder.read(buffer,0,minOf(buffer.size,rate*seconds-total),AudioRecord.READ_NON_BLOCKING)
                 check(count >= 0) { "Microphone read failed ($count)" }
                 if(count == 0) { Thread.sleep(10); continue }
-                check(recorder.routedDevice?.type == android.media.AudioDeviceInfo.TYPE_BUILTIN_MIC) { "Built-in microphone route changed" }
+                check(recorder.routedDevice?.id == microphone.id) { "Built-in microphone route changed" }
                 accumulator.add(buffer,count); total += count
             }
             check(!cancel.get() && allowed()) { "Capture interrupted; sample discarded" }

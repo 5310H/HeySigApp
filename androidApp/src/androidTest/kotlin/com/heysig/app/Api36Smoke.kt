@@ -69,6 +69,18 @@ class Api36Smoke : Instrumentation() {
             }
             capture("home")
             open("Noise")
+            runOnMainSync {
+                val buttons = descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                check(buttons.any { it.text == "Start new calibration" })
+                check(buttons.any { it.text == "Capture next calibration sample" })
+                check(buttons.any { it.text == "Review calibration thresholds" })
+                check(buttons.any { it.text == "Preview Automatic" })
+                check(buttons.first { it.text == "Start Automatic" }.isEnabled == false)
+                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>()
+                    .any { it.contentDescription == "Protected Sleep program" })
+                check(!com.heysig.noise.NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
+                result.putString("noiseControls","PASS: calibration, preview and protected Sleep controls present; physical acceptance gate locked; no sampling or playback")
+            }
             capture("noise")
             open("Settings")
             capture("settings")
@@ -145,6 +157,37 @@ class Api36Smoke : Instrumentation() {
                     }
                 }
                 result.putString("roundWatch","PASS: isolated 192dp round native-style contexts at font scales 1 and 2; 48dp targets and no text ellipses; actual Wear device acceptance pending")
+            }
+            // Version-1 migration and release lock use isolated preferences and a playback spy.
+            runOnMainSync {
+                val store = targetContext.getSharedPreferences("acceptance-isolated-noise",0)
+                check(store.edit().clear().commit())
+                try {
+                    val old = org.json.JSONObject().put("version",1).put("fitting","1:Awake|2:Sleep")
+                        .put("programs",org.json.JSONArray(listOf(1,2,org.json.JSONObject.NULL,1,2,1)))
+                        .put("boundaries",org.json.JSONArray(listOf(-60.0,-50.0,-40.0,-30.0,-20.0)))
+                        .put("margin",2.0).put("confirmations",3).put("cooldown",60)
+                        .put("capture",5).put("wait",10).put("freshness",30)
+                    check(store.edit().putString("settings",old.toString()).putString("calibration","corrupt").commit())
+                    var playback = 0
+                    var reply = ""
+                    val feature = NoiseFeature(screen,{
+                        listOf(com.heysig.control.Program(1,"Awake",com.heysig.control.TinnitusCapability.UNKNOWN),
+                            com.heysig.control.Program(2,"Sleep",com.heysig.control.TinnitusCapability.UNKNOWN))
+                    },{ false },{ text,_ -> reply=text },{ com.heysig.noise.NoiseSafety() },{ 1 },
+                        { _,_ -> playback++ },store)
+                    feature.handle(com.heysig.noise.NoiseCommand.Automatic)
+                    check(reply.contains("locked pending physical acceptance"))
+                    check(!store.contains("microphoneDisclosureV2") && playback == 0)
+                    feature.handle(com.heysig.noise.NoiseCommand.Save)
+                    check(reply.startsWith("Noise settings saved"))
+                    val migrated = org.json.JSONObject(checkNotNull(store.getString("settings",null)))
+                    check(migrated.getJSONArray("programs").toString() == old.getJSONArray("programs").toString())
+                    check(migrated.getJSONArray("boundaries").toString() == old.getJSONArray("boundaries").toString())
+                    check(migrated.isNull("sleepProgram") && !store.contains("calibration"))
+                    feature.stop()
+                    result.putString("noiseStorage","PASS: isolated v1 migration preserves mappings/thresholds; corrupt calibration fails closed; Automatic lock sends no playback or permission request")
+                } finally { check(store.edit().clear().commit()) }
             }
             // Exercise history deletion/expiry in isolated preferences, never the user's fitting.
             val isolated = object : android.content.ContextWrapper(targetContext) {

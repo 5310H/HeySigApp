@@ -12,6 +12,9 @@ public class SharedRegressionTest {
     @Test public void relativeNoiseMeasurement() {
         com.heysig.noise.NoiseMeasurementCheckKt.main();
     }
+    @Test public void noiseAutomation() {
+        com.heysig.noise.NoiseAutomationCheckKt.main();
+    }
     @Test public void sixLevelObservation() {
         com.heysig.noise.NoiseObserveCheckKt.main();
     }

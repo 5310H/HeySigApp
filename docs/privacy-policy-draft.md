@@ -16,7 +16,8 @@ change. No regulatory or device-compatibility classification is made here.
 ## Information used and stored
 
 The phone stores your fitting addresses, program names/capabilities, last-sent
-requests, a saved restoration record, noise settings, optional speech choices
+requests, a saved restoration record, noise settings and optional scalar
+calibration values with microphone/capture configuration, optional speech choices
 and disclosure choices in private app storage. The phone and watch store their
 selected companion's Data Layer identifier and display name. These identify
 the app's paired node, not an IMEI or advertising identifier. The watch also
@@ -36,11 +37,14 @@ the screen/process ends. The app does not retain audio recordings.
 
 ## Optional microphone and speech features
 
-Noise Sample/Observe uses bounded microphone capture while the phone app is
+Noise Sample, Observe, calibration and Automatic preview use bounded microphone capture while the phone app is
 open, after an explanation and runtime permission. Samples are processed in
 memory into relative sound statistics and discarded; this feature does not
 write recordings or upload noise audio. Stop or leave the app to stop capture.
-Automatic program switching remains disabled.
+Calibration saves 18 relative level numbers and microphone/capture configuration
+locally when you save noise settings. Unfinished calibration stays in memory.
+Automatic preview simulates decisions and cooldown without sending commands.
+Automatic program switching remains locked pending physical acceptance.
 
 Speech recognition is optional. Your installed recognition service accesses
 the microphone and may send audio to its provider over a network. Its privacy

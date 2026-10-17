@@ -1,0 +1,1 @@
+PASS: requested Sample displayed the updated microphone/calibration explanation before consent. Not now dismissed it. Continue was never selected; no permission grant, sample or aid command was requested.

@@ -9,9 +9,11 @@ data class NoiseSettings(
     val cooldownSeconds: Int = 60,
     val captureSeconds: Int = 5,
     val waitSeconds: Int = 10,
-    val freshnessSeconds: Int = 30
+    val freshnessSeconds: Int = 30,
+    val sleepProgram: Int? = null
 ) {
     fun validate(configuredSlots: Set<Int>) {
+        require(sleepProgram == null || sleepProgram in configuredSlots) { "Protected Sleep program is unavailable; review settings" }
         require(programs.size == 6) { "Choose six noise level assignments" }
         require(programs.all { it == null || it in configuredSlots }) { "A noise level refers to an unavailable program; review assignments" }
         require(boundaries.size == 5 && boundaries.all { it.isFinite() }) { "Enter five finite thresholds" }
