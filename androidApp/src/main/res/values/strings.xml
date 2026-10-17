@@ -7,5 +7,4 @@
     <string name="integer_value">%1$s</string>
     <string name="decimal_value">%1$s</string>
     <string name="watch_status">Watch: %1$s\n%2$s</string>
-    <string name="info">Info</string>
 </resources>

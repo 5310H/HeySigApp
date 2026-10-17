@@ -6,7 +6,7 @@ It takes cues from Apple's clear visual hierarchy while retaining native
 Android controls, Android Back, system speech/document pickers and scalable
 system text. No Apple fonts or assets are bundled.
 
-Home shows the last requested program as a native chooser and four shortcuts:
+Home has a program chooser and four shortcuts:
 Volume, Tinnitus, Sharpness and Batteries. Each opens its own focused page.
 Moving a slider changes a draft value only; Send still goes through the
 existing validation and guarded acoustic executor. Battery actions request
@@ -15,8 +15,7 @@ are invented.
 
 Speak and Stop remain available below the page. Saved settings, aid setup,
 voice, watch and privacy live under Settings. The three tabs stay in one row;
-large text drops decorative tab icons. Status has a compact Info action for
-its full message. On-screen keyboards hide the tab bar to leave room for
+large text drops decorative tab icons. Command results appear directly when needed, without an Info button. On-screen keyboards hide the tab bar to leave room for
 editing. Wide windows retain a comfortable maximum content width.
 
 Noise opens with Observe, Sample, Stop and a concise status. Noise setup,

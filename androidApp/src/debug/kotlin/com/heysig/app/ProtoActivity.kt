@@ -39,11 +39,12 @@ class ProtoActivity : Activity() {
         layout.addView(TextView(this).apply { text = "HeySig acoustic prototype\nUse the configured addresses and profile. Confirm aid response by listening." })
         val names = listOf("Left qualified address", "Right qualified address", "Sample rate Hz", "Center frequency Hz", "Frequency spacing Hz", "Bit duration seconds", "Gain divisor")
         val defaults = listOf("","","44100","15360","512","0.0625","1.2")
+        val fieldIds = listOf(R.id.prototype_left_address,R.id.prototype_right_address,R.id.prototype_sample_rate,R.id.prototype_center_frequency,R.id.prototype_frequency_spacing,R.id.prototype_bit_duration,R.id.prototype_gain_divisor)
         names.forEachIndexed { i, name ->
             layout.addView(TextView(this).apply { text = name })
-            fields.add(EditText(this).apply { setSingleLine(); setText(defaults[i]); id = 100+i; layout.addView(this) })
+            fields.add(EditText(this).apply { setSingleLine(); setText(defaults[i]); id = fieldIds[i]; layout.addView(this) })
         }
-        xor = CheckBox(this).apply { text = "Address-XOR checksum"; isChecked = true; id = 110 }; layout.addView(xor)
+        xor = CheckBox(this).apply { text = "Address-XOR checksum"; isChecked = true; id = R.id.prototype_address_xor }; layout.addView(xor)
         layout.addView(Button(this).apply { text = "Use basic Signia defaults"; setOnClickListener {
             if (!busy.get()) {
                 val preset = listOf("0","0","44100","15360","512","0.0625","1.2")

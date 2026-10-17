@@ -1,0 +1,10 @@
+<resources>
+    <item type="id" name="prototype_left_address" />
+    <item type="id" name="prototype_right_address" />
+    <item type="id" name="prototype_sample_rate" />
+    <item type="id" name="prototype_center_frequency" />
+    <item type="id" name="prototype_frequency_spacing" />
+    <item type="id" name="prototype_bit_duration" />
+    <item type="id" name="prototype_gain_divisor" />
+    <item type="id" name="prototype_address_xor" />
+</resources>

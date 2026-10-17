@@ -225,17 +225,10 @@ class HomeActivity : Activity() {
         statusRow=resultRow; statusCard.addView(resultRow)
         status = TextView(this).apply {
             text = message; PhoneStyle.text(this,14f,color=PhoneStyle.secondary)
-            maxLines=1; ellipsize=android.text.TextUtils.TruncateAt.END
             accessibilityLiveRegion = android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
             resultRow.addView(this,LinearLayout.LayoutParams(0,-2,1f))
         }
         resultRow.visibility=if(message == "Ready. Nothing is sent until you ask.") android.view.View.GONE else android.view.View.VISIBLE
-        val info=Button(this).apply {
-            setText(R.string.info); PhoneStyle.action(this); setPadding(PhoneStyle.dp(context,4),0,PhoneStyle.dp(context,4),0)
-            contentDescription="Read full command status"
-            setOnClickListener { android.app.AlertDialog.Builder(this@HomeActivity).setTitle("Status").setMessage(message).setPositiveButton("Close",null).show() }
-        }
-        resultRow.addView(info,LinearLayout.LayoutParams(PhoneStyle.dp(this,64),-2))
         heardStatus = TextView(this).apply {
             text = if(lastHeard.isEmpty()) "" else "Heard: $lastHeard"
             PhoneStyle.text(this,14f,color=PhoneStyle.secondary)
@@ -355,7 +348,6 @@ class HomeActivity : Activity() {
             PhoneStyle.action(button("Set up hearing aids") { navigate("Setup") },"primary")
             return
         }
-        line("Last requested program")
         val current = fitting?.programs?.find { it.slot == requested.program }?.name ?: "Choose program"
         val programButton = button("$current ▾",!busy.get()) {
             val available = fitting?.programs.orEmpty()
