@@ -2,12 +2,16 @@ package com.heysig.control
 
 sealed class AppIntent {
     data class Control(val request: ManualRequest) : AppIntent()
+    data class RelativeVolume(val delta: Int) : AppIntent()
+    data class RelativeLevel(val control: LevelControl, val delta: Int) : AppIntent()
     data class ReadLevel(val control: LevelControl) : AppIntent()
     data class ClarifyProgram(val slot: Int) : AppIntent()
     data object ReadProgram : AppIntent()
     data object ListPrograms : AppIntent()
     data object SaveSettings : AppIntent()
+    data object ReadSavedSettings : AppIntent()
     data object RestoreSettings : AppIntent()
+    data object Refresh : AppIntent()
     data object Cancel : AppIntent()
     data class Unsupported(val explanation: String) : AppIntent()
 }
@@ -25,7 +29,37 @@ object VoiceCommands {
         val value = numbers[token] ?: token.toIntOrNull() ?: return null
         return if(match.groupValues[1].isNotEmpty()) -value else value
     }
+    /** A bounded grammar; relative intents need a known baseline before execution. */
     fun parse(raw: String, fitting: Fitting): AppIntent {
+        val exact = parseExact(raw, fitting)
+        if (exact !is AppIntent.Unsupported) return exact
+        if (Regex("[.!?]{2}$").containsMatchIn(raw.trim())) return exact
+        var text = raw.trim().lowercase().replace(Regex("\\s+"), " ")
+            .replace(Regex("[.!?]$"), "")
+            .replace(Regex("^(hey sig|sig3|sig) "), "")
+        text = text.replace(Regex("^(please |could you |can you |would you )"), "")
+            .removePrefix("please ").removeSuffix(" please").trim()
+        // Only complete, anchored forms are rewritten. Negation, multiple targets and
+        // additional clauses survive and fail ordinary parsing and range validation.
+        val naturalProgram = Regex("^(?:switch|go) to (?:the )?(?:(?:program|mode) )?(.+)$").matchEntire(text)
+        val trailingProgram = Regex("^(?:set|change|switch) (?:my |the )?(?:program|mode) to (.+)$").matchEntire(text)
+        val level = Regex("^(set|change) (?:my |the )?(volume|balance|sharpness|sound sharpness|tin|tinnitus)(?: level)? to (.+)$").matchEntire(text)
+        text = when {
+            naturalProgram != null -> "program ${naturalProgram.groupValues[1]}"
+            trailingProgram != null -> "program ${trailingProgram.groupValues[1]}"
+            level != null -> "${level.groupValues[2]} ${level.groupValues[3]}"
+            text in listOf("what program am i in", "which program am i using", "what program am i using") -> "current program"
+            text in listOf("check my batteries", "check my battery", "check the batteries", "check the battery") -> "check battery"
+            text == "check my left battery" -> "check left battery"
+            text == "check my right battery" -> "check right battery"
+            text == "save my settings" -> "save settings"
+            text == "restore my settings" -> "restore settings"
+            else -> text.replace(Regex("^what(?: is|'s) (?:my|the) (current )?"), "what is the $1")
+        }
+        return parseExact(text, fitting)
+    }
+
+    private fun parseExact(raw: String, fitting: Fitting): AppIntent {
         val input = raw.trim().lowercase().replace(Regex("\\s+")," ")
             .replace(Regex("^(sig3|sig) "),"")
         // Exact configured names retain punctuation; one sentence-ending mark is also accepted.
@@ -41,12 +75,24 @@ object VoiceCommands {
         }
         val text = candidates.last()
         fun request(request: ManualRequest) = AppIntent.Control(request)
+        if(text in listOf("volume up","turn volume up","turn the volume up","turn my volume up","turn up volume","turn up the volume","increase volume","increase the volume","increase my volume","raise volume","raise the volume")) return AppIntent.RelativeVolume(1)
+        if(text in listOf("volume down","turn volume down","turn the volume down","turn my volume down","turn down volume","turn down the volume","decrease volume","decrease the volume","decrease my volume","lower volume","lower the volume")) return AppIntent.RelativeVolume(-1)
+        for ((label, control) in mapOf("balance" to LevelControl.SHARPNESS, "sharpness" to LevelControl.SHARPNESS,
+            "sound sharpness" to LevelControl.SHARPNESS, "tin" to LevelControl.TINNITUS, "tinnitus" to LevelControl.TINNITUS)) {
+            for ((direction, delta) in listOf("up" to 1, "down" to -1)) {
+                val verb = if (delta > 0) "increase|raise" else "decrease|lower"
+                if (Regex("^(?:$label $direction|turn (?:the |my )?$label $direction|turn $direction (?:the |my )?$label|(?:$verb) (?:the |my )?$label)$").matches(text))
+                    return AppIntent.RelativeLevel(control, delta)
+            }
+        }
         when (text) {
             "cancel", "stop" -> return AppIntent.Cancel
             "current program", "current mode", "what program", "what mode", "what is the current program" -> return AppIntent.ReadProgram
             "list programs", "what programs" -> return AppIntent.ListPrograms
             "save settings" -> return AppIntent.SaveSettings
+            "what is saved", "read saved settings", "what settings are saved", "show saved settings" -> return AppIntent.ReadSavedSettings
             "restore settings" -> return AppIntent.RestoreSettings
+            "refresh", "refresh settings", "refresh current settings", "refresh hearing aids", "refresh aids" -> return AppIntent.Refresh
             "battery", "battery check", "check battery", "battery listen", "listen to battery", "check both batteries" -> return request(ManualRequest.Battery(true,true))
             "check left battery", "left battery" -> return request(ManualRequest.Battery(true,false))
             "check right battery", "right battery" -> return request(ManualRequest.Battery(false,true))
@@ -90,19 +136,7 @@ class ManualSession(val fitting: Fitting) {
     fun validate(request: ManualRequest) = ManualValidation.validate(request, fitting, requested)
     fun completed(request: ManualRequest) { validate(request); requested = requested.completed(request) }
     fun save(): RequestedState {
-        require(requested.program != null) { "No requested program to save" }
-        return requested.copy(levels = requested.levels.toMap()).also { snapshot = it }
+        return SavedSettings.snapshot(requested,fitting).also { snapshot = it }
     }
-    fun restorePlan(): List<ManualRequest> {
-        val saved = requireNotNull(snapshot) { "No saved settings" }
-        val slot = requireNotNull(saved.program)
-        val first = ManualRequest.SelectProgram(slot)
-        ManualValidation.validate(first,fitting,RequestedState())
-        val plan = listOf<ManualRequest>(first) + LevelControl.entries.mapNotNull { control ->
-            saved.levels[control]?.let { ManualRequest.SetLevel(control,it) }
-        }
-        var state = RequestedState()
-        plan.forEach { ManualValidation.validate(it,fitting,state); state = state.completed(it) }
-        return plan
-    }
+    fun restorePlan(): List<ManualRequest> = SavedSettings.plan(requireNotNull(snapshot) { "No saved settings" },fitting)
 }

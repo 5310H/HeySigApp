@@ -26,7 +26,7 @@ class HandsFreeWatchConnection(private val context: Context,private val dispatch
                 CompanionSafety.command(id,conversation,text,choices)
                 val history=WatchHistory(context)
                 history.get("development",id)?.let { reply(it);return@post }
-                val identities=choices.map { HandsFreeCompanion.identity(it,ManualRuntime.get(context).fitting) }.filterNot { it is AppIntent.Unsupported }.distinct()
+                val identities=choices.map { ManualRuntime.get(context).personalPhrases.identity(it,ManualRuntime.get(context).fitting) }.filterNot { it is AppIntent.Unsupported }.distinct()
                 check(identities.size<=1) { "Speech alternatives disagree" }
                 check(history.put("development",id,JSONObject().put("phase","UNKNOWN").put("text","Started; do not replay")))
                 dispatch(text,"development:$conversation") { result ->

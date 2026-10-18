@@ -18,9 +18,9 @@ object PhoneStyle {
     val background = Color.rgb(242,242,247)
     val ink = Color.rgb(28,28,30)
     val secondary = Color.rgb(88,88,96)
-    val blue = Color.rgb(0,91,202)
+    val blue = Color.rgb(0,112,112)
     val red = Color.rgb(185,36,46)
-    val tint = Color.rgb(232,240,255)
+    val tint = Color.rgb(225,244,242)
     fun dp(context: Context, value: Int) = (value*context.resources.displayMetrics.density+.5f).toInt()
     fun shape(context: Context, color: Int, radius: Int = 18, stroke: Int? = null) = GradientDrawable().apply {
         setColor(color); cornerRadius = dp(context,radius).toFloat()
@@ -44,7 +44,7 @@ object PhoneStyle {
         view.minHeight = dp(context,52); view.minimumHeight = dp(context,52)
         view.setPadding(dp(context,16),dp(context,12),dp(context,16),dp(context,12))
         view.backgroundTintList = null
-        view.background = RippleDrawable(ColorStateList.valueOf(0x18005BCA),shape(context,fill),null)
+        view.background = RippleDrawable(ColorStateList.valueOf(0x18007070),shape(context,fill),null)
         view.alpha = if(view.isEnabled) 1f else .45f
         view.stateListAnimator = null
         view.layoutParams = LinearLayout.LayoutParams(-1,-2).apply { topMargin = dp(context,4); bottomMargin = dp(context,4) }

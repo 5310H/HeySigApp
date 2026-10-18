@@ -71,7 +71,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private fun shakeOptions() {
         val choices=getSharedPreferences("heysig-gesture",MODE_PRIVATE)
         android.app.AlertDialog.Builder(this).setTitle("Shake to speak")
-            .setMessage("Three deliberate shakes start Speak while HeySig is open. A short vibration acknowledges the gesture. Sleeping-watch activation is not supported. Movement may trigger speech accidentally.")
+            .setMessage("Three deliberate shakes start Speak while HeySig is open. A short vibration acknowledges the gesture. For screen-off use, choose Sleeping-watch shake in More. Movement may trigger speech accidentally.")
             .setPositiveButton(if(choices.getBoolean("shake",false)) "Turn Off" else "Turn On") { _,_ ->
                 val enabled=!choices.getBoolean("shake",false)
                 if(choices.edit().putBoolean("shake",enabled).commit()) { shake.stop();if(enabled && active) shake.start() }
@@ -82,16 +82,20 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         val home = WatchStyle.home(this,WatchStyle.Labels(R.string.speak,R.string.stop,R.string.more,R.string.speech_off,R.string.connect,R.string.speak_command),lastStatus,
             !prefs.getBoolean("voicePrompts",false) && !prefs.getBoolean("spokenResponses",false),
             { if(working) reply("Wait or press Stop") else if(!ready) connect() else speechConsent() },
-            { generation++; abandon(); working=false; speech?.stop(); send("stop",listOf("stop")) },
+            { SleepingShakeService.stop(this); generation++; abandon(); working=false; speech?.stop(); send("stop",listOf("stop")) },
             { more() },connected=ready)
         primaryForShake=home.primary; primary=home.primary
         status = home.status
         setContentView(home.view)
     }
+    private var wifiCheck: WatchWifiCheck?=null
+    private fun checkWifi() { wifiCheck?.close();wifiCheck=WatchWifiCheck(this) { send("status",listOf("status")) }.show() }
     private fun more() {
-        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Hands-free","Shake to speak")
+        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake")
         AlertDialog.Builder(this).setTitle("More").setItems(items) { _,index ->
             when(index) {
+                12 -> SleepingShakeOptions.show(this)
+                11 -> checkWifi()
                 10 -> shakeOptions()
                 2 -> connect()
                 0 -> send("status",listOf("status"))
@@ -128,7 +132,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             }.setPositiveButton("Done",null).setOnDismissListener { render() }.show()
     }
     override fun onResume() {
-        super.onResume(); active = true
+        super.onResume(); active = true; SleepingShakeService.activityVisible = true
         if(getSharedPreferences("heysig-gesture",MODE_PRIVATE).getBoolean("shake",false)) shake.start()
         lastStatus = getString(R.string.watch_disconnected); status.text = lastStatus; primary.setText(R.string.connect)
         val current = ++listenerGeneration
@@ -141,7 +145,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             else { listening = true; drainSpeech() }
         }.addOnFailureListener { reply("Wear OS Data Layer unavailable. Check Google Play services.") }
     }
-    override fun onPostResume() { super.onPostResume(); drainSpeech() }
+    override fun onPostResume() { super.onPostResume(); consumeShakeTap(); drainSpeech() }
     private fun drainSpeech() {
         if(!active || !listening) return
         val action = deferred ?: return
@@ -155,9 +159,19 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         }
     }
     override fun onPause() {
+        wifiCheck?.close();wifiCheck=null;
         shake.stop()
+        SleepingShakeService.activityVisible = false
         active = false; listenerGeneration++; disconnect(false); listener?.let { messages.removeListener(it) }; listener = null; listening = false; speech?.stop()
         super.onPause()
+    }
+    override fun onNewIntent(intent: Intent) { super.onNewIntent(intent); setIntent(intent) }
+    private fun consumeShakeTap() {
+        if(SleepingShakeService.consume(intent)) {
+            if(getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) reply("Unlock the watch, then tap Speak")
+            else if(working) reply("Wait for the current result or press Stop")
+            else speechConsent()
+        }
     }
     override fun onDestroy() { exportDocument = null; speech?.shutdown(); super.onDestroy() }
     private fun abandon() { pending.values.forEach { handler.removeCallbacks(it.timeout) }; pending.clear() }
@@ -239,6 +253,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         }
     }
     private fun send(text: String, alternatives: List<String>) {
+        if(WatchWifiCheck.requested(text)) { checkWifi();return }
         val local = VoicePreference.parse(text)
         if(local != null) {
             if(alternatives.any { VoicePreference.parse(it) != local }) { reply("Speech alternatives disagree"); return }

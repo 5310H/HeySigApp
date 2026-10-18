@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Explicit opt-in silent-audio runner; never part of production manifests. -->
     <instrumentation android:name="com.heysig.app.PlaybackSmoke" android:targetPackage="com.heysig.batteryprototype" />
+    <instrumentation android:name="com.heysig.app.ProgramSettingsSmoke" android:targetPackage="com.heysig.batteryprototype" />
+    <instrumentation android:name="com.heysig.app.SettingsFingerprintSmoke" android:targetPackage="com.heysig.batteryprototype" />
 </manifest>

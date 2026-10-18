@@ -44,17 +44,17 @@ object HandsFreeAcceptance {
             check(second.await(10,TimeUnit.SECONDS));check(!secondOk);check(plays==1)
             proceed.countDown();check(done.await(10,TimeUnit.SECONDS));check(completedOk)
             check(runtime.requested.program==2 && !store.getBoolean("pending",true))
-            check(runtime.saved?.program==2)
+            check(runtime.saved?.program==1 && runtime.saved?.levels?.get(LevelControl.VOLUME)==6)
             cancellationCase=true
             val stopped=CountDownLatch(1);var stoppedOk=true
             main.post { runtime.execute(listOf(ManualRequest.SelectProgram(1)),false,false,{false},{true},{}) { _,ok -> stoppedOk=ok;stopped.countDown() } }
             check(cancelBegan.await(10,TimeUnit.SECONDS));runtime.cancelled.set(true);cancelProceed.countDown()
             check(stopped.await(10,TimeUnit.SECONDS));check(!stoppedOk)
-            check(runtime.requested.program==null && runtime.saved?.program==2 && !store.getBoolean("pending",true))
+            check(runtime.requested.program==null && runtime.saved?.program==1 && runtime.saved?.levels?.get(LevelControl.VOLUME)==6 && !store.getBoolean("pending",true))
             // Corrupt/interrupted state is unknown; it never replays on process initialization.
             check(store.edit().putString("requested","""{"program":1}""").putBoolean("pending",true).commit())
             val restarted=ManualRuntime.isolated(store,transport)
-            check(restarted.requested.program==null && restarted.saved?.program==2 && plays==2)
+            check(restarted.requested.program==null && restarted.saved?.program==1 && restarted.saved?.levels?.get(LevelControl.VOLUME)==6 && plays==2)
             check(store.edit().putBoolean("pending",false).commit())
             val failing=object: SharedPreferences by store {
                 override fun edit(): SharedPreferences.Editor {

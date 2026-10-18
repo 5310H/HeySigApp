@@ -67,5 +67,34 @@ background production service. Wear tiles and fully voice-driven setup are not i
 
 More → Shake to speak adds a separate default-off gesture choice. Three deliberate
 shakes use the existing Speak action with a short vibration, only while HeySig
-is resumed. Sleeping-watch activation and physical gesture/haptic acceptance
-remain pending.
+is resumed. Physical gesture/haptic acceptance remains pending.
+
+**More → Sleeping-watch shake** provides a separate default-off session.
+Choose Start after the motion/provider/battery explanation and notification
+permission. Three deliberate shakes with HeySig in the background vibrate and
+offer **Tap to speak** for 30 seconds. Tap to use the existing speech path;
+unlock first if required. No microphone starts from the gesture itself.
+The watch must provide a wake-up accelerometer. Unsupported devices retain
+foreground Shake to speak. The session has a visible notification Stop control
+and watch-face ongoing-activity return affordance. It ends after eight hours,
+Stop, closing from Recents or process death, and never restarts after reboot.
+Real screen-off delivery, false triggers and battery acceptance remain pending.
+
+## Native launcher and connection check
+
+The native watch launcher entry is now labelled **HeySig**, using the ear icon.
+The development application ID/signing identity stays unchanged. Replacing an
+older Tasker-created HeySig entry requires identifying that separate installed
+launcher/package on the actual watch; updating this app does not remove Tasker
+or another app's shortcut automatically.
+
+Open **More → Check Wi-Fi**, or say **check watch Wi-Fi**, for a passive local
+connection snapshot lasting at most five seconds. It does not scan, switch Wi-Fi
+on or save network names. **Check phone link** asks the configured companion for
+status over the existing transport; Wi-Fi validation alone does not prove that
+link works. **Wi-Fi settings** opens the watch's system settings. Physical watch
+acceptance for this new check remains pending.
+
+Sleep routine setup commands are described in [the sleep guide](../docs/sleep-quick-start.md).
+The phone owns saved routine choices. This build saves and previews them with
+scheduling Off; it does not provide automatic overnight aid changes.

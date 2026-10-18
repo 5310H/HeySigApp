@@ -1,6 +1,52 @@
 # HeySigApp coding specification
 
+## Current implementation decisions — October 18, 2026
+
+These approved implementation decisions take precedence over older design sketches
+below. They describe implementation, with physical/release acceptance tracked
+separately in [the remaining checklist](remaining-checklist.md).
+
+- Retain completed requested volume, Balance and tinnitus targets per program;
+  selecting a program explicitly reapplies its retained known targets through the
+  shared executor. These values are remembered targets, never electronic aid readback.
+- Balance is the displayed name; SHARPNESS remains the storage/protocol key.
+  Volume, Balance and tinnitus up/down require known current-program baselines,
+  validate one-step targets and reject endpoints without clamping.
+- Home Refresh reviews and confirms replay of the current known configuration.
+  Explicit Save alone replaces the restoration snapshot. Battery check is in
+  Settings; the old Battery Restore action is removed.
+- Sleep reminders are optional, inexact notifications requiring a tap and an
+  explicit request to switch programs. They replace automatic scheduled playback.
+  Real noise Automatic remains source-locked pending measured physical acceptance.
+- Shared guided aid setup stages edits/import, requires review before Save and
+  archives previous fitting/settings bytes before invalidating active assumptions.
+  Program aliases use explicit, reviewed personal phrases. Conversational phrase
+  proposals and separate phrase import/export never execute aid commands.
+- Android adapters currently use native Activity/View layouts and the existing
+  validated transport with one ManualRuntime executor. Compose/ViewModel layouts
+  and example interfaces below are design sketches, not implemented architecture.
+
+See [program settings](acceptance/program-settings-2026-10-18.md),
+[relative controls](acceptance/relative-balance-tinnitus-2026-10-18.md),
+[guided setup/phrases](acceptance/guided-setup-and-phrases-2026-10-18.md),
+[Refresh](acceptance/refresh-controls-2026-10-18.md) and
+[sleep design](sleep-management-design.md) for scope and outstanding acceptance.
+
 October 16, 2026 · Implementation draft v1 · Phone and Pixel Watch 3
+
+## October 18 scope amendment — aid-state reporting
+
+The owner removed aid-state reporting as a remaining feature requirement.
+The implemented acoustic speaker transport receives no electronic aid response,
+settings readback or receipt acknowledgment. User-heard program/battery indications
+remain possible and are distinct from app readback. References below to state
+queries describe remembered app requests only; they do not require an aid-state
+reporting feature or expanded user-facing provenance/timestamp reporting.
+Preserve internal requested/unknown state, snapshot integrity, command outcomes,
+relative-baseline validation and interruption/no-replay safeguards. Existing
+controls and stored settings are not removed by this documentation change.
+
+The current check-off list is [remaining work](remaining-checklist.md).
 
 ## 1. Scope and implementation decisions
 

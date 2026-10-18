@@ -3,6 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 python3 tools/setup-signing.py
 ./gradlew --no-daemon :androidApp:assembleDebug
+python3 tools/check-development-apk.py androidApp/build/outputs/apk/debug/androidApp-debug.apk
 cp androidApp/build/outputs/apk/debug/androidApp-debug.apk androidApp/build/heysig-proto.apk
 if [ "${HEYSIG_AUDIO_SMOKE:-0}" = "1" ]; then
     ./gradlew --no-daemon :androidApp:assembleDebugAndroidTest

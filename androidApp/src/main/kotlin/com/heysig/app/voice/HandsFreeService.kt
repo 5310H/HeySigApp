@@ -43,7 +43,7 @@ class HandsFreeService : Service() {
     private var pending: Pair<String,AppIntent>?=null
     private var pendingUntil=0L
     private var restoreSnapshot: RequestedState?=null
-    fun isPromptFor(origin: String) = pending?.first==origin
+    fun isPromptFor(origin: String) = runtime.sleepRoutine.isDraftFor(origin) || pending?.first==origin || runtime.personalPhrases.isPromptFor(origin) || runtime.fittingWorkflow.isPromptFor(origin)
     private var repeatRequest: ManualRequest?=null
     private var foreground=false
     private var sessionEndsAt=0L
@@ -130,6 +130,7 @@ class HandsFreeService : Service() {
         if(isListening && getSharedPreferences("heysig-handsfree",MODE_PRIVATE).getBoolean("shake",false)) shake.start()
     }
     fun control(control: HandsFreeControl) {
+        if(control != HandsFreeControl.STATUS) { runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel() }
         currentUtterance=null;synthesis?.stop();speaking=false
         if(foreground && SystemClock.elapsedRealtime()>=sessionEndsAt) { end();return }
         when(control) {
@@ -232,7 +233,7 @@ class HandsFreeService : Service() {
                     val identities=choices.map { identity(it,fit) }.filterNot { it is AppIntent.Unsupported }.distinct()
                     if(identities.size>1) { completeCommand("Speech alternatives disagree; nothing sent");return }
                     val text=choices.firstOrNull { identity(it,fit)==identities.firstOrNull() } ?: choices[0]
-                    handle(text,"hands-free") { result ->
+                    handle(text,"phone") { result ->
                         if(session.accepts(token)) completeCommand(result) else { update(result);resumeWhenQuiet() }
                     }
                 }
@@ -249,7 +250,7 @@ class HandsFreeService : Service() {
         val token=session.generation
         if(session.complete(token)) {
             update(text)
-            val prompt=pending!=null
+            val prompt=runtime.sleepRoutine.isDraftFor("phone") || pending!=null || (runtime.personalPhrases.awaitingConfirmation || runtime.fittingWorkflow.pending)
             if(speechReady && prefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",if(prompt) BuildConfig.DEBUG else prefs.getBoolean("spokenResults",BuildConfig.DEBUG))) {
                 speaking=true;currentUtterance="handsfree-result-${session.generation}"
                 if(synthesis?.speak(text,TextToSpeech.QUEUE_FLUSH,null,currentUtterance)!=TextToSpeech.SUCCESS) speaking=false
@@ -259,7 +260,7 @@ class HandsFreeService : Service() {
             handler.postDelayed({ resumeWhenQuiet() },1000)
         }
     }
-    private fun identity(text: String,fit: Fitting?): Any = HandsFreeCompanion.identity(text,fit)
+    private fun identity(text: String,fit: Fitting?): Any = DataVoice.parse(text) ?: if(FittingWorkflow.accepts(text)) "setup:${FittingWorkflow.normalize(text)}" else runtime.personalPhrases.identity(text,fit)
     private fun handleWatch(text: String,origin: String,reply: (String)->Unit) {
         if(session.mode==HandsFreeSession.Mode.COMMAND) { session.on();stopInputs() }
         handle(text,origin) { result -> reply(result.replace("Listening for Hey Sig","Phone listening On"));update(result);resumeWhenQuiet() }
@@ -267,13 +268,24 @@ class HandsFreeService : Service() {
     private fun handle(text: String,origin: String,reply: (String)->Unit) {
         if(closed || !foreground || SystemClock.elapsedRealtime()>=sessionEndsAt) { reply("Hands-free session expired; start it on the phone again");end();return }
         HandsFreeControl.parse(text)?.let { if(it==HandsFreeControl.END) { reply("Hands-free session ending");handler.post { end() } } else { control(it);reply(status) };return }
-        if(text.lowercase().trim() in listOf("stop","cancel")) { runtime.cancelled.set(true);pending=null;reply("Stop requested");return }
+        if(text.lowercase().trim() in listOf("stop","cancel")) { runtime.cancelled.set(true);pending=null;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();reply("Stop requested");return }
         VoicePreference.parse(text)?.let {
             val ok=prefs.edit().putBoolean(it.key,it.enabled).commit()
             if(!it.enabled) { currentUtterance=null;synthesis?.stop();speaking=false }
             reply(if(ok) it.description else "Voice setting could not be saved");return
         }
+        DataVoice.parse(text)?.let { reply("Open HeySig on the phone and say ${text.trim()}, or use Aid setup / Voice and speech to choose a document. Nothing sent.");return }
         if(text=="status") { reply("$status. ${runtime.lastResult}");return }
+        if(FittingWorkflow.accepts(text) && !runtime.fittingWorkflow.pending &&
+            (runtime.personalPhrases.awaitingConfirmation || runtime.sleepRoutine.hasDraft)) {
+            reply("Finish or cancel the current phrase or sleep review before starting aid setup.");return
+        }
+        if(!runtime.busy.get() && pending == null && (runtime.fittingWorkflow.pending || FittingWorkflow.accepts(text))) {
+            runtime.fittingWorkflow.handle(text,runtime.fitting,origin,SystemClock.elapsedRealtime())?.let {
+                if(it.startsWith("Aid setup saved")) runCatching { SleepReminders(this).refresh() }
+                reply(it);return
+            }
+        }
         val fit=runtime.fitting ?: run { reply("Save aid setup first");return }
         if(runtime.busy.get()) { reply("Busy; wait or Stop");return }
         pending?.let { (actor,intent) ->
@@ -281,11 +293,16 @@ class HandsFreeService : Service() {
             pending=null
             val snapshot=restoreSnapshot;restoreSnapshot=null
             if(SystemClock.elapsedRealtime()>pendingUntil) { reply("Confirmation expired; nothing sent");return }
-            val yes=text.lowercase().trim().trimEnd('.','!','?') in listOf("yes","confirm","confirm program","confirm restore","restore known settings")
+            val yes=text.lowercase().trim().trimEnd('.','!','?') in listOf("yes","confirm","confirm program","confirm restore","restore known settings","confirm refresh","refresh current settings")
             if(!yes) { reply("Cancelled; nothing sent");return }
             when(intent) {
                 is AppIntent.ClarifyProgram -> play(listOf(ManualRequest.SelectProgram(intent.slot)),false,reply)
                 AppIntent.RestoreSettings -> restore(snapshot,reply)
+                AppIntent.Refresh -> {
+                    val plan=try { runtime.restorePlan(requireNotNull(snapshot)) }
+                        catch(e: Exception) { reply(e.message ?: "Refresh unavailable");return }
+                    play(plan,true,{ reply("Refresh result. $it") })
+                }
                 else -> reply("Confirmation expired")
             };return
         }
@@ -293,10 +310,35 @@ class HandsFreeService : Service() {
             val request=repeatRequest ?: run { reply("No repeated target to resend");return }
             play(listOf(request),false,reply);return
         }
-        when(val intent=VoiceCommands.parse(text,fit)) {
+        com.heysig.sleep.SleepVoice.parse(text,fit)?.let { command ->
+            if(command is com.heysig.sleep.SleepCommand.Now) {
+                val slot=runCatching { runtime.sleepRoutine.target(command.sleep,fit) }.getOrElse { reply(it.message ?: "Review routine first");return }
+                play(listOf(ManualRequest.SelectProgram(slot)),false,reply,command.sleep)
+            } else if(command==com.heysig.sleep.SleepCommand.Enable) reply(SleepReminders(this).setEnabled(true))
+            else { reply(runtime.sleepRoutine.handle(command,fit,origin));runCatching { SleepReminders(this).refresh() } }
+            return
+        }
+        runtime.personalPhrases.manage(text,fit,origin)?.let { reply(it);return }
+        when(val intent=runtime.personalPhrases.resolve(text,fit)) {
+            is AppIntent.RelativeLevel -> {
+                val request=try { LevelSteps.request(intent.control,intent.delta,runtime.requested,fit) }
+                    catch(e: Exception) { reply(e.message ?: "Choose an exact value first");return }
+                repeatRequest=null
+                play(listOf(request),false,reply)
+            }
+            is AppIntent.RelativeVolume -> {
+                val request=try { VolumeSteps.request(intent.delta,runtime.requested,fit) }
+                    catch(e: Exception) { reply(e.message ?: "Choose an exact volume first");return }
+                repeatRequest=null
+                play(listOf(request),false,reply)
+            }
             is AppIntent.Control -> {
                 val request=intent.request
                 try { ManualValidation.validate(request,fit,runtime.requested) } catch(e: Exception) { reply(e.message ?: "Invalid request");return }
+                if(request !is ManualRequest.Battery) {
+                    try { runtime.sleepRoutine.transition(runtime.sleepRoutine.state.manual()) }
+                    catch(e: Exception) { reply(e.message ?: "Could not pause routine");return }
+                }
                 val same=when(request) {
                     is ManualRequest.SelectProgram -> runtime.requested.program==request.slot
                     is ManualRequest.SetLevel -> runtime.requested.levels[request.control]==request.level
@@ -309,32 +351,40 @@ class HandsFreeService : Service() {
                 }
             }
             is AppIntent.ClarifyProgram -> { pending=origin to intent;pendingUntil=SystemClock.elapsedRealtime()+60000;reply("Did you mean program ${intent.slot}? Say yes or cancel after the wake phrase.") }
+            AppIntent.Refresh -> {
+                val current=runtime.requested.copy(levels=runtime.requested.levels.toMap())
+                try { runtime.restorePlan(current) }
+                catch(e: Exception) { reply(e.message ?: "Select a program before Refresh");return }
+                restoreSnapshot=current;pending=origin to intent;pendingUntil=SystemClock.elapsedRealtime()+60000
+                reply("Refresh current program ${current.program} and known levels? Unknown levels are skipped. Say confirm refresh or cancel after the wake phrase.")
+            }
             AppIntent.RestoreSettings -> {
                 val saved=runtime.saved
-                if(saved?.program==null) reply("No known saved settings")
+                if(saved?.program==null) reply(runtime.savedIssue ?: "No known saved settings")
                 else { restoreSnapshot=saved;pending=origin to intent;pendingUntil=SystemClock.elapsedRealtime()+60000;reply("Restore saved program ${saved.program} and known levels? Say confirm restore or cancel after the wake phrase.") }
             }
-            AppIntent.SaveSettings -> {
-                if(runtime.requested.program==null) reply("Select a program first")
-                else if(prefs.edit().putString("saved",runtime.encode(runtime.requested)).commit()) { runtime.saved=runtime.requested;reply("Requested settings saved") }
-                else reply("Settings could not be saved")
+            AppIntent.SaveSettings -> reply(runtime.saveSnapshot())
+            AppIntent.ReadSavedSettings -> {
+                val saved=runtime.saved
+                reply(saved?.let { "Saved snapshot: program ${it.program}. " + LevelControl.entries.joinToString(". ") { key -> "${key.name.lowercase()} ${it.levels[key] ?: "unknown"}" } } ?: runtime.savedIssue ?: "No saved settings")
             }
-            AppIntent.ReadProgram -> reply("Last requested program: ${fit.programs.find { it.slot==runtime.requested.program }?.name ?: "unknown"}")
-            is AppIntent.ReadLevel -> reply("Last requested ${intent.control.name.lowercase()}: ${runtime.requested.levels[intent.control] ?: "unknown"}")
+            AppIntent.ReadProgram -> reply("Program: ${fit.programs.find { it.slot==runtime.requested.program }?.name ?: "unknown"}")
+            is AppIntent.ReadLevel -> reply("${intent.control.name.lowercase().replaceFirstChar { it.uppercase() }}: ${runtime.requested.levels[intent.control] ?: "unknown"}")
             AppIntent.ListPrograms -> reply(fit.programs.joinToString(". ") { "${it.slot}: ${it.name}" })
-            AppIntent.Cancel -> { pending=null;runtime.cancelled.set(true);reply("Cancelled") }
+            AppIntent.Cancel -> { runtime.sleepRoutine.cancel();pending=null;runtime.cancelled.set(true);reply("Cancelled") }
             is AppIntent.Unsupported -> reply(intent.explanation)
         }
     }
     private fun restore(snapshot: RequestedState?,reply: (String)->Unit) {
         val saved=snapshot ?: run { reply("No saved settings");return }
         val program=saved.program ?: run { reply("Saved program unknown");return }
-        play(listOf(ManualRequest.SelectProgram(program))+saved.levels.map { ManualRequest.SetLevel(it.key,it.value) },true,reply)
+        val plan=try { runtime.restorePlan(saved) } catch(e: Exception) { reply(e.message ?: "Saved settings cannot be restored");return }
+        play(plan,true,reply)
     }
-    private fun play(plan: List<ManualRequest>,restoring: Boolean,reply: (String)->Unit) {
+    private fun play(plan: List<ManualRequest>,restoring: Boolean,reply: (String)->Unit,sleepTarget: Boolean? = null) {
         stopInputs();currentUtterance=null;synthesis?.stop();speaking=false
         holdCommandLock()
-        runtime.execute(plan,restoring,false,{false},{foreground && !closed && running===this && SystemClock.elapsedRealtime()<sessionEndsAt},::update) { text,_ -> if(!isListening) releaseCommandLock();reply(text);resumeWhenQuiet() }
+        runtime.execute(plan,restoring,false,{false},{foreground && !closed && running===this && SystemClock.elapsedRealtime()<sessionEndsAt},::update,sleepTarget=sleepTarget) { text,_ -> if(!isListening) releaseCommandLock();reply(text);resumeWhenQuiet() }
     }
     private fun update(text: String) { status=if(text.startsWith(listeningLabel)) text else "$listeningLabel · $text"; statusListener?.invoke(text); android.service.quicksettings.TileService.requestListeningState(this,ComponentName(this,HandsFreeTile::class.java)); if(foreground) {
             if(Build.VERSION.SDK_INT<33 || checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)==PackageManager.PERMISSION_GRANTED) getSystemService(NotificationManager::class.java).notify(ID,notification())
@@ -348,7 +398,7 @@ class HandsFreeService : Service() {
             .setOngoing(true).setVisibility(Notification.VISIBILITY_PRIVATE)
             .addAction(action("Off",OFF)).addAction(action("Pause 30 min",PAUSE)).addAction(action("End session",END)).build()
     }
-    private fun end() { if(closed) return;closed=true;if(runtime.backgroundExecution) runtime.cancelled.set(true);shake.stop();releaseCommandLock();manualSpeechBusy=false;cancelResumeAlarm();session.off();pending=null;stopInputs();connection?.close();connection=null;currentUtterance=null;synthesis?.stop();speaking=false;foreground=false;if(running===this) running=null;statusListener?.invoke("Hands-free session ended");stopForeground(STOP_FOREGROUND_REMOVE);stopSelf() }
+    private fun end() { if(closed) return;closed=true;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();if(runtime.backgroundExecution) runtime.cancelled.set(true);shake.stop();releaseCommandLock();manualSpeechBusy=false;cancelResumeAlarm();session.off();pending=null;stopInputs();connection?.close();connection=null;currentUtterance=null;synthesis?.stop();speaking=false;foreground=false;if(running===this) running=null;statusListener?.invoke("Hands-free session ended");stopForeground(STOP_FOREGROUND_REMOVE);stopSelf() }
     override fun onDestroy() { end();handler.removeCallbacksAndMessages(null);synthesis?.shutdown();super.onDestroy() }
     companion object {
         const val START="com.heysig.handsfree.START"

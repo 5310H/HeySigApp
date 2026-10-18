@@ -100,10 +100,19 @@ class Api36Smoke : Instrumentation() {
             open("Noise")
             capture("noise")
             open("Calibrate")
-            runOnMainSync {
-                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
-                    .any { it.text == "Start new calibration" && it.isShown })
+            var calibrationReady=false
+            var calibrationControls=""
+            val calibrationDeadline=android.os.SystemClock.elapsedRealtime()+5000
+            while(!calibrationReady && android.os.SystemClock.elapsedRealtime()<calibrationDeadline) {
+                waitForIdleSync()
+                runOnMainSync {
+                    val controls=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                    calibrationReady=controls.any { it.text.toString()=="Start new calibration" && it.isShown }
+                    calibrationControls=controls.joinToString { "${it.text}: shown=${it.isShown}, visibility=${it.visibility}" }
+                }
+                if(!calibrationReady) Thread.sleep(20)
             }
+            check(calibrationReady) { "Calibration screen did not settle: $calibrationControls" }
             capture("calibration")
             open("‹ Back")
             open("Noise setup")
@@ -124,6 +133,16 @@ class Api36Smoke : Instrumentation() {
             open("‹ Back")
             open("Settings")
             capture("settings")
+            open("Sleep routine")
+            runOnMainSync {
+                val controls=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                check(controls.any { it.text.toString()=="Save routine" })
+                check(controls.any { it.text.toString()=="Enable sleep reminders" })
+                check(controls.any { it.text.toString()=="Sleep now" })
+                check(controls.any { it.text.toString()=="Wake now" })
+            }
+            capture("sleep")
+            open("Settings")
             open("Voice & speech")
             capture("voice")
             open("Settings")
@@ -200,6 +219,14 @@ class Api36Smoke : Instrumentation() {
                 }
                 result.putString("roundWatch","PASS: real compact watch home in isolated 192dp round contexts at font scales 1 and 2; Speak/Stop/More, 48dp targets and no ellipses; hardware acceptance pending")
             }
+            SavedSettingsAcceptance.run(targetContext)
+            result.putString("savedSettings","PASS: explicit Save only; manual/battery/automatic/partial restore and restart preserve snapshot bytes; busy/invalid/failed save retain old record; corrupt snapshot preserves fitting and bytes")
+            SleepRoutineAcceptance.run(targetContext)
+            result.putString("sleepRoutine","PASS: isolated save/validation, restart persistence, Off gate, draft source/expiry/cancel, revision conflicts, fitting invalidation and corrupt-data preservation; no alarm or playback")
+            SleepManagementAcceptance.run(targetContext)
+            result.putString("sleepManagement","PASS: isolated saved targets, shared executor, sleep/wake completion, noise priority, manual override, partial failure, pending restart and fitting invalidation; fake transport only")
+            PersonalPhraseAcceptance.run(targetContext)
+            result.putString("personalPhrases","PASS: isolated explicit consent, restart persistence, disable/forget/reset, source confirmation, setup invalidation and corruption recovery; no microphone or playback")
             HandsFreeAcceptance.run(targetContext)
             result.putString("handsFree","PASS: isolated shared executor serializes locked-session playback, journals before transport, rejects inactive sessions/storage failure and never replays interrupted state; native keyword model decodes silence without capture")
             // Version-1 migration and release lock use isolated preferences and a playback spy.

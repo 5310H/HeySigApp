@@ -1,6 +1,6 @@
 # HeySig remaining work checklist
 
-Updated October 17, 2026. Check an item only after its result is recorded with
+Updated October 18, 2026. Check an item only after its result is recorded with
 build/commit, device/OS, date and an acceptance-record link. A build or preview
 pass does not establish physical aid reception or Play approval.
 
@@ -11,6 +11,77 @@ and historical acceptance evidence must be preserved throughout testing.
 The compact phone/watch layout and ear launcher are documented in the
 [October 17 acceptance record](acceptance/compact-ui-and-ear-icon-2026-10-17.md).
 Physical-device and release gates below remain separate.
+
+## Owner review checklist — October 18
+
+Aid-state reporting is removed from the remaining feature scope. The current
+speaker/acoustic transport sends commands and receives no electronic aid-state,
+setting or receipt response. Audible program/battery indications can be heard by
+the user; they are not electronic readback to HeySig. Keep command completion,
+blocked/failed/cancelled results and remembered requested values clearly labelled.
+Internal unknown-state guards remain necessary for relative commands and safe
+recovery. This scope change does not remove existing app controls or saved data.
+
+Completed implementation items (physical acceptance remains separate):
+
+- [x] Retain volume, Balance and tinnitus targets per program.
+- [x] Rename Sharpness to Balance and change phone blue accents to teal.
+- [x] Add Home Refresh for current known configuration, including voice
+  confirmation and independently optional prompts/responses.
+- [x] Move Battery check to Settings and remove its Restore button.
+- [x] Repair incomplete APK packaging and verify phone/Chromebook startup.
+
+Evidence: [program settings](acceptance/program-settings-2026-10-18.md) and
+[Refresh controls](acceptance/refresh-controls-2026-10-18.md).
+
+Remaining implementation and acceptance:
+
+- [x] Implement Balance up/down and tinnitus up/down from known baselines.
+  Shared tests and phone/Wear builds passed; physical acceptance remains pending.
+  See [relative controls evidence](acceptance/relative-balance-tinnitus-2026-10-18.md).
+- [x] Implement guided fitting/setup voice drafts, program names/aliases, reviewed
+  fitting import, Help and cancel/retry recovery for phone and forwarded watch input.
+  See [guided setup evidence](acceptance/guided-setup-and-phrases-2026-10-18.md).
+- [ ] Physically accept guided setup on phone/watch, including speech switches,
+  document-provider interaction and disposable-fitting recovery.
+- [ ] Complete noise calibration and physical acceptance before enabling real
+  Automatic; use the detailed Noise checklist below.
+- [ ] Validate implemented tap-to-switch sleep reminders on real devices,
+  including Doze, notification permissions, reboot and clock changes.
+- [ ] Accept full watch voice parity and production pairing without ADB/relay.
+- [ ] Accept hands-free wake/locked-phone use, interruptions, shake and battery
+  behavior. Sleeping-watch shake now has a separate vibration-and-tap session;
+  physical gesture/battery acceptance remains pending.
+- [x] Implement the owner-selected sleeping-watch vibration-and-tap session in
+  More, with explicit Start/Stop, bounded in-memory authority and no background
+  microphone. Shared checks, development builds and in-place watch update passed;
+  owner confirmed the menu entry. See [implementation evidence](acceptance/sleeping-watch-shake-2026-10-18.md).
+- [x] Implement explicit conversational phrase proposals and reviewed personal-phrase
+  import/export, with confirmation and no replay.
+  See [phrase evidence](acceptance/guided-setup-and-phrases-2026-10-18.md).
+- [ ] Physically accept corrections/import/export and actual recognition providers.
+- [ ] Complete recognition baseline measurements and controlled voice-improvement
+  evaluation using the [trial plan](voice-evaluation.md); text examples require explicit opt-in.
+- [ ] Complete endurance, accessibility, lifecycle/recovery and supported-device
+  acceptance using the detailed everyday-use checklist below.
+- [ ] Complete production packaging, verified privacy/health/rights/account work
+  and applicable Play testing using the release checklist below.
+- [x] Reconcile the written specifications with approved retained program targets,
+  Balance/relative controls, Refresh, reviewed setup/phrases and tap-to-switch sleep reminders.
+  Current-decision sections take precedence over the older architecture sketches.
+
+Optional future work:
+
+- [ ] Evaluate a local LLM and only integrate it after its separate validation gates.
+- [ ] Establish a viable iPhone control path before promising an iPhone client.
+
+October 18 development updates: Pixel, Chromebook and watch updated in place.
+Pixel/Chromebook isolated workflow/archive/import/relative-snapshot checks passed;
+protected preference hashes were unchanged. Watch startup and preference checks
+passed. See [device update evidence](acceptance/device-updates-2026-10-18.md).
+Physical acceptance and release items remain unchecked. October 18 follow-up:
+sleeping-watch shake now offers a separately started vibration-and-tap session;
+see the [session design](architecture/hands-free-session.md#october-18-sleeping-watch-extension).
 
 ## 1. Noise — next priority
 
@@ -119,9 +190,11 @@ or policy publication is marked complete by the local build checks.
 These are product-scope items, not additional Noise implementation blockers.
 They require their own implementation and acceptance before being advertised.
 
-- [ ] Finish guided voice setup/configuration and remaining phone/watch parity.
-- [ ] Implement and accept native sleep scheduling, including overnight/reboot
-  behavior; keep this separate from Noise's protected Sleep-program priority.
+- [x] Implement guided voice setup/configuration and reviewed personal phrases.
+- [ ] Physically accept guided setup and remaining phone/watch parity.
+- [ ] Complete physical acceptance of the implemented tap-to-switch sleep
+  reminders, including overnight/reboot behavior. Automatic scheduled aid
+  switching was replaced by the owner-approved reminder design.
 - [ ] Establish a viable iPhone control path before committing to an iPhone client.
 - [ ] Finish physical acceptance of the separately reviewed hands-free session.
   Background noise automation remains separate and source-locked.

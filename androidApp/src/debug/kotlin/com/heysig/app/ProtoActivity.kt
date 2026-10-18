@@ -156,7 +156,7 @@ class ProtoActivity : Activity() {
             cancelled.set(false); buttons.forEach { it.isEnabled = false }; status.text = "Sending $request using ${side.name.lowercase()} address…"
             Thread({
                 var track: AudioTrack? = null
-                var message = "$request request played; aid receipt is unverified."
+                var message = "$request request played."
                 var completed = false
                 try {
                     preflight()

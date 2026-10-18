@@ -56,6 +56,7 @@ dependencies {
     add(wakeEngine.name,"com.k2fsa:sherpa-onnx:1.13.8@aar")
     implementation(files(wakeEngine))
     implementation("androidx.core:core:1.17.0")
+    androidTestImplementation("androidx.wear:wear-ongoing:1.1.0")
     "releaseImplementation"("com.google.android.gms:play-services-wearable:20.0.1")
 }
 androidComponents {

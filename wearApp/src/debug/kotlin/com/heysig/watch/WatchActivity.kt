@@ -56,7 +56,7 @@ class WatchActivity : Activity() {
     private fun shakeOptions() {
         val choices=getSharedPreferences("heysig-gesture",MODE_PRIVATE)
         android.app.AlertDialog.Builder(this).setTitle("Shake to speak")
-            .setMessage("Three deliberate shakes start Speak while HeySig is open. A short vibration acknowledges the gesture. Sleeping-watch activation is not supported. Movement may trigger speech accidentally.")
+            .setMessage("Three deliberate shakes start Speak while HeySig is open. A short vibration acknowledges the gesture. For screen-off use, choose Sleeping-watch shake in More. Movement may trigger speech accidentally.")
             .setPositiveButton(if(choices.getBoolean("shake",false)) "Turn Off" else "Turn On") { _,_ ->
                 val enabled=!choices.getBoolean("shake",false)
                 if(choices.edit().putBoolean("shake",enabled).commit()) { shake.stop();if(enabled && active) shake.start() }
@@ -78,15 +78,20 @@ class WatchActivity : Activity() {
             } catch(e:Exception) { reply("Watch speech service unavailable") }
 
             },{
+                SleepingShakeService.stop(this)
                 generation++; connection?.disconnect(); working.set(false)
                 send("stop",listOf("stop"))
             },{ more() })
         primaryForShake=home.primary; status=home.status; setContentView(home.view)
     }
+    private var wifiCheck: WatchWifiCheck?=null
+    private fun checkWifi() { wifiCheck?.close();wifiCheck=WatchWifiCheck(this) { send("status",listOf("status")) }.show() }
     private fun more() {
         android.app.AlertDialog.Builder(this).setTitle("More")
-            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status","Hands-free","Shake to speak")) { _,index ->
+            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status","Hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake")) { _,index ->
                 when(index) {
+                    7 -> SleepingShakeOptions.show(this)
+                    6 -> checkWifi()
                     5 -> shakeOptions()
                     0 -> send("status",listOf("status"))
                     1 -> lastRequest?.let { fetchResult(it) } ?: reply("No previous request")
@@ -112,13 +117,22 @@ class WatchActivity : Activity() {
                 }
             }.setNegativeButton("Close",null).show()
     }
-    override fun onResume() { super.onResume(); active = true
+    override fun onResume() { super.onResume(); active = true; SleepingShakeService.activityVisible = true
         if(getSharedPreferences("heysig-gesture",MODE_PRIVATE).getBoolean("shake",false)) shake.start() }
-    override fun onPostResume() { super.onPostResume(); deferred?.let { deferred=null; it() } }
+    override fun onPostResume() { super.onPostResume(); consumeShakeTap(); deferred?.let { deferred=null; it() } }
     override fun onPause() {
+        wifiCheck?.close();wifiCheck=null;
         shake.stop()
+        SleepingShakeService.activityVisible = false
         active = false; generation++; connection?.disconnect(); working.set(false); speech?.stop()
         super.onPause()
+    }
+    override fun onNewIntent(intent: Intent) { super.onNewIntent(intent); setIntent(intent) }
+    private fun consumeShakeTap() {
+        if(SleepingShakeService.consume(intent)) {
+            if(getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) reply("Unlock the watch, then tap Speak")
+            else primaryShake()
+        }
     }
     override fun onDestroy() { generation++; connection?.disconnect(); speech?.shutdown(); super.onDestroy() }
     @Deprecated("Platform speech result")
@@ -198,6 +212,7 @@ class WatchActivity : Activity() {
         } finally { http.disconnect(); if(connection === http) connection = null }
     }
     private fun send(text:String, alternatives:List<String>) {
+        if(WatchWifiCheck.requested(text)) { checkWifi();return }
         val preference = VoicePreference.parse(text)
         if(preference != null) {
             if(alternatives.any { VoicePreference.parse(it) != preference }) { reply("Speech alternatives disagree. Say voice prompts or voice responses, then on or off"); return }

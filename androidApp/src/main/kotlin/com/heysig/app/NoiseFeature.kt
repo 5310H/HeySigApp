@@ -496,7 +496,7 @@ class NoiseFeature(
                         lastAutomaticSuccessMillis = automatic.lastSuccessMillis
                         quietUntil = SystemClock.elapsedRealtime()+settings.waitSeconds.coerceAtLeast(10)*1000L
                     } else stop()
-                    detail = if(success) "Program command played; settling before fresh confirmations. Reception is unverified." else "Playback failed or interrupted. Automatic stopped; state may be uncertain."
+                    detail = if(success) "Program command played; settling before fresh confirmations." else "Playback failed or interrupted. Automatic stopped; state may be uncertain."
                     update()
                 }
             } }
