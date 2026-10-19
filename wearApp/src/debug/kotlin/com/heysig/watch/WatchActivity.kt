@@ -24,6 +24,7 @@ import java.util.UUID
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.net.ssl.*
 import com.heysig.control.VoicePreference
+import com.heysig.companion.PrivacyNotice
 
 /** Experimental standalone Wi-Fi client; never emits hearing-aid command tones. */
 class WatchActivity : Activity() {
@@ -31,6 +32,7 @@ class WatchActivity : Activity() {
     private val working = AtomicBoolean(false)
     private var speech: TextToSpeech? = null
     private var speechReady = false
+    private var speechIssue = "Speech engine is starting. Try again shortly."
     private var conversation = UUID.randomUUID().toString()
     private var lastRequest: String? = null
     private var lastText: String? = null
@@ -45,7 +47,20 @@ class WatchActivity : Activity() {
         super.onCreate(state)
         lastRequest = getPreferences(MODE_PRIVATE).getString("lastRequest",null)
         lastStatus = if(File(filesDir,"pairing.json").exists()) "Ready" else "Setup needed"
-        speech = TextToSpeech(this) { speechReady = it == TextToSpeech.SUCCESS; if(speechReady) speech?.language = Locale.US }
+        speech = TextToSpeech(this) { result ->
+            runOnUiThread {
+                val language = if(result == TextToSpeech.SUCCESS) speech?.setLanguage(Locale.US) else null
+                speechReady = language != null && language >= TextToSpeech.LANG_AVAILABLE
+                speechIssue = if(result != TextToSpeech.SUCCESS) "Speech engine unavailable. Check watch text-to-speech settings."
+                    else "English speech data unavailable. Check watch text-to-speech language settings."
+                if(speechReady) speech?.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
+                    override fun onStart(id: String?) {}
+                    override fun onDone(id: String?) {}
+                    @Deprecated("Platform speech callback")
+                    override fun onError(id: String?) { runOnUiThread { if(active) showSpeechIssue("Speech output failed. Check watch speech data and media volume.") } }
+                })
+            }
+        }
         render()
     }
     private val shake by lazy { ShakeTrigger(this) {
@@ -68,14 +83,7 @@ class WatchActivity : Activity() {
             !voicePrefs.getBoolean("voicePrompts",true) && !voicePrefs.getBoolean("spokenResponses",true),
             speakAction@ {
             if(working.get()) { reply("Wait for the current result or press Stop"); return@speakAction }
-            speech?.stop()
-            try {
-                startActivityForResult(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                    putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                    putExtra(RecognizerIntent.EXTRA_LANGUAGE,"en-US")
-                    if(voicePrefs.getBoolean("voicePrompts",true)) putExtra(RecognizerIntent.EXTRA_PROMPT,"HeySig command")
-                },41)
-            } catch(e:Exception) { reply("Watch speech service unavailable") }
+            speechConsent()
 
             },{
                 SleepingShakeService.stop(this)
@@ -88,8 +96,17 @@ class WatchActivity : Activity() {
     private fun checkWifi() { wifiCheck?.close();wifiCheck=WatchWifiCheck(this) { send("status",listOf("status")) }.show() }
     private fun more() {
         android.app.AlertDialog.Builder(this).setTitle("More")
-            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status","Hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake")) { _,index ->
+            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status","Hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake","Type command")) { _,index ->
                 when(index) {
+                    8 -> {
+                        val input = EditText(this).apply { hint="Command"; setSingleLine() }
+                        android.app.AlertDialog.Builder(this).setTitle("Type command").setView(input)
+                            .setNegativeButton("Cancel",null).setPositiveButton("Send") { _,_ ->
+                                val text=input.text.toString()
+                                if(text.isBlank() || text.length>512) reply("Use a command of 1–512 characters")
+                                else send(text,listOf(text))
+                            }.show()
+                    }
                     7 -> SleepingShakeOptions.show(this)
                     6 -> checkWifi()
                     5 -> shakeOptions()
@@ -103,7 +120,10 @@ class WatchActivity : Activity() {
                                     (dialog as android.app.AlertDialog).listView.setItemChecked(item,!value); reply("Could not save speech choice")
                                 }
                                 if(!value) speech?.stop()
-                            }.setPositiveButton("Done",null).setOnDismissListener { render() }.show()
+                            }.setNeutralButton("Test reply") { _,_ ->
+                                reply(if(voicePrefs.getBoolean("spokenResponses",true)) "This is a HeySig spoken reply test." else "Spoken responses are off. Turn them on to test speech.")
+                            }
+                            .setPositiveButton("Done",null).setOnDismissListener { render() }.show()
                     }
                     4 -> {
                         val commands=arrayOf("hands free on","pause listening for 30 minutes","hands free off","hands free status","end hands free session")
@@ -116,6 +136,26 @@ class WatchActivity : Activity() {
                         .setPositiveButton("Close",null).show()
                 }
             }.setNegativeButton("Close",null).show()
+    }
+    private fun speechConsent() {
+        if(!voicePrefs.getBoolean("speechDisclosureV1",false)) {
+            android.app.AlertDialog.Builder(this).setTitle("Optional speech recognition")
+                .setMessage(PrivacyNotice.SPEECH.replace("connected phone", "Chromebook through the development Wi-Fi relay") + " The relay retains command digests and final replies, which can contain settings or recognized words.")
+                .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
+                    if(voicePrefs.edit().putBoolean("speechDisclosureV1",true).commit()) launchSpeech()
+                    else reply("Could not save speech choice")
+                }.show()
+        } else launchSpeech()
+    }
+    private fun launchSpeech() {
+        speech?.stop()
+        try {
+            startActivityForResult(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE,"en-US")
+                if(voicePrefs.getBoolean("voicePrompts",true)) putExtra(RecognizerIntent.EXTRA_PROMPT,"HeySig command")
+            },41)
+        } catch(e:Exception) { reply("Watch speech service unavailable. Use More → Type command") }
     }
     override fun onResume() { super.onResume(); active = true; SleepingShakeService.activityVisible = true
         if(getSharedPreferences("heysig-gesture",MODE_PRIVATE).getBoolean("shake",false)) shake.start() }
@@ -151,7 +191,16 @@ class WatchActivity : Activity() {
     }
     private fun reply(text:String, prompt:Boolean = false) {
         lastStatus=text; status.text = text
-        if(active && speechReady && voicePrefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",true)) speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-watch-result")
+        if(active && voicePrefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",true)) {
+            if(!speechReady) showSpeechIssue(speechIssue)
+            else if(speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-watch-result") != TextToSpeech.SUCCESS)
+                showSpeechIssue("Speech output could not start. Check watch text-to-speech settings.")
+        }
+    }
+    private fun showSpeechIssue(issue: String) {
+        lastStatus = "$lastStatus\n$issue"; status.text = lastStatus
+        android.app.AlertDialog.Builder(this).setTitle("Spoken reply unavailable").setMessage(issue)
+            .setPositiveButton("Close",null).show()
     }
     private fun withWifi(action:(Network)->JSONObject): JSONObject {
         val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -225,8 +274,15 @@ class WatchActivity : Activity() {
         if(!active || !working.compareAndSet(false,true)) return
         val myGeneration = ++generation
         val id = UUID.randomUUID().toString()
-        lastRequest = id; lastText = text
-        getPreferences(MODE_PRIVATE).edit().putString("lastRequest",id).commit()
+        // Stop must preserve lookup of the interrupted command, including an uncertain result.
+        val stopping = text.trim().lowercase(Locale.ROOT) in listOf("stop","cancel")
+        if(!stopping) {
+            if(!voicePrefs.edit().putString("lastRequest",id).commit()) {
+                working.set(false); reply("Could not remember request; nothing sent"); return
+            }
+            lastRequest = id
+        }
+        lastText = text
         status.text = "Heard: $text\nSending…"
         Thread({
             val answer = try {

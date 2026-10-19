@@ -49,6 +49,9 @@ old grants. Requests have UUID identifiers, bounded payload/text/alternatives,
 correlated replies and a 30-second visible timeout. No transport retry exists.
 Ambiguous recognition still passes through the existing shared parser rules.
 Program/restore confirmations stay bound to the initiating node/conversation.
+While the watch Activity is visible, a pending RPC keeps its screen on until
+reply, failure, cancellation or the 30-second timeout. This does not override
+explicit locking/navigation or change the system screen timeout.
 
 The phone journals UNKNOWN before starting playback. A duplicate retained
 identifier returns its recorded result without new playback. The shared gate

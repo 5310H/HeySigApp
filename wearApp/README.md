@@ -7,13 +7,20 @@ The remainder of this guide describes the separate, preserved development relay.
 ## HeySig watch development companion
 
 Native Wear OS prototype for the Pixel Watch 3. It offers Speak command,
-Read status, Check last result, and Stop, with spoken replies. Commands use the
+Read status, Check last result, Stop, and More → Type command, with independently optional spoken replies. Commands use the
 existing Chromebook app's parser and acoustic playback path.
+
+Before first speech use, the development companion explains the installed recognition provider and possible network handling. Typed commands remain available without recognition. Stop preserves the interrupted command’s lookup identifier.
 
 The development companion has independent **Voice prompts** and **Spoken responses** switches
 in More → Speech options. They persist on the watch. Say “voice prompts off/on” or “voice
 responses off/on” to change them locally, even without the relay. The phone has
 its own switches. Text replies remain available when speech is off.
+
+Both watch variants offer **Test reply** in Speech options. Turn Spoken responses
+on to test the local speech engine without contacting the phone or playing aid
+tones. Initialization, missing English speech data and output errors are shown
+visibly; a text reply alone does not prove audible speech succeeded.
 
 ## Experimental Chromebook connection
 

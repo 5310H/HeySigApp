@@ -49,12 +49,26 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private lateinit var layout: LinearLayout
     private var speech: TextToSpeech? = null
     private var speechReady = false
+    private var speechIssue = "Speech engine is starting. Try again shortly."
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         phone = prefs.getString("phone",null)
         rpcPath=prefs.getString("connectionPath",CompanionSafety.PATH)!!
-        speech = TextToSpeech(this) { speechReady = it == TextToSpeech.SUCCESS; if(speechReady) speech?.language = Locale.US }
+        speech = TextToSpeech(this) { result ->
+            runOnUiThread {
+                val language = if(result == TextToSpeech.SUCCESS) speech?.setLanguage(Locale.US) else null
+                speechReady = language != null && language >= TextToSpeech.LANG_AVAILABLE
+                speechIssue = if(result != TextToSpeech.SUCCESS) "Speech engine unavailable. Check watch text-to-speech settings."
+                    else "English speech data unavailable. Check watch text-to-speech language settings."
+                if(speechReady) speech?.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
+                    override fun onStart(id: String?) {}
+                    override fun onDone(id: String?) {}
+                    @Deprecated("Platform speech callback")
+                    override fun onError(id: String?) { runOnUiThread { if(active) showSpeechIssue("Speech output failed. Check watch speech data and media volume.") } }
+                })
+            }
+        }
         render()
     }
     private fun label(text: String, size: Float = 16f) {
@@ -129,7 +143,10 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
                     (dialog as AlertDialog).listView.setItemChecked(index,!value); reply("Could not save speech choice")
                 }
                 if(!value) speech?.stop()
-            }.setPositiveButton("Done",null).setOnDismissListener { render() }.show()
+            }.setNeutralButton("Test reply") { _,_ ->
+                reply(if(prefs.getBoolean("spokenResponses",false)) "This is a HeySig spoken reply test." else "Spoken responses are off. Turn them on to test speech.")
+            }
+            .setPositiveButton("Done",null).setOnDismissListener { render() }.show()
     }
     override fun onResume() {
         super.onResume(); active = true; SleepingShakeService.activityVisible = true
@@ -174,7 +191,14 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         }
     }
     override fun onDestroy() { exportDocument = null; speech?.shutdown(); super.onDestroy() }
-    private fun abandon() { pending.values.forEach { handler.removeCallbacks(it.timeout) }; pending.clear() }
+    private fun updateRequestScreen() {
+        // A normal watch screen timeout must not abandon an in-flight result.
+        // This applies only to the visible Activity and the bounded RPC wait;
+        // explicit navigation/locking still disconnects without replay.
+        if(active && pending.isNotEmpty()) window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        else window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+    private fun abandon() { pending.values.forEach { handler.removeCallbacks(it.timeout) }; pending.clear(); updateRequestScreen() }
     private fun disconnect(resetConversation: Boolean = true) {
         generation++; ready = false; working = false; abandon()
         if(resetConversation) conversation = UUID.randomUUID().toString()
@@ -182,7 +206,16 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private fun reply(text: String, prompt: Boolean = false) {
         lastStatus = text; status.text = text
         primary.setText(if(ready) R.string.speak else R.string.connect)
-        if(active && speechReady && prefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",false)) speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-result")
+        if(active && prefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",false)) {
+            if(!speechReady) showSpeechIssue(speechIssue)
+            else if(speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-result") != TextToSpeech.SUCCESS)
+                showSpeechIssue("Speech output could not start. Check watch text-to-speech settings.")
+        }
+    }
+    private fun showSpeechIssue(issue: String) {
+        lastStatus = "$lastStatus\n$issue"; status.text = lastStatus
+        AlertDialog.Builder(this).setTitle("Spoken reply unavailable").setMessage(issue)
+            .setPositiveButton("Close",null).show()
     }
     private fun handsFreeControls() {
         val commands=arrayOf("hands free on","pause listening for 30 minutes","hands free off","hands free status","end hands free session")
@@ -223,17 +256,21 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         val id = UUID.randomUUID().toString()
         val current = generation
         val timeout = Runnable {
-            if(pending.remove(id) != null && active && current == generation) {
+            val request = pending.remove(id)
+            updateRequestScreen()
+            if(request != null && active && current == generation) {
                 ready = false
                 callback(JSONObject().put("phase","UNKNOWN").put("text","No confirmed result. Reconnect and use Check last result. No automatic retry."))
             }
         }
         pending[id] = Awaiting(node,timeout,callback)
+        updateRequestScreen()
         handler.postDelayed(timeout,30000)
         val data = body.put("rpc",id).toString().toByteArray(Charsets.UTF_8)
-        if(data.size > CompanionSafety.MAX_BYTES) { pending.remove(id); handler.removeCallbacks(timeout); callback(JSONObject().put("phase","BLOCKED").put("text","Command too large")); return }
+        if(data.size > CompanionSafety.MAX_BYTES) { pending.remove(id); updateRequestScreen(); handler.removeCallbacks(timeout); callback(JSONObject().put("phase","BLOCKED").put("text","Command too large")); return }
         messages.sendMessage(node,rpcPath,data).addOnFailureListener {
             val request = pending.remove(id)
+            updateRequestScreen()
             handler.removeCallbacks(timeout)
             if(request != null && active && current == generation) { ready = false; request.reply(JSONObject().put("phase","UNKNOWN").put("text","Phone disconnected. Reconnect and check the last result. No retry.")) }
         }
@@ -246,6 +283,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             val waiting = pending[id] ?: return
             if(waiting.node != event.sourceNodeId) return
             pending.remove(id); handler.removeCallbacks(waiting.timeout)
+            updateRequestScreen()
             waiting.reply(answer)
         } catch(e:Exception) {
             ready = false; working = false; abandon()

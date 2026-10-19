@@ -813,7 +813,19 @@ class HomeActivity : Activity() {
                 require(bytes.size <= 65_536) { "Setup import is limited to 64 KiB" }
                 if(requestCode == 404) {
                     val next=FittingImport.decode(bytes.toString(Charsets.UTF_8))
-                    tell(runtime.fittingWorkflow.stage(next,fitting,"phone",SystemClock.elapsedRealtime()),true)
+                    val review=runtime.fittingWorkflow.stage(next,fitting,"phone",SystemClock.elapsedRealtime())
+                    val scroll=ScrollView(this).apply {
+                        addView(TextView(this@HomeActivity).apply { text=review.replace("Say save aid setup or cancel aid setup.","Choose Save reviewed fitting or Cancel.");setPadding(24,24,24,24);textSize=18f })
+                    }
+                    android.app.AlertDialog.Builder(this).setTitle("Review imported fitting").setView(scroll)
+                        .setNegativeButton("Cancel") { _,_ -> route("cancel aid setup") }
+                        .setOnCancelListener { route("cancel aid setup") }
+                        .setPositiveButton("Save reviewed fitting") { _,_ ->
+                            route("save aid setup")
+                            // Rebuild the form from the saved fitting, never the pre-import defaults.
+                            show()
+                        }.show()
+                    tell("Imported fitting ready for review. Nothing saved or sent.",true)
                 } else {
                     check(!runtime.fittingWorkflow.pending) { "Finish setup review first" }
                     val review=runtime.personalPhrases.importForReview(bytes.toString(Charsets.UTF_8),requireNotNull(fitting),"phone",System.currentTimeMillis())

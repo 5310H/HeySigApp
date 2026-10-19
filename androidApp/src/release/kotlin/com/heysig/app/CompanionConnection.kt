@@ -33,9 +33,9 @@ class CompanionConnection(
     private var connectionStatus: TextView? = null
     val enabled get() = gate != null && foreground
     fun resume() {
-        val returning = !foreground
         foreground = true; refreshStatus()
-        if(returning && gate == null) report("Watch connection is off. Enable the selected watch before connecting.")
+        // Returning from recognition/import must preserve that feature's result.
+        // The connection card already shows Off and the explicit enable action.
     }
     private fun refreshStatus() {
         connectionStatus?.text = activity.getString(R.string.watch_status,prefs.getString("label","none selected"),if(enabled) "Enabled while this phone stays open and unlocked" else "Off — enable before connecting on the watch")

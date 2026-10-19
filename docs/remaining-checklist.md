@@ -1,5 +1,11 @@
 # HeySig remaining work checklist
 
+Watch follow-up: [October 18 completion checks](acceptance/watch-completion-2026-10-18.md)
+record the direct-candidate updates and bounded request screen safeguard.
+Reviewed fitting import, direct status and spoken status input passed. Spoken
+replies and recovery have reported failures; aid commands and sleep/shake remain
+pending.
+
 Updated October 18, 2026. Check an item only after its result is recorded with
 build/commit, device/OS, date and an acceptance-record link. A build or preview
 pass does not establish physical aid reception or Play approval.
@@ -82,6 +88,13 @@ passed. See [device update evidence](acceptance/device-updates-2026-10-18.md).
 Physical acceptance and release items remain unchecked. October 18 follow-up:
 sleeping-watch shake now offers a separately started vibration-and-tap session;
 see the [session design](architecture/hands-free-session.md#october-18-sleeping-watch-extension).
+
+October 18 direct watch setup: matching production-connection candidates are now
+installed separately on Pixel/watch. Phone discovery, watch selection, explicit
+enable, fresh watch connection and a status-only round trip passed. Candidate
+fitting was subsequently reviewed and saved; lifecycle/physical acceptance remains
+pending. Existing development settings were preserved. See
+[direct setup evidence](acceptance/watch-production-setup-2026-10-18.md).
 
 ## 1. Noise — next priority
 
