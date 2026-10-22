@@ -18,9 +18,10 @@ object SleepManagementAcceptance {
             .putString("saved","""{"program":1,"VOLUME":6}""").commit())
         check(prefs.edit().clear().commit())
         var failed=false
+        var blocked=false
         var played=0
         val transport=object: CommandTransport {
-            override fun inspect(allowLocked: Boolean) = Unit
+            override fun inspect(allowLocked: Boolean) { check(!blocked) { "Injected audio blocker" } }
             override fun play(pcm: ByteArray,rate: Int,cancelled: AtomicBoolean,allowLocked: Boolean) { played++;check(!failed) { "Injected transport failure" } }
         }
         val runtime=ManualRuntime.isolated(core,transport,prefs)
@@ -38,6 +39,7 @@ object SleepManagementAcceptance {
             check(store.save(SleepRoutine(1320,420,2,1),fit,store.editorRevision()).startsWith("Routine saved"))
             check(store.target(true,fit)==2 && store.target(false,fit)==1)
             check(play(2,true))
+            check(store.actionResult()!!.startsWith("Sleep now sent"))
             check(store.state.mode==SleepMode.ASLEEP && store.state.blocksNoise)
             check(SleepRoutineStore(prefs).state==store.state)
             val before=played
@@ -48,6 +50,12 @@ object SleepManagementAcceptance {
             check(store.state.blocksNoise)
             check(play(1,false))
             check(store.state==SleepState())
+            val beforeBlocked=played
+            blocked=true
+            check(!play(2,true))
+            check(played==beforeBlocked && store.state==SleepState())
+            check(SleepRoutineStore(prefs).actionResult()!!.contains("Sleep now did not complete. Blocked: Injected audio blocker"))
+            blocked=false
             failed=true
             check(!play(2,true))
             check(store.state==SleepState(SleepMode.UNKNOWN,true))

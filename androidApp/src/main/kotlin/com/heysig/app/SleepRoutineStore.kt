@@ -39,7 +39,8 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
     private fun revision()=prefs.getLong("revision",0)
     fun setupChanged(fit: Fitting) {
         if(saved != null && savedFitting != fit.toString() && !prefs.getBoolean("invalidated",false)) {
-            check(prefs.edit().putBoolean("invalidated",true).putBoolean("reminders",false).commit()) { "Could not invalidate changed routine" }
+            check(prefs.edit().putBoolean("invalidated",true).putBoolean("reminders",false).putBoolean("automaticEnabled",false)
+                .putLong("automaticGeneration",Math.addExact(prefs.getLong("automaticGeneration",0),1)).commit()) { "Could not invalidate changed routine" }
             transition(SleepState(SleepMode.UNKNOWN,true))
             cancel()
         }
@@ -52,6 +53,12 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
     fun cancel() { draft=null }
     val hasDraft get()=draft != null
     fun isDraftFor(origin: String)=draft?.origin==origin
+    fun actionResult(): String? = prefs.getString("actionResult",null)
+    fun recordActionResult(sleep: Boolean,success: Boolean,detail: String): String {
+        val text="${if(sleep) "Sleep now" else "Wake now"} ${if(success) "sent" else "did not complete"}. $detail" +
+            if(success) " Playback completed; hearing-aid receipt is not verified." else ""
+        return if(prefs.edit().putString("actionResult",text).commit()) text else "$text Result could not be saved."
+    }
     private fun describe(value: SleepRoutine,fit: Fitting): String {
         fun name(slot: Int?)=fit.programs.find { it.slot==slot }?.name ?: "choose program"
         return "Sleep ${SleepRoutine.clock(value.sleepMinute)}: ${name(value.sleepSlot)}. Wake ${SleepRoutine.clock(value.wakeMinute)}: ${name(value.wakeSlot)}."
@@ -60,37 +67,46 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
         val routine=validSaved(fit) ?: return "Needs setup · Choose and save bedtime and morning programs. " +
             (if(saved != null) "Your saved routine needs review after an aid setup change." else "")
         val enabled=prefs.getBoolean("reminders",false)
+        val automatic=prefs.getBoolean("automaticEnabled",false)
         val stateLabel=when {
-            !enabled -> "Reminders Off · Enable reminders below."
-            state.override -> "Paused · Choose Resume reminders below."
+            automatic && state.override -> "Automatic switching paused by a manual change. Review and start automatic again."
+            automatic -> "Automatic switching On · Saved programs play at bedtime and morning, including while locked."
+            !enabled -> "Routine Off · Start automatic switching or use reminder options."
+            state.override -> "Paused · Choose Resume routine reminders."
             else -> "Reminders On · Each program switch needs your confirmation."
         }
-        val next=if(enabled && !state.override) {
+        val next=if((enabled || automatic) && !state.override) {
             val now=ZonedDateTime.now()
-            val event=listOf("Bedtime" to routine.sleepMinute,"Morning" to routine.wakeMinute)
-                .mapNotNull { (label,minute) -> SleepPreview.next(minute,now)?.let { label to it } }
-                .minByOrNull { it.second.toInstant() }
-            event?.let { "\nNext reminder: ${it.first}, ${it.second.format(java.time.format.DateTimeFormatter.ofPattern("EEE h:mm a",java.util.Locale.getDefault()))} (${now.zone.id}). Android may delay it." }.orEmpty()
+            val event=listOf("Bedtime" to prefs.getLong(if(automatic) "automaticSleepDue" else "sleepDue",0),"Morning" to prefs.getLong(if(automatic) "automaticWakeDue" else "wakeDue",0))
+                .filter { it.second>now.toInstant().toEpochMilli() }.minByOrNull { it.second }
+            event?.let { "\nNext ${if(automatic) "automatic switch" else "reminder requested"}: ${it.first}, ${Instant.ofEpochMilli(it.second).atZone(now.zone).format(java.time.format.DateTimeFormatter.ofPattern("EEE MMM d h:mm a",java.util.Locale.getDefault()))} (${now.zone.id})." }
+                ?: "\nNo future ${if(automatic) "automatic switch" else "reminder"} is recorded. Review and start the routine again."
         } else ""
         return "$stateLabel\n${describe(routine,fit)}$next"
     }
     fun status(fit: Fitting): String {
         val valid=validSaved(fit)
         return "Sleep mode: ${state.mode.name.lowercase()}. ${if(state.override) "Manual override On. " else ""}Reminders ${if(prefs.getBoolean("reminders",false)) "On" else "Off"}. " + (error ?: if(saved==null) "No saved routine. 22:00 and 07:00 are suggestions only." else if(valid==null) "Setup changed; review and save the routine again." else describe(valid,fit)) +
-            " " + prefs.getString("reminderResult","").orEmpty() + " Program switching requires your tap."
+            " " + prefs.getString("reminderResult","").orEmpty() + if(prefs.getBoolean("automaticEnabled",false)) " Automatic program switching is enabled." else " Automatic program switching is Off."
     }
     fun preview(fit: Fitting, now: ZonedDateTime=ZonedDateTime.now()): String {
         val value=validSaved(fit) ?: return "Save a valid routine to preview upcoming times."
-        return SleepPreview.describe(value,now).let { if(prefs.getBoolean("reminders",false)) it.replace("Preview only","Reminder times").replace("No alarms are scheduled.","Android may delay reminders; delivery more than 15 minutes late is skipped.") else it }
+        return SleepPreview.describe(value,now).let {
+            if(prefs.getBoolean("automaticEnabled",false)) it.replace("Preview only","Automatic local-clock plan").replace("No alarms are scheduled.","See the main status for actual armed occurrences; no past events replay.")
+            else if(prefs.getBoolean("reminders",false)) it.replace("Preview only","Reminder times").replace("No alarms are scheduled.","Android may delay reminders; delivery more than 15 minutes late is skipped.") else it
+        }
     }
     fun save(value: SleepRoutine, fit: Fitting, expectedRevision: Long): String {
         try {
             value.validate(fit)
+            check(!state.pending) { "Wait for the current sleep/wake command before changing the routine" }
             check(draft == null || draft?.choices == value) { "A voice sleep draft is active. Review/save it by voice or say cancel sleep setup before saving different screen choices." }
             check(expectedRevision==revision()) { "Routine changed elsewhere. Review it again before saving." }
             val json=JSONObject().put("version",1).put("sleepMinute",value.sleepMinute).put("wakeMinute",value.wakeMinute)
                 .put("sleepSlot",value.sleepSlot).put("wakeSlot",value.wakeSlot).put("fitting",fit.toString())
-            check(prefs.edit().putString("settings",json.toString()).putLong("revision",expectedRevision+1).putBoolean("invalidated",false).putBoolean("reminders",false).commit()) { "Could not save routine; previous choices retained" }
+            check(prefs.edit().putString("settings",json.toString()).putLong("revision",expectedRevision+1).putBoolean("invalidated",false)
+                .putBoolean("reminders",false).putBoolean("automaticEnabled",false)
+                .putLong("automaticGeneration",Math.addExact(prefs.getLong("automaticGeneration",0),1)).remove("automaticClaim").commit()) { "Could not save routine; previous choices retained" }
             saved=value;savedFitting=fit.toString();error=null;draft=null
             return "Routine saved. ${describe(value,fit)} Schedule remains Off. No command sent."
         } catch(e: Exception) { return e.message ?: "Routine could not be saved" }
@@ -103,7 +119,7 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
         }.getOrElse { it.message ?: "Sleep state could not be saved" }
         if(command is SleepCommand.Now) return "Open HeySig to run the saved sleep or wake program."
         if(command==SleepCommand.Disable) { cancel();return if(prefs.edit().putBoolean("reminders",false).commit()) "Sleep reminders Off. No pending sleep action." else "Could not disable reminders; try again" }
-        if(command==SleepCommand.Enable) return "Schedule unavailable: automatic overnight switching has not passed acceptance. Choices can be saved and previewed; nothing is armed."
+        if(command==SleepCommand.Enable) return "Schedule unavailable here: review Start automatic routine on the phone and allow Alarms & reminders. Nothing is armed."
         if(command==SleepCommand.Read) return status(fit)+" "+preview(fit)
         if(command==SleepCommand.Cancel) { cancel();return "Sleep draft discarded. Saved choices retained. Nothing sent." }
         if(command is SleepCommand.Invalid) return command.reason

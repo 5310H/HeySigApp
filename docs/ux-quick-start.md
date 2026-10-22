@@ -10,21 +10,24 @@ Open **Settings → Sleep routine**.
 
 1. For an existing routine, open **Edit bedtime & morning routine**. Choose
    bedtime, morning time and both programs. Select **Review & save
-   routine** and check the summary. Saving sends no command and turns reminders
-   Off, including when editing an existing routine.
-2. Choose **Enable sleep reminders** and allow notifications if asked. The
-   dashboard shows whether reminders are On, Off, paused or need setup. When
-   paused, choose **Resume reminders**. Android notification blocking is shown
-   with a link to its notification settings.
+   routine** and check the summary. Choose **Save & start automatic**, or
+   **Save only** to leave schedules Off.
+2. Choose **Start automatic routine**, review the saved programs/times, then
+   **Enable automatic**. Allow Android Alarms & reminders and notifications if
+   requested. Check the main status and dated next switch. The notification's
+   Stop automatic cancels future actions and requests cancellation of playback.
 3. To try a saved program now, choose **Sleep now** or **Wake now**, then
    **Switch** in the confirmation. This is a real one-time program command,
    not a silent test. It does not change the schedule. Read the result at the
-   top of the screen; use **Advanced & troubleshooting → Check device audio**
+   top of the screen; use **Check device audio**
    to check the speaker conditions without sending a command.
 
-Reminders ask you to open the app and confirm a switch. There is no automatic
-bedtime or morning switching. Android may delay reminders; reminders more than
-15 minutes late are skipped. Manual changes pause future reminders. A program
+Automatic plays saved program commands at future times while locked, without
+another tap. Keep the phone speaker near the aids, media volume at least halfway,
+DND off and external audio disconnected. Blocked/interrupted or more than two
+minutes late actions are not retried. Manual changes pause automatic. Optional
+Reminder options retains notifications that ask you to tap; these are inexact
+and skip reminders more than 15 minutes late. A program
 named Sleep does not imply power-off or mute. Do not change fitting values to
 make a sleep program appear.
 

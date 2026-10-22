@@ -1,5 +1,20 @@
 # Release data inventory and Data safety worksheet
 
+October 21 automatic-sleep scope update: the owner now requests automatic
+scheduled program changes while locked. This supersedes the historical
+reminder-only/setup-only descriptions below for the optional automatic mode.
+Local sleep preferences additionally retain automatic enablement, reviewed
+revision, generation, due times, one-use claim metadata and latest playback /
+blocked outcomes. Existing export/deletion covers them. Exact alarms dispatch a
+short-lived media-playback foreground service using the same validated executor;
+no new recognition, audio recording, analytics or network SDK is added. The
+service can suspend/resume an already authorized hands-free session, but cannot
+create one. Claims and interrupted operations never replay. New manifest
+permissions are SCHEDULE_EXACT_ALARM and FOREGROUND_SERVICE_MEDIA_PLAYBACK.
+Review foreground-service use/declarations, alarm scope, privacy/health intent
+and final release behavior before completing forms. See the
+[automatic design](architecture/automatic-sleep.md) and in-app Sleep notice.
+
 October 18 setup/phrase update: guided fitting drafts are memory-only and expire
 in five minutes. A changed saved fitting archives prior fitting/requested/snapshot/
 per-program JSON locally (at most 20 archives; no silent overwrite), then clears

@@ -59,6 +59,8 @@ class HomeActivity : Activity() {
     private var voiceSessionStatus: TextView? = null
     private var voiceSessionPresent = false
     private var pendingHandsFreeStart=false
+    private var pendingExactSleepRevision: Long?=null
+    private var pendingNotificationSleepRevision: Long?=null
     private var seenRuntimeRevision=0L
     private var statusRow: LinearLayout? = null
     private fun speechStatusText() = "Prompts ${if(voiceEnabled("voicePrompts")) "on" else "off"} · Replies ${if(voiceEnabled("spokenResponses")) "on" else "off"}"
@@ -99,6 +101,9 @@ class HomeActivity : Activity() {
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         load()
+        // Android removes alarms after force-stop. Reopening restores future
+        // occurrences only; never disturb an operation already owned by the service.
+        if(AutomaticSleepService.running==null) runCatching { AutomaticSleepScheduler(this).refresh() }
         if(android.os.Build.VERSION.SDK_INT >= 33) {
             backCallback = android.window.OnBackInvokedCallback { leavePage() }.also {
                 onBackInvokedDispatcher.registerOnBackInvokedCallback(android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT,it)
@@ -121,9 +126,9 @@ class HomeActivity : Activity() {
     override fun onResume() {
         super.onResume(); resumed = true;
         runtime.stateChanged={
-            if(resumed && page in listOf("Home","Volume","Balance","Tinnitus","Batteries")) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
+            if(resumed && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
         }
-        if(seenRuntimeRevision!=runtime.revision && page in listOf("Home","Volume","Balance","Tinnitus","Batteries")) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
+        if(seenRuntimeRevision!=runtime.revision && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
         HandsFreeService.stopNoise={ noise.stop() }
         HandsFreeService.externalSpeechBusy={ tts?.isSpeaking==true || SystemClock.elapsedRealtime()<foregroundSpeechDeadline }
         HandsFreeService.statusListener={ _ ->
@@ -142,6 +147,11 @@ class HomeActivity : Activity() {
     override fun onPostResume() {
         super.onPostResume()
         if(intent.getBooleanExtra("openSleep",false)) { intent.removeExtra("openSleep");navigate("Sleep") }
+        pendingExactSleepRevision?.let { revision ->
+            pendingExactSleepRevision=null
+            if(AutomaticSleepScheduler(this).exactAllowed()) continueAutomaticSleep(revision)
+            else { show("Sleep");tell("Automatic stays Off. Allow Alarms & reminders, then choose Start automatic routine.",true) }
+        }
         pendingText?.let { pendingText = null; route(it) }
         if(pendingHandsFreeStart && checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)==android.content.pm.PackageManager.PERMISSION_GRANTED &&
             (android.os.Build.VERSION.SDK_INT<33 || checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)==android.content.pm.PackageManager.PERMISSION_GRANTED)) {
@@ -286,7 +296,7 @@ class HomeActivity : Activity() {
         val speak = Button(this).apply { setText(R.string.speak); contentDescription = "Speak command"; setOnClickListener { beginVoice() }; PhoneStyle.action(this,"primary") }
         val stop = Button(this).apply {
             setText(R.string.stop); PhoneStyle.action(this,"danger")
-            setOnClickListener { HandsFreeService.running?.control(HandsFreeControl.OFF); noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); pendingVoice = false; cancelled.set(true); tell("Stop requested. Already emitted tones cannot be undone.") }
+            setOnClickListener { runCatching { AutomaticSleepScheduler(this@HomeActivity).disable() };HandsFreeService.running?.control(HandsFreeControl.OFF); noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); pendingVoice = false; cancelled.set(true); tell("Stop requested. Automatic sleep is Off. Already emitted tones cannot be undone.") }
         }
         actions.addView(speak,LinearLayout.LayoutParams(0,-2,2f).apply { marginEnd = PhoneStyle.dp(this@HomeActivity,10) })
         actions.addView(stop,LinearLayout.LayoutParams(0,-2,1f))
@@ -557,18 +567,47 @@ class HomeActivity : Activity() {
     private fun sleepPage() {
         val fit=fitting ?: run { line("Save aid setup before choosing a sleep routine."); return }
         val store=runtime.sleepRoutine
+        val ready=runCatching { store.target(true,fit);store.target(false,fit) }.isSuccess
+        val remindersOn=getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getBoolean("reminders",false)
+        val automatic=AutomaticSleepScheduler(this)
         section("Your bedtime routine") {
-            line(store.dashboard(fit))
-            if(getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getBoolean("reminders",false) && !SleepReminders(this).available()) {
+            line(if(automatic.enabled && (!automatic.exactAllowed() || !automatic.notificationsAllowed()))
+                "Automatic is blocked by alarm or notification access. Review and start it again." else store.dashboard(fit))
+            PhoneStyle.action(button(if(automatic.enabled) "Review automatic routine" else "Start automatic routine",ready && !busy.get()) { reviewAutomaticSleep() },"primary")
+            if(automatic.enabled) button("Stop automatic routine") { tell(automatic.disable(),true);show("Sleep") }
+            line("Automatic switches to your saved bedtime and morning programs without a tap, including while the phone is locked. The phone speaker must be near the aids, media volume at least halfway, Do Not Disturb off and external audio disconnected. A blocked or late action is not retried.")
+            if(automatic.enabled && (!automatic.exactAllowed() || !automatic.notificationsAllowed())) line("Blocked: review Alarms & reminders and notification access before starting automatic again.")
+            getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getString("automaticResult",null)?.let { line("Last automatic result: $it") }
+            if(ready) {
+                val choices=store.choices(fit)
+                line("Sleep now: ${fit.programs.first { it.slot==choices.sleepSlot }.name}. Wake now: ${fit.programs.first { it.slot==choices.wakeSlot }.name}.")
+            } else line("Choose and save both programs below before starting.")
+            button("Sleep now",ready && !busy.get()) { confirmSleep(true) }
+            button("Wake now",ready && !busy.get()) { confirmSleep(false) }
+            line("These buttons ask before switching immediately. They do not start a schedule, power off or mute the aids.")
+            store.actionResult()?.let { line("Last program result: $it") }
+            button("Check device audio",!busy.get()) {
+                try { player.inspect();tell("Speaker audio checks passed. No command sent.",true) }
+                catch(e:Exception) { tell("Blocked: ${e.message}",true) }
+            }
+        }
+        val reminderOptions=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL;visibility=android.view.View.GONE }
+        button("Reminder options") { reminderOptions.visibility=if(reminderOptions.visibility==android.view.View.VISIBLE) android.view.View.GONE else android.view.View.VISIBLE }
+        content.addView(reminderOptions)
+        val mainContent=content;content=reminderOptions
+        try {
+            PhoneStyle.heading(this,content,"Ask me to tap instead")
+            button(if(remindersOn && store.state.override) "Resume routine reminders" else "Start routine reminders",ready && !busy.get()) { requestSleepReminder() }
+            if(remindersOn) button("Stop reminders") { val result=SleepReminders(this).setEnabled(false);show("Sleep");tell(result,true) }
+            button("Test reminder") { requestSleepReminder(test=true) }
+            line("Test reminder posts a notification now without changing a program or your saved schedule. Daily reminders open this screen so you can choose Sleep now or Wake now.")
+            if(!SleepReminders(this).available()) {
                 line("Blocked: Android notifications are off. Allow HeySig notifications, including the Sleep routine reminders channel, in Android settings.")
                 button("Open notification settings") { startActivity(Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE,packageName)) }
             }
-            if(store.state.override && getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getBoolean("reminders",false)) button("Resume reminders",!busy.get()) {
-                tell(store.handle(SleepCommand.Resume,fit,"phone"),true);show("Sleep")
-            }
-            line("HeySig reminds you at bedtime and in the morning. Open the reminder, then confirm the program switch. It does not switch automatically, power down or mute your aids.")
-        }
-        val ready=runCatching { store.target(true,fit);store.target(false,fit) }.isSuccess
+            line("Start also clears the manual pause for future reminders. Times are approximate; Android can delay delivery. A reminder more than 15 minutes late is skipped and recorded below.")
+            getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getString("reminderResult",null)?.let { line("Last reminder result: $it") }
+        } finally { content=mainContent }
         val routineParent=content
         val routineEditor=LinearLayout(this).apply {
             orientation=LinearLayout.VERTICAL
@@ -583,8 +622,8 @@ class HomeActivity : Activity() {
         routineParent.addView(routineEditor)
         content=routineEditor
         try {
-        PhoneStyle.heading(this,content,"1. Choose bedtime and morning programs")
-        line("Changes below take effect only after Review & save routine. Saving turns reminders Off; enable them in step 2 afterward.")
+        PhoneStyle.heading(this,content,"Choose bedtime and morning programs")
+        line("Review your choices, then choose Save & start automatic or Save only. Saving alone leaves schedules Off.")
         val initial=store.choices(fit)
         val revision=store.editorRevision()
         var sleepMinute=initial.sleepMinute
@@ -607,13 +646,15 @@ class HomeActivity : Activity() {
         val wake=picker("Morning return program",initial.wakeSlot)
         fun choices()=SleepRoutine(sleepMinute,wakeMinute,programs.getOrNull(sleep.selectedItemPosition-1)?.slot,programs.getOrNull(wake.selectedItemPosition-1)?.slot)
         setupChanged={ choices()!=initial }
-        val commitRoutine={
+        val commitRoutine: (Boolean) -> Unit = { start ->
             if(fitting != fit) tell("Aid setup changed. Reopen and review the sleep routine.",true)
             else {
                 val result=store.save(choices(),fit,revision)
                 runCatching { SleepReminders(this).refresh() }
-                if(result.startsWith("Routine saved.")) show("Sleep")
-                tell(result,true)
+                runCatching { AutomaticSleepScheduler(this).refresh() }
+                if(result.startsWith("Routine saved.")) {
+                    if(start) continueAutomaticSleep(store.editorRevision()) else { show("Sleep");tell(result,true) }
+                } else tell(result,true)
             }
         }
         val save: () -> Unit = {
@@ -622,29 +663,15 @@ class HomeActivity : Activity() {
                 val bedtime=fit.programs.first { it.slot==selected.sleepSlot }.name
                 val morning=fit.programs.first { it.slot==selected.wakeSlot }.name
                 android.app.AlertDialog.Builder(this).setTitle("Review bedtime routine")
-                    .setMessage("Bedtime ${SleepRoutine.clock(selected.sleepMinute)}: remind me to switch to $bedtime.\nMorning ${SleepRoutine.clock(selected.wakeMinute)}: remind me to switch to $morning.\n\nSaving sends no command and turns reminders Off. Enable reminders next. Each switch requires your confirmation. Cancel keeps your previous saved routine.")
-                    .setNegativeButton("Keep editing",null).setPositiveButton("Save routine") { _,_ -> commitRoutine() }.show()
+                    .setMessage("Bedtime ${SleepRoutine.clock(selected.sleepMinute)}: switch to $bedtime.\nMorning ${SleepRoutine.clock(selected.wakeMinute)}: switch to $morning.\n\nSave & start automatic plays the saved programs and retained known targets at future times, even while locked, without another tap. Phone speaker must be near the aids; media volume at least halfway, DND off, external audio disconnected. Other people may hear the tones. Blocked, interrupted or more than two minutes late actions are not retried. Manual changes pause automatic. Save only leaves schedules Off.")
+                    .setNegativeButton("Keep editing",null).setNeutralButton("Save only") { _,_ -> commitRoutine(false) }
+                    .setPositiveButton("Save & start automatic") { _,_ -> commitRoutine(true) }.show()
             },onFailure={ tell(it.message ?: "Choose both programs and different times",true) })
         }
         saveSetupAction=save
         PhoneStyle.action(button("Review & save routine") { save() },"primary")
         button("Discard routine changes") { store.cancel();show("Sleep") }
         } finally { content=routineParent }
-        PhoneStyle.heading(this,content,"2. Enable bedtime & morning reminders")
-        line("Reminders require saved choices and Android notification access. They never switch a program by themselves.")
-        if(!ready) line("Needs setup: choose both programs and save your routine before enabling reminders or trying a switch.")
-        button("Enable sleep reminders",ready) {
-            if(android.os.Build.VERSION.SDK_INT>=33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                android.app.AlertDialog.Builder(this).setTitle("Sleep routine reminders")
-                    .setMessage("Allow notifications for bedtime and wake-up reminders. Each opens HeySig so you can tap to switch programs. No microphone or automatic playback is started. Android may delay reminders.")
-                    .setNegativeButton("Not now",null).setPositiveButton("Allow") { _,_ -> requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),765) }.show()
-            } else { val result=SleepReminders(this).setEnabled(true);show("Sleep");tell(result,true) }
-        }
-        button("Disable sleep reminders") { val result=SleepReminders(this).setEnabled(false);show("Sleep");tell(result,true) }
-        PhoneStyle.heading(this,content,"3. Try a saved program now")
-        line("These one-time actions use your saved routine and ask before sending a real program command. They do not enable or change reminder times. Keep the app open and unlocked with the built-in speaker available.")
-        button("Sleep now",ready && !busy.get()) { confirmSleep(true) }
-        button("Wake now",ready && !busy.get()) { confirmSleep(false) }
         val details=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; visibility=android.view.View.GONE }
         val toggle=button("Advanced & troubleshooting") { }
         toggle.setOnClickListener {
@@ -661,10 +688,46 @@ class HomeActivity : Activity() {
             button(if(store.state.override) "Resume sleep reminders" else "Pause sleep reminders",!busy.get()) {
                 tell(store.handle(if(store.state.override) SleepCommand.Resume else SleepCommand.Override,fit,"phone"),true);show("Sleep")
             }
-            button("Check device audio",!busy.get()) { try { player.inspect();tell("Speaker audio checks passed. No command sent.",true) } catch(e:Exception) { tell("Blocked: ${e.message}",true) } }
             line("No reminder? Check that reminders are On, the routine is not paused, and Android allows HeySig notifications. No switch? Read the result at the top of this screen after confirming Switch.")
         } finally { content=parent }
 
+    }
+    private fun reviewAutomaticSleep() {
+        val fit=fitting ?: return
+        val store=runtime.sleepRoutine
+        val targets=runCatching { store.target(true,fit) to store.target(false,fit) }.getOrElse { tell(it.message ?: "Save both programs first",true);return }
+        val choices=store.choices(fit)
+        val revision=store.editorRevision()
+        android.app.AlertDialog.Builder(this).setTitle("Start automatic program switching?")
+            .setMessage("Bedtime ${SleepRoutine.clock(choices.sleepMinute)}: ${fit.programs.first { it.slot==targets.first }.name}.\nMorning ${SleepRoutine.clock(choices.wakeMinute)}: ${fit.programs.first { it.slot==targets.second }.name}.\n\nAt future scheduled times HeySig plays these programs and their retained known targets without a tap, including while locked. Keep the phone speaker near the aids, media volume at least halfway, Do Not Disturb off and external audio disconnected. Other people may hear the tones.\n\nManual changes pause automatic. Blocked, interrupted or more than two minutes late actions are not retried. Use Stop automatic in the notification to cancel future actions and request cancellation of playback. Emitted tones cannot be undone. No microphone or audio recording is started.")
+            .setNegativeButton("Cancel",null).setPositiveButton("Enable automatic") { _,_ -> continueAutomaticSleep(revision) }.show()
+    }
+    private fun continueAutomaticSleep(revision: Long) {
+        if(runtime.sleepRoutine.editorRevision()!=revision) { tell("Routine changed. Review automatic switching again.",true);return }
+        val scheduler=AutomaticSleepScheduler(this)
+        if(!scheduler.exactAllowed()) {
+            pendingExactSleepRevision=revision
+            try { startActivity(Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,android.net.Uri.parse("package:$packageName"))) }
+            catch(e: Exception) { pendingExactSleepRevision=null;tell("Open Android app settings and allow Alarms & reminders, then start automatic again.",true) }
+            return
+        }
+        if(android.os.Build.VERSION.SDK_INT>=33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            pendingNotificationSleepRevision=revision
+            requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),767);return
+        }
+        val result=scheduler.enable(revision)
+        show("Sleep");tell(result,true)
+    }
+    private fun requestSleepReminder(test: Boolean=false) {
+        if(android.os.Build.VERSION.SDK_INT>=33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            android.app.AlertDialog.Builder(this).setTitle(if(test) "Test sleep notification" else "Sleep routine reminders")
+                .setMessage(if(test) "Allow notifications to post one test reminder now. This will not start daily reminders or change your hearing-aid program." else "Allow bedtime and morning reminders. Each opens HeySig so you can choose a program switch. No microphone or automatic playback starts. Android may delay reminders.")
+                .setNegativeButton("Not now",null).setPositiveButton("Allow") { _,_ -> requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),if(test) 766 else 765) }.show()
+        } else {
+            if(!test) AutomaticSleepScheduler(this).disable()
+            val result=if(test) SleepReminders(this).testReminder() else SleepReminders(this).setEnabled(true)
+            show("Sleep");tell(result,true)
+        }
     }
 
     private fun voicePage() {
@@ -848,8 +911,15 @@ class HomeActivity : Activity() {
     }
     override fun onRequestPermissionsResult(code:Int,permissions:Array<out String>,grants:IntArray) {
         super.onRequestPermissionsResult(code,permissions,grants)
-        if(code==765) {
-            val result=if(grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED }) SleepReminders(this).setEnabled(true) else "Sleep reminders stay Off. You can still use Sleep now and Wake now."
+        if(code==767) {
+            val revision=pendingNotificationSleepRevision;pendingNotificationSleepRevision=null
+            if(revision!=null && grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED }) continueAutomaticSleep(revision)
+            else { show("Sleep");tell("Automatic stays Off. Visible notifications are required for Stop and results.",true) }
+        }
+        if(code==765 || code==766) {
+            val result=if(grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED }) {
+                if(code==766) SleepReminders(this).testReminder() else { AutomaticSleepScheduler(this).disable();SleepReminders(this).setEnabled(true) }
+            } else "Notification permission was not granted. You can still use Sleep now and Wake now."
             show("Sleep");tell(result,true)
         }
         if(code==764 && pendingHandsFreeStart) {
@@ -1088,7 +1158,7 @@ class HomeActivity : Activity() {
             }
         }
         val fit = fitting ?: run { tell("Save aid setup first",true); return }
-        if(text.trim().lowercase() in listOf("stop","cancel")) { noise.stop(); tts?.stop(); cancelled.set(true); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); tell("Cancelled"); return }
+        if(text.trim().lowercase() in listOf("stop","cancel")) { if(text.trim().lowercase()=="stop") runCatching { AutomaticSleepScheduler(this).disable() };noise.stop(); tts?.stop(); cancelled.set(true); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); tell("Cancelled"); return }
         if((pendingRestore != null || pendingProgram != null) && origin != confirmationOrigin) {
             tell("Complete or cancel the existing confirmation on the device that started it",true); return
         }
@@ -1123,9 +1193,11 @@ class HomeActivity : Activity() {
         }
         SleepVoice.parse(text,fit)?.let { command ->
             if(command is SleepCommand.Now) { runSleep(command.sleep);return }
-            if(command==SleepCommand.Enable) { tell(SleepReminders(this).setEnabled(true),true);return }
+            if(command==SleepCommand.Enable) { tell(AutomaticSleepScheduler(this).enable(),true);return }
+            if(command==SleepCommand.Disable) { val result=AutomaticSleepScheduler(this).disable();SleepReminders(this).setEnabled(false);tell(result,true);return }
             val reply=runtime.sleepRoutine.handle(command,fit,origin ?: "phone")
             runCatching { SleepReminders(this).refresh() }
+            if(command in listOf(SleepCommand.Resume,SleepCommand.Override) || reply.startsWith("Routine saved.")) runCatching { AutomaticSleepScheduler(this).refresh() }
             if(origin == null && command == SleepCommand.Configure) navigate("Sleep")
             tell(reply,true); return
         }
@@ -1225,9 +1297,15 @@ class HomeActivity : Activity() {
     private fun confirmSleep(sleep: Boolean) {
         val fit=fitting ?: return
         val slot=runCatching { runtime.sleepRoutine.target(sleep,fit) }.getOrElse { tell(it.message ?: "Review routine first",true);return }
+        val revision=runtime.sleepRoutine.editorRevision()
+        val deadline=SystemClock.elapsedRealtime()+60_000
         android.app.AlertDialog.Builder(this).setTitle(if(sleep) "Sleep now?" else "Wake now?")
             .setMessage("Switch to ${fit.programs.first { it.slot==slot }.name}?")
-            .setNegativeButton("Cancel",null).setPositiveButton("Switch") { _,_ -> runSleep(sleep) }.show()
+            .setNegativeButton("Cancel",null).setPositiveButton("Switch") { _,_ ->
+                if(fitting!=fit || runtime.sleepRoutine.editorRevision()!=revision || SystemClock.elapsedRealtime()>deadline)
+                    tell("Routine changed or confirmation expired. Review the program again; nothing sent.",true)
+                else runSleep(sleep)
+            }.show()
     }
     private fun runSleep(sleep: Boolean) {
         val fit=fitting ?: run { tell("Save aid setup first");return }

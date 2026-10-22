@@ -49,6 +49,7 @@ class HandsFreeService : Service() {
     private var sessionEndsAt=0L
     private var closed=false
     val isListening get()=session.mode in listOf(HandsFreeSession.Mode.WAKE,HandsFreeSession.Mode.COMMAND)
+    val commandInProgress get()=session.mode==HandsFreeSession.Mode.COMMAND || pending!=null
     val listeningLabel get()=when(session.mode) {
         HandsFreeSession.Mode.WAKE -> "Listening for Hey Sig"
         HandsFreeSession.Mode.COMMAND -> "Listening for command"
@@ -268,7 +269,7 @@ class HandsFreeService : Service() {
     private fun handle(text: String,origin: String,reply: (String)->Unit) {
         if(closed || !foreground || SystemClock.elapsedRealtime()>=sessionEndsAt) { reply("Hands-free session expired; start it on the phone again");end();return }
         HandsFreeControl.parse(text)?.let { if(it==HandsFreeControl.END) { reply("Hands-free session ending");handler.post { end() } } else { control(it);reply(status) };return }
-        if(text.lowercase().trim() in listOf("stop","cancel")) { runtime.cancelled.set(true);pending=null;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();reply("Stop requested");return }
+        if(text.lowercase().trim() in listOf("stop","cancel")) { if(text.lowercase().trim()=="stop") runCatching { AutomaticSleepScheduler(this).disable() };runtime.cancelled.set(true);pending=null;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();reply("Stop requested");return }
         VoicePreference.parse(text)?.let {
             val ok=prefs.edit().putBoolean(it.key,it.enabled).commit()
             if(!it.enabled) { currentUtterance=null;synthesis?.stop();speaking=false }
@@ -314,8 +315,14 @@ class HandsFreeService : Service() {
             if(command is com.heysig.sleep.SleepCommand.Now) {
                 val slot=runCatching { runtime.sleepRoutine.target(command.sleep,fit) }.getOrElse { reply(it.message ?: "Review routine first");return }
                 play(listOf(ManualRequest.SelectProgram(slot)),false,reply,command.sleep)
-            } else if(command==com.heysig.sleep.SleepCommand.Enable) reply(SleepReminders(this).setEnabled(true))
-            else { reply(runtime.sleepRoutine.handle(command,fit,origin));runCatching { SleepReminders(this).refresh() } }
+            } else if(command==com.heysig.sleep.SleepCommand.Enable) reply(AutomaticSleepScheduler(this).enable())
+            else if(command==com.heysig.sleep.SleepCommand.Disable) { val result=AutomaticSleepScheduler(this).disable();SleepReminders(this).setEnabled(false);reply(result) }
+            else {
+                val result=runtime.sleepRoutine.handle(command,fit,origin)
+                runCatching { SleepReminders(this).refresh() }
+                if(command in listOf(com.heysig.sleep.SleepCommand.Resume,com.heysig.sleep.SleepCommand.Override) || result.startsWith("Routine saved.")) runCatching { AutomaticSleepScheduler(this).refresh() }
+                reply(result)
+            }
             return
         }
         runtime.personalPhrases.manage(text,fit,origin)?.let { reply(it);return }

@@ -60,3 +60,8 @@ Optional [hands-free sessions](docs/hands-free-quick-start.md) now add local Hey
 
 For the simplified setup checklist, Sleep reminders and guided Noise preview, see
 [the UX quick start](docs/ux-quick-start.md).
+
+Optional [automatic sleep switching](docs/sleep-quick-start.md) adds a separately
+reviewed mode for future bedtime/morning program changes while locked. It starts
+Off and requires phone alarm/notification access. Reminder mode remains available;
+physical automatic playback acceptance and release review are pending.

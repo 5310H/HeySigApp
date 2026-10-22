@@ -67,8 +67,8 @@ object SleepVoice {
             "review sleep routine", "review sleep settings" -> return SleepCommand.Review
             "save sleep routine", "save sleep settings" -> return SleepCommand.Save
             "cancel sleep setup", "discard sleep changes" -> return SleepCommand.Cancel
-            "enable sleep schedule", "enable sleep routine" -> return SleepCommand.Enable
-            "disable sleep schedule", "disable sleep routine" -> return SleepCommand.Disable
+            "enable sleep schedule", "enable sleep routine", "start automatic routine", "enable automatic sleep" -> return SleepCommand.Enable
+            "disable sleep schedule", "disable sleep routine", "stop automatic routine", "disable automatic sleep" -> return SleepCommand.Disable
         }
         Regex("^(?:set )?(sleep|wake) (?:time (?:to )?|at )(.+)$").matchEntire(text)?.let {
             val minute=time(it.groupValues[2]) ?: return SleepCommand.Invalid("Say an explicit time, such as ten PM, seven AM or 22:00. Include AM or PM when not using a 24-hour clock.")

@@ -27,6 +27,7 @@ class ManualRuntime private constructor(
     var savedIssue: String?=null; private set
     var revision=0L; private set
     var stateChanged: (() -> Unit)?=null
+    private var sleepStateChanged: (() -> Unit)?=null
     var lastResult="Ready. Nothing is sent until you ask."
         private set
     private val profile=AcousticProfile(44100,15360,512,0.0625,1.2,true)
@@ -141,7 +142,9 @@ class ManualRuntime private constructor(
     fun execute(plan: List<ManualRequest>, restoring: Boolean, automatic: Boolean,
         foreground: () -> Boolean, backgroundAllowed: () -> Boolean,
         progress: (String) -> Unit, sleepTarget: Boolean? = null, done: (String, Boolean) -> Unit) {
-        fun reject(text: String) { done(text,false) }
+        fun recorded(text: String,success: Boolean) = if(sleepTarget!=null && this::sleepRoutine.isInitialized)
+            sleepRoutine.recordActionResult(sleepTarget,success,text) else text
+        fun reject(text: String) { val result=recorded(text,false);if(sleepTarget!=null) lastResult=result;done(result,false) }
         val fit = fitting ?: run { reject("Save setup first"); return }
         if(!foreground() && !backgroundAllowed()) { reject("Open HeySig before sending a command"); return }
         if(busy.get()) { reject("Busy; wait or Stop"); return }
@@ -160,6 +163,7 @@ class ManualRuntime private constructor(
         } catch(e:Exception) { reject("Blocked: ${e.message}"); return }
         if(!busy.compareAndSet(false,true)) { reject("Busy; wait or Stop"); return }
         backgroundExecution=backgroundAllowed(); cancelled.set(false); lastResult = "Transmitting…"; revision++;stateChanged?.invoke();progress(lastResult)
+        runCatching { sleepStateChanged?.invoke() }
         Thread({
             val completed = mutableListOf<String>()
             var result: String
@@ -220,6 +224,8 @@ class ManualRuntime private constructor(
                     try { sleepRoutine.transition(sleepRoutine.state.completed(sleepTarget,success)) }
                     catch(e: Exception) { success=false;result+=" Sleep state could not be saved; review routine before continuing." }
                 }
+                result=recorded(result,success)
+                runCatching { sleepStateChanged?.invoke() }
                 lastResult=result;revision++;stateChanged?.invoke(); done(result,success)
             }
         },"heysig-manual").start()
@@ -231,7 +237,13 @@ class ManualRuntime private constructor(
         }
         @Volatile private var instance: ManualRuntime?=null
         fun get(context: Context): ManualRuntime = instance ?: synchronized(this) {
-            instance ?: ManualRuntime(context.applicationContext.getSharedPreferences("heysig-core-v1",Context.MODE_PRIVATE),SpeakerCommandTransport(context.applicationContext)).also { it.sleepRoutine=SleepRoutineStore(context); it.personalPhrases=PersonalPhraseStore(context); it.fitting?.let(it.personalPhrases::setupChanged); it.fitting?.let(it.sleepRoutine::setupChanged); instance=it }
+            instance ?: ManualRuntime(context.applicationContext.getSharedPreferences("heysig-core-v1",Context.MODE_PRIVATE),SpeakerCommandTransport(context.applicationContext)).also {
+                it.sleepRoutine=SleepRoutineStore(context);it.personalPhrases=PersonalPhraseStore(context)
+                it.fitting?.let(it.personalPhrases::setupChanged);it.fitting?.let(it.sleepRoutine::setupChanged)
+                val app=context.applicationContext
+                it.sleepStateChanged={ if(AutomaticSleepService.running==null) AutomaticSleepScheduler(app).publishStatus() }
+                instance=it
+            }
         }
     }
 }

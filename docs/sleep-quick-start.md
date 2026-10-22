@@ -1,47 +1,68 @@
-# Sleep routine management
+# Sleep routine
 
-Open **Settings → Sleep routine**. Choose bedtime and wake-up clock times and
-select a configured program for each, then **Save routine**. The 22:00 / 07:00
-values are editable suggestions; neither program is chosen automatically.
-Both programs are required and the times must differ. Save sends no aid command.
+Open **Settings → Sleep routine**. Existing times and program choices are kept.
+Choose only programs already fitted and configured for your aids.
 
-Use **Sleep now** or **Wake now**, review the saved target and tap **Switch**.
-These explicit actions use the existing shared executor and preserve the saved
-restoration snapshot. Routine mode records commands, not sensed sleep. Program
-selection does not imply standby, power-down or microphone muting.
+## Automatic bedtime and morning switching
 
-Choose **Enable sleep reminders** and allow notifications if asked. Reminders
-open this screen; tap Sleep now or Wake now to switch. Nothing plays automatically
-while the phone is locked. Android may delay reminders; delivery over 15 minutes
-late is skipped. Times follow the current timezone, skip nonexistent DST times
-and use the first repeated occurrence. Enabled reminders replan future times
-after reboot/update or clock/timezone changes. Saving choices turns reminders Off.
+1. Review bedtime, morning time and both programs. To change them, open
+   **Edit bedtime & morning routine → Review & save routine**. Choose
+   **Save & start automatic**, or **Save only** to leave schedules Off.
+2. For an already saved routine, choose **Start automatic routine**. Review the
+   programs, times and conditions, then **Enable automatic**.
+3. Allow **Alarms & reminders** in Android settings if requested, return to
+   HeySig, and allow notifications if requested. Check the main status and
+   dated next switch. Automatic stays Off until these requirements are met.
+4. Keep the phone speaker near the aids, media volume at least halfway, Do Not
+   Disturb off and external audio disconnected. At future scheduled times the
+   phone plays the validated command tones, including while locked. Other people
+   may hear them. Program selection uses retained known targets as with manual
+   selection; unknown values are not invented.
 
-Manual program/level commands pause the routine. **Resume sleep routine** allows
-future reminders without sending a command. **Pause sleep routine** pauses
-delivery; **Disable sleep reminders** disarms alarms. Failed/interrupted playback
-leaves mode Unknown with override On. Review and explicitly request Sleep now or
-Wake now; interrupted commands are never replayed.
+Automatic starts Off on upgrade. It uses exact-alarm access and a short-lived
+media-playback foreground service per occurrence. It does not listen, record
+sound, track sleep, power off or mute the aids. Playback completion does not prove
+hearing-aid receipt. Physical acceptance remains required, including locked-phone
+output, audio routes, permissions and power restrictions.
 
-Phone and watch voice setup:
+**Stop automatic routine**, the ongoing notification's **Stop automatic**, and
+global **Stop** cancel future actions and request cancellation of active playback.
+Emitted tones cannot be undone. Manual program/level changes pause automatic.
+Review and start it again deliberately afterward.
 
-1. **Configure sleep**.
-2. **Set sleep time to ten PM** (or **22:00**).
-3. **Set wake time to seven AM**.
-4. **Set sleep program to Sleep** (use your configured name or slot).
-5. **Set wake program to Universal** (use your configured name or slot).
-6. **Review sleep routine**, then **save sleep routine**.
+An occurrence more than two minutes late, an active command/review, an invalid
+routine or denied audio conditions is skipped or blocked. Failed/interrupted
+playback is not retried. Check **Last automatic result** and the last program
+result before another request. Interrupted claims never replay after process
+death or reboot. Recovery replans only future times; interrupted work requires
+review. Times follow the phone timezone, skip nonexistent DST times and use the
+first repeated occurrence. Changing the saved routine or aid setup disarms
+automatic and requires a fresh review.
 
-Say **read sleep settings** to hear saved choices and preview, or **cancel sleep
-setup** to discard the voice draft. Voice drafts expire after five minutes and
-remain scoped to the device/conversation that started them. Stop cancels drafts.
-Ambiguous times need explicit AM/PM or a 24-hour HH:mm time. Setup changes require
-routine review and Save again. Screen drafts have Save/Discard; navigation asks
-before discarding changes. Saved choices and explicit reminder preferences survive restart.
-Routine choices are included in optional local data export and app-data deletion.
+## Immediate controls and optional reminders
 
-Voice management: **sleep now**, **wake now**, **pause sleep routine**, **resume
-sleep routine**, **enable sleep schedule**, **disable sleep schedule**, **sleep
-status**. Schedule commands control reminders; notification access must first be
-granted on the phone. Watch commands retain existing connection/session guards.
-See [background design](sleep-management-design.md) for recovery and data handling.
+**Sleep now** and **Wake now** ask you to review the target and tap **Switch**.
+They use the same executor and preserve the independent saved restoration
+snapshot. **Check device audio** checks conditions without playing tones.
+The latest Sleep/Wake result persists locally, including an audio blocker.
+
+For reminders asking you to tap, open **Reminder options → Start routine
+reminders**. This turns automatic switching Off. Starting automatic turns these
+reminders Off. **Test reminder** posts one notification without changing the
+schedule or program; it does not prove future timed delivery. **Stop reminders**
+cancels reminder alarms. Android may delay inexact reminders; reminders over
+15 minutes late are skipped. Reminder notification taps only open this screen.
+
+Voice setup: **configure sleep**, **set sleep time to ten PM**, **set wake time
+to seven AM**, **set sleep program to Sleep**, **set wake program to Universal**,
+**review sleep routine**, **save sleep routine**. Use your configured names.
+Voice Save leaves schedules Off. **Enable sleep schedule** or **start automatic
+routine** re-enables a previously reviewed unchanged routine when permissions
+are available; first-time automatic review happens on the phone. **Disable sleep
+schedule** or **stop automatic routine** disables future actions. Voice drafts
+expire after five minutes and remain scoped to their originating device. Cancel
+preserves saved choices. No command replays while configuring a routine.
+
+Routine choices, enable flags, revisions, scheduling/claim identifiers and latest
+results are local, covered by existing export/deletion controls. Automatic adds
+no recognition, network or analytics service. See [the automatic design](architecture/automatic-sleep.md).

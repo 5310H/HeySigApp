@@ -146,7 +146,9 @@ class Api36Smoke : Instrumentation() {
             runOnMainSync {
                 val controls=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
                 check(controls.any { it.text.toString()=="Review & save routine" })
-                check(controls.any { it.text.toString()=="Enable sleep reminders" })
+                check(controls.any { it.text.toString() in listOf("Start routine reminders","Resume routine reminders") })
+                check(controls.any { it.text.toString()=="Test reminder" })
+                check(controls.any { it.text.toString() in listOf("Start automatic routine","Review automatic routine") })
                 check(controls.any { it.text.toString()=="Sleep now" })
                 check(controls.any { it.text.toString()=="Wake now" })
             }
@@ -232,6 +234,10 @@ class Api36Smoke : Instrumentation() {
             result.putString("savedSettings","PASS: explicit Save only; manual/battery/automatic/partial restore and restart preserve snapshot bytes; busy/invalid/failed save retain old record; corrupt snapshot preserves fitting and bytes")
             SleepRoutineAcceptance.run(targetContext)
             result.putString("sleepRoutine","PASS: isolated save/validation, restart persistence, Off gate, draft source/expiry/cancel, revision conflicts, fitting invalidation and corrupt-data preservation; no alarm or playback")
+            SleepReminderAcceptance.run(targetContext)
+            result.putString("sleepReminders","PASS: isolated start clears pause, both alarm requests recorded, disable/failed scheduling clears due times, duplicate/paused/late delivery rejected, notification-only test preserves schedule; fake alarms/notifications, no playback")
+            AutomaticSleepAcceptance.run(targetContext)
+            result.putString("automaticSleep","PASS: isolated exact-alarm authorization, reviewed revisions, duplicate/stale/early/late/paused/revoked occurrences, one-use claims, locked shared executor, snapshot preservation, scheduling/dispatch failure and interrupted recovery; fake alarms/transport only")
             SleepManagementAcceptance.run(targetContext)
             result.putString("sleepManagement","PASS: isolated saved targets, shared executor, sleep/wake completion, noise priority, manual override, partial failure, pending restart and fitting invalidation; fake transport only")
             PersonalPhraseAcceptance.run(targetContext)

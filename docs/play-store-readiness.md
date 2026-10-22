@@ -129,3 +129,16 @@ and https://developer.android.com/develop/background-work/services/fgs/service-t
 The Play foreground-service declaration requirements are at
 https://support.google.com/googleplay/android-developer/answer/13392821
 These sources do not establish approval for this implementation.
+
+## October 21 automatic sleep scope change
+
+The owner requested automatic bedtime/morning program changes while locked.
+The [design](architecture/automatic-sleep.md) uses explicit revision-bound review,
+SCHEDULE_EXACT_ALARM special access and a short-lived mediaPlayback service with
+FOREGROUND_SERVICE_MEDIA_PLAYBACK. Microphone capture is not expanded. Reminder
+mode remains available; migration never enables automatic playback. IDs, signers
+and production packaging are unchanged. Reassess foreground-service suitability
+and declarations, alarm access, health/regulatory intent, actual data flows,
+release lint/signed artifacts and physical locked-phone/no-replay acceptance
+before submission. Earlier bundle validation does not validate these components.
+This remains development work.

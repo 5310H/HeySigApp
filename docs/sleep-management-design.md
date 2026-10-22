@@ -1,5 +1,9 @@
 # Sleep management — October 17, 2026
 
+Historical reminder-only design. The owner's October 21 request supersedes this
+scope with optional [automatic sleep switching](architecture/automatic-sleep.md).
+The receiver-only notification design below still applies to reminder mode.
+
 The owner chose notifications requiring a tap, rather than automatic locked-phone
 program switching. Alarm receivers have no playback path, microphone capture or
 foreground service. They post local notifications that open sleep settings.
