@@ -8,7 +8,7 @@ commands and play the same validated tones while the phone is locked.
 2. Read the microphone, installed-provider, locked-command and watch explanation.
    Enable the session, then allow the requested microphone and notification
    permissions. A new permission is never requested merely by opening Home.
-3. Wait for the listening indicator. Say **Hey Sig**, pause briefly (or wait for
+3. Wait for the listening indicator. Say **Hey Sig**, wait for the vibration (or
    **Ready** if voice prompts are on), then say **program TV**, **volume eight**,
    **tinnitus four**, or another existing supported command.
 4. Every new command or confirmation needs another Hey Sig. Recognition lasts
@@ -25,7 +25,7 @@ Actual pocket/locked reception and wake accuracy require physical acceptance.
   hear a request to turn itself back on.
 - **Hey Sig, pause for 30 minutes** releases the microphone and schedules a
   return to this same live session. Android may delay the timer.
-- Use **Hands-free On** on the phone or your authorized watch to resume sooner.
+- Use **Resume listening** on the phone or **On** on your authorized watch to resume sooner.
 - **End session** stops listening and watch control, removes the notification
   and cancels the timer. Start another session on the unlocked phone afterward.
 - The phone's global Stop also turns listening Off and cancels command playback.
@@ -44,6 +44,13 @@ phone app for explicit setup; it does not silently start the microphone.
 Voice prompts and spoken responses remain separate choices on each device.
 They are not required for recognition. A listening indicator remains visible
 when both are off. The installed recognizer may have its own sounds.
+
+Tap the listening status above the phone's navigation tabs to open Voice &
+speech. This shortcut remains visible when hands-free is Off. Start/Resume,
+Pause, Off and End are at the top of that screen, followed by Shake to speak
+and the two speech switches. Voice tools & personal phrases contains the
+recognition test, microphone settings, phrase management and typed commands.
+Listening updates preserve your place on the voice screen.
 
 ## Watch
 

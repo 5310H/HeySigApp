@@ -117,7 +117,13 @@ class NoiseFeature(
         return if(extra.isEmpty()) progress else activity.getString(R.string.two_lines,progress,extra)
     }
     private fun summary(): String = buildString {
-        append(mode)
+        append(when {
+            mode != "Off" -> "Sampling · $mode"
+            loadError != null -> "Needs review · $loadError"
+            !stored -> "Needs setup · Choose programs and save them in step 1."
+            !calibrated() -> "Needs calibration · Take samples in step 2 for automatic preview."
+            else -> "Ready for preview · No hearing-aid commands will be sent."
+        })
         measurement?.let { if(it.flags.isEmpty()) append(" · %.1f dBFS".format(java.util.Locale.US,it.rmsDbfs)) else append(" · sample rejected") }
         observation.target?.let { append("\n${label(it)} · ${observation.count}/${settings.confirmations}") }
         if(detail != "No samples yet") append("\n$detail")
@@ -147,8 +153,10 @@ class NoiseFeature(
             try { PhoneStyle.heading(activity,target,title); build() } finally { target = parent }
         }
         group("Noise observation") {
-            runtime = line(summary()).apply { maxLines=3; ellipsize=android.text.TextUtils.TruncateAt.END; contentDescription=status() }
-            PhoneStyle.action(button("Start Observe") { handle(NoiseCommand.Observe) },"primary")
+            line("Find a suitable program for your surroundings. This guided trial measures sound and shows suggestions without changing your aids.")
+            runtime = line(summary()).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE; contentDescription=status() }
+            line("Keep HeySig open and unlocked. Sampling uses this device's built-in microphone after your permission; audio is processed in memory and discarded. Stop cancels measurement. Noise sampling turns hands-free listening Off.")
+            PhoneStyle.action(button("Show program suggestions") { handle(NoiseCommand.Observe) },"primary")
             button("Sample now") { handle(NoiseCommand.Sample) }
             PhoneStyle.action(button("Stop noise") { stop(); tell("Noise stopped",false) },"danger")
             val sample=checkNotNull(calibrationButtons["Sample now"])
@@ -158,11 +166,11 @@ class NoiseFeature(
             row.addView(sample,LinearLayout.LayoutParams(0,-2,1f).apply { marginEnd=PhoneStyle.dp(activity,6) })
             row.addView(stop,LinearLayout.LayoutParams(0,-2,1f))
             target.addView(row)
-            line("Proposals only. Automatic is locked.")
+            line("Sample now measures once without setup. Program suggestions need saved program choices. Automatic switching is unavailable in this build; completing calibration enables preview only.")
         }
         group("Guided calibration") {
             calibrationRuntime = line(calibrationProgress())
-            line("18 samples · 3 per level. Use comfortable everyday sounds.")
+            line("Step 2 of 3 · Learn this device's sound levels. Take three samples in each of six environments, from quietest to loudest. Use comfortable everyday sounds; do not create loud noise for this task. Saved choices remain unchanged until you review and save.")
             button("Start new calibration") {
                 android.app.AlertDialog.Builder(activity).setTitle("Measure six listening levels?")
                     .setMessage("This replaces only unfinished calibration samples. Saved settings stay unchanged until you apply and save. Use naturally occurring, comfortable environments; if six levels cannot be separated, keep using Observe.")
@@ -206,7 +214,7 @@ class NoiseFeature(
             button("Cancel calibration") { stop(); calibrating = false; calibration = NoiseCalibration(); detail = "Unfinished calibration cleared. Saved noise settings retained."; update() }
         }
         group("Your listening levels") {
-            line("Assign programs from quietest (1) to loudest (6). Reuse a program or leave a level unused. Save your choices before observing.")
+            line("Step 1 of 3 · Choose which of your configured programs you would use as surroundings get louder. Reuse programs or leave levels unused. HeySig does not choose fitting values for you. Save these choices, then continue to sound samples.")
             loadError?.let { line("Review needed: $it") }
         }
         val choices = listOf<Int?>(null) + programs().map { it.slot } + draft.programs.filterNotNull().filter { slot -> programs().none { it.slot == slot } }.distinct()
@@ -250,12 +258,12 @@ class NoiseFeature(
         lateinit var margin: EditText; lateinit var confirmations: EditText; lateinit var cooldown: EditText
         lateinit var capture: EditText; lateinit var wait: EditText; lateinit var freshness: EditText
         group("Measurement settings") {
-            line("Thresholds are illustrative until calibrated on this device. These are relative microphone levels, not sound-pressure dB.")
+            line("Advanced options. Keep existing values unless you understand their effect. Thresholds are illustrative until calibrated on this device. These are relative microphone levels, not sound-pressure dB. Changing these settings may require new calibration.")
             boundaries = draft.boundaries.mapIndexed { i,value -> field("Threshold ${i+1} · levels ${i+1} and ${i+2}",value) }
-            margin = field("Hysteresis margin",draft.margin)
-            confirmations = field("Consecutive confirmations (1–20)",draft.confirmations)
-            cooldown = field("Cooldown seconds (Automatic preview)",draft.cooldownSeconds)
-            capture = field("Capture seconds (1–10)",draft.captureSeconds)
+            margin = field("Change buffer (hysteresis margin)",draft.margin)
+            confirmations = field("Matching samples before a suggestion (1–20)",draft.confirmations)
+            cooldown = field("Minimum seconds between preview changes",draft.cooldownSeconds)
+            capture = field("Sample duration in seconds (1–10)",draft.captureSeconds)
             wait = field("Wait seconds (1–300)",draft.waitSeconds)
             freshness = field("Freshness limit seconds (must exceed capture + wait)",draft.freshnessSeconds)
         }
@@ -311,16 +319,15 @@ class NoiseFeature(
             if(i >= firstView) child.visibility = if(visible) android.view.View.VISIBLE else android.view.View.GONE
         }
         if(page == "Noise") {
-            val setup=button("Noise setup") { navigate("NoiseSetup") }
-            val calibrate=button("Calibrate") { navigate("NoiseCalibration") }
-            content.removeView(setup); content.removeView(calibrate)
-            val row=LinearLayout(activity)
-            row.addView(setup,LinearLayout.LayoutParams(0,-2,1f).apply { marginEnd=PhoneStyle.dp(activity,6) })
-            row.addView(calibrate,LinearLayout.LayoutParams(0,-2,1f))
-            content.addView(row)
-            button("Details & preview") { navigate("NoiseDetails") }
+            button("1. Choose programs") { navigate("NoiseSetup") }
+            button("2. Learn sound levels") { navigate("NoiseCalibration") }
+            button("3. Preview suggested changes") { navigate("NoiseDetails") }
         }
-        if(page == "NoiseSetup") button("Measurement settings") { navigate("NoiseMeasure") }
+        if(page == "NoiseSetup") {
+            button("Next: learn sound levels") { navigate("NoiseCalibration") }
+            button("Advanced measurement settings") { navigate("NoiseMeasure") }
+        }
+        if(page == "NoiseCalibration") button("Next: preview suggested changes") { navigate("NoiseDetails") }
         refreshCalibration = {
             val complete=calibration.levels.all { it.size == 3 }
             fun show(label:String, visible:Boolean) { calibrationButtons[label]?.visibility=if(visible) android.view.View.VISIBLE else android.view.View.GONE }
@@ -330,15 +337,24 @@ class NoiseFeature(
             show("Review calibration thresholds",calibrating && complete)
             show("Cancel calibration",calibrating)
             if(page == "NoiseCalibration") {
-                show("Save noise settings",draft != settings)
-                show("Discard noise changes",draft != settings)
+                show("Save noise settings",draft != settings || proof != savedProof)
+                show("Discard noise changes",draft != settings || proof != savedProof)
             }
         }
         refreshCalibration?.invoke()
         if(page == "NoiseDetails") {
-            line(status())
-            button("Preview Automatic") { runCatching { start(true,preview=true) }.onFailure { tell("Noise: ${it.message}",false) } }
-            button("Start Automatic") { handle(NoiseCommand.Automatic) }.isEnabled = NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED
+            line("Step 3 of 3 · Preview before use")
+            runtime=line(summary()).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
+            line("Preview simulates program changes without sending commands. First save your program choices and measured calibration, then select a daytime program on Home. Keep HeySig open and unlocked. Leave the Sleep program before starting preview.")
+            button("Preview suggested changes") { runCatching { start(true,preview=true) }.onFailure { tell("Noise: ${it.message}",false) } }
+            button("Stop preview") { stop();tell("Preview stopped. No command sent.",false) }
+            button("Review program choices") { navigate("NoiseSetup") }
+            button("Review calibration") { navigate("NoiseCalibration") }
+            val details=TextView(activity).apply { text=status();PhoneStyle.text(this,16f,color=PhoneStyle.secondary);visibility=android.view.View.GONE }
+            button("Advanced status") { details.text=status();details.visibility=if(details.visibility==android.view.View.VISIBLE) android.view.View.GONE else android.view.View.VISIBLE }
+            content.addView(details)
+            line("Automatic switching is unavailable until device testing is complete. Calibration alone does not enable it.")
+            button("Start Automatic") { handle(NoiseCommand.Automatic) }.apply { isEnabled=NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED;visibility=if(isEnabled) android.view.View.VISIBLE else android.view.View.GONE }
         }
 
     }
@@ -396,7 +412,7 @@ class NoiseFeature(
         readEditor?.let { draft = it() }
         check(mode == "Off") { "Noise capture already active; Stop first" }
         if(preview || automaticMode) {
-            check(calibrated()) { "Complete calibration, apply thresholds and save noise settings first" }
+            check(calibrated()) { "Complete step 2: take calibration samples, review them and save noise settings before previewing" }
             check(lastRequested() != null) { "Select a waking program manually before starting automatic preview or switching" }
             val guards = safety().copy(calibrated=true,physicallyAccepted=preview || NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED,
                 sleeping=safety().sleeping || (automaticSettings().sleepProgram != null && lastRequested() == automaticSettings().sleepProgram))
@@ -407,9 +423,9 @@ class NoiseFeature(
             check(calibrationSource == sampler.sourceIdentity() && calibrationCapture == draft.captureSeconds) { "Microphone or capture settings changed; start calibration again" }
         }
         if(repeat) {
-            check(stored && draft == settings && reviewedFitting == fittingSignature()) { "Save reviewed noise settings before Observe" }
+            check(stored && draft == settings && reviewedFitting == fittingSignature()) { "Save your program choices in step 1 before starting suggestions" }
             settings.validate(programs().map { it.slot }.toSet())
-            check(settings.programs.any { it != null }) { "Assign at least one program" }
+            check(settings.programs.any { it != null }) { "Choose at least one program in step 1" }
         }
         if(!prefs.getBoolean("microphoneDisclosureV2",false)) {
             android.app.AlertDialog.Builder(activity).setTitle("Microphone for noise measurement")
@@ -471,7 +487,7 @@ class NoiseFeature(
                 update()
             }
         } }
-        if(!started) { mode = "Off"; error("Previous capture is stopping; try again shortly") }
+        if(!started) { mode = "Off"; error("The previous measurement is still stopping. Wait a moment, then try again") }
         update(); tell(if(preview) "Automatic preview started. No commands are sent." else if(automaticMode) "Automatic started; keep this app open." else if(calibrationSample) "Calibration sample requested. Stay quiet during measurement." else if(repeat) "Observe started. Proposals appear on Noise; no commands are sent." else "Sampling microphone. Result will appear on Noise.",false)
     }
     private fun processAutomatic(index:Double, preview:Boolean, session:Int, capturedAt:Long) {

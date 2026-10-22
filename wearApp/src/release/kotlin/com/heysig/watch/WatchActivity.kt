@@ -105,7 +105,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private var wifiCheck: WatchWifiCheck?=null
     private fun checkWifi() { wifiCheck?.close();wifiCheck=WatchWifiCheck(this) { send("status",listOf("status")) }.show() }
     private fun more() {
-        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake")
+        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Phone hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake")
         AlertDialog.Builder(this).setTitle("More").setItems(items) { _,index ->
             when(index) {
                 12 -> SleepingShakeOptions.show(this)

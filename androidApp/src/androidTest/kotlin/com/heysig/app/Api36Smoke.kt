@@ -99,7 +99,7 @@ class Api36Smoke : Instrumentation() {
             open("‹ Back")
             open("Noise")
             capture("noise")
-            open("Calibrate")
+            open("2. Learn sound levels")
             var calibrationReady=false
             var calibrationControls=""
             val calibrationDeadline=android.os.SystemClock.elapsedRealtime()+5000
@@ -115,15 +115,15 @@ class Api36Smoke : Instrumentation() {
             check(calibrationReady) { "Calibration screen did not settle: $calibrationControls" }
             capture("calibration")
             open("‹ Back")
-            open("Noise setup")
+            open("1. Choose programs")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>()
                     .any { it.contentDescription == "Protected Sleep program" })
             }
-            open("Measurement settings")
+            open("Advanced measurement settings")
             open("‹ Back")
             open("‹ Back")
-            open("Details & preview")
+            open("3. Preview suggested changes")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
                     .first { it.text == "Start Automatic" }.isEnabled == false)
@@ -133,10 +133,19 @@ class Api36Smoke : Instrumentation() {
             open("‹ Back")
             open("Settings")
             capture("settings")
+            open("Getting started")
+            capture("getting-started")
+            open("‹ Back")
             open("Sleep routine")
+            capture("sleep-dashboard")
+            runOnMainSync {
+                descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                    .firstOrNull { it.text.toString()=="Edit bedtime & morning routine" }?.performClick()
+            }
+            waitForIdleSync()
             runOnMainSync {
                 val controls=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
-                check(controls.any { it.text.toString()=="Save routine" })
+                check(controls.any { it.text.toString()=="Review & save routine" })
                 check(controls.any { it.text.toString()=="Enable sleep reminders" })
                 check(controls.any { it.text.toString()=="Sleep now" })
                 check(controls.any { it.text.toString()=="Wake now" })

@@ -56,6 +56,8 @@ class HomeActivity : Activity() {
     private var message = "Ready. Nothing is sent until you ask."
     private var speechSummary: TextView? = null
     private var handsFreeStatus: TextView? = null
+    private var voiceSessionStatus: TextView? = null
+    private var voiceSessionPresent = false
     private var pendingHandsFreeStart=false
     private var seenRuntimeRevision=0L
     private var statusRow: LinearLayout? = null
@@ -124,9 +126,16 @@ class HomeActivity : Activity() {
         if(seenRuntimeRevision!=runtime.revision && page in listOf("Home","Volume","Balance","Tinnitus","Batteries")) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
         HandsFreeService.stopNoise={ noise.stop() }
         HandsFreeService.externalSpeechBusy={ tts?.isSpeaking==true || SystemClock.elapsedRealtime()<foregroundSpeechDeadline }
-        HandsFreeService.statusListener={ _ -> if(resumed && page=="Voice") show(); handsFreeStatus?.text=HandsFreeService.running?.listeningLabel.orEmpty(); handsFreeStatus?.visibility=if(HandsFreeService.running==null) android.view.View.GONE else android.view.View.VISIBLE }
-        handsFreeStatus?.text=HandsFreeService.running?.listeningLabel.orEmpty()
-        handsFreeStatus?.visibility=if(HandsFreeService.running==null) android.view.View.GONE else android.view.View.VISIBLE
+        HandsFreeService.statusListener={ _ ->
+            if(resumed && page=="Voice") {
+                if(voiceSessionPresent != (HandsFreeService.running!=null) || speechSummary?.text?.toString()!=speechStatusText()) show()
+                else voiceSessionStatus?.text=HandsFreeService.running?.status ?: "Hands-free is Off"
+            }
+            handsFreeStatus?.text=HandsFreeService.running?.status ?: "Hands-free Off · Tap to set up"
+            handsFreeStatus?.contentDescription="${handsFreeStatus?.text}. Open Voice and speech"
+            speechSummary?.text=speechStatusText()
+        }
+        HandsFreeService.statusListener?.invoke(HandsFreeService.running?.status ?: "Hands-free is Off")
          if(companionDelegate.isInitialized()) companion.resume(); watchToggle?.isChecked = watchBridge != null
         runCatching { watchHistory.prune() }.onFailure { tell("Watch history could not be expired; watch commands remain blocked until storage works") }
     }
@@ -151,7 +160,8 @@ class HomeActivity : Activity() {
         when {
             page == "NoiseMeasure" -> navigate("NoiseSetup")
             page.startsWith("Noise") && page != "Noise" -> navigate("Noise")
-            page in listOf("Setup","Voice","Watch","Privacy","Saved","Sleep") -> navigate("Settings")
+            page == "VoiceTools" -> navigate("Voice")
+            page in listOf("Setup","Voice","Watch","Privacy","Saved","Sleep","GettingStarted") -> navigate("Settings")
             page == "Home" -> finish()
             else -> navigate("Home")
         }
@@ -191,6 +201,7 @@ class HomeActivity : Activity() {
     private fun show(destination: String = page) {
         try { noise.detachEditor() } catch(e:Exception) { tell("Noise draft: ${e.message}. Correct the field or discard noise changes."); return }
         page = destination
+        voiceSessionStatus = null
         setupChanged = null; saveSetupAction = null
         val root = FrameLayout(this).apply { setBackgroundColor(PhoneStyle.background) }
         val shell = object : LinearLayout(this) {
@@ -218,8 +229,10 @@ class HomeActivity : Activity() {
             "Batteries" -> "Batteries"
             "Saved" -> "Saved settings"
             "Setup" -> "Aid setup"
+            "GettingStarted" -> "Getting started"
             "Sleep" -> "Sleep routine"
             "Voice" -> "Voice & speech"
+            "VoiceTools" -> "Voice tools"
             "Watch" -> "Watch connection"
             "Privacy" -> "Privacy & data"
             else -> "Settings"
@@ -241,15 +254,17 @@ class HomeActivity : Activity() {
         heardStatus = TextView(this).apply {
             text = if(lastHeard.isEmpty()) "" else "Heard: $lastHeard"
             PhoneStyle.text(this,14f,color=PhoneStyle.secondary)
-            visibility = if(lastHeard.isEmpty() || page != "Voice") android.view.View.GONE else android.view.View.VISIBLE
+            visibility = if(lastHeard.isEmpty() || page !in listOf("Voice","VoiceTools")) android.view.View.GONE else android.view.View.VISIBLE
             statusCard.addView(this)
         }
         when(page) {
             "Home" -> home()
+            "GettingStarted" -> gettingStarted()
             "Setup" -> section("Your hearing-aid setup") { setup() }
             "Saved" -> section("Your saved snapshot") { snapshot() }
             "Sleep" -> section("Bedtime & waking") { sleepPage() }
             "Voice" -> section("Voice & speech") { voicePage() }
+            "VoiceTools" -> section("Voice tools") { voiceToolsPage() }
             "Noise", "NoiseCalibration", "NoiseSetup", "NoiseMeasure", "NoiseDetails" -> noise.render(content,page) { navigate(it) }
             "Volume" -> levelPage(LevelControl.VOLUME)
             "Balance" -> levelPage(LevelControl.SHARPNESS)
@@ -282,10 +297,13 @@ class HomeActivity : Activity() {
             setPadding(PhoneStyle.dp(context,12),0,PhoneStyle.dp(context,12),PhoneStyle.dp(context,6))
         }; speechSummary = speechLabel; shell.addView(speechLabel)
         handsFreeStatus=TextView(this).apply {
-            text=HandsFreeService.running?.listeningLabel.orEmpty(); PhoneStyle.text(this,12f,color=PhoneStyle.secondary)
+            text=HandsFreeService.running?.status ?: "Hands-free Off · Tap to set up"; PhoneStyle.text(this,12f,color=PhoneStyle.secondary)
             gravity=android.view.Gravity.CENTER
+            minHeight=PhoneStyle.dp(context,48)
+            isClickable=true; isFocusable=true
+            contentDescription="${text}. Open Voice and speech"
+            setOnClickListener { navigate("Voice") }
             accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
-            visibility=if(HandsFreeService.running==null) android.view.View.GONE else android.view.View.VISIBLE
         }.also { shell.addView(it) }
         val tabs = listOf("Home","Noise","Settings")
         val selected = when { page.startsWith("Noise") -> "Noise"; page in listOf("Volume","Balance","Tinnitus","Batteries") -> "Home"; page in tabs -> page; else -> "Settings" }
@@ -324,6 +342,7 @@ class HomeActivity : Activity() {
     private var pendingRefresh = false
     private fun settingsPage() {
         section("Your preferences") {
+            button("Getting started") { navigate("GettingStarted") }
             button("Sleep routine") { navigate("Sleep") }
             button("Saved settings") { navigate("Saved") }
             button("Battery check") { navigate("Batteries") }
@@ -363,9 +382,30 @@ class HomeActivity : Activity() {
     private fun programLabel(slot: Int?) = fitting?.programs?.find { it.slot == slot }?.let { "${it.name}, program ${it.slot}" } ?: "unknown"
     private fun stateText(state: RequestedState) = "Program: ${programLabel(state.program)}\n" +
         LevelControl.entries.joinToString("\n") { "${when(it) { LevelControl.VOLUME -> "Volume"; LevelControl.SHARPNESS -> "Balance"; LevelControl.TINNITUS -> "Tinnitus" }}: ${state.levels[it]?.toString() ?: "not set"}" }
+    private fun gettingStarted() {
+        section("1. Review your hearing aids") {
+            line(if(fitting == null) "Needs setup. Use the addresses and programs verified for your aids. Do not guess fitting values." else "Setup saved. Your existing programs and settings are retained.")
+            button(if(fitting == null) "Set up hearing aids" else "Review aid setup") { navigate("Setup") }
+        }
+        section("2. Use everyday controls") {
+            line("Choose a program on Home, then adjust its levels. Keep HeySig open and unlocked, use the built-in speaker and check media volume and Do Not Disturb. Completed playback means sent, not confirmed by your aids.")
+            button("Open Home") { navigate("Home") }
+            button("Check device audio",!busy.get()) { try { player.inspect();tell("Speaker audio checks passed. No command sent.",true) } catch(e:Exception) { tell("Blocked: ${e.message}",true) } }
+        }
+        section("3. Choose optional help") {
+            line("Hands-free: enable a phone listening session, then say Hey Sig, pause and give a command. Microphone use is explained before you enable it. The watch still needs Speak or a gesture.")
+            button("Set up voice & hands-free") { navigate("Voice") }
+            line("Sleep: save bedtime and morning programs, then enable reminders. A reminder asks you to open HeySig and confirm a switch; programs do not change automatically.")
+            button("Set up bedtime reminders") { navigate("Sleep") }
+            line("Noise: measure your surroundings and preview suggested programs without changing your aids. Keep the app open and unlocked during measurement. Automatic switching is unavailable in this build.")
+            button("Explore noise preview") { navigate("Noise") }
+        }
+    }
     private fun home() {
         if(fitting == null) {
-            line("Set up your hearing aids to begin.")
+            PhoneStyle.heading(this,content,"Welcome to HeySig")
+            line("Start with your verified hearing-aid setup. Then choose a program. Voice, bedtime reminders and noise previews are optional.")
+            button("See setup checklist") { navigate("GettingStarted") }
             PhoneStyle.action(button("Set up hearing aids") { navigate("Setup") },"primary")
             return
         }
@@ -392,7 +432,7 @@ class HomeActivity : Activity() {
             content.addView(row)
         }
         repeatRequest?.let { request -> button("Send last target again",!busy.get()) { dispatch(request,true) } }
-        fitting?.let { fit -> content.addView(SigSceneCard(this,fit,requested) { navigate("Voice") }) }
+        fitting?.let { fit -> content.addView(SigSceneCard(this,fit,requested) { navigate("VoiceTools") }) }
     }
     private fun levelPage(control: LevelControl) {
             val title = when(control) { LevelControl.VOLUME -> "Volume"; LevelControl.SHARPNESS -> "Balance"; LevelControl.TINNITUS -> "Tinnitus" }
@@ -517,8 +557,34 @@ class HomeActivity : Activity() {
     private fun sleepPage() {
         val fit=fitting ?: run { line("Save aid setup before choosing a sleep routine."); return }
         val store=runtime.sleepRoutine
-        line(store.status(fit))
-        line("Choose bedtime and wake-up programs and local clock times. Saving sends no tones and leaves scheduling Off. These programs do not imply that the aids power down or mute.")
+        section("Your bedtime routine") {
+            line(store.dashboard(fit))
+            if(getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getBoolean("reminders",false) && !SleepReminders(this).available()) {
+                line("Blocked: Android notifications are off. Allow HeySig notifications, including the Sleep routine reminders channel, in Android settings.")
+                button("Open notification settings") { startActivity(Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE,packageName)) }
+            }
+            if(store.state.override && getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getBoolean("reminders",false)) button("Resume reminders",!busy.get()) {
+                tell(store.handle(SleepCommand.Resume,fit,"phone"),true);show("Sleep")
+            }
+            line("HeySig reminds you at bedtime and in the morning. Open the reminder, then confirm the program switch. It does not switch automatically, power down or mute your aids.")
+        }
+        val ready=runCatching { store.target(true,fit);store.target(false,fit) }.isSuccess
+        val routineParent=content
+        val routineEditor=LinearLayout(this).apply {
+            orientation=LinearLayout.VERTICAL
+            visibility=if(ready) android.view.View.GONE else android.view.View.VISIBLE
+        }
+        val editRoutine=button(if(ready) "Edit bedtime & morning routine" else "Set up bedtime & morning routine") { }
+        editRoutine.setOnClickListener {
+            val opening=routineEditor.visibility != android.view.View.VISIBLE
+            routineEditor.visibility=if(opening) android.view.View.VISIBLE else android.view.View.GONE
+            editRoutine.text=if(opening) "Hide routine editor" else if(ready) "Edit bedtime & morning routine" else "Set up bedtime & morning routine"
+        }
+        routineParent.addView(routineEditor)
+        content=routineEditor
+        try {
+        PhoneStyle.heading(this,content,"1. Choose bedtime and morning programs")
+        line("Changes below take effect only after Review & save routine. Saving turns reminders Off; enable them in step 2 afterward.")
         val initial=store.choices(fit)
         val revision=store.editorRevision()
         var sleepMinute=initial.sleepMinute
@@ -528,8 +594,8 @@ class HomeActivity : Activity() {
         sleepTime=button("Bedtime: ${SleepRoutine.clock(sleepMinute)}") {
             android.app.TimePickerDialog(this,{ _,hour,minute -> sleepMinute=hour*60+minute; sleepTime.text="Bedtime: ${SleepRoutine.clock(sleepMinute)}" },sleepMinute/60,sleepMinute%60,true).show()
         }
-        wakeTime=button("Wake-up: ${SleepRoutine.clock(wakeMinute)}") {
-            android.app.TimePickerDialog(this,{ _,hour,minute -> wakeMinute=hour*60+minute; wakeTime.text="Wake-up: ${SleepRoutine.clock(wakeMinute)}" },wakeMinute/60,wakeMinute%60,true).show()
+        wakeTime=button("Morning: ${SleepRoutine.clock(wakeMinute)}") {
+            android.app.TimePickerDialog(this,{ _,hour,minute -> wakeMinute=hour*60+minute; wakeTime.text="Morning: ${SleepRoutine.clock(wakeMinute)}" },wakeMinute/60,wakeMinute%60,true).show()
         }
         val programs=fit.programs
         fun picker(label: String,slot: Int?) = Spinner(this).apply {
@@ -537,11 +603,11 @@ class HomeActivity : Activity() {
             adapter=ArrayAdapter(this@HomeActivity,android.R.layout.simple_spinner_dropdown_item,listOf("Choose a program")+programs.map { "${it.slot}: ${it.name}" })
             setSelection(programs.indexOfFirst { it.slot==slot }.let { if(it<0) 0 else it+1 });content.addView(this)
         }
-        val sleep=picker("Sleep program",initial.sleepSlot)
-        val wake=picker("Wake program",initial.wakeSlot)
+        val sleep=picker("Bedtime program",initial.sleepSlot)
+        val wake=picker("Morning return program",initial.wakeSlot)
         fun choices()=SleepRoutine(sleepMinute,wakeMinute,programs.getOrNull(sleep.selectedItemPosition-1)?.slot,programs.getOrNull(wake.selectedItemPosition-1)?.slot)
         setupChanged={ choices()!=initial }
-        val save={
+        val commitRoutine={
             if(fitting != fit) tell("Aid setup changed. Reopen and review the sleep routine.",true)
             else {
                 val result=store.save(choices(),fit,revision)
@@ -550,17 +616,24 @@ class HomeActivity : Activity() {
                 tell(result,true)
             }
         }
-        saveSetupAction=save
-        PhoneStyle.action(button("Save routine") { save() },"primary")
-        button("Discard routine changes") { store.cancel();show("Sleep") }
-        line(store.preview(fit))
-        button("Refresh schedule preview") { tell(store.preview(fit),true) }
-        button("Sleep now",!busy.get()) { confirmSleep(true) }
-        button("Wake now",!busy.get()) { confirmSleep(false) }
-        button(if(store.state.override) "Resume sleep routine" else "Pause sleep routine",!busy.get()) {
-            tell(store.handle(if(store.state.override) SleepCommand.Resume else SleepCommand.Override,fit,"phone"),true);show("Sleep")
+        val save: () -> Unit = {
+            val selected=choices()
+            runCatching { selected.validate(fit) }.fold(onSuccess={
+                val bedtime=fit.programs.first { it.slot==selected.sleepSlot }.name
+                val morning=fit.programs.first { it.slot==selected.wakeSlot }.name
+                android.app.AlertDialog.Builder(this).setTitle("Review bedtime routine")
+                    .setMessage("Bedtime ${SleepRoutine.clock(selected.sleepMinute)}: remind me to switch to $bedtime.\nMorning ${SleepRoutine.clock(selected.wakeMinute)}: remind me to switch to $morning.\n\nSaving sends no command and turns reminders Off. Enable reminders next. Each switch requires your confirmation. Cancel keeps your previous saved routine.")
+                    .setNegativeButton("Keep editing",null).setPositiveButton("Save routine") { _,_ -> commitRoutine() }.show()
+            },onFailure={ tell(it.message ?: "Choose both programs and different times",true) })
         }
-        button("Enable sleep reminders") {
+        saveSetupAction=save
+        PhoneStyle.action(button("Review & save routine") { save() },"primary")
+        button("Discard routine changes") { store.cancel();show("Sleep") }
+        } finally { content=routineParent }
+        PhoneStyle.heading(this,content,"2. Enable bedtime & morning reminders")
+        line("Reminders require saved choices and Android notification access. They never switch a program by themselves.")
+        if(!ready) line("Needs setup: choose both programs and save your routine before enabling reminders or trying a switch.")
+        button("Enable sleep reminders",ready) {
             if(android.os.Build.VERSION.SDK_INT>=33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED) {
                 android.app.AlertDialog.Builder(this).setTitle("Sleep routine reminders")
                     .setMessage("Allow notifications for bedtime and wake-up reminders. Each opens HeySig so you can tap to switch programs. No microphone or automatic playback is started. Android may delay reminders.")
@@ -568,32 +641,63 @@ class HomeActivity : Activity() {
             } else { val result=SleepReminders(this).setEnabled(true);show("Sleep");tell(result,true) }
         }
         button("Disable sleep reminders") { val result=SleepReminders(this).setEnabled(false);show("Sleep");tell(result,true) }
-        line("Reminders open this screen; use Sleep now or Wake now to switch. Manual changes pause future reminders until Resume. Sleep mode does not power down or mute your aids.")
-        line("Voice: configure sleep • set sleep time to ten PM • set wake time to seven AM • set sleep program to Sleep • set wake program to Universal • review sleep routine • save sleep routine • cancel sleep setup.")
+        PhoneStyle.heading(this,content,"3. Try a saved program now")
+        line("These one-time actions use your saved routine and ask before sending a real program command. They do not enable or change reminder times. Keep the app open and unlocked with the built-in speaker available.")
+        button("Sleep now",ready && !busy.get()) { confirmSleep(true) }
+        button("Wake now",ready && !busy.get()) { confirmSleep(false) }
+        val details=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; visibility=android.view.View.GONE }
+        val toggle=button("Advanced & troubleshooting") { }
+        toggle.setOnClickListener {
+            val opening=details.visibility != android.view.View.VISIBLE
+            details.visibility=if(opening) android.view.View.VISIBLE else android.view.View.GONE
+            toggle.text=if(opening) "Hide advanced & troubleshooting" else "Advanced & troubleshooting"
+        }
+        content.addView(details)
+        val parent=content;content=details
+        try {
+            line(store.status(fit))
+            line(store.preview(fit))
+            line("Manual program or level changes pause future reminders. Resume allows future reminders; it does not send a program command. Android may delay reminders, and reminders over 15 minutes late are skipped.")
+            button(if(store.state.override) "Resume sleep reminders" else "Pause sleep reminders",!busy.get()) {
+                tell(store.handle(if(store.state.override) SleepCommand.Resume else SleepCommand.Override,fit,"phone"),true);show("Sleep")
+            }
+            button("Check device audio",!busy.get()) { try { player.inspect();tell("Speaker audio checks passed. No command sent.",true) } catch(e:Exception) { tell("Blocked: ${e.message}",true) } }
+            line("No reminder? Check that reminders are On, the routine is not paused, and Android allows HeySig notifications. No switch? Read the result at the top of this screen after confirming Switch.")
+        } finally { content=parent }
+
     }
 
     private fun voicePage() {
-        PhoneStyle.heading(this,content,"Hands-free")
-        line("Say Hey Sig, pause, then your command—even while the phone is locked. Start a session here first.")
-        button(if(HandsFreeService.running==null) "Start hands-free session" else "Hands-free On",!busy.get()) { startHandsFree() }
-        if(HandsFreeService.running!=null) {
-            line("Off releases the microphone. End also disconnects watch control. Sessions last up to eight hours.")
-            button("Pause listening for 30 minutes") { HandsFreeService.running?.control(HandsFreeControl.PAUSE) }
-            button("Hands-free Off") { HandsFreeService.running?.control(HandsFreeControl.OFF) }
+        voiceSessionPresent=HandsFreeService.running!=null
+        voiceSessionStatus=line(HandsFreeService.running?.status ?: "Hands-free is Off").apply {
+            accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
+        }
+        button(if(voiceSessionPresent) "Resume listening" else "Start hands-free session",!busy.get()) { startHandsFree() }
+        line("Say Hey Sig, wait for Ready or a vibration, then say your command. Try: current program. Each new command needs Hey Sig again.")
+        if(voiceSessionPresent) {
+            button("Pause for 30 minutes") { HandsFreeService.running?.control(HandsFreeControl.PAUSE) }
+            button("Turn listening Off") { HandsFreeService.running?.control(HandsFreeControl.OFF) }
             button("End hands-free session") { HandsFreeService.running?.control(HandsFreeControl.END); show() }
         }
-
+        line("Off stops the microphone and shake. Resume turns them back on. End closes the session; start again here after restarting the app. Sessions last up to eight hours.")
+        val needsMic=checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)!=android.content.pm.PackageManager.PERMISSION_GRANTED
+        val needsNotifications=android.os.Build.VERSION.SDK_INT>=33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED
+        if(needsMic || needsNotifications) line("Hey Sig needs: "+listOfNotNull(if(needsMic) "microphone permission" else null,if(needsNotifications) "notification permission" else null).joinToString(" and ")+". Choose Start hands-free session to review microphone use and allow access. No listening starts just by opening this screen.")
         content.addView(CheckBox(this).apply {
-            text="Shake to speak while listening is On"
+            text="Shake to speak"
             val choices=getSharedPreferences("heysig-handsfree",MODE_PRIVATE)
             isChecked=choices.getBoolean("shake",false)
-            setOnCheckedChangeListener { _,checked ->
-                if(choices.edit().putBoolean("shake",checked).commit()) HandsFreeService.running?.refreshShake()
+            var reverting=false
+            setOnCheckedChangeListener { box,checked ->
+                if(!reverting) {
+                    if(choices.edit().putBoolean("shake",checked).commit()) HandsFreeService.running?.refreshShake()
+                    else { reverting=true;box.isChecked=!checked;reverting=false;tell("Could not save shake choice") }
+                }
             }
         })
-        line("Three deliberate shakes start one command with a short vibration. Off and Pause disable shake. Movement may trigger it accidentally.")
+        line("While listening is On, shake three times, wait for Ready or a vibration, then speak. Movement can trigger it accidentally.")
         PhoneStyle.heading(this,content,"Spoken feedback")
-        line(PrivacyNotice.SYNTHESIS)
+        line("Choose what HeySig says. Both can be Off; listening status stays visible. Your installed speech engine may use its network service.")
         for((label,key) in listOf("Voice prompts (confirmation and guidance)" to "voicePrompts","Spoken responses (status, results and errors)" to "spokenResponses")) {
             content.addView(CheckBox(this).apply {
                 text = label; isChecked = voiceEnabled(key)
@@ -609,7 +713,18 @@ class HomeActivity : Activity() {
                 }
             })
         }
-        line("Saved separately on this device and the watch. Text replies remain visible. Say voice prompts off/on or voice responses off/on. The installed speech-recognition service may have its own sounds.")
+        line("Prompts say Ready and guide confirmations. Responses read results and errors. The watch saves its own choices.")
+        button("Voice tools & personal phrases") { navigate("VoiceTools") }
+    }
+    private fun voiceToolsPage() {
+        button("Test voice recognition",!busy.get()) {
+            noise.stop();tts?.stop();launchVoice(testOnly=true)
+        }
+        line("Say testing one two three. This test displays the words without running a command or changing aid settings.")
+        button("Open microphone & app settings") {
+            startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,android.net.Uri.parse("package:$packageName")))
+        }
+        line(PrivacyNotice.SYNTHESIS)
         line("Use your installed speech service, or type a command below. Recognition may use the service's network connection. Cancel sends nothing.")
         PhoneStyle.heading(this,content,"Personal phrases")
         line("Teach an exact phrase with: learn phrase TV time means program TV. Review the proposed mapping, then say remember that correction. Only the confirmed phrase and meaning are stored locally; audio is not saved. Learning sends no command. Use the phrase separately afterward. Setup changes deactivate old phrases.")
@@ -771,13 +886,13 @@ class HomeActivity : Activity() {
         if(busy.get()) { pendingVoice = true; cancelled.set(true); tell("Stopping playback before voice input"); return }
         launchVoice()
     }
-    private fun launchVoice() {
+    private fun launchVoice(testOnly: Boolean = false) {
         pendingVoice = false
         if(!prefs.getBoolean("speechDisclosureV1",false)) {
             android.app.AlertDialog.Builder(this).setTitle("Optional speech recognition")
                 .setMessage(PrivacyNotice.SPEECH).setNegativeButton("Not now",null)
                 .setPositiveButton("Continue") { _,_ ->
-                    if(prefs.edit().putBoolean("speechDisclosureV1",true).commit()) launchVoice()
+                    if(prefs.edit().putBoolean("speechDisclosureV1",true).commit()) launchVoice(testOnly)
                     else tell("Could not save speech choice")
                 }.show()
             return
@@ -789,7 +904,7 @@ class HomeActivity : Activity() {
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE,"en-US")
                 if(voiceEnabled("voicePrompts")) putExtra(RecognizerIntent.EXTRA_PROMPT,"HeySig: say a command")
-            },401)
+            },if(testOnly) 406 else 401)
         } catch(e:Exception) { HandsFreeService.manualSpeechBusy=false; HandsFreeService.running?.resumeWhenQuiet(); tell("Speech service unavailable. Use typed commands on Voice.",true) }
     }
     @Deprecated("Platform recognition result adapter")
@@ -851,12 +966,27 @@ class HomeActivity : Activity() {
             }
             return
         }
-        if(requestCode == 401) { HandsFreeService.manualSpeechBusy=false; HandsFreeService.running?.resumeWhenQuiet() }
+        if(requestCode in listOf(401,406)) {
+            HandsFreeService.manualSpeechBusy=false; HandsFreeService.running?.resumeWhenQuiet()
+            val words=data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).orEmpty()
+            if(requestCode==406) {
+                if(resultCode==RESULT_OK && words.isNotEmpty()) {
+                    lastHeard=words.first()
+                    heardStatus.text=getString(R.string.heard,lastHeard);heardStatus.visibility=android.view.View.VISIBLE
+                    tell("Voice test heard: $lastHeard. No command sent.")
+                } else tell("Voice test returned no words. Check microphone access in ChromeOS and your speech provider, then try again. No command sent.")
+                return
+            }
+            if(resultCode!=RESULT_OK || words.isEmpty()) {
+                tell("No voice command returned. Try Test voice recognition in Voice & speech to check microphone and speech input. Nothing sent.")
+                return
+            }
+        }
         if(requestCode == 401 && resultCode == RESULT_OK) {
             val alternatives = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).orEmpty()
             if(alternatives.isNotEmpty()) {
                 lastHeard = alternatives[0]
-                heardStatus.text = getString(R.string.heard,lastHeard); heardStatus.visibility = if(page == "Voice") android.view.View.VISIBLE else android.view.View.GONE
+                heardStatus.text = getString(R.string.heard,lastHeard); heardStatus.visibility = if(page in listOf("Voice","VoiceTools")) android.view.View.VISIBLE else android.view.View.GONE
             }
             // Do not guess between conflicting recognized targets.
             val fit = fitting

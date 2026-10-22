@@ -96,7 +96,7 @@ class WatchActivity : Activity() {
     private fun checkWifi() { wifiCheck?.close();wifiCheck=WatchWifiCheck(this) { send("status",listOf("status")) }.show() }
     private fun more() {
         android.app.AlertDialog.Builder(this).setTitle("More")
-            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status","Hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake","Type command")) { _,index ->
+            .setItems(arrayOf("Read status","Check last result","Speech options","Connection & full status","Phone hands-free","Shake to speak","Check Wi-Fi","Sleeping-watch shake","Type command")) { _,index ->
                 when(index) {
                     8 -> {
                         val input = EditText(this).apply { hint="Command"; setSingleLine() }

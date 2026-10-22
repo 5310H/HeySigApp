@@ -79,7 +79,7 @@ pending; grammar checks and debug builds do not establish hearing-aid receipt.
 
 ## Personal phrase learning
 
-Open **Settings → Voice & speech → Personal phrases**, or use phone/watch voice:
+Open **Settings → Voice & speech → Voice tools & personal phrases**, or use phone/watch voice:
 
 1. Say **learn phrase TV time means program TV**. The meaning must be an existing
    program, absolute level, battery or current-value command.

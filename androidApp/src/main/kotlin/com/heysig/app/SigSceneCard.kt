@@ -34,7 +34,7 @@ class SigSceneCard(context: Context, fitting: Fitting, state: RequestedState, te
         addView(Button(context).apply {
             text="Teach a phrase"; PhoneStyle.action(this)
             setOnClickListener { teach() }
-            contentDescription="Teach a personal phrase. Opens Voice and speech."
+            contentDescription="Teach a personal phrase. Opens Voice tools and personal phrases."
         })
     }
     private class SceneArtwork(context: Context): View(context) {

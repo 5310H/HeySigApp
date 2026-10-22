@@ -68,5 +68,7 @@ object WakeModel {
         modelConfig=OnlineModelConfig(
             transducer=OnlineTransducerModelConfig(encoder="handsfree/encoder.onnx",decoder="handsfree/decoder.onnx",joiner="handsfree/joiner.onnx"),
             tokens="handsfree/tokens.txt",numThreads=1,debug=false,modelType="zipformer2"),
-        keywordsFile="handsfree/keywords.txt",keywordsThreshold=0.5f))
+        // Use the pinned engine's default threshold. The previous 0.5 override
+        // made this short, untrained phrase harder to trigger than upstream.
+        keywordsFile="handsfree/keywords.txt",keywordsThreshold=0.25f))
 }

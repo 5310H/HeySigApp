@@ -68,7 +68,7 @@ object WatchStyle {
         }
         val status = TextView(context).apply {
             text = initialStatus; setTextColor(muted); textSize = minOf(14f,20f/resources.configuration.fontScale)
-            maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.END; gravity = android.view.Gravity.CENTER
+            gravity = android.view.Gravity.CENTER
             accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
         }; column.addView(status,LinearLayout.LayoutParams(-1,-2))
         if(speechOff) column.addView(TextView(context).apply {

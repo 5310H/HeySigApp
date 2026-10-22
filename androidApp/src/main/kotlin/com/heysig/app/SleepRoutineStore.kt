@@ -56,6 +56,24 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
         fun name(slot: Int?)=fit.programs.find { it.slot==slot }?.name ?: "choose program"
         return "Sleep ${SleepRoutine.clock(value.sleepMinute)}: ${name(value.sleepSlot)}. Wake ${SleepRoutine.clock(value.wakeMinute)}: ${name(value.wakeSlot)}."
     }
+    fun dashboard(fit: Fitting): String {
+        val routine=validSaved(fit) ?: return "Needs setup · Choose and save bedtime and morning programs. " +
+            (if(saved != null) "Your saved routine needs review after an aid setup change." else "")
+        val enabled=prefs.getBoolean("reminders",false)
+        val stateLabel=when {
+            !enabled -> "Reminders Off · Enable reminders below."
+            state.override -> "Paused · Choose Resume reminders below."
+            else -> "Reminders On · Each program switch needs your confirmation."
+        }
+        val next=if(enabled && !state.override) {
+            val now=ZonedDateTime.now()
+            val event=listOf("Bedtime" to routine.sleepMinute,"Morning" to routine.wakeMinute)
+                .mapNotNull { (label,minute) -> SleepPreview.next(minute,now)?.let { label to it } }
+                .minByOrNull { it.second.toInstant() }
+            event?.let { "\nNext reminder: ${it.first}, ${it.second.format(java.time.format.DateTimeFormatter.ofPattern("EEE h:mm a",java.util.Locale.getDefault()))} (${now.zone.id}). Android may delay it." }.orEmpty()
+        } else ""
+        return "$stateLabel\n${describe(routine,fit)}$next"
+    }
     fun status(fit: Fitting): String {
         val valid=validSaved(fit)
         return "Sleep mode: ${state.mode.name.lowercase()}. ${if(state.override) "Manual override On. " else ""}Reminders ${if(prefs.getBoolean("reminders",false)) "On" else "Off"}. " + (error ?: if(saved==null) "No saved routine. 22:00 and 07:00 are suggestions only." else if(valid==null) "Setup changed; review and save the routine again." else describe(valid,fit)) +
