@@ -731,6 +731,24 @@ class HomeActivity : Activity() {
     }
 
     private fun voicePage() {
+        PhoneStyle.heading(this,content,"Speech on phone and watch")
+        line("These switches control spoken prompts and replies on both your phone and watch. Both can be Off; text status stays visible. Speech engines may use their network services.")
+        for((label,key) in listOf("Voice prompts (confirmation and guidance)" to "voicePrompts","Spoken responses (status, results and errors)" to "spokenResponses")) {
+            content.addView(CheckBox(this).apply {
+                text = label; isChecked = voiceEnabled(key)
+                var reverting = false
+                setOnCheckedChangeListener { box,checked ->
+                    if(reverting) return@setOnCheckedChangeListener
+                    if(!prefs.edit().putBoolean(key,checked).commit()) {
+                        reverting = true; box.isChecked = !checked; reverting = false
+                        tell("Could not save voice setting")
+                    }
+                    speechSummary?.text = speechStatusText()
+                    if(!checked) { tts?.stop(); HandsFreeService.running?.stopSpokenReply() }
+                }
+            })
+        }
+        line("Prompts give a listening cue and guide confirmations. Responses read results and errors. The watch follows these choices for each command.")
         voiceSessionPresent=HandsFreeService.running!=null
         voiceSessionStatus=line(HandsFreeService.running?.status ?: "Hands-free is Off").apply {
             accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
@@ -759,24 +777,6 @@ class HomeActivity : Activity() {
             }
         })
         line("While listening is On, shake three times, wait for Ready or a vibration, then speak. Movement can trigger it accidentally.")
-        PhoneStyle.heading(this,content,"Spoken feedback")
-        line("Choose what HeySig says. Both can be Off; listening status stays visible. Your installed speech engine may use its network service.")
-        for((label,key) in listOf("Voice prompts (confirmation and guidance)" to "voicePrompts","Spoken responses (status, results and errors)" to "spokenResponses")) {
-            content.addView(CheckBox(this).apply {
-                text = label; isChecked = voiceEnabled(key)
-                var reverting = false
-                setOnCheckedChangeListener { box,checked ->
-                    if(reverting) return@setOnCheckedChangeListener
-                    if(!prefs.edit().putBoolean(key,checked).commit()) {
-                        reverting = true; box.isChecked = !checked; reverting = false
-                        tell("Could not save voice setting")
-                    }
-                    speechSummary?.text = speechStatusText()
-                    if(!checked) { tts?.stop(); HandsFreeService.running?.stopSpokenReply() }
-                }
-            })
-        }
-        line("Prompts say Ready and guide confirmations. Responses read results and errors. The watch saves its own choices.")
         button("Voice tools & personal phrases") { navigate("VoiceTools") }
     }
     private fun voiceToolsPage() {

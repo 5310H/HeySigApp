@@ -45,7 +45,7 @@ def main():
         '-storepass:env','HEYSIG_KEY_PASSWORD','-alias',signing['keyAlias']], env=environment)
     expected_signer = hashlib.sha256(certificate).hexdigest()
     reports = []
-    for module, application, target, code in [('androidApp','com.heysig.app',36,1_000_009),('wearApp','com.heysig.app',35,2_000_003)]:
+    for module, application, target, code in [('androidApp','com.heysig.app',36,1_000_011),('wearApp','com.heysig.app',35,2_000_006)]:
         bundle = ROOT / module / f'build/outputs/bundle/release/{module}-release.aab'
         run(['java','-jar',str(args.bundletool),'validate',f'--bundle={bundle}'])
         verified = run(['jarsigner','-J-Duser.language=en','-verify',str(bundle)]).decode()
@@ -80,8 +80,13 @@ def main():
             'android.permission.RECORD_AUDIO', 'android.permission.FOREGROUND_SERVICE',
             'android.permission.FOREGROUND_SERVICE_MICROPHONE', 'android.permission.POST_NOTIFICATIONS',
             'android.permission.WAKE_LOCK', 'android.permission.VIBRATE'
-        } if module == 'androidApp' else {'android.permission.VIBRATE'}
-        if module == 'androidApp':
+        } if module == 'androidApp' else {
+            'android.permission.VIBRATE', 'android.permission.RECORD_AUDIO',
+            'android.permission.FOREGROUND_SERVICE', 'android.permission.FOREGROUND_SERVICE_MICROPHONE',
+            'android.permission.FOREGROUND_SERVICE_SPECIAL_USE', 'android.permission.POST_NOTIFICATIONS',
+            'android.permission.WAKE_LOCK', 'android.permission.ACCESS_NETWORK_STATE'
+        }
+        if module in ('androidApp','wearApp'):
             # AndroidX Core's app-private compatibility permission is signature-only,
             # not a runtime grant or new microphone/background capability.
             internal_permission = application + '.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
@@ -91,6 +96,8 @@ def main():
                         item.get(ANDROID+'protectionLevel') in ('signature', '2', '0x2', '0x00000002')
                         for item in manifest.findall('permission')),
                     'Phone: AndroidX internal permission must remain signature-only')
+        if module == 'androidApp':
+            expected_permissions.update({'android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK', 'android.permission.SCHEDULE_EXACT_ALARM', 'android.permission.RECEIVE_BOOT_COMPLETED'})
         require(set(permissions) == expected_permissions, f'{module}: unexpected release permissions {permissions}')
         with zipfile.ZipFile(bundle) as archive:
             names = archive.namelist()

@@ -29,9 +29,13 @@ is separate and does not copy or overwrite the development fitting.
    operation's lookup identifier. **Check last result** retrieves only the
    retained reply; it never resends the original command.
 7. Leaving the phone app disconnects and cancels playback/capture. Leaving the
-   watch abandons pending callbacks without replay. Reconnect explicitly after
-   interruption. Speech recognition is a deliberate temporary departure: only
-   freshly returned words can reconnect for a user-reviewed Send action.
+   manual watch screen abandons its callbacks without replay. An explicitly
+   started Shake voice foreground session continues until Stop or expiry. Reconnect explicitly after
+   interruption. The Shake voice session reconnects to the selected phone per turn without a
+   chooser and performs bounded recognition without opening another Activity.
+   Returned words expire after 15 seconds, including grant time; invalid or
+   cancelled recognition sends nothing;
+   ambiguous commands and restoration retain the phone's existing confirmations.
 
 Candidate APKs for controlled tests are in each module's
 `build/outputs/apk/release/`; these are not a published Play app or permission to
@@ -85,3 +89,34 @@ build or unit test must not be substituted for these results.
 Official references checked October 16, 2026:
 [Data Layer architecture, security and cloud routing](https://developer.android.com/training/wearables/data/overview),
 [MessageClient persistence/retry characteristics](https://developer.android.com/training/wearables/data/client-types).
+
+
+## Shake voice session (October 26 update)
+
+After selecting the phone once, use Speak or More → Shake to speak to start a
+voice session. Its one-time explanation and Android microphone/notification
+permission requests are setup steps. Routine use is **three deliberate shakes
+→ one optional “Say a command” prompt → speak → displayed/spoken result**.
+There is no per-command phone chooser, review dialog or notification tap.
+Prompt and response audio follow the phone's independent Voice prompts and
+Spoken responses switches, refreshed from authenticated replies. Separate watch
+speech toggles no longer override them. Unknown/missing phone choices mean off.
+
+The explicitly started microphone/motion foreground service remains armed while
+the screen sleeps. It captures only after a shake or Speak, for at most ten
+seconds, and waits for prompt playback to end first. Between commands the
+microphone is idle. A private persistent notification provides Stop. Only the
+requested turn holds a bounded partial wake lock. Stop, Recents removal, process
+death or eight hours ends the session; there is no reboot restart. An active session works while PIN-locked; starting a new session requires unlocking. The phone must still expose its enabled foreground watch
+connection or an explicitly started hands-free watch session. A shake does not
+silently enable phone playback permissions.
+
+Ordinary results/errors are visible without modal dialogs; meaningful phone
+ambiguity, fitting and restore confirmations remain. Connection failure never
+queues speech or retries a hearing-aid command. Repeated shakes during a turn
+are ignored. The watch sends recognized text/alternatives and receives results;
+all aid playback remains in the phone's existing serialized executor.
+
+See [screen-asleep voice design review](watch-shake-voice-design.md) for lifecycle,
+privacy and runtime acceptance. This extends the earlier foreground-only watch
+recognition design; it is not a Play submission approval.

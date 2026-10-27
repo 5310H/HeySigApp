@@ -128,3 +128,14 @@ Wi-Fi transport and Android's validated-internet flag, without SSID, IP address,
 location, scan, persistence or network requests. Optional Check phone link uses
 the existing status request/transport and existing reply retention. Opening
 Wi-Fi settings delegates to the OS; HeySig does not change radio state.
+
+
+October 26 watch voice extension: the release watch now requests microphone and
+microphone-FGS permissions for an explicitly started, eight-hour shake session.
+Each shake captures at most ten seconds via the installed recognition service;
+the microphone is idle between turns. The provider may send audio off-device.
+Phone-owned speech switches travel in Data Layer replies. Generic persistent
+notification/Stop and in-memory status are used; no transcript/audio storage or
+analytics were added. Update release FGS declarations and verify provider/network
+behavior before final privacy or Data safety submissions. See the
+[design review](watch-shake-voice-design.md).

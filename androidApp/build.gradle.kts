@@ -24,8 +24,8 @@ android {
         applicationId = "com.heysig"
         minSdk = 29
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.9"
+        versionCode = 11
+        versionName = "0.11"
         testInstrumentationRunner = "com.heysig.app.Api36Smoke"
     }
     buildFeatures { buildConfig = true }
@@ -61,7 +61,7 @@ dependencies {
 }
 androidComponents {
     onVariants(selector().withBuildType("release")) { variant ->
-        variant.outputs.forEach { it.versionCode.set(1_000_009) }
+        variant.outputs.forEach { it.versionCode.set(1_000_011) }
     }
 }
 

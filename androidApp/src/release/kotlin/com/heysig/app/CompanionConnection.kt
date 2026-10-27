@@ -113,7 +113,7 @@ class CompanionConnection(
         var rpc: String? = null
         fun reply(value: JSONObject) {
             if(current != generation || !accepts(node)) return
-            val data = value.put("rpc",rpc).toString().toByteArray(Charsets.UTF_8)
+            val data = CompanionSpeech.attach(activity,value).put("rpc",rpc).toString().toByteArray(Charsets.UTF_8)
             if(data.size <= CompanionSafety.MAX_BYTES) messages.sendMessage(node,CompanionSafety.PATH,data)
         }
         try {

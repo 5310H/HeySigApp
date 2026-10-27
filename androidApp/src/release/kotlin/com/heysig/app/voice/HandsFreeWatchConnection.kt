@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import com.google.android.gms.wearable.*
+import com.heysig.app.CompanionSpeech
 import com.heysig.app.ManualRuntime
 import com.heysig.app.WatchHistory
 import com.heysig.companion.*
@@ -41,7 +42,7 @@ class HandsFreeWatchConnection(private val context: Context,private val dispatch
         var rpc: String?=null
         fun reply(value: JSONObject) {
             if(!active) return
-            val bytes=value.put("rpc",rpc).toString().toByteArray(Charsets.UTF_8)
+            val bytes=CompanionSpeech.attach(context,value).put("rpc",rpc).toString().toByteArray(Charsets.UTF_8)
             if(bytes.size<=CompanionSafety.MAX_BYTES) messages.sendMessage(node,HandsFreeCompanion.PATH,bytes)
         }
         try {
