@@ -1,9 +1,3 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <application>
-        <receiver android:name="com.heysig.app.WatchBridgeSetup" android:exported="true" android:permission="android.permission.DUMP">
-            <intent-filter><action android:name="com.heysig.PAIR_WATCH_BRIDGE" /></intent-filter>
-        </receiver>
-        <activity android:name="com.heysig.app.ProtoActivity" android:exported="false" />
-    </application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <application android:label="HeySig Dev" tools:replace="android:label" />
 </manifest>

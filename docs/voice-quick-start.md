@@ -8,11 +8,11 @@ current program; otherwise say an exact value, such as **volume eight**. Program
 changes use that program’s retained known targets after completed playback; unknown values need an exact command first. At 0 or 15, HeySig reports the limit and sends
 nothing. These commands preserve your saved restoration snapshot.
 
-For the native Chromebook Android app, version 0.9. Open HeySig and press **Speak command** for each request. This is push-to-talk; an always-listening Hey Sig wake phrase is not implemented. The same APK/source is being developed for later phone acceptance. The experimental [watch companion](../wearApp/README.md) has passed Wi-Fi status and spoken-reply acceptance; watch-triggered aid controls remain pending. See [six-level noise settings and Observe commands](noise-quick-start.md).
+Use the native Android phone and Wear OS watch apps. Both variants connect directly through Data Layer. Phone hands-free sessions offer optional Hey Sig detection; the watch uses a bounded session after deliberate shakes. Complete watch recognition and spoken-result acceptance is still pending.
 
 ## Voice sound switches
 
-On Chromebook/phone, open **Voice**. On the watch, scroll below Stop. **Voice prompts** controls confirmation guidance; **Spoken responses** controls status, results and errors. Each device saves its own choices independently. Both may be off; text replies remain visible. Saying “voice responses off” turns off its own spoken acknowledgement. Turn responses back on by voice or touch.
+On the phone, open **Settings → Voice & speech**. **Voice prompts** controls confirmation guidance; **Spoken responses** controls status, results and errors. These independent phone switches control both phone and watch. Both may be off; text replies remain visible. Saying “voice responses off” turns off its own spoken acknowledgement. Turn responses back on by voice or touch.
 
 Say “voice prompts off,” “voice prompts on,” “voice responses off,” or “voice responses on.” These settings do not change media volume or hearing-aid levels. The installed recognition service may still provide its own sounds. The previous phone “Speak playback completion” preference is used as the initial response setting when upgrading.
 
@@ -49,7 +49,7 @@ If speech is unclear, read **Speech heard** on screen. “Program to” asks whe
 
 Current-value replies mean **last sent**, not a query of the aids. Changes made externally are not tracked. Mark aid settings unknown on Home when appropriate. A successful program selection clears remembered levels because the new program's actual levels cannot be read. Only one last-settings record exists; completed manual setting changes replace/update it automatically. Restore does not replace its source record.
 
-Keep the app open/unlocked, DND off, device media volume at least halfway, and use the built-in speakers. On Chromebook, also check ChromeOS host volume/output. The app explains blocked playback and does not change those system settings itself. Speak during playback stops the current operation before opening recognition; already emitted tones cannot be undone.
+Keep the app open/unlocked, DND off, device media volume at least halfway, and use the built-in speakers. The app explains blocked playback and does not change those system settings itself. Speak during playback stops the current operation before opening recognition; already emitted tones cannot be undone.
 
 Recognition uses the installed Android speech service, which may use its network connection. Speech text is shown for the current session, not saved as a transcript. Physical aid response remains separate from playback completion.
 

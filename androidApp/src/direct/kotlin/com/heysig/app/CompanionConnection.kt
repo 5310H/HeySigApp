@@ -1,6 +1,8 @@
 package com.heysig.app
 
 import android.app.Activity
+import android.app.KeyguardManager
+import com.heysig.app.voice.HandsFreeService
 import android.app.AlertDialog
 import android.os.SystemClock
 import android.widget.Button
@@ -33,9 +35,15 @@ class CompanionConnection(
     private var connectionStatus: TextView? = null
     val enabled get() = gate != null && foreground
     fun resume() {
-        foreground = true; refreshStatus()
-        // Returning from recognition/import must preserve that feature's result.
-        // The connection card already shows Off and the explicit enable action.
+        foreground = true
+        // A stored selection alone is not consent. Only an explicit Enable watch
+        // grants foreground restoration; pause closes live authority immediately.
+        val node=prefs.getString("node",null)
+        if(prefs.getBoolean("foregroundEnabledV1",false) && node!=null && gate==null && listener==null &&
+            HandsFreeService.running==null && !activity.getSystemService(KeyguardManager::class.java).isKeyguardLocked) {
+            enable(node,announce=false)
+        }
+        refreshStatus()
     }
     private fun refreshStatus() {
         connectionStatus?.text = activity.getString(R.string.watch_status,prefs.getString("label","none selected"),if(enabled) "Enabled while this phone stays open and unlocked" else "Off — enable before connecting on the watch")
@@ -45,7 +53,7 @@ class CompanionConnection(
     fun render(layout: LinearLayout) {
         fun line(text: String) = TextView(activity).also { it.text = text; it.textSize = 17f; layout.addView(it) }
         fun button(text: String, action: () -> Unit) { layout.addView(Button(activity).apply { this.text = text; setOnClickListener { action() } }) }
-        line("Pair your watch with this Android phone using the watch's companion app, then install HeySig on both devices. No developer tools or relay are needed. iPhone and Chromebook pairing are not supported by this connection.")
+        line("Pair your watch with this Android phone using the watch's companion app, then install HeySig on both devices. No developer tools or relay are needed. This connection uses your paired Android phone and watch.")
         connectionStatus = line(""); refreshStatus()
         button("Find paired watches") {
             if(!foreground) return@button
@@ -73,17 +81,21 @@ class CompanionConnection(
     }
     private fun consent(node: String, label: String) {
         AlertDialog.Builder(activity).setTitle("Allow $label to control HeySig?")
-            .setMessage("Watch command text, speech alternatives and requested-setting replies travel through Google Play services. Data Layer may use encrypted Google-server routing when Bluetooth is unavailable. This phone plays the validated command tones only while HeySig is open and unlocked. Command results are kept locally for up to 24 hours, limited to 64; clear them in Privacy. No command is retried automatically.")
+            .setMessage("Watch command text, speech alternatives and requested-setting replies travel through Google Play services. Data Layer may use encrypted Google-server routing when Bluetooth is unavailable. This phone plays the validated command tones only while HeySig is open and unlocked. Command results are kept locally for up to 24 hours, limited to 64; clear them in Privacy. Your Enable choice is remembered, so this connection resumes when you return to the unlocked phone app. Leaving or locking the app closes the live connection. Disconnect or Forget turns this choice off. No command is retried automatically.")
             .setNegativeButton("Not now",null)
             .setPositiveButton("Enable watch") { _,_ ->
                 if(!foreground) return@setPositiveButton
-                if(!prefs.edit().putString("node",node).putString("label",label).commit()) { report("Could not save watch selection"); return@setPositiveButton }
+                if(!prefs.edit().putString("node",node).putString("label",label).putBoolean("foregroundEnabledV1",true).commit()) { report("Could not save watch selection"); return@setPositiveButton }
                 enable(node)
             }.show()
     }
-    private fun enable(node: String) {
-        close()
-        if(!foreground) return
+    private fun enable(node: String, announce: Boolean = true) {
+        dropConnection()
+        if(!foreground || activity.getSystemService(KeyguardManager::class.java).isKeyguardLocked) return
+        if(HandsFreeService.running!=null) {
+            if(announce) report("The hands-free session already owns the watch connection. Use that session or end it before enabling foreground control.")
+            return
+        }
         val current = ++generation
         selected = node
         val receiver = MessageClient.OnMessageReceivedListener { event ->
@@ -98,12 +110,12 @@ class CompanionConnection(
                 if(!foreground || current != generation) {
                     if(!enabled) capabilities.removeLocalCapability(CompanionSafety.CAPABILITY)
                 }
-                else report("Watch connection ready. Open HeySig on the watch and select Connect phone.")
+                else if(announce) report("Watch connection ready. Open HeySig on the watch and select Connect phone.")
             }.addOnFailureListener {
-                if(current == generation) { close(); report("Could not advertise phone connection; no watch commands enabled") }
+                if(current == generation) { dropConnection(); report("Could not advertise phone connection; no watch commands enabled") }
             }
         }.addOnFailureListener {
-            if(current == generation) { close(); report("Wear OS Data Layer unavailable. Check Google Play services.") }
+            if(current == generation) { dropConnection(); report("Wear OS Data Layer unavailable. Check Google Play services.") }
         }
     }
     override fun onMessageReceived(event: MessageEvent) {
@@ -149,11 +161,16 @@ class CompanionConnection(
         }
     }
     override fun close() {
+        val saved=prefs.edit().putBoolean("foregroundEnabledV1",false).commit()
+        dropConnection()
+        if(!saved) report("Connection closed for now, but its Off choice could not be saved. Use Forget selected watch.")
+    }
+    private fun dropConnection() {
         generation++; gate?.close(); gate = null; selected = null
         refreshStatus()
         listener?.let { messages.removeListener(it) }; listener = null
         capabilities.removeLocalCapability(CompanionSafety.CAPABILITY)
         disconnected()
     }
-    fun pause() { foreground = false; close() }
+    fun pause() { foreground = false; dropConnection() }
 }

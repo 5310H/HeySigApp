@@ -9,7 +9,7 @@ import android.widget.Button
 import android.view.View
 import android.view.ViewGroup
 
-/** No microphone or aid playback. Run on the explicitly selected phone/Chromebook. */
+/** No microphone or aid playback. Run on the explicitly selected phone. */
 class Api36Smoke : Instrumentation() {
     private var captureScreens = false
     override fun onCreate(arguments: Bundle?) {

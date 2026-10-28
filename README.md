@@ -42,9 +42,16 @@ HeySigApp/
 
 The [native UI refresh](docs/ui-refresh.md) adds four-tab phone navigation, grouped cards, explicit Send sliders and a matching dark watch style. Existing fitting, saved settings and transport behavior are preserved.
 
-Development now targets the actual Android app running in the Chromebook Google Play environment. See [Chromebook-first development and current manual-core scope](docs/chromebook-development.md). `HomeActivity` provides native Home/Setup/Saved/Voice/Noise screens. [Six-level Noise Setup](docs/noise-quick-start.md) includes guided scalar calibration, Observe and automatic preview without playback. The guarded automatic loop is implemented but source-locked pending physical acceptance. Phone and watch each have independent saved switches for voice prompts and spoken responses. Release candidates now include a [foreground Data Layer watch connection](docs/production-watch-connection.md) and Privacy and data controls. Physical pairing acceptance and [public policy finalization](docs/privacy-policy-draft.md) remain pending. Watch parity and full guided voice configuration remain in progress.
+Development targets the Android phone and Wear OS watch only. Both build types
+use the direct Data Layer connection; the desktop relay and desktop runtime have
+been removed. Phone speech switches govern prompts and replies on both devices.
+See [phone/watch setup](docs/production-watch-connection.md).
 
-The debug source set retains `ProtoActivity.kt` and the development watch relay; release builds exclude them. `ProtoRequest.kt` generates PCM command tones; Android plays them through its built-in speaker with audio guards. The app remembers completed requests. In this acoustic setup neither HeySig nor Signia can query the aids' current state. User feedback provides separate acceptance of the tested changes.
+`ProtoRequest.kt` generates PCM command tones through the guarded phone speaker
+executor. Completed playback is remembered; it does not confirm hearing-aid receipt.
+Watch voice now has observed recognition and spoken status completion, with
+owner-reported operation. The current checkpoint is phone 0.13/watch 0.12;
+see [device evidence and remaining acceptance](docs/acceptance/phone-watch-only-2026-10-27.md).
 
 Keep the shared core independent of Android classes. Android services implement its control interfaces; a future iPhone control implementation can reuse the command and decision logic.
 
@@ -54,9 +61,11 @@ Existing protocol research and the dependency-free offline packet regression are
 
 ## Proto builds
 
-See [Chromebook build and use](desktopApp/README.md) and [Android prototype build](androidApp/README.md). Both reuse the explicit-profile Kotlin renderer. Android exposes all implemented families; the desktop window currently exposes battery playback/export. Offline encoder validation and actual aid reception have separate evidence and scope.
+See [Android phone builds](androidApp/README.md) and [watch builds](wearApp/README.md). Both variants use direct pairing. Offline encoder validation and actual aid reception have separate evidence and scope.
 
-Optional [hands-free sessions](docs/hands-free-quick-start.md) now add local Hey Sig detection, locked-phone manual commands, watch On/Pause/Off/End controls and separate default-off shake choices. Watch shake currently requires HeySig open; real wake/gesture/battery acceptance remains pending. See the [October 17 implementation and acceptance record](docs/acceptance/hands-free-2026-10-17.md).
+Optional [hands-free sessions](docs/hands-free-quick-start.md) now add local Hey Sig detection, locked-phone manual commands, watch On/Pause/Off/End controls and separate default-off shake choices. The explicitly started watch session can receive shakes while its screen sleeps;
+full locked-session reliability and battery acceptance remain pending. See the
+[current session setup](docs/hands-free-quick-start.md). See the [October 17 implementation and acceptance record](docs/acceptance/hands-free-2026-10-17.md).
 
 For the simplified setup checklist, Sleep reminders and guided Noise preview, see
 [the UX quick start](docs/ux-quick-start.md).

@@ -29,7 +29,13 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
     private lateinit var wake: PowerManager.WakeLock
     private var speech: TextToSpeech?=null
     private var speechReady=false
+    @Volatile private var speechInitCode: Int?=null
+    @Volatile private var speechLanguageCode: Int?=null
+    @Volatile private var speechEvent="starting"
+    @Volatile private var recognitionEvent="idle"
+    @Volatile private var recognitionError: Int?=null
     private var stopping=false
+    private var voiceFeedbackPending=false
     @Volatile private var motionSamples=0L
     @Volatile private var motionMaxG=0.0
     @Volatile private var lastMotionElapsed=0L
@@ -39,8 +45,8 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
     private var afterSpeech: (() -> Unit)?=null
     private var utterance: String?=null
     private val conversation=UUID.randomUUID().toString()
-    private val turnTimeout=Runnable { endTurn("Timed out. Check last result if a command was sent; shake for a new request.") }
-    private val captureTimeout=Runnable { endTurn("No speech received. Shake to try again.",speak=true) }
+    private val turnTimeout=Runnable { endTurn("Timed out. Check last result if a command was sent; shake for a new request.",speak=true) }
+    private val captureTimeout=Runnable { recognitionEvent="timeout";endTurn("No speech received. Shake to try again.",speak=true) }
     private val expire=Runnable { stopSelf() }
     var status="Shake voice ready"; private set
     val busy get()=turn.stage!=IDLE
@@ -52,12 +58,18 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         client=WatchVoiceClient(this)
         wake=getSystemService(PowerManager::class.java).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"HeySig:watchVoiceTurn").apply { setReferenceCounted(false) }
         speech=TextToSpeech(this) { result ->
-            handler.post { speechReady=result==TextToSpeech.SUCCESS && (speech?.setLanguage(Locale.US) ?: -1)>=TextToSpeech.LANG_AVAILABLE }
+            handler.post {
+                speechInitCode=result
+                speechLanguageCode=if(result==TextToSpeech.SUCCESS) speech?.setLanguage(Locale.US) else null
+                speechReady=result==TextToSpeech.SUCCESS && (speechLanguageCode ?: -1)>=TextToSpeech.LANG_AVAILABLE
+                speechEvent=if(speechReady) "ready" else "unavailable"
+            }
         }
         speech?.setOnUtteranceProgressListener(object: UtteranceProgressListener() {
-            override fun onStart(id: String?) {}
-            override fun onDone(id: String?) { handler.post { finishSpeech(id) } }
-            @Deprecated("Platform callback") override fun onError(id: String?) { handler.post { finishSpeech(id) } }
+            override fun onStart(id: String?) { handler.post { if(id==utterance) speechEvent="playing" } }
+            override fun onDone(id: String?) { handler.post { if(id==utterance) speechEvent="done";finishSpeech(id) } }
+            @Deprecated("Platform callback") override fun onError(id: String?) { handler.post { if(id==utterance) speechEvent="error";finishSpeech(id) } }
+            override fun onError(id: String?,code: Int) { handler.post { if(id==utterance) speechEvent="error:$code";finishSpeech(id) } }
         })
     }
     override fun onStartCommand(intent: Intent?,flags: Int,startId: Int): Int {
@@ -79,7 +91,7 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
             session.start(SystemClock.elapsedRealtime())
             instance=this;SleepingShakeService.stop(this)
             handler.postDelayed(expire,8*60*60*1000L)
-            publish("Shake voice ready. Speech follows the phone settings.")
+            publish("Tap or shake. Double buzz → speak → single buzz.")
             if(intent.getBooleanExtra("capture",false)) capture()
         } catch(e: RuntimeException) { stopSelf() }
         return START_NOT_STICKY
@@ -118,10 +130,10 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
     }
     fun capture() {
         val id=begin() ?: return
-        ShakeTrigger.acknowledge(this)
+        voiceFeedbackPending=true
         client.connect { reply ->
             if(!turn.fresh(id,SystemClock.elapsedRealtime())) return@connect
-            if(reply.optString("phase")!="READY") { endTurn(reply.optString("text","Phone unavailable"));return@connect }
+            if(reply.optString("phase")!="READY") { endTurn(reply.optString("text","Phone unavailable"),speak=true);return@connect }
             if(!turn.advance(id,CONNECTING,PROMPTING)) return@connect
             publish(if(choices.prompts) "Say a command" else "Ready to listen")
             speakIf("Say a command",choices.prompts) { listen(id) }
@@ -130,15 +142,24 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
     private fun listen(id: Long) {
         if(!turn.fresh(id,SystemClock.elapsedRealtime()) || !turn.advance(id,PROMPTING,LISTENING)) return
         if(!access().mayCapture || checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED) {
-            endTurn("Voice session or microphone permission is unavailable. Start a new session on the watch.");return
+            endTurn("Voice session or microphone permission is unavailable. Start a new session on the watch.",speak=true);return
         }
+        recognitionEvent="starting";recognitionError=null
         publish("Listening…")
         handoff.begin(SystemClock.elapsedRealtime())
         try {
             val recorder=SpeechRecognizer.createSpeechRecognizer(this)
             recognizer=recorder
             recorder.setRecognitionListener(object: RecognitionListener {
-                override fun onReadyForSpeech(params: Bundle?) {}
+                override fun onReadyForSpeech(params: Bundle?) {
+                    if(turn.active(id) && turn.stage==LISTENING && recognitionEvent!="ready") {
+                        recognitionEvent="ready"
+                        // Two full-strength pulses distinguish ready from the single completion buzz.
+                        val vibrator=getSystemService(Vibrator::class.java)
+                        if(vibrator?.hasVibrator()==true) vibrator.vibrate(VibrationEffect.createWaveform(
+                            longArrayOf(0,120,80,120),intArrayOf(0,255,0,255),-1))
+                    }
+                }
                 override fun onBeginningOfSpeech() {}
                 override fun onRmsChanged(rmsdB: Float) {}
                 override fun onBufferReceived(buffer: ByteArray?) {}
@@ -146,11 +167,13 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
                 override fun onPartialResults(partialResults: Bundle?) {}
                 override fun onEvent(eventType: Int,params: Bundle?) {}
                 override fun onError(error: Int) {
+                    if(turn.active(id) && turn.stage==LISTENING) { recognitionEvent="error";recognitionError=error }
                     if(turn.active(id) && turn.stage==LISTENING) endTurn(if(error==SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS) "Microphone permission is off. Enable it on the watch." else "No speech recognized. Shake to try again.",speak=true)
                 }
                 override fun onResults(results: Bundle?) {
                     if(!turn.active(id) || turn.stage!=LISTENING) return
                     handler.removeCallbacks(captureTimeout)
+                    recognitionEvent="results_received"
                     val words=results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION).orEmpty()
                     if(!handoff.receive(words,SystemClock.elapsedRealtime())) { endTurn("No valid speech recognized. Shake to try again.",speak=true);return }
                     val result=handoff.take(SystemClock.elapsedRealtime()) ?: return
@@ -174,7 +197,7 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         val captured=SystemClock.elapsedRealtime()
         client.connect { reply ->
             if(!turn.fresh(id,SystemClock.elapsedRealtime())) return@connect
-            if(reply.optString("phase")!="READY") { endTurn(reply.optString("text","Phone unavailable"));return@connect }
+            if(reply.optString("phase")!="READY") { endTurn(reply.optString("text","Phone unavailable"),speak=true);return@connect }
             if(turn.advance(id,CONNECTING,SENDING)) submit(id,alternatives) { SystemClock.elapsedRealtime()-captured in 0 until 15_000L }
         }
     }
@@ -182,7 +205,7 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         val id=begin() ?: return
         client.connect { reply ->
             if(!turn.fresh(id,SystemClock.elapsedRealtime())) return@connect
-            if(reply.optString("phase")!="READY") { endTurn(reply.optString("text","Phone unavailable"));return@connect }
+            if(reply.optString("phase")!="READY") { endTurn(reply.optString("text","Phone unavailable"),speak=true);return@connect }
             if(!turn.advance(id,CONNECTING,REPLYING)) return@connect
             client.lastResult { result ->
                 if(!turn.active(id)) return@lastResult
@@ -196,6 +219,7 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         client.command(alternatives.first(),alternatives,conversation,{ turn.fresh(id,SystemClock.elapsedRealtime()) && fresh() }) { answer ->
             if(!turn.advance(id,SENDING,REPLYING)) return@command
             val text=answer.optString("text","No confirmed result. Check the phone.")
+            finishVoiceFeedback()
             publish(text)
             val prompt=answer.optBoolean("prompt",answer.optString("phase")=="CLARIFY")
             speakIf(text,if(prompt) choices.prompts else choices.responses) { endTurn(text) }
@@ -212,8 +236,9 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         if(!speechReady && attempt<15) {
             handler.postDelayed({ startSpeech(id,text,attempt+1) },200);return
         }
-        if(!speechReady) { publish("$status · Watch speech output unavailable");finishSpeech(id);return }
-        if(speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,id)!=TextToSpeech.SUCCESS) finishSpeech(id)
+        if(!speechReady) { speechEvent="unavailable";publish("$status · Watch speech output unavailable");finishSpeech(id);return }
+        speechEvent="queued"
+        if(speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,id)!=TextToSpeech.SUCCESS) { speechEvent="enqueue_failed";finishSpeech(id) }
         else handler.postDelayed({ finishSpeech(id) },if(turn.stage==PROMPTING) 5_000 else 25_000)
     }
     private fun finishSpeech(id: String?) {
@@ -228,7 +253,15 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         runCatching { old?.destroy() }
         handoff.cancel()
     }
+    private fun finishVoiceFeedback() {
+        if(!voiceFeedbackPending) return
+        voiceFeedbackPending=false
+        // Completion means a reply or terminal error, never confirmation of an aid setting.
+        val vibrator=getSystemService(Vibrator::class.java)
+        if(vibrator?.hasVibrator()==true) vibrator.vibrate(VibrationEffect.createOneShot(140,VibrationEffect.DEFAULT_AMPLITUDE))
+    }
     private fun endTurn(text: String,speak: Boolean=false) {
+        finishVoiceFeedback()
         releaseRecognizer()
         if(speak && choices.responses && turn.stage!=REPLYING) {
             // Consume this capture before speaking an error; callbacks cannot submit it later.
@@ -245,6 +278,7 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
     fun stopListening() {
         if(stopping) return
         stopping=true
+        voiceFeedbackPending=false
         val commandPending=turn.stage==SENDING
         turn.cancel();releaseRecognizer();utterance=null;afterSpeech=null;speech?.stop()
         handler.removeCallbacks(turnTimeout);client.close()
@@ -271,6 +305,7 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         writer.println("watchVoiceSession active=${session.active(SystemClock.elapsedRealtime())} stage=${turn.stage}")
         writer.println("motionSamples=$motionSamples maxG=$motionMaxG shakeTriggers=$shakeTriggers lastMotionAgeMs=${if(lastMotionElapsed==0L) -1L else SystemClock.elapsedRealtime()-lastMotionElapsed}")
         writer.println("speechPrompts=${choices.prompts} speechResponses=${choices.responses}")
+        writer.println("ttsInit=$speechInitCode ttsLanguage=$speechLanguageCode ttsEvent=$speechEvent recognitionEvent=$recognitionEvent recognitionError=$recognitionError")
     }
     override fun onAccuracyChanged(sensor: Sensor?,accuracy: Int) {}
     override fun onTaskRemoved(rootIntent: Intent?) { stopSelf() }

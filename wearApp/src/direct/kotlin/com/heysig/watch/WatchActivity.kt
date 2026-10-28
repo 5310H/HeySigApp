@@ -36,6 +36,9 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private var active = false
     private var listening = false
     private var listener: MessageClient.OnMessageReceivedListener? = null
+    private var reconnectProbe: WatchVoiceClient?=null
+    private var reconnecting = false
+    private var readStatusAfterConnect = false
     private var ready = false
     private var working = false
     private var generation = 0
@@ -78,14 +81,14 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         layout.addView(Button(this).apply { this.text = text; minHeight = (48*resources.displayMetrics.density).toInt(); setOnClickListener { action() } })
     }
     private val shake by lazy { ShakeTrigger(this) {
-        if(active) { ShakeTrigger.acknowledge(this); primaryShake() }
+        if(active) { primaryShake() }
     } }
     private fun primaryShake() { beginVoiceSession(true) }
     private var primaryForShake: Button?=null
     private fun shakeOptions() {
         if(WatchVoiceSessionService.instance!=null) {
             AlertDialog.Builder(this).setTitle("Stop voice session")
-                .setMessage("Shake → prompt → speak → result, even while the screen is asleep. Prompt and reply switches follow your phone. The microphone is idle between commands.")
+                .setMessage("Shake → double vibration → speak → single vibration, even while the screen is asleep. Prompt and reply switches follow your phone. The microphone is idle between commands.")
                 .setPositiveButton("Keep on",null).setNegativeButton("Stop session") { _,_ -> WatchVoiceSessionService.stop(this) }.show()
         } else beginVoiceSession(false)
     }
@@ -100,7 +103,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         }
         if(!prefs.getBoolean("shakeVoiceDisclosureV1",false)) {
             AlertDialog.Builder(this).setTitle("Shake voice, including screen asleep or locked")
-                .setMessage("Start an eight-hour voice session that continues while the watch is asleep or PIN-locked; the PIN lock stays intact. Three deliberate shakes vibrate, give one prompt if enabled on your phone, and capture up to ten seconds of speech. The microphone stays idle between commands. Recognition and spoken replies use your watch providers, which may send audio or reply text over their networks. Phone/watch commands and replies use Google Play services. Accidental movement or other voices can trigger commands; this is not voice authentication. A persistent notification provides Stop. Ends on Stop, closing HeySig from Recents, process death or eight hours; never restarts after reboot. Prompt and reply switches follow your phone.")
+                .setMessage("Start an eight-hour voice session that continues while the watch is asleep or PIN-locked; the PIN lock stays intact. Three deliberate shakes give one prompt if enabled on your phone, then two ready vibrations before capturing up to ten seconds of speech. A single vibration marks the reply or error; it does not confirm aid receipt. The microphone stays idle between commands. Recognition and spoken replies use your watch providers, which may send audio or reply text over their networks. Phone/watch commands and replies use Google Play services. Accidental movement or other voices can trigger commands; this is not voice authentication. A persistent notification provides Stop. Ends on Stop, closing HeySig from Recents, process death or eight hours; never restarts after reboot. Prompt and reply switches follow your phone.")
                 .setNegativeButton("Not now",null).setPositiveButton("Start session") { _,_ ->
                     if(prefs.edit().putBoolean("shakeVoiceDisclosureV1",true).putBoolean("speechDisclosureV1",true).commit()) beginVoiceSession(capture)
                     else reply("Could not save voice choice")
@@ -114,24 +117,35 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         if(!getSystemService(android.app.NotificationManager::class.java).areNotificationsEnabled()) { reply("Enable HeySig notifications to start shake voice.");return }
         val access=com.heysig.voice.WatchVoiceAccess(false,true,true,getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked)
         if(!access.mayStartSession) { reply("Unlock once to start the voice session. It can then continue while locked.");return }
-        try { shake.stop();WatchVoiceSessionService.start(this,capture) }
+        try { reconnectProbe?.close();reconnectProbe=null;reconnecting=false;readStatusAfterConnect=false;shake.stop();WatchVoiceSessionService.start(this,capture) }
         catch(e: RuntimeException) { reply("Could not start shake voice. Open HeySig and try again.") }
     }
     override fun onRequestPermissionsResult(code: Int, permissions: Array<out String>, grants: IntArray) {
         super.onRequestPermissionsResult(code,permissions,grants)
         if(code==732) {
             val capture=pendingSessionCapture;pendingSessionCapture=null
-            if(capture!=null && grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED }) beginVoiceSession(capture)
+            if(capture!=null && grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED }) {
+                pendingSessionCapture=capture
+                if(active) { pendingSessionCapture=null;beginVoiceSession(capture) }
+            }
             else reply("Shake voice is off. Microphone and notifications are needed for this session.")
         }
     }
     private var lastStatus = "Disconnected"
+    private fun canSpeak() = phone != null && (ready || WatchVoiceSessionService.instance != null)
+    private fun primaryAction() {
+        when {
+            phone == null -> connect()
+            !canSpeak() -> reconnectSelectedPhone()
+            else -> beginVoiceSession(true)
+        }
+    }
     private fun render() {
         val home = WatchStyle.home(this,WatchStyle.Labels(R.string.speak,R.string.stop,R.string.more,R.string.speech_off,R.string.connect,R.string.speak_command),lastStatus,
             !phoneSpeech.prompts && !phoneSpeech.responses,
-            { beginVoiceSession(true) },
-            { if(WatchVoiceSessionService.instance!=null) WatchVoiceSessionService.stop(this) else { SleepingShakeService.stop(this); generation++; abandon(); working=false; speech?.stop(); send("stop",listOf("stop")) } },
-            { more() },connected=phone!=null)
+            { primaryAction() },
+            { if(WatchVoiceSessionService.instance!=null) WatchVoiceSessionService.stop(this) else { SleepingShakeService.stop(this); generation++; abandon(); working=false; reconnecting=false; readStatusAfterConnect=false; speech?.stop(); send("stop",listOf("stop")) } },
+            { more() },connected=canSpeak(),tapBackgroundToSpeak=true)
         primaryForShake=home.primary; primary=home.primary
         status = home.status
         setContentView(home.view)
@@ -179,12 +193,12 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         super.onResume(); active = true; SleepingShakeService.activityVisible = true
         WatchVoiceSessionService.observer={ text,choices -> runOnUiThread {
             if(active) { val changed=phoneSpeech!=choices;phoneSpeech=choices;lastStatus=text
-                if(changed) render() else { status.text=text;primary.setText(R.string.speak) }
+                if(changed) render() else { status.text=text;primary.setText(if(canSpeak()) R.string.speak else R.string.connect) }
             }
         } }
         WatchVoiceSessionService.instance?.let { phoneSpeech=it.choices;lastStatus=it.status;render() }
         if(WatchVoiceSessionService.instance==null && getSharedPreferences("heysig-gesture",MODE_PRIVATE).getBoolean("shake",false)) shake.start()
-        status.text = lastStatus;primary.setText(if(phone!=null) R.string.speak else R.string.connect)
+        status.text = lastStatus;primary.setText(if(canSpeak()) R.string.speak else R.string.connect)
         val current = ++listenerGeneration
         val receiver = MessageClient.OnMessageReceivedListener { event ->
             if(active && current == listenerGeneration) onMessageReceived(event)
@@ -192,10 +206,19 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         listener = receiver
         messages.addListener(receiver).addOnSuccessListener {
             if(!active || current != listenerGeneration) messages.removeListener(receiver)
-            else { listening = true }
+            else {
+                listening = true
+                // Pause invalidates a connection, not the saved phone choice.
+                // Re-establish readiness only with a fresh, correlated hello.
+                if(phone != null && WatchVoiceSessionService.instance == null) reconnectSelectedPhone()
+            }
         }.addOnFailureListener { reply("Wear OS Data Layer unavailable. Check Google Play services.") }
     }
-    override fun onPostResume() { super.onPostResume(); consumeShakeTap() }
+    override fun onPostResume() {
+        super.onPostResume()
+        pendingSessionCapture?.let { capture -> pendingSessionCapture=null;beginVoiceSession(capture) }
+        consumeShakeTap()
+    }
     override fun onPause() {
         wifiCheck?.close();wifiCheck=null;
         WatchVoiceSessionService.observer=null
@@ -220,14 +243,14 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         if(active && pending.isNotEmpty()) window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         else window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
-    private fun abandon() { pending.values.forEach { handler.removeCallbacks(it.timeout) }; pending.clear(); updateRequestScreen() }
+    private fun abandon() { reconnectProbe?.close();reconnectProbe=null; pending.values.forEach { handler.removeCallbacks(it.timeout) }; pending.clear(); updateRequestScreen() }
     private fun disconnect(resetConversation: Boolean = true) {
-        generation++; ready = false; working = false; abandon()
+        generation++; ready = false; reconnecting = false; readStatusAfterConnect = false; working = false; abandon()
         if(resetConversation) conversation = UUID.randomUUID().toString()
     }
     private fun reply(text: String, prompt: Boolean = false) {
         lastStatus = text; status.text = text
-        primary.setText(if(phone!=null) R.string.speak else R.string.connect)
+        primary.setText(if(canSpeak()) R.string.speak else R.string.connect)
         if(active && (if(prompt) phoneSpeech.prompts else phoneSpeech.responses)) {
             if(!speechReady) showSpeechIssue(speechIssue)
             else if(speech?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"heysig-result") != TextToSpeech.SUCCESS)
@@ -243,6 +266,30 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             .setItems(arrayOf("On","Pause 30 minutes","Off","Status","End session")) { _,index -> send(commands[index],listOf(commands[index])) }
             .setNegativeButton("Close",null).show()
     }
+    /** Read-only reconnect; never queues or replays a hearing-aid command. */
+    private fun reconnectSelectedPhone() {
+        if(!active || !listening || reconnecting) return
+        if(phone == null) { reply("Choose your phone with Connect first");return }
+        reconnecting=true;ready=false
+        lastStatus="Connecting to your selected phone…";status.text=lastStatus
+        primary.setText(R.string.connect)
+        val current=generation
+        val probe=WatchVoiceClient(this);reconnectProbe=probe
+        probe.connect { answer ->
+            if(!active || current!=generation || reconnectProbe!==probe) { probe.close();return@connect }
+            reconnectProbe=null;reconnecting=false
+            ready=answer.optString("phase")=="READY"
+            if(ready) {
+                rpcPath=probe.connectedRoute;phoneSpeech=probe.choices
+                prefs.edit().putString("connectionPath",rpcPath).apply()
+            }
+            probe.close()
+            val requestedStatus=readStatusAfterConnect;readStatusAfterConnect=false
+            lastStatus=answer.optString("text","Phone connection is not ready. Open HeySig on the phone and enable this watch.")
+            render() // Refresh both the actual Connect/Speak state and phone speech switches.
+            if(ready && requestedStatus) send("status",listOf("status"))
+        }
+    }
     private fun connect() {
         if(WatchVoiceSessionService.instance?.busy==true) { reply("Stop the current voice turn before changing phones.");return }
         WatchVoiceSessionService.stop(this)
@@ -257,9 +304,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
                     if(!active || current!=generation) return@setItems
                     val node=nodes[index];disconnect();phone=node.id;rpcPath=path
                     if(!prefs.edit().putString("phone",node.id).putString("phoneLabel",node.displayName).putString("connectionPath",path).commit()) { reply("Could not save phone selection");return@setItems }
-                    rpc(JSONObject().put("op","hello")) {
-                        ready=it.optString("phase")=="READY";reply(it.optString("text","Connection not ready"))
-                    }
+                    reconnectSelectedPhone()
                 }.show()
         }
         fun ordinary() {
@@ -309,14 +354,23 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
             phoneSpeech=WatchSpeechChoices.received(answer.opt("voicePrompts") as? Boolean,answer.opt("spokenResponses") as? Boolean)
             waiting.reply(answer)
         } catch(e:Exception) {
-            ready = false; working = false; abandon()
+            ready = false; reconnecting = false; readStatusAfterConnect = false; working = false; abandon()
             reply("Invalid phone reply. Check the phone; no command is retried.")
         }
     }
     private fun send(text: String, alternatives: List<String>) {
         if(WatchWifiCheck.requested(text)) { checkWifi();return }
         WatchVoiceSessionService.instance?.let { it.typed(text,alternatives);return }
-        if(!active || !ready) { reply("Connect phone first"); return }
+        if(!active || !listening) { reply("Watch connection is starting. Try again shortly.");return }
+        if(!ready) {
+            if(phone == null) { reply("Choose your phone with Connect first");return }
+            // Only a newly requested, read-only status may wait for hello.
+            // Any aid-changing command must be spoken/entered again after connection.
+            if(text.trim().equals("status",ignoreCase=true)) readStatusAfterConnect=true
+            reconnectSelectedPhone()
+            if(!text.trim().equals("status",ignoreCase=true)) reply("Connecting to your phone. Give the command again when connected.")
+            return
+        }
         if(working) { reply("Wait for the current result or press Stop"); return }
         val id = UUID.randomUUID().toString()
         try { CompanionSafety.command(id,conversation,text,alternatives) } catch(e:Exception) { reply("Use a command of 1–512 characters"); return }

@@ -24,10 +24,12 @@ android {
         applicationId = "com.heysig"
         minSdk = 29
         targetSdk = 36
-        versionCode = 11
-        versionName = "0.11"
+        versionCode = 13
+        versionName = "0.13"
         testInstrumentationRunner = "com.heysig.app.Api36Smoke"
     }
+    sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
+    sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     buildFeatures { buildConfig = true }
     // Exercise the native watch style on isolated round-display contexts; never ship it in the phone app.
     sourceSets.getByName("androidTest").java.srcDir("../wearApp/src/main/kotlin")
@@ -57,11 +59,11 @@ dependencies {
     implementation(files(wakeEngine))
     implementation("androidx.core:core:1.17.0")
     androidTestImplementation("androidx.wear:wear-ongoing:1.1.0")
-    "releaseImplementation"("com.google.android.gms:play-services-wearable:20.0.1")
+    implementation("com.google.android.gms:play-services-wearable:20.0.1")
 }
 androidComponents {
     onVariants(selector().withBuildType("release")) { variant ->
-        variant.outputs.forEach { it.versionCode.set(1_000_011) }
+        variant.outputs.forEach { it.versionCode.set(1_000_013) }
     }
 }
 

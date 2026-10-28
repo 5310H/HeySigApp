@@ -23,6 +23,7 @@ internal class WatchVoiceClient(private val context: Context) : AutoCloseable {
     private var node: String?=null
     private var path=CompanionSafety.PATH
     private var receiver: MessageClient.OnMessageReceivedListener?=null
+    val connectedRoute get() = path
     var choices=WatchSpeechChoices(); private set
     private fun failure(text: String)=JSONObject().put("phase","UNKNOWN").put("text",text)
     fun connect(done: (JSONObject)->Unit) {

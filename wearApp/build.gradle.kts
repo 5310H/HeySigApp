@@ -23,13 +23,21 @@ android {
         applicationId = "com.heysig"
         minSdk = 30
         targetSdk = 35
-        versionCode = 6
-        versionName = "0.6"
+        versionCode = 12
+        versionName = "0.12"
     }
+    sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
+    sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     buildFeatures { buildConfig = true }
     defaultConfig { buildConfigField("String", "PRIVACY_POLICY_URL", "\"$privacyPolicyUrl\"") }
     buildTypes {
-        debug { applicationIdSuffix = ".watchdev" }
+        debug {
+            // The paired debug apps must have the same package and signer.
+            applicationIdSuffix = ".batteryprototype"
+            signingConfig = signingConfigs.getByName("debug").apply {
+                storeFile = rootProject.file("private/signing/androidApp-debug.keystore")
+            }
+        }
         release {
             applicationIdSuffix = ".app"
             isDebuggable = false
@@ -48,10 +56,10 @@ dependencies {
     implementation(project(":shared"))
     implementation("androidx.core:core:1.17.0")
     implementation("androidx.wear:wear-ongoing:1.1.0")
-    "releaseImplementation"("com.google.android.gms:play-services-wearable:20.0.1")
+    implementation("com.google.android.gms:play-services-wearable:20.0.1")
 }
 androidComponents {
     onVariants(selector().withBuildType("release")) { variant ->
-        variant.outputs.forEach { it.versionCode.set(2_000_006) }
+        variant.outputs.forEach { it.versionCode.set(2_000_012) }
     }
 }

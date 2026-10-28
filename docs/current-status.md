@@ -1,3 +1,27 @@
+# Current phone/watch checkpoint — October 27, 2026
+
+The active runtime is Android phone plus Wear OS watch. Both build types now
+share direct Data Layer connection code; the desktop runtime and relay have been
+removed. Phone development fitting and release identities remain unchanged.
+Installed development versions: phone 0.13 and watch 0.12. Read-only status,
+recognition results and TTS completion were observed. The owner reports the
+flow works and prefers shaking after considering alternatives. The watch now
+uses two 120 ms ready pulses and one completion pulse, with optional voice
+following phone settings. Tapping the visible watch home background is also
+implemented; no side-button activation was added. Full sleep/lock reliability,
+endurance and perception of every cue remain acceptance work. See
+[latest evidence](acceptance/phone-watch-only-2026-10-27.md),
+[voice setup](hands-free-quick-start.md) and
+[direct setup](production-watch-connection.md).
+
+All 27 shared checks passed. Phone 0.13 and watch 0.10 debug/release APKs and
+release lint passed; the final watch 0.12 debug APK built and was installed.
+Release lint/APK/AAB validation was not repeated for the last watch gesture
+edits. This checkpoint is not a production release or Play-readiness claim.
+
+The following dated entries are historical evidence of the versions actually
+tested, not current installation instructions.
+
 # What we know so far
 
 October 14, 2026. These results describe the existing HeySig/Tasker setup on the Pixel 9a. Experimental Kotlin battery-audio prototypes now build for a Chromebook Linux desktop and Android; the full app remains unimplemented and must earn its own phone acceptance.
@@ -37,7 +61,7 @@ Source: [5310H/HeySig, HeySid3](https://github.com/5310H/HeySig/tree/HeySid3). M
 
 October 15 program extension: direct slots 1–6 are implemented and installed. Six address-zero/startup-profile program waveforms matched original-CIL PCM exactly. A static-AudioTrack initialization bug was fixed; completed Sleep slot-2 playback still gave no user-observed response. Matching Signia's streaming/legacy-media playback attributes also completed without aid response. Signia's own Sleep request produced two beeps and Sleep, and TV restoration produced five beeps, both user-confirmed. See [direct-program acceptance](acceptance/direct-program-prototype-2026-10-15.md). Program reception and active address remain unresolved.
 
-The [Chromebook window](../desktopApp/README.md) and [Android debug prototype](../androidApp/README.md) share a standalone Kotlin PCM generator. Twenty-four waveform comparisons against restricted interpretation of original Signia encoder instructions matched PCM bytes exactly. [Evidence](../research/acoustic/fixtures/proto-waveform-validation.json) identifies the original methods and supplied profiles; this is not live capture or acoustic reception evidence.
+The retired desktop window and [Android debug prototype](../androidApp/README.md) share a standalone Kotlin PCM generator. Twenty-four waveform comparisons against restricted interpretation of original Signia encoder instructions matched PCM bytes exactly. [Evidence](../research/acoustic/fixtures/proto-waveform-validation.json) identifies the original methods and supplied profiles; this is not live capture or acoustic reception evidence.
 
 The user confirms there is no pairing in their setup. Static basic-setup defaults support a manual address-zero test; an explicit preset is available. Real Chromebook/phone speaker playback and the user’s audible aid response remain pending. Neither prototype starts playback automatically or modifies the independent eight-hour Tasker observation trial.
 

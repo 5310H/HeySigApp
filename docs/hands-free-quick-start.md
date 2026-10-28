@@ -41,7 +41,7 @@ Off, Pause and End. Add **HeySig listening** through Android's Quick Settings
 Edit screen for a convenient toggle. Without a live session, the tile opens the
 phone app for explicit setup; it does not silently start the microphone.
 
-Voice prompts and spoken responses remain separate choices on each device.
+Voice prompts and spoken responses are independent phone choices followed by both devices.
 They are not required for recognition. A listening indicator remains visible
 when both are off. The installed recognizer may have its own sounds.
 
@@ -56,7 +56,7 @@ Listening updates preserve your place on the voice screen.
 
 Select and authorize the paired watch in the phone's **Watch connection** before
 starting the hands-free session. Normal pairing needs the shared production
-application ID/signing identity; development builds retain their separate relay.
+application ID/signing identity within each variant. Development builds now use the same direct connection; there is no computer relay.
 If the selected watch changes, restart or enable the session from the phone to
 refresh the hands-free connection. Forget immediately rejects the old sender.
 
@@ -85,8 +85,32 @@ recognizer; otherwise the installed provider may transmit command audio.
 Optional TTS can also use a network provider. No new audio/transcript history
 is added. See Privacy and data for notices, export and deletion controls.
 
-## Optional shake activation
+## Shake voice on the watch
 
-Phone Voice settings and watch More → Shake to speak provide separate, default-off choices. Three acceleration peaks above 2.7 g within 1.2 seconds, separated by at least 180 ms and a return below 1.8 g, trigger one command; a ten-second cooldown limits retriggers. Sensor samples stay in memory. A 60 ms vibration acknowledges activation. This is a gesture heuristic, not a trained model; walking/exercise false triggers and accessibility require physical testing.
+Once per session, start the phone hands-free session with the selected watch
+authorized. You can then turn phone listening Off while keeping that session
+active for the watch. On the unlocked watch, tap Speak to start its voice session;
+accept the disclosure and microphone/notification permissions once if requested.
+Both sessions last up to eight hours and end on Stop/End, process death or reboot.
+After that setup, shake for each command, or tap the status/background anywhere
+on the visible HeySig watch home screen to start speech. Speak remains a large
+explicit target; Stop and More keep their normal actions. Swipes/scrolls do not
+start speech. When the display is asleep, the first tap may only wake it. This
+shortcut cannot receive taps on the watch face or bypass the PIN lock.
 
-Phone shake requires an existing session with listening On; it never overrides Off or Pause, starts a session or changes an aid setting by itself. It uses the same bounded command recognition, generation checks and shared executor. The phone foreground listening wake lock supports sensor delivery while locked. Watch shake currently runs only while the HeySig activity is resumed and uses the existing Speak consent and connection checks. It is not a sleeping-watch wake gesture. No persistent watch sensor service or new background watch permission is added.
+Shake your wrist three distinct times within about two seconds. Wait for the
+double vibration before speaking. A single vibration marks the result or an
+error, not proof that the hearing aids received a setting. With phone Voice
+prompts On, “Say a command” comes before the ready double vibration. With Spoken
+responses On, the result/error is also spoken. Vibrations remain when both
+speech switches are Off. Android recognition may have its own sounds.
+
+The watch screen may sleep or remain PIN-locked during an existing session.
+The microphone is idle between turns and captures for at most ten seconds per
+command. The watch uses three 1.8 g peaks, reset below 1.3 g, separated by at
+least 180 ms within 1.8 seconds, with a ten-second cooldown. No raw motion
+samples are retained. Physical gesture and sleep/lock acceptance remains partial.
+
+Phone shake is separate: it requires its existing session with listening On
+and does not override Off or Pause. Its thresholds remain 2.7 g/1.8 g within
+1.2 seconds. All commands use the shared validated executor.

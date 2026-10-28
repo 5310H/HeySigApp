@@ -42,17 +42,17 @@ removes the active signer.
 
 | Variant | Phone application ID | Watch application ID |
 |---|---|---|
-| Debug | `com.heysig.batteryprototype` | `com.heysig.watchdev` |
+| Debug | `com.heysig.batteryprototype` | `com.heysig.batteryprototype` |
 | Release | `com.heysig.app` | `com.heysig.app` |
 
-Debug IDs, signers and preference names preserve the development installation.
+The phone development ID, signer and preferences remain unchanged. The watch development build now uses that same package and phone signer so Data Layer can connect. The old `com.heysig.watchdev` relay package is retired; no installed data is silently copied or erased.
 Release IDs are separate; installing a release candidate does not migrate
 development fitting/settings automatically. Final publisher/package identity
 must be confirmed before registering the apps in Play Console.
 
 Phone and non-standalone Wear release candidates share the package and signer,
 as required for companion publishing. Their version-code ranges are distinct:
-phone `1,000,009`, watch `2,000,003`; debug remains 9 and 3 respectively. The
+phone `1,000,013`, watch `2,000,009`; debug uses 13 and 9 respectively. The
 separate `com.heysig.watch` namespace identifies the watch's Kotlin classes,
 not its release application ID.
 [Companion package/signing requirement](https://support.google.com/googleplay/android-developer/answer/18058043?hl=en-CA-3).
@@ -61,7 +61,7 @@ The earlier build scripts now call Gradle and copy debug APKs to the familiar
 `androidApp/build/heysig-proto.apk` and `wearApp/build/heysig-watch.apk` paths.
 The old HEYSIG Android-jar/D8 environment variables are no longer needed.
 
-## Chromebook ARM tooling
+## Local ARM build tooling
 
 The initial migration uses an ignored SDK at `/tmp/heysig-android-sdk` and cache
 `GRADLE_USER_HOME=/tmp/heysig-gradle-cache`. Google's SDK platform/build-tool
@@ -112,10 +112,7 @@ development relay, research Activity, instrumentation, private configuration
 and native libraries. It writes each decoded bundle manifest beside the AAB
 for further inspection. It is not a privacy, medical or Play approval check.
 
-The production watch artifact deliberately excludes the Linux/ADB relay client.
-It now uses the [foreground Wear Data Layer connection](production-watch-connection.md),
-which requires physical pairing/recovery acceptance before submission. The
-development watch keeps its existing relay behavior.
+Both variants use the [direct Wear Data Layer connection](production-watch-connection.md). The desktop runtime, relay client/server, pairing receiver and loopback listener have been removed. Physical pairing/recovery acceptance is required before submission.
 
 Public policy fields live in `gradle/release-public.properties`. Set only real,
 owner-verified publisher/contact information and the published HTTPS policy URL.

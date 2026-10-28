@@ -17,9 +17,7 @@ Neither app can query the aids in this acoustic setup. HeySig remembers the last
 | `androidApp/src/debug/kotlin/com/heysig/app/ProtoActivity.kt` | Debug-only manual form, input validation, audio preflight, single-request playback, Stop/cancellation, and completed-request labels |
 | `androidApp/src/main/AndroidManifest.xml` | Android launcher, SDK levels, app identity and label |
 | `research/acoustic/kotlin/ProtoRequest.kt` | Explicit waveform profile, command mapping, CRC/bit encoding, PCM generation, WAV wrapping and command-line renderer |
-| `desktopApp/src/main/kotlin/com/heysig/desktop/ProtoWindow.kt` | JVM/Swing battery playback and WAV export using the same renderer |
 | `tools/build-android-prototype.sh` | Kotlin compile, D8 dexing, ARM-compatible packaging, local debug signing and verification |
-| `tools/build-desktop.sh` | Build desktop JAR and run its non-playback self-check |
 | `research/acoustic/tools/sig3_chirp_packet.py` | Independent packet/CRC model |
 | `research/acoustic/tools/waveform_oracle.py` | Bounded interpretation of original encoder CIL for offline comparisons |
 | `research/acoustic/tools/decode_playback_capture.py` | Known-profile decoding of captured postmix WAVs into command/address candidates |
@@ -85,7 +83,7 @@ See [working programs/address recovery](../research/acoustic/notes/decoded-progr
 
 ## Build and checks
 
-Use [Android prerequisites and commands](../androidApp/README.md) and [desktop instructions](../desktopApp/README.md). Outputs are `androidApp/build/heysig-proto.apk` and `desktopApp/build/heysig-proto.jar`.
+Use [phone prerequisites and commands](../androidApp/README.md) and [watch instructions](../wearApp/README.md). Both apps connect directly; the desktop build and relay have been removed.
 
 ```sh
 python3 research/acoustic/tests/check_packet.py

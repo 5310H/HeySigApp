@@ -1,21 +1,19 @@
 # Production phone/watch connection
 
-The release candidates use Wear OS Data Layer MessageClient 20.0.1. They do not
+Both build variants use Wear OS Data Layer MessageClient 20.0.1. They do not
 use the Linux relay, ADB forwarding, pairing files, shared relay tokens or raw
 network sockets. Google Play services restricts communication to apps with the
 same package name and signing identity. Both releases use `com.heysig.app` and
 the same configured upload signer; production Play App Signing must also be
 configured consistently across form factors.
 
-The existing debug IDs/signers and optional development relay are preserved.
-They do not participate in production Data Layer pairing. Release installation
-is separate and does not copy or overwrite the development fitting.
+Development phone and watch now share `com.heysig.batteryprototype` and the existing phone development signer. The phone keeps its fitting and preferences. The former watch-only `com.heysig.watchdev` relay package is retired. Release installation remains separate and does not copy or overwrite development fitting.
 
 ## Setup without developer tools
 
 1. Pair the Wear OS watch with its Android phone using its normal companion app.
    Google Play services and the installed HeySig phone/watch release pair are
-   required. This is not a Chromebook or iPhone watch connection.
+   required. Install both devices from the same variant.
 2. Open HeySig on the phone. Use **Watch connection → Find paired watches**.
    Select your watch and read the data/command disclosure. Enable it explicitly.
 3. Keep the phone open and unlocked. On the watch open HeySig, choose **Connect
@@ -120,3 +118,26 @@ all aid playback remains in the phone's existing serialized executor.
 See [screen-asleep voice design review](watch-shake-voice-design.md) for lifecycle,
 privacy and runtime acceptance. This extends the earlier foreground-only watch
 recognition design; it is not a Play submission approval.
+
+## Phone/watch-only builds — October 27, 2026
+
+Both build types now compile the same direct connection and watch voice sources
+from `src/direct/kotlin`. The desktop runtime, relay tooling, loopback listener,
+pairing receiver and development-only unavailable screen are removed. Release
+identity/signing remain unchanged. Debug phone keeps its package/signing/fitting;
+debug watch now uses the matching phone package and signer. Its former standalone
+watch development package cannot communicate through Data Layer and is retired.
+Use HeySig Dev on both for development, or HeySig on both for release. Do not mix.
+The old watch package and either phone package are not uninstalled or wiped.
+Historical acceptance files remain records of earlier tests.
+
+## Foreground restoration — phone 0.13 / watch 0.8
+
+Phone Enable watch is remembered separately from watch selection. Returning to
+the unlocked phone app restores that explicitly authorized foreground listener
+without another dialog. Background/lock still immediately closes its gate and
+listener. Disconnect persists Off; Forget removes the selection too. Existing
+selections without the new explicit enable choice remain Off until enabled.
+No commands are queued/replayed by restoration. A running hands-free service
+retains its separate connection ownership. Watch 0.8 likewise obtains a fresh
+hello on resume instead of treating a stored phone ID as readiness.

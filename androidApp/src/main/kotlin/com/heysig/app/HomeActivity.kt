@@ -65,8 +65,6 @@ class HomeActivity : Activity() {
     private var statusRow: LinearLayout? = null
     private fun speechStatusText() = "Prompts ${if(voiceEnabled("voicePrompts")) "on" else "off"} · Replies ${if(voiceEnabled("spokenResponses")) "on" else "off"}"
     private var backCallback: android.window.OnBackInvokedCallback? = null
-    private var watchBridge: WatchBridge? = null
-    private var watchToggle: CheckBox? = null
     @Volatile private var remoteReply: ((JSONObject) -> Unit)? = null
     private var commandOrigin: String? = null
     private var confirmationOrigin: String? = null
@@ -141,7 +139,7 @@ class HomeActivity : Activity() {
             speechSummary?.text=speechStatusText()
         }
         HandsFreeService.statusListener?.invoke(HandsFreeService.running?.status ?: "Hands-free is Off")
-         if(companionDelegate.isInitialized()) companion.resume(); watchToggle?.isChecked = watchBridge != null
+         companion.resume()
         runCatching { watchHistory.prune() }.onFailure { tell("Watch history could not be expired; watch commands remain blocked until storage works") }
     }
     override fun onPostResume() {
@@ -158,10 +156,10 @@ class HomeActivity : Activity() {
             pendingHandsFreeStart=false;startHandsFree()
         }
     }
-    override fun onPause() { noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); watchBridge?.close(); watchBridge = null; resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
+    override fun onPause() { noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
     override fun onDestroy() {
         if(android.os.Build.VERSION.SDK_INT >= 33) backCallback?.let { onBackInvokedDispatcher.unregisterOnBackInvokedCallback(it) }
-        noise.stop(); disconnectCompanion(); exportDocument = null; if(!runtime.backgroundExecution) cancelled.set(true); tts?.shutdown(); super.onDestroy()
+        noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); exportDocument = null; if(!runtime.backgroundExecution) cancelled.set(true); tts?.shutdown(); super.onDestroy()
     }
     @Deprecated("Fallback for Android 10–12; newer versions use OnBackInvokedDispatcher")
     @android.annotation.SuppressLint("GestureBackNavigation") // API 33+ dispatcher is registered in onCreate; retain the pre-33 framework fallback.
@@ -369,24 +367,6 @@ class HomeActivity : Activity() {
                 message = if(prefs.edit().putString("requested",encode(requested)).commit()) "Requested state cleared; saved restoration record retained." else "Could not save unknown state"
                 show()
             }
-        }
-        if(BuildConfig.DEBUG) section("Development connection") {
-            line("Optional Chromebook relay. Normal phone/watch pairing is available in the release candidate.")
-            val remote = CheckBox(this).apply {
-                setText(R.string.development_relay); isChecked = watchBridge != null
-                setOnCheckedChangeListener { box,enabled ->
-                    if(enabled) {
-                        if(HandsFreeService.running!=null) {
-                            box.isChecked=false;tell("The hands-free session already owns watch control. End it before enabling the foreground relay.")
-                        } else if(getSharedPreferences("heysig-watch-dev",MODE_PRIVATE).getString("token",null) == null) {
-                            box.isChecked = false; tell("Set up the Chromebook watch relay first")
-                        } else try {
-                            watchBridge = WatchBridge(this@HomeActivity) { request,reply -> runOnUiThread { try { receiveWatch(request,reply) } catch(e:Exception) { reply(remoteResult("FAILED","Watch request could not be processed")) } } }
-                            tell("Watch Wi-Fi ready while HeySig stays open")
-                        } catch(e:Exception) { box.isChecked = false; tell("Watch bridge could not start: ${e.message}") }
-                    } else { watchBridge?.close(); watchBridge = null }
-                }
-            }; watchToggle = remote; content.addView(remote)
         }
     }
     private fun programLabel(slot: Int?) = fitting?.programs?.find { it.slot == slot }?.let { "${it.name}, program ${it.slot}" } ?: "unknown"
@@ -831,7 +811,6 @@ class HomeActivity : Activity() {
     }
     private fun privacyPage() {
         PrivacyNotice.sections.forEach { (title,text) -> section(title) { line(text) } }
-        if(BuildConfig.DEBUG) line("Development build: the optional Linux/ADB relay has separate command/reply storage on that computer. This phone can also retain up to 128 legacy development replies until cleared; the 24-hour production rule does not apply to those old records. Clear heard text and watch history removes phone-side replies. Phone deletion does not delete computer relay records. This transport is excluded from production.")
         button("Offline wake engine licenses") {
             val notices=listOf("LICENSE","ONNXRUNTIME-LICENSE").joinToString("\n\n") { name -> assets.open("handsfree/$name").bufferedReader().use { it.readText() } }
             android.app.AlertDialog.Builder(this).setTitle("Offline wake detector notices").setMessage(notices).setPositiveButton("Close",null).show()
@@ -873,10 +852,10 @@ class HomeActivity : Activity() {
         }
         button("Delete local app data",!busy.get()) {
             android.app.AlertDialog.Builder(this).setTitle("Delete this device's HeySig data?")
-                .setMessage("Android will close HeySig and erase this app's private data, including fitting, requested settings, saved restoration record, noise configuration, watch selection/history and speech choices, and reset its permissions. You will need Setup again. No command is sent to the aids. Watch, relay, provider and exported copies must be deleted separately.")
+                .setMessage("Android will close HeySig and erase this app's private data, including fitting, requested settings, saved restoration record, noise configuration, watch selection/history and speech choices, and reset its permissions. You will need Setup again. No command is sent to the aids. Watch, provider and exported copies must be deleted separately.")
                 .setNegativeButton("Keep data",null).setPositiveButton("Delete local data") { _,_ ->
                     if(busy.get() || remoteReply != null) { tell("Wait for the current result or Stop before deleting data"); return@setPositiveButton }
-                    HandsFreeService.running?.control(HandsFreeControl.END); noise.stop(); disconnectCompanion(); watchBridge?.close(); watchBridge = null; tts?.stop()
+                    HandsFreeService.running?.control(HandsFreeControl.END); noise.stop(); disconnectCompanion(); tts?.stop()
                     pendingVoice = false; pendingText = null; lastHeard = ""; exportDocument = null
                     val manager = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager
                     if(!manager.clearApplicationUserData()) tell("Android could not clear local data. Use the app's Android storage settings.")
@@ -890,7 +869,7 @@ class HomeActivity : Activity() {
         val choice=getSharedPreferences("heysig-handsfree",MODE_PRIVATE)
         if(!choice.getBoolean("disclosureV1",false)) {
             android.app.AlertDialog.Builder(this).setTitle("Enable hands-free, including while locked?")
-                .setMessage("HeySig will use the phone microphone continuously during your session to detect Hey Sig on this device. Wake audio is processed in memory and not saved or uploaded. After the phrase, command recognition lasts up to ten seconds. On-device recognition is preferred; an installed service may send command audio to its provider when on-device recognition is unavailable. Spoken replies use your independently optional TTS settings.\n\nCommands can change your hearing-aid program or levels while this phone is locked, through the same validated speaker transport. Background sounds or other people may trigger recognition: this is not speaker authentication. Keep media volume, speaker route and Do Not Disturb configured normally.\n\nYour selected watch (or configured development relay) may control listening and send commands throughout this session, including while locked. Off releases the microphone but keeps the visible session notification and watch control. End session stops both. Pause resumes after about 30 minutes; Android may delay that timer. Sessions end after eight hours, a crash or reboot, with no automatic replay. No audio or transcript history is added.")
+                .setMessage("HeySig will use the phone microphone continuously during your session to detect Hey Sig on this device. Wake audio is processed in memory and not saved or uploaded. After the phrase, command recognition lasts up to ten seconds. On-device recognition is preferred; an installed service may send command audio to its provider when on-device recognition is unavailable. Spoken replies use your independently optional TTS settings.\n\nCommands can change your hearing-aid program or levels while this phone is locked, through the same validated speaker transport. Background sounds or other people may trigger recognition: this is not speaker authentication. Keep media volume, speaker route and Do Not Disturb configured normally.\n\nYour selected watch may control listening and send commands throughout this session, including while locked. Off releases the microphone but keeps the visible session notification and watch control. End session stops both. Pause resumes after about 30 minutes; Android may delay that timer. Sessions end after eight hours, a crash or reboot, with no automatic replay. No audio or transcript history is added.")
                 .setNegativeButton("Not now",null).setPositiveButton("Enable session") { _,_ ->
                     if(choice.edit().putBoolean("disclosureV1",true).putBoolean("watchControlV1",true).commit()) startHandsFree()
                     else tell("Could not save hands-free choice")
@@ -905,7 +884,7 @@ class HomeActivity : Activity() {
         if(!notifications.areNotificationsEnabled() || notifications.getNotificationChannel("handsfree-v1")?.importance==android.app.NotificationManager.IMPORTANCE_NONE) {
             tell("Enable HeySig hands-free notifications in Android app settings first. Listening stays Off.");return
         }
-        noise.stop();tts?.stop();watchBridge?.close();watchBridge=null
+        noise.stop();tts?.stop();
         try { HandsFreeService.startFromVisibleActivity(this);tell("Starting hands-free session");show() }
         catch(e: Exception) { tell("Hands-free could not start; use Speak or watch controls") }
     }
@@ -1044,7 +1023,7 @@ class HomeActivity : Activity() {
                     lastHeard=words.first()
                     heardStatus.text=getString(R.string.heard,lastHeard);heardStatus.visibility=android.view.View.VISIBLE
                     tell("Voice test heard: $lastHeard. No command sent.")
-                } else tell("Voice test returned no words. Check microphone access in ChromeOS and your speech provider, then try again. No command sent.")
+                } else tell("Voice test returned no words. Check microphone access on this phone and your speech provider, then try again. No command sent.")
                 return
             }
             if(resultCode!=RESULT_OK || words.isEmpty()) {
@@ -1067,19 +1046,12 @@ class HomeActivity : Activity() {
     }
     // Must observe durable journal success before acknowledging or playing; apply() cannot do this.
     private fun commitRequired(editor: android.content.SharedPreferences.Editor): Boolean = editor.commit()
-    private fun receiveWatch(request: JSONObject, callback: (JSONObject) -> Unit, node: String? = null) {
-        if(!resumed || (if(node == null) watchBridge == null else !companion.accepts(node))) { callback(remoteResult("BLOCKED","Open HeySig and enable its watch connection")); return }
+    private fun receiveWatch(request: JSONObject, callback: (JSONObject) -> Unit, node: String) {
+        if(!resumed || !companion.accepts(node)) { callback(remoteResult("BLOCKED","Open HeySig and enable its watch connection")); return }
         val id = request.getString("id")
-        if(node == null) remotePrefs.getString(id,null)?.let { callback(JSONObject(it)); return }
-        else watchHistory.get(node,id)?.let { callback(it); return }
+        watchHistory.get(node,id)?.let { callback(it); return }
         val record: (JSONObject) -> Unit = { result ->
-            val stored = if(node != null) watchHistory.put(node,id,result) else {
-                val editor = remotePrefs.edit().putString(id,result.toString())
-                val old = remotePrefs.all.keys.filter { it != id }.sorted()
-                if(old.size >= 128) old.take(old.size-127).forEach { editor.remove(it) }
-                commitRequired(editor)
-            }
-            if(!stored) callback(remoteResult("UNKNOWN","App result could not be stored; do not automatically retry")) else callback(result)
+            if(!watchHistory.put(node,id,result)) callback(remoteResult("UNKNOWN","App result could not be stored; do not automatically retry")) else callback(result)
         }
         val text = request.getString("text")
         if(text.lowercase() == "status") { record(remoteResult("FINAL", stateText(requested))); return }
@@ -1093,16 +1065,16 @@ class HomeActivity : Activity() {
         if(NoiseVoice.parse(text) == null) noise.stop()
         if(busy.get() || remoteReply != null) { record(remoteResult("BUSY","HeySig is busy. Wait for its result or say Stop")); return }
         if(page == "Setup") { record(remoteResult("BLOCKED","Return to Home after reviewing and saving Setup")); return }
-        if(node != null && NoiseVoice.parse(text) in listOf(NoiseCommand.Sample,NoiseCommand.Observe) &&
+        if(NoiseVoice.parse(text) in listOf(NoiseCommand.Sample,NoiseCommand.Observe) &&
             (!getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).getBoolean("microphoneDisclosureV2",false) ||
                 checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != android.content.pm.PackageManager.PERMISSION_GRANTED)) {
             record(remoteResult("BLOCKED","On the phone, open Noise and review microphone use and permission before requesting watch noise capture.")); return
         }
         val started = remoteResult("UNKNOWN","An earlier request started; do not replay automatically")
-        if(!(if(node == null) commitRequired(remotePrefs.edit().putString(id,started.toString())) else watchHistory.put(node,id,started))) {
+        if(!watchHistory.put(node,id,started)) {
             callback(remoteResult("BLOCKED","Cannot journal watch command")); return
         }
-        val origin = (if(node != null) "paired:$node:" else "") + request.getString("conversation")
+        val origin = "paired:$node:" + request.getString("conversation")
         val alternatives = request.optJSONArray("alternatives")
         if(pendingProgram == null && pendingRestore == null && alternatives != null) {
             val intents = (0 until minOf(5,alternatives.length())).map { voiceIdentity(alternatives.getString(it),fitting) }.filter { it !is AppIntent.Unsupported }.distinct()

@@ -7,6 +7,8 @@ import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.view.View
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.*
 
@@ -59,7 +61,7 @@ object WatchStyle {
     data class Labels(val speak: Int, val stop: Int, val more: Int, val speechOff: Int, val connect: Int, val speakCommand: Int)
     data class Home(val view: ScrollView, val status: TextView, val primary: Button)
     /** The real home layout is also exercised on isolated round displays by instrumentation. */
-    fun home(context: Context, labels: Labels, initialStatus: String, speechOff: Boolean, speak: () -> Unit, stop: () -> Unit, more: () -> Unit, connected: Boolean = true): Home {
+    fun home(context: Context, labels: Labels, initialStatus: String, speechOff: Boolean, speak: () -> Unit, stop: () -> Unit, more: () -> Unit, connected: Boolean = true, tapBackgroundToSpeak: Boolean = false): Home {
         val column = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL; gravity = android.view.Gravity.CENTER_HORIZONTAL
             val horizontal = if(resources.configuration.isScreenRound) 32 else 16
@@ -86,7 +88,29 @@ object WatchStyle {
         row.addView(action(labels.stop,stop),LinearLayout.LayoutParams(0,-2,1f).apply { marginEnd=dp(context,4) })
         row.addView(action(labels.more,more),LinearLayout.LayoutParams(0,-2,1f))
         column.addView(row,LinearLayout.LayoutParams(-1,-2))
-        return Home(ScrollView(context).apply { isVerticalScrollBarEnabled=false; setBackgroundColor(Color.BLACK); addView(column) },status,primary)
+        // Children consume their own taps, so Stop/More retain their actions.
+        // Only background taps reach this detector; scrolling is not a speech trigger.
+        val surface=object: ScrollView(context) {
+            private val taps=GestureDetector(context,object: GestureDetector.SimpleOnGestureListener() {
+                override fun onDown(event: MotionEvent)=true
+                override fun onSingleTapUp(event: MotionEvent): Boolean {
+                    performClick();return true
+                }
+            })
+            override fun onTouchEvent(event: MotionEvent): Boolean {
+                val handled=super.onTouchEvent(event)
+                return (tapBackgroundToSpeak && taps.onTouchEvent(event)) || handled
+            }
+            override fun performClick(): Boolean {
+                val handled=super.performClick()
+                if(tapBackgroundToSpeak) { speak();return true }
+                return handled
+            }
+        }.apply {
+            isFillViewport=true;isVerticalScrollBarEnabled=false
+            setBackgroundColor(Color.BLACK);addView(column)
+        }
+        return Home(surface,status,primary)
     }
     fun prepareColumn(column: LinearLayout) {
         val context = column.context

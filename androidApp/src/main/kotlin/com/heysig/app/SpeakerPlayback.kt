@@ -57,7 +57,7 @@ class SpeakerPlayback(private val context: Context) {
             check(output.state == AudioTrack.STATE_INITIALIZED) { "Audio playback could not initialize" }
             check(output.setPreferredDevice(speaker)) { "Speaker preference rejected" }
             // ARC can recreate a track as play() resolves its route. Preloading the whole
-            // packet before play() lost that packet on Chromebook (0 frames delivered).
+            // packet before play() lost that packet on an earlier Android runtime (0 frames delivered).
             output.play()
             // Silence after the unchanged packet lets a resampler drain its final frames.
             val data = pcm.copyOf(pcm.size + (rate / 20) * 2)
