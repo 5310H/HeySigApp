@@ -24,8 +24,8 @@ android {
         applicationId = "com.heysig"
         minSdk = 29
         targetSdk = 36
-        versionCode = 13
-        versionName = "0.13"
+        versionCode = 15
+        versionName = "0.15"
         testInstrumentationRunner = "com.heysig.app.Api36Smoke"
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
@@ -63,7 +63,7 @@ dependencies {
 }
 androidComponents {
     onVariants(selector().withBuildType("release")) { variant ->
-        variant.outputs.forEach { it.versionCode.set(1_000_013) }
+        variant.outputs.forEach { it.versionCode.set(1_000_015) }
     }
 }
 

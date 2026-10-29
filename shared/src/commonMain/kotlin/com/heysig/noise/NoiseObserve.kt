@@ -59,6 +59,15 @@ sealed class NoiseCommand {
     data class Assign(val level: Int, val slot: Int?) : NoiseCommand()
     data class SetField(val field: String, val value: Double) : NoiseCommand()
     data object Automatic : NoiseCommand()
+    data object Preview : NoiseCommand()
+    data object TrialAutomatic : NoiseCommand()
+    data object CalibrationStart : NoiseCommand()
+    data object CalibrationConfirmStart : NoiseCommand()
+    data object CalibrationSample : NoiseCommand()
+    data object CalibrationReview : NoiseCommand()
+    data object CalibrationStatus : NoiseCommand()
+    data object CalibrationApply : NoiseCommand()
+    data object CalibrationCancel : NoiseCommand()
 }
 
 /** Deliberately explicit: a noise level is never interpreted as a program command. */
@@ -91,6 +100,15 @@ object NoiseVoice {
             "save noise settings" -> return NoiseCommand.Save
             "discard noise changes" -> return NoiseCommand.Discard
             "automatic noise", "start automatic noise" -> return NoiseCommand.Automatic
+            "start automatic noise trial", "start uncalibrated noise trial" -> return NoiseCommand.TrialAutomatic
+            "preview automatic noise", "start noise preview" -> return NoiseCommand.Preview
+            "calibrate noise", "start noise calibration", "start new noise calibration" -> return NoiseCommand.CalibrationStart
+            "confirm new noise calibration" -> return NoiseCommand.CalibrationConfirmStart
+            "capture noise calibration sample", "next noise calibration sample" -> return NoiseCommand.CalibrationSample
+            "noise calibration status", "read noise calibration progress" -> return NoiseCommand.CalibrationStatus
+            "review noise calibration", "review noise calibration thresholds" -> return NoiseCommand.CalibrationReview
+            "apply noise calibration", "apply noise calibration thresholds" -> return NoiseCommand.CalibrationApply
+            "cancel noise calibration" -> return NoiseCommand.CalibrationCancel
         }
         Regex("assign program (.+) to noise level (.+)").matchEntire(text)?.let {
             val slot = number(it.groupValues[1]); val level = number(it.groupValues[2])

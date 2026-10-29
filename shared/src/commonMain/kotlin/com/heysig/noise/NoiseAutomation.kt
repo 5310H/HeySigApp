@@ -29,6 +29,15 @@ data class NoiseCalibrationProfile(val samples: NoiseCalibration, val source: St
     }.getOrDefault(false)
 }
 
+/** One-minute review bound to the exact samples, draft and fitting; no persistence or audio. */
+data class NoiseCalibrationReview(val draft: NoiseSettings,val profile: NoiseCalibrationProfile,val fitting: String,val reviewedAt: Long) {
+    fun apply(current: NoiseSettings,samples: NoiseCalibration,source: String,currentFitting: String,now: Long): NoiseSettings {
+        require(reviewedAt>=0 && now>=reviewedAt && now-reviewedAt<60_000L) { "Calibration review expired; review again" }
+        require(current==draft && samples==profile.samples && source==profile.source && source.isNotBlank() && currentFitting==fitting && profile.captureSeconds==current.captureSeconds && profile.margin==current.margin) { "Calibration changed; review again" }
+        return current.copy(boundaries=samples.thresholds(current.margin))
+    }
+}
+
 /** Validate delivery age using monotonic timestamps supplied by the platform. */
 fun isFreshNoiseSample(capturedAt: Long, deliveredAt: Long, freshnessSeconds: Int): Boolean =
     freshnessSeconds in 2..900 && capturedAt >= 0 && deliveredAt >= capturedAt &&
@@ -42,11 +51,12 @@ data class NoiseSafety(
     val unlocked: Boolean = false,
     val audioFree: Boolean = false,
     val manualOverride: Boolean = false,
-    val sleeping: Boolean = false
+    val sleeping: Boolean = false,
+    val developmentTrial: Boolean = false
 ) {
     fun blocked(): String? = when {
-        !calibrated -> "Calibrate this microphone and review saved settings first"
-        !physicallyAccepted -> "Physical automatic-switching acceptance is pending"
+        !calibrated && !developmentTrial -> "Calibrate this microphone and review saved settings first"
+        !physicallyAccepted && !developmentTrial -> "Physical automatic-switching acceptance is pending"
         !foreground || !unlocked -> "Keep HeySig open and the device unlocked"
         !audioFree -> "Speech, playback or a pending command has priority"
         manualOverride -> "Manual override has priority; restart explicitly"
@@ -96,3 +106,11 @@ fun completeNoise(previous: NoiseAutomaticState, token: Long, success: Boolean, 
 
 /** Production gate. Change only with recorded physical acceptance, never through a preference. */
 object NoiseReleaseGate { const val PHYSICAL_ACCEPTANCE_PASSED = false }
+
+/** Explicit development-only acceptance trial; never changes production qualification. */
+object NoiseTrialGate {
+    const val MAX_MILLIS=15*60*1000L
+    fun allowed(debugBuild: Boolean,explicitTrial: Boolean)=debugBuild && explicitTrial
+    fun active(debugBuild: Boolean,explicitTrial: Boolean,expiresAt: Long,now: Long)=
+        allowed(debugBuild,explicitTrial) && now>=0 && expiresAt>now && expiresAt-now<=MAX_MILLIS
+}

@@ -45,7 +45,7 @@ def main():
         '-storepass:env','HEYSIG_KEY_PASSWORD','-alias',signing['keyAlias']], env=environment)
     expected_signer = hashlib.sha256(certificate).hexdigest()
     reports = []
-    for module, application, target, code in [('androidApp','com.heysig.app',36,1_000_013),('wearApp','com.heysig.app',35,2_000_012)]:
+    for module, application, target, code in [('androidApp','com.heysig.app',36,1_000_015),('wearApp','com.heysig.app',35,2_000_012)]:
         bundle = ROOT / module / f'build/outputs/bundle/release/{module}-release.aab'
         run(['java','-jar',str(args.bundletool),'validate',f'--bundle={bundle}'])
         verified = run(['jarsigner','-J-Duser.language=en','-verify',str(bundle)]).decode()

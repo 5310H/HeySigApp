@@ -10,6 +10,7 @@ import com.heysig.app.ManualRuntime
 import com.heysig.app.WatchHistory
 import com.heysig.companion.*
 import com.heysig.control.AppIntent
+import com.heysig.noise.NoiseVoice
 import com.heysig.voice.HandsFreeCompanion
 import org.json.JSONObject
 import java.util.UUID
@@ -61,11 +62,11 @@ class HandsFreeWatchConnection(private val context: Context,private val dispatch
                     checkNotNull(gate).consume(node,id,request.getString("token"),SystemClock.elapsedRealtime())
                     history.get(node,id)?.let { reply(it);return }
                     val fit=ManualRuntime.get(context).fitting
-                    val identities=alternatives.map { ManualRuntime.get(context).personalPhrases.identity(it,fit) }.filterNot { it is AppIntent.Unsupported }.distinct()
+                    val identities=alternatives.map { NoiseVoice.parse(it) ?: ManualRuntime.get(context).personalPhrases.identity(it,fit) }.filterNot { it is AppIntent.Unsupported }.distinct()
                     if(identities.size>1) { reply(JSONObject().put("phase","CLARIFY").put("text","Speech alternatives disagree; nothing sent"));return }
                     check(history.put(node,id,JSONObject().put("phase","UNKNOWN").put("text","Request started; never replay automatically"))) { "Watch journal unavailable" }
                     dispatch(text,"paired:$node:$conversation") { result ->
-                        val prompt=HandsFreeService.running?.isPromptFor("paired:$node:$conversation")==true
+                        val prompt=result.startsWith("Noise calibration:") || HandsFreeService.running?.isPromptFor("paired:$node:$conversation")==true
                         val value=JSONObject().put("phase",if(prompt) "CLARIFY" else "FINAL").put("prompt",prompt).put("text",result)
                         if(history.put(node,id,value)) reply(value)
                         else reply(JSONObject().put("phase","UNKNOWN").put("text","Result storage failed; check aid state before another request"))

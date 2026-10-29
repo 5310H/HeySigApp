@@ -1,3 +1,23 @@
+# Noise automation checkpoint — October 28, 2026
+
+Phone development version 0.15 is installed; watch remains 0.12. Added voice
+calibration commands and a debug-only, owner-authorized uncalibrated automatic
+trial, limited to 15 minutes with the phone open and unlocked. Production
+automatic qualification remains locked. No calibration evidence was invented.
+
+Live sampling, cooldown, unused-level decisions and a Stop/restart were observed.
+The persisted last-requested program changed from TV (5) to Very Noisy (6)
+during the trial; this does not establish physical hearing-aid reception. The
+restoration snapshot digest was unchanged. Saved noise choices remain
+[1,3,6,null,null,null], so levels 4–6 send nothing.
+
+All 27 shared checks passed; debug lint had zero errors and 17 warnings. Final
+phone and AndroidTest APK builds succeeded. The earlier 0.14 device smoke test
+passed; the final 0.15 rerun failed on screen visibility and is not a pass.
+Background monitoring, calibration and physical acceptance remain unfinished.
+See [dated evidence](acceptance/noise-voice-calibration-2026-10-28.md) and
+[noise instructions](noise-quick-start.md). This is not a production release.
+
 # Current phone/watch checkpoint — October 27, 2026
 
 The active runtime is Android phone plus Wear OS watch. Both build types now

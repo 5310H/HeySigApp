@@ -87,11 +87,24 @@ class HomeActivity : Activity() {
         { noiseSafety().let { it.foreground && it.unlocked && it.audioFree } },{ text,speak -> tell(text,speak) },
         { noiseSafety() },{ requested.program },{ slot,done ->
             execute(listOf(ManualRequest.SelectProgram(slot)),false,automatic=true,onComplete=done)
+        },prepareTrial={
+            val old=runtime.sleepRoutine.state
+            val schedule=getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE)
+            check(old.mode==com.heysig.sleep.SleepMode.AWAKE && !old.pending) { "A waking baseline is required" }
+            check(!schedule.getBoolean("reminders",false) && !schedule.getBoolean("automaticEnabled",false)) { "Pause other schedules before resuming a noise-only trial" }
+            runtime.sleepRoutine.transition(old.resume())
+            val rollback: () -> Unit={ runtime.sleepRoutine.transition(old) }
+            rollback
         }) }
+    private var handlingNoiseRequest=false
+    private fun handleNoiseCommand(command: NoiseCommand) {
+        handlingNoiseRequest=true
+        try { noise.handle(command) } finally { handlingNoiseRequest=false }
+    }
     private fun noiseSafety(): NoiseSafety {
         val keyguard = getSystemService(KEYGUARD_SERVICE) as android.app.KeyguardManager
         return NoiseSafety(foreground=resumed,unlocked=!keyguard.isKeyguardLocked,
-            audioFree=!busy.get() && !pendingVoice && pendingProgram == null && pendingRestore == null && remoteReply == null && tts?.isSpeaking != true,
+            audioFree=!busy.get() && !pendingVoice && pendingProgram == null && pendingRestore == null && (remoteReply == null || handlingNoiseRequest) && tts?.isSpeaking != true,
             manualOverride=runtime.sleepRoutine.state.override,
             sleeping=runtime.sleepRoutine.state.blocksNoise || fitting?.programs?.find { it.slot == requested.program }?.name?.trim()?.equals("sleep",true) == true)
     }
@@ -128,6 +141,19 @@ class HomeActivity : Activity() {
         }
         if(seenRuntimeRevision!=runtime.revision && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
         HandsFreeService.stopNoise={ noise.stop() }
+        HandsFreeService.foregroundNoise={ command,reply ->
+            if(!resumed || getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) false
+            else {
+                if(command==NoiseCommand.Stop) { noise.stop();reply("Noise stopped") }
+                else if(busy.get() || remoteReply!=null || pendingProgram!=null || pendingRestore!=null || runtime.fittingWorkflow.pending || runtime.sleepRoutine.hasDraft || runtime.personalPhrases.awaitingConfirmation || page=="Setup") reply("Finish the current operation or review before noise setup. Nothing sent.")
+                else if(command in listOf(NoiseCommand.Sample,NoiseCommand.Observe,NoiseCommand.CalibrationSample,NoiseCommand.Preview,NoiseCommand.TrialAutomatic) && (!getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).getBoolean("microphoneDisclosureV2",false) || checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)!=android.content.pm.PackageManager.PERMISSION_GRANTED)) reply("On the phone, open Noise and review microphone use and permission before requesting capture from the watch.")
+                else {
+                    remoteReply={ result -> reply(result.optString("text","Noise request returned no result")) }
+                    handleNoiseCommand(command)
+                }
+                true
+            }
+        }
         HandsFreeService.externalSpeechBusy={ tts?.isSpeaking==true || SystemClock.elapsedRealtime()<foregroundSpeechDeadline }
         HandsFreeService.statusListener={ _ ->
             if(resumed && page=="Voice") {
@@ -156,7 +182,7 @@ class HomeActivity : Activity() {
             pendingHandsFreeStart=false;startHandsFree()
         }
     }
-    override fun onPause() { noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
+    override fun onPause() { noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.foregroundNoise=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
     override fun onDestroy() {
         if(android.os.Build.VERSION.SDK_INT >= 33) backCallback?.let { onBackInvokedDispatcher.unregisterOnBackInvokedCallback(it) }
         noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); exportDocument = null; if(!runtime.backgroundExecution) cancelled.set(true); tts?.shutdown(); super.onDestroy()
@@ -911,7 +937,7 @@ class HomeActivity : Activity() {
     private fun tell(text: String, speak: Boolean = false) {
         message = text
         val fromWatch = remoteReply != null
-        val prompt = runtime.sleepRoutine.isDraftFor(commandOrigin ?: "phone") || pendingProgram != null || pendingRestore != null || (runtime.personalPhrases.awaitingConfirmation || runtime.fittingWorkflow.pending) || text.startsWith("Noise settings.") || text.startsWith("Draft noise")
+        val prompt = runtime.sleepRoutine.isDraftFor(commandOrigin ?: "phone") || pendingProgram != null || pendingRestore != null || (runtime.personalPhrases.awaitingConfirmation || runtime.fittingWorkflow.pending) || text.startsWith("Noise settings.") || text.startsWith("Noise calibration:") || text.startsWith("Draft noise")
         if(!busy.get() && remoteReply != null) {
             val reply = remoteReply; remoteReply = null
             activeRemoteNode = null
@@ -1065,7 +1091,7 @@ class HomeActivity : Activity() {
         if(NoiseVoice.parse(text) == null) noise.stop()
         if(busy.get() || remoteReply != null) { record(remoteResult("BUSY","HeySig is busy. Wait for its result or say Stop")); return }
         if(page == "Setup") { record(remoteResult("BLOCKED","Return to Home after reviewing and saving Setup")); return }
-        if(NoiseVoice.parse(text) in listOf(NoiseCommand.Sample,NoiseCommand.Observe) &&
+        if(NoiseVoice.parse(text) in listOf(NoiseCommand.Sample,NoiseCommand.Observe,NoiseCommand.CalibrationSample,NoiseCommand.Preview,NoiseCommand.TrialAutomatic) &&
             (!getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).getBoolean("microphoneDisclosureV2",false) ||
                 checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != android.content.pm.PackageManager.PERMISSION_GRANTED)) {
             record(remoteResult("BLOCKED","On the phone, open Noise and review microphone use and permission before requesting watch noise capture.")); return
@@ -1160,7 +1186,7 @@ class HomeActivity : Activity() {
         if(busy.get()) { tell("Busy; wait or Stop"); return }
         NoiseVoice.parse(text)?.let { command ->
             if(command == NoiseCommand.Open && origin == null) { navigate("Noise") }
-            noise.handle(command)
+            handleNoiseCommand(command)
             return
         }
         SleepVoice.parse(text,fit)?.let { command ->
@@ -1287,7 +1313,7 @@ class HomeActivity : Activity() {
     private fun execute(plan: List<ManualRequest>,restoring: Boolean, automatic: Boolean = false, sleepTarget: Boolean? = null, refreshing: Boolean = false, onComplete: ((Boolean) -> Unit)? = null) {
         if(!automatic) noise.stop()
         fun reject(text:String) { tell(text,true); onComplete?.invoke(false) }
-        if(automatic && (!NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED || noiseSafety().let { !it.foreground || !it.unlocked || !it.audioFree || it.manualOverride || it.sleeping })) {
+        if(automatic && (!noise.automaticDispatchAllowed() || noiseSafety().let { !it.foreground || !it.unlocked || !it.audioFree || it.manualOverride || it.sleeping })) {
             reject("Automatic blocked by release or foreground/audio priority guard"); return
         }
         if(!resumed) { reject("Open HeySig before sending a command"); return }

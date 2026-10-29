@@ -19,7 +19,8 @@ class NoiseFeature(
     private val safety: () -> NoiseSafety,
     private val lastRequested: () -> Int?,
     private val sendProgram: (Int, (Boolean) -> Unit) -> Unit,
-    private val prefs: android.content.SharedPreferences = activity.getSharedPreferences("heysig-noise-v1",Activity.MODE_PRIVATE)
+    private val prefs: android.content.SharedPreferences = activity.getSharedPreferences("heysig-noise-v1",Activity.MODE_PRIVATE),
+    private val prepareTrial: (() -> (() -> Unit))?=null
 ) {
     private var settings = NoiseSettings()
     private var stored = false
@@ -32,11 +33,18 @@ class NoiseFeature(
     private var calibration = NoiseCalibration()
     private var calibrating = false
     private var calibrationSource: String? = null
+    private var calibrationStartUntil=0L
+    private var calibrationReview: NoiseCalibrationReview?=null
     private var calibrationCapture = 5
     private var proof: NoiseCalibrationProfile? = null
     private var savedProof: NoiseCalibrationProfile? = null
     private var automatic = NoiseAutomaticState()
     private var previewLast: Int? = null
+    private var trialUntil=0L
+    private val trialHandler=android.os.Handler(android.os.Looper.getMainLooper())
+    private var trialExpiry: Runnable?=null
+    private fun trialAllowed()=NoiseTrialGate.active(BuildConfig.DEBUG,mode=="Automatic trial",trialUntil,SystemClock.elapsedRealtime())
+    fun automaticDispatchAllowed()=NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED || trialAllowed()
     private var mode = "Off"
     private var detail = "No samples yet"
     private var generation = 0
@@ -91,6 +99,7 @@ class NoiseFeature(
         readEditor = null; refreshEditor = null; runtime = null; calibrationRuntime = null; refreshCalibration = null
     }
     fun stop() {
+        trialExpiry?.let { trialHandler.removeCallbacks(it) };trialExpiry=null;trialUntil=0
         generation++; sampler.stop(); quietUntil = 0L; mode = "Off"; observation = NoiseObservation(); automatic = NoiseAutomaticState(); update()
     }
     fun fittingChanged() { stop(); stored = false; loadError = "Program fitting changed; review and save noise settings" }
@@ -118,6 +127,7 @@ class NoiseFeature(
     }
     private fun summary(): String = buildString {
         append(when {
+            mode == "Automatic trial" -> "Automatic trial · UNCALIBRATED · stops after 15 minutes"
             mode != "Off" -> "Sampling · $mode"
             loadError != null -> "Needs review · $loadError"
             !stored -> "Needs setup · Choose programs and save them in step 1."
@@ -130,11 +140,11 @@ class NoiseFeature(
     }
     fun status(): String {
         val age = observation.lastSampleMillis?.let { (SystemClock.elapsedRealtime()-it)/1000 }
-        return "Noise: $mode • Source: this device's built-in microphone\n$detail\n" +
+        return (if(mode=="Automatic trial") "UNCALIBRATED development trial; real program changes; ${((trialUntil-SystemClock.elapsedRealtime()).coerceAtLeast(0)/1000)} seconds remaining.\n" else "")+"Noise: $mode • Source: this device's built-in microphone\n$detail\n" +
             (measurement?.let { "RMS index: ${"%.1f".format(java.util.Locale.US,it.rmsDbfs)} dBFS (relative digital level, not sound-pressure dB)\n" } ?: "") +
             (observation.level?.let { "Noise level $it → ${label(observation.target)}; confirmations ${observation.count}/${settings.confirmations}; age ${age}s\n" } ?: "") +
             (observation.proposed?.takeIf { mode == "Observe" || mode == "Automatic preview" }?.let { "Would select ${label(it)}. No command sent.\n" } ?: "") +
-            calibrationText()+if(NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED) "\nAutomatic requires reviewed calibration and an open, unlocked app." else "\nAutomatic switching remains locked pending physical acceptance."
+            calibrationText()+if(trialAllowed()) "\nProduction Automatic remains locked; this development trial is active." else if(NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED) "\nAutomatic requires reviewed calibration and an open, unlocked app." else "\nAutomatic switching remains locked pending physical acceptance."
     }
     fun render(content: LinearLayout, page: String = "Noise", navigate: (String) -> Unit = {}) {
         val firstView = content.childCount
@@ -176,42 +186,26 @@ class NoiseFeature(
                     .setMessage("This replaces only unfinished calibration samples. Saved settings stay unchanged until you apply and save. Use naturally occurring, comfortable environments; if six levels cannot be separated, keep using Observe.")
                     .setNegativeButton("Cancel",null).setPositiveButton("Start") { _,_ ->
                         runCatching {
-                            readEditor?.let { draft = it() }; draft.validate(programs().map { it.slot }.toSet())
-                            stop(); calibration = NoiseCalibration(); calibrating = true
-                            calibrationSource = sampler.sourceIdentity(); calibrationCapture = draft.captureSeconds
-                            detail = "Prepare level 1, the quietest environment. Capture three samples before moving to level 2."; update()
+                            beginCalibration()
                         }.onFailure { tell("Calibration: ${it.message}",false) }
                     }.show()
             }
             button("Capture next calibration sample") {
                 runCatching {
-                    check(calibrating) { "Start calibration first" }
-                    check(calibration.levels.any { it.size < 3 }) { "All samples captured; review and apply" }
-                    start(false,calibrationSample=true)
+                    captureCalibration()
                 }.onFailure { tell("Calibration: ${it.message}",false) }
             }
             button("Review calibration thresholds") {
                 runCatching {
-                    check(calibrating && mode == "Off") { "Finish or stop the current sample first" }
-                    readEditor?.let { draft = it() }
-                    check(calibrationCapture == draft.captureSeconds && calibrationSource == sampler.sourceIdentity()) { "Capture settings or microphone changed; start calibration again" }
-                    val boundaries = calibration.thresholds(draft.margin)
+                    val review=reviewCalibration()
                     android.app.AlertDialog.Builder(activity).setTitle("Use measured thresholds?")
-                        .setMessage(calibration.levels.mapIndexed { i,row -> "Level ${i+1}: ${row.joinToString { "%.1f".format(java.util.Locale.US,it) }} dBFS" }.joinToString("\n")+
-                            "\nThresholds: ${boundaries.joinToString { "%.1f".format(java.util.Locale.US,it) }}\nThis updates the draft only. Review program assignments, then Save noise settings. No command is sent.")
+                        .setMessage(review)
                         .setNegativeButton("Keep measuring",null).setPositiveButton("Apply to draft") { _,_ ->
-                            runCatching {
-                                check(calibrating && mode == "Off") { "Calibration is no longer ready" }
-                                readEditor?.let { draft = it() }
-                                check(calibrationSource == sampler.sourceIdentity() && calibrationCapture == draft.captureSeconds && calibration.thresholds(draft.margin) == boundaries) { "Calibration settings changed; review again" }
-                                draft = draft.copy(boundaries=boundaries)
-                                proof = NoiseCalibrationProfile(calibration,checkNotNull(calibrationSource),calibrationCapture,draft.margin)
-                                calibrating = false; refreshEditor?.invoke(); detail = "Measured thresholds applied to draft. Save noise settings when reviewed."; update()
-                            }.onFailure { tell("Calibration: ${it.message}",false) }
+                            runCatching { applyCalibration() }.onFailure { tell("Calibration: ${it.message}",false) }
                         }.show()
                 }.onFailure { tell("Calibration: ${it.message}",false) }
             }
-            button("Cancel calibration") { stop(); calibrating = false; calibration = NoiseCalibration(); detail = "Unfinished calibration cleared. Saved noise settings retained."; update() }
+            button("Cancel calibration") { cancelCalibration() }
         }
         group("Your listening levels") {
             line("Step 1 of 3 · Choose which of your configured programs you would use as surroundings get louder. Reuse programs or leave levels unused. HeySig does not choose fitting values for you. Save these choices, then continue to sound samples.")
@@ -355,21 +349,92 @@ class NoiseFeature(
             content.addView(details)
             line("Automatic switching is unavailable until device testing is complete. Calibration alone does not enable it.")
             button("Start Automatic") { handle(NoiseCommand.Automatic) }.apply { isEnabled=NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED;visibility=if(isEnabled) android.view.View.VISIBLE else android.view.View.GONE }
+            if(BuildConfig.DEBUG) button("Start uncalibrated trial") {
+                android.app.AlertDialog.Builder(activity).setTitle("Start automatic program trial?")
+                    .setMessage("Development trial, not calibrated. Uses saved thresholds and program choices for up to 15 minutes and may change your hearing-aid program. Keep this phone open and unlocked. Starting resumes noise control after your last manual program choice; another manual command stops it. Confirmation, cooldown, audio checks and Stop remain active. Unused noise levels send nothing. Calibration can follow later.\n\n"+settings.programs.mapIndexed { i,slot -> "Level ${i+1}: ${label(slot)}" }.joinToString("\n")+"\nThresholds: "+settings.boundaries.joinToString())
+                    .setNegativeButton("Cancel",null).setPositiveButton("Start trial") { _,_ -> handle(NoiseCommand.TrialAutomatic) }.show()
+            }
         }
 
     }
+    private fun beginCalibration() {
+        readEditor?.let { draft=it() };draft.validate(programs().map { it.slot }.toSet())
+        val source=sampler.sourceIdentity()
+        stop();calibration=NoiseCalibration();calibrating=true;calibrationReview=null;calibrationStartUntil=0
+        calibrationSource=source;calibrationCapture=draft.captureSeconds
+        detail="Prepare level 1, the quietest environment. Capture three samples before moving to level 2.";update()
+    }
+    private fun captureCalibration() {
+        check(calibrating) { "Start calibration first" }
+        check(calibration.levels.any { it.size<3 }) { "All samples captured; review and apply" }
+        calibrationReview=null
+        start(false,calibrationSample=true)
+    }
+    private fun reviewCalibration(): String {
+        check(calibrating && mode=="Off") { "Finish or stop the current sample first" }
+        readEditor?.let { draft=it() }
+        check(calibrationCapture==draft.captureSeconds && calibrationSource==sampler.sourceIdentity()) { "Capture settings or microphone changed; start calibration again" }
+        val profile=NoiseCalibrationProfile(calibration,checkNotNull(calibrationSource),calibrationCapture,draft.margin)
+        val boundaries=calibration.thresholds(draft.margin)
+        calibrationReview=NoiseCalibrationReview(draft,profile,fittingSignature(),SystemClock.elapsedRealtime())
+        return calibration.levels.mapIndexed { i,row -> "Level ${i+1}: ${row.joinToString { "%.1f".format(java.util.Locale.US,it) }} dBFS" }.joinToString(". ")+
+            ". Thresholds: ${boundaries.joinToString { "%.1f".format(java.util.Locale.US,it) }}. Say apply noise calibration within one minute, then save noise settings after reviewing assignments. No command is sent."
+    }
+    private fun applyCalibration() {
+        val review=checkNotNull(calibrationReview) { "Say review noise calibration first" }
+        calibrationReview=null
+        check(calibrating && mode=="Off") { "Calibration is no longer ready" }
+        readEditor?.let { draft=it() }
+        check(calibrationSource==review.profile.source && calibrationCapture==review.profile.captureSeconds) { "Capture settings changed; review again" }
+        draft=review.apply(draft,calibration,sampler.sourceIdentity(),fittingSignature(),SystemClock.elapsedRealtime());proof=review.profile
+        calibrating=false;refreshEditor?.invoke();detail="Measured thresholds applied to draft. Review program assignments, then say save noise settings. No command sent.";update()
+    }
+    private fun cancelCalibration() {
+        stop();calibrating=false;calibration=NoiseCalibration();calibrationReview=null;calibrationStartUntil=0
+        detail="Unfinished calibration cleared. Saved noise settings retained.";update()
+    }
     fun handle(command: NoiseCommand) {
         try {
-            if(command != NoiseCommand.Discard && command != NoiseCommand.Stop) readEditor?.let { draft = it() }
+            if(command !in listOf(NoiseCommand.Discard,NoiseCommand.Stop,NoiseCommand.CalibrationCancel)) readEditor?.let { draft = it() }
             when(command) {
                 NoiseCommand.Open -> tell("Noise settings. Assign a program to each of six noise levels. Guided calibration and automatic preview are available on the phone. Automatic remains locked pending physical acceptance.",true)
                 NoiseCommand.Read -> tell(status()+"\nDraft assignments: "+draft.programs.mapIndexed { i,slot -> "${i+1}: ${label(slot)}" }.joinToString(". ")+"\nDraft thresholds: "+draft.boundaries.joinToString()+". Margin ${draft.margin}. Confirmations ${draft.confirmations}. Cooldown ${draft.cooldownSeconds}. Capture ${draft.captureSeconds}. Wait ${draft.waitSeconds}. Freshness ${draft.freshnessSeconds}.",true)
-                NoiseCommand.Stop -> { stop(); tell("Noise stopped",true) }
+                NoiseCommand.Stop -> { stop();calibrationStartUntil=0;calibrationReview=null;tell("Noise stopped",true) }
+                NoiseCommand.Preview -> start(true,preview=true)
+                NoiseCommand.TrialAutomatic -> {
+                    check(NoiseTrialGate.allowed(BuildConfig.DEBUG,true)) { "Uncalibrated trials are available only in development builds" }
+                    check(mode=="Off" && stored && draft==settings && reviewedFitting==fittingSignature()) { "Stop noise, review and save your choices first" }
+                    settings.validate(programs().map { it.slot }.toSet())
+                    check(settings.programs.any { it!=null } && lastRequested()!=null && lastRequested()!=automaticSettings().sleepProgram) { "Choose a waking program and valid noise targets first" }
+                    val ready=safety()
+                    check(ready.foreground && ready.unlocked && ready.audioFree) { "Keep the phone open, unlocked and free of speech or playback" }
+                    val rollback=checkNotNull(prepareTrial) { "Development trial requires the visible phone adapter" }.invoke()
+                    try { start(true,automaticMode=true,trial=true) } catch(error: Exception) { rollback();throw error }
+                }
+                NoiseCommand.CalibrationStart -> {
+                    stop();calibrationReview=null
+                    calibrationStartUntil=SystemClock.elapsedRealtime()+60_000
+                    tell("Noise calibration: this replaces unfinished samples only. Saved settings remain unchanged. Use comfortable everyday environments. Say confirm new noise calibration within one minute, or cancel noise calibration.",true)
+                }
+                NoiseCommand.CalibrationConfirmStart -> {
+                    val deadline=calibrationStartUntil;calibrationStartUntil=0
+                    check(deadline>0 && SystemClock.elapsedRealtime()<=deadline) { "Say start noise calibration first; confirmation lasts one minute" }
+                    beginCalibration();tell("Noise calibration: $detail Say capture noise calibration sample when ready.",true)
+                }
+                NoiseCommand.CalibrationSample -> captureCalibration()
+                NoiseCommand.CalibrationStatus -> tell("Calibration progress: ${calibrationProgress()}. $detail",true)
+                NoiseCommand.CalibrationReview -> {
+                    reviewCalibration()
+                    val thresholds=calibration.thresholds(draft.margin).joinToString { "%.1f".format(java.util.Locale.US,it) }
+                    tell("Noise calibration: 18 samples complete. Thresholds: $thresholds. Say apply noise calibration, then save noise settings after review.",true)
+                }
+                NoiseCommand.CalibrationApply -> { applyCalibration();tell(detail,true) }
+                NoiseCommand.CalibrationCancel -> { cancelCalibration();tell(detail,true) }
                 NoiseCommand.Automatic -> {
                     check(NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED) { "Automatic switching is locked pending physical acceptance. Use Preview Automatic on the phone; it sends no commands." }
                     start(true,automaticMode=true)
                 }
-                NoiseCommand.Discard -> { stop(); draft = settings; proof = savedProof; refreshEditor?.invoke(); update(); tell("Noise draft discarded",true) }
+                NoiseCommand.Discard -> { stop();calibrationStartUntil=0;calibrationReview=null; draft = settings; proof = savedProof; refreshEditor?.invoke(); update(); tell("Noise draft discarded",true) }
                 NoiseCommand.Save -> {
                     draft.validate(programs().map { it.slot }.toSet())
                     val json = JSONObject().put("version",1).put("fitting",fittingSignature()).put("programs",JSONArray(draft.programs.map { it ?: JSONObject.NULL }))
@@ -407,14 +472,14 @@ class NoiseFeature(
             }
         } catch(e:Exception) { tell("Noise: ${e.message}",true) }
     }
-    private fun start(repeat:Boolean, calibrationSample:Boolean = false, preview:Boolean = false, automaticMode:Boolean = false) {
+    private fun start(repeat:Boolean, calibrationSample:Boolean = false, preview:Boolean = false, automaticMode:Boolean = false,trial:Boolean=false) {
         com.heysig.app.voice.HandsFreeService.running?.control(com.heysig.voice.HandsFreeControl.OFF)
         readEditor?.let { draft = it() }
         check(mode == "Off") { "Noise capture already active; Stop first" }
         if(preview || automaticMode) {
-            check(calibrated()) { "Complete step 2: take calibration samples, review them and save noise settings before previewing" }
+            check((trial && NoiseTrialGate.allowed(BuildConfig.DEBUG,true)) || calibrated()) { "Complete step 2: take calibration samples, review them and save noise settings before previewing" }
             check(lastRequested() != null) { "Select a waking program manually before starting automatic preview or switching" }
-            val guards = safety().copy(calibrated=true,physicallyAccepted=preview || NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED,
+            val guards = safety().copy(calibrated=calibrated(),developmentTrial=NoiseTrialGate.allowed(BuildConfig.DEBUG,trial),physicallyAccepted=preview || NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED,
                 sleeping=safety().sleeping || (automaticSettings().sleepProgram != null && lastRequested() == automaticSettings().sleepProgram))
             check(guards.blocked() == null) { guards.blocked() ?: "Not ready" }
         }
@@ -436,7 +501,7 @@ class NoiseFeature(
                         if(activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                             activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO),402)
                             tell("After allowing microphone access, select your sampling action again.",false)
-                        } else try { start(repeat,calibrationSample,preview,automaticMode) } catch(e:Exception) { tell("Noise: ${e.message}",false) }
+                        } else try { start(repeat,calibrationSample,preview,automaticMode,trial) } catch(e:Exception) { tell("Noise: ${e.message}",false) }
                     } else tell("Could not save microphone choice; capture remains off",false)
                 }.show()
             return
@@ -449,7 +514,11 @@ class NoiseFeature(
         val captureSettings = if(calibrationSample) draft else if(stored) settings else NoiseSettings()
         val source = sampler.sourceIdentity()
         automatic = NoiseAutomaticState(lastSuccessMillis=if(preview) null else lastAutomaticSuccessMillis ?: SystemClock.elapsedRealtime()); previewLast = lastRequested()
-        observation = NoiseObservation(); mode = when { calibrationSample -> "Calibration sample"; preview -> "Automatic preview"; automaticMode -> "Automatic"; repeat -> "Observe"; else -> "Sample" }; detail = "Waiting ${captureSettings.waitSeconds.coerceAtLeast(10)} seconds before capture. "+if(automaticMode) "Automatic may send confirmed program requests." else "No commands will be sent."
+        if(trial) {
+            trialUntil=SystemClock.elapsedRealtime()+NoiseTrialGate.MAX_MILLIS
+            trialExpiry=Runnable { if(generation==myGeneration) { stop();detail="Uncalibrated trial expired. Noise is Off.";update() } }.also { trialHandler.postDelayed(it,NoiseTrialGate.MAX_MILLIS) }
+        }
+        observation = NoiseObservation(); mode = when { trial -> "Automatic trial"; calibrationSample -> "Calibration sample"; preview -> "Automatic preview"; automaticMode -> "Automatic"; repeat -> "Observe"; else -> "Sample" }; detail = "Waiting ${captureSettings.waitSeconds.coerceAtLeast(10)} seconds before capture. "+if(automaticMode) "Automatic may send confirmed program requests." else "No commands will be sent."
         val started = sampler.start(captureSettings,repeat) { value,error,capturedAt -> activity.runOnUiThread {
             if(generation == myGeneration) {
                 val deliveredAt = SystemClock.elapsedRealtime()
@@ -487,11 +556,11 @@ class NoiseFeature(
                 update()
             }
         } }
-        if(!started) { mode = "Off"; error("The previous measurement is still stopping. Wait a moment, then try again") }
-        update(); tell(if(preview) "Automatic preview started. No commands are sent." else if(automaticMode) "Automatic started; keep this app open." else if(calibrationSample) "Calibration sample requested. Stay quiet during measurement." else if(repeat) "Observe started. Proposals appear on Noise; no commands are sent." else "Sampling microphone. Result will appear on Noise.",false)
+        if(!started) { stop(); error("The previous measurement is still stopping. Wait a moment, then try again") }
+        update(); tell(if(preview) "Automatic preview started. No commands are sent." else if(trial) "Uncalibrated automatic trial started for 15 minutes. Keep this phone open and unlocked. Stop noise ends it." else if(automaticMode) "Automatic started; keep this app open." else if(calibrationSample) "Calibration sample requested. Stay quiet for ${captureSettings.waitSeconds.coerceAtLeast(10)+captureSettings.captureSeconds} seconds, then say noise calibration status to hear the result." else if(repeat) "Observe started. Proposals appear on Noise; no commands are sent." else "Sampling microphone. Result will appear on Noise.",calibrationSample)
     }
     private fun processAutomatic(index:Double, preview:Boolean, session:Int, capturedAt:Long) {
-        val guards = safety().copy(calibrated=calibrated(),physicallyAccepted=preview || NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
+        val guards = safety().copy(calibrated=calibrated(),developmentTrial=trialAllowed(),physicallyAccepted=preview || NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
         val decision = automaticNoise(automatic,index,capturedAt,automaticSettings(),guards,if(preview) previewLast else lastRequested())
         automatic = decision.state; observation = automatic.observation
         detail = "${if(preview) "Preview" else "Automatic"}: ${decision.reason}"
@@ -503,7 +572,7 @@ class NoiseFeature(
             detail = "Would select ${label(target)}. No command sent. Simulating cooldown."
         } else {
             // Gate at the final dispatch boundary as well as at start. No preferences bypass it.
-            check(NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
+            check(NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED || trialAllowed())
             quietUntil = Long.MAX_VALUE
             sendProgram(target) { success -> activity.runOnUiThread {
                 if(generation == session) {

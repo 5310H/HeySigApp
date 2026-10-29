@@ -99,8 +99,46 @@ again. Successful playback still does not establish aid reception.
 - “Save noise settings” or “discard noise changes.”
 - “Noise sample,” “observe noise,” “noise status,” or “stop noise.”
 
-Calibration review, protected Sleep selection and Automatic preview use the phone
-controls. Voice changes remain drafts until Save. The development relay allows
-editor/Observe vocabulary while automatic aid playback remains blocked in
-status-only mode. The release companion still requires foreground setup and
-permission/disclosure on the phone.
+## Calibration by phone or watch voice
+
+The following explicit commands reuse the phone calibration controls:
+
+1. “Start noise calibration,” then “confirm new noise calibration.” Confirmation
+   expires after one minute and replaces unfinished samples only.
+2. In each real environment, say “capture noise calibration sample.” Wait for
+   the stated settling/capture interval before speaking again. Then say “noise
+   calibration status” for the sample count and result. Capture remains bounded;
+   speech can interrupt it, so a failed/interrupted sample must be requested again.
+3. Repeat for all 18 valid samples. “Review noise calibration” speaks the proposed
+   thresholds. Full measured values remain visible in the phone review.
+4. Say “apply noise calibration” within one minute of review. Changed samples,
+   microphone, fitting or draft invalidate that review. Applying updates only
+   the draft. Review assignments, then “save noise settings.”
+5. “Preview automatic noise” simulates the loop without any aid command.
+   “Stop noise” stops it; “cancel noise calibration” discards unfinished samples.
+
+Phone and watch voice share these controls. When using the watch's existing
+hands-free connection, noise commands are delegated only while HeySig is open
+and unlocked on the phone. Otherwise the watch reports that requirement; it
+never starts background noise capture. Review the phone microphone disclosure
+and permission on the phone before watch capture requests. The phone/watch
+runtime uses direct Data Layer; no computer relay is needed. Voice changes stay
+drafts until Save. These commands do not enable real Automatic. Protected Sleep
+selection remains a phone setting, not a noise-level target recommendation.
+
+## Uncalibrated development trial
+
+At the owner's explicit request, HeySig Dev 0.15 offers **Start uncalibrated
+trial** on the preview page, or “start automatic noise trial” by voice. This is
+real program switching using the reviewed saved thresholds and assignments,
+not a preview and not calibrated operation. It expires after 15 minutes and
+requires the phone open/unlocked throughout. It never resumes after leaving,
+process death or reboot. A new Start is required.
+
+Starting explicitly resumes noise control after the last manual program choice.
+It requires an awake baseline and other schedules Off; a failed start restores
+the prior override. New manual commands and Stop end the trial. Three fresh
+confirmations and the saved cooldown still apply; the initial cooldown means
+the first eligible request may take around 90 seconds with default timing.
+Unused levels send nothing. Normal source-locked Automatic remains unchanged
+in production; no preference unlocks it. Calibration can be completed later.

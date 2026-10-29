@@ -11,6 +11,7 @@ import android.speech.tts.TextToSpeech
 import com.heysig.app.*
 import com.heysig.control.*
 import com.heysig.voice.*
+import com.heysig.noise.*
 import java.util.Locale
 
 /** Explicit, non-sticky microphone session. The UI, not a receiver/boot event, starts it. */
@@ -251,7 +252,7 @@ class HandsFreeService : Service() {
         val token=session.generation
         if(session.complete(token)) {
             update(text)
-            val prompt=runtime.sleepRoutine.isDraftFor("phone") || pending!=null || (runtime.personalPhrases.awaitingConfirmation || runtime.fittingWorkflow.pending)
+            val prompt=text.startsWith("Noise calibration:") || runtime.sleepRoutine.isDraftFor("phone") || pending!=null || (runtime.personalPhrases.awaitingConfirmation || runtime.fittingWorkflow.pending)
             if(speechReady && prefs.getBoolean(if(prompt) "voicePrompts" else "spokenResponses",if(prompt) BuildConfig.DEBUG else prefs.getBoolean("spokenResults",BuildConfig.DEBUG))) {
                 speaking=true;currentUtterance="handsfree-result-${session.generation}"
                 if(synthesis?.speak(text,TextToSpeech.QUEUE_FLUSH,null,currentUtterance)!=TextToSpeech.SUCCESS) speaking=false
@@ -261,7 +262,7 @@ class HandsFreeService : Service() {
             handler.postDelayed({ resumeWhenQuiet() },1000)
         }
     }
-    private fun identity(text: String,fit: Fitting?): Any = DataVoice.parse(text) ?: if(FittingWorkflow.accepts(text)) "setup:${FittingWorkflow.normalize(text)}" else runtime.personalPhrases.identity(text,fit)
+    private fun identity(text: String,fit: Fitting?): Any = NoiseVoice.parse(text) ?: DataVoice.parse(text) ?: if(FittingWorkflow.accepts(text)) "setup:${FittingWorkflow.normalize(text)}" else runtime.personalPhrases.identity(text,fit)
     private fun handleWatch(text: String,origin: String,reply: (String)->Unit) {
         if(session.mode==HandsFreeSession.Mode.COMMAND) { session.on();stopInputs() }
         handle(text,origin) { result -> reply(result.replace("Listening for Hey Sig","Phone listening On"));update(result);resumeWhenQuiet() }
@@ -269,11 +270,15 @@ class HandsFreeService : Service() {
     private fun handle(text: String,origin: String,reply: (String)->Unit) {
         if(closed || !foreground || SystemClock.elapsedRealtime()>=sessionEndsAt) { reply("Hands-free session expired; start it on the phone again");end();return }
         HandsFreeControl.parse(text)?.let { if(it==HandsFreeControl.END) { reply("Hands-free session ending");handler.post { end() } } else { control(it);reply(status) };return }
-        if(text.lowercase().trim() in listOf("stop","cancel")) { if(text.lowercase().trim()=="stop") runCatching { AutomaticSleepScheduler(this).disable() };runtime.cancelled.set(true);pending=null;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();reply("Stop requested");return }
+        if(text.lowercase().trim() in listOf("stop","cancel")) { if(text.lowercase().trim()=="stop") runCatching { AutomaticSleepScheduler(this).disable() };stopNoise?.invoke();runtime.cancelled.set(true);pending=null;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();reply("Stop requested");return }
         VoicePreference.parse(text)?.let {
             val ok=prefs.edit().putBoolean(it.key,it.enabled).commit()
             if(!it.enabled) { currentUtterance=null;synthesis?.stop();speaking=false }
             reply(if(ok) it.description else "Voice setting could not be saved");return
+        }
+        NoiseVoice.parse(text)?.let { command ->
+            if(foregroundNoise?.invoke(command,reply)!=true) reply("Open and unlock HeySig on the phone for noise setup, calibration or sampling. No microphone capture or aid command started.")
+            return
         }
         DataVoice.parse(text)?.let { reply("Open HeySig on the phone and say ${text.trim()}, or use Aid setup / Voice and speech to choose a document. Nothing sent.");return }
         if(text=="status") { reply("$status. ${runtime.lastResult}");return }
@@ -389,7 +394,7 @@ class HandsFreeService : Service() {
         play(plan,true,reply)
     }
     private fun play(plan: List<ManualRequest>,restoring: Boolean,reply: (String)->Unit,sleepTarget: Boolean? = null) {
-        stopInputs();currentUtterance=null;synthesis?.stop();speaking=false
+        stopNoise?.invoke();stopInputs();currentUtterance=null;synthesis?.stop();speaking=false
         holdCommandLock()
         runtime.execute(plan,restoring,false,{false},{foreground && !closed && running===this && SystemClock.elapsedRealtime()<sessionEndsAt},::update,sleepTarget=sleepTarget) { text,_ -> if(!isListening) releaseCommandLock();reply(text);resumeWhenQuiet() }
     }
@@ -418,6 +423,8 @@ class HandsFreeService : Service() {
         private const val ID=73
         @Volatile var running: HandsFreeService?=null; private set
         var stopNoise: (() -> Unit)?=null
+        // Activity-owned adapter only; cleared on pause. No background noise authority.
+        var foregroundNoise: ((NoiseCommand,(String)->Unit)->Boolean)?=null
         var externalSpeechBusy: (() -> Boolean)?=null
         var statusListener: ((String) -> Unit)?=null
         var manualSpeechBusy=false
