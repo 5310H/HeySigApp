@@ -17,6 +17,7 @@
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="User-started bounded wake-up motion gesture session offering a notification to open speech; no background microphone." />
         </service>
         <meta-data android:name="com.google.android.wearable.standalone" android:value="false" />
+        <activity android:name="com.heysig.watch.WatchMonitoringActivity" android:exported="false" />
         <activity android:name="com.heysig.watch.WatchActivity" android:exported="true" android:taskAffinity="${applicationId}">
             <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
         </activity>

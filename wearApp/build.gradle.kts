@@ -3,6 +3,7 @@ import java.net.URI
 
 plugins { id("com.android.application"); kotlin("android") }
 apply(from = rootProject.file("gradle/app-signing.gradle"))
+apply(from = rootProject.file("gradle/environment-model.gradle"))
 
 
 val releasePublic = Properties().apply {
@@ -28,6 +29,8 @@ android {
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
+    sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
+    sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
     buildFeatures { buildConfig = true }
     defaultConfig { buildConfigField("String", "PRIVACY_POLICY_URL", "\"$privacyPolicyUrl\"") }
     buildTypes {
@@ -54,6 +57,7 @@ android {
 kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8) } }
 dependencies {
     implementation(project(":shared"))
+    implementation("com.google.ai.edge.litert:litert:1.4.2")
     implementation("androidx.core:core:1.17.0")
     implementation("androidx.wear:wear-ongoing:1.1.0")
     implementation("com.google.android.gms:play-services-wearable:20.0.1")

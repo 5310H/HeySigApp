@@ -94,6 +94,17 @@ internal class WatchVoiceClient(private val context: Context) : AutoCloseable {
                 .put("token",token).put("text",text).put("alternatives",JSONArray(alternatives)),done)
         }
     }
+    fun environment(body: JSONObject,done: (JSONObject)->Unit) {
+        if(path!=CompanionSafety.PATH) { done(failure("For monitoring, end phone hands-free and enable Watch connection with HeySig open on the phone."));return }
+        val id=UUID.randomUUID().toString()
+        val started=SystemClock.elapsedRealtime()
+        rpc(JSONObject().put("op","prepare").put("id",id).put("scope","environment")) { lease ->
+            if(lease.optString("phase")!="LEASE" || SystemClock.elapsedRealtime()-started>5000) {
+                done(failure("Monitoring grant expired; reconnect explicitly"));return@rpc
+            }
+            rpc(JSONObject().put("op","environment").put("id",id).put("token",lease.getString("token")).put("body",body),done)
+        }
+    }
     fun lastResult(done: (JSONObject)->Unit) {
         val id=prefs.getString("lastRequest",null)
         if(id==null || prefs.getString("lastNode",null)!=node) { done(failure("No retained request for this phone"));return }

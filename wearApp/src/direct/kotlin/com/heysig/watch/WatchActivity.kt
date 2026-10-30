@@ -153,9 +153,10 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private var wifiCheck: WatchWifiCheck?=null
     private fun checkWifi() { wifiCheck?.close();wifiCheck=WatchWifiCheck(this) { send("status",listOf("status")) }.show() }
     private fun more() {
-        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Phone hands-free","Shake to speak","Check Wi-Fi","Stop voice session")
+        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Phone hands-free","Shake to speak","Check Wi-Fi","Stop voice session","Environmental monitoring")
         AlertDialog.Builder(this).setTitle("More").setItems(items) { _,index ->
             when(index) {
+                13 -> startActivity(Intent(this,WatchMonitoringActivity::class.java))
                 12 -> WatchVoiceSessionService.stop(this)
                 11 -> checkWifi()
                 10 -> shakeOptions()
@@ -218,6 +219,9 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         super.onPostResume()
         pendingSessionCapture?.let { capture -> pendingSessionCapture=null;beginVoiceSession(capture) }
         consumeShakeTap()
+        if(intent.getBooleanExtra("environmentSpeak",false)) {
+            intent.removeExtra("environmentSpeak");beginVoiceSession(true)
+        }
     }
     override fun onPause() {
         wifiCheck?.close();wifiCheck=null;
