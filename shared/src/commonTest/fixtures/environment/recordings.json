@@ -1,0 +1,10 @@
+{
+  "modelSha256": "10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de",
+  "labels": ["Speech", "Conversation", "Narration, monologue", "Hubbub, speech noise, speech babble", "Crowd", "Chatter", "Silence", "Vehicle", "Traffic noise, roadway noise", "Engine", "Tools", "Mechanisms", "Dishes, pots, and pans", "Vacuum cleaner", "Water", "Wind", "Mechanical fan", "Music"],
+  "recordings": [
+    {"file":"heysig-restaurant.wav","sha256":"d38e9bf06ff35a840b70951e78ca32ff86d3b82672d97b19942ecfd944a7a5a2","url":"https://raw.githubusercontent.com/microsoft/MS-SNSD/master/noise_train/Restaurant_1.wav","reference":"Restaurant"},
+    {"file":"heysig-babble.wav","sha256":"c355c815d3cc34e0826fb1ba72fab8c3d221d7be4b25e629932b8a7e083d4af5","url":"https://raw.githubusercontent.com/microsoft/MS-SNSD/master/noise_test/Babble_6.wav","reference":"Competing speech; group size unknown"},
+    {"file":"heysig-traffic.wav","sha256":"6965ebb2629e62c970b011056b9486046ed7214233521233db9b31057c032d3a","url":"https://raw.githubusercontent.com/microsoft/MS-SNSD/master/noise_train/Traffic_1.wav","reference":"Non-Speech Noise"},
+    {"file":"heysig-vacuum.wav","sha256":"594c10d5db0f809b695f90199443b81b799fa1b06c09efcac02c1ebff62fda80","url":"https://raw.githubusercontent.com/microsoft/MS-SNSD/master/noise_test/VacuumCleaner_1.wav","reference":"Non-Speech Noise"}
+  ]
+}

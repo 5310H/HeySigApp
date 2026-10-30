@@ -3,6 +3,12 @@ package com.heysig;
 import org.junit.Test;
 
 public class SharedRegressionTest {
+    @Test public void environmentSwitching() {
+        com.heysig.noise.EnvironmentSwitchingCheckKt.main();
+    }
+    @Test public void environmentRecordings() {
+        com.heysig.noise.EnvironmentRecordingCheckKt.main();
+    }
     @Test public void sleepRoutine() {
         com.heysig.sleep.SleepRoutineCheckKt.main();
     }
