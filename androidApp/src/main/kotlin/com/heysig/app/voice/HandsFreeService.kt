@@ -262,7 +262,7 @@ class HandsFreeService : Service() {
             handler.postDelayed({ resumeWhenQuiet() },1000)
         }
     }
-    private fun identity(text: String,fit: Fitting?): Any = NoiseVoice.parse(text) ?: DataVoice.parse(text) ?: if(FittingWorkflow.accepts(text)) "setup:${FittingWorkflow.normalize(text)}" else runtime.personalPhrases.identity(text,fit)
+    private fun identity(text: String,fit: Fitting?): Any = EnvironmentVoice.parse(text) ?: NoiseVoice.parse(text) ?: DataVoice.parse(text) ?: if(FittingWorkflow.accepts(text)) "setup:${FittingWorkflow.normalize(text)}" else runtime.personalPhrases.identity(text,fit)
     private fun handleWatch(text: String,origin: String,reply: (String)->Unit) {
         if(session.mode==HandsFreeSession.Mode.COMMAND) { session.on();stopInputs() }
         handle(text,origin) { result -> reply(result.replace("Listening for Hey Sig","Phone listening On"));update(result);resumeWhenQuiet() }
@@ -275,6 +275,10 @@ class HandsFreeService : Service() {
             val ok=prefs.edit().putBoolean(it.key,it.enabled).commit()
             if(!it.enabled) { currentUtterance=null;synthesis?.stop();speaking=false }
             reply(if(ok) it.description else "Voice setting could not be saved");return
+        }
+        EnvironmentVoice.parse(text)?.let { command ->
+            if(foregroundEnvironment?.invoke(command,reply)!=true) reply("Open and unlock HeySig on the phone for automatic program settings or monitoring.")
+            return
         }
         NoiseVoice.parse(text)?.let { command ->
             if(foregroundNoise?.invoke(command,reply)!=true) reply("Open and unlock HeySig on the phone for noise setup, calibration or sampling. No microphone capture or aid command started.")
@@ -424,6 +428,7 @@ class HandsFreeService : Service() {
         @Volatile var running: HandsFreeService?=null; private set
         var stopNoise: (() -> Unit)?=null
         // Activity-owned adapter only; cleared on pause. No background noise authority.
+        var foregroundEnvironment: ((EnvironmentCommand,(String)->Unit)->Boolean)?=null
         var foregroundNoise: ((NoiseCommand,(String)->Unit)->Boolean)?=null
         var externalSpeechBusy: (() -> Boolean)?=null
         var statusListener: ((String) -> Unit)?=null

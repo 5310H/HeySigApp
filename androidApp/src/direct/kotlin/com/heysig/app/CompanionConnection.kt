@@ -22,12 +22,14 @@ class CompanionConnection(
     private val dispatch: (String, JSONObject, (JSONObject) -> Unit) -> Unit,
     private val lookup: (String, String) -> JSONObject?,
     private val disconnected: () -> Unit,
-    private val report: (String) -> Unit
+    private val report: (String) -> Unit,
+    private val environment: (JSONObject)->JSONObject = { error("Monitoring unavailable") }
 ) : AutoCloseable, MessageClient.OnMessageReceivedListener {
     private val prefs = activity.getSharedPreferences("heysig-companion",Activity.MODE_PRIVATE)
     private val messages = Wearable.getMessageClient(activity)
     private val capabilities = Wearable.getCapabilityClient(activity)
     private var gate: CommandLeaseGate? = null
+    private var environmentGate: CommandLeaseGate? = null
     private var selected: String? = null
     private var generation = 0
     private var foreground = false
@@ -105,6 +107,7 @@ class CompanionConnection(
         messages.addListener(receiver).addOnSuccessListener {
             if(!foreground || current != generation) { messages.removeListener(receiver); return@addOnSuccessListener }
             gate = CommandLeaseGate(node) { UUID.randomUUID().toString() }
+            environmentGate = CommandLeaseGate(node,4096) { UUID.randomUUID().toString() }
             refreshStatus()
             capabilities.addLocalCapability(CompanionSafety.CAPABILITY).addOnSuccessListener {
                 if(!foreground || current != generation) {
@@ -135,16 +138,23 @@ class CompanionConnection(
                 "hello" -> {
                     gate?.close()
                     gate = CommandLeaseGate(node) { UUID.randomUUID().toString() }
+                    environmentGate?.close()
+                    environmentGate = CommandLeaseGate(node,4096) { UUID.randomUUID().toString() }
                     reply(JSONObject().put("phase","READY").put("text","Phone connected. Commands use the phone speaker; keep HeySig open and unlocked."))
                 }
                 "prepare" -> {
                     val id = request.getString("id")
-                    val token = checkNotNull(gate).issue(node,id,SystemClock.elapsedRealtime())
+                    val selectedGate=if(request.optString("scope")=="environment") environmentGate else gate
+                    val token = checkNotNull(selectedGate).issue(node,id,SystemClock.elapsedRealtime())
                     reply(JSONObject().put("phase","LEASE").put("token",token))
                 }
                 "result" -> {
                     val id = request.getString("id"); CompanionSafety.id(id)
                     reply(lookup(node,id) ?: JSONObject().put("phase","UNKNOWN").put("text","No retained result. Do not repeat automatically; check the phone and aid state."))
+                }
+                "environment" -> {
+                    checkNotNull(environmentGate).consume(node,request.getString("id"),request.getString("token"),SystemClock.elapsedRealtime())
+                    reply(environment(request.getJSONObject("body")))
                 }
                 "command" -> {
                     val alternatives = request.getJSONArray("alternatives")
@@ -167,6 +177,7 @@ class CompanionConnection(
     }
     private fun dropConnection() {
         generation++; gate?.close(); gate = null; selected = null
+        environmentGate?.close();environmentGate=null
         refreshStatus()
         listener?.let { messages.removeListener(it) }; listener = null
         capabilities.removeLocalCapability(CompanionSafety.CAPABILITY)

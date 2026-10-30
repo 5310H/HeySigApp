@@ -18,6 +18,14 @@ fun main() {
     gate.close()
     rejects { gate.issue("watch",second,10001) }
     val reconnect = CommandLeaseGate("watch") { "fresh" }
+    val monitoring = CommandLeaseGate("watch",4096) { "monitoring-${++sequence}" }
+    // One-hour 15-second sampling must not exhaust the manual connection's 128 grants.
+    repeat(242) { i ->
+        val sampleId="00000000-0000-0000-0000-"+i.toString().padStart(12,'0')
+        val sampleToken=monitoring.issue("watch",sampleId,i*1000L)
+        monitoring.consume("watch",sampleId,sampleToken,i*1000L+1)
+    }
+    rejects { monitoring.issue("watch",id,300_000) }
     reconnect.issue("watch",second,10001)
     rejects { reconnect.consume("watch",second,expired,10002) }
     CompanionSafety.command(id,second,"status",listOf("status"))

@@ -1,0 +1,13 @@
+{
+  "version": "1.4.2",
+  "artifacts": {
+    "litert-1.4.2.aar": "9b02cdf9db0a698b341b59e75c54ab8221d6304577cc43830d01024caf1fca74",
+    "litert-api-1.4.2.aar": "66c2ba8086bd5cbf89bec2bd81c3de6c1a852312829cd55bc30c9dd26ffa357c"
+  },
+  "native": {
+    "jni/arm64-v8a/libtensorflowlite_jni.so": "e2328caf39606382a13dc08f06ed03eb0119a490208d375e3f42b80e4dabc465",
+    "jni/armeabi-v7a/libtensorflowlite_jni.so": "1ef7f586c996fb95c944c3e25555d121f01874153b330d5b26503f369fd54d0a",
+    "jni/x86/libtensorflowlite_jni.so": "bd625a7422a8c19466a021b2cdfac3e964aa4945452e698c2ad2ecc7235b364c",
+    "jni/x86_64/libtensorflowlite_jni.so": "59fb31cc5aae55fd764ef74b0855db7549e981427e7debe31ef3a3f2792dc0d5"
+  }
+}

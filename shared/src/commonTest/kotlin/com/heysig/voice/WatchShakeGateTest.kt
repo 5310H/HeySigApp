@@ -4,6 +4,17 @@ import org.junit.Test
 import org.junit.Assert.*
 
 class WatchShakeGateTest {
+    @Test fun phoneSensitivityIsBoundedAndStillNeedsThreeSeparatedPeaks() {
+        assertTrue(runCatching { ShakeGate.phone(Double.NaN) }.isFailure)
+        assertTrue(runCatching { ShakeGate.phone(1.0) }.isFailure)
+        for(threshold in listOf(2.0,2.7,3.5)) {
+            val gate=ShakeGate.phone(threshold)
+            assertFalse(gate.sample(threshold+0.1,1000));assertFalse(gate.sample(1.0,1100))
+            assertFalse(gate.sample(threshold+0.1,1400));assertFalse(gate.sample(1.0,1500))
+            assertTrue(gate.sample(threshold+0.1,1800));assertFalse(gate.sample(1.0,1900))
+            assertFalse(gate.sample(threshold+0.1,2100))
+        }
+    }
     @Test fun moderateSeparatedWristPeaksTriggerWithinLongerWindow() {
         val watch=ShakeGate.watch()
         assertFalse(watch.sample(1.9,1000));assertFalse(watch.sample(1.0,1100))

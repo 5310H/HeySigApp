@@ -8,6 +8,10 @@ class ShakeGate private constructor(
 ) {
     constructor(): this(2.7, 1.8, 1200)
     companion object {
+        fun phone(peakG: Double): ShakeGate {
+            require(peakG.isFinite() && peakG in 1.8..4.0)
+            return ShakeGate(peakG,peakG*2/3,1200)
+        }
         /** Wrist motion needs a different threshold from a handheld phone. */
         fun watch() = ShakeGate(1.8, 1.3, 1800)
     }

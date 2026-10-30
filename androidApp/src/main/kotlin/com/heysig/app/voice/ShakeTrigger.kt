@@ -6,9 +6,9 @@ import android.os.*
 import com.heysig.voice.ShakeGate
 
 /** Session/activity owned; no sensor values are retained. */
-class ShakeTrigger(private val context: Context, private val action: () -> Unit): SensorEventListener {
+class ShakeTrigger(private val context: Context, peakG: Double = 2.7, private val action: () -> Unit): SensorEventListener {
     private val manager=context.getSystemService(SensorManager::class.java)
-    private val gate=ShakeGate()
+    private val gate=ShakeGate.phone(peakG)
     fun start(): Boolean {
         stop()
         val sensor=manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) ?: return false

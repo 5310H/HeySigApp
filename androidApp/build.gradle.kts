@@ -4,6 +4,7 @@ import java.security.MessageDigest
 
 plugins { id("com.android.application"); kotlin("android") }
 apply(from = rootProject.file("gradle/app-signing.gradle"))
+apply(from = rootProject.file("gradle/environment-model.gradle"))
 
 
 val releasePublic = Properties().apply {
@@ -30,6 +31,8 @@ android {
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
+    sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
+    sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
     buildFeatures { buildConfig = true }
     // Exercise the native watch style on isolated round-display contexts; never ship it in the phone app.
     sourceSets.getByName("androidTest").java.srcDir("../wearApp/src/main/kotlin")
@@ -55,6 +58,7 @@ kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarg
 val wakeEngine by configurations.creating
 dependencies {
     implementation(project(":shared"))
+    implementation("com.google.ai.edge.litert:litert:1.4.2")
     add(wakeEngine.name,"com.k2fsa:sherpa-onnx:1.13.8@aar")
     implementation(files(wakeEngine))
     implementation("androidx.core:core:1.17.0")

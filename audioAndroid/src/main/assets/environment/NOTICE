@@ -1,0 +1,7 @@
+YAMNet classification-tflite version 1 by Google / TensorFlow Authors.
+Apache License 2.0; see LICENSE.
+Source: https://www.kaggle.com/models/google/yamnet/tfLite/classification-tflite/1
+Model SHA-256: 10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de
+labels.txt is the label list embedded in the original model, unmodified.
+yamnet_class_map.csv is the upstream TensorFlow Model Garden class map.
+No AudioSet or FSD50K audio recordings are shipped in the application.

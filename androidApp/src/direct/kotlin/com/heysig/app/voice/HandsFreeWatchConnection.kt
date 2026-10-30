@@ -62,7 +62,7 @@ class HandsFreeWatchConnection(private val context: Context,private val dispatch
                     checkNotNull(gate).consume(node,id,request.getString("token"),SystemClock.elapsedRealtime())
                     history.get(node,id)?.let { reply(it);return }
                     val fit=ManualRuntime.get(context).fitting
-                    val identities=alternatives.map { NoiseVoice.parse(it) ?: ManualRuntime.get(context).personalPhrases.identity(it,fit) }.filterNot { it is AppIntent.Unsupported }.distinct()
+                    val identities=alternatives.map { com.heysig.noise.EnvironmentVoice.parse(it) ?: NoiseVoice.parse(it) ?: ManualRuntime.get(context).personalPhrases.identity(it,fit) }.filterNot { it is AppIntent.Unsupported }.distinct()
                     if(identities.size>1) { reply(JSONObject().put("phase","CLARIFY").put("text","Speech alternatives disagree; nothing sent"));return }
                     check(history.put(node,id,JSONObject().put("phase","UNKNOWN").put("text","Request started; never replay automatically"))) { "Watch journal unavailable" }
                     dispatch(text,"paired:$node:$conversation") { result ->

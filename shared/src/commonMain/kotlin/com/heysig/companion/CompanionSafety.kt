@@ -22,7 +22,8 @@ object CompanionSafety {
 }
 
 /** A short-lived one-use permission to send one command. Never queues or retries. */
-class CommandLeaseGate(private val node: String, private val nonce: () -> String) {
+class CommandLeaseGate(private val node: String, private val maximumRequests: Int = 128, private val nonce: () -> String) {
+    init { require(maximumRequests in 128..4096) }
     private data class Lease(val token: String, val expires: Long)
     private val leases = mutableMapOf<String, Lease>()
     private val used = mutableSetOf<String>()
@@ -30,7 +31,7 @@ class CommandLeaseGate(private val node: String, private val nonce: () -> String
     fun issue(sender: String, id: String, now: Long): String {
         CompanionSafety.id(id)
         check(open && sender == node) { "Watch connection is not enabled" }
-        check(id !in used && used.size < 128) { "Request already used or session full; reconnect without replay" }
+        check(id !in used && used.size < maximumRequests) { "Request already used or session full; reconnect without replay" }
         leases.entries.removeAll { now >= it.value.expires }
         check(leases.size < 8) { "Too many pending requests" }
         return nonce().also { leases[id] = Lease(it, now + 5000) }

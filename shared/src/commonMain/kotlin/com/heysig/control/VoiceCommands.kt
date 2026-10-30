@@ -49,6 +49,7 @@ object VoiceCommands {
             trailingProgram != null -> "program ${trailingProgram.groupValues[1]}"
             level != null -> "${level.groupValues[2]} ${level.groupValues[3]}"
             text in listOf("what program am i in", "which program am i using", "what program am i using") -> "current program"
+            text == "normal mode" -> "program normal"
             text in listOf("check my batteries", "check my battery", "check the batteries", "check the battery") -> "check battery"
             text == "check my left battery" -> "check left battery"
             text == "check my right battery" -> "check right battery"
