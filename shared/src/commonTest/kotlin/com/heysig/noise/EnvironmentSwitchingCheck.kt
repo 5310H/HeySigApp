@@ -68,6 +68,8 @@ fun main() {
     check(noRestart.cooldownUntil==complete.cooldownUntil)
     val zero=settings.copy(cooldownSeconds=0,overrideSeconds=0)
     check(EnvironmentSwitching.complete(stable.state,stable.state.token,true,18_000,zero).cooldownUntil==18_000L)
+    check(EnvironmentSwitching.complete(stable.state,stable.state.token,true,18_000,zero).phase==SwitchingPhase.MONITORING)
+    check(sample(first.state.copy(cooldownUntil=999_999),17_000,config=zero).target?.slot==4)
     check(!sample(initial,1_801_000).state.monitoring) // default timeout
     check(!sample(EnvironmentSwitching.stop(first.state),18_000).state.monitoring)
     // A fresh reconnection starts evidence again, never replays a classification or pending target.

@@ -1,5 +1,22 @@
 # Google Play readiness — audited October 16, 2026
 
+October 30 development update: a separate semantic environment monitor adds
+bundled YAMNet/LiteRT 1.4.2 inference, local settings, foreground intermittent
+phone/watch sampling and foreground shake-triggered bounded speech commands.
+No new permission or background service is introduced. Monitoring PCM stays in
+memory and is discarded; compact watch classifications use the existing selected
+Data Layer connection and may traverse Google's encrypted server routing. Speech
+provider fallback remains separately disclosed and may use a network. New
+environment/voice choices are local preferences; no raw monitoring audio,
+transcripts or analytics are stored/uploaded. Recheck the final release and all
+dependencies before making Data safety claims. See the
+[feature and outstanding acceptance](automatic-program-switching.md).
+Calibration is optional for this new semantic path; physical acceptance and
+model-accuracy qualification still block real automatic dispatch. The recorded
+restaurant errors are not release-qualified classification. Revalidate new native
+libraries, licenses, privacy/health intent, accessibility and battery on devices;
+earlier signed artifacts do not cover this change. No submission is prepared.
+
 **Status: development only; not ready for store submission.** This is a
 source/build audit, not a Play review or medical-device classification.
 Recheck the official links before every submission. The requirements below

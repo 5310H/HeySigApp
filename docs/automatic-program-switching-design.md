@@ -109,6 +109,29 @@ when available; fallback providers may use a network and require disclosure.
 Calibration is optional for the new semantic path. The old level-based path and
 all existing fitting/calibration data remain available. Enabling a preference
 does not establish hardware acceptance. Real automatic dispatch retains
-`NoiseReleaseGate`; simulation is explicitly labelled and never presented as a
+`NoiseReleaseGate` plus a separate `EnvironmentReleaseGate` for classifier
+qualification; simulation is explicitly labelled and never presented as a
 real program change. No Play submission, regulatory assessment, physical aid
 confirmation or measured classifier/battery qualification is implied.
+
+## Implemented source map
+
+| Component | Responsibility |
+|---|---|
+| `shared/.../noise/EnvironmentSwitching.kt` | Six environments, speech/event-score mapping with abstention, monotonic reducer, assignment identity, cooldown/stability/override and qualification gates. |
+| `shared/.../noise/EnvironmentSettingsCodec.kt` | Versioned, validated portable assignment/settings persistence format. |
+| `shared/.../noise/EnvironmentMonitoring.kt` | Foreground/permission policy, fresh watch-session sequencing and playback-contamination timing. |
+| `audioAndroid/.../EnvironmentAudio.kt` | Shared Android/Wear bounded PCM capture, local pinned YAMNet/LiteRT inference and immediate PCM disposal. |
+| `androidApp/.../EnvironmentFeature.kt` | Phone storage/UI, sampling/session lifecycle, explicit isolated simulation, authoritative watch state and existing executor callbacks. |
+| `androidApp/.../voice/ForegroundVoice.kt` | Foreground-only on-device-preferred recognition with hard timeout and lifecycle cancellation. |
+| `wearApp/.../WatchMonitoringActivity.kt` | Explicit watch sampling, timeout/Stop, current phone status/program controls and return-to-voice navigation. |
+| Existing `CompanionConnection` / `WatchVoiceClient` | Selected-node one-use scoped monitoring grants; no persistent audio messages or replay queue. |
+| `gradle/environment-model.gradle` / `third_party/litert` | Model/label/AAR pins and dependency provenance; native artifact checks cover both apps. |
+
+No Signia encoder or transport implementation was changed. Monitoring can be
+enabled without calibration, but real semantic dispatch cannot be qualified by
+the legacy six-level acceptance alone. Successful manual selection stops
+monitoring and sets the configured hold; starting monitoring preserves the pause
+of any enabled Sleep schedule. Zero cooldown bypasses an already active cooldown
+as well as disabling future cooldowns. Simulation never supplies real fitting or
+requested-state evidence.

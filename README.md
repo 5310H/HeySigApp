@@ -14,6 +14,12 @@ Start with [how the prototype works](docs/proto-code-guide.md), [Android build/u
 
 Research: [noise adaptation in other hearing aids and proposed HeySig improvements](docs/research/noise-adaptation-2026-10-16.md).
 
+New development work: [speech-aware automatic program settings, simulation, phone
+shake voice and intermittent watch monitoring](docs/automatic-program-switching.md).
+Calibration is optional for the new semantic path. The experimental model has
+documented restaurant/group accuracy limits; real automatic dispatch still awaits
+physical acceptance. See the [investigation/design](docs/automatic-program-switching-design.md).
+
 ## Directory layout
 
 ```text

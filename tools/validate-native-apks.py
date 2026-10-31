@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Check pinned phone native libraries and 16 KB ELF/ZIP alignment; no runtime claim."""
+"""Check pinned phone/watch native libraries and 16 KB ELF/ZIP alignment; no runtime claim."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -7,10 +8,17 @@ import struct
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-expected = json.loads((ROOT/'third_party/sherpa-onnx/integrity.json').read_text())['native']
-for variant in ('debug', 'release'):
-    apk = ROOT/f'androidApp/build/outputs/apk/{variant}/androidApp-{variant}.apk'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--variants', nargs='+', choices=('debug','release'), default=['debug','release'])
+args = parser.parse_args()
+litert = json.loads((ROOT/'third_party/litert/integrity.json').read_text())['native']
+sherpa = json.loads((ROOT/'third_party/sherpa-onnx/integrity.json').read_text())['native']
+for module, variant in ((m,v) for m in ('androidApp','wearApp') for v in args.variants):
+    expected = dict(litert, **sherpa) if module == 'androidApp' else litert
+    apk = ROOT/f'{module}/build/outputs/apk/{variant}/{module}-{variant}.apk'
     with zipfile.ZipFile(apk) as archive, apk.open('rb') as source:
+        assert hashlib.sha256(archive.read('assets/environment/yamnet.tflite')).hexdigest() == '10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de', 'Bundled model mismatch'
+        assert hashlib.sha256(archive.read('assets/environment/labels.txt')).hexdigest() == '8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051', 'Bundled labels mismatch'
         libraries = {item.filename: item for item in archive.infolist() if item.filename.endswith('.so')}
         assert set(libraries) == {name.replace('jni/', 'lib/', 1) for name in expected}, 'Unexpected native library inventory'
         for name, item in libraries.items():
@@ -33,4 +41,4 @@ for variant in ('debug', 'release'):
             filename, extra = struct.unpack_from('<HH', header, 26)
             assert item.compress_type == zipfile.ZIP_STORED, 'Native library must be uncompressed'
             assert (item.header_offset+30+filename+extra) % 16384 == 0, 'Native ZIP data is not 16 KB aligned'
-    print(f'{variant}: {len(libraries)} pinned native libraries; ELF and APK ZIP alignment >=16 KB. Runtime/device acceptance pending.')
+    print(f'{module} {variant}: {len(libraries)} pinned native libraries; ELF and APK ZIP alignment >=16 KB. Runtime/device acceptance pending.')

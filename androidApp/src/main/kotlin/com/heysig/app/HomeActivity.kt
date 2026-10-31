@@ -103,7 +103,10 @@ class HomeActivity : Activity() {
             foregroundVoice.close();noise.stop();HandsFreeService.running?.control(HandsFreeControl.OFF)
             val old=runtime.sleepRoutine.state
             check(old.mode==com.heysig.sleep.SleepMode.AWAKE && !old.pending) { "Choose a waking program and resume the routine before monitoring" }
-            runtime.sleepRoutine.transition(old.resume())
+            val schedule=getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE)
+            // Starting noise must not re-arm an explicitly paused Sleep schedule.
+            if(!schedule.getBoolean("reminders",false) && !schedule.getBoolean("automaticEnabled",false))
+                runtime.sleepRoutine.transition(old.resume())
         },{ slot,done -> execute(listOf(ManualRequest.SelectProgram(slot)),false,automatic=true,onComplete=done) },
         { slot -> dispatch(ManualRequest.SelectProgram(slot)) },{ text -> tell(text,true) }) }
     private val automaticVoicePrefs by lazy { getSharedPreferences("heysig-environment-voice",MODE_PRIVATE) }

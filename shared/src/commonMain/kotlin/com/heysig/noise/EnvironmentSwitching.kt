@@ -127,7 +127,7 @@ object EnvironmentSwitching {
         fun wait(phase: SwitchingPhase, reason: String) = EnvironmentDecision(state.copy(phase=phase,reason=reason))
         // Monitoring and candidate evidence continue through cooldown and override.
         if(now < previous.overrideUntil) return wait(SwitchingPhase.MANUAL_OVERRIDE,"Manual override active")
-        if(now < previous.cooldownUntil) return wait(SwitchingPhase.COOLDOWN,"Cooldown active")
+        if(settings.cooldownSeconds > 0 && now < previous.cooldownUntil) return wait(SwitchingPhase.COOLDOWN,"Cooldown active")
         if(!settings.enabled) return wait(SwitchingPhase.MONITORING,"Automatic switching off; monitoring only")
         if(target.slot == current) return wait(SwitchingPhase.MONITORING,"Already last requested; no command")
         if(!stable || now-state.candidateSince < settings.stabilitySeconds*1000L) return wait(SwitchingPhase.STABILITY_WAIT,"Waiting for stable environment")
@@ -140,7 +140,7 @@ object EnvironmentSwitching {
         if(previous.pending == null || previous.token != token) return previous
         return previous.copy(pending=null,candidate=null,lastSampleAt=null,
             cooldownUntil=if(success) now+settings.cooldownSeconds*1000L else previous.cooldownUntil,
-            monitoring=previous.monitoring && success,phase=if(success) SwitchingPhase.COOLDOWN else SwitchingPhase.ERROR,
+            monitoring=previous.monitoring && success,phase=if(!success) SwitchingPhase.ERROR else if(settings.cooldownSeconds>0) SwitchingPhase.COOLDOWN else SwitchingPhase.MONITORING,
             reason=if(success) "Program command played; aid reception unconfirmed" else "Playback failed; monitoring stopped")
     }
 }

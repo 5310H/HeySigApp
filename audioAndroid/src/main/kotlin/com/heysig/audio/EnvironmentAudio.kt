@@ -30,10 +30,12 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
                 val pcm=try { capture(seconds,cancel) } finally { release() }
                 val capturedAt=SystemClock.elapsedRealtime()
                 try {
-                    if(!cancel.get() && allowed()) {
-                        val result=Yamnet(context).use { it.classify(pcm) }
-                        if(!cancel.get() && allowed()) done(result,null,capturedAt)
-                    }
+                    // Losing access without an explicit stop must complete with an error;
+                    // otherwise the caller stays stuck waiting for this sample forever.
+                    check(!cancel.get() && allowed()) { "Capture access ended; sample discarded" }
+                    val result=Yamnet(context).use { it.classify(pcm) }
+                    check(!cancel.get() && allowed()) { "Capture access ended; sample discarded" }
+                    done(result,null,capturedAt)
                 } finally { pcm.fill(0) }
             } catch(e: Exception) {
                 if(!cancel.get()) done(null,e.message ?: "Microphone/model unavailable",SystemClock.elapsedRealtime())

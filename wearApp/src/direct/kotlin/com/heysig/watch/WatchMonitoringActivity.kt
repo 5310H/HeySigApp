@@ -57,12 +57,10 @@ class WatchMonitoringActivity: Activity() {
         button("Voice command") {
             stop("Voice has microphone priority",notify=true)
             // Existing watch Speak control handles disclosure, permissions and bounded recognition.
-            startActivity(android.content.Intent(this,WatchActivity::class.java)
-                .addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                .putExtra("environmentSpeak",true))
+            setResult(RESULT_OK)
             finish()
         }
-        line("Voice: return to Speak, then tap it. Monitoring stops before voice capture. Sampling settings come from Automatic program switching on your phone. Keep both apps visible and unlocked. Leaving this screen stops watch capture. Estimates are experimental.")
+        line("Voice command returns to the existing Speak flow. Monitoring stops before voice capture. Sampling settings come from Automatic program switching on your phone. Keep both apps visible and unlocked. Leaving this screen stops watch capture. Estimates are experimental.")
         setContentView(ScrollView(this).apply { setBackgroundColor(Color.BLACK);addView(layout) })
     }
     override fun onResume() { super.onResume();foreground=true;connect() }

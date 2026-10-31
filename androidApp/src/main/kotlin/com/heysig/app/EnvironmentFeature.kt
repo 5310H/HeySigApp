@@ -77,7 +77,7 @@ class EnvironmentFeature(
             "Detected: ${result?.environment?.label ?: "Uncertain / not sampled"} · score ${((result?.confidence ?: 0.0)*100).toInt()}%\n"+
             "Last requested program: $program (aid reception unconfirmed)\n"+
             (if(simulation) "Simulation baseline: ${programs().find { it.slot==simulatedCurrent }?.name ?: "Unknown"}\n" else "")+
-            "Cooldown: ${state.remainingSeconds(now())} seconds remaining\n${state.reason}"+
+            "Cooldown: ${if(settings.cooldownSeconds==0) 0 else state.remainingSeconds(now())} seconds remaining\n${state.reason}"+
             if(!EnvironmentReleaseGate.qualified() && settings.enabled && !simulation) "\nReal automatic dispatch awaits classifier and physical acceptance. Monitoring is available." else ""
     }
     private fun update() { statusView?.text=status() }

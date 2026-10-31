@@ -231,6 +231,8 @@ class Api36Smoke : Instrumentation() {
                 result.putString("roundWatch","PASS: real compact watch home in isolated 192dp round contexts at font scales 1 and 2; Speak/Stop/More, 48dp targets and no ellipses; hardware acceptance pending")
             }
             SavedSettingsAcceptance.run(targetContext)
+            EnvironmentAcceptance.run(targetContext)
+            result.putString("environment","PASS: isolated assignment persistence and bundled native model loading; no microphone or aid commands")
             result.putString("savedSettings","PASS: explicit Save only; manual/battery/automatic/partial restore and restart preserve snapshot bytes; busy/invalid/failed save retain old record; corrupt snapshot preserves fitting and bytes")
             SleepRoutineAcceptance.run(targetContext)
             result.putString("sleepRoutine","PASS: isolated save/validation, restart persistence, Off gate, draft source/expiry/cancel, revision conflicts, fitting invalidation and corrupt-data preservation; no alarm or playback")
