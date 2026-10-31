@@ -16,11 +16,19 @@ import java.util.concurrent.atomic.AtomicBoolean
 /** One worker, bounded in-memory audio; no files, transcript or network APIs. */
 class EnvironmentAudio(private val context: Context, private val allowed: () -> Boolean,
                        private val acquire: ((()->Boolean)->Boolean) = { true },
-                       private val release: ()->Unit = {}) {
+                       private val release: ()->Unit = {},
+                       // Explicit development diagnostics only; ordinary monitoring has no observer.
+                       private val observeScores: ((Map<String,Double>)->Unit)? = null) {
     private val worker=EnvironmentSampleWorker(allowed,{ seconds,cancel ->
         check(acquire { cancel.get() }) { "Microphone busy or capture cancelled" }
         try { capture(seconds,cancel) } finally { release() }
-    },{ pcm,cancelled -> Yamnet(context).use { it.classify(pcm,cancelled) } },{ SystemClock.elapsedRealtime() })
+    },{ pcm,cancelled -> Yamnet(context).use { model ->
+        val frames=model.eventScores(pcm,cancelled)
+        if(!cancelled()) observeScores?.invoke(EnvironmentClassifier.requiredLabels.associateWith { label ->
+            frames.map { it.getValue(label) }.average()
+        })
+        EnvironmentClassifier.classify(frames)
+    } },{ SystemClock.elapsedRealtime() })
     fun stop() = worker.stop()
     fun busy() = worker.busy()
     fun sample(seconds: Int, done: (EnvironmentClassification?, String?, Long)->Unit) = worker.sample(seconds,done)
@@ -95,6 +103,9 @@ class Yamnet(context: Context): AutoCloseable {
         interpreter=candidate
     }
     fun classify(pcm: ShortArray, cancelled: () -> Boolean = { false }): EnvironmentClassification {
+        return EnvironmentClassifier.classify(eventScores(pcm,cancelled))
+    }
+    fun eventScores(pcm: ShortArray, cancelled: () -> Boolean = { false }): List<Map<String,Double>> {
         require(pcm.size in 48000..160000)
         val frames=mutableListOf<Map<String,Double>>()
         var start=0
@@ -109,7 +120,7 @@ class Yamnet(context: Context): AutoCloseable {
             start+=7680
         }
         check(!cancelled()) { "Inference cancelled; sample discarded" }
-        return EnvironmentClassifier.classify(frames)
+        return frames
     }
     override fun close() { interpreter.close() }
 }

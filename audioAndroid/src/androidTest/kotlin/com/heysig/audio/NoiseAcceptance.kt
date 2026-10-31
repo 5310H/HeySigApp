@@ -108,6 +108,7 @@ class NoiseAcceptance: Instrumentation() {
                     result.putLong("sample${seconds}InferenceAgeMs",inferenceAge)
                     result.putString("sample${seconds}Environment",classification?.environment?.name ?: "UNCERTAIN")
                     result.putDouble("sample${seconds}Score",classification?.confidence ?: 0.0)
+                    result.putString("sample${seconds}Events",activity.eventScores.entries.joinToString("; ") { "${it.key}=${it.value}" })
                     awaitIdle()
                 }
                 show("Microphone cancellation test")

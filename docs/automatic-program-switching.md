@@ -146,10 +146,15 @@ python3 tools/run-noise-acceptance.py --module wearApp --device WATCH --micropho
 
 Use `--microphone` only after the user agrees to the disclosed tests. Omitting
 it runs model and layout checks without microphone access. Tests report scalar
-timing/CPU/process-memory values and coarse labels, never PCM or transcripts.
+timing/CPU/process-memory values, coarse labels and optional coarse sound-event
+scores, never PCM or transcripts.
 The driver checks existing preference hashes around in-place installation and
 testing. The real monitoring layout is measured at 192dp round and font scales
 1 and 2 with 48dp targets, complete button text and scroll reachability.
 These short runs do not establish classifier accuracy, end-to-end Data Layer
 acceptance, permission/privacy-switch behavior or battery endurance. Acceptance
 components are debug-only and rejected by the release-artifact validators.
+
+The [October 31 diagnostics](acceptance/noise-diagnostics-2026-10-31.md) record
+mixed-scene phone results and a reproducible seven-recording regression probe.
+Both expose unresolved classifier failures. Automatic dispatch remains disabled.
