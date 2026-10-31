@@ -64,7 +64,9 @@ object EnvironmentClassifier {
         // No amplitude ordering: large groups may be quieter than one speaker.
         val candidates = listOf(
             ListeningEnvironment.QUIET to if(speech < 0.2 && noise < 0.2 && music < 0.2) quiet else 0.0,
-            ListeningEnvironment.CONVERSATION to if(babble < 0.25 && crowd < 0.25 && noise < 0.25 && music < 0.25) speech else 0.0,
+            // Speech includes monologues/TV and background speech in other environments.
+            // Require conversation-specific evidence rather than guessing its context.
+            ListeningEnvironment.CONVERSATION to if(babble < 0.25 && crowd < 0.25 && noise < 0.25 && music < 0.25) conversation else 0.0,
             ListeningEnvironment.SMALL_GROUP to if(crowd < 0.35 && babble in 0.25..0.65) minOf(conversation,babble)*1.15 else 0.0,
             ListeningEnvironment.RESTAURANT to if(speech > 0.3 && babble > 0.3 && noise > 0.2) minOf(speech,babble,noise)*1.15 else 0.0,
             ListeningEnvironment.LARGE_GROUP to if(babble > 0.35) minOf(crowd,babble) else 0.0,

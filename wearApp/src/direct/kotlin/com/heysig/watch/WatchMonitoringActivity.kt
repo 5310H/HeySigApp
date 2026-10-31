@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.*
 import android.widget.*
 import com.heysig.audio.EnvironmentAudio
@@ -31,17 +30,8 @@ class WatchMonitoringActivity: Activity() {
         !getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked }) }
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
-        val layout=LinearLayout(this).apply {
-            orientation=LinearLayout.VERTICAL
-            val dp=resources.displayMetrics.density
-            setPadding((28*dp).toInt(),(24*dp).toInt(),(28*dp).toInt(),(36*dp).toInt())
-        }
-        fun line(text: String)=TextView(this).apply { this.text=text;textSize=16f;setTextColor(Color.WHITE);layout.addView(this) }
-        fun button(text: String, action: ()->Unit) { layout.addView(Button(this).apply {
-            this.text=text;minHeight=(48*resources.displayMetrics.density).toInt();setOnClickListener { action() }
-        }) }
-        line("Listening environments")
-        status=line("Connect with HeySig open on your phone").apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
+        val actions=mutableListOf<Pair<String,()->Unit>>()
+        fun button(text: String, action: ()->Unit) { actions.add(text to action) }
         button("Connect / refresh status") { connect() }
         button("Start monitoring") { start() }
         button("Stop monitoring") { stop("Monitoring off",notify=true) }
@@ -60,8 +50,8 @@ class WatchMonitoringActivity: Activity() {
             setResult(RESULT_OK)
             finish()
         }
-        line("Voice command returns to the existing Speak flow. Monitoring stops before voice capture. Sampling settings come from Automatic program switching on your phone. Keep both apps visible and unlocked. Leaving this screen stops watch capture. Estimates are experimental.")
-        setContentView(ScrollView(this).apply { setBackgroundColor(Color.BLACK);addView(layout) })
+        val screen=EnvironmentMonitoringLayout.create(this,actions)
+        status=screen.status;setContentView(screen.view)
     }
     override fun onResume() { super.onResume();foreground=true;connect() }
     override fun onPause() {

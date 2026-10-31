@@ -30,6 +30,8 @@ android {
         testInstrumentationRunner = "com.heysig.app.Api36Smoke"
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
+    sourceSets.getByName("debug").java.srcDir("../audioAndroid/src/debug/kotlin")
+    sourceSets.getByName("androidTest").java.srcDir("../audioAndroid/src/androidTest/kotlin")
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")

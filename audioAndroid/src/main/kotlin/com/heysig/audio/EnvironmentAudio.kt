@@ -17,34 +17,13 @@ import java.util.concurrent.atomic.AtomicBoolean
 class EnvironmentAudio(private val context: Context, private val allowed: () -> Boolean,
                        private val acquire: ((()->Boolean)->Boolean) = { true },
                        private val release: ()->Unit = {}) {
-    @Volatile private var cancelled=AtomicBoolean(true)
-    private var worker: Thread?=null
-    @Synchronized fun stop() { cancelled.set(true) }
-    @Synchronized fun sample(seconds: Int, done: (EnvironmentClassification?, String?, Long)->Unit): Boolean {
-        require(seconds in listOf(3,5,10))
-        if(worker?.isAlive == true) return false
-        val cancel=AtomicBoolean(false);cancelled=cancel
-        worker=Thread({
-            try {
-                check(acquire { cancel.get() }) { "Microphone busy or capture cancelled" }
-                val pcm=try { capture(seconds,cancel) } finally { release() }
-                val capturedAt=SystemClock.elapsedRealtime()
-                try {
-                    // Losing access without an explicit stop must complete with an error;
-                    // otherwise the caller stays stuck waiting for this sample forever.
-                    check(!cancel.get() && allowed()) { "Capture access ended; sample discarded" }
-                    val result=Yamnet(context).use { it.classify(pcm) }
-                    check(!cancel.get() && allowed()) { "Capture access ended; sample discarded" }
-                    done(result,null,capturedAt)
-                } finally { pcm.fill(0) }
-            } catch(e: Exception) {
-                if(!cancel.get()) done(null,e.message ?: "Microphone/model unavailable",SystemClock.elapsedRealtime())
-            } catch(e: LinkageError) {
-                if(!cancel.get()) done(null,"Audio model runtime unavailable",SystemClock.elapsedRealtime())
-            }
-        },"heysig-environment").apply { start() }
-        return true
-    }
+    private val worker=EnvironmentSampleWorker(allowed,{ seconds,cancel ->
+        check(acquire { cancel.get() }) { "Microphone busy or capture cancelled" }
+        try { capture(seconds,cancel) } finally { release() }
+    },{ pcm,cancelled -> Yamnet(context).use { it.classify(pcm,cancelled) } },{ SystemClock.elapsedRealtime() })
+    fun stop() = worker.stop()
+    fun busy() = worker.busy()
+    fun sample(seconds: Int, done: (EnvironmentClassification?, String?, Long)->Unit) = worker.sample(seconds,done)
     private fun capture(seconds: Int,cancel: AtomicBoolean): ShortArray {
         fun checkAccess() {
             check(!cancel.get()) { "Capture interrupted; sample discarded" }
@@ -107,24 +86,29 @@ class Yamnet(context: Context): AutoCloseable {
         check(MessageDigest.getInstance("SHA-256").digest(labelBytes).joinToString("") { "%02x".format(it) }==
             "8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051") { "Unexpected environment labels" }
         val model=ByteBuffer.allocateDirect(bytes.size).order(ByteOrder.nativeOrder()).put(bytes).apply { rewind() }
-        interpreter=Interpreter(model,Interpreter.Options().setNumThreads(1))
-        check(labels.size==521 && labels.containsAll(EnvironmentClassifier.requiredLabels) && interpreter.getInputTensor(0).numElements()==15600 &&
-            interpreter.getInputTensor(0).dataType()==DataType.FLOAT32 &&
-            interpreter.getOutputTensor(0).numElements()==521 && interpreter.getOutputTensor(0).dataType()==DataType.FLOAT32) { "Unexpected model signature" }
+        val candidate=Interpreter(model,Interpreter.Options().setNumThreads(1))
+        try {
+            check(labels.size==521 && labels.containsAll(EnvironmentClassifier.requiredLabels) && candidate.getInputTensor(0).numElements()==15600 &&
+                candidate.getInputTensor(0).dataType()==DataType.FLOAT32 &&
+                candidate.getOutputTensor(0).numElements()==521 && candidate.getOutputTensor(0).dataType()==DataType.FLOAT32) { "Unexpected model signature" }
+        } catch(e: Exception) { candidate.close();throw e }
+        interpreter=candidate
     }
-    fun classify(pcm: ShortArray): EnvironmentClassification {
+    fun classify(pcm: ShortArray, cancelled: () -> Boolean = { false }): EnvironmentClassification {
         require(pcm.size in 48000..160000)
         val frames=mutableListOf<Map<String,Double>>()
         var start=0
         val input=ByteBuffer.allocateDirect(15600*4).order(ByteOrder.nativeOrder())
         val output=ByteBuffer.allocateDirect(521*4).order(ByteOrder.nativeOrder())
         while(start+15600<=pcm.size) {
+            check(!cancelled()) { "Inference cancelled; sample discarded" }
             input.rewind();output.rewind()
             for(i in start until start+15600) input.putFloat(pcm[i]/32768f)
             input.rewind();interpreter.run(input,output);output.rewind()
             frames.add(labels.associateWith { output.float.toDouble() })
             start+=7680
         }
+        check(!cancelled()) { "Inference cancelled; sample discarded" }
         return EnvironmentClassifier.classify(frames)
     }
     override fun close() { interpreter.close() }

@@ -19,9 +19,11 @@ data class EnvironmentCaptureAccess(val foreground: Boolean, val unlocked: Boole
 /** Compact samples must belong to a live connection/session; a reconnect starts fresh. */
 data class WatchEnvironmentSession(val id: String, val lastReceivedAt: Long, val sequence: Long = -1, val connected: Boolean = true) {
     init { require(Regex("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}").matches(id));require(lastReceivedAt>=0 && sequence>=-1) }
-    fun receive(session: String, nextSequence: Long, ageMillis: Long, now: Long): WatchEnvironmentSession {
+    fun receive(session: String, nextSequence: Long, ageMillis: Long, now: Long,
+                schedule: SamplingSchedule = SamplingSchedule()): WatchEnvironmentSession {
         require(connected && session==id && nextSequence>=0 && nextSequence>sequence) { "Watch session expired or sample already used" }
         require(ageMillis in 0..5000 && now>=lastReceivedAt) { "Watch sample expired or clock changed" }
+        require(!expired(now,schedule)) { "Watch heartbeat expired; reconnect and restart explicitly" }
         return copy(lastReceivedAt=now,sequence=nextSequence)
     }
     fun expired(now: Long, schedule: SamplingSchedule) = !connected || now<lastReceivedAt ||

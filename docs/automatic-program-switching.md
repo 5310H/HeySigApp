@@ -98,13 +98,21 @@ development-only WAVs at 3/5/10 seconds and two gains. See the
 Recorded scalar outputs are regression fixtures; synthetic event-score tests
 exercise all six mappings but do not establish audio accuracy.
 
-Observed limits: Restaurant_1 is mapped to generic Conversation in all six
-tested cases; babble depends strongly on digital gain, and short traffic
-windows often abstain. Vacuum noise is recognized more consistently. Therefore
+The original mapper incorrectly labelled all six Restaurant_1 cases as generic
+Conversation. Conversation now requires conversation-specific model evidence;
+generic Speech or Narration alone abstains. The unchanged 24 recording-score
+fixtures now yield 17 abstentions, including all restaurant and babble cases.
+This removes a wrong label without establishing restaurant/group detection.
+Vacuum noise is recognized more consistently, while short traffic windows often
+abstain. Therefore
 the initial sampling schedule and six-way mapping are **not qualified for real
 automatic aid switching**. A stronger/validated overlap/context approach and
 held-out quiet/conversation/group/crowd recordings remain necessary. No measured
-phone/watch RAM, CPU, battery/endurance or Pixel Watch 3 runtime result is claimed.
+watch RAM, CPU, battery/endurance or Pixel Watch 3 runtime result is claimed.
+Short isolated phone timing/memory/cancellation results are recorded in the
+[follow-up acceptance report](acceptance/noise-hardening-2026-10-30.md); the
+user-reported quiet-room samples all abstained, so quiet recognition is still
+unqualified.
 
 Device acceptance still needs microphone denial/revocation/privacy switches,
 pause/lock/Stop races, voice/model conflicts, watch disconnect/reconnect and
@@ -119,3 +127,29 @@ If access ends without an explicit Stop, the worker reports failure so the UI
 leaves its active-sample state and stops monitoring. Device acceptance must
 include a voice/audio-priority interruption during inference, then an explicit
 monitoring restart; a discarded sample must never request an aid program.
+
+## Command-free device acceptance
+
+Both debug variants include a separate instrumentation-only acceptance screen.
+It has no fitting, saved-settings, companion connection or aid executor access.
+The native model benchmark uses synthetic PCM without playback. Optional live
+microphone windows remain foreground-only and can be cancelled on screen.
+Microphone permission is requested on that screen only after its explanation
+and an explicit button tap if permission has not already been granted.
+
+Build both debug and AndroidTest APKs, then run on an explicitly selected device:
+
+```sh
+python3 tools/run-noise-acceptance.py --module androidApp --device PHONE --microphone --report /tmp/phone-noise-acceptance.txt
+python3 tools/run-noise-acceptance.py --module wearApp --device WATCH --microphone --report /tmp/watch-noise-acceptance.txt
+```
+
+Use `--microphone` only after the user agrees to the disclosed tests. Omitting
+it runs model and layout checks without microphone access. Tests report scalar
+timing/CPU/process-memory values and coarse labels, never PCM or transcripts.
+The driver checks existing preference hashes around in-place installation and
+testing. The real monitoring layout is measured at 192dp round and font scales
+1 and 2 with 48dp targets, complete button text and scroll reachability.
+These short runs do not establish classifier accuracy, end-to-end Data Layer
+acceptance, permission/privacy-switch behavior or battery endurance. Acceptance
+components are debug-only and rejected by the release-artifact validators.

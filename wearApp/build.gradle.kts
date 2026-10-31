@@ -26,8 +26,11 @@ android {
         targetSdk = 35
         versionCode = 12
         versionName = "0.12"
+        testInstrumentationRunner = "com.heysig.audio.NoiseAcceptance"
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
+    sourceSets.getByName("debug").java.srcDir("../audioAndroid/src/debug/kotlin")
+    sourceSets.getByName("androidTest").java.srcDir("../audioAndroid/src/androidTest/kotlin")
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")

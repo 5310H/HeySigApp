@@ -17,6 +17,15 @@ restaurant errors are not release-qualified classification. Revalidate new nativ
 libraries, licenses, privacy/health intent, accessibility and battery on devices;
 earlier signed artifacts do not cover this change. No submission is prepared.
 
+Follow-up noise hardening adds debug-only, command-free microphone acceptance
+screens, cancellation between model frames and stricter Conversation evidence.
+Short Pixel 9a capture/cancellation/layout tests passed with unchanged preferences;
+all three user-reported quiet-room windows abstained. This does not qualify
+Quiet or six-way classification. Watch connection/runtime, OS permission/privacy,
+Data Layer, battery, accessibility and physical aid acceptance remain open. See
+[the measured follow-up](acceptance/noise-hardening-2026-10-30.md). The production
+permission set and automatic qualification gates are unchanged.
+
 **Status: development only; not ready for store submission.** This is a
 source/build audit, not a Play review or medical-device classification.
 Recheck the official links before every submission. The requirements below

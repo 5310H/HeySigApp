@@ -68,7 +68,7 @@ def main():
         if module == 'androidApp':
             require(app.get(ANDROID+'enableOnBackInvokedCallback') == 'true', 'Phone: predictive Back must be explicitly enabled for older supported runtimes')
         for element in manifest.iter():
-            require(not any(name in element.get(ANDROID+'name','') for name in ('WatchBridgeSetup','ProtoActivity','PlaybackSmoke','Api36Smoke')), 'Development component in bundle manifest')
+            require(not any(name in element.get(ANDROID+'name','') for name in ('WatchBridgeSetup','ProtoActivity','PlaybackSmoke','Api36Smoke','NoiseAcceptance')), 'Development component in bundle manifest')
         require(manifest.find('instrumentation') is None, f'{module}: instrumentation packaged in release')
         require(not any(item.get(ANDROID+'name') in (
             'com.google.android.gms.wearable.MESSAGE_RECEIVED',
@@ -103,20 +103,11 @@ def main():
             names = archive.namelist()
             require(not any(name.endswith(('.keystore','.jks','pairing.json')) for name in names), 'Private configuration packaged')
             native = {name for name in names if name.endswith('.so')}
+            litert = json.loads((ROOT/'third_party/litert/integrity.json').read_text())
+            expected_native = {'base/lib/'+name.removeprefix('jni/'): digest for name,digest in litert['native'].items()}
             if module == 'androidApp':
                 integrity = json.loads((ROOT/'third_party/sherpa-onnx/integrity.json').read_text())
-                expected_native = {'base/lib/'+name.removeprefix('jni/'): digest for name,digest in integrity['native'].items()}
-                require(native == set(expected_native), 'Unexpected or missing wake native libraries/ABIs')
-                for name in native:
-                    data = archive.read(name)
-                    require(hashlib.sha256(data).hexdigest() == expected_native[name], f'Unexpected native bytes: {name}')
-                    bits = data[4]
-                    offset = struct.unpack_from('<Q' if bits == 2 else '<I', data, 32 if bits == 2 else 28)[0]
-                    size,count = struct.unpack_from('<HH',data,54 if bits == 2 else 42)
-                    for index in range(count):
-                        program = struct.unpack_from('<IIQQQQQQ' if bits == 2 else '<IIIIIIII',data,offset+size*index)
-                        if program[0] == 1:
-                            require(program[-1] >= 16384, f'Native library lacks 16 KB ELF alignment: {name}')
+                expected_native.update({'base/lib/'+name.removeprefix('jni/'): digest for name,digest in integrity['native'].items()})
                 for name,digest in integrity['assets'].items():
                     require(hashlib.sha256(archive.read('base/assets/handsfree/'+name)).hexdigest() == digest, f'Wake asset checksum mismatch: {name}')
                 services = {item.get(ANDROID+'name'): item for item in app.findall('service')}
@@ -124,10 +115,26 @@ def main():
                 require(foreground is not None and foreground.get(ANDROID+'exported') == 'false' and foreground.get(ANDROID+'foregroundServiceType') in ('microphone','0x00000080'), 'Hands-free service must be private and microphone-typed')
                 tile = services.get('com.heysig.app.voice.HandsFreeTile')
                 require(tile is not None and tile.get(ANDROID+'permission') == 'android.permission.BIND_QUICK_SETTINGS_TILE', 'Quick Settings tile must be system-permission protected')
-            else:
-                require(not native, 'Watch unexpectedly contains native dependencies')
+            require(native == set(expected_native), 'Unexpected or missing native libraries/ABIs')
+            for name in native:
+                data = archive.read(name)
+                require(hashlib.sha256(data).hexdigest() == expected_native[name], f'Unexpected native bytes: {name}')
+                bits = data[4]
+                offset = struct.unpack_from('<Q' if bits == 2 else '<I', data, 32 if bits == 2 else 28)[0]
+                size,count = struct.unpack_from('<HH',data,54 if bits == 2 else 42)
+                for index in range(count):
+                    program = struct.unpack_from('<IIQQQQQQ' if bits == 2 else '<IIIIIIII',data,offset+size*index)
+                    if program[0] == 1:
+                        require(program[-1] >= 16384, f'Native library lacks 16 KB ELF alignment: {name}')
+            for asset,digest in {
+                'yamnet.tflite': '10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de',
+                'labels.txt': '8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051',
+            }.items():
+                require(hashlib.sha256(archive.read('base/assets/environment/'+asset)).hexdigest() == digest,
+                        f'Unexpected environment model/labels: {asset}')
             dex = b''.join(archive.read(name) for name in names if name.endswith('.dex'))
             require(b'WatchBridgeSetup' not in dex and b'ProtoActivity' not in dex, 'Development classes packaged')
+            require(b'NoiseAcceptance' not in dex, 'Noise acceptance test code packaged in release')
             require(b'heysig-watch-loopback' not in dex and b'pairing.json' not in dex, 'Development relay packaged')
             require(b'heysig_phone_v1' in dex, f'{module}: production companion capability missing')
         output_manifest = bundle.parent / 'validated-manifest.xml'

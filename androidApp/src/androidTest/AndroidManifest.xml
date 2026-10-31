@@ -3,4 +3,5 @@
     <instrumentation android:name="com.heysig.app.PlaybackSmoke" android:targetPackage="com.heysig.batteryprototype" />
     <instrumentation android:name="com.heysig.app.ProgramSettingsSmoke" android:targetPackage="com.heysig.batteryprototype" />
     <instrumentation android:name="com.heysig.app.SettingsFingerprintSmoke" android:targetPackage="com.heysig.batteryprototype" />
+    <instrumentation android:name="com.heysig.audio.NoiseAcceptance" android:targetPackage="com.heysig.batteryprototype" />
 </manifest>

@@ -26,7 +26,7 @@ class EnvironmentFeature(
 ) {
     private val prefs=activity.getSharedPreferences("heysig-noise-v1",Activity.MODE_PRIVATE)
     var settings=EnvironmentSettings(); private set
-    private var state=EnvironmentState()
+    @Volatile private var state=EnvironmentState()
     private var classification: EnvironmentClassification?=null
     private var simulation=false
     private var beforeSimulation: EnvironmentState?=null
@@ -36,7 +36,7 @@ class EnvironmentFeature(
     private var nextSample=0L
     private var lastPlaybackFinishedAt: Long?=null
     private var watchLink: WatchEnvironmentSession?=null
-    private var source="phone"
+    @Volatile private var source="phone"
     private var statusView: TextView?=null
     private val handler=Handler(Looper.getMainLooper())
     private val audio=EnvironmentAudio(activity,{ captureAllowed() },{ cancelled -> MicrophoneLease.acquire(cancelled) },{ MicrophoneLease.release() })
@@ -187,7 +187,7 @@ class EnvironmentFeature(
             "stop" -> stop("Watch monitoring stopped")
             "sample" -> {
                 check(state.monitoring && source=="watch") { "Watch session expired; start again" }
-                watchLink=checkNotNull(watchLink).receive(request.getString("session"),request.getLong("sequence"),request.getLong("ageMillis"),now())
+                watchLink=checkNotNull(watchLink).receive(request.getString("session"),request.getLong("sequence"),request.getLong("ageMillis"),now(),settings.schedule)
                 val id=request.optInt("environment",0)
                 val environment=if(id==0) null else ListeningEnvironment.entries.firstOrNull { it.id==id } ?: error("Invalid environment")
                 accept(EnvironmentClassification(environment,request.getDouble("confidence"),"Watch experimental model result"),

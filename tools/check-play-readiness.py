@@ -31,7 +31,7 @@ def inspect_manifest(path, label, minimum_target):
                 blockers.append(f'{label}: {flag}={value}; release configuration needs review')
         for component in app:
             name = component.get(ANDROID + 'name', '')
-            if 'WatchBridgeSetup' in name or 'PlaybackSmoke' in name:
+            if any(marker in name for marker in ('WatchBridgeSetup', 'PlaybackSmoke', 'NoiseAcceptance')):
                 blockers.append(f'{label}: development component present: {name}')
         for instrumentation in manifest.findall('instrumentation'):
             blockers.append(f'{label}: instrumentation present: {instrumentation.get(ANDROID + "name", "unknown")}')

@@ -29,5 +29,11 @@ requirements. DEMAND: Joachim Thiemann, Nobutaka Ito, Emmanuel Vincent,
 Current reference labels come from upstream filenames, not independent human
 annotation. Restaurant/crowd accuracy, held-out conversation and small/large
 groups, quiet recordings, provider/device behavior and battery remain acceptance
-work. In particular, the model often calls Restaurant_1 generic Speech; passing
-this regression preserves evidence of that failure and does not qualify it.
+work. In particular, the model often calls Restaurant_1 generic Speech. The
+original mapper treated that as Conversation; the stricter mapper now requires
+conversation-specific evidence and abstains on all six restaurant cases and
+all six babble cases. The unchanged scalar fixtures produce 17 abstentions in
+24 duration/gain cases. This is a conservative correction, not six-environment
+qualification or a held-out test of the rule change. YAMNet predicts audio
+events; group size/location still require independently validated evidence.
+See the [official model tutorial](https://www.tensorflow.org/hub/tutorials/yamnet).

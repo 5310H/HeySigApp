@@ -8,7 +8,7 @@ fun checkEnvironmentRecordings(raw: String) {
     val cases=rows.drop(1).groupBy { it.take(3) }
     check(cases.size==24)
     var eligible=0
-    var restaurantErrors=0
+    var restaurantAbstentions=0
     var uncertain=0
     for((key,frames) in cases) {
         val scores=frames.map { row ->
@@ -21,16 +21,16 @@ fun checkEnvironmentRecordings(raw: String) {
         when(key[0]) {
             "heysig-vacuum.wav" -> check(result.environment==ListeningEnvironment.NON_SPEECH_NOISE)
             "heysig-restaurant.wav" -> {
-                // Regression records a known error; it must not be represented as accepted accuracy.
-                check(result.environment==ListeningEnvironment.CONVERSATION);restaurantErrors++
+                // These clips provide generic speech evidence without reliable context.
+                check(result.environment==null);restaurantAbstentions++
             }
-            "heysig-babble.wav" -> check(result.environment in listOf(null,ListeningEnvironment.CONVERSATION))
+            "heysig-babble.wav" -> check(result.environment==null)
             "heysig-traffic.wav" -> check(result.environment in listOf(null,ListeningEnvironment.NON_SPEECH_NOISE))
             else -> error("Unexpected recording")
         }
     }
-    check(restaurantErrors==6 && uncertain>0 && eligible>0)
-    println("PASS: 24 recording score regressions; $uncertain abstentions, $restaurantErrors known restaurant errors. NOT classifier qualification.")
+    check(restaurantAbstentions==6 && uncertain>0 && eligible>0)
+    println("PASS: 24 recording score regressions; $uncertain abstentions including all 6 restaurant cases. NOT classifier qualification.")
 }
 
 fun main() {
