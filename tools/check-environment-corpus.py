@@ -64,6 +64,7 @@ def main():
     parser.add_argument('--cache', type=Path, required=True)
     parser.add_argument('--output', type=Path, default=ROOT/'shared/build/environment-corpus/evidence.tsv')
     parser.add_argument('--fetch', action='store_true', help='Explicitly download missing pinned public previews to the developer cache')
+    parser.add_argument('--regressions', type=Path, help='Explicitly write compact paired Quiet regression evidence to this directory')
     args = parser.parse_args()
     manifest = load_manifest(args.manifest)
     import numpy as np
@@ -79,6 +80,7 @@ def main():
         raise ValueError('Unexpected model signature')
     args.cache.mkdir(parents=True, exist_ok=True)
     rows = ['clip\tseconds\tgain\t'+'\t'.join(labels)]
+    verification_rows = [rows[0]]
     references = ['clip\treference\tpartition\tsourceGroup\tauthor\tsha256\treferenceBasis']
     summaries = []
     for clip in manifest['recordings']:
@@ -105,26 +107,69 @@ def main():
                 continue  # Never pad or loop a short recording to fabricate a longer test.
             for gain in (0.25, 1.0):
                 frames = []
+                # Match the Android PCM conversion before deriving the second view.
+                samples = (pcm[:seconds*16000]*gain*32768).astype(np.int16).astype(np.float32)/32768
+                peak = float(np.max(np.abs(samples)))
+                rms = float(np.sqrt(np.mean(samples.astype(np.float64)**2)))
+                verification_gain = max(1.0, min(16.0, 0.05/rms, 0.95/peak)) if peak else 1.0
                 for start in range(0, seconds*16000-15600+1, 7680):
-                    engine.set_tensor(source['index'], pcm[start:start+15600]*gain)
+                    engine.set_tensor(source['index'], samples[start:start+15600])
                     engine.invoke()
                     scores = engine.get_tensor(target['index']).reshape(-1)
                     if not np.all(np.isfinite(scores)) or not np.all((scores >= 0) & (scores <= 1)):
                         raise ValueError('Invalid model scores')
                     frames.append(scores.copy())
                     rows.append(f'{clip["id"]}\t{seconds}\t{gain}\t'+'\t'.join(f'{float(x):.8f}' for x in scores))
+                    engine.set_tensor(source['index'], (samples[start:start+15600].astype(np.float64)*verification_gain).astype(np.float32))
+                    engine.invoke()
+                    verified = engine.get_tensor(target['index']).reshape(-1)
+                    if not np.all(np.isfinite(verified)) or not np.all((verified >= 0) & (verified <= 1)):
+                        raise ValueError('Invalid verification scores')
+                    verification_rows.append(f'{clip["id"]}\t{seconds}\t{gain}\t'+'\t'.join(f'{float(x):.8f}' for x in verified))
                 mean = np.mean(frames, axis=0)
                 top = [(labels[int(i)], float(mean[i])) for i in np.argsort(mean)[-5:][::-1]]
                 summaries.append({'clip': clip['id'], 'seconds': seconds, 'gain': gain, 'reference': clip['reference'],
-                                  'partition': clip['partition'], 'pcmSha256': hashlib.sha256(decoded).hexdigest(), 'topEvents': top})
+                                  'partition': clip['partition'], 'pcmSha256': hashlib.sha256(decoded).hexdigest(),
+                                  'verificationGain': verification_gain, 'topEvents': top})
                 print(clip['id'], seconds, gain, top[:3])
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text('\n'.join(rows)+'\n')
+    args.output.with_name('verification.tsv').write_text('\n'.join(verification_rows)+'\n')
     args.output.with_name('references.tsv').write_text('\n'.join(references)+'\n')
     args.output.with_suffix('.json').write_text(json.dumps({'modelSha256': manifest['modelSha256'],
         'manifestSha256': hashlib.sha256(args.manifest.read_bytes()).hexdigest(),
         'decoder': subprocess.check_output(['ffmpeg', '-version'], text=True).splitlines()[0], 'cases': summaries}, indent=2)+'\n')
+    if args.regressions:
+        write_quiet_regressions(rows, verification_rows, args.regressions, manifest)
     print(f'Wrote {len(summaries)} duration/gain cases from {len(manifest["recordings"])} recordings. Creator references are provisional; NOT qualification.')
+
+
+def write_quiet_regressions(rows, verification_rows, directory, manifest):
+    # Four known false Quiet cases plus all six genuine room-tone cases.
+    def selected(row):
+        return row[0] == 'fs-565535' or (row[2] == '0.25' and (
+            row[0] == 'fs-260124' or (row[0] == 'fs-608996' and row[1] == '3')))
+    labels = rows[0].split('\t')[3:]
+    required = ['Speech', 'Conversation', 'Narration, monologue', 'Hubbub, speech noise, speech babble',
+                'Crowd', 'Chatter', 'Silence', 'Vehicle', 'Traffic noise, roadway noise', 'Engine', 'Tools',
+                'Mechanisms', 'Dishes, pots, and pans', 'Vacuum cleaner', 'Water', 'Wind', 'Mechanical fan', 'Music']
+    indices = [0, 1, 2] + [3+labels.index(label) for label in required]
+    directory.mkdir(parents=True, exist_ok=True)
+    hashes = {}
+    for name, evidence in [('quiet-original.tsv', rows), ('quiet-verification.tsv', verification_rows)]:
+        compact = ['\t'.join(evidence[0].split('\t')[i] for i in indices)]
+        for line in evidence[1:]:
+            row = line.split('\t')
+            if selected(row):
+                compact.append('\t'.join(row[i] for i in indices))
+        data = ('\n'.join(compact)+'\n').encode()
+        (directory/name).write_bytes(data)
+        hashes[name] = hashlib.sha256(data).hexdigest()
+    (directory/'quiet-integrity.json').write_text(json.dumps({
+        'modelSha256': manifest['modelSha256'], 'evidenceSha256': hashes,
+        'notes': 'PCM16 quantized gain variants; fixed bounded RMS/headroom verification, not acoustic calibration.',
+        'sources': [{key: clip[key] for key in ('id', 'sha256')} for clip in manifest['recordings']
+                    if clip['id'] in ('fs-565535', 'fs-260124', 'fs-608996')]}, indent=2)+'\n')
 
 
 if __name__ == '__main__':

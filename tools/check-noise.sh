@@ -13,4 +13,5 @@ java -cp shared/build/noise-check.jar com.heysig.noise.NoiseObserveCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.NoiseAutomationCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.EnvironmentSwitchingCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.EnvironmentRecordingCheckKt
+java -cp shared/build/noise-check.jar com.heysig.noise.EnvironmentSignalCheckKt
 java -cp shared/build/noise-check.jar com.heysig.audio.EnvironmentWorkerCheckKt

@@ -83,6 +83,16 @@ class NoiseAcceptance: Instrumentation() {
                 result.putLong("model${seconds}CpuMs",(Debug.threadCpuTimeNanos()-cpu)/1_000_000)
             }
             result.putLong("pssAfterModelKb",Debug.getPss())
+            // No sound is played. Zero input cannot establish a quiet acoustic environment.
+            val zero=ShortArray(48_000)
+            try {
+                Yamnet(activity).use { model ->
+                    check(model.classify(zero).environment==null)
+                    val quiet=EnvironmentClassification(com.heysig.noise.ListeningEnvironment.QUIET,0.9,"test")
+                    check(runCatching { model.confirmQuiet(zero,quiet) { true } }.isFailure)
+                }
+            } finally { zero.fill(0) }
+            result.putString("quietVerification","PASS: zero input rejected and verification cancellation honored")
             if(microphone) {
                 show("Microphone tests requested. If needed, tap Allow microphone tests and approve the system prompt.")
                 val deadline=SystemClock.elapsedRealtime()+60_000

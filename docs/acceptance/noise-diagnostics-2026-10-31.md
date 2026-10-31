@@ -55,6 +55,71 @@ full scalar event scores and the actual shared classifier decisions. A Python
 model environment is developer-only and introduces no app dependency. No source
 recordings are packaged with either application.
 
+## Quiet verification correction
+
+Quiet candidates now require agreement with a second digital-gain inference
+view. Shared Kotlin computes a target RMS of 0.05 full scale, capped at 16x gain
+and 0.95 peak headroom, without attenuating the original. No audio is played,
+transferred, saved or used as calibrated SPL. Zero PCM supplies no acoustic
+evidence and cannot establish Quiet. Disagreement abstains; the second view
+cannot promote another environment or increase the original confidence. The
+existing cancellation token is checked before, between and after model frames.
+Only Quiet candidates with gain above 1 need additional native inference.
+
+The reproducible PCM16 corpus rerun has **0 correct, 0 wrong, 40 abstentions**
+at the unchanged switching threshold. All four known false Quiet decisions are
+rejected; six room-tone variants remain below switching confidence and are never
+promoted. This fixes a demonstrated failure, not six-class recognition. Pinned
+paired scalar fixtures run in the standard shared regression suite. The original
+results above are retained as historical evidence, not overwritten acceptance.
+
+Both Android debug lint tasks for the preceding diagnostic commit passed with
+no errors. Builds and device results for the Quiet correction are recorded
+separately when complete; the phone APK hash above refers to the earlier build.
+
+The Quiet correction built both debug and both instrumentation APKs. All 31
+Gradle shared tests passed without failures/errors/skips, as did the standalone
+shared noise checks and four corpus integrity/leakage checks. Both APKs passed
+the pinned native/model and 16 KB ELF/ZIP alignment checks.
+
+The corrected phone build passed command-free model, cancellation, zero-input
+and round/large-font layout checks with the microphone off. All 25 existing
+preference files remained byte-identical. APK SHA-256:
+`09680422449d8e4526825db2d35c515afef945d4d8d7af079c42a0d48e8a74e7`.
+Synthetic 3/5/10-second wall/thread CPU times were 86/66, 34/33 and 60/60 ms.
+Process PSS was 120081 KB before, 158438 KB after model benchmarks and 170974 KB
+at completion, including instrumentation/extra interpreter overhead. This does
+not establish a sustained memory leak or production battery performance.
+The scalar report is `/tmp/heysig-phone-quiet-verification-2026-10-31.txt`.
+No repeat physical microphone or watch acceptance is claimed for this correction.
+
+Both corrected debug lint tasks also passed with no errors. Existing warnings
+remain: 26 on phone and 18 on watch, including untranslated debug-only test text.
+
+## Alternative pretrained-model probe
+
+A host-only evaluation used the 17,843,130-byte pretrained tinyCLAP PhiNet student
+with its original 44.1 kHz reference spectrogram/log-mel preprocessing and six
+fixed text descriptions. No fitting, microphone samples or user conversations
+were used. Text vectors came from the official 2022 CLAP text encoder; no new
+model was trained. [Scalar results and provenance](data/tinyclap-zero-shot-2026-10-31.json)
+and a [reproducer](../../tools/environment/README.md) are retained.
+
+Forced cosine top-1 matched 17/40 provisional references: Quiet 6/6,
+Conversation 6/6, Small Group 1/6, Restaurant 4/4, Large Group 0/12 and
+Non-Speech Noise 0/6. The twelve Large Group variants are two recordings, not
+twelve independent sessions. The score probe failed to distinguish group size
+and the vacuum recording. It supplies neither a qualified replacement nor
+calibrated switching confidence; changing text prompts after these observations
+would be another development experiment, not fresh held-out evidence.
+
+Host audio preprocessing/inference took approximately 453–4735 ms per case,
+excluding text-encoder preparation and model loading. These are not Android or
+Wear measurements and cannot be compared directly to the phone timings above.
+The student/source licenses are Apache-2.0; the Microsoft teacher/text weights
+use MS-PL as identified upstream. Nothing from this probe was added to app
+dependencies/assets, and no phone/watch runtime or battery qualification is claimed.
+
 ## Remaining work
 
 A suitable environment classifier still needs representative, independently

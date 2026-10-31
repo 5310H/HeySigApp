@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Reject corpus leakage and provenance corruption without model dependencies."""
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -42,6 +43,16 @@ class ManifestChecks(unittest.TestCase):
         altered['recordings'][1]['sha256'] = altered['recordings'][0]['sha256']
         with self.assertRaises(ValueError):
             self.load(altered)
+
+    def test_quiet_evidence_matches_model_and_sources(self):
+        directory=ROOT/'shared/src/commonTest/fixtures/environment/corpus'
+        pins=json.loads((directory/'quiet-integrity.json').read_text())
+        self.assertEqual(pins['modelSha256'],self.manifest['modelSha256'])
+        sources={clip['id']:clip['sha256'] for clip in self.manifest['recordings']}
+        for clip in pins['sources']:
+            self.assertEqual(clip['sha256'],sources[clip['id']])
+        for name,digest in pins['evidenceSha256'].items():
+            self.assertEqual(hashlib.sha256((directory/name).read_bytes()).hexdigest(),digest)
 
 
 if __name__ == '__main__':

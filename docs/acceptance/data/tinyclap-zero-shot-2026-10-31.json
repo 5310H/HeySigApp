@@ -1,0 +1,739 @@
+{
+  "labels": {
+    "QUIET": "a quiet room with minimal background noise",
+    "CONVERSATION": "two people having a one on one conversation",
+    "SMALL_GROUP": "a small group of several people talking",
+    "RESTAURANT": "people talking in a busy restaurant with clattering dishes and competing conversations",
+    "LARGE_GROUP": "a large crowd of people with many overlapping conversations",
+    "NON_SPEECH_NOISE": "traffic machinery or household appliance noise without speech"
+  },
+  "cases": [
+    {
+      "clip": "fs-565535",
+      "seconds": 3,
+      "gain": 0.25,
+      "reference": "QUIET",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.42936208844184875,
+        "CONVERSATION": 0.026815302670001984,
+        "SMALL_GROUP": -0.1743430197238922,
+        "RESTAURANT": -0.04995857924222946,
+        "LARGE_GROUP": -0.2550789713859558,
+        "NON_SPEECH_NOISE": 0.2563358247280121
+      },
+      "wallMs": 4734.508231005748
+    },
+    {
+      "clip": "fs-565535",
+      "seconds": 3,
+      "gain": 1.0,
+      "reference": "QUIET",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.412479043006897,
+        "CONVERSATION": 0.05242995172739029,
+        "SMALL_GROUP": -0.15476320683956146,
+        "RESTAURANT": -0.064740389585495,
+        "LARGE_GROUP": -0.25083252787590027,
+        "NON_SPEECH_NOISE": 0.2167171835899353
+      },
+      "wallMs": 862.9790769919055
+    },
+    {
+      "clip": "fs-565535",
+      "seconds": 5,
+      "gain": 0.25,
+      "reference": "QUIET",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.6291633248329163,
+        "CONVERSATION": -0.0009833507938310504,
+        "SMALL_GROUP": -0.2407524585723877,
+        "RESTAURANT": -0.18949425220489502,
+        "LARGE_GROUP": -0.3158241808414459,
+        "NON_SPEECH_NOISE": 0.530700147151947
+      },
+      "wallMs": 1169.3813070014585
+    },
+    {
+      "clip": "fs-565535",
+      "seconds": 5,
+      "gain": 1.0,
+      "reference": "QUIET",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.6755813360214233,
+        "CONVERSATION": 0.023647457361221313,
+        "SMALL_GROUP": -0.2369992733001709,
+        "RESTAURANT": -0.19885770976543427,
+        "LARGE_GROUP": -0.32169780135154724,
+        "NON_SPEECH_NOISE": 0.5640053749084473
+      },
+      "wallMs": 1379.3718469969463
+    },
+    {
+      "clip": "fs-565535",
+      "seconds": 10,
+      "gain": 0.25,
+      "reference": "QUIET",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.5168866515159607,
+        "CONVERSATION": 0.0304263886064291,
+        "SMALL_GROUP": -0.18640027940273285,
+        "RESTAURANT": -0.12847335636615753,
+        "LARGE_GROUP": -0.33030763268470764,
+        "NON_SPEECH_NOISE": 0.41251394152641296
+      },
+      "wallMs": 2034.4597689982038
+    },
+    {
+      "clip": "fs-565535",
+      "seconds": 10,
+      "gain": 1.0,
+      "reference": "QUIET",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.5425965189933777,
+        "CONVERSATION": 0.05236791446805,
+        "SMALL_GROUP": -0.17710408568382263,
+        "RESTAURANT": -0.14259769022464752,
+        "LARGE_GROUP": -0.34460538625717163,
+        "NON_SPEECH_NOISE": 0.42701324820518494
+      },
+      "wallMs": 1259.0655389940366
+    },
+    {
+      "clip": "fs-260124",
+      "seconds": 3,
+      "gain": 0.25,
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.2357461005449295,
+        "CONVERSATION": 0.5085231065750122,
+        "SMALL_GROUP": 0.31266307830810547,
+        "RESTAURANT": 0.36402031779289246,
+        "LARGE_GROUP": 0.06905443966388702,
+        "NON_SPEECH_NOISE": -0.037141039967536926
+      },
+      "wallMs": 605.5108459986513
+    },
+    {
+      "clip": "fs-260124",
+      "seconds": 3,
+      "gain": 1.0,
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.17405414581298828,
+        "CONVERSATION": 0.5211048126220703,
+        "SMALL_GROUP": 0.27900582551956177,
+        "RESTAURANT": 0.3367791473865509,
+        "LARGE_GROUP": 0.053187426179647446,
+        "NON_SPEECH_NOISE": -0.08897782117128372
+      },
+      "wallMs": 634.712999992189
+    },
+    {
+      "clip": "fs-260124",
+      "seconds": 5,
+      "gain": 0.25,
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.21933478116989136,
+        "CONVERSATION": 0.543942928314209,
+        "SMALL_GROUP": 0.4611152708530426,
+        "RESTAURANT": 0.35752999782562256,
+        "LARGE_GROUP": 0.16942818462848663,
+        "NON_SPEECH_NOISE": -0.013733097352087498
+      },
+      "wallMs": 802.2231539944187
+    },
+    {
+      "clip": "fs-260124",
+      "seconds": 5,
+      "gain": 1.0,
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.1483917385339737,
+        "CONVERSATION": 0.5290377140045166,
+        "SMALL_GROUP": 0.3943290412425995,
+        "RESTAURANT": 0.34173309803009033,
+        "LARGE_GROUP": 0.1539124995470047,
+        "NON_SPEECH_NOISE": -0.07787411659955978
+      },
+      "wallMs": 775.1098459993955
+    },
+    {
+      "clip": "fs-260124",
+      "seconds": 10,
+      "gain": 0.25,
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.141557514667511,
+        "CONVERSATION": 0.5241865515708923,
+        "SMALL_GROUP": 0.474200040102005,
+        "RESTAURANT": 0.36927294731140137,
+        "LARGE_GROUP": 0.14679613709449768,
+        "NON_SPEECH_NOISE": -0.08543013036251068
+      },
+      "wallMs": 1714.0553839999484
+    },
+    {
+      "clip": "fs-260124",
+      "seconds": 10,
+      "gain": 1.0,
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.0876510739326477,
+        "CONVERSATION": 0.5232624411582947,
+        "SMALL_GROUP": 0.4173946976661682,
+        "RESTAURANT": 0.3789997398853302,
+        "LARGE_GROUP": 0.14155596494674683,
+        "NON_SPEECH_NOISE": -0.14111468195915222
+      },
+      "wallMs": 1175.6256920052692
+    },
+    {
+      "clip": "fs-260121",
+      "seconds": 3,
+      "gain": 0.25,
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.11147984117269516,
+        "CONVERSATION": 0.5139185786247253,
+        "SMALL_GROUP": 0.5017917156219482,
+        "RESTAURANT": 0.5063636302947998,
+        "LARGE_GROUP": 0.2741718590259552,
+        "NON_SPEECH_NOISE": -0.1278887391090393
+      },
+      "wallMs": 635.8438460010802
+    },
+    {
+      "clip": "fs-260121",
+      "seconds": 3,
+      "gain": 1.0,
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.07482262700796127,
+        "CONVERSATION": 0.537530243396759,
+        "SMALL_GROUP": 0.4457785487174988,
+        "RESTAURANT": 0.5099716782569885,
+        "LARGE_GROUP": 0.2622961699962616,
+        "NON_SPEECH_NOISE": -0.16851800680160522
+      },
+      "wallMs": 748.0835390015272
+    },
+    {
+      "clip": "fs-260121",
+      "seconds": 5,
+      "gain": 0.25,
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "winner": "SMALL_GROUP",
+      "similarities": {
+        "QUIET": 0.15316984057426453,
+        "CONVERSATION": 0.5274689793586731,
+        "SMALL_GROUP": 0.5390175580978394,
+        "RESTAURANT": 0.4365215599536896,
+        "LARGE_GROUP": 0.2892858386039734,
+        "NON_SPEECH_NOISE": -0.050387099385261536
+      },
+      "wallMs": 512.0396929996787
+    },
+    {
+      "clip": "fs-260121",
+      "seconds": 5,
+      "gain": 1.0,
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.07290958613157272,
+        "CONVERSATION": 0.5514645576477051,
+        "SMALL_GROUP": 0.5188208818435669,
+        "RESTAURANT": 0.5124386548995972,
+        "LARGE_GROUP": 0.32766199111938477,
+        "NON_SPEECH_NOISE": -0.1310701072216034
+      },
+      "wallMs": 484.4980769994436
+    },
+    {
+      "clip": "fs-260121",
+      "seconds": 10,
+      "gain": 0.25,
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.16786053776741028,
+        "CONVERSATION": 0.5508987903594971,
+        "SMALL_GROUP": 0.5123748183250427,
+        "RESTAURANT": 0.43963512778282166,
+        "LARGE_GROUP": 0.24864372611045837,
+        "NON_SPEECH_NOISE": -0.04313934966921806
+      },
+      "wallMs": 788.5191540117376
+    },
+    {
+      "clip": "fs-260121",
+      "seconds": 10,
+      "gain": 1.0,
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "winner": "CONVERSATION",
+      "similarities": {
+        "QUIET": 0.0974574014544487,
+        "CONVERSATION": 0.5642690658569336,
+        "SMALL_GROUP": 0.47652727365493774,
+        "RESTAURANT": 0.5092849731445312,
+        "LARGE_GROUP": 0.27459144592285156,
+        "NON_SPEECH_NOISE": -0.11135786771774292
+      },
+      "wallMs": 819.2396160011413
+    },
+    {
+      "clip": "fs-260123",
+      "seconds": 3,
+      "gain": 0.25,
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": 0.10004521161317825,
+        "CONVERSATION": 0.40393978357315063,
+        "SMALL_GROUP": 0.3923010528087616,
+        "RESTAURANT": 0.4622878432273865,
+        "LARGE_GROUP": 0.20751330256462097,
+        "NON_SPEECH_NOISE": -0.12209118902683258
+      },
+      "wallMs": 636.1336150002899
+    },
+    {
+      "clip": "fs-260123",
+      "seconds": 3,
+      "gain": 1.0,
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": 0.03606409206986427,
+        "CONVERSATION": 0.41075408458709717,
+        "SMALL_GROUP": 0.41049855947494507,
+        "RESTAURANT": 0.5280279517173767,
+        "LARGE_GROUP": 0.27388155460357666,
+        "NON_SPEECH_NOISE": -0.17162929475307465
+      },
+      "wallMs": 623.0245379992994
+    },
+    {
+      "clip": "fs-260123",
+      "seconds": 5,
+      "gain": 0.25,
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "winner": "SMALL_GROUP",
+      "similarities": {
+        "QUIET": 0.07756050676107407,
+        "CONVERSATION": 0.45866912603378296,
+        "SMALL_GROUP": 0.5649281740188599,
+        "RESTAURANT": 0.5625106692314148,
+        "LARGE_GROUP": 0.4037657082080841,
+        "NON_SPEECH_NOISE": -0.09959672391414642
+      },
+      "wallMs": 746.023615996819
+    },
+    {
+      "clip": "fs-260123",
+      "seconds": 5,
+      "gain": 1.0,
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.03862939774990082,
+        "CONVERSATION": 0.4441218674182892,
+        "SMALL_GROUP": 0.5519171357154846,
+        "RESTAURANT": 0.6674253940582275,
+        "LARGE_GROUP": 0.49623310565948486,
+        "NON_SPEECH_NOISE": -0.18971134722232819
+      },
+      "wallMs": 614.8725379898679
+    },
+    {
+      "clip": "fs-260123",
+      "seconds": 10,
+      "gain": 0.25,
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": 0.06863944232463837,
+        "CONVERSATION": 0.4603300988674164,
+        "SMALL_GROUP": 0.5404543876647949,
+        "RESTAURANT": 0.5555365681648254,
+        "LARGE_GROUP": 0.3656631112098694,
+        "NON_SPEECH_NOISE": -0.10583606362342834
+      },
+      "wallMs": 1829.3936160043813
+    },
+    {
+      "clip": "fs-260123",
+      "seconds": 10,
+      "gain": 1.0,
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.05642067641019821,
+        "CONVERSATION": 0.44185715913772583,
+        "SMALL_GROUP": 0.5057490468025208,
+        "RESTAURANT": 0.6574196219444275,
+        "LARGE_GROUP": 0.44126155972480774,
+        "NON_SPEECH_NOISE": -0.2075445055961609
+      },
+      "wallMs": 1177.1063849882921
+    },
+    {
+      "clip": "fs-363712",
+      "seconds": 3,
+      "gain": 0.25,
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.038999561220407486,
+        "CONVERSATION": 0.13149842619895935,
+        "SMALL_GROUP": 0.3164631426334381,
+        "RESTAURANT": 0.5226690173149109,
+        "LARGE_GROUP": 0.35603582859039307,
+        "NON_SPEECH_NOISE": -0.19948258996009827
+      },
+      "wallMs": 683.0699230049504
+    },
+    {
+      "clip": "fs-363712",
+      "seconds": 3,
+      "gain": 1.0,
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.13945432007312775,
+        "CONVERSATION": 0.18894585967063904,
+        "SMALL_GROUP": 0.3580985963344574,
+        "RESTAURANT": 0.6173540949821472,
+        "LARGE_GROUP": 0.4809400141239166,
+        "NON_SPEECH_NOISE": -0.2688769996166229
+      },
+      "wallMs": 610.6416919938056
+    },
+    {
+      "clip": "fs-363712",
+      "seconds": 5,
+      "gain": 0.25,
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.07712338864803314,
+        "CONVERSATION": 0.1630701720714569,
+        "SMALL_GROUP": 0.45583856105804443,
+        "RESTAURANT": 0.6771881580352783,
+        "LARGE_GROUP": 0.5648483633995056,
+        "NON_SPEECH_NOISE": -0.18900494277477264
+      },
+      "wallMs": 882.9807700094534
+    },
+    {
+      "clip": "fs-363712",
+      "seconds": 5,
+      "gain": 1.0,
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.18055225908756256,
+        "CONVERSATION": 0.19740067422389984,
+        "SMALL_GROUP": 0.44695425033569336,
+        "RESTAURANT": 0.7721462845802307,
+        "LARGE_GROUP": 0.6679660081863403,
+        "NON_SPEECH_NOISE": -0.24402529001235962
+      },
+      "wallMs": 624.3073849909706
+    },
+    {
+      "clip": "fs-533833",
+      "seconds": 3,
+      "gain": 0.25,
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.1231183111667633,
+        "CONVERSATION": 0.01083350833505392,
+        "SMALL_GROUP": -0.11769270151853561,
+        "RESTAURANT": 0.060840751975774765,
+        "LARGE_GROUP": -0.03451211750507355,
+        "NON_SPEECH_NOISE": -0.03105316311120987
+      },
+      "wallMs": 569.1466150019551
+    },
+    {
+      "clip": "fs-533833",
+      "seconds": 3,
+      "gain": 1.0,
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": 0.028888948261737823,
+        "CONVERSATION": -0.02670958824455738,
+        "SMALL_GROUP": -0.13783778250217438,
+        "RESTAURANT": 0.09343311190605164,
+        "LARGE_GROUP": 0.009216121397912502,
+        "NON_SPEECH_NOISE": -0.08182141184806824
+      },
+      "wallMs": 491.967846013722
+    },
+    {
+      "clip": "fs-533833",
+      "seconds": 5,
+      "gain": 0.25,
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.2554435729980469,
+        "CONVERSATION": -0.08252926915884018,
+        "SMALL_GROUP": -0.21890638768672943,
+        "RESTAURANT": 0.052647914737463,
+        "LARGE_GROUP": -0.0613262839615345,
+        "NON_SPEECH_NOISE": 0.12385473400354385
+      },
+      "wallMs": 829.4460000033723
+    },
+    {
+      "clip": "fs-533833",
+      "seconds": 5,
+      "gain": 1.0,
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": 0.07393920421600342,
+        "CONVERSATION": -0.15013910830020905,
+        "SMALL_GROUP": -0.25126174092292786,
+        "RESTAURANT": 0.10254355520009995,
+        "LARGE_GROUP": 0.0076550752855837345,
+        "NON_SPEECH_NOISE": 0.013577846810221672
+      },
+      "wallMs": 642.3148460016819
+    },
+    {
+      "clip": "fs-533833",
+      "seconds": 10,
+      "gain": 0.25,
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.2852921187877655,
+        "CONVERSATION": -0.08191521465778351,
+        "SMALL_GROUP": -0.22158238291740417,
+        "RESTAURANT": 0.0486074835062027,
+        "LARGE_GROUP": -0.07740468531847,
+        "NON_SPEECH_NOISE": 0.16978952288627625
+      },
+      "wallMs": 957.3944620060502
+    },
+    {
+      "clip": "fs-533833",
+      "seconds": 10,
+      "gain": 1.0,
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "winner": "QUIET",
+      "similarities": {
+        "QUIET": 0.13684134185314178,
+        "CONVERSATION": -0.15111598372459412,
+        "SMALL_GROUP": -0.2510993480682373,
+        "RESTAURANT": 0.08853965252637863,
+        "LARGE_GROUP": -0.021267442032694817,
+        "NON_SPEECH_NOISE": 0.07018788158893585
+      },
+      "wallMs": 920.3833079955075
+    },
+    {
+      "clip": "fs-608996",
+      "seconds": 3,
+      "gain": 0.25,
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "winner": "SMALL_GROUP",
+      "similarities": {
+        "QUIET": 0.06986384093761444,
+        "CONVERSATION": 0.32793986797332764,
+        "SMALL_GROUP": 0.3772847652435303,
+        "RESTAURANT": 0.36843469738960266,
+        "LARGE_GROUP": 0.1523178368806839,
+        "NON_SPEECH_NOISE": -0.19735059142112732
+      },
+      "wallMs": 677.152614996885
+    },
+    {
+      "clip": "fs-608996",
+      "seconds": 3,
+      "gain": 1.0,
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": 0.012703354470431805,
+        "CONVERSATION": 0.3126142919063568,
+        "SMALL_GROUP": 0.3708154857158661,
+        "RESTAURANT": 0.37929779291152954,
+        "LARGE_GROUP": 0.17958928644657135,
+        "NON_SPEECH_NOISE": -0.2415980100631714
+      },
+      "wallMs": 453.25846200285014
+    },
+    {
+      "clip": "fs-608996",
+      "seconds": 5,
+      "gain": 0.25,
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "winner": "SMALL_GROUP",
+      "similarities": {
+        "QUIET": 0.020505758002400398,
+        "CONVERSATION": 0.38475823402404785,
+        "SMALL_GROUP": 0.531004011631012,
+        "RESTAURANT": 0.4105547070503235,
+        "LARGE_GROUP": 0.2474728226661682,
+        "NON_SPEECH_NOISE": -0.19605541229248047
+      },
+      "wallMs": 660.3483079961734
+    },
+    {
+      "clip": "fs-608996",
+      "seconds": 5,
+      "gain": 1.0,
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "winner": "SMALL_GROUP",
+      "similarities": {
+        "QUIET": -0.07545170187950134,
+        "CONVERSATION": 0.36328935623168945,
+        "SMALL_GROUP": 0.5166985392570496,
+        "RESTAURANT": 0.4574511647224426,
+        "LARGE_GROUP": 0.30853888392448425,
+        "NON_SPEECH_NOISE": -0.2534453868865967
+      },
+      "wallMs": 676.3016150071053
+    },
+    {
+      "clip": "fs-608996",
+      "seconds": 10,
+      "gain": 0.25,
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.17713235318660736,
+        "CONVERSATION": 0.29479268193244934,
+        "SMALL_GROUP": 0.5174208283424377,
+        "RESTAURANT": 0.527863621711731,
+        "LARGE_GROUP": 0.36518386006355286,
+        "NON_SPEECH_NOISE": -0.31364676356315613
+      },
+      "wallMs": 977.572385003441
+    },
+    {
+      "clip": "fs-608996",
+      "seconds": 10,
+      "gain": 1.0,
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "winner": "RESTAURANT",
+      "similarities": {
+        "QUIET": -0.2800246775150299,
+        "CONVERSATION": 0.2730019986629486,
+        "SMALL_GROUP": 0.4861178994178772,
+        "RESTAURANT": 0.5549286007881165,
+        "LARGE_GROUP": 0.4102290868759155,
+        "NON_SPEECH_NOISE": -0.3635137379169464
+      },
+      "wallMs": 935.006922998582
+    }
+  ],
+  "notes": "Zero-shot cosine similarities; not calibrated probabilities. Provisional references; NOT qualification.",
+  "provenance": {
+    "student.ckpt": {
+      "url": "https://huggingface.co/fpaissan/tinyCLAP/resolve/d498b46/phinet_alpha_1.50_beta_0.75_t0_6_N_7.ckpt",
+      "sha256": "9ee541d799c106510def4e228818e3cef000bb1e130557c292b23cd94798d88b"
+    },
+    "modules.py": {
+      "url": "https://raw.githubusercontent.com/fpaissan/tinyCLAP/main/modules.py",
+      "sha256": "b1cee925728b3f76c1ed5e386cd0191d48cb954cc5d7bd00156ca40fad72650c"
+    },
+    "phinet.py": {
+      "url": "https://raw.githubusercontent.com/micromind-toolkit/micromind/main/micromind/networks/phinet.py",
+      "sha256": "c3a9fa0931884a78991534cf0ca0ac24fd35191825d4c29d19c7d4685ec1d4e5"
+    },
+    "vocab.txt": {
+      "url": "https://huggingface.co/google-bert/bert-base-uncased/resolve/main/vocab.txt",
+      "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "config.json": {
+      "url": "https://huggingface.co/google-bert/bert-base-uncased/resolve/main/config.json",
+      "sha256": "7160e1553ad2ca51d8c1cb066be533db31826e12d173824c1bb0cb1a4f187d20"
+    },
+    "LICENSE-tinyCLAP": {
+      "url": "https://raw.githubusercontent.com/fpaissan/tinyCLAP/main/LICENSE",
+      "sha256": "82887c177b75a33606a1d35c5c732d60a102b492b982139cb8eaf47aa7814a4b"
+    },
+    "LICENSE-micromind": {
+      "url": "https://raw.githubusercontent.com/micromind-toolkit/micromind/main/LICENSE",
+      "sha256": "4d2d3772494803e028ca00c197c204b62445151623990de411415cc14eb67277"
+    },
+    "LICENSE-CLAP": {
+      "url": "https://raw.githubusercontent.com/microsoft/CLAP/main/LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    }
+  },
+  "teacherCheckpoint": "https://huggingface.co/microsoft/msclap/resolve/c47d441/CLAP_weights_2022.pth",
+  "hostVersions": {
+    "python": "3.11.2",
+    "torch": "2.6.0",
+    "transformers": "4.46.3",
+    "librosa": "0.11.0",
+    "torchlibrosa": "0.1.0",
+    "numpy": "2.4.4"
+  },
+  "teacherTextTensorDigest": "aefcf1a18670d6481690d064a38274c0953d7eadd9a7bb8d5ef1ed26c57a10cc",
+  "textVectorsSha256": "ee6c74f0a88b55cdc6c5d6f586da3412c4f779b40aaff8920bf12b6b6d9ea99e",
+  "corpusManifestSha256": "dcc301714e48afa128ba71fc1e6e78a89c0bea3dafef521690ae7debe83d72f2"
+}

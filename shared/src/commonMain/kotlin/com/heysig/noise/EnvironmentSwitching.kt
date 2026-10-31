@@ -45,6 +45,13 @@ data class EnvironmentClassification(val environment: ListeningEnvironment?, val
 
 /** YAMNet event evidence, not speaker counting or a calibrated location probability. */
 object EnvironmentClassifier {
+    /** Quiet must survive a higher-gain view; disagreement never promotes another class. */
+    fun confirmQuiet(original: EnvironmentClassification, verification: EnvironmentClassification?): EnvironmentClassification {
+        if(original.environment!=ListeningEnvironment.QUIET) return original
+        if(verification?.environment!=ListeningEnvironment.QUIET) return EnvironmentClassification(null,0.0,
+            "Quiet was not confirmed; keeping current program")
+        return original.copy(confidence=minOf(original.confidence,verification.confidence))
+    }
     val requiredLabels = setOf("Speech","Conversation","Narration, monologue","Hubbub, speech noise, speech babble",
         "Crowd","Chatter","Silence","Vehicle","Traffic noise, roadway noise","Engine","Tools","Mechanisms",
         "Dishes, pots, and pans","Vacuum cleaner","Water","Wind","Mechanical fan","Music")

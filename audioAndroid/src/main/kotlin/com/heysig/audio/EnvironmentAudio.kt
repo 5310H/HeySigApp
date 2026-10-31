@@ -27,7 +27,7 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
         if(!cancelled()) observeScores?.invoke(EnvironmentClassifier.requiredLabels.associateWith { label ->
             frames.map { it.getValue(label) }.average()
         })
-        EnvironmentClassifier.classify(frames)
+        model.confirmQuiet(pcm,EnvironmentClassifier.classify(frames),cancelled)
     } },{ SystemClock.elapsedRealtime() })
     fun stop() = worker.stop()
     fun busy() = worker.busy()
@@ -103,10 +103,23 @@ class Yamnet(context: Context): AutoCloseable {
         interpreter=candidate
     }
     fun classify(pcm: ShortArray, cancelled: () -> Boolean = { false }): EnvironmentClassification {
-        return EnvironmentClassifier.classify(eventScores(pcm,cancelled))
+        return confirmQuiet(pcm,EnvironmentClassifier.classify(eventScores(pcm,cancelled)),cancelled)
     }
-    fun eventScores(pcm: ShortArray, cancelled: () -> Boolean = { false }): List<Map<String,Double>> {
+    fun confirmQuiet(pcm: ShortArray, original: EnvironmentClassification, cancelled: () -> Boolean): EnvironmentClassification {
+        if(original.environment!=ListeningEnvironment.QUIET) return original
+        check(!cancelled()) { "Inference cancelled; sample discarded" }
+        val gain=EnvironmentSignal.quietVerificationGain(pcm)
+        val verification=when {
+            gain==null -> null
+            gain==1.0 -> original
+            else -> EnvironmentClassifier.classify(eventScores(pcm,cancelled,gain))
+        }
+        check(!cancelled()) { "Inference cancelled; sample discarded" }
+        return EnvironmentClassifier.confirmQuiet(original,verification)
+    }
+    fun eventScores(pcm: ShortArray, cancelled: () -> Boolean = { false }, gain: Double = 1.0): List<Map<String,Double>> {
         require(pcm.size in 48000..160000)
+        require(gain.isFinite() && gain in 1.0..16.0)
         val frames=mutableListOf<Map<String,Double>>()
         var start=0
         val input=ByteBuffer.allocateDirect(15600*4).order(ByteOrder.nativeOrder())
@@ -114,7 +127,7 @@ class Yamnet(context: Context): AutoCloseable {
         while(start+15600<=pcm.size) {
             check(!cancelled()) { "Inference cancelled; sample discarded" }
             input.rewind();output.rewind()
-            for(i in start until start+15600) input.putFloat(pcm[i]/32768f)
+            for(i in start until start+15600) input.putFloat((pcm[i]/32768.0*gain).toFloat())
             input.rewind();interpreter.run(input,output);output.rewind()
             frames.add(labels.associateWith { output.float.toDouble() })
             start+=7680

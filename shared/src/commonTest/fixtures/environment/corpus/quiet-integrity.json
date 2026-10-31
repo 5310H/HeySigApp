@@ -1,0 +1,22 @@
+{
+  "modelSha256": "10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de",
+  "evidenceSha256": {
+    "quiet-original.tsv": "4c43b6b68c3a13460d1af80b715e6f2fae14dbb8f45738638312a5c8c8652b13",
+    "quiet-verification.tsv": "5bc338a98a70b02fcde58e870466baf24b4b20cb0f1e1655e59eac1b2bb84070"
+  },
+  "notes": "PCM16 quantized gain variants; fixed bounded RMS/headroom verification, not acoustic calibration.",
+  "sources": [
+    {
+      "id": "fs-565535",
+      "sha256": "00b64b3566e5596f8c4905d95dc09212bc21a69ff62d1f02db2a3b0a145c8332"
+    },
+    {
+      "id": "fs-260124",
+      "sha256": "0e45102d17749ee2af11f02b4d7878ceb3326ef799984d88e3010e5c64d86011"
+    },
+    {
+      "id": "fs-608996",
+      "sha256": "9a3fd2457e6e646bd644f740df4c1e014fc105e521bfd5498fb0e53cdb3021ca"
+    }
+  ]
+}

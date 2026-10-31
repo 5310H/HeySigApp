@@ -5,7 +5,7 @@ import java.io.File
 
 /** Evaluate the actual shared mapper; never duplicate its rules in Python. */
 fun main(args: Array<String>) {
-    require(args.size==3) { "Usage: evidence.tsv references.tsv report.tsv" }
+    require(args.size in 3..4) { "Usage: evidence.tsv references.tsv report.tsv [verification.tsv]" }
     val references=File(args[1]).readLines().drop(1).map { it.split('\t') }
     require(references.isNotEmpty() && references.all { it.size==7 })
     require(references.all { it.all(String::isNotBlank) && it[2] in listOf("development","validation") &&
@@ -22,6 +22,10 @@ fun main(args: Array<String>) {
     val labels=rows.first().drop(3)
     require(labels.distinct().size==labels.size && labels.containsAll(EnvironmentClassifier.requiredLabels))
     val cases=rows.drop(1).groupBy { it.take(3) }
+    val verification=if(args.size==4) File(args[3]).readLines().map { it.split('\t') }.let {
+        require(it.first()==rows.first())
+        it.drop(1).groupBy { row -> row.take(3) }.also { other -> require(other.keys==cases.keys) }
+    } else null
     val output=mutableListOf("clip\treference\tpartition\tsourceGroup\tseconds\tgain\tprediction\tscore\tdecision\toutcome")
     var correct=0;var wrong=0;var abstain=0
     for((key,frames) in cases) {
@@ -31,13 +35,18 @@ fun main(args: Array<String>) {
         val seconds=key[1].toInt()
         require(seconds in listOf(3,5,10) && key[2].toDouble() in listOf(0.25,1.0))
         require(frames.size==(seconds*16000-15600)/7680+1) { "Missing/extra inference frame" }
-        val evidence=frames.map { row ->
+        fun parse(frames: List<List<String>>)=frames.map { row ->
             require(row.size==labels.size+3)
             val scores=row.drop(3).map { it.toDouble() }
             require(scores.all { it.isFinite() && it in 0.0..1.0 })
             labels.zip(scores).toMap()
         }
-        val prediction=EnvironmentClassifier.classify(evidence)
+        val original=EnvironmentClassifier.classify(parse(frames))
+        val prediction=if(verification!=null) {
+            val checkFrames=verification.getValue(key)
+            require(checkFrames.size==frames.size)
+            EnvironmentClassifier.confirmQuiet(original,EnvironmentClassifier.classify(parse(checkFrames)))
+        } else original
         val decision=prediction.environment?.takeIf { prediction.confidence>=EnvironmentSettings().minimumConfidence }
         val outcome=when { decision==null -> { abstain++;"ABSTAIN" };decision==expected -> { correct++;"CORRECT" };else -> { wrong++;"WRONG" } }
         output.add(listOf(key[0],expected.name,reference[2],reference[3],key[1],key[2],prediction.environment?.name ?: "UNCERTAIN",
