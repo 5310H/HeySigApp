@@ -9,6 +9,7 @@ p=argparse.ArgumentParser(description='Fit an exploratory scene head with source
 p.add_argument('--features',type=Path,required=True)
 p.add_argument('--manifest',type=Path,default=DEFAULT_MANIFEST)
 p.add_argument('--output',type=Path,required=True)
+p.add_argument('--cv-output',type=Path,help='New directory for development-only leave-source-group-out heads')
 a=p.parse_args()
 manifest=load_manifest(a.manifest)
 archive=np.load(a.features,allow_pickle=False);assert str(archive['manifestSha256'])==hashlib.sha256(a.manifest.read_bytes()).hexdigest();records=json.loads(str(archive['records']));features=archive['features'];events=archive['events']
@@ -68,3 +69,18 @@ for part in ('development','validation'):
   rr=[r for r in rows if r['reference']==name];print(name,len(rr),'top1',sum(r['winner']==name for r in rr),flush=True)
 a.output.with_suffix('.json').write_text(json.dumps(report,indent=2)+'\n')
 print('SELECTED C',C,'temperature',temp,'HEAD',report['headSha256'],flush=True)
+
+if a.cv_output is not None:
+ a.cv_output.mkdir(parents=True,exist_ok=False)
+ folds=[]
+ with threadpool_limits(1):
+  for index,group in enumerate(sorted(set(groups[train]))):
+   mask=train & (groups!=group);fold_model=fit(mask,C)
+   blob=bytearray(b'HSGENV1\n'+bytes.fromhex(model_hash)+struct.pack('<iiifff',1024,6,1,temp,.65,.15))
+   for c in range(6):
+    center=np.average(features[mask & (y==c)],axis=0,weights=sample_weights(mask)[y[mask]==c]);center/=np.linalg.norm(center)
+    blob+=struct.pack('<f',fold_model.intercept_[c])+fold_model.coef_[c].astype('<f4').tobytes()+center.astype('<f4').tobytes()
+   filename=f'fold-{index:03d}.bin';(a.cv_output/filename).write_bytes(blob)
+   folds.append(dict(sourceGroup=group,file=filename,sha256=hashlib.sha256(blob).hexdigest(),heldOutVariants=int(sum(train & (groups==group)))))
+ (a.cv_output/'folds.json').write_text(json.dumps(dict(version=1,C=C,temperature=temp,encoderSha256=model_hash,corpusManifestSha256=str(archive['manifestSha256']),folds=folds,notes='Development-only diagnostic, not nested unbiased validation: C and temperature were selected using these development groups. Every fold excludes its source group from coefficients AND centroids.'),indent=2)+'\n')
+ print('Wrote',len(folds),'development-only CV heads',flush=True)

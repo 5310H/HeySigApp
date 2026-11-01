@@ -8,9 +8,11 @@ import java.security.MessageDigest
 
 /** Run the exact app decision code on frozen development evidence, without any device APIs. */
 fun main(args: Array<String>) {
-    require(args.size==6) { "Usage: encoder.tflite head.bin corpus.json evidence.bin references.tsv report.tsv" }
+    require(args.size in 6..7) { "Usage: encoder.tflite head.bin corpus.json evidence.bin references.tsv report.tsv [development-source-group]" }
     fun hash(bytes: ByteArray)=MessageDigest.getInstance("SHA-256").digest(bytes)
     fun hex(bytes: ByteArray)=bytes.joinToString("") { "%02x".format(it) }
+    val heldGroup=args.getOrNull(6)
+    require(heldGroup==null || (heldGroup.isNotBlank() && heldGroup.length<=200 && heldGroup.none { it in "\t\r\n" }))
     val encoderHash=hash(File(args[0]).readBytes())
     val headBytes=File(args[1]).readBytes()
     val head=EnvironmentSceneHead.decode(headBytes,hex(encoderHash))
@@ -39,6 +41,10 @@ fun main(args: Array<String>) {
         val events=List(frames) { EnvironmentClassifier.requiredLabels.associateWith {
             evidence.double.also { score -> require(score.isFinite() && score in 0.0..1.0) }
         } }
+        if(heldGroup!=null) {
+            if(reference[4]!=heldGroup) continue
+            require(reference[3]=="development") { "Fold reports must use development groups only" }
+        }
         val prediction=head.classify(features,events)
         val decision=prediction.environment?.takeIf { prediction.confidence>=EnvironmentSettings().minimumConfidence }
         val expected=ListeningEnvironment.valueOf(reference[2])
@@ -47,7 +53,7 @@ fun main(args: Array<String>) {
             decision?.name ?: "UNCERTAIN",prediction.confidence.toString(),outcome)
         results.add(row);output.add(row.joinToString("\t"))
     }
-    require(!evidence.hasRemaining())
+    require(!evidence.hasRemaining() && results.isNotEmpty())
     File(args[5]).apply { parentFile?.mkdirs();writeText(output.joinToString("\n")+"\n") }
     for(partition in listOf("development","validation")) {
         val rows=results.filter { it[2]==partition }

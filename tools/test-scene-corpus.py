@@ -44,6 +44,28 @@ class CorpusChecks(unittest.TestCase):
                 altered=copy.deepcopy(self.manifest);altered['recordings'][1][key]=value
                 with self.assertRaises(ValueError):self.load(altered)
 
+    def test_attribution_license_requires_explicit_review_fields(self):
+        altered=copy.deepcopy(self.manifest)
+        clip=next(c for c in altered['recordings'] if not c['id'].startswith('ami-'))
+        clip['license']='CC-BY-3.0';clip['licenseUrl']='https://creativecommons.org/licenses/by/3.0/'
+        with self.assertRaises(ValueError):self.load(altered)
+        clip['attribution']=clip['title']+' by '+clip['author'];clip['transforms']='Decoded WAV and embedding features'
+        self.load(altered)
+        clip['license']='CC-BY-NC-3.0';clip['licenseUrl']='https://creativecommons.org/licenses/by-nc/3.0/'
+        with self.assertRaises(ValueError):self.load(altered)
+
+    def test_expansion_preserves_sources_partitions_and_fresh_evaluation(self):
+        expanded=scene.load_manifest(scene.DEFAULT_MANIFEST.with_name('expanded-corpus.json'))
+        old={c['id']:c for c in self.manifest['recordings']}
+        current={c['id']:c for c in expanded['recordings']}
+        self.assertEqual(len(current),len(old)+7)
+        self.assertTrue(all(current[k]==v for k,v in old.items()))
+        self.assertEqual(set(expanded['freshValidationIds']),{'fsd-401794','fsd-17118'})
+        self.assertTrue(set(expanded['freshValidationIds']).isdisjoint(old))
+        for fresh in (['fsd-324783'],['fsd-401794','fsd-401794'],['missing']):
+            altered=copy.deepcopy(expanded);altered['freshValidationIds']=fresh
+            with self.assertRaises(ValueError):self.load(altered)
+
     def test_native_recordings_are_pinned_and_separate(self):
         base=ROOT/'shared/src/commonTest/fixtures/environment/scene-head/device/scene-fixtures'
         manifest=json.loads((base/'manifest.json').read_text())

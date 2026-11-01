@@ -1,0 +1,457 @@
+{
+  "manifestSha256": "e4d519bb6f8d637494a5d5d6f52ec4e2fa307f5c7a31108cc4a9de74b8f513a7",
+  "decisionReportSha256": "bc347471e68e05a3f255c7083fb25a38df72dfa845b659c3e53aec278bbf02d4",
+  "notes": "Actual shared Kotlin decisions at unchanged threshold. Correlated windows and provisional source references are not independent physical acceptance. Fresh sources were not used to fit coefficients or select hyperparameters.",
+  "evaluations": {
+    "development": {
+      "total": {
+        "variants": 212,
+        "recordings": 22,
+        "sourceGroups": 20,
+        "CORRECT": 129,
+        "WRONG": 10,
+        "ABSTAIN": 73
+      },
+      "byScene": {
+        "QUIET": {
+          "variants": 16,
+          "recordings": 2,
+          "sourceGroups": 2,
+          "CORRECT": 16,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "CONVERSATION": {
+          "variants": 42,
+          "recordings": 4,
+          "sourceGroups": 4,
+          "CORRECT": 15,
+          "WRONG": 0,
+          "ABSTAIN": 27
+        },
+        "SMALL_GROUP": {
+          "variants": 52,
+          "recordings": 3,
+          "sourceGroups": 3,
+          "CORRECT": 29,
+          "WRONG": 0,
+          "ABSTAIN": 23
+        },
+        "RESTAURANT": {
+          "variants": 34,
+          "recordings": 5,
+          "sourceGroups": 5,
+          "CORRECT": 23,
+          "WRONG": 10,
+          "ABSTAIN": 1
+        },
+        "LARGE_GROUP": {
+          "variants": 22,
+          "recordings": 3,
+          "sourceGroups": 3,
+          "CORRECT": 2,
+          "WRONG": 0,
+          "ABSTAIN": 20
+        },
+        "NON_SPEECH_NOISE": {
+          "variants": 46,
+          "recordings": 5,
+          "sourceGroups": 5,
+          "CORRECT": 44,
+          "WRONG": 0,
+          "ABSTAIN": 2
+        }
+      },
+      "byRecording": {
+        "ami-ES2002a": {
+          "variants": 18,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 12,
+          "WRONG": 0,
+          "ABSTAIN": 6
+        },
+        "ami-ES2003a": {
+          "variants": 18,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 17,
+          "WRONG": 0,
+          "ABSTAIN": 1
+        },
+        "fs-260121": {
+          "variants": 16,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 16
+        },
+        "fs-260123": {
+          "variants": 12,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 12
+        },
+        "fs-260124": {
+          "variants": 10,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 9,
+          "WRONG": 0,
+          "ABSTAIN": 1
+        },
+        "fs-363712": {
+          "variants": 4,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 4,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fs-533833": {
+          "variants": 6,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 6,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fs-565535": {
+          "variants": 12,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 12,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-152978": {
+          "variants": 2,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 1,
+          "WRONG": 0,
+          "ABSTAIN": 1
+        },
+        "fsd-174229": {
+          "variants": 10,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 10,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-192347": {
+          "variants": 4,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 4,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-201734": {
+          "variants": 4,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 2,
+          "WRONG": 0,
+          "ABSTAIN": 2
+        },
+        "fsd-212187": {
+          "variants": 16,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 16,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-235249": {
+          "variants": 8,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 6,
+          "WRONG": 0,
+          "ABSTAIN": 2
+        },
+        "fsd-324783": {
+          "variants": 14,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 14
+        },
+        "fsd-338964": {
+          "variants": 10,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 10,
+          "ABSTAIN": 0
+        },
+        "fsd-347537": {
+          "variants": 8,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 8,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-360702": {
+          "variants": 6,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 6
+        },
+        "fsd-382575": {
+          "variants": 12,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 12
+        },
+        "fsd-431478": {
+          "variants": 6,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 6,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-50763": {
+          "variants": 10,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 10,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-79669": {
+          "variants": 6,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 6,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        }
+      }
+    },
+    "previouslyViewedValidation": {
+      "total": {
+        "variants": 108,
+        "recordings": 9,
+        "sourceGroups": 9,
+        "CORRECT": 31,
+        "WRONG": 0,
+        "ABSTAIN": 77
+      },
+      "byScene": {
+        "QUIET": {
+          "variants": 14,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 6,
+          "WRONG": 0,
+          "ABSTAIN": 8
+        },
+        "CONVERSATION": {
+          "variants": 8,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 8
+        },
+        "SMALL_GROUP": {
+          "variants": 36,
+          "recordings": 2,
+          "sourceGroups": 2,
+          "CORRECT": 18,
+          "WRONG": 0,
+          "ABSTAIN": 18
+        },
+        "RESTAURANT": {
+          "variants": 16,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 16
+        },
+        "LARGE_GROUP": {
+          "variants": 20,
+          "recordings": 2,
+          "sourceGroups": 2,
+          "CORRECT": 2,
+          "WRONG": 0,
+          "ABSTAIN": 18
+        },
+        "NON_SPEECH_NOISE": {
+          "variants": 14,
+          "recordings": 2,
+          "sourceGroups": 2,
+          "CORRECT": 5,
+          "WRONG": 0,
+          "ABSTAIN": 9
+        }
+      },
+      "byRecording": {
+        "ami-IS1000a": {
+          "variants": 18,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 18
+        },
+        "ami-TS3003a": {
+          "variants": 18,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 18,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "fsd-338254": {
+          "variants": 10,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 2,
+          "WRONG": 0,
+          "ABSTAIN": 8
+        },
+        "fsd-348830": {
+          "variants": 14,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 6,
+          "WRONG": 0,
+          "ABSTAIN": 8
+        },
+        "fsd-389755": {
+          "variants": 4,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 2,
+          "WRONG": 0,
+          "ABSTAIN": 2
+        },
+        "fsd-414297": {
+          "variants": 16,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 16
+        },
+        "fsd-418989": {
+          "variants": 8,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 8
+        },
+        "fsd-423267": {
+          "variants": 10,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 3,
+          "WRONG": 0,
+          "ABSTAIN": 7
+        },
+        "fsd-62478": {
+          "variants": 10,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 10
+        }
+      }
+    },
+    "freshValidation": {
+      "total": {
+        "variants": 16,
+        "recordings": 2,
+        "sourceGroups": 2,
+        "CORRECT": 2,
+        "WRONG": 0,
+        "ABSTAIN": 14
+      },
+      "byScene": {
+        "QUIET": {
+          "variants": 0,
+          "recordings": 0,
+          "sourceGroups": 0,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "CONVERSATION": {
+          "variants": 2,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 2
+        },
+        "SMALL_GROUP": {
+          "variants": 0,
+          "recordings": 0,
+          "sourceGroups": 0,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "RESTAURANT": {
+          "variants": 14,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 2,
+          "WRONG": 0,
+          "ABSTAIN": 12
+        },
+        "LARGE_GROUP": {
+          "variants": 0,
+          "recordings": 0,
+          "sourceGroups": 0,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        },
+        "NON_SPEECH_NOISE": {
+          "variants": 0,
+          "recordings": 0,
+          "sourceGroups": 0,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 0
+        }
+      },
+      "byRecording": {
+        "fsd-17118": {
+          "variants": 14,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 2,
+          "WRONG": 0,
+          "ABSTAIN": 12
+        },
+        "fsd-401794": {
+          "variants": 2,
+          "recordings": 1,
+          "sourceGroups": 1,
+          "CORRECT": 0,
+          "WRONG": 0,
+          "ABSTAIN": 2
+        }
+      }
+    }
+  }
+}

@@ -48,8 +48,12 @@ def load_manifest(path):
                 raise ValueError('AMI needs four participant IDs, attribution and transformations')
             identities_for_clip += [('participant',person) for person in people]
         else:
-            if parsed.hostname!='freesound.org' or clip['license']!='CC0-1.0' or clip['licenseUrl']!='https://creativecommons.org/publicdomain/zero/1.0/':
+            licenses={'CC0-1.0':'https://creativecommons.org/publicdomain/zero/1.0/',
+                      'CC-BY-3.0':'https://creativecommons.org/licenses/by/3.0/'}
+            if parsed.hostname!='freesound.org' or licenses.get(clip['license'])!=clip['licenseUrl']:
                 raise ValueError('Unreviewed Freesound license/source')
+            if clip['license']=='CC-BY-3.0' and (not clip.get('attribution') or not clip.get('transforms')):
+                raise ValueError('Attribution license requires credit and transformations')
             identities_for_clip.append(('creator',clip['author']))
         for identity in identities_for_clip:
             previous=identities.setdefault(identity,clip['partition'])
@@ -58,6 +62,9 @@ def load_manifest(path):
     for partition in ('development','validation'):
         if {c['reference'] for c in manifest['recordings'] if c['partition']==partition}!=set(LABELS):
             raise ValueError('Both partitions must cover all six scenes')
+    fresh=manifest.get('freshValidationIds',[])
+    if not isinstance(fresh,list) or not all(isinstance(item,str) for item in fresh) or len(fresh)!=len(set(fresh)) or not set(fresh).issubset({c['id'] for c in manifest['recordings'] if c['partition']=='validation'}):
+        raise ValueError('Fresh evaluation IDs must be unique validation recordings')
     return manifest
 
 
