@@ -1,0 +1,25 @@
+{
+  "policy": "Offline Small Group fallback at fixed .65; conflicting accepted primary prediction abstains; other specialist labels ignored.",
+  "primaryHeadSha256": "0500150700fc75a8fc4b4c59f0cd284fea0b8d61d9b5fe6de074b24358233bfd",
+  "specialistHeadSha256": "b32f1124b31e4961f52c1153fa8220d3cc10b374292dfdb199b7bcb852e56be8",
+  "qualification": false,
+  "notes": "All evaluation sources previously viewed. Mixed CV excludes groups from specialist fitting only; primary includes original training sources. Neither confidence calibration nor independent generalization or physical acceptance.",
+  "evidenceSha256": {
+    "small-group-fallback-curated-2026-11-01.tsv": "243f7aeae6b22fe7d16769137f85443c5737a7e9bd25ce09389b383838292ced",
+    "small-group-fallback-curated-2026-11-01.json": "23fcb0c3602dc94b00dd8c98ac17286d8b96c90f1ebcf40a75195c2500936af0",
+    "small-group-fallback-historical-component-2026-11-01.tsv": "dfb8390f297db1adba201c9631fde693b94466f439288fbc34ea57614c69bba7",
+    "small-group-fallback-historical-2026-11-01.tsv": "4298c9954fd270c1cfc92b33d5dc13d494265be26cf5a1c05096bc9aae7b87d4",
+    "small-group-fallback-historical-2026-11-01.json": "153be0274b0c01085231ed6e11df872960f7910b19f74c8d2fb4e30238ce6114",
+    "small-group-fallback-primary-cv-order-2026-11-01.tsv": "feaee21803d78f48b0c2181458b32561f9fbee18d6f04e35f5bf12e959ad7829",
+    "small-group-fallback-mixed-cv-2026-11-01.tsv": "a9e338eea7b63742aaa126a953112422d24e1525b1be4a69f99473082723987a",
+    "small-group-fallback-mixed-cv-2026-11-01.json": "b4ec993a25c0360c74ff67712fe095528786e8d42f00ec7f2588a90d94582d4a",
+    "window-curation-baseline-2026-11-01.tsv": "348d7703f9921d72215d854e339a5d27b945a96a41b5cbbc5c9c70095c021670",
+    "window-curation-candidate-2026-11-01.tsv": "c1765b8848852d9a29c57a1b0aa6571a5cb7f01933f5a4d4d3fe8dd7ace8d5f3",
+    "window-curation-development-cv-2026-11-01.tsv": "5133f5f097e4b701600fb4194655f5a068dfe907c71fb233c75636b12114d86a",
+    "scene-expansion-baseline-2026-11-01.tsv": "bc347471e68e05a3f255c7083fb25a38df72dfa845b659c3e53aec278bbf02d4"
+  },
+  "policySourceSha256": {
+    "tools/environment/SceneSpecialistReport.kt": "c7b98c741b9d3b5eb7e5e609fa46e8712fa745586854c7c8016d4bdf0dffcd8b",
+    "tools/environment/SceneSpecialistCheck.kt": "9854879a7589826d2f9af50b90dcf1000d355b0e3528a829e08384726193db6c"
+  }
+}

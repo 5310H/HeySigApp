@@ -99,6 +99,9 @@ and [reproduction instructions](../shared/src/commonTest/fixtures/environment/sc
 Its held-out Conversation and Restaurant coverage remains inadequate, so real
 automatic switching stays disabled. Model notices are in **Privacy and data →
 Environmental model notices**.
+The [Small Group-only fallback experiment](acceptance/environment-small-group-fallback-2026-11-01.md)
+adds coverage on curated meeting windows but remains an offline research tool;
+it does not replace the installed classifier or qualify six-way switching.
 
 Historical event-only regression: `tools/check-environment-model.py` exercises the archived original model on four
 development-only WAVs at 3/5/10 seconds and two gains. See the
