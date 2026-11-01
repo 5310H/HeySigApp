@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "notes": "Frozen before feature extraction/model scoring. New participant groups IS1001a and TS3005a are reserved for Small Group evaluation only. All original data/evidence remain historical.",
+  "metadataSource": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/ami_public_manual_1.6.2/corpusResources/meetings.xml",
+  "metadataSha256": "8ab6cdcf03ed863e839418f31c7380392397a2eed892d73b9bc1b438c7ec520a",
+  "policy": {
+    "durationOrderSeconds": [
+      10,
+      5,
+      3
+    ],
+    "windowsPerDuration": 2,
+    "minimumSpeakerWordSeconds": 0.5,
+    "minimumSpeakers": 3,
+    "minimumWordCoverageFraction": 0.4,
+    "maximumWordOverlapFraction": 0.2,
+    "minimumGapSeconds": 5,
+    "selection": "earliest eligible integer-second start, ten-second windows first; no model outputs consulted"
+  },
+  "meetings": [
+    {
+      "meeting": "ES2002a",
+      "partition": "development",
+      "participantsByChannel": {
+        "B": "FEE005",
+        "A": "MEE006",
+        "C": "MEE007",
+        "D": "MEE008"
+      },
+      "durationSeconds": 1242,
+      "previouslyViewedParticipants": true,
+      "reservedAudioIntervals": [
+        [
+          115,
+          155
+        ]
+      ]
+    },
+    {
+      "meeting": "ES2003a",
+      "partition": "development",
+      "participantsByChannel": {
+        "B": "MEE009",
+        "D": "MEE010",
+        "A": "MEE011",
+        "C": "MEE012"
+      },
+      "durationSeconds": 1124,
+      "previouslyViewedParticipants": true,
+      "reservedAudioIntervals": [
+        [
+          115,
+          155
+        ]
+      ]
+    },
+    {
+      "meeting": "ES2004a",
+      "partition": "development",
+      "participantsByChannel": {
+        "B": "FEE013",
+        "C": "MEE014",
+        "A": "MEO015",
+        "D": "FEE016"
+      },
+      "durationSeconds": 1186,
+      "previouslyViewedParticipants": false,
+      "reservedAudioIntervals": []
+    },
+    {
+      "meeting": "ES2005a",
+      "partition": "development",
+      "participantsByChannel": {
+        "C": "MEE017",
+        "A": "MEE018",
+        "D": "FEE019",
+        "B": "MEO020"
+      },
+      "durationSeconds": 958,
+      "previouslyViewedParticipants": false,
+      "reservedAudioIntervals": []
+    },
+    {
+      "meeting": "IS1000a",
+      "partition": "validation",
+      "participantsByChannel": {
+        "D": "MIO016",
+        "B": "MIO082",
+        "A": "FIE081",
+        "C": "MIO050"
+      },
+      "durationSeconds": 1490,
+      "previouslyViewedParticipants": true,
+      "reservedAudioIntervals": [
+        [
+          115,
+          155
+        ]
+      ]
+    },
+    {
+      "meeting": "TS3003a",
+      "partition": "validation",
+      "participantsByChannel": {
+        "A": "MTD009PM",
+        "C": "MTD0010ID",
+        "B": "MTD011UID",
+        "D": "MTD012ME"
+      },
+      "durationSeconds": 1505,
+      "previouslyViewedParticipants": true,
+      "reservedAudioIntervals": [
+        [
+          115,
+          155
+        ]
+      ]
+    },
+    {
+      "meeting": "IS1001a",
+      "partition": "validation",
+      "participantsByChannel": {
+        "D": "FIO074",
+        "B": "MIO012",
+        "A": "MIO043",
+        "C": "MIO020"
+      },
+      "durationSeconds": 890,
+      "previouslyViewedParticipants": false,
+      "reservedAudioIntervals": []
+    },
+    {
+      "meeting": "TS3005a",
+      "partition": "validation",
+      "participantsByChannel": {
+        "A": "MTD017PM",
+        "C": "MTD018ID",
+        "B": "FTD019UID",
+        "D": "MTD020ME"
+      },
+      "durationSeconds": 1318,
+      "previouslyViewedParticipants": false,
+      "reservedAudioIntervals": []
+    }
+  ]
+}

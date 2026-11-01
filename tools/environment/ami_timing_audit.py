@@ -2,7 +2,8 @@
 import math
 import xml.etree.ElementTree as E
 
-def word_intervals(data):
+def word_intervals(data,source_start=120.,source_end=150.):
+    if not 0<=source_start<source_end<=7200:raise ValueError("Source interval bound")
     if not 1<=len(data)<=2_000_000:raise ValueError('Annotation size bound')
     intervals=[]
     for node in E.fromstring(data):
@@ -10,14 +11,14 @@ def word_intervals(data):
         if 'starttime' not in node.attrib or 'endtime' not in node.attrib:continue
         start=float(node.get('starttime'));end=float(node.get('endtime'))
         if not math.isfinite(start) or not math.isfinite(end) or start<0 or end<start:raise ValueError('Invalid word timing')
-        start=max(120.,start);end=min(150.,end)
-        if end>start:intervals.append([start-120.,end-120.])
+        start=max(source_start,start);end=min(source_end,end)
+        if end>start:intervals.append([start-source_start,end-source_start])
     return sorted(intervals)
 
-def merge(intervals,start,end):
+def merge(intervals,start,end,limit=30):
     out=[]
     for left,right in sorted(intervals):
-        if not all(math.isfinite(v) for v in (left,right)) or not 0<=left<right<=30:raise ValueError('Invalid derived timing')
+        if not all(math.isfinite(v) for v in (left,right)) or not 0<=left<right<=limit:raise ValueError('Invalid derived timing')
         left=max(start,left);right=min(end,right)
         if right<=left:continue
         if out and left<=out[-1][1]:out[-1][1]=max(out[-1][1],right)
@@ -27,9 +28,13 @@ def merge(intervals,start,end):
 def summarize(speakers,offset,seconds):
     if offset not in (0,10,20) or seconds not in (3,5,10) or offset+seconds>30:raise ValueError('Unreviewed window')
     if set(speakers)!=set('ABCD'):raise ValueError('Expected four annotated participants')
+    return span_activity(speakers,offset,seconds,30)
+
+def span_activity(speakers,offset,seconds,limit=7200):
+    if set(speakers)!=set('ABCD') or not 0<=offset<offset+seconds<=limit<=7200:raise ValueError('Activity span bound')
     end=offset+seconds;events={offset:0,end:0};durations={}
     for speaker,intervals in speakers.items():
-        merged=merge(intervals,offset,end);durations[speaker]=sum(r-l for l,r in merged)
+        merged=merge(intervals,offset,end,limit);durations[speaker]=sum(r-l for l,r in merged)
         for left,right in merged:
             events[left]=events.get(left,0)+1;events[right]=events.get(right,0)-1
     histogram=[0.]*5;active=0;last=offset

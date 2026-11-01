@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "C": 10.0,
+  "temperature": 0.5,
+  "encoderSha256": "b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4",
+  "corpusManifestSha256": "b8db4e08ac981b387e61ed97270add26c382851a71f2a2f9e3f502d384735d3f",
+  "folds": [
+    {
+      "sourceGroup": "AMI/ES2002",
+      "file": "fold-000.bin",
+      "sha256": "14ad3e4ded0b71725b6438cdeeb90d443ccca916b99c52879d9cedaaf9ae27eb",
+      "heldOutVariants": 10
+    },
+    {
+      "sourceGroup": "AMI/ES2003",
+      "file": "fold-001.bin",
+      "sha256": "e3f9c08b4977f42c02253106008106bddb80809acf01c74f791b1ff96ae32348",
+      "heldOutVariants": 6
+    },
+    {
+      "sourceGroup": "AMI/ES2004",
+      "file": "fold-002.bin",
+      "sha256": "f97c1f8f2662150c1adf268338d9d4dd457ce98eb0f0bab5c22a9a6b646c6955",
+      "heldOutVariants": 12
+    },
+    {
+      "sourceGroup": "AMI/ES2005",
+      "file": "fold-003.bin",
+      "sha256": "65b9a9b4b584dee84b9316adc3a75ebda740ed5a89d5b01c6bf63ccb0db69e7f",
+      "heldOutVariants": 6
+    },
+    {
+      "sourceGroup": "AirialPC/scene-session",
+      "file": "fold-004.bin",
+      "sha256": "02cfe5a8219e11bc9eb4b5d4642048a9a70ca86b7d8962e41efe8c59d0f64b2e",
+      "heldOutVariants": 4
+    },
+    {
+      "sourceGroup": "AlexanderChe/363712",
+      "file": "fold-005.bin",
+      "sha256": "0b7849cc829a219dd4c58e5c4172850d8c74b1dd093e31372863f48e57f095e0",
+      "heldOutVariants": 4
+    },
+    {
+      "sourceGroup": "Angellu16/533833",
+      "file": "fold-006.bin",
+      "sha256": "01be852e63335c986c1b35cc9af329558418eed871021775a2d4c4b004e664ea",
+      "heldOutVariants": 6
+    },
+    {
+      "sourceGroup": "KieranKeegan/scene-session",
+      "file": "fold-007.bin",
+      "sha256": "9a84e9f875625b091b6735cebe750a5cb476be80464fbdc1ac17d3eebf77d299",
+      "heldOutVariants": 6
+    },
+    {
+      "sourceGroup": "RutgerMuller/scene-session",
+      "file": "fold-008.bin",
+      "sha256": "c0cc84a7858c595781ae372740dbe602d80060dab0240c40742bcfb13349205a",
+      "heldOutVariants": 10
+    },
+    {
+      "sourceGroup": "Ryding/scene-session",
+      "file": "fold-009.bin",
+      "sha256": "769eb59973476f59ab103c7fe034af8321d0337ed104dcf8dfe0bdd9e24195cd",
+      "heldOutVariants": 10
+    },
+    {
+      "sourceGroup": "SpliceSound/crowd-murmur",
+      "file": "fold-010.bin",
+      "sha256": "44ee68cb33ae31ad293ebcb14e4a384e8dc3d758f67ba60fddccb83236909234",
+      "heldOutVariants": 38
+    },
+    {
+      "sourceGroup": "andrebola/scene-session",
+      "file": "fold-011.bin",
+      "sha256": "b0d0d715ee33ea59dc43d8c420cde53cd144ff621a8a66a9f7f8b8b04e11f3d3",
+      "heldOutVariants": 8
+    },
+    {
+      "sourceGroup": "blaukreuz/scene-session",
+      "file": "fold-012.bin",
+      "sha256": "a6cabfe4fcc41c93c06fbe94885ab06d1e6a48403c72f8476eb932d83c670dac",
+      "heldOutVariants": 16
+    },
+    {
+      "sourceGroup": "cognito perceptu/scene-session",
+      "file": "fold-013.bin",
+      "sha256": "fc25f586d7d77bb08b0355ca1c64cbc7236179c2bf35565829a721b79ad98955",
+      "heldOutVariants": 10
+    },
+    {
+      "sourceGroup": "dianser72/scene-session",
+      "file": "fold-014.bin",
+      "sha256": "2562789543050ac8bef5e36152580e0a60833e430db77d066ea24a0b429355db",
+      "heldOutVariants": 2
+    },
+    {
+      "sourceGroup": "eguobyte/scene-session",
+      "file": "fold-015.bin",
+      "sha256": "873f81598525f3338d7df3f38672b6adf919a13d50250fb32e8cd12ed70a47d6",
+      "heldOutVariants": 6
+    },
+    {
+      "sourceGroup": "jaredpass24/scene-session",
+      "file": "fold-016.bin",
+      "sha256": "482ce79ce1b3b79123eb0263c5894822262a415e339b3c540bec00e4103c499e",
+      "heldOutVariants": 8
+    },
+    {
+      "sourceGroup": "labailey/scene-session",
+      "file": "fold-017.bin",
+      "sha256": "d40016f6224cf37e9b2c705078d9583dbd708f6d613a63f46c7f1fdb2f607f72",
+      "heldOutVariants": 6
+    },
+    {
+      "sourceGroup": "macdaddyno1/scene-session",
+      "file": "fold-018.bin",
+      "sha256": "120db6d49af2213034d046cbc71a1a33a40334b1df629d2fee395f94c45778d4",
+      "heldOutVariants": 12
+    },
+    {
+      "sourceGroup": "miguel2613/scene-session",
+      "file": "fold-019.bin",
+      "sha256": "bedad68dd80a19d99fff81ad2f63a5f3787e903cf8585f0519c8001bda886e20",
+      "heldOutVariants": 14
+    },
+    {
+      "sourceGroup": "univ_lyon3/scene-session",
+      "file": "fold-020.bin",
+      "sha256": "34fd1617c36c5bf084af130457b9f0543f0e94f4ac9016e4c761cb16c9257c93",
+      "heldOutVariants": 4
+    },
+    {
+      "sourceGroup": "visionear/565535",
+      "file": "fold-021.bin",
+      "sha256": "50e9d6d17cf3ba94692a0164d9c9e50da65d08f240fb0d2e1af9fbabcf863ea2",
+      "heldOutVariants": 12
+    }
+  ],
+  "notes": "Development-only diagnostic, not nested unbiased validation: C and temperature were selected using these development groups. Every fold excludes its source group from coefficients AND centroids."
+}

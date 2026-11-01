@@ -62,3 +62,18 @@ python3 tools/test-ami-timings.py
 ```
 
 Use matching **expanded** feature/head/fit/CV inputs and a new consensus work directory. Add `--fetch` to the timing audit only for an explicit public-source hash/extraction recheck. HTTP mode receives XML in memory and retains no word text. `ami-word-timings.json` contains only public timestamps, credits and hashes, under CC BY 4.0; it is excluded from application assets. Word activity is not scene ground truth: 28/36 existing AMI windows have words from fewer than three speakers, while the original references describe a four-person meeting. These references need window-level review; no relabeling is used to improve reported model scores.
+
+## Per-window curated corpus
+
+`curation-plan.json` freezes a model-blind word-activity rule. `curation-word-timings.json` is a CC BY 4.0 numeric derivative of 32 public AMI annotation files, with source hashes/attribution and no word text. `curated-windows.json` records the 38 selected excerpts; `curated-corpus.json` replaces the four meeting-context AMI clips with those complete annotated windows, retaining all non-AMI entries unchanged. Earlier manifests/evidence remain historical. Two previously unused participant groups were reserved for this experiment; they are now viewed evidence.
+
+```sh
+python3 tools/environment/curate-ami-references.py --output /tmp/curated-windows.json
+python3 tools/environment/fetch-scene-corpus.py --manifest shared/src/commonTest/fixtures/environment/scene-head/curated-corpus.json --cache /tmp/heysig-environment-corpus
+python3 tools/environment/build-curated-corpus.py --cache /tmp/heysig-environment-corpus --output /tmp/rebuilt-curated-corpus.json
+python3 tools/test-curated-references.py
+```
+
+Add `--fetch` to the curation tool only for an explicit source XML/participant-metadata hash recheck. The builder is offline by default; its separate explicit `--fetch` mode prepares only bounded public audio excerpts when first capturing a new selection's hashes. Reproduction of the frozen corpus should use the hash-pinned downloader first. Source word text stays in memory during HTTP verification and is neither inspected nor saved.
+
+Use `curated-corpus.json` with the existing feature/fit/export/Kotlin report commands and distinct output paths. Extraction honors each entry's explicit `windows` list: a qualified ten-second reference never implies its shorter subwindows qualify. Participant/session splits and sample durations stay unchanged. See the [curation results](../../../../../../docs/acceptance/environment-window-curation-2026-11-01.md): new-participant Small Group coverage improved to 17/22 variants, but four other errors prevent promoting the full head. No new model or audio is packaged with either app.

@@ -45,7 +45,9 @@ for c in manifest['recordings']:
             cursor+=8+size+(size%2)
         else: raise ValueError('Missing bounded WAV header')
         if fmt!=(1,1,16000,32000,2,16): raise ValueError('Unexpected source format')
-        pcm=ranged(url,offset+120*32000,offset+150*32000-1); output=io.BytesIO()
+        excerpt=c.get('audioExcerpt',{'startSeconds':120,'durationSeconds':30})
+        first=offset+excerpt['startSeconds']*32000;count=excerpt['durationSeconds']*32000
+        pcm=ranged(url,first,first+count-1); output=io.BytesIO()
         with wave.open(output,'wb') as f:
             f.setnchannels(1); f.setsampwidth(2); f.setframerate(16000); f.writeframes(pcm)
         data=output.getvalue()

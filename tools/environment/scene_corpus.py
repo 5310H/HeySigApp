@@ -36,6 +36,15 @@ def load_manifest(path):
         if not re.fullmatch('[A-Za-z0-9_-]+\.(mp3|wav)',clip['file']) or clip['file'] in filenames:
             raise ValueError('Unsafe/repeated cache path')
         filenames.add(clip['file'])
+        explicit_windows(clip)
+        if 'audioExcerpt' in clip:
+            excerpt=clip['audioExcerpt']
+            if not clip['id'].startswith('ami-') or not isinstance(excerpt,dict) or set(excerpt)!={'startSeconds','durationSeconds'}:
+                raise ValueError('Unreviewed explicit audio excerpt')
+            start=excerpt['startSeconds'];seconds=excerpt['durationSeconds']
+            if type(start)!=int or not 0<=start<=7200 or type(seconds)!=int or seconds not in (3,5,10) or start+seconds>7200:
+                raise ValueError('Invalid audio excerpt bounds')
+            if explicit_windows(clip)!=[(0,seconds)]:raise ValueError('Curated excerpt must use only its annotated complete window')
         parsed=urlparse(clip['source'])
         if parsed.scheme!='https' or parsed.username or parsed.password or parsed.port not in (None,443):
             raise ValueError('Invalid source URL')
@@ -73,3 +82,27 @@ def cached_source(cache, clip):
     if path.stat().st_size>20_000_000 or hashlib.sha256(path.read_bytes()).hexdigest()!=clip['sha256']:
         raise ValueError('Unexpected cached source: '+clip['id'])
     return path
+
+
+def explicit_windows(clip):
+    if 'windows' not in clip:return None
+    windows=clip['windows']
+    if not isinstance(windows,list) or not 1<=len(windows)<=9:raise ValueError('Invalid explicit windows')
+    result=[]
+    for w in windows:
+        if not isinstance(w,dict) or set(w)!={'offsetSeconds','seconds'}:raise ValueError('Unknown window fields')
+        offset=w['offsetSeconds'];seconds=w['seconds']
+        if type(offset)!=int or offset not in (0,10,20) or type(seconds)!=int or seconds not in (3,5,10) or offset+seconds>30:
+            raise ValueError('Unreviewed window dimensions')
+        result.append((offset,seconds))
+    if len(set(result))!=len(result):raise ValueError('Duplicate explicit window')
+    return result
+
+
+def capture_windows(clip,samples):
+    if type(samples)!=int or not 0<=samples<=480000:raise ValueError('Decoded source exceeds bounded duration')
+    explicit=explicit_windows(clip)
+    if explicit is not None:
+        if any((offset+seconds)*16000>samples for offset,seconds in explicit):raise ValueError('Annotated window longer than decoded source')
+        return [(offset*16000,seconds) for offset,seconds in explicit]
+    return [(offset,seconds) for offset in range(0,min(samples,480000),160000) for seconds in (3,5,10) if offset+seconds*16000<=samples]

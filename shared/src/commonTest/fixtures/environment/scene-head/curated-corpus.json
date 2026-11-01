@@ -1,0 +1,3073 @@
+{
+  "version": 2,
+  "encoderSha256": "b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4",
+  "sourceEncoderSha256": "10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de",
+  "recordings": [
+    {
+      "id": "fs-260121",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260121/",
+      "download": "https://cdn.freesound.org/previews/260/260121_1480854-hq.mp3",
+      "author": "SpliceSound",
+      "title": "Indoor adult murmur, small group.wav by SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "b0b08a216892e874679d4afca0abc8857a46261728a93e62a8c189fc28c5d766",
+      "reference": "SMALL_GROUP",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "SpliceSound/crowd-murmur",
+      "file": "260121.mp3",
+      "splitGroup": "SpliceSound"
+    },
+    {
+      "id": "fs-260123",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260123/",
+      "download": "https://cdn.freesound.org/previews/260/260123_1480854-hq.mp3",
+      "author": "SpliceSound",
+      "title": "Indoor adult murmur, large group.wav by SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "b564989005cc845679fabe4bed1f67241e32efb1a303a5d1bb90cfddc3eaa110",
+      "reference": "LARGE_GROUP",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "SpliceSound/crowd-murmur",
+      "file": "260123.mp3",
+      "splitGroup": "SpliceSound"
+    },
+    {
+      "id": "fs-260124",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260124/",
+      "download": "https://cdn.freesound.org/previews/260/260124_1480854-hq.mp3",
+      "author": "SpliceSound",
+      "title": "Indoor adult murmur, couple.wav by SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "0e45102d17749ee2af11f02b4d7878ceb3326ef799984d88e3010e5c64d86011",
+      "reference": "CONVERSATION",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "SpliceSound/crowd-murmur",
+      "file": "260124.mp3",
+      "splitGroup": "SpliceSound"
+    },
+    {
+      "id": "fs-363712",
+      "source": "https://freesound.org/people/AlexanderChe/sounds/363712/",
+      "download": "https://cdn.freesound.org/previews/363/363712_6598647-hq.mp3",
+      "author": "AlexanderChe",
+      "title": "ambience, cafe, burger king, city, Moscow by AlexanderChe",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "28a143ad270d00f3cb963a92f3b0ea79437c23799f515aff576a54da7f572c52",
+      "reference": "RESTAURANT",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "AlexanderChe/363712",
+      "file": "363712.mp3",
+      "splitGroup": "AlexanderChe"
+    },
+    {
+      "id": "fs-533833",
+      "source": "https://freesound.org/people/Angellu16/sounds/533833/",
+      "download": "https://cdn.freesound.org/previews/533/533833_11852214-hq.mp3",
+      "author": "Angellu16",
+      "title": "Vacuum Cleaner.wav by Angellu16",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "2333a18f1d6ea0526d6021d4ce92efa7cfb356512e2d2352935061816cced16e",
+      "reference": "NON_SPEECH_NOISE",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "Angellu16/533833",
+      "file": "533833.mp3",
+      "splitGroup": "Angellu16"
+    },
+    {
+      "id": "fs-565535",
+      "source": "https://freesound.org/people/visionear/sounds/565535/",
+      "download": "https://cdn.freesound.org/previews/565/565535_10869493-hq.mp3",
+      "author": "visionear",
+      "title": "Room tone Very quiet Small apartment room loopable edlarez vsnr.wav by visionear",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "00b64b3566e5596f8c4905d95dc09212bc21a69ff62d1f02db2a3b0a145c8332",
+      "reference": "QUIET",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "visionear/565535",
+      "file": "565535.mp3",
+      "splitGroup": "visionear"
+    },
+    {
+      "id": "fsd-153167",
+      "source": "https://freesound.org/people/marcolo91/sounds/153167/",
+      "author": "marcolo91",
+      "title": "Metal fork and knife in a cafeteria.wav",
+      "description": "Recording in the cafeteria of Pompeu Fabra University (Poblenou Campus). A sound of a metal knife and fork is the main sound and in the background we can hear the typical sound of a cafeteria with a lot of people. It was in the lunch time and the sound have high frecuencies due to the metal contact and middle-low frecuencies due to people talking.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 1390,
+      "mirrorRowName": "eval_audio/153167_0.ogg",
+      "sha256": "0e736f091828d52b1b297e69257a2d8ef5ecf83b8b5434724cbe85c62c473715",
+      "file": "fsd-153167.wav",
+      "reference": "RESTAURANT",
+      "partition": "validation",
+      "sourceGroup": "marcolo91/scene-session",
+      "splitGroup": "marcolo91",
+      "referenceBasis": "Creator description; not independent annotation: Fork/knife in busy cafeteria with lots of people in background",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-156091",
+      "source": "https://freesound.org/people/marcolo91/sounds/156091/",
+      "author": "marcolo91",
+      "title": "traffic and klaxon of a car.wav",
+      "description": "Barcelona traffic (gran via de les corts catalanes) and a klaxon of an angry driver.\r\n\r\nRecorded with a zoom H2",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 1493,
+      "mirrorRowName": "eval_audio/156091_0.ogg",
+      "sha256": "61844aac72f0aded55ad2348e0856d62921ba510e0c7cf79ab29949c70c152cc",
+      "file": "fsd-156091.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "validation",
+      "sourceGroup": "marcolo91/scene-session",
+      "splitGroup": "marcolo91",
+      "referenceBasis": "Creator description; not independent annotation: Barcelona traffic and car horn",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-174229",
+      "source": "https://freesound.org/people/cognito%20perceptu/sounds/174229/",
+      "author": "cognito perceptu",
+      "title": "restaurant.wav",
+      "description": "Clear recording from a conference hall where a meal was being served to a crowd of about 80 people. Jumbled voices, the tink of plates and utensils. No kitchen noises and the room is carpeted, so much clearer than a regular restaurant situation.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 1977,
+      "mirrorRowName": "eval_audio/174229_0.ogg",
+      "sha256": "751a3c27a186ca150a9d4218d68f1c53f4fc55fbef657e7e39e77aa23a590817",
+      "file": "fsd-174229.wav",
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "sourceGroup": "cognito perceptu/scene-session",
+      "splitGroup": "cognito perceptu",
+      "referenceBasis": "Creator description; not independent annotation: Meal served to about 80 people, jumbled voices and plates/utensils",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-192347",
+      "source": "https://freesound.org/people/AirialPC/sounds/192347/",
+      "author": "AirialPC",
+      "title": "Quiet Ambiance",
+      "description": "Just a little Ambiance that can be heard in the Background of anything you put this sound into. Plus, this sound can be looped.\r\n\r\nRecorded with Jazz HDV180\r\nEdited with Audacity",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 9856,
+      "mirrorRowName": "dev_audio/192347_0.ogg",
+      "sha256": "7faf264199130d7bdd7715ca3394166a46eccc043d6f323aa814c4fe414d14e9",
+      "file": "fsd-192347.wav",
+      "reference": "QUIET",
+      "partition": "development",
+      "sourceGroup": "AirialPC/scene-session",
+      "splitGroup": "AirialPC",
+      "referenceBasis": "Creator description; not independent annotation: Quiet Ambiance by creator; bird background, provisional minimal-background reference",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-201734",
+      "source": "https://freesound.org/people/univ_lyon3/sounds/201734/",
+      "author": "univ_lyon3",
+      "title": "AMIZET_Hugo_2013_2014_son5.wav",
+      "description": ".:: Recorded sound ::.\r\n\r\n- Go to the university's main hall. Record three differents times.\r\n\r\nIn the Audacity software :\r\n\r\n- Put the three recording on three separate tracks, giving the impression of massive crowd.\r\n\r\n.:: Typologie ::.\r\n\r\nContinu complexe.\r\n\r\n.:: Morphologie ::.\r\n\r\nMasse : Groupe nodal\r\nTimbre harmonique : Riche, massif\r\nGrain : Rugueux\r\nAllure : Pas de vibrato\r\nDynamique : Autre (continue)\r\nProfil m\u00e9lodique : Aucun\r\nProfil de masse : Calibre",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 10788,
+      "mirrorRowName": "dev_audio/201734_0.ogg",
+      "sha256": "b16d12dc39ff51d4fd239733c019d386449db95efb63a5134e93ffc4f2523dc5",
+      "file": "fsd-201734.wav",
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "sourceGroup": "univ_lyon3/scene-session",
+      "splitGroup": "univ_lyon3",
+      "referenceBasis": "Creator description; not independent annotation: Three main-hall recordings mixed into massive crowd; synthetic training example",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-212187",
+      "source": "https://freesound.org/people/blaukreuz/sounds/212187/",
+      "author": "blaukreuz",
+      "title": "120308_NYTbldg06n.wav",
+      "description": "Mid range field recording of the area in front of the New York Times building in New York, taken next to the building on the corner of 8th Ave and West 40th St. Cars can be heard driving by, horns are honked, brakes are trodden etc. A sweeper vehicle features sometimes.\r\nPeople can rarely be heard, as the recording was done at about 6 AM on a Saturday morning in March 2012.\r\nRecorded with a Zoom H2, mics set to 90\u00b0 dispersion.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 11709,
+      "mirrorRowName": "dev_audio/212187_0.ogg",
+      "sha256": "793e302de8bcae9ecc12d82d495a366e5d3be49e9df105c430cb5811cd5cc4a6",
+      "file": "fsd-212187.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "sourceGroup": "blaukreuz/scene-session",
+      "splitGroup": "blaukreuz",
+      "referenceBasis": "Creator description; not independent annotation: Mid-range New York street traffic",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-235249",
+      "source": "https://freesound.org/people/jaredpass24/sounds/235249/",
+      "author": "jaredpass24",
+      "title": "Printing_Quiet Room.wav",
+      "description": "large printer printing in a quiet room",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 13515,
+      "mirrorRowName": "dev_audio/235249_0.ogg",
+      "sha256": "f9bd7b1bfd56d68e68465fa19ec50fe464238fca8356f7266823b867079bfc8e",
+      "file": "fsd-235249.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "sourceGroup": "jaredpass24/scene-session",
+      "splitGroup": "jaredpass24",
+      "referenceBasis": "Creator description; not independent annotation: Large printer printing in quiet room",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-338254",
+      "source": "https://freesound.org/people/leo153/sounds/338254/",
+      "author": "leo153",
+      "title": "theater_audience_mincing.wav",
+      "description": "150 people in a small theater low talking before play starts- 16 seconds.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 5629,
+      "mirrorRowName": "eval_audio/338254_0.ogg",
+      "sha256": "82c4543513e96ef99f8d890c35149c171301f8dfe47f44b01a7912f492dee63e",
+      "file": "fsd-338254.wav",
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "sourceGroup": "leo153/scene-session",
+      "splitGroup": "leo153",
+      "referenceBasis": "Creator description; not independent annotation: 150 people talking in a theater before a play",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-348830",
+      "source": "https://freesound.org/people/Yoyodaman234/sounds/348830/",
+      "author": "Yoyodaman234",
+      "title": "Quiet Forest Ambience from Underneath Overhang",
+      "description": "Field recording of a forest from underneath an overhang, with slowly dripping water to the side.\r\n\r\nRecorded at Springbrook National Park, Queensland using the Zoom H6 Mid-side module.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 23159,
+      "mirrorRowName": "dev_audio/348830_0.ogg",
+      "sha256": "3fca5f34437e64f24eb29200144940c776868930fc89b659a9ad21f72c909f72",
+      "file": "fsd-348830.wav",
+      "reference": "QUIET",
+      "partition": "validation",
+      "sourceGroup": "Yoyodaman234/scene-session",
+      "splitGroup": "Yoyodaman234",
+      "referenceBasis": "Creator description; not independent annotation: Quiet Forest Ambience by creator; slowly dripping water, provisional reference",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-360702",
+      "source": "https://freesound.org/people/eguobyte/sounds/360702/",
+      "author": "eguobyte",
+      "title": "Large_crowd_far_away_stereo.wav",
+      "description": "A clean raw stereo recording of about a thousand people chatting with each other. No distinct dialogue. Recorded in stereo on an H4n. The microphone was at a far distance from the crowd, so this would be suitable for any scene where you need a crowd to be in the next room or some such. There might be minimal handling noise.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 26045,
+      "mirrorRowName": "dev_audio/360702_0.ogg",
+      "sha256": "8d0a6d9c2004c1185c047383e9c52aaa3d0573e1fcda916709d6cffbd3c3872f",
+      "file": "fsd-360702.wav",
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "sourceGroup": "eguobyte/scene-session",
+      "splitGroup": "eguobyte",
+      "referenceBasis": "Creator description; not independent annotation: About a thousand people chatting, no distinct dialogue",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-389755",
+      "source": "https://freesound.org/people/buzbe20/sounds/389755/",
+      "author": "buzbe20",
+      "title": "Vacuum cleaner on off.wav",
+      "description": "Vacuum cleaner being turn on and off",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 7221,
+      "mirrorRowName": "eval_audio/389755_0.ogg",
+      "sha256": "7d5c87b1d9b4d0003a329b31d8ca2d7ddb253878018e9e765a3c6365d79fad1b",
+      "file": "fsd-389755.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "validation",
+      "sourceGroup": "buzbe20/scene-session",
+      "splitGroup": "buzbe20",
+      "referenceBasis": "Creator description; not independent annotation: Vacuum cleaner turned on/off",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-414297",
+      "source": "https://freesound.org/people/gusgus26/sounds/414297/",
+      "author": "gusgus26",
+      "title": "Asian Restaurant. wav",
+      "description": "This Sound was recorded in an asian fast food Restaurant in germany. You can hear the Sound of Cooking and people chatting in the background.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 8209,
+      "mirrorRowName": "eval_audio/414297_0.ogg",
+      "sha256": "04683e40bd6d4a3e894e906dc671ad50b81e04c854619e8971dd66d35b9ef944",
+      "file": "fsd-414297.wav",
+      "reference": "RESTAURANT",
+      "partition": "validation",
+      "sourceGroup": "gusgus26/scene-session",
+      "splitGroup": "gusgus26",
+      "referenceBasis": "Creator description; not independent annotation: Asian fast food restaurant, cooking and people chatting",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-418989",
+      "source": "https://freesound.org/people/hondajkt/sounds/418989/",
+      "author": "hondajkt",
+      "title": "Gak mau ngaku.m4a",
+      "description": "Just normal dialogue and conversation between a guy and a girl speaking in Indonesian language.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 32732,
+      "mirrorRowName": "dev_audio/418989_0.ogg",
+      "sha256": "d39b09c51315da58a7581947d88eae47b71fe0f4bbcfe9bc9b2040e3e8baac47",
+      "file": "fsd-418989.wav",
+      "reference": "CONVERSATION",
+      "partition": "validation",
+      "sourceGroup": "hondajkt/scene-session",
+      "splitGroup": "hondajkt",
+      "referenceBasis": "Creator description; not independent annotation: Normal dialogue between a guy and a girl, Indonesian; background music annotated",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-423267",
+      "source": "https://freesound.org/people/ANARKYA/sounds/423267/",
+      "author": "ANARKYA",
+      "title": "Washing Machine [spinning cycle]",
+      "description": "Washing machine recorded at home on the spinning cycle.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 8442,
+      "mirrorRowName": "eval_audio/423267_0.ogg",
+      "sha256": "01746441c5e4c01b68c207e2f52be36550c4ad63e86311e53cb7c48c4d35b5e4",
+      "file": "fsd-423267.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "validation",
+      "sourceGroup": "ANARKYA/scene-session",
+      "splitGroup": "ANARKYA",
+      "referenceBasis": "Creator description; not independent annotation: Washing machine spinning cycle",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-431478",
+      "source": "https://freesound.org/people/KieranKeegan/sounds/431478/",
+      "author": "KieranKeegan",
+      "title": "Mower_Close_Startup_Idle_Shutoff",
+      "description": "Warning: Loud\nLawnmower Startup, 7 seconds idle, shut off. Close distance.\nRecorded at 24bit 96k with Dr-05 in back garden during summer. \nAB recording pattern",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 33743,
+      "mirrorRowName": "dev_audio/431478_0.ogg",
+      "sha256": "775cdf0ce2ffcb1dc20664492866ff8ba9990ec9390cf5d438ade64b4d95d9d2",
+      "file": "fsd-431478.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "sourceGroup": "KieranKeegan/scene-session",
+      "splitGroup": "KieranKeegan",
+      "referenceBasis": "Creator description; not independent annotation: Lawnmower starting, idling, shutting off",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-50763",
+      "source": "https://freesound.org/people/RutgerMuller/sounds/50763/",
+      "author": "RutgerMuller",
+      "title": "Vacuum Cleaner 2.wav",
+      "description": "Vacuum cleaner in action. Various sounds.\n\nRecorded with Edirol R-1 &amp; Sennheiser e185S.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 34724,
+      "mirrorRowName": "dev_audio/50763_0.ogg",
+      "sha256": "917d49acbd5aee2473f19e18ccd8d14ca89b51870054efc0baaea2700d286bca",
+      "file": "fsd-50763.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "sourceGroup": "RutgerMuller/scene-session",
+      "splitGroup": "RutgerMuller",
+      "referenceBasis": "Creator description; not independent annotation: Vacuum cleaner in action",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-62478",
+      "source": "https://freesound.org/people/bsumusictech/sounds/62478/",
+      "author": "bsumusictech",
+      "title": "uchor.wav",
+      "description": "Group KMM-\nThis is a recording of conversation in the lobby of the music building during the 10 minute break at the choral union practice.\nRecorded with a Zoom H4 handheld recorder.\n",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 9291,
+      "mirrorRowName": "eval_audio/62478_0.ogg",
+      "sha256": "3492056b2050cf7497c56a8d741e813461ff1bb92225257f4e9cc129d9794bd5",
+      "file": "fsd-62478.wav",
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "sourceGroup": "bsumusictech/scene-session",
+      "splitGroup": "bsumusictech",
+      "referenceBasis": "Creator description; not independent annotation: Conversation in lobby during choral-union break",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-79669",
+      "source": "https://freesound.org/people/labailey/sounds/79669/",
+      "author": "labailey",
+      "title": "volleyball convo.WAV",
+      "description": "Two Stanford students discussing the Stanford Volleyball team's success.  Recorded in a dorm room at Stanford University with a M-Audio Microtrack 24/96.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 38491,
+      "mirrorRowName": "dev_audio/79669_0.ogg",
+      "sha256": "4d35f2912d085190454cc311735f050f102db40df0f03f343ed27fd5cb599c1b",
+      "file": "fsd-79669.wav",
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "sourceGroup": "labailey/scene-session",
+      "splitGroup": "labailey",
+      "referenceBasis": "Creator description; not independent annotation: Two students discussing volleyball in a dorm room",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-324783",
+      "source": "https://freesound.org/people/miguel2613/sounds/324783/",
+      "author": "miguel2613",
+      "title": "conversation.wav",
+      "description": "sound capture a conversation enter a boy and a girl talking about going to dinner. The sound was recorded with a zoom recorder in a large kitchen. The recorder was holding the boy in his hand while he was recording.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 20567,
+      "mirrorRowName": "dev_audio/324783_0.ogg",
+      "sha256": "692163667aca8dd5aa7b81d877a4f9589bee3658f514036d4d7434203c2d3caf",
+      "file": "fsd-324783.wav",
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "sourceGroup": "miguel2613/scene-session",
+      "splitGroup": "miguel2613",
+      "referenceBasis": "Creator describes a boy and girl talking about dinner in a kitchen. Not independently annotated.",
+      "transforms": "Mirror original audio to mono Opus 48 kHz, then decoded WAV; subsequent bounded mono 16 kHz inference features.",
+      "attribution": "conversation.wav by miguel2613 via Freesound/FSD50K; CC0-1.0"
+    },
+    {
+      "id": "fsd-382575",
+      "source": "https://freesound.org/people/macdaddyno1/sounds/382575/",
+      "author": "macdaddyno1",
+      "title": "A new jersey bloke talking to a welsh bloke.MP3",
+      "description": "A new jersey bloke talking to a welsh bloke",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 6989,
+      "mirrorRowName": "eval_audio/382575_0.ogg",
+      "sha256": "6b42b2caf3dac5a5646a435261dfbd0ca17d34a66f302de31a8ee0740027f8be",
+      "file": "fsd-382575.wav",
+      "reference": "CONVERSATION",
+      "partition": "development",
+      "sourceGroup": "macdaddyno1/scene-session",
+      "splitGroup": "macdaddyno1",
+      "referenceBasis": "Creator describes two men talking. Not independently annotated.",
+      "transforms": "Mirror original audio to mono Opus 48 kHz, then decoded WAV; subsequent bounded mono 16 kHz inference features.",
+      "attribution": "A new jersey bloke talking to a welsh bloke.MP3 by macdaddyno1 via Freesound/FSD50K; CC0-1.0"
+    },
+    {
+      "id": "fsd-152978",
+      "source": "https://freesound.org/people/dianser72/sounds/152978/",
+      "author": "dianser72",
+      "title": "people talking",
+      "description": "This is the sound of some people talking and a microwave in the dinning room of the UPF campus Poblenou at 14:00.\r\n\r\nRecorded using Zoom H4, normalized and fade-in/fade-out added with Audacity.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 5397,
+      "mirrorRowName": "dev_audio/152978_0.ogg",
+      "sha256": "3b8657b2aca337c2f6a3120bfdf582e78b12fb2ce00551fa0c568af592bd9c9b",
+      "file": "fsd-152978.wav",
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "sourceGroup": "dianser72/scene-session",
+      "splitGroup": "dianser72",
+      "referenceBasis": "Creator describes people talking with a microwave in a university dining room; provisional dining-scene reference. Not independently annotated.",
+      "transforms": "Mirror original audio to mono Opus 48 kHz, then decoded WAV; subsequent bounded mono 16 kHz inference features.",
+      "attribution": "people talking by dianser72 via Freesound/FSD50K; CC0-1.0"
+    },
+    {
+      "id": "fsd-347537",
+      "source": "https://freesound.org/people/andrebola/sounds/347537/",
+      "author": "andrebola",
+      "title": "people talking at bar",
+      "description": "People voices at bar, sound recorded in a french bar (Bordeaux, France). Date 26/3/2016. \r\nRecorded using Voice recording app on iPhone 5s.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 5986,
+      "mirrorRowName": "eval_audio/347537_0.ogg",
+      "sha256": "adca5c171d1ec7dcc56470f442a37858f7f9ed76bff0c285cfa1151627f45fd6",
+      "file": "fsd-347537.wav",
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "sourceGroup": "andrebola/scene-session",
+      "splitGroup": "andrebola",
+      "referenceBasis": "Creator describes people voices in a French bar; provisional competing-conversation setting, not verified voice overlap. Not independently annotated.",
+      "transforms": "Mirror original audio to mono Opus 48 kHz, then decoded WAV; subsequent bounded mono 16 kHz inference features.",
+      "attribution": "people talking at bar by andrebola via Freesound/FSD50K; CC0-1.0"
+    },
+    {
+      "id": "fsd-338964",
+      "source": "https://freesound.org/people/Ryding/sounds/338964/",
+      "author": "Ryding",
+      "title": "Ambience_Walla_Vasaloppsrestaurangen.wav",
+      "description": "Some chatter from a temporary restaurant in a tent during a ski-event. Recorded with an Iphone 5S",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 22085,
+      "mirrorRowName": "dev_audio/338964_0.ogg",
+      "sha256": "b42c73d1f08f72801665df43f77aafbed0585c40c8980fac502ecee381a759c8",
+      "file": "fsd-338964.wav",
+      "reference": "RESTAURANT",
+      "partition": "development",
+      "sourceGroup": "Ryding/scene-session",
+      "splitGroup": "Ryding",
+      "referenceBasis": "Creator describes chatter in a temporary restaurant tent; provisional speech-plus-competing-conversations reference. Not independently annotated.",
+      "transforms": "Mirror original audio to mono Opus 48 kHz, then decoded WAV; subsequent bounded mono 16 kHz inference features.",
+      "attribution": "Ambience_Walla_Vasaloppsrestaurangen.wav by Ryding via Freesound/FSD50K; CC-BY-3.0"
+    },
+    {
+      "id": "fsd-401794",
+      "source": "https://freesound.org/people/Sean-TE0/sounds/401794/",
+      "author": "Sean-TE0",
+      "title": "We'll Eat Pizzas",
+      "description": "Myself talking to a friend about eating frozen pizzas. Who knows, maybe you can find a use for it!",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 7690,
+      "mirrorRowName": "eval_audio/401794_0.ogg",
+      "sha256": "c231757046186e9bd3a4366c7f5f1fdfc111511a1614af9d9447c91bef2dcd19",
+      "file": "fsd-401794.wav",
+      "reference": "CONVERSATION",
+      "partition": "validation",
+      "sourceGroup": "Sean-TE0/scene-session",
+      "splitGroup": "Sean-TE0",
+      "referenceBasis": "Creator describes talking to a friend about frozen pizzas; provisional two-person reference. Not independently annotated.",
+      "transforms": "Mirror original audio to mono Opus 48 kHz, then decoded WAV; subsequent bounded mono 16 kHz inference features.",
+      "attribution": "We'll Eat Pizzas by Sean-TE0 via Freesound/FSD50K; CC0-1.0"
+    },
+    {
+      "id": "fsd-17118",
+      "source": "https://freesound.org/people/dcaudio/sounds/17118/",
+      "author": "dcaudio",
+      "title": "interior walla cafe voices dishes clinks.aif",
+      "description": "interior walla cafe voices dishes clinks",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 1865,
+      "mirrorRowName": "eval_audio/17118_0.ogg",
+      "sha256": "22b4b775d23afa41127aa67d6ec0d70a153497f87ba3ac89f7e92f33a641ed3c",
+      "file": "fsd-17118.wav",
+      "reference": "RESTAURANT",
+      "partition": "validation",
+      "sourceGroup": "dcaudio/scene-session",
+      "splitGroup": "dcaudio",
+      "referenceBasis": "Creator title describes interior cafe voices, dishes and clinks; provisional competing-conversation reference. Not independently annotated.",
+      "transforms": "Mirror original audio to mono Opus 48 kHz, then decoded WAV; subsequent bounded mono 16 kHz inference features.",
+      "attribution": "interior walla cafe voices dishes clinks.aif by dcaudio via Freesound/FSD50K; CC-BY-3.0"
+    },
+    {
+      "id": "ami-ES2002a-w000073-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2002a/audio/ES2002a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2002a, annotated 10-second multi-speaker window at 73s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "1a19026c6356dec62b3014bf826d65c5caeb39f59b9350147a5c9ff10d797d99",
+      "file": "ES2002a-w000073-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2002",
+      "splitGroup": "AMI/ES2002",
+      "participants": [
+        "MEE006",
+        "FEE005",
+        "MEE007",
+        "MEE008"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 73-83, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 73,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "03e7f37c4b3519ee78396779bbc90e2778b7b7ccd7a7388f7fa3a22cb31f7044",
+          "B": "a51156e0b3f1b05d9d1a631206d523c5247d2d6fd851ecfe826317ab261cc17a",
+          "C": "c539fca7b7183a2b56be43f2362432a91a4552512ed03df8c4ce96aee75f3330",
+          "D": "d4f8b66e53de583c839424323f0e05d038a1426e5628042d03dcd2ee72e68b05"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 3.430000000000007,
+            "B": 4.740000000000009,
+            "C": 0,
+            "D": 1.269999999999996
+          },
+          "wordActivityHistogramSeconds": [
+            0.9699999999999847,
+            8.620000000000019,
+            0.4099999999999966,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.04099999999999966,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2002a-w000287-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2002a/audio/ES2002a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2002a, annotated 10-second multi-speaker window at 287s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "2535400adca71dff9fb9ccb1058a613e8a8e2e85da1dfa1b1f868f3ad0cc52b6",
+      "file": "ES2002a-w000287-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2002",
+      "splitGroup": "AMI/ES2002",
+      "participants": [
+        "MEE006",
+        "FEE005",
+        "MEE007",
+        "MEE008"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 287-297, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 287,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "03e7f37c4b3519ee78396779bbc90e2778b7b7ccd7a7388f7fa3a22cb31f7044",
+          "B": "a51156e0b3f1b05d9d1a631206d523c5247d2d6fd851ecfe826317ab261cc17a",
+          "C": "c539fca7b7183a2b56be43f2362432a91a4552512ed03df8c4ce96aee75f3330",
+          "D": "d4f8b66e53de583c839424323f0e05d038a1426e5628042d03dcd2ee72e68b05"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0.9900000000000091,
+            "B": 6.3700000000000045,
+            "C": 0,
+            "D": 0.9800000000000182
+          },
+          "wordActivityHistogramSeconds": [
+            1.7699999999999818,
+            8.120000000000005,
+            0.11000000000001364,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.011000000000001365,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2002a-w000338-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2002a/audio/ES2002a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2002a, annotated 5-second multi-speaker window at 338s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "c50add0db57a4979e7416748d7acd30b6cdc0843e5ab0898bbe63f087e21ab91",
+      "file": "ES2002a-w000338-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2002",
+      "splitGroup": "AMI/ES2002",
+      "participants": [
+        "MEE006",
+        "FEE005",
+        "MEE007",
+        "MEE008"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 338-343, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 338,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "03e7f37c4b3519ee78396779bbc90e2778b7b7ccd7a7388f7fa3a22cb31f7044",
+          "B": "a51156e0b3f1b05d9d1a631206d523c5247d2d6fd851ecfe826317ab261cc17a",
+          "C": "c539fca7b7183a2b56be43f2362432a91a4552512ed03df8c4ce96aee75f3330",
+          "D": "d4f8b66e53de583c839424323f0e05d038a1426e5628042d03dcd2ee72e68b05"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 3.2999999999999545,
+            "B": 0.5799999999999841,
+            "C": 0,
+            "D": 0.9199999999999591
+          },
+          "wordActivityHistogramSeconds": [
+            0.7700000000000955,
+            3.6599999999999113,
+            0.5699999999999932,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.11399999999999863,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2002a-w000568-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2002a/audio/ES2002a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2002a, annotated 5-second multi-speaker window at 568s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "f045984bdcd75adff15b62dd8360967e63a1612a5dc7f5e51940994db79d1017",
+      "file": "ES2002a-w000568-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2002",
+      "splitGroup": "AMI/ES2002",
+      "participants": [
+        "MEE006",
+        "FEE005",
+        "MEE007",
+        "MEE008"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 568-573, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 568,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "03e7f37c4b3519ee78396779bbc90e2778b7b7ccd7a7388f7fa3a22cb31f7044",
+          "B": "a51156e0b3f1b05d9d1a631206d523c5247d2d6fd851ecfe826317ab261cc17a",
+          "C": "c539fca7b7183a2b56be43f2362432a91a4552512ed03df8c4ce96aee75f3330",
+          "D": "d4f8b66e53de583c839424323f0e05d038a1426e5628042d03dcd2ee72e68b05"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.259999999999991,
+            "B": 3.009999999999991,
+            "C": 0,
+            "D": 0.7300000000000182
+          },
+          "wordActivityHistogramSeconds": [
+            0.37000000000000455,
+            4.259999999999991,
+            0.37000000000000455,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.07400000000000091,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2002a-w000903-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2002a/audio/ES2002a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2002a, annotated 3-second multi-speaker window at 903s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "99eadb8697a35cb0f397e92c0e363ce4a4591cd7197f1f1da452f8e98ed8594d",
+      "file": "ES2002a-w000903-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2002",
+      "splitGroup": "AMI/ES2002",
+      "participants": [
+        "MEE006",
+        "FEE005",
+        "MEE007",
+        "MEE008"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 903-906, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 903,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "03e7f37c4b3519ee78396779bbc90e2778b7b7ccd7a7388f7fa3a22cb31f7044",
+          "B": "a51156e0b3f1b05d9d1a631206d523c5247d2d6fd851ecfe826317ab261cc17a",
+          "C": "c539fca7b7183a2b56be43f2362432a91a4552512ed03df8c4ce96aee75f3330",
+          "D": "d4f8b66e53de583c839424323f0e05d038a1426e5628042d03dcd2ee72e68b05"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0.8999999999999773,
+            "B": 1.3999999999999773,
+            "C": 0,
+            "D": 0.5099999999999909
+          },
+          "wordActivityHistogramSeconds": [
+            0.7000000000000455,
+            1.7899999999999636,
+            0.5099999999999909,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.16999999999999696,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2003a-w000025-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2003a/audio/ES2003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2003a, annotated 10-second multi-speaker window at 25s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "a113a5bfa6a85534a596b88fe68546dba4e288e1c448697ac98401f98bea7a18",
+      "file": "ES2003a-w000025-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2003",
+      "splitGroup": "AMI/ES2003",
+      "participants": [
+        "MEE011",
+        "MEE009",
+        "MEE012",
+        "MEE010"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 25-35, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 25,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "8ee1e2ba5ab4421e16ebf42d0e221247a83e174fe34aa06e3aadd7a08540e470",
+          "B": "d9af4424014f9e2ae55e1a33fc7fb95a2352903453e3afb51118845cea4c304d",
+          "C": "9393f7af2a0cd95da35d306e4861e2513544c54059b11515ff311cd9b051cff4",
+          "D": "bdcf987020238618bed2941bc906d31aa61aec6732e3104d16f11b7f1a104384"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 3.700000000000003,
+            "C": 1.9600000000000009,
+            "D": 0.6599999999999966
+          },
+          "wordActivityHistogramSeconds": [
+            3.6799999999999997,
+            6.32,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.0,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2003a-w000248-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2003a/audio/ES2003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2003a, annotated 10-second multi-speaker window at 248s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "ddf49a995b0d43930830a443ef35800244cc3d4979171caa815b3ae7482fd35a",
+      "file": "ES2003a-w000248-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2003",
+      "splitGroup": "AMI/ES2003",
+      "participants": [
+        "MEE011",
+        "MEE009",
+        "MEE012",
+        "MEE010"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 248-258, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 248,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "8ee1e2ba5ab4421e16ebf42d0e221247a83e174fe34aa06e3aadd7a08540e470",
+          "B": "d9af4424014f9e2ae55e1a33fc7fb95a2352903453e3afb51118845cea4c304d",
+          "C": "9393f7af2a0cd95da35d306e4861e2513544c54059b11515ff311cd9b051cff4",
+          "D": "bdcf987020238618bed2941bc906d31aa61aec6732e3104d16f11b7f1a104384"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 6.370000000000033,
+            "C": 2.1100000000000136,
+            "D": 1.2300000000000182
+          },
+          "wordActivityHistogramSeconds": [
+            3.2399999999999807,
+            4.969999999999999,
+            0.6299999999999955,
+            1.160000000000025,
+            0.0
+          ],
+          "wordOverlapFraction": 0.17900000000000205,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2003a-w000300-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2003a/audio/ES2003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2003a, annotated 5-second multi-speaker window at 300s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "fb98353ededa13d06010cd7884833c674f8fe547bac807cb1a4744891be4c2bc",
+      "file": "ES2003a-w000300-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2003",
+      "splitGroup": "AMI/ES2003",
+      "participants": [
+        "MEE011",
+        "MEE009",
+        "MEE012",
+        "MEE010"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 300-305, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 300,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "8ee1e2ba5ab4421e16ebf42d0e221247a83e174fe34aa06e3aadd7a08540e470",
+          "B": "d9af4424014f9e2ae55e1a33fc7fb95a2352903453e3afb51118845cea4c304d",
+          "C": "9393f7af2a0cd95da35d306e4861e2513544c54059b11515ff311cd9b051cff4",
+          "D": "bdcf987020238618bed2941bc906d31aa61aec6732e3104d16f11b7f1a104384"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 1.579999999999984,
+            "C": 1.4399999999999977,
+            "D": 1.079999999999984
+          },
+          "wordActivityHistogramSeconds": [
+            0.9200000000000159,
+            4.060000000000002,
+            0.01999999999998181,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.003999999999996362,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2004a-w000308-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2004a/audio/ES2004a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2004a, annotated 10-second multi-speaker window at 308s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "eaab20ff9f6ec9da0b7ecdf2366e47bf62fbcb7534b228d5162d51a9188ab802",
+      "file": "ES2004a-w000308-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2004",
+      "splitGroup": "AMI/ES2004",
+      "participants": [
+        "MEO015",
+        "FEE013",
+        "MEE014",
+        "FEE016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 308-318, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 308,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "3b91765c8985e7c2652f1004832c00840e88bad4c3213296192b9fd741d675cc",
+          "B": "0e24646b84f2772bb3ca28e666df5f7ba48cde647589f7ae8f85e2724ff5cbc3",
+          "C": "07c25c4831fdc91cdff736ebf27c1380d0a7ef98e9835e33b15d44797fed7fd1",
+          "D": "e085188b2f4855808911934c309ba965c283e54371044c9086185f27913d44f8"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 5.3899999999999295,
+            "B": 0,
+            "C": 0.75,
+            "D": 0.5500000000000114
+          },
+          "wordActivityHistogramSeconds": [
+            4.6100000000000705,
+            4.089999999999918,
+            1.3000000000000114,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.13000000000000114,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2004a-w000344-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2004a/audio/ES2004a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2004a, annotated 10-second multi-speaker window at 344s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "82c10a882319880de8f8e4c96c321d8eac79e558f1cf9e67452983d9a8b64dbd",
+      "file": "ES2004a-w000344-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2004",
+      "splitGroup": "AMI/ES2004",
+      "participants": [
+        "MEO015",
+        "FEE013",
+        "MEE014",
+        "FEE016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 344-354, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 344,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "3b91765c8985e7c2652f1004832c00840e88bad4c3213296192b9fd741d675cc",
+          "B": "0e24646b84f2772bb3ca28e666df5f7ba48cde647589f7ae8f85e2724ff5cbc3",
+          "C": "07c25c4831fdc91cdff736ebf27c1380d0a7ef98e9835e33b15d44797fed7fd1",
+          "D": "e085188b2f4855808911934c309ba965c283e54371044c9086185f27913d44f8"
+        },
+        "activity": {
+          "speakersWithWords": 4,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 7.470000000000027,
+            "B": 1.079999999999984,
+            "C": 0.5199999999999818,
+            "D": 0.44999999999998863
+          },
+          "wordActivityHistogramSeconds": [
+            2.009999999999991,
+            6.460000000000036,
+            1.5299999999999727,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.15299999999999728,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2004a-w000375-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2004a/audio/ES2004a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2004a, annotated 5-second multi-speaker window at 375s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "4810cc66f9f6dd4bff4089c059c078c8866d33c2fc963dcadd6a52c72da72993",
+      "file": "ES2004a-w000375-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2004",
+      "splitGroup": "AMI/ES2004",
+      "participants": [
+        "MEO015",
+        "FEE013",
+        "MEE014",
+        "FEE016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 375-380, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 375,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "3b91765c8985e7c2652f1004832c00840e88bad4c3213296192b9fd741d675cc",
+          "B": "0e24646b84f2772bb3ca28e666df5f7ba48cde647589f7ae8f85e2724ff5cbc3",
+          "C": "07c25c4831fdc91cdff736ebf27c1380d0a7ef98e9835e33b15d44797fed7fd1",
+          "D": "e085188b2f4855808911934c309ba965c283e54371044c9086185f27913d44f8"
+        },
+        "activity": {
+          "speakersWithWords": 4,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0.35000000000002274,
+            "B": 1.829999999999984,
+            "C": 0.6899999999999977,
+            "D": 2.1399999999999864
+          },
+          "wordActivityHistogramSeconds": [
+            0.660000000000025,
+            3.8799999999999955,
+            0.24999999999994316,
+            0.21000000000003638,
+            0.0
+          ],
+          "wordOverlapFraction": 0.0919999999999959,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2004a-w000391-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2004a/audio/ES2004a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2004a, annotated 5-second multi-speaker window at 391s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "fa82c60fa118b94ec8fa269618f1900bbe5a4c88b97810bb4099d7c126293261",
+      "file": "ES2004a-w000391-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2004",
+      "splitGroup": "AMI/ES2004",
+      "participants": [
+        "MEO015",
+        "FEE013",
+        "MEE014",
+        "FEE016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 391-396, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 391,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "3b91765c8985e7c2652f1004832c00840e88bad4c3213296192b9fd741d675cc",
+          "B": "0e24646b84f2772bb3ca28e666df5f7ba48cde647589f7ae8f85e2724ff5cbc3",
+          "C": "07c25c4831fdc91cdff736ebf27c1380d0a7ef98e9835e33b15d44797fed7fd1",
+          "D": "e085188b2f4855808911934c309ba965c283e54371044c9086185f27913d44f8"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 0.9300000000000068,
+            "C": 1.6200000000000045,
+            "D": 0.6100000000000136
+          },
+          "wordActivityHistogramSeconds": [
+            2.3799999999999955,
+            2.079999999999984,
+            0.5400000000000205,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.10800000000000409,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2004a-w000419-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2004a/audio/ES2004a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2004a, annotated 3-second multi-speaker window at 419s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "64fb52cc92cf7e68fced7e49e3c08e72c27ad20e3ce434cac56f24495aac1db7",
+      "file": "ES2004a-w000419-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2004",
+      "splitGroup": "AMI/ES2004",
+      "participants": [
+        "MEO015",
+        "FEE013",
+        "MEE014",
+        "FEE016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 419-422, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 419,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "3b91765c8985e7c2652f1004832c00840e88bad4c3213296192b9fd741d675cc",
+          "B": "0e24646b84f2772bb3ca28e666df5f7ba48cde647589f7ae8f85e2724ff5cbc3",
+          "C": "07c25c4831fdc91cdff736ebf27c1380d0a7ef98e9835e33b15d44797fed7fd1",
+          "D": "e085188b2f4855808911934c309ba965c283e54371044c9086185f27913d44f8"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 0.839999999999975,
+            "C": 0.8000000000000114,
+            "D": 0.5600000000000023
+          },
+          "wordActivityHistogramSeconds": [
+            1.3600000000000136,
+            1.079999999999984,
+            0.5600000000000023,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.18666666666666742,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2004a-w000587-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2004a/audio/ES2004a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2004a, annotated 3-second multi-speaker window at 587s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "7e275d91e5da0d034f399bfbbfdc6a11fce1b113ff5532a5224a086f73725db4",
+      "file": "ES2004a-w000587-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2004",
+      "splitGroup": "AMI/ES2004",
+      "participants": [
+        "MEO015",
+        "FEE013",
+        "MEE014",
+        "FEE016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 587-590, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 587,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "3b91765c8985e7c2652f1004832c00840e88bad4c3213296192b9fd741d675cc",
+          "B": "0e24646b84f2772bb3ca28e666df5f7ba48cde647589f7ae8f85e2724ff5cbc3",
+          "C": "07c25c4831fdc91cdff736ebf27c1380d0a7ef98e9835e33b15d44797fed7fd1",
+          "D": "e085188b2f4855808911934c309ba965c283e54371044c9086185f27913d44f8"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 0.9800000000000182,
+            "C": 0.57000000000005,
+            "D": 1.6299999999999955
+          },
+          "wordActivityHistogramSeconds": [
+            0.38999999999998636,
+            2.0399999999999636,
+            0.57000000000005,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.19000000000001668,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2005a-w000029-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2005a/audio/ES2005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2005a, annotated 10-second multi-speaker window at 29s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "9c560a28efd83794569b3c4e1732bacfb6725e813394520f571ecb1bcb440f5e",
+      "file": "ES2005a-w000029-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2005",
+      "splitGroup": "AMI/ES2005",
+      "participants": [
+        "MEE018",
+        "MEO020",
+        "MEE017",
+        "FEE019"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 29-39, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 29,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "678d6a3aed1cc8715195e2d52811849a9990a6a4f297f9807528327d4e23bcaa",
+          "B": "6688e84d94fbb273961dcd1ae239f031f542029eac946f927b35ea3476f93825",
+          "C": "3380c39fcd75accf138f280cb84809b29338b6bb5c9e0de29b86f3db947ec5fe",
+          "D": "21e12eff9a08258a48f23e57cbd8b90fff5c9a3edd5c0db2e9ca52bdf59ace88"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 2.5,
+            "B": 0,
+            "C": 5.510000000000009,
+            "D": 0.9700000000000024
+          },
+          "wordActivityHistogramSeconds": [
+            2.4199999999999946,
+            6.210000000000001,
+            1.3400000000000034,
+            0.030000000000001137,
+            0.0
+          ],
+          "wordOverlapFraction": 0.13700000000000045,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2005a-w000073-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2005a/audio/ES2005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2005a, annotated 10-second multi-speaker window at 73s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "f2f4d23812f6a547a40a537f9bad6f9194622cee979eebc3b0f0feb817b44e59",
+      "file": "ES2005a-w000073-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2005",
+      "splitGroup": "AMI/ES2005",
+      "participants": [
+        "MEE018",
+        "MEO020",
+        "MEE017",
+        "FEE019"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 73-83, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 73,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "678d6a3aed1cc8715195e2d52811849a9990a6a4f297f9807528327d4e23bcaa",
+          "B": "6688e84d94fbb273961dcd1ae239f031f542029eac946f927b35ea3476f93825",
+          "C": "3380c39fcd75accf138f280cb84809b29338b6bb5c9e0de29b86f3db947ec5fe",
+          "D": "21e12eff9a08258a48f23e57cbd8b90fff5c9a3edd5c0db2e9ca52bdf59ace88"
+        },
+        "activity": {
+          "speakersWithWords": 4,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0.22999999999998977,
+            "B": 7.359999999999999,
+            "C": 2.6599999999999966,
+            "D": 1.1400000000000006
+          },
+          "wordActivityHistogramSeconds": [
+            0.0,
+            8.610000000000014,
+            1.3899999999999864,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.13899999999999862,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-ES2005a-w000237-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/ES2005a/audio/ES2005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "ES2005a, annotated 5-second multi-speaker window at 237s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "9c1315e1af5aff3f659b133e4e281b53d73855960a81e0f265fbe49250956c4f",
+      "file": "ES2005a-w000237-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "development",
+      "sourceGroup": "AMI/ES2005",
+      "splitGroup": "AMI/ES2005",
+      "participants": [
+        "MEE018",
+        "MEO020",
+        "MEE017",
+        "FEE019"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 237-242, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 237,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "678d6a3aed1cc8715195e2d52811849a9990a6a4f297f9807528327d4e23bcaa",
+          "B": "6688e84d94fbb273961dcd1ae239f031f542029eac946f927b35ea3476f93825",
+          "C": "3380c39fcd75accf138f280cb84809b29338b6bb5c9e0de29b86f3db947ec5fe",
+          "D": "21e12eff9a08258a48f23e57cbd8b90fff5c9a3edd5c0db2e9ca52bdf59ace88"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.039999999999992,
+            "B": 0.5999999999999943,
+            "C": 3.219999999999999,
+            "D": 0
+          },
+          "wordActivityHistogramSeconds": [
+            0.5100000000000193,
+            4.119999999999976,
+            0.37000000000000455,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.07400000000000091,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1000a-w000096-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1000a/audio/IS1000a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1000a, annotated 10-second multi-speaker window at 96s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "77a5c1d5b2a1aedeed4aa8b35a67995b4e637db7287f1c4d7dc6976a5e45f029",
+      "file": "IS1000a-w000096-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1000",
+      "splitGroup": "AMI/IS1000",
+      "participants": [
+        "FIE081",
+        "MIO082",
+        "MIO050",
+        "MIO016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 96-106, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 96,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "f065db34e9fed74c00135fea4d47f9f1e7e0f42e77e36cc78371e253c1088020",
+          "B": "c3f6bc40aab864f46ca27a5763d87b617b1ce08096d6e7fb327aed947195989f",
+          "C": "cc76fe065ee1b79bce28830172513fd54110f4d3e95ce5676db26ca652212c7f",
+          "D": "15f4817b9bda95a5d97d597811c404e0d2643d338267daef29fa00a5502d9cc3"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 1.480000000000004,
+            "C": 3.0,
+            "D": 1.0400000000000063
+          },
+          "wordActivityHistogramSeconds": [
+            5.939999999999998,
+            2.5999999999999943,
+            1.460000000000008,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.1460000000000008,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1000a-w000160-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1000a/audio/IS1000a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1000a, annotated 10-second multi-speaker window at 160s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "761f4f078996a24ff807194b2946032976f20957a4d69e5ddf05cc27043ac7ed",
+      "file": "IS1000a-w000160-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1000",
+      "splitGroup": "AMI/IS1000",
+      "participants": [
+        "FIE081",
+        "MIO082",
+        "MIO050",
+        "MIO016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 160-170, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 160,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "f065db34e9fed74c00135fea4d47f9f1e7e0f42e77e36cc78371e253c1088020",
+          "B": "c3f6bc40aab864f46ca27a5763d87b617b1ce08096d6e7fb327aed947195989f",
+          "C": "cc76fe065ee1b79bce28830172513fd54110f4d3e95ce5676db26ca652212c7f",
+          "D": "15f4817b9bda95a5d97d597811c404e0d2643d338267daef29fa00a5502d9cc3"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 2.079999999999984,
+            "C": 0.5600000000000023,
+            "D": 3.359999999999985
+          },
+          "wordActivityHistogramSeconds": [
+            4.850000000000023,
+            4.299999999999983,
+            0.8499999999999943,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.08499999999999944,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1000a-w000518-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1000a/audio/IS1000a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1000a, annotated 5-second multi-speaker window at 518s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "7c678ae1684cd35ddc6d556e01a5f9caf232c30898a6251971fadb9ca21ea3e0",
+      "file": "IS1000a-w000518-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1000",
+      "splitGroup": "AMI/IS1000",
+      "participants": [
+        "FIE081",
+        "MIO082",
+        "MIO050",
+        "MIO016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 518-523, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 518,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "f065db34e9fed74c00135fea4d47f9f1e7e0f42e77e36cc78371e253c1088020",
+          "B": "c3f6bc40aab864f46ca27a5763d87b617b1ce08096d6e7fb327aed947195989f",
+          "C": "cc76fe065ee1b79bce28830172513fd54110f4d3e95ce5676db26ca652212c7f",
+          "D": "15f4817b9bda95a5d97d597811c404e0d2643d338267daef29fa00a5502d9cc3"
+        },
+        "activity": {
+          "speakersWithWords": 4,
+          "speakersWithAtLeastHalfSecond": 4,
+          "perSpeakerWordSeconds": {
+            "A": 0.6599999999999682,
+            "B": 3.4599999999999227,
+            "C": 0.5299999999999727,
+            "D": 1.1299999999999955
+          },
+          "wordActivityHistogramSeconds": [
+            0.01999999999998181,
+            4.330000000000155,
+            0.4999999999998863,
+            0.14999999999997726,
+            0.0
+          ],
+          "wordOverlapFraction": 0.12999999999997272,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1000a-w000706-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1000a/audio/IS1000a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1000a, annotated 5-second multi-speaker window at 706s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "02d35ba91fd16247fbeac705d8dae70941e9e9ce17f00973acd98743ed9604b3",
+      "file": "IS1000a-w000706-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1000",
+      "splitGroup": "AMI/IS1000",
+      "participants": [
+        "FIE081",
+        "MIO082",
+        "MIO050",
+        "MIO016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 706-711, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 706,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "f065db34e9fed74c00135fea4d47f9f1e7e0f42e77e36cc78371e253c1088020",
+          "B": "c3f6bc40aab864f46ca27a5763d87b617b1ce08096d6e7fb327aed947195989f",
+          "C": "cc76fe065ee1b79bce28830172513fd54110f4d3e95ce5676db26ca652212c7f",
+          "D": "15f4817b9bda95a5d97d597811c404e0d2643d338267daef29fa00a5502d9cc3"
+        },
+        "activity": {
+          "speakersWithWords": 4,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 2.0599999999999454,
+            "B": 0.6599999999999682,
+            "C": 0.42000000000007276,
+            "D": 2.480000000000018
+          },
+          "wordActivityHistogramSeconds": [
+            0.36999999999989086,
+            3.6400000000002137,
+            0.9899999999998954,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.19799999999997908,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1000a-w001004-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1000a/audio/IS1000a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1000a, annotated 3-second multi-speaker window at 1004s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "c28bdf996b5cb18599ad4dbb7fa37d4c98ab95ae928a09b3bead25b68df14722",
+      "file": "IS1000a-w001004-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1000",
+      "splitGroup": "AMI/IS1000",
+      "participants": [
+        "FIE081",
+        "MIO082",
+        "MIO050",
+        "MIO016"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 1004-1007, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 1004,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "f065db34e9fed74c00135fea4d47f9f1e7e0f42e77e36cc78371e253c1088020",
+          "B": "c3f6bc40aab864f46ca27a5763d87b617b1ce08096d6e7fb327aed947195989f",
+          "C": "cc76fe065ee1b79bce28830172513fd54110f4d3e95ce5676db26ca652212c7f",
+          "D": "15f4817b9bda95a5d97d597811c404e0d2643d338267daef29fa00a5502d9cc3"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.330000000000041,
+            "B": 0,
+            "C": 1.3799999999999955,
+            "D": 0.6599999999999682
+          },
+          "wordActivityHistogramSeconds": [
+            0.17999999999994998,
+            2.2700000000000955,
+            0.5499999999999545,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.18333333333331817,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3003a-w000034-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3003a/audio/TS3003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3003a, annotated 10-second multi-speaker window at 34s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "996c7d467e2cb69d94f99cda3d48dd568364a02f9e56d08e106e582f5f864f8a",
+      "file": "TS3003a-w000034-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3003",
+      "splitGroup": "AMI/TS3003",
+      "participants": [
+        "MTD009PM",
+        "MTD011UID",
+        "MTD0010ID",
+        "MTD012ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 34-44, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 34,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "b343403033d4d960f2bdfc605d2425c4974956285a3191ba19ec66c74e4e3855",
+          "B": "2f0600d74984f3fc925482e556bcdcd2e82ee44e518a0e0910250bba056572ec",
+          "C": "6342c203442438c77906b41f8b95631ce84f85b459cb6411890a08e32d6d0e5e",
+          "D": "2fb26c7afff76c7ae34bd186b1fef28a974f73d9e3a1f22e3410dc3703c53a92"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 8.049999999999997,
+            "B": 0.6299999999999955,
+            "C": 0,
+            "D": 0.7000000000000028
+          },
+          "wordActivityHistogramSeconds": [
+            1.9500000000000028,
+            6.719999999999999,
+            1.3299999999999983,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.13299999999999984,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3003a-w000207-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3003a/audio/TS3003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3003a, annotated 10-second multi-speaker window at 207s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "c22048527cbc485ae49eb0474b32a8d6e68fc568e87aa354b8906c8f5fdea3ca",
+      "file": "TS3003a-w000207-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3003",
+      "splitGroup": "AMI/TS3003",
+      "participants": [
+        "MTD009PM",
+        "MTD011UID",
+        "MTD0010ID",
+        "MTD012ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 207-217, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 207,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "b343403033d4d960f2bdfc605d2425c4974956285a3191ba19ec66c74e4e3855",
+          "B": "2f0600d74984f3fc925482e556bcdcd2e82ee44e518a0e0910250bba056572ec",
+          "C": "6342c203442438c77906b41f8b95631ce84f85b459cb6411890a08e32d6d0e5e",
+          "D": "2fb26c7afff76c7ae34bd186b1fef28a974f73d9e3a1f22e3410dc3703c53a92"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 10,
+            "B": 0.6999999999999886,
+            "C": 0,
+            "D": 0.5200000000000102
+          },
+          "wordActivityHistogramSeconds": [
+            0.0,
+            8.780000000000001,
+            1.2199999999999989,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.12199999999999989,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3003a-w000578-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3003a/audio/TS3003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3003a, annotated 5-second multi-speaker window at 578s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "bb834e06caae090d144f6e3f266d70d7a9891a31899331cc4377aaee8c9cffa4",
+      "file": "TS3003a-w000578-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3003",
+      "splitGroup": "AMI/TS3003",
+      "participants": [
+        "MTD009PM",
+        "MTD011UID",
+        "MTD0010ID",
+        "MTD012ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 578-583, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 578,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "b343403033d4d960f2bdfc605d2425c4974956285a3191ba19ec66c74e4e3855",
+          "B": "2f0600d74984f3fc925482e556bcdcd2e82ee44e518a0e0910250bba056572ec",
+          "C": "6342c203442438c77906b41f8b95631ce84f85b459cb6411890a08e32d6d0e5e",
+          "D": "2fb26c7afff76c7ae34bd186b1fef28a974f73d9e3a1f22e3410dc3703c53a92"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 3.3799999999999955,
+            "B": 0.7300000000000182,
+            "C": 0,
+            "D": 0.92999999999995
+          },
+          "wordActivityHistogramSeconds": [
+            0.6900000000000546,
+            3.5799999999999272,
+            0.7300000000000182,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.14600000000000363,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3003a-w001042-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3003a/audio/TS3003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3003a, annotated 5-second multi-speaker window at 1042s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "306923fffce15cc547441084e8287636255d0e6641b462c7e7f3ec4158db73f5",
+      "file": "TS3003a-w001042-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3003",
+      "splitGroup": "AMI/TS3003",
+      "participants": [
+        "MTD009PM",
+        "MTD011UID",
+        "MTD0010ID",
+        "MTD012ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 1042-1047, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 1042,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "b343403033d4d960f2bdfc605d2425c4974956285a3191ba19ec66c74e4e3855",
+          "B": "2f0600d74984f3fc925482e556bcdcd2e82ee44e518a0e0910250bba056572ec",
+          "C": "6342c203442438c77906b41f8b95631ce84f85b459cb6411890a08e32d6d0e5e",
+          "D": "2fb26c7afff76c7ae34bd186b1fef28a974f73d9e3a1f22e3410dc3703c53a92"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.509999999999991,
+            "B": 0,
+            "C": 1.4500000000000455,
+            "D": 1.6499999999998636
+          },
+          "wordActivityHistogramSeconds": [
+            1.1800000000000637,
+            3.3599999999999,
+            0.13000000000010914,
+            0.32999999999992724,
+            0.0
+          ],
+          "wordOverlapFraction": 0.09200000000000727,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3003a-w001375-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3003a/audio/TS3003a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3003a, annotated 3-second multi-speaker window at 1375s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "af26dd414e824f621962643a3b9809cd054bad4f083b29928fdfbfa7e965525e",
+      "file": "TS3003a-w001375-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3003",
+      "splitGroup": "AMI/TS3003",
+      "participants": [
+        "MTD009PM",
+        "MTD011UID",
+        "MTD0010ID",
+        "MTD012ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 1375-1378, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 1375,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "b343403033d4d960f2bdfc605d2425c4974956285a3191ba19ec66c74e4e3855",
+          "B": "2f0600d74984f3fc925482e556bcdcd2e82ee44e518a0e0910250bba056572ec",
+          "C": "6342c203442438c77906b41f8b95631ce84f85b459cb6411890a08e32d6d0e5e",
+          "D": "2fb26c7afff76c7ae34bd186b1fef28a974f73d9e3a1f22e3410dc3703c53a92"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0.75,
+            "B": 0.6700000000000728,
+            "C": 0,
+            "D": 0.599999999999909
+          },
+          "wordActivityHistogramSeconds": [
+            1.0599999999999454,
+            1.8600000000001273,
+            0.07999999999992724,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.026666666666642413,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1001a-w000239-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1001a/audio/IS1001a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1001a, annotated 10-second multi-speaker window at 239s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "d321b4cab724a8712e2335b37a6d2d042cdf85a564cb01be10b80e0c813992e0",
+      "file": "IS1001a-w000239-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1001",
+      "splitGroup": "AMI/IS1001",
+      "participants": [
+        "MIO043",
+        "MIO012",
+        "MIO020",
+        "FIO074"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 239-249, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 239,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "34bee734cb29476052a8eed7dfbd1756189810a8c8277c558055586100f5afb5",
+          "B": "200214567737f0a57838f663f567fa026e373bca04cc0ed0c95f87925010cb63",
+          "C": "b0782f7119e4c99dee3810bafc6bff02dab5774b14697b32c41eafa6a428c072",
+          "D": "6d77da953fecaf28e67ffe28da27f5658ad4fbe2c0db8704fc1d404b62cad68a"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 8.199999999999989,
+            "B": 0.700000000000017,
+            "C": 0.6699999999999875,
+            "D": 0
+          },
+          "wordActivityHistogramSeconds": [
+            1.0999999999999943,
+            8.230000000000018,
+            0.6699999999999875,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.06699999999999875,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1001a-w000273-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1001a/audio/IS1001a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1001a, annotated 10-second multi-speaker window at 273s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "e29f848541789ac6e8eb3816306d51f104420d22f83f1e273a1e6588f5e91975",
+      "file": "IS1001a-w000273-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1001",
+      "splitGroup": "AMI/IS1001",
+      "participants": [
+        "MIO043",
+        "MIO012",
+        "MIO020",
+        "FIO074"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 273-283, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 273,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "34bee734cb29476052a8eed7dfbd1756189810a8c8277c558055586100f5afb5",
+          "B": "200214567737f0a57838f663f567fa026e373bca04cc0ed0c95f87925010cb63",
+          "C": "b0782f7119e4c99dee3810bafc6bff02dab5774b14697b32c41eafa6a428c072",
+          "D": "6d77da953fecaf28e67ffe28da27f5658ad4fbe2c0db8704fc1d404b62cad68a"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 4.310000000000002,
+            "B": 1.1300000000000523,
+            "C": 1.9700000000000273,
+            "D": 0
+          },
+          "wordActivityHistogramSeconds": [
+            3.329999999999984,
+            5.92999999999995,
+            0.7400000000000659,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.07400000000000659,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1001a-w000320-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1001a/audio/IS1001a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1001a, annotated 5-second multi-speaker window at 320s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "5b75a6b0e1c9d5682cc3e51a32dc2fa82f0c8454f0b4e42092385ee29a37c11c",
+      "file": "IS1001a-w000320-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1001",
+      "splitGroup": "AMI/IS1001",
+      "participants": [
+        "MIO043",
+        "MIO012",
+        "MIO020",
+        "FIO074"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 320-325, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 320,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "34bee734cb29476052a8eed7dfbd1756189810a8c8277c558055586100f5afb5",
+          "B": "200214567737f0a57838f663f567fa026e373bca04cc0ed0c95f87925010cb63",
+          "C": "b0782f7119e4c99dee3810bafc6bff02dab5774b14697b32c41eafa6a428c072",
+          "D": "6d77da953fecaf28e67ffe28da27f5658ad4fbe2c0db8704fc1d404b62cad68a"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 4.009999999999991,
+            "B": 0.7800000000000296,
+            "C": 0,
+            "D": 1.160000000000025
+          },
+          "wordActivityHistogramSeconds": [
+            0.0,
+            4.0499999999999545,
+            0.9500000000000455,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.1900000000000091,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1001a-w000408-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1001a/audio/IS1001a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1001a, annotated 5-second multi-speaker window at 408s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "11b7b7fbe63857b8f9ac1865b60e5f87ed22e6293fe4277b6fa573358c56e5b5",
+      "file": "IS1001a-w000408-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1001",
+      "splitGroup": "AMI/IS1001",
+      "participants": [
+        "MIO043",
+        "MIO012",
+        "MIO020",
+        "FIO074"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 408-413, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 408,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "34bee734cb29476052a8eed7dfbd1756189810a8c8277c558055586100f5afb5",
+          "B": "200214567737f0a57838f663f567fa026e373bca04cc0ed0c95f87925010cb63",
+          "C": "b0782f7119e4c99dee3810bafc6bff02dab5774b14697b32c41eafa6a428c072",
+          "D": "6d77da953fecaf28e67ffe28da27f5658ad4fbe2c0db8704fc1d404b62cad68a"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.7300000000000182,
+            "B": 2.089999999999975,
+            "C": 0.5,
+            "D": 0
+          },
+          "wordActivityHistogramSeconds": [
+            1.2900000000000205,
+            3.099999999999966,
+            0.6100000000000136,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.12200000000000273,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-IS1001a-w000701-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/IS1001a/audio/IS1001a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "IS1001a, annotated 3-second multi-speaker window at 701s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "9f624a2578eb8aceb763875156023569a92ae0fa196bed4ba420dc5286064928",
+      "file": "IS1001a-w000701-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/IS1001",
+      "splitGroup": "AMI/IS1001",
+      "participants": [
+        "MIO043",
+        "MIO012",
+        "MIO020",
+        "FIO074"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 701-704, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 701,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "34bee734cb29476052a8eed7dfbd1756189810a8c8277c558055586100f5afb5",
+          "B": "200214567737f0a57838f663f567fa026e373bca04cc0ed0c95f87925010cb63",
+          "C": "b0782f7119e4c99dee3810bafc6bff02dab5774b14697b32c41eafa6a428c072",
+          "D": "6d77da953fecaf28e67ffe28da27f5658ad4fbe2c0db8704fc1d404b62cad68a"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.509999999999991,
+            "B": 0.5,
+            "C": 0.5099999999999909,
+            "D": 0
+          },
+          "wordActivityHistogramSeconds": [
+            0.5399999999999636,
+            2.400000000000091,
+            0.05999999999994543,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.01999999999998181,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3005a-w000185-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3005a/audio/TS3005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3005a, annotated 10-second multi-speaker window at 185s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "673b727698d55ae8696333b17bff5ed2001bb928881e9498426fac7f8b233b31",
+      "file": "TS3005a-w000185-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3005",
+      "splitGroup": "AMI/TS3005",
+      "participants": [
+        "MTD017PM",
+        "FTD019UID",
+        "MTD018ID",
+        "MTD020ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 185-195, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 185,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "7874144b6c0ab1edc2eeb21033b5e9b085653ccd5f55a01d78b20624f51c419e",
+          "B": "0b2ca98da14a438f499cc7b7b0b532a2761f157c65393862bb68e9246f2bce31",
+          "C": "8f262b57a095f4e4afc0e4325a9b9b3347ce8442fc1f4b1b8e1f795d89368e56",
+          "D": "e7d163eb2158e13b8268a1b91db3b5037a2bf51a647f7cb3423e97b84057e1a7"
+        },
+        "activity": {
+          "speakersWithWords": 4,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0.950000000000017,
+            "B": 0.3599999999999852,
+            "C": 8.169999999999987,
+            "D": 0.5600000000000023
+          },
+          "wordActivityHistogramSeconds": [
+            0.25,
+            9.460000000000008,
+            0.28999999999999204,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.028999999999999203,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3005a-w000365-10s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3005a/audio/TS3005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3005a, annotated 10-second multi-speaker window at 365s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "fcd784df64b0c19ffd81e9a0364bb5e41a3ed518bc53282992d3556c73880fa9",
+      "file": "TS3005a-w000365-10s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3005",
+      "splitGroup": "AMI/TS3005",
+      "participants": [
+        "MTD017PM",
+        "FTD019UID",
+        "MTD018ID",
+        "MTD020ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "10-second source excerpt at seconds 365-375, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 365,
+        "durationSeconds": 10
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 10
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "7874144b6c0ab1edc2eeb21033b5e9b085653ccd5f55a01d78b20624f51c419e",
+          "B": "0b2ca98da14a438f499cc7b7b0b532a2761f157c65393862bb68e9246f2bce31",
+          "C": "8f262b57a095f4e4afc0e4325a9b9b3347ce8442fc1f4b1b8e1f795d89368e56",
+          "D": "e7d163eb2158e13b8268a1b91db3b5037a2bf51a647f7cb3423e97b84057e1a7"
+        },
+        "activity": {
+          "speakersWithWords": 4,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 8.810000000000002,
+            "B": 1.4600000000000364,
+            "C": 0.18999999999999773,
+            "D": 0.5099999999999909
+          },
+          "wordActivityHistogramSeconds": [
+            0.6299999999999955,
+            7.919999999999959,
+            1.3000000000000682,
+            0.14999999999997726,
+            0.0
+          ],
+          "wordOverlapFraction": 0.14500000000000454,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3005a-w000456-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3005a/audio/TS3005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3005a, annotated 5-second multi-speaker window at 456s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "45eb11ebb4cf2c73c1325d7bbd1b3d544fbb7725adecc9a6ad8bb768edf4229b",
+      "file": "TS3005a-w000456-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3005",
+      "splitGroup": "AMI/TS3005",
+      "participants": [
+        "MTD017PM",
+        "FTD019UID",
+        "MTD018ID",
+        "MTD020ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 456-461, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 456,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "7874144b6c0ab1edc2eeb21033b5e9b085653ccd5f55a01d78b20624f51c419e",
+          "B": "0b2ca98da14a438f499cc7b7b0b532a2761f157c65393862bb68e9246f2bce31",
+          "C": "8f262b57a095f4e4afc0e4325a9b9b3347ce8442fc1f4b1b8e1f795d89368e56",
+          "D": "e7d163eb2158e13b8268a1b91db3b5037a2bf51a647f7cb3423e97b84057e1a7"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.6900000000000546,
+            "B": 1.4499999999999886,
+            "C": 0.8199999999999932,
+            "D": 0
+          },
+          "wordActivityHistogramSeconds": [
+            1.589999999999975,
+            2.8600000000000136,
+            0.5500000000000114,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.11000000000000228,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3005a-w000472-5s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3005a/audio/TS3005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3005a, annotated 5-second multi-speaker window at 472s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "f3b50b4b0c160e2f34d475aeed904d25cb84216521761cd5063043f92c597043",
+      "file": "TS3005a-w000472-5s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3005",
+      "splitGroup": "AMI/TS3005",
+      "participants": [
+        "MTD017PM",
+        "FTD019UID",
+        "MTD018ID",
+        "MTD020ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "5-second source excerpt at seconds 472-477, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 472,
+        "durationSeconds": 5
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 5
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "7874144b6c0ab1edc2eeb21033b5e9b085653ccd5f55a01d78b20624f51c419e",
+          "B": "0b2ca98da14a438f499cc7b7b0b532a2761f157c65393862bb68e9246f2bce31",
+          "C": "8f262b57a095f4e4afc0e4325a9b9b3347ce8442fc1f4b1b8e1f795d89368e56",
+          "D": "e7d163eb2158e13b8268a1b91db3b5037a2bf51a647f7cb3423e97b84057e1a7"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.8700000000000045,
+            "B": 1.3000000000000114,
+            "C": 1.160000000000025,
+            "D": 0
+          },
+          "wordActivityHistogramSeconds": [
+            1.5499999999999545,
+            2.57000000000005,
+            0.8799999999999955,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.1759999999999991,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3005a-w000493-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3005a/audio/TS3005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3005a, annotated 3-second multi-speaker window at 493s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "2d7fe016b003e7f9647fe60c9789bcc750baa557583c2d3877fef80e52bd6355",
+      "file": "TS3005a-w000493-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3005",
+      "splitGroup": "AMI/TS3005",
+      "participants": [
+        "MTD017PM",
+        "FTD019UID",
+        "MTD018ID",
+        "MTD020ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 493-496, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 493,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "7874144b6c0ab1edc2eeb21033b5e9b085653ccd5f55a01d78b20624f51c419e",
+          "B": "0b2ca98da14a438f499cc7b7b0b532a2761f157c65393862bb68e9246f2bce31",
+          "C": "8f262b57a095f4e4afc0e4325a9b9b3347ce8442fc1f4b1b8e1f795d89368e56",
+          "D": "e7d163eb2158e13b8268a1b91db3b5037a2bf51a647f7cb3423e97b84057e1a7"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 1.4800000000000182,
+            "B": 0,
+            "C": 0.6899999999999977,
+            "D": 0.6000000000000227
+          },
+          "wordActivityHistogramSeconds": [
+            0.7099999999999795,
+            1.8100000000000023,
+            0.4800000000000182,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.16000000000000605,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    },
+    {
+      "id": "ami-TS3005a-w000975-3s",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "download": "https://huggingface.co/datasets/ggfox00000/dia-AMICorpus-all/resolve/a249db5/amicorpus/TS3005a/audio/TS3005a.Mix-Headset.wav",
+      "author": "AMI Project Consortium",
+      "title": "TS3005a, annotated 3-second multi-speaker window at 975s",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "AMI Meeting Corpus, AMI Project Consortium; J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).",
+      "sha256": "92ada7749cf8d89883bc32f6d6e14fdd8133f0eca3cc4a07d266e0d79d10479a",
+      "file": "TS3005a-w000975-3s.wav",
+      "reference": "SMALL_GROUP",
+      "partition": "validation",
+      "sourceGroup": "AMI/TS3005",
+      "splitGroup": "AMI/TS3005",
+      "participants": [
+        "MTD017PM",
+        "FTD019UID",
+        "MTD018ID",
+        "MTD020ME"
+      ],
+      "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+      "transforms": "3-second source excerpt at seconds 975-978, mono 16 kHz PCM16, from public headset mix; not far-field.",
+      "audioExcerpt": {
+        "startSeconds": 975,
+        "durationSeconds": 3
+      },
+      "windows": [
+        {
+          "offsetSeconds": 0,
+          "seconds": 3
+        }
+      ],
+      "windowReference": {
+        "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+        "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+        "timingXmlSha256BySpeaker": {
+          "A": "7874144b6c0ab1edc2eeb21033b5e9b085653ccd5f55a01d78b20624f51c419e",
+          "B": "0b2ca98da14a438f499cc7b7b0b532a2761f157c65393862bb68e9246f2bce31",
+          "C": "8f262b57a095f4e4afc0e4325a9b9b3347ce8442fc1f4b1b8e1f795d89368e56",
+          "D": "e7d163eb2158e13b8268a1b91db3b5037a2bf51a647f7cb3423e97b84057e1a7"
+        },
+        "activity": {
+          "speakersWithWords": 3,
+          "speakersWithAtLeastHalfSecond": 3,
+          "perSpeakerWordSeconds": {
+            "A": 0,
+            "B": 1.9099999999999682,
+            "C": 0.5,
+            "D": 0.5599999999999454
+          },
+          "wordActivityHistogramSeconds": [
+            0.5300000000000864,
+            1.9699999999999136,
+            0.5,
+            0.0,
+            0.0
+          ],
+          "wordOverlapFraction": 0.16666666666666666,
+          "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+        }
+      }
+    }
+  ],
+  "freshValidationIds": [
+    "ami-IS1001a-w000239-10s",
+    "ami-IS1001a-w000273-10s",
+    "ami-IS1001a-w000320-5s",
+    "ami-IS1001a-w000408-5s",
+    "ami-IS1001a-w000701-3s",
+    "ami-TS3005a-w000185-10s",
+    "ami-TS3005a-w000365-10s",
+    "ami-TS3005a-w000456-5s",
+    "ami-TS3005a-w000472-5s",
+    "ami-TS3005a-w000493-3s",
+    "ami-TS3005a-w000975-3s"
+  ],
+  "notes": "Per-window AMI word-activity curation. Historical meeting-level AMI references are preserved in previous manifests, not used here. Fixed model-blind policy; two new participant groups reserved before inference. FSD references remain provisional creator descriptions; this is not six-class or physical acceptance.",
+  "curation": {
+    "planSha256": "2db27cd9c65112c62bb0b14903b119b845732514b9f76bd741fbcd2fa1b6363b",
+    "timingsSha256": "967829c80eaa26a618d877010c30b46b845ad3dd78c0f3f8cc229ddebc99eb08",
+    "selectionSha256": "bb212a58f4346ca4b8e1c540f03ed37e811ebfcee8a31b6ab3e6ae2592a1597f"
+  }
+}
