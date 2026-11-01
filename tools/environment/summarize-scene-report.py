@@ -7,8 +7,9 @@ p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--manifest',type=Path,required=True)
 p.add_argument('--report',type=Path,required=True)
 p.add_argument('--output',type=Path,required=True)
+p.add_argument('--all-validation-viewed',action='store_true',help='Treat every validation source as previously viewed for follow-up experiments')
 a=p.parse_args();manifest=load_manifest(a.manifest)
-clips={c['id']:c for c in manifest['recordings']};fresh=set(manifest.get('freshValidationIds',[]))
+clips={c['id']:c for c in manifest['recordings']};fresh=set() if a.all_validation_viewed else set(manifest.get('freshValidationIds',[]))
 with a.report.open() as f:
  reader=csv.DictReader(f,delimiter='\t')
  if reader.fieldnames!=['clip','reference','partition','sourceGroup','seconds','gain','offsetSeconds','decision','score','outcome']:raise ValueError('Unexpected report header')
@@ -34,7 +35,7 @@ def summarize(selected):
  counts=Counter(r['outcome'] for r in selected)
  return dict(variants=len(selected),recordings=len({r['clip'] for r in selected}),sourceGroups=len({r['sourceGroup'] for r in selected}),**{k:counts[k] for k in ('CORRECT','WRONG','ABSTAIN')})
 result={'manifestSha256':hashlib.sha256(a.manifest.read_bytes()).hexdigest(),'decisionReportSha256':hashlib.sha256(a.report.read_bytes()).hexdigest(),
- 'notes':'Actual shared Kotlin decisions at unchanged threshold. Correlated windows and provisional source references are not independent physical acceptance. Fresh sources were not used to fit coefficients or select hyperparameters.', 'evaluations':{}}
+ 'notes':'Actual shared Kotlin decisions at unchanged threshold. Correlated windows and provisional source references are not independent physical acceptance. Partition names refer to the original experiment; they do not establish that sources remain unseen in later experiments. Use --all-validation-viewed after examining evaluation results.', 'evaluations':{}}
 for category in ('development','previouslyViewedValidation','freshValidation'):
  selected=[r for r in rows if r['evaluation']==category]
  result['evaluations'][category]=dict(total=summarize(selected),byScene={label:summarize([r for r in selected if r['reference']==label]) for label in LABELS},

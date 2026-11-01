@@ -1,0 +1,848 @@
+{
+  "version": 1,
+  "manifestSha256": "e4d519bb6f8d637494a5d5d6f52ec4e2fa307f5c7a31108cc4a9de74b8f513a7",
+  "timingsSha256": "bfe1a41bc71123f6f7c79ea26a6edad323cdf58abe4b1aa6942ace00a66b4253",
+  "notes": "Public annotation audit only. Word intervals are not acoustic voice activity, group size, room occupancy or independent scene truth. No reference labels changed. Gain variants share timing windows; raw audio and word text are never read/saved by the offline audit.",
+  "summary": {
+    "development": {
+      "uniqueTimingWindows": 18,
+      "fewerThanThreeSpeakersWithWords": 14,
+      "fewerThanThreeWithHalfSecond": 14
+    },
+    "validation": {
+      "uniqueTimingWindows": 18,
+      "fewerThanThreeSpeakersWithWords": 14,
+      "fewerThanThreeWithHalfSecond": 15
+    }
+  },
+  "windows": [
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 0,
+      "seconds": 5,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 5,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        5.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 10,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        10.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 10,
+      "seconds": 3,
+      "speakersWithWords": 2,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0.4300000000000068,
+        "B": 2.030000000000001,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.539999999999992,
+        2.460000000000008,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 10,
+      "seconds": 5,
+      "speakersWithWords": 2,
+      "speakersWithAtLeastHalfSecond": 2,
+      "perSpeakerWordSeconds": {
+        "A": 2.430000000000007,
+        "B": 2.030000000000001,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.539999999999992,
+        4.460000000000008,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 10,
+      "seconds": 10,
+      "speakersWithWords": 3,
+      "speakersWithAtLeastHalfSecond": 3,
+      "perSpeakerWordSeconds": {
+        "A": 7.430000000000007,
+        "B": 2.3899999999999864,
+        "C": 0,
+        "D": 1.3099999999999739
+      },
+      "wordActivityHistogramSeconds": [
+        0.539999999999992,
+        7.790000000000049,
+        1.669999999999959,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.1669999999999959,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 20,
+      "seconds": 3,
+      "speakersWithWords": 4,
+      "speakersWithAtLeastHalfSecond": 3,
+      "perSpeakerWordSeconds": {
+        "A": 1.9799999999999898,
+        "B": 2.9000000000000057,
+        "C": 0.36000000000001364,
+        "D": 0.7099999999999795
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        1.0200000000000102,
+        1.0999999999999943,
+        0.789999999999992,
+        0.09000000000000341
+      ],
+      "wordOverlapFraction": 0.6599999999999966,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 20,
+      "seconds": 5,
+      "speakersWithWords": 4,
+      "speakersWithAtLeastHalfSecond": 3,
+      "perSpeakerWordSeconds": {
+        "A": 1.9799999999999898,
+        "B": 4.900000000000006,
+        "C": 0.36000000000001364,
+        "D": 0.7099999999999795
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0200000000000102,
+        1.0999999999999943,
+        0.789999999999992,
+        0.09000000000000341
+      ],
+      "wordOverlapFraction": 0.39599999999999796,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2002a",
+      "partition": "development",
+      "offsetSeconds": 20,
+      "seconds": 10,
+      "speakersWithWords": 4,
+      "speakersWithAtLeastHalfSecond": 3,
+      "perSpeakerWordSeconds": {
+        "A": 1.9799999999999898,
+        "B": 9.900000000000006,
+        "C": 0.36000000000001364,
+        "D": 0.7099999999999795
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        8.02000000000001,
+        1.0999999999999943,
+        0.789999999999992,
+        0.09000000000000341
+      ],
+      "wordOverlapFraction": 0.19799999999999898,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 0,
+      "seconds": 5,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 5,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        5.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 10,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        10.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 10,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 10,
+      "seconds": 5,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 5,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        5.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 10,
+      "seconds": 10,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 6.849999999999994,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        3.1500000000000057,
+        6.849999999999994,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 20,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 20,
+      "seconds": 5,
+      "speakersWithWords": 2,
+      "speakersWithAtLeastHalfSecond": 2,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3.4799999999999898,
+        "C": 0.5800000000000125,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.9399999999999977,
+        4.060000000000002,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-ES2003a",
+      "partition": "development",
+      "offsetSeconds": 20,
+      "seconds": 10,
+      "speakersWithWords": 2,
+      "speakersWithAtLeastHalfSecond": 2,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3.4799999999999898,
+        "C": 2.630000000000024,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        3.8899999999999864,
+        6.110000000000014,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 0,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 0.12000000000000455,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        2.8799999999999955,
+        0.12000000000000455,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 0,
+      "seconds": 5,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 2.1200000000000045,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        2.8799999999999955,
+        2.1200000000000045,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "speakersWithWords": 2,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 7.1200000000000045,
+        "C": 0.47999999999998977,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        2.8799999999999955,
+        6.640000000000015,
+        0.47999999999998977,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.047999999999998974,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 10,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 10,
+      "seconds": 5,
+      "speakersWithWords": 3,
+      "speakersWithAtLeastHalfSecond": 3,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3.430000000000007,
+        "C": 0.75,
+        "D": 1.0500000000000114
+      },
+      "wordActivityHistogramSeconds": [
+        0.7400000000000091,
+        3.2899999999999636,
+        0.9700000000000273,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.19400000000000545,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 10,
+      "seconds": 10,
+      "speakersWithWords": 3,
+      "speakersWithAtLeastHalfSecond": 3,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 3.920000000000016,
+        "C": 0.75,
+        "D": 1.0500000000000114
+      },
+      "wordActivityHistogramSeconds": [
+        5.25,
+        3.7799999999999727,
+        0.9700000000000273,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.09700000000000272,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 20,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1.4499999999999886
+      },
+      "wordActivityHistogramSeconds": [
+        1.5500000000000114,
+        1.4499999999999886,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 20,
+      "seconds": 5,
+      "speakersWithWords": 3,
+      "speakersWithAtLeastHalfSecond": 2,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 0.1599999999999966,
+        "C": 1.2200000000000273,
+        "D": 1.5999999999999943
+      },
+      "wordActivityHistogramSeconds": [
+        2.1699999999999875,
+        2.680000000000007,
+        0.15000000000000568,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.030000000000001137,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-IS1000a",
+      "partition": "validation",
+      "offsetSeconds": 20,
+      "seconds": 10,
+      "speakersWithWords": 3,
+      "speakersWithAtLeastHalfSecond": 3,
+      "perSpeakerWordSeconds": {
+        "A": 0,
+        "B": 2.660000000000025,
+        "C": 1.2200000000000273,
+        "D": 2.3899999999999864
+      },
+      "wordActivityHistogramSeconds": [
+        4.669999999999959,
+        4.390000000000043,
+        0.9399999999999977,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.09399999999999978,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 0,
+      "seconds": 5,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 5,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        5.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 10,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        10.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 10,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 10,
+      "seconds": 5,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 5,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        0.0,
+        5.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 10,
+      "seconds": 10,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 8.650000000000006,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        1.3499999999999943,
+        8.650000000000006,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 20,
+      "seconds": 3,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 1.1400000000000148,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        1.8599999999999852,
+        1.1400000000000148,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 20,
+      "seconds": 5,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 2.7500000000000284,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        2.2499999999999716,
+        2.7500000000000284,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    },
+    {
+      "clip": "ami-TS3003a",
+      "partition": "validation",
+      "offsetSeconds": 20,
+      "seconds": 10,
+      "speakersWithWords": 1,
+      "speakersWithAtLeastHalfSecond": 1,
+      "perSpeakerWordSeconds": {
+        "A": 5.790000000000049,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "wordActivityHistogramSeconds": [
+        4.209999999999951,
+        5.790000000000049,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wordOverlapFraction": 0.0,
+      "notes": "Word timings only, excluding punctuation and vocal-sound tags; not total people present, acoustic VAD, scene ground truth or transcript content."
+    }
+  ]
+}

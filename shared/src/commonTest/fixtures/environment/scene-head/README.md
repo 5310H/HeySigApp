@@ -47,3 +47,18 @@ python3 tools/test-scene-reports.py
 ```
 
 `--cv-output` must name a new directory. These folds share development-selected hyperparameters and are not nested independent validation. Their 78 correct/30 wrong/104 abstentions contradict the fitted-source 159/0/53 result. Neither those numbers nor extra public references qualify real automatic commands. Candidate/fold weights remain developer-cache artifacts, not production assets. The actual phone/watch scene head and its hash remain unchanged.
+
+## Model sensitivity and reference quality
+
+The [November 1 follow-up](../../../../../../docs/acceptance/environment-consensus-and-reference-audit-2026-11-01.md) rejects unanimous agreement as the six-scene solution: it accepts only 6/124 previously viewed evaluation variants. All votes/guards use Kotlin. To reproduce after building the head-report jar and source-excluded heads:
+
+```sh
+python3 tools/environment/report-scene-consensus.py --manifest shared/src/commonTest/fixtures/environment/scene-head/expanded-corpus.json --encoder /tmp/scene-encoder.tflite --head /tmp/scene-head.bin --fit-report /tmp/scene-head.json --cv-directory /tmp/new-scene-cv --evidence /tmp/expanded-evidence.bin --references /tmp/expanded-evidence.tsv --jar shared/build/scene-head-report.jar --work-directory /tmp/new-consensus-components --output /tmp/consensus.tsv
+python3 tools/environment/summarize-scene-report.py --manifest shared/src/commonTest/fixtures/environment/scene-head/expanded-corpus.json --report /tmp/consensus.tsv --all-validation-viewed --output /tmp/consensus-summary.json
+bash tools/check-scene-consensus.sh
+python3 tools/test-scene-consensus.py
+python3 tools/environment/audit-ami-timings.py --output /tmp/ami-timing-audit.json
+python3 tools/test-ami-timings.py
+```
+
+Use matching **expanded** feature/head/fit/CV inputs and a new consensus work directory. Add `--fetch` to the timing audit only for an explicit public-source hash/extraction recheck. HTTP mode receives XML in memory and retains no word text. `ami-word-timings.json` contains only public timestamps, credits and hashes, under CC BY 4.0; it is excluded from application assets. Word activity is not scene ground truth: 28/36 existing AMI windows have words from fewer than three speakers, while the original references describe a four-person meeting. These references need window-level review; no relabeling is used to improve reported model scores.

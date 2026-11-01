@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "policy": "Unanimous class across full head and every source-excluded head at unchanged >=0.65 score; any abstention or disagreement abstains; score is minimum component softmax, not calibrated confidence.",
+  "notes": "Offline research only. Training sets overlap; votes are not independent. Development results are sensitivity on fitted sources, NOT held-source-out CV. All validation sources have previously been viewed; this is regression evidence, not fresh acceptance.",
+  "manifestSha256": "e4d519bb6f8d637494a5d5d6f52ec4e2fa307f5c7a31108cc4a9de74b8f513a7",
+  "evidenceSha256": "4a4e2d59717fc1cb9678be896ea907c278b8dd0576f59b1379f1169ea63a7962",
+  "referencesSha256": "c02c902369246b240f822ee33fb572ef259b9f4eb9be53b1ba54a2cd23f78b56",
+  "reporterJarSha256": "de3a6aa4267efed5aa13f802a47bf50db96054a3e4aaf7263a1c9078dd4294ad",
+  "foldRegistrySha256": "216b835fbcd16f7f9878f775385ec082001c3561a840ba6815338e60908cc18b",
+  "decisionReportSha256": "44852d6506bb197dd7ec2844e79a8107f03cd66a2ee16a1d6bd2211cf7b40fd1",
+  "components": [
+    {
+      "headSha256": "c157c694677fb4e9ed74696561f9080cc2021dfb5973394dfe35bca86c70f48d",
+      "reportSha256": "6c001e99f5a8593fd893b3a42e0988e9825bc50a4d23041ee2f6a15882fabde5",
+      "sourceExclusion": "full-development-fit"
+    },
+    {
+      "headSha256": "52f5c669cfa0300d89572c394ee91332405e268f0925eada16d265e45e0e92c3",
+      "reportSha256": "c505582e13510cd54a0513a0200e82e19c1eaf4c74f2654a0e4b05a46adec641",
+      "sourceExclusion": "excluding AMI/ES2002"
+    },
+    {
+      "headSha256": "8ac4005afb136264eacea1e24b5be537798c6fe102909d1396166a3654f169b0",
+      "reportSha256": "1a8c15819d6711ddd4229d999b8a10a5c2bb0b8b144c88dfb082f78b04c641a6",
+      "sourceExclusion": "excluding AMI/ES2003"
+    },
+    {
+      "headSha256": "404e7b011e826ad26f169cb90b1a4b9793c165a929cc35db225b69ad8ad07580",
+      "reportSha256": "dcbdf13e2402e95733d0543bb8ec0878fb944b795f1bf21eb08c184fbcf3e6be",
+      "sourceExclusion": "excluding AirialPC/scene-session"
+    },
+    {
+      "headSha256": "9513b85c89ba9b2f7b9b8212592b5d4592dded1d1cd3f8bdb367ff7836a82ae7",
+      "reportSha256": "c74977c55ed1d653e5add4d535e03dd43bc6f71467e569f4ea68371c3cd90663",
+      "sourceExclusion": "excluding AlexanderChe/363712"
+    },
+    {
+      "headSha256": "8f6070c3dca8ac75daeb9542278c92455dfd42c340756d5d30dc2eb92f6a6af1",
+      "reportSha256": "3ef71eba6263892a3f8d9f03e4d322ac16b08c3825585277bebe41b05f1a35f8",
+      "sourceExclusion": "excluding Angellu16/533833"
+    },
+    {
+      "headSha256": "12a67aebe229bfd225fc070c12eddd451823451d08c87e1078007b8d9af036d5",
+      "reportSha256": "9d7b70b7df5dc393edc0ef6fdb719675f96381388aef9c40384763ad3299e191",
+      "sourceExclusion": "excluding KieranKeegan/scene-session"
+    },
+    {
+      "headSha256": "92d738b9c61c912f80cf386e5e9dcfc29a709f120547ee282f831fc5e7998873",
+      "reportSha256": "a992339ced7192cd606be1269c105ecf54fc24c1bae869c7a83946ea5998f0e2",
+      "sourceExclusion": "excluding RutgerMuller/scene-session"
+    },
+    {
+      "headSha256": "38f82d30a3661f5bc0922b80d5a095ccb18fa2d556520e4a63c99a32617ad7eb",
+      "reportSha256": "c9e49cf8ba30bbaee6b0e25b8e9877066dac5788fc5f73454646dbf19a943d0b",
+      "sourceExclusion": "excluding Ryding/scene-session"
+    },
+    {
+      "headSha256": "0f704728b00249b41a7b0026d91daa49e8ab13559127cf57c881ee867fc4d568",
+      "reportSha256": "4919701ec5520c25a6e91e4f4c3591d5babe4d10667eeb4ef68474d94b8d1ad3",
+      "sourceExclusion": "excluding SpliceSound/crowd-murmur"
+    },
+    {
+      "headSha256": "8aa145e091c67500091481abb928ed29b4c3ec0ff8a95ab5d1d0a5100dd255ec",
+      "reportSha256": "447bf303b6bf9703defab0ce77540736d26105b2d910df4f4fd22bbe85ea8128",
+      "sourceExclusion": "excluding andrebola/scene-session"
+    },
+    {
+      "headSha256": "e22a6202ad569d382cf0bf405171c3f84439430cb105e4baf8d13ab5663a67be",
+      "reportSha256": "684d3e1d2d16b64d2f19d29f8827740f8e8e04ff9263b2ec997b14d7e89fec4c",
+      "sourceExclusion": "excluding blaukreuz/scene-session"
+    },
+    {
+      "headSha256": "7f1e8927fca14ccc7089731b29e8a23406bea984735595a25db44098b606e445",
+      "reportSha256": "7836f54838f35e495801e4b89625d3e2cd89c010ffccc62f2bba436a95413a48",
+      "sourceExclusion": "excluding cognito perceptu/scene-session"
+    },
+    {
+      "headSha256": "2ad5a9d394911b65aa22ffef296b775c7bca18090cac64b66b968be51d5c4784",
+      "reportSha256": "0fc120d7826fe384d1a366d308165ffddebfeb83a8b58df9cbe30259c7e08dc0",
+      "sourceExclusion": "excluding dianser72/scene-session"
+    },
+    {
+      "headSha256": "075e21ec9e5c2abfcc1b2a6cc86956e3f8020a85194764cac3a54eb09d5c5e4c",
+      "reportSha256": "3104f86ffe04edf74cbdee2d4fb56727bfab51cb9c22f5f1523c0f5bafac691f",
+      "sourceExclusion": "excluding eguobyte/scene-session"
+    },
+    {
+      "headSha256": "992588b4c36dec816d13a867463e007664e5bc1dcefb966c2394b97554bf1516",
+      "reportSha256": "08291f15cec607280e83ede2ae96aec24e9cd2303366eee37631392ce72df75a",
+      "sourceExclusion": "excluding jaredpass24/scene-session"
+    },
+    {
+      "headSha256": "1551faad5ce6c0c538f003c5a7a1565bfd086ee11c6c1870f4fe45229058961f",
+      "reportSha256": "d630459305a536d8b5a7df2199a135c91bca531dd3744e2ab3f8d69c0dc22f5c",
+      "sourceExclusion": "excluding labailey/scene-session"
+    },
+    {
+      "headSha256": "223ccd65df5564e182e9b4b83326170e46c6f71f6a36bfb8256e2706d7fd866f",
+      "reportSha256": "b5b65fc8ec53f97f8008c11942b26c9b8660b084fbbec570532304c2c0963749",
+      "sourceExclusion": "excluding macdaddyno1/scene-session"
+    },
+    {
+      "headSha256": "f6d47f0d2bea28d4822c50d3d2b6f8c2f827d434717b74a234866af19f7d084a",
+      "reportSha256": "1a6baf635b54d45f9c1d7f118f5c77e079e959bc981ec1ce1e6a45617e021aac",
+      "sourceExclusion": "excluding miguel2613/scene-session"
+    },
+    {
+      "headSha256": "8b63a4f4160186dbc3044d1a0ba704abcac8c454edd02f72756f9617ed0b82ee",
+      "reportSha256": "84d88ef50d53faf184291e054bfb7a973a96f210474ae3558ae192c014a0bd40",
+      "sourceExclusion": "excluding univ_lyon3/scene-session"
+    },
+    {
+      "headSha256": "394ce854a74f36079ed6a30b373f63c7344796e0376f787559427b2b5ea88143",
+      "reportSha256": "7b296c9c294f44c03676029c4de6d5447d3cefa4f062c195e3280c46f7e500a9",
+      "sourceExclusion": "excluding visionear/565535"
+    }
+  ]
+}

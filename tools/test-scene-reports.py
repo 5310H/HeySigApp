@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/'shared/src/commonTest/fixtures/environment/scene-head/expanded-corpus.json'
 REPORT=ROOT/'docs/acceptance/data/scene-expansion-candidate-2026-11-01.tsv'
 class ReportChecks(unittest.TestCase):
- def run_report(self,rows=None):
+ def run_report(self,rows=None,viewed=False):
   with tempfile.TemporaryDirectory() as tmp:
    base=Path(tmp);report=REPORT
    if rows is not None:
@@ -13,11 +13,18 @@ class ReportChecks(unittest.TestCase):
     with report.open('w') as f:
      writer=csv.DictWriter(f,fieldnames=list(rows[0]),delimiter='\t');writer.writeheader();writer.writerows(rows)
    output=base/'output.json'
-   result=subprocess.run(['python3',str(ROOT/'tools/environment/summarize-scene-report.py'),'--manifest',str(MANIFEST),'--report',str(report),'--output',str(output)],capture_output=True,text=True)
+   command=['python3',str(ROOT/'tools/environment/summarize-scene-report.py'),'--manifest',str(MANIFEST),'--report',str(report),'--output',str(output)]
+   if viewed:command.append('--all-validation-viewed')
+   result=subprocess.run(command,capture_output=True,text=True)
    return result,json.loads(output.read_text()) if output.exists() else None
  def test_new_evaluation_is_separate_from_previously_viewed(self):
   process,report=self.run_report();self.assertEqual(process.returncode,0,process.stderr)
   self.assertEqual(report['evaluations']['freshValidation']['total'],dict(variants=16,recordings=2,sourceGroups=2,CORRECT=6,WRONG=0,ABSTAIN=10))
+  self.assertEqual(report['evaluations']['previouslyViewedValidation']['total']['WRONG'],9)
+ def test_followup_marks_all_evaluation_as_viewed(self):
+  process,report=self.run_report(viewed=True);self.assertEqual(process.returncode,0,process.stderr)
+  self.assertEqual(report['evaluations']['freshValidation']['total']['variants'],0)
+  self.assertEqual(report['evaluations']['previouslyViewedValidation']['total']['variants'],124)
   self.assertEqual(report['evaluations']['previouslyViewedValidation']['total']['WRONG'],9)
  def test_duplicate_and_mislabeled_evidence_fails(self):
   with REPORT.open() as f:original=list(csv.DictReader(f,delimiter='\t'))
