@@ -20,9 +20,9 @@ parser.add_argument('--fixtures', type=Path, required=True)
 parser.add_argument('--output', type=Path, default=ROOT/'shared/build/environment-evidence.tsv')
 args = parser.parse_args()
 manifest = json.loads((ROOT/'shared/src/commonTest/fixtures/environment/recordings.json').read_text())
-model = ROOT/'audioAndroid/src/main/assets/environment/yamnet.tflite'
+model = ROOT/'third_party/environment/yamnet-original.tflite'
 assert hashlib.sha256(model.read_bytes()).hexdigest() == manifest['modelSha256']
-labels = (model.parent/'labels.txt').read_text().splitlines()
+labels = (ROOT/'audioAndroid/src/main/assets/environment/labels.txt').read_text().splitlines()
 interpreter = Interpreter(model_path=str(model), num_threads=1)
 interpreter.allocate_tensors()
 source = interpreter.get_input_details()[0]

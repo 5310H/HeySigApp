@@ -930,6 +930,12 @@ class HomeActivity : Activity() {
             val notices=listOf("LICENSE","ONNXRUNTIME-LICENSE").joinToString("\n\n") { name -> assets.open("handsfree/$name").bufferedReader().use { it.readText() } }
             android.app.AlertDialog.Builder(this).setTitle("Offline wake detector notices").setMessage(notices).setPositiveButton("Close",null).show()
         }
+        button("Environmental model notices") {
+            val notices=listOf("NOTICE","HEAD_NOTICE","LICENSE","CC-BY-4.0.txt").joinToString("\n\n") { name ->
+                assets.open("environment/$name").bufferedReader().use { it.readText() }
+            }
+            android.app.AlertDialog.Builder(this).setTitle("Environmental model notices").setMessage(notices).setPositiveButton("Close",null).show()
+        }
         button("Open public privacy policy") {
             if(BuildConfig.PRIVACY_POLICY_URL.isEmpty()) tell("Public policy is not configured yet. Publisher contact and hosting must be supplied before release.")
             else try { startActivity(Intent(Intent.ACTION_VIEW,android.net.Uri.parse(BuildConfig.PRIVACY_POLICY_URL))) }

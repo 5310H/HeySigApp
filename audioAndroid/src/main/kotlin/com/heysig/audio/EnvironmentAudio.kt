@@ -22,13 +22,8 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
     private val worker=EnvironmentSampleWorker(allowed,{ seconds,cancel ->
         check(acquire { cancel.get() }) { "Microphone busy or capture cancelled" }
         try { capture(seconds,cancel) } finally { release() }
-    },{ pcm,cancelled -> Yamnet(context).use { model ->
-        val frames=model.eventScores(pcm,cancelled)
-        if(!cancelled()) observeScores?.invoke(EnvironmentClassifier.requiredLabels.associateWith { label ->
-            frames.map { it.getValue(label) }.average()
-        })
-        model.confirmQuiet(pcm,EnvironmentClassifier.classify(frames),cancelled)
-    } },{ SystemClock.elapsedRealtime() })
+    },{ pcm,cancelled -> Yamnet(context,observeScores).use { model -> model.classify(pcm,cancelled) } },
+        { SystemClock.elapsedRealtime() })
     fun stop() = worker.stop()
     fun busy() = worker.busy()
     fun sample(seconds: Int, done: (EnvironmentClassification?, String?, Long)->Unit) = worker.sample(seconds,done)
@@ -50,6 +45,7 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
             throw SecurityException("Microphone permission is required")
         val recorder=AudioRecord(MediaRecorder.AudioSource.MIC,16000,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT,maxOf(minimum,4096))
         val pcm=ShortArray(seconds*16000)
+        val buffer=ShortArray(1024)
         var successful=false
         try {
             check(recorder.state==AudioRecord.STATE_INITIALIZED) { "Microphone unavailable" }
@@ -59,7 +55,6 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
             recorder.startRecording()
             check(recorder.recordingState==AudioRecord.RECORDSTATE_RECORDING) { "Microphone start failed" }
             val accumulator=NoiseAccumulator(16000,seconds)
-            val buffer=ShortArray(1024)
             var count=0
             val deadline=SystemClock.elapsedRealtime()+seconds*1000L+2000
             while(count<pcm.size) {
@@ -77,63 +72,72 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
             return pcm
         } finally {
             runCatching { recorder.stop() };recorder.release()
+            buffer.fill(0)
             if(!successful) pcm.fill(0)
         }
     }
 }
 
-/** Pinned Google quantized YAMNet, CPU only, one inference thread. */
-class Yamnet(context: Context): AutoCloseable {
+/** Pinned pretrained encoder and shared scene head; CPU only, one inference thread. */
+class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)->Unit)? = null): AutoCloseable {
     private val labelBytes=context.assets.open("environment/labels.txt").use { it.readBytes() }
     private val labels=labelBytes.toString(Charsets.UTF_8).trimEnd().lines()
+    private val selectedLabels=EnvironmentClassifier.requiredLabels.associateWith { labels.indexOf(it) }
     private val interpreter: Interpreter
+    private val head: EnvironmentSceneHead
     init {
         val bytes=context.assets.open("environment/yamnet.tflite").use { it.readBytes() }
         val hash=MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
-        check(hash=="10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de") { "Unexpected environment model" }
+        check(hash==EnvironmentSceneProfile.ENCODER_SHA256) { "Unexpected environment model" }
         check(MessageDigest.getInstance("SHA-256").digest(labelBytes).joinToString("") { "%02x".format(it) }==
             "8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051") { "Unexpected environment labels" }
+        val headBytes=context.assets.open("environment/scene-head.bin").use { it.readBytes() }
+        check(MessageDigest.getInstance("SHA-256").digest(headBytes).joinToString("") { "%02x".format(it) }==
+            EnvironmentSceneProfile.HEAD_SHA256) { "Unexpected environment scene head" }
+        head=EnvironmentSceneHead.decode(headBytes,hash)
         val model=ByteBuffer.allocateDirect(bytes.size).order(ByteOrder.nativeOrder()).put(bytes).apply { rewind() }
         val candidate=Interpreter(model,Interpreter.Options().setNumThreads(1))
         try {
             check(labels.size==521 && labels.containsAll(EnvironmentClassifier.requiredLabels) && candidate.getInputTensor(0).numElements()==15600 &&
                 candidate.getInputTensor(0).dataType()==DataType.FLOAT32 &&
-                candidate.getOutputTensor(0).numElements()==521 && candidate.getOutputTensor(0).dataType()==DataType.FLOAT32) { "Unexpected model signature" }
+                candidate.getOutputTensorCount()==2 && candidate.getOutputTensor(0).numElements()==521 &&
+                candidate.getOutputTensor(0).dataType()==DataType.FLOAT32 && candidate.getOutputTensor(1).numElements()==1024 &&
+                candidate.getOutputTensor(1).dataType()==DataType.INT8 && candidate.getOutputTensor(1).quantizationParams().zeroPoint==-128 &&
+                kotlin.math.abs(candidate.getOutputTensor(1).quantizationParams().scale-0.022328350692987442)<1e-9) { "Unexpected model signature" }
         } catch(e: Exception) { candidate.close();throw e }
         interpreter=candidate
     }
     fun classify(pcm: ShortArray, cancelled: () -> Boolean = { false }): EnvironmentClassification {
-        return confirmQuiet(pcm,EnvironmentClassifier.classify(eventScores(pcm,cancelled)),cancelled)
-    }
-    fun confirmQuiet(pcm: ShortArray, original: EnvironmentClassification, cancelled: () -> Boolean): EnvironmentClassification {
-        if(original.environment!=ListeningEnvironment.QUIET) return original
         check(!cancelled()) { "Inference cancelled; sample discarded" }
-        val gain=EnvironmentSignal.quietVerificationGain(pcm)
-        val verification=when {
-            gain==null -> null
-            gain==1.0 -> original
-            else -> EnvironmentClassifier.classify(eventScores(pcm,cancelled,gain))
-        }
-        check(!cancelled()) { "Inference cancelled; sample discarded" }
-        return EnvironmentClassifier.confirmQuiet(original,verification)
-    }
-    fun eventScores(pcm: ShortArray, cancelled: () -> Boolean = { false }, gain: Double = 1.0): List<Map<String,Double>> {
-        require(pcm.size in 48000..160000)
-        require(gain.isFinite() && gain in 1.0..16.0)
+        val gain=EnvironmentSignal.inferenceGain(pcm)
+            ?: return EnvironmentClassification(null,0.0,"No acoustic evidence; keeping current program")
         val frames=mutableListOf<Map<String,Double>>()
+        val pool=EnvironmentEmbeddingPool()
         var start=0
         val input=ByteBuffer.allocateDirect(15600*4).order(ByteOrder.nativeOrder())
         val output=ByteBuffer.allocateDirect(521*4).order(ByteOrder.nativeOrder())
-        while(start+15600<=pcm.size) {
+        val embedding=ByteBuffer.allocateDirect(1024).order(ByteOrder.nativeOrder())
+        try {
+            while(start+15600<=pcm.size) {
+                check(!cancelled()) { "Inference cancelled; sample discarded" }
+                input.rewind();output.rewind();embedding.rewind()
+                for(i in start until start+15600) input.putFloat((pcm[i]/32768.0*gain).toFloat())
+                input.rewind()
+                interpreter.runForMultipleInputsOutputs(arrayOf(input),mutableMapOf<Int,Any>(0 to output,1 to embedding))
+                output.rewind();embedding.rewind()
+                frames.add(selectedLabels.mapValues { (_,index) -> output.getFloat(index*4).toDouble() })
+                pool.add(ByteArray(1024).also { embedding.get(it) })
+                start+=7680
+            }
             check(!cancelled()) { "Inference cancelled; sample discarded" }
-            input.rewind();output.rewind()
-            for(i in start until start+15600) input.putFloat((pcm[i]/32768.0*gain).toFloat())
-            input.rewind();interpreter.run(input,output);output.rewind()
-            frames.add(labels.associateWith { output.float.toDouble() })
-            start+=7680
+            observeScores?.invoke(EnvironmentClassifier.requiredLabels.associateWith { label -> frames.map { it.getValue(label) }.average() })
+            val result=head.classify(pool.finish(),frames)
+            check(!cancelled()) { "Inference cancelled; sample discarded" }
+            return result
+        } finally {
+            // The worker clears PCM16; also clear this direct float waveform copy on every exit.
+            input.clear();while(input.hasRemaining()) input.put(0.toByte())
         }
-        check(!cancelled()) { "Inference cancelled; sample discarded" }
-        return frames
     }
     override fun close() { interpreter.close() }
 }

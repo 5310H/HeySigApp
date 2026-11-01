@@ -37,3 +37,5 @@ all six babble cases. The unchanged scalar fixtures produce 17 abstentions in
 qualification or a held-out test of the rule change. YAMNet predicts audio
 events; group size/location still require independently validated evidence.
 See the [official model tutorial](https://www.tensorflow.org/hub/tutorials/yamnet).
+
+October 31 scene-head update: these event-only probes now use the hash-pinned original encoder archive at `third_party/environment/yamnet-original.tflite`. This preserves historical scores and mapper fixtures. The app runtime uses the derived embedding encoder and separate scene head; see `scene-head/README.md` for current inference, corpus and acceptance limits.

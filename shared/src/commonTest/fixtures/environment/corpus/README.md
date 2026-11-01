@@ -13,7 +13,7 @@ bash tools/report-environment-corpus.sh shared/build/environment-corpus/evidence
 python3 tools/test-environment-corpus.py
 ```
 
-The scorer uses the pinned shipped model. The report invokes the actual shared
+The scorer uses the pinned original event-only model archive. The report invokes the actual shared
 Kotlin classifier and switching confidence threshold. It does not dispatch any
 commands. Sources, creators and source groups cannot cross development/validation
 partitions; duplicate audio hashes are rejected. Duration and gain variants of a
@@ -34,3 +34,5 @@ Digital gain variants are first quantized to PCM16, matching the device input;
 the verification view uses the same bounded RMS/headroom gain as the shared
 Kotlin implementation. This is not an SPL estimate or acoustic calibration.
 The paired recordings are exercised by `tools/check-noise.sh` and Gradle tests.
+
+October 31 scene-head update: these event-only probes now use the hash-pinned original encoder archive at `third_party/environment/yamnet-original.tflite`. This preserves historical scores and mapper fixtures. The app runtime uses the derived embedding encoder and separate scene head; see `scene-head/README.md` for current inference, corpus and acceptance limits.

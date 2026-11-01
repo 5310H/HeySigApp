@@ -180,12 +180,14 @@ class EnvironmentFeature(
     fun watch(request: JSONObject): JSONObject {
         when(request.getString("action")) {
             "start" -> {
+                EnvironmentSceneProfile.requireCompatible(request.optString("classifierProfile"))
                 stop("New watch monitoring session")
                 val id=request.getString("session");com.heysig.companion.CompanionSafety.id(id)
                 start(watch=true);watchLink=WatchEnvironmentSession(id,now())
             }
             "stop" -> stop("Watch monitoring stopped")
             "sample" -> {
+                EnvironmentSceneProfile.requireCompatible(request.optString("classifierProfile"))
                 check(state.monitoring && source=="watch") { "Watch session expired; start again" }
                 watchLink=checkNotNull(watchLink).receive(request.getString("session"),request.getLong("sequence"),request.getLong("ageMillis"),now(),settings.schedule)
                 val id=request.optInt("environment",0)
@@ -197,6 +199,7 @@ class EnvironmentFeature(
             else -> error("Unsupported monitoring action")
         }
         return JSONObject().put("phase","FINAL").put("text",status())
+            .put("classifierProfile",EnvironmentSceneProfile.HEAD_SHA256)
             .put("interval",settings.schedule.intervalSeconds).put("duration",settings.schedule.durationSeconds)
             .put("timeout",settings.schedule.timeoutMinutes).put("monitoring",state.monitoring)
             .put("programs",org.json.JSONArray(programs().map { JSONObject().put("slot",it.slot).put("name",it.name) }))

@@ -74,11 +74,12 @@ class WatchMonitoringActivity: Activity() {
         status.text=reply.optString("text","No phone result")
         if(reply.optString("phase")!="FINAL") { stop("Phone disconnected or request rejected. Reconnect explicitly.",false);connected=false;return }
         try {
+            EnvironmentSceneProfile.requireCompatible(reply.optString("classifierProfile"))
             schedule=SamplingSchedule(reply.getInt("interval"),reply.getInt("duration"),reply.getInt("timeout"))
             val list=reply.getJSONArray("programs")
             programs=(0 until list.length()).map { list.getJSONObject(it).let { p -> p.getInt("slot") to p.getString("name") } }
             if(monitoring && !reply.getBoolean("monitoring")) stop("Phone monitoring stopped",false)
-        } catch(e: Exception) { stop("Invalid phone monitoring settings",false);connected=false }
+        } catch(e: Exception) { stop(e.message ?: "Invalid phone monitoring settings",false);connected=false }
     }
     private fun start() {
         if(monitoring) return
@@ -96,7 +97,8 @@ class WatchMonitoringActivity: Activity() {
         if(getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) { status.text="Unlock before monitoring";return }
         WatchVoiceSessionService.stop(this);SleepingShakeService.stop(this)
         session=UUID.randomUUID().toString();sequence=0;val token=++generation
-        client.environment(JSONObject().put("action","start").put("session",session)) { reply ->
+        client.environment(JSONObject().put("action","start").put("session",session)
+            .put("classifierProfile",EnvironmentSceneProfile.HEAD_SHA256)) { reply ->
             if(!foreground || token!=generation) return@environment
             update(reply)
             if(connected && reply.optBoolean("monitoring",false)) {
@@ -120,6 +122,7 @@ class WatchMonitoringActivity: Activity() {
                 if(!foreground || !monitoring || token!=generation) return@runOnUiThread
                 if(result==null) { stop(error ?: "Audio unavailable",true);return@runOnUiThread }
                 val body=JSONObject().put("action","sample").put("session",session).put("sequence",sequence++)
+                    .put("classifierProfile",EnvironmentSceneProfile.HEAD_SHA256)
                     .put("ageMillis",SystemClock.elapsedRealtime()-capturedAt)
                     .put("environment",result.environment?.id ?: 0).put("confidence",result.confidence)
                 client.environment(body) { reply ->

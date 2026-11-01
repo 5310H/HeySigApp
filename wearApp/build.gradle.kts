@@ -31,6 +31,7 @@ android {
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("debug").java.srcDir("../audioAndroid/src/debug/kotlin")
     sourceSets.getByName("androidTest").java.srcDir("../audioAndroid/src/androidTest/kotlin")
+    sourceSets.getByName("androidTest").assets.srcDir("../shared/src/commonTest/fixtures/environment/scene-head/device")
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")

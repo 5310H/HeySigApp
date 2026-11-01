@@ -46,6 +46,19 @@ locally when you save noise settings. Unfinished calibration stays in memory.
 Automatic preview simulates decisions and cooldown without sending commands.
 Automatic program switching remains locked pending physical acceptance.
 
+Environmental monitoring is a separate, explicitly requested foreground-only
+phone/watch feature. Bounded PCM is processed locally with a bundled experimental
+encoder and six-scene head, then discarded along with derived features. It saves
+or uploads no recording or transcript. Assignments, sampling settings and optional
+calibration summaries are local preferences. The watch sends compact environment,
+confidence, freshness and classifier-profile identifiers to the phone over the
+Data Layer transport described below, not PCM. Leaving or locking the monitoring
+screen, Stop or session expiry ends capture. Public licensed recordings were used
+to develop the head; user microphone audio was not used for model fitting.
+Automatic dispatch remains disabled pending classifier and physical acceptance.
+Model/license notices are available in the phone privacy screen and bundled with
+both applications. This does not change the separate speech-provider behavior.
+
 Speech recognition is optional. Your installed recognition service accesses
 the microphone and may send audio to its provider over a network. Its privacy
 policy, retention and deletion controls apply to that processing. HeySig receives

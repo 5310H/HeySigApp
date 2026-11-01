@@ -86,6 +86,14 @@ Development fixtures need quiet, single conversation, small/large groups,
 restaurant, traffic and household recordings at multiple gains and mixtures.
 Record held-out confusion/abstention rates separately from reducer tests.
 
+## Current experimental scene head
+
+The runtime now exposes YAMNet's existing 1024-value quantized embedding and retains its event scores as contradiction guards. Shared Kotlin pools temporal mean/std and runs a pinned 98 KB linear six-scene head. No backbone weights or Android runtime dependencies changed. A bounded digital gain view reduces input-level sensitivity; it is not calibrated SPL. The legacy event-only mapper remains archived regression evidence and is not a fallback for uncertain scene-head results.
+
+Phone/watch require matching head profiles before monitoring starts or samples are accepted. Missing/mismatched profiles stop monitoring; they do not affect manual commands. Model notices are available in the phone's privacy screen and packaged with both apps. Training uses only reviewed public recordings, with per-source licenses and separate creator/participant partitions. No user PCM or transcripts enter fitting. Test-only public PCM is excluded from main APKs/AABs by artifact checks.
+
+The [October 31 scene-head report](acceptance/environment-scene-head-2026-10-31.md) records poor held-out coverage, including no accepted Conversation or Restaurant examples. Automatic dispatch remains disabled. Native regression tests, physical microphone tests and model accuracy are separate acceptance evidence.
+
 ## Watch architecture and lifecycle
 
 Option A (local classification) sends only compact scores/results; it avoids raw

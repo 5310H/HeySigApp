@@ -17,7 +17,9 @@ for module, variant in ((m,v) for m in ('androidApp','wearApp') for v in args.va
     expected = dict(litert, **sherpa) if module == 'androidApp' else litert
     apk = ROOT/f'{module}/build/outputs/apk/{variant}/{module}-{variant}.apk'
     with zipfile.ZipFile(apk) as archive, apk.open('rb') as source:
-        assert hashlib.sha256(archive.read('assets/environment/yamnet.tflite')).hexdigest() == '10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de', 'Bundled model mismatch'
+        assert hashlib.sha256(archive.read('assets/environment/yamnet.tflite')).hexdigest() == 'b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4', 'Bundled encoder mismatch'
+        assert hashlib.sha256(archive.read('assets/environment/scene-head.bin')).hexdigest() == '0500150700fc75a8fc4b4c59f0cd284fea0b8d61d9b5fe6de074b24358233bfd', 'Bundled scene head mismatch'
+        assert not any(name.startswith('assets/scene-fixtures/') for name in archive.namelist()), 'Test recordings packaged in app'
         assert hashlib.sha256(archive.read('assets/environment/labels.txt')).hexdigest() == '8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051', 'Bundled labels mismatch'
         libraries = {item.filename: item for item in archive.infolist() if item.filename.endswith('.so')}
         assert set(libraries) == {name.replace('jni/', 'lib/', 1) for name in expected}, 'Unexpected native library inventory'

@@ -1,0 +1,55 @@
+Experimental six-scene head. Real automatic dispatch remains disabled pending acceptance.
+
+Encoder: Google/TensorFlow YAMNet classification-tflite v1, Apache-2.0; see LICENSE and NOTICE.
+
+Only the output vector is extended to expose the existing 1024-value embedding. Weights/operators are unchanged.
+
+Head: 2048 mean/std pooled features, regularized linear classifier, source-group cross-validation using development data only.
+
+No source audio or transcripts are included in the main phone/watch APKs. No user audio was used for fitting.
+
+AMI source signals are CC BY 4.0: AMI Project Consortium, J. Carletta et al., The AMI Meeting Corpus: A Pre-announcement (2005).
+
+AMI license: https://groups.inf.ed.ac.uk/ami/corpus/license.shtml ; see CC-BY-4.0.txt.
+
+AMI transformations: headset-mix excerpts at source 120-150 seconds; embedding extraction, temporal pooling, classifier fitting.
+
+FSD50K: E. Fonseca et al., FSD50K: An Open Dataset of Human-Labeled Sound Events. https://zenodo.org/records/4060432
+
+FSD50K mirror: https://huggingface.co/datasets/philgzl/fsd50k ; decoded from mono Opus to WAV; per-clip licenses below.
+
+Development sources used to fit coefficients (all other corpus entries are evaluation only):
+
+fs-260121 | Indoor adult murmur, small group.wav by SpliceSound | SpliceSound | CC0-1.0 | https://freesound.org/people/SpliceSound/sounds/260121/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fs-260123 | Indoor adult murmur, large group.wav by SpliceSound | SpliceSound | CC0-1.0 | https://freesound.org/people/SpliceSound/sounds/260123/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fs-260124 | Indoor adult murmur, couple.wav by SpliceSound | SpliceSound | CC0-1.0 | https://freesound.org/people/SpliceSound/sounds/260124/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fs-363712 | ambience, cafe, burger king, city, Moscow by AlexanderChe | AlexanderChe | CC0-1.0 | https://freesound.org/people/AlexanderChe/sounds/363712/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fs-533833 | Vacuum Cleaner.wav by Angellu16 | Angellu16 | CC0-1.0 | https://freesound.org/people/Angellu16/sounds/533833/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fs-565535 | Room tone Very quiet Small apartment room loopable edlarez vsnr.wav by visionear | visionear | CC0-1.0 | https://freesound.org/people/visionear/sounds/565535/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-174229 | restaurant.wav | cognito perceptu | CC0-1.0 | https://freesound.org/people/cognito%20perceptu/sounds/174229/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-192347 | Quiet Ambiance | AirialPC | CC0-1.0 | https://freesound.org/people/AirialPC/sounds/192347/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-201734 | AMIZET_Hugo_2013_2014_son5.wav | univ_lyon3 | CC0-1.0 | https://freesound.org/people/univ_lyon3/sounds/201734/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-212187 | 120308_NYTbldg06n.wav | blaukreuz | CC0-1.0 | https://freesound.org/people/blaukreuz/sounds/212187/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-235249 | Printing_Quiet Room.wav | jaredpass24 | CC0-1.0 | https://freesound.org/people/jaredpass24/sounds/235249/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-360702 | Large_crowd_far_away_stereo.wav | eguobyte | CC0-1.0 | https://freesound.org/people/eguobyte/sounds/360702/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-431478 | Mower_Close_Startup_Idle_Shutoff | KieranKeegan | CC0-1.0 | https://freesound.org/people/KieranKeegan/sounds/431478/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-50763 | Vacuum Cleaner 2.wav | RutgerMuller | CC0-1.0 | https://freesound.org/people/RutgerMuller/sounds/50763/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-79669 | volleyball convo.WAV | labailey | CC0-1.0 | https://freesound.org/people/labailey/sounds/79669/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+ami-ES2002a | ES2002a four-person scenario meeting, headset mix excerpt | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2003a | ES2003a four-person scenario meeting, headset mix excerpt | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/

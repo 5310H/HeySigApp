@@ -127,12 +127,14 @@ def main():
                     if program[0] == 1:
                         require(program[-1] >= 16384, f'Native library lacks 16 KB ELF alignment: {name}')
             for asset,digest in {
-                'yamnet.tflite': '10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de',
+                'yamnet.tflite': 'b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4',
+                'scene-head.bin': '0500150700fc75a8fc4b4c59f0cd284fea0b8d61d9b5fe6de074b24358233bfd',
                 'labels.txt': '8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051',
             }.items():
                 require(hashlib.sha256(archive.read('base/assets/environment/'+asset)).hexdigest() == digest,
                         f'Unexpected environment model/labels: {asset}')
             dex = b''.join(archive.read(name) for name in names if name.endswith('.dex'))
+            require(not any(name.startswith('base/assets/scene-fixtures/') for name in names), 'Development scene recordings packaged')
             require(b'WatchBridgeSetup' not in dex and b'ProtoActivity' not in dex, 'Development classes packaged')
             require(b'NoiseAcceptance' not in dex, 'Noise acceptance test code packaged in release')
             require(b'heysig-watch-loopback' not in dex and b'pairing.json' not in dex, 'Development relay packaged')

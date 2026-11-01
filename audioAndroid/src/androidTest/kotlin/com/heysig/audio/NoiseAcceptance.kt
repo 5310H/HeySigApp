@@ -88,11 +88,40 @@ class NoiseAcceptance: Instrumentation() {
             try {
                 Yamnet(activity).use { model ->
                     check(model.classify(zero).environment==null)
-                    val quiet=EnvironmentClassification(com.heysig.noise.ListeningEnvironment.QUIET,0.9,"test")
-                    check(runCatching { model.confirmQuiet(zero,quiet) { true } }.isFailure)
+                    check(runCatching { model.classify(zero) { true } }.isFailure)
                 }
             } finally { zero.fill(0) }
             result.putString("quietVerification","PASS: zero input rejected and verification cancellation honored")
+            show("Prerecorded development fixtures · microphone off · no playback or commands")
+            fun sha(bytes: ByteArray)=java.security.MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
+            val fixtureManifest=context.assets.open("scene-fixtures/manifest.json").use { it.readBytes() }
+            check(sha(fixtureManifest)=="10c8549a763d1af5fbdf79eb8d0ed8252a1a129e83ccffe1282c1a961da6b979")
+            val fixtures=org.json.JSONObject(fixtureManifest.toString(Charsets.UTF_8)).getJSONArray("recordings")
+            check(fixtures.length()==6)
+            Yamnet(activity).use { model ->
+                for(i in 0 until fixtures.length()) {
+                    val fixture=fixtures.getJSONObject(i)
+                    val expected=com.heysig.noise.ListeningEnvironment.valueOf(fixture.getString("expectedEnvironment"))
+                    val filename=fixture.getString("file")
+                    check(filename==expected.name.lowercase(java.util.Locale.ROOT)+".pcm")
+                    val seconds=fixture.getInt("seconds");check(seconds in listOf(3,5,10))
+                    val data=context.assets.open("scene-fixtures/$filename").use { it.readBytes() }
+                    check(data.size==seconds*16000*2 && sha(data)==fixture.getString("sha256"))
+                    val pcm=ShortArray(seconds*16000)
+                    val started=SystemClock.elapsedRealtime()
+                    try {
+                        java.nio.ByteBuffer.wrap(data).order(java.nio.ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(pcm)
+                        val prediction=model.classify(pcm) { activity.cancelled }
+                        check(prediction.environment==expected && prediction.confidence>=com.heysig.noise.EnvironmentSettings().minimumConfidence) {
+                            "Recorded development fixture $expected yielded ${prediction.environment} / ${prediction.confidence}"
+                        }
+                        check(kotlin.math.abs(prediction.confidence-fixture.getDouble("expectedScore"))<0.03) { "Native scene score diverged from host reference" }
+                        result.putDouble("scene_${expected.name}_Score",prediction.confidence)
+                        result.putLong("scene_${expected.name}_WallMs",SystemClock.elapsedRealtime()-started)
+                    } finally { pcm.fill(0);data.fill(0) }
+                }
+            }
+            result.putString("recordedScenes","PASS: six pinned training/development recordings; native inference + shared head. NOT held-out accuracy or physical acceptance")
             if(microphone) {
                 show("Microphone tests requested. If needed, tap Allow microphone tests and approve the system prompt.")
                 val deadline=SystemClock.elapsedRealtime()+60_000

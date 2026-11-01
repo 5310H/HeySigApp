@@ -12,6 +12,9 @@ public class SharedRegressionTest {
     @Test public void environmentQuietVerification() {
         com.heysig.noise.EnvironmentSignalCheckKt.main();
     }
+    @Test public void environmentSceneHead() {
+        com.heysig.noise.EnvironmentSceneHeadCheckKt.main();
+    }
     @Test public void sleepRoutine() {
         com.heysig.sleep.SleepRoutineCheckKt.main();
     }

@@ -22,7 +22,7 @@ Neither fitting nor legacy calibration is migrated or erased.
    monitoring does not resume the Sleep schedule. Review/resume that routine
    explicitly when appropriate before expecting automatic decisions.
 4. Automatic On arms decisions; it does not start monitoring. This build still
-   blocks **real automatic dispatch** pending physical acceptance. This gate is
+   blocks **real automatic dispatch** pending classifier and physical acceptance. This gate is
    separate from optional acoustic calibration. Monitoring shows experimental
    environment/event confidence and the last requested program. No electronic
    aid readback is available; completed tones do not confirm reception.
@@ -60,7 +60,8 @@ do not request a program. Conflicting speech alternatives send nothing.
 ## Watch
 
 Use the existing paired selected-node Watch connection with matching app
-variant/signing identity. End the phone hands-free session and keep the phone
+variant/signing identity and the same environmental classifier version. Update
+both apps when monitoring reports a version mismatch. End the phone hands-free session and keep the phone
 app visible/unlocked for this monitor. On the watch choose **More → Environmental
 monitoring → Connect / refresh status**, then **Start monitoring**. The watch
 explains its microphone use and requests access only at your request. Starting
@@ -92,13 +93,20 @@ and `lintDebug` tasks. On this ARM host use the documented machine-local aapt2
 override. Run `python3 tools/validate-native-apks.py --variants debug` after both
 APK builds. These commands install nothing and send no aid commands.
 
-`tools/check-environment-model.py` exercises a pinned offline model on four
+The current runtime uses a pinned six-scene head over YAMNet embeddings.
+See the [scene-head report](acceptance/environment-scene-head-2026-10-31.md)
+and [reproduction instructions](../shared/src/commonTest/fixtures/environment/scene-head/README.md).
+Its held-out Conversation and Restaurant coverage remains inadequate, so real
+automatic switching stays disabled. Model notices are in **Privacy and data →
+Environmental model notices**.
+
+Historical event-only regression: `tools/check-environment-model.py` exercises the archived original model on four
 development-only WAVs at 3/5/10 seconds and two gains. See the
 [fixture instructions](../shared/src/commonTest/fixtures/environment/README.md).
 Recorded scalar outputs are regression fixtures; synthetic event-score tests
 exercise all six mappings but do not establish audio accuracy.
 
-The original mapper incorrectly labelled all six Restaurant_1 cases as generic
+The previous event-only mapper incorrectly labelled all six Restaurant_1 cases as generic
 Conversation. Conversation now requires conversation-specific model evidence;
 generic Speech or Narration alone abstains. The unchanged 24 recording-score
 fixtures now yield 17 abstentions, including all restaurant and babble cases.
@@ -132,7 +140,10 @@ monitoring restart; a discarded sample must never request an aid program.
 
 Both debug variants include a separate instrumentation-only acceptance screen.
 It has no fitting, saved-settings, companion connection or aid executor access.
-The native model benchmark uses synthetic PCM without playback. Optional live
+The native model benchmark uses synthetic PCM and six licensed prerecorded
+development regressions without playback. The latter verify complete native
+inference and shared decisions, not independent accuracy. These recordings are
+AndroidTest assets only and excluded from main app artifacts. Optional live
 microphone windows remain foreground-only and can be cancelled on screen.
 Microphone permission is requested on that screen only after its explanation
 and an explicit button tap if permission has not already been granted.

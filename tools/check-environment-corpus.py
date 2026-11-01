@@ -69,10 +69,10 @@ def main():
     manifest = load_manifest(args.manifest)
     import numpy as np
     from ai_edge_litert.interpreter import Interpreter
-    model = ROOT/'audioAndroid/src/main/assets/environment/yamnet.tflite'
+    model = ROOT/'third_party/environment/yamnet-original.tflite'
     if hashlib.sha256(model.read_bytes()).hexdigest() != manifest['modelSha256']:
         raise ValueError('Unexpected model bytes')
-    labels = (model.parent/'labels.txt').read_text().splitlines()
+    labels = (ROOT/'audioAndroid/src/main/assets/environment/labels.txt').read_text().splitlines()
     engine = Interpreter(model_path=str(model), num_threads=1)
     engine.allocate_tensors()
     source, target = engine.get_input_details()[0], engine.get_output_details()[0]

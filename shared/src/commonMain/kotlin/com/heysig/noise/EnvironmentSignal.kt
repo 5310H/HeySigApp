@@ -3,9 +3,10 @@ package com.heysig.noise
 import kotlin.math.abs
 import kotlin.math.sqrt
 
-/** Digital gain for a second inference view, never playback, SPL or calibration. */
+/** Bounded digital model-input gain, never playback, SPL or acoustic calibration. */
 object EnvironmentSignal {
-    fun quietVerificationGain(pcm: ShortArray): Double? {
+    fun quietVerificationGain(pcm: ShortArray): Double? = inferenceGain(pcm)
+    fun inferenceGain(pcm: ShortArray): Double? {
         require(pcm.size in 48_000..160_000)
         var energy=0.0
         var peak=0
