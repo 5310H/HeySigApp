@@ -8,14 +8,18 @@ import java.security.MessageDigest
 
 /** Run the exact app decision code on frozen development evidence, without any device APIs. */
 fun main(args: Array<String>) {
-    require(args.size in 6..7) { "Usage: encoder.tflite head.bin corpus.json evidence.bin references.tsv report.tsv [development-source-group]" }
+    require(args.size in 6..8) { "Usage: encoder.tflite head.bin corpus.json evidence.bin references.tsv report.tsv [development-source-group | --small-group-head specialist.bin]" }
     fun hash(bytes: ByteArray)=MessageDigest.getInstance("SHA-256").digest(bytes)
     fun hex(bytes: ByteArray)=bytes.joinToString("") { "%02x".format(it) }
-    val heldGroup=args.getOrNull(6)
+    val heldGroup=args.getOrNull(6).takeIf { args.size==7 }
     require(heldGroup==null || (heldGroup.isNotBlank() && heldGroup.length<=200 && heldGroup.none { it in "\t\r\n" }))
     val encoderHash=hash(File(args[0]).readBytes())
     val headBytes=File(args[1]).readBytes()
     val head=EnvironmentSceneHead.decode(headBytes,hex(encoderHash))
+    val specialist=if(args.size==8) {
+        require(args[6]=="--small-group-head")
+        EnvironmentSceneHead.decode(File(args[7]).readBytes(),hex(encoderHash))
+    } else null
     val corpusHash=hash(File(args[2]).readBytes())
     val evidenceFile=File(args[3]);require(evidenceFile.length() in 76..64_000_000)
     val evidence=ByteBuffer.wrap(evidenceFile.readBytes()).order(ByteOrder.LITTLE_ENDIAN)
@@ -45,7 +49,8 @@ fun main(args: Array<String>) {
             if(reference[4]!=heldGroup) continue
             require(reference[3]=="development") { "Fold reports must use development groups only" }
         }
-        val prediction=head.classify(features,events)
+        val primary=head.classify(features,events)
+        val prediction=if(specialist==null) primary else EnvironmentSceneFusion.combine(primary,specialist.classify(features,events))
         val decision=prediction.environment?.takeIf { prediction.confidence>=EnvironmentSettings().minimumConfidence }
         val expected=ListeningEnvironment.valueOf(reference[2])
         val outcome=when { decision==null -> "ABSTAIN";decision==expected -> "CORRECT";else -> "WRONG" }
@@ -64,4 +69,5 @@ fun main(args: Array<String>) {
         }
     }
     println("Head ${hex(hash(headBytes))}; provisional references, correlated variants, NOT classifier/physical acceptance.")
+    if(specialist!=null) println("Specialist ${hex(hash(File(args[7]).readBytes()))}; policy ${EnvironmentSceneProfile.POLICY}")
 }

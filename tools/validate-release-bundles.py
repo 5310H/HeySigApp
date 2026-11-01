@@ -129,6 +129,9 @@ def main():
             for asset,digest in {
                 'yamnet.tflite': 'b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4',
                 'scene-head.bin': '0500150700fc75a8fc4b4c59f0cd284fea0b8d61d9b5fe6de074b24358233bfd',
+                'small-group-head.bin': 'b32f1124b31e4961f52c1153fa8220d3cc10b374292dfdb199b7bcb852e56be8',
+                'HEAD_NOTICE': '05ae0943f40d8858a9f9e33385084054fc4ad3263cc297ee2c57ec2dad10eb8b',
+                'NOTICE': 'e237d4cee44da23a7ac5297a86765f8bc9e00b528bec16920f0066df98f1fcc2',
                 'labels.txt': '8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051',
             }.items():
                 require(hashlib.sha256(archive.read('base/assets/environment/'+asset)).hexdigest() == digest,

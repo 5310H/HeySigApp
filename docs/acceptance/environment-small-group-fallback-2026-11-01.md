@@ -50,3 +50,5 @@ Evidence: [curated report](data/small-group-fallback-curated-2026-11-01.tsv), [c
 ## Remaining completion requirements
 
 The requested six-way automatic feature remains incomplete. Classifier acceptance still needs independent, representative evidence for the weak Conversation/Restaurant/Large Group distinctions, and resolution of existing wrong labels. Physical watch microphone/Data Layer acceptance, endurance and actual aid confirmation/priority acceptance remain outstanding. The watch was reported unavailable; no watch result is fabricated. Both automatic release gates remain false. This research increment does not constitute Google Play submission readiness.
+
+Later implementation uses a [stricter primary-preserving policy](environment-primary-preserving-fallback-2026-11-01.md) in the experimental monitor. This document's fixed-threshold policy remains an offline experiment and must not be used as the runtime reference.

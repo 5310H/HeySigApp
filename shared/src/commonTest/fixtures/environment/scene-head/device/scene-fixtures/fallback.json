@@ -1,0 +1,18 @@
+{
+  "file": "small_group_fallback.pcm",
+  "sha256": "0281314f537d1005f7189ac8d6e6244ef13060f700c79a9d67dfce1ac708082d",
+  "seconds": 5,
+  "expectedEnvironment": "SMALL_GROUP",
+  "expectedScore": 0.7081885333731266,
+  "primaryExpectedEnvironment": "UNCERTAIN",
+  "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+  "sourceId": "ami-ES2002a-w000338-5s",
+  "sourceSha256": "c50add0db57a4979e7416748d7acd30b6cdc0843e5ab0898bbe63f087e21ab91",
+  "author": "AMI Project Consortium",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceTransforms": "5-second source excerpt at seconds 338-343, mono 16 kHz PCM16, from public headset mix; not far-field.",
+  "referenceBasis": "Model-blind word-activity proxy: at least three annotated speakers each >=0.5 s, word coverage >=40%, overlap <=20%. Not independent scene/room annotation or acoustic VAD.",
+  "transforms": "Complete curated source window, mono 16 kHz PCM16, digital gain 1.0; never played.",
+  "notes": "Previously viewed development/training regression for fallback wiring only; NOT independent accuracy or physical acceptance."
+}

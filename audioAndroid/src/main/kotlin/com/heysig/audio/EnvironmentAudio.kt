@@ -85,6 +85,7 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
     private val selectedLabels=EnvironmentClassifier.requiredLabels.associateWith { labels.indexOf(it) }
     private val interpreter: Interpreter
     private val head: EnvironmentSceneHead
+    private val smallGroupHead: EnvironmentSceneHead
     init {
         val bytes=context.assets.open("environment/yamnet.tflite").use { it.readBytes() }
         val hash=MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
@@ -95,6 +96,10 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
         check(MessageDigest.getInstance("SHA-256").digest(headBytes).joinToString("") { "%02x".format(it) }==
             EnvironmentSceneProfile.HEAD_SHA256) { "Unexpected environment scene head" }
         head=EnvironmentSceneHead.decode(headBytes,hash)
+        val specialistBytes=context.assets.open("environment/small-group-head.bin").use { it.readBytes() }
+        check(MessageDigest.getInstance("SHA-256").digest(specialistBytes).joinToString("") { "%02x".format(it) }==
+            EnvironmentSceneProfile.SMALL_GROUP_HEAD_SHA256) { "Unexpected Small Group scene head" }
+        smallGroupHead=EnvironmentSceneHead.decode(specialistBytes,hash)
         val model=ByteBuffer.allocateDirect(bytes.size).order(ByteOrder.nativeOrder()).put(bytes).apply { rewind() }
         val candidate=Interpreter(model,Interpreter.Options().setNumThreads(1))
         try {
@@ -131,7 +136,13 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
             }
             check(!cancelled()) { "Inference cancelled; sample discarded" }
             observeScores?.invoke(EnvironmentClassifier.requiredLabels.associateWith { label -> frames.map { it.getValue(label) }.average() })
-            val result=head.classify(pool.finish(),frames)
+            val features=pool.finish()
+            val primary=head.classify(features,frames)
+            // A specialist cannot overwrite even a low-confidence primary estimate.
+            val result=if(primary.environment!=null) primary else {
+                check(!cancelled()) { "Inference cancelled; sample discarded" }
+                EnvironmentSceneFusion.combine(primary,smallGroupHead.classify(features,frames))
+            }
             check(!cancelled()) { "Inference cancelled; sample discarded" }
             return result
         } finally {

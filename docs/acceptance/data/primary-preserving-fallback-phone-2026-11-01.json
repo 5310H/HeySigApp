@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-01",
+  "module": "androidApp",
+  "classifierProfile": "8d1cb1d1d8137accce10091a3c364dc99b1193aa998e9da5243d96732a403ece",
+  "phoneApkSha256": "f8787ae0670e3801d95827c7b4f0dcd01f38ddf5412ac4ea6876560ef39e4442",
+  "watchApkSha256": "304bad1cd30055ebb39a686292fd7f54038a352cafed5b8dbb88c9763fd157db",
+  "commandFreeResult": "PASS: pinned native model, cancellable inference, bounded microphone windows, Stop/access loss/pause; no aid commands",
+  "preferencesPreserved": true,
+  "existingPreferenceFilesChecked": 25,
+  "nativeDevelopmentRegressions": "PASS: six pinned training/development recordings; native inference + shared head. NOT held-out accuracy or physical acceptance",
+  "fallbackDevelopmentRegression": "PASS: pinned development recording through native encoder and primary-abstention fallback; NOT qualification",
+  "fallbackScore": 0.7081885333731266,
+  "layout": "PASS: actual monitoring layout at 192dp round, font scales 1/2, >=48dp targets and scroll reachability",
+  "cancellation": {
+    "cancel": "PASS: stopped capture, discarded callback, worker idle",
+    "accessLoss": "PASS: interruption reports failure and frees worker",
+    "pause": "PASS: leaving screen stops capture and discards result",
+    "quietVerification": "PASS: zero input rejected and verification cancellation honored"
+  },
+  "syntheticModelBenchmarks": [
+    {
+      "seconds": 3,
+      "wallMs": 141,
+      "threadCpuMs": 127
+    },
+    {
+      "seconds": 5,
+      "wallMs": 68,
+      "threadCpuMs": 67
+    },
+    {
+      "seconds": 10,
+      "wallMs": 64,
+      "threadCpuMs": 63
+    }
+  ],
+  "foregroundMicrophoneCaptures": [
+    {
+      "seconds": 3,
+      "wallMs": 3327,
+      "inferenceAgeMs": 68
+    },
+    {
+      "seconds": 5,
+      "wallMs": 5255,
+      "inferenceAgeMs": 73
+    },
+    {
+      "seconds": 10,
+      "wallMs": 10294,
+      "inferenceAgeMs": 108
+    }
+  ],
+  "processPssKb": {
+    "pssBeforeKb": 114900,
+    "pssAfterModelKb": 164481,
+    "pssFinalKb": 139512
+  },
+  "notes": "No live environment reference; no accuracy claim. Licensed native fixtures are viewed development regressions. Short PSS/CPU/timing checks do not establish endurance, physical Wear acceptance or aid reception. Raw microphone PCM/transcripts are not retained in this evidence; live event scores/labels are omitted.",
+  "lint": {
+    "androidApp": {
+      "Warning": 26
+    },
+    "wearApp": {
+      "Warning": 18
+    }
+  }
+}

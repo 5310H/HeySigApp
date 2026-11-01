@@ -122,6 +122,25 @@ class NoiseAcceptance: Instrumentation() {
                 }
             }
             result.putString("recordedScenes","PASS: six pinned training/development recordings; native inference + shared head. NOT held-out accuracy or physical acceptance")
+            val fallbackManifest=context.assets.open("scene-fixtures/fallback.json").use { it.readBytes() }
+            check(sha(fallbackManifest)=="633dc1bb9244e933dca936a176ab5f5e3e64e0d79f5de7614e5acb3299f74421")
+            val fallback=org.json.JSONObject(fallbackManifest.toString(Charsets.UTF_8))
+            check(fallback.getString("file")=="small_group_fallback.pcm" && fallback.getInt("seconds")==5)
+            val fallbackBytes=context.assets.open("scene-fixtures/small_group_fallback.pcm").use { it.readBytes() }
+            check(fallbackBytes.size==160_000 && sha(fallbackBytes)==fallback.getString("sha256"))
+            val fallbackPcm=ShortArray(80_000)
+            try {
+                java.nio.ByteBuffer.wrap(fallbackBytes).order(java.nio.ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(fallbackPcm)
+                Yamnet(activity).use { model ->
+                    val prediction=model.classify(fallbackPcm) { activity.cancelled }
+                    check(prediction.environment==com.heysig.noise.ListeningEnvironment.SMALL_GROUP &&
+                        kotlin.math.abs(prediction.confidence-fallback.getDouble("expectedScore"))<0.03) { "Native fallback diverged from shared reference" }
+                    check(prediction.explanation=="Experimental Small Group estimate") { "Fallback regression did not use the specialist" }
+                    result.putDouble("smallGroupFallbackScore",prediction.confidence)
+                }
+            } finally { fallbackPcm.fill(0);fallbackBytes.fill(0) }
+            result.putString("classifierProfile",com.heysig.noise.EnvironmentSceneProfile.PROFILE_ID)
+            result.putString("smallGroupFallback","PASS: pinned development recording through native encoder and primary-abstention fallback; NOT qualification")
             if(microphone) {
                 show("Microphone tests requested. If needed, tap Allow microphone tests and approve the system prompt.")
                 val deadline=SystemClock.elapsedRealtime()+60_000

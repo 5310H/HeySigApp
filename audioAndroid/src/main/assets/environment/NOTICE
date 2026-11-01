@@ -4,6 +4,9 @@ Original SHA-256: 10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317
 Derived encoder SHA-256: b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4
 Modification: expose existing embedding tensor as output 1; no operator/weight changes.
 Scene head SHA-256: 0500150700fc75a8fc4b4c59f0cd284fea0b8d61d9b5fe6de074b24358233bfd
+Small Group specialist SHA-256: b32f1124b31e4961f52c1153fa8220d3cc10b374292dfdb199b7bcb852e56be8
+Monitoring profile: 8d1cb1d1d8137accce10091a3c364dc99b1193aa998e9da5243d96732a403ece
+Policy: primary-preserving-small-group-v1. Only complete primary abstentions may use a Small Group specialist score >= .65. Automatic commands remain disabled pending qualification.
 See HEAD_NOTICE and CC-BY-4.0.txt for head/data attribution and limitations.
 labels.txt and yamnet_class_map.csv retain the upstream 521 labels.
 No AudioSet, FSD50K or AMI recordings are included in the main application APKs.

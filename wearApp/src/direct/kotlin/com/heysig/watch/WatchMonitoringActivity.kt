@@ -98,7 +98,7 @@ class WatchMonitoringActivity: Activity() {
         WatchVoiceSessionService.stop(this);SleepingShakeService.stop(this)
         session=UUID.randomUUID().toString();sequence=0;val token=++generation
         client.environment(JSONObject().put("action","start").put("session",session)
-            .put("classifierProfile",EnvironmentSceneProfile.HEAD_SHA256)) { reply ->
+            .put("classifierProfile",EnvironmentSceneProfile.PROFILE_ID)) { reply ->
             if(!foreground || token!=generation) return@environment
             update(reply)
             if(connected && reply.optBoolean("monitoring",false)) {
@@ -122,7 +122,7 @@ class WatchMonitoringActivity: Activity() {
                 if(!foreground || !monitoring || token!=generation) return@runOnUiThread
                 if(result==null) { stop(error ?: "Audio unavailable",true);return@runOnUiThread }
                 val body=JSONObject().put("action","sample").put("session",session).put("sequence",sequence++)
-                    .put("classifierProfile",EnvironmentSceneProfile.HEAD_SHA256)
+                    .put("classifierProfile",EnvironmentSceneProfile.PROFILE_ID)
                     .put("ageMillis",SystemClock.elapsedRealtime()-capturedAt)
                     .put("environment",result.environment?.id ?: 0).put("confidence",result.confidence)
                 client.environment(body) { reply ->

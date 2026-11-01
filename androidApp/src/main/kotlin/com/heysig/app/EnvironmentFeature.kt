@@ -199,7 +199,7 @@ class EnvironmentFeature(
             else -> error("Unsupported monitoring action")
         }
         return JSONObject().put("phase","FINAL").put("text",status())
-            .put("classifierProfile",EnvironmentSceneProfile.HEAD_SHA256)
+            .put("classifierProfile",EnvironmentSceneProfile.PROFILE_ID)
             .put("interval",settings.schedule.intervalSeconds).put("duration",settings.schedule.durationSeconds)
             .put("timeout",settings.schedule.timeoutMinutes).put("monitoring",state.monitoring)
             .put("programs",org.json.JSONArray(programs().map { JSONObject().put("slot",it.slot).put("name",it.name) }))

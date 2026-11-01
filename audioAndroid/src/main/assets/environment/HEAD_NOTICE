@@ -53,3 +53,61 @@ fsd-79669 | volleyball convo.WAV | labailey | CC0-1.0 | https://freesound.org/pe
 ami-ES2002a | ES2002a four-person scenario meeting, headset mix excerpt | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
 
 ami-ES2003a | ES2003a four-person scenario meeting, headset mix excerpt | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+Restricted Small Group specialist (experimental monitoring; automatic dispatch remains disabled):
+
+SHA-256: b32f1124b31e4961f52c1153fa8220d3cc10b374292dfdb199b7bcb852e56be8
+
+Only fills a complete primary abstention; primary estimates and all acoustic guards are preserved. No independently qualified six-scene accuracy is claimed.
+
+Curated training manifest SHA-256: b8db4e08ac981b387e61ed97270add26c382851a71f2a2f9e3f502d384735d3f
+
+The specialist also uses the non-AMI development sources above. Additional sources and revised AMI excerpts follow.
+
+AMI transformations: selected 3/5/10-second headset excerpts with numeric speaker-word-activity curation, embedding extraction, temporal pooling and head fitting. Source signals and word annotations: AMI Project Consortium, CC BY 4.0; license and credit above.
+
+FSD transformations: public mirror mono Opus to decoded WAV, bounded mono 16 kHz excerpts, embedding extraction, pooling and head fitting. CC BY 3.0 legal code: https://creativecommons.org/licenses/by/3.0/legalcode . Attribution does not imply creator endorsement.
+
+fsd-324783 | conversation.wav | miguel2613 | CC0-1.0 | https://freesound.org/people/miguel2613/sounds/324783/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-382575 | A new jersey bloke talking to a welsh bloke.MP3 | macdaddyno1 | CC0-1.0 | https://freesound.org/people/macdaddyno1/sounds/382575/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-152978 | people talking | dianser72 | CC0-1.0 | https://freesound.org/people/dianser72/sounds/152978/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-347537 | people talking at bar | andrebola | CC0-1.0 | https://freesound.org/people/andrebola/sounds/347537/ | https://creativecommons.org/publicdomain/zero/1.0/
+
+fsd-338964 | Ambience_Walla_Vasaloppsrestaurangen.wav | Ryding | CC-BY-3.0 | https://freesound.org/people/Ryding/sounds/338964/ | https://creativecommons.org/licenses/by/3.0/
+
+ami-ES2002a-w000073-10s | ES2002a, annotated 10-second multi-speaker window at 73s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2002a-w000287-10s | ES2002a, annotated 10-second multi-speaker window at 287s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2002a-w000338-5s | ES2002a, annotated 5-second multi-speaker window at 338s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2002a-w000568-5s | ES2002a, annotated 5-second multi-speaker window at 568s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2002a-w000903-3s | ES2002a, annotated 3-second multi-speaker window at 903s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2003a-w000025-10s | ES2003a, annotated 10-second multi-speaker window at 25s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2003a-w000248-10s | ES2003a, annotated 10-second multi-speaker window at 248s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2003a-w000300-5s | ES2003a, annotated 5-second multi-speaker window at 300s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2004a-w000308-10s | ES2004a, annotated 10-second multi-speaker window at 308s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2004a-w000344-10s | ES2004a, annotated 10-second multi-speaker window at 344s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2004a-w000375-5s | ES2004a, annotated 5-second multi-speaker window at 375s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2004a-w000391-5s | ES2004a, annotated 5-second multi-speaker window at 391s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2004a-w000419-3s | ES2004a, annotated 3-second multi-speaker window at 419s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2004a-w000587-3s | ES2004a, annotated 3-second multi-speaker window at 587s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2005a-w000029-10s | ES2005a, annotated 10-second multi-speaker window at 29s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2005a-w000073-10s | ES2005a, annotated 10-second multi-speaker window at 73s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/
+
+ami-ES2005a-w000237-5s | ES2005a, annotated 5-second multi-speaker window at 237s | AMI Project Consortium | CC-BY-4.0 | https://groups.inf.ed.ac.uk/ami/corpus/ | https://creativecommons.org/licenses/by/4.0/

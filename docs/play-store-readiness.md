@@ -17,6 +17,13 @@ restaurant errors are not release-qualified classification. Revalidate new nativ
 libraries, licenses, privacy/health intent, accessibility and battery on devices;
 earlier signed artifacts do not cover this change. No submission is prepared.
 
+November 1 follow-up: the [primary-preserving environmental monitor](acceptance/environment-primary-preserving-fallback-2026-11-01.md)
+adds a second pinned 98 KB head, a combined phone/watch profile and expanded
+CC BY 3.0/4.0 source credits. It preserves all primary estimates and fills only
+complete abstentions with confident Small Group results. Both automatic gates
+remain false. Earlier signed bundles do not contain this model/profile and are
+not current submission candidates; no new signed release or submission is prepared.
+
 Follow-up noise hardening adds debug-only, command-free microphone acceptance
 screens, cancellation between model frames and stricter Conversation evidence.
 Short Pixel 9a capture/cancellation/layout tests passed with unchanged preferences;

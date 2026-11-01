@@ -1,0 +1,18 @@
+{
+  "profile": "8d1cb1d1d8137accce10091a3c364dc99b1193aa998e9da5243d96732a403ece",
+  "policy": "primary-preserving-small-group-v1",
+  "qualification": false,
+  "notes": "All evaluation sources viewed; correlated provisional references. Runtime never overwrites non-null primary estimates. Existing development errors remain.",
+  "sha256": {
+    "docs/acceptance/data/primary-preserving-fallback-curated-2026-11-01.tsv": "1f1467bf3b31126672defc6a4c1e4af1eff2c9820174576e1c787b406e1985ac",
+    "docs/acceptance/data/primary-preserving-fallback-curated-2026-11-01.json": "05718054c55c0b80b54dbfb5f495dacfce0907a64121e186ba35715222a70b9d",
+    "docs/acceptance/data/primary-preserving-fallback-historical-2026-11-01.tsv": "fdf8fbb5af7f068267624a095319ce343cfb923e22ddc10a95d79d78af38fc88",
+    "docs/acceptance/data/primary-preserving-fallback-historical-2026-11-01.json": "8bf3b546dab36cab9b13e62a929038dd2c5ca4b0dc1530701fb4a2093642c4e0",
+    "shared/src/commonMain/kotlin/com/heysig/noise/EnvironmentSceneHead.kt": "6e0eed0a961031ee920b3d994dd2de338bfa7f1cd64843f0ce74b7812c2663bd",
+    "audioAndroid/src/main/assets/environment/small-group-head.bin": "b32f1124b31e4961f52c1153fa8220d3cc10b374292dfdb199b7bcb852e56be8",
+    "audioAndroid/src/main/assets/environment/HEAD_NOTICE": "05ae0943f40d8858a9f9e33385084054fc4ad3263cc297ee2c57ec2dad10eb8b",
+    "audioAndroid/src/main/assets/environment/NOTICE": "e237d4cee44da23a7ac5297a86765f8bc9e00b528bec16920f0066df98f1fcc2",
+    "gradle/environment-model.gradle": "529fa02b3024f71b516eaa06e7235675816015d1d8dc79f0003913b4c2dffd9e",
+    "docs/acceptance/data/primary-preserving-fallback-phone-2026-11-01.json": "d4253b0bdf425dc83a2d03c50cdb7f5480e8eaa4cc8d9a9a194dbc7e7d36a18d"
+  }
+}

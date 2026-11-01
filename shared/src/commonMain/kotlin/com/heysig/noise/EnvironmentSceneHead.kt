@@ -3,12 +3,29 @@ package com.heysig.noise
 import kotlin.math.exp
 import kotlin.math.sqrt
 
+/** Experimental monitoring only; release qualification remains a separate gate. */
+object EnvironmentSceneFusion {
+    const val MINIMUM_SPECIALIST_CONFIDENCE=0.65
+
+    fun combine(primary: EnvironmentClassification, specialist: EnvironmentClassification): EnvironmentClassification {
+        if(specialist.environment!=ListeningEnvironment.SMALL_GROUP || specialist.confidence<MINIMUM_SPECIALIST_CONFIDENCE)
+            return primary
+        // Preserve even low-confidence primary estimates: users may configure a .5 minimum.
+        if(primary.environment!=null) return primary
+        return EnvironmentClassification(ListeningEnvironment.SMALL_GROUP,specialist.confidence,"Experimental Small Group estimate")
+    }
+}
+
 /** Both form factors must use the same encoder/head before exchanging monitoring samples. */
 object EnvironmentSceneProfile {
     const val ENCODER_SHA256="b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4"
     const val HEAD_SHA256="0500150700fc75a8fc4b4c59f0cd284fea0b8d61d9b5fe6de074b24358233bfd"
+    const val SMALL_GROUP_HEAD_SHA256="b32f1124b31e4961f52c1153fa8220d3cc10b374292dfdb199b7bcb852e56be8"
+    // SHA-256 of HSGENV2\n + encoder\n + primary\n + specialist\n + policy\n.
+    const val POLICY="primary-preserving-small-group-v1"
+    const val PROFILE_ID="8d1cb1d1d8137accce10091a3c364dc99b1193aa998e9da5243d96732a403ece"
     fun requireCompatible(profile: String?) {
-        require(profile==HEAD_SHA256) { "Update phone and watch for environmental monitoring" }
+        require(profile==PROFILE_ID) { "Update phone and watch for environmental monitoring" }
     }
 }
 

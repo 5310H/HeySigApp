@@ -4,8 +4,26 @@ import kotlin.math.abs
 import kotlin.math.sqrt
 
 fun main() {
-    EnvironmentSceneProfile.requireCompatible(EnvironmentSceneProfile.HEAD_SHA256)
-    for(profile in listOf(null,"","legacy-event-mapper","00".repeat(32))) {
+    val abstention=EnvironmentClassification(null,0.0,"Uncertain")
+    for(environment in ListeningEnvironment.entries) {
+        val specialist=EnvironmentClassification(environment,0.9,"Specialist")
+        val fallback=EnvironmentSceneFusion.combine(abstention,specialist)
+        check(fallback.environment==if(environment==ListeningEnvironment.SMALL_GROUP) environment else null)
+        if(environment==ListeningEnvironment.SMALL_GROUP) check(fallback.confidence==specialist.confidence)
+        for(primaryEnvironment in ListeningEnvironment.entries) {
+            for(score in listOf(0.5,0.649999,0.65,0.99)) {
+                val primary=EnvironmentClassification(primaryEnvironment,score,"Primary")
+                check(EnvironmentSceneFusion.combine(primary,specialist)===primary)
+            }
+        }
+    }
+    for(score in listOf(0.0,0.5,0.649999)) {
+        check(EnvironmentSceneFusion.combine(abstention,EnvironmentClassification(ListeningEnvironment.SMALL_GROUP,score,"Specialist"))===abstention)
+    }
+    check(EnvironmentSceneFusion.combine(abstention,EnvironmentClassification(ListeningEnvironment.SMALL_GROUP,0.65,"Specialist")).confidence==0.65)
+    check(EnvironmentSceneFusion.combine(abstention,EnvironmentClassification(null,0.99,"Unknown specialist"))===abstention)
+    EnvironmentSceneProfile.requireCompatible(EnvironmentSceneProfile.PROFILE_ID)
+    for(profile in listOf(null,"","legacy-event-mapper","00".repeat(32),EnvironmentSceneProfile.HEAD_SHA256,EnvironmentSceneProfile.SMALL_GROUP_HEAD_SHA256)) {
         check(runCatching { EnvironmentSceneProfile.requireCompatible(profile) }.isFailure)
     }
     val encoder="00".repeat(32)

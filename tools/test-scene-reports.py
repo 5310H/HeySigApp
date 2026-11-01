@@ -33,4 +33,16 @@ class ReportChecks(unittest.TestCase):
    with self.subTest(field=field):
     result,report=self.run_report(rows);self.assertNotEqual(result.returncode,0);self.assertIsNone(report)
   result,report=self.run_report(original+[original[-1]]);self.assertNotEqual(result.returncode,0);self.assertIsNone(report)
+ def test_integrated_fallback_preserves_primary_evidence(self):
+  base=ROOT/'docs/acceptance/data'
+  with (base/'window-curation-baseline-2026-11-01.tsv').open() as f:primary=list(csv.DictReader(f,delimiter='\t'))
+  with (base/'primary-preserving-fallback-curated-2026-11-01.tsv').open() as f:combined=list(csv.DictReader(f,delimiter='\t'))
+  self.assertEqual(len(primary),len(combined));additions=[]
+  for before,after in zip(primary,combined):
+   self.assertEqual([before[k] for k in list(before)[:7]],[after[k] for k in list(after)[:7]])
+   if before['decision']!='UNCERTAIN' or float(before['score'])>0:self.assertEqual(before,after)
+   elif after['decision']!='UNCERTAIN':
+    self.assertEqual(after['decision'],'SMALL_GROUP');self.assertGreaterEqual(float(after['score']),.65);additions.append(after)
+  self.assertEqual(sum(r['partition']=='validation' for r in additions),4)
+  self.assertTrue(all(r['outcome']=='CORRECT' for r in additions))
 if __name__=='__main__':unittest.main()

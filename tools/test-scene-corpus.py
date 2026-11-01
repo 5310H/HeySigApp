@@ -80,5 +80,32 @@ class CorpusChecks(unittest.TestCase):
             self.assertEqual(hashlib.sha256(data).hexdigest(),row['sha256'])
         self.assertFalse((ROOT/'audioAndroid/src/main/assets/scene-fixtures').exists())
 
+    def test_fallback_profile_assets_and_development_regression(self):
+        assets=ROOT/'audioAndroid/src/main/assets/environment'
+        primary=hashlib.sha256((assets/'scene-head.bin').read_bytes()).hexdigest()
+        specialist=hashlib.sha256((assets/'small-group-head.bin').read_bytes()).hexdigest()
+        self.assertEqual(specialist,'b32f1124b31e4961f52c1153fa8220d3cc10b374292dfdb199b7bcb852e56be8')
+        encoder=hashlib.sha256((assets/'yamnet.tflite').read_bytes()).hexdigest()
+        profile=hashlib.sha256(('HSGENV2\n'+encoder+'\n'+primary+'\n'+specialist+'\nprimary-preserving-small-group-v1\n').encode()).hexdigest()
+        code=(ROOT/'shared/src/commonMain/kotlin/com/heysig/noise/EnvironmentSceneHead.kt').read_text()
+        self.assertIn('const val PROFILE_ID="'+profile+'"',code)
+        base=ROOT/'shared/src/commonTest/fixtures/environment/scene-head/device/scene-fixtures'
+        data=(base/'fallback.json').read_bytes()
+        self.assertEqual(hashlib.sha256(data).hexdigest(),'633dc1bb9244e933dca936a176ab5f5e3e64e0d79f5de7614e5acb3299f74421')
+        fixture=json.loads(data)
+        corpus=scene.load_manifest(scene.DEFAULT_MANIFEST.with_name('curated-corpus.json'))
+        clip=next(c for c in corpus['recordings'] if c['id']==fixture['sourceId'])
+        self.assertEqual(clip['partition'],'development')
+        self.assertEqual(clip['sha256'],fixture['sourceSha256'])
+        self.assertEqual(clip['license'],fixture['license'])
+        pcm=(base/fixture['file']).read_bytes()
+        self.assertEqual(len(pcm),fixture['seconds']*16000*2)
+        self.assertEqual(hashlib.sha256(pcm).hexdigest(),fixture['sha256'])
+        notice=(assets/'HEAD_NOTICE').read_text()
+        for clip in corpus['recordings']:
+            if clip['partition']=='development':
+                self.assertIn(clip['id'],notice)
+                self.assertIn(clip['licenseUrl'],notice)
+
 
 if __name__=='__main__':unittest.main()
