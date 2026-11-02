@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-01",
+  "device": "Pixel Watch 3",
+  "attempts": [
+    {
+      "result": "FAIL: Keep acceptance screen open and unlocked",
+      "apkSha256": "304bad1cd30055ebb39a686292fd7f54038a352cafed5b8dbb88c9763fd157db",
+      "classifierProfile": "8d1cb1d1d8137accce10091a3c364dc99b1193aa998e9da5243d96732a403ece",
+      "nativeScenes": "PASS: six pinned training/development recordings; native inference + shared head. NOT held-out accuracy or physical acceptance",
+      "fallback": "PASS: pinned development recording through native encoder and primary-abstention fallback; NOT qualification",
+      "fallbackScore": 0.7081885333731266,
+      "roundLayout": "PASS: actual monitoring layout at 192dp round, font scales 1/2, >=48dp targets and scroll reachability",
+      "existingPreferenceFilesChecked": 1,
+      "preferencesPreserved": true,
+      "microphoneCaptureStarted": false,
+      "modelBenchmarks": [
+        {
+          "seconds": 3,
+          "wallMs": 23054,
+          "cpuMs": 1373
+        },
+        {
+          "seconds": 5,
+          "wallMs": 5600,
+          "cpuMs": 834
+        },
+        {
+          "seconds": 10,
+          "wallMs": 6540,
+          "cpuMs": 845
+        }
+      ]
+    },
+    {
+      "result": "FAIL: Keep acceptance screen open and unlocked",
+      "apkSha256": "304bad1cd30055ebb39a686292fd7f54038a352cafed5b8dbb88c9763fd157db",
+      "classifierProfile": "8d1cb1d1d8137accce10091a3c364dc99b1193aa998e9da5243d96732a403ece",
+      "nativeScenes": "PASS: six pinned training/development recordings; native inference + shared head. NOT held-out accuracy or physical acceptance",
+      "fallback": "PASS: pinned development recording through native encoder and primary-abstention fallback; NOT qualification",
+      "fallbackScore": 0.7081885333731266,
+      "roundLayout": "PASS: actual monitoring layout at 192dp round, font scales 1/2, >=48dp targets and scroll reachability",
+      "existingPreferenceFilesChecked": 1,
+      "preferencesPreserved": true,
+      "microphoneCaptureStarted": false,
+      "modelBenchmarks": [
+        {
+          "seconds": 3,
+          "wallMs": 25014,
+          "cpuMs": 1865
+        },
+        {
+          "seconds": 5,
+          "wallMs": 3918,
+          "cpuMs": 836
+        },
+        {
+          "seconds": 10,
+          "wallMs": 7457,
+          "cpuMs": 844
+        }
+      ]
+    }
+  ],
+  "notes": "Both attempts failed the pre-capture foreground check. Native regression/layout success is separate evidence. Background timing is not accepted foreground performance or battery evidence. No hearing-aid commands or microphone captures occurred."
+}

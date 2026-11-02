@@ -2,6 +2,15 @@ package com.heysig.noise
 
 fun main() {
     check(!EnvironmentReleaseGate.qualified())
+    check(watchSampleAgeAfterGrant(120,1000,1400)==520L)
+    check(watchSampleAgeAfterGrant(4999,1000,1001)==5000L)
+    check(watchSampleAgeAfterGrant(5000,1000,1000)==5000L)
+    check(watchSampleAgeAfterGrant(0,Long.MAX_VALUE-5000,Long.MAX_VALUE)==5000L)
+    for(args in listOf(Triple(4999L,1000L,1002L),Triple(0L,0L,5001L),
+        Triple(-1L,0L,0L),Triple(5001L,0L,0L),Triple(0L,-1L,0L),
+        Triple(0L,1000L,999L),Triple(1L,0L,Long.MAX_VALUE))) {
+        check(runCatching { watchSampleAgeAfterGrant(args.first,args.second,args.third) }.isFailure)
+    }
     val id="12345678-1234-1234-1234-123456789abc"
     val link=WatchEnvironmentSession(id,1000).receive(id,0,100,2000)
     check(runCatching { link.receive(id,0,0,3000) }.isFailure)

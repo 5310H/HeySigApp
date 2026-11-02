@@ -1,0 +1,24 @@
+[
+  {
+    "module": "androidApp",
+    "apkSha256": "ba428c5f1fb87e079e50f3c2de73a3d44ccfa75f42975d67f4c6bd265b8fba1f",
+    "inPlaceInstall": "PASS",
+    "installedBytesMatch": true,
+    "preferenceFilesChecked": 25,
+    "preferencesPreserved": true,
+    "launch": "Starting: Intent { cmp=com.heysig.batteryprototype/com.heysig.app.HomeActivity }\nStatus: ok\nLaunchState: WARM\nActivity: com.heysig.batteryprototype/com.heysig.app.HomeActivity\nTotalTime: 646\nWaitTime: 648\nComplete",
+    "microphoneTested": false,
+    "aidCommandsSent": false
+  },
+  {
+    "module": "wearApp",
+    "apkSha256": "d580e9d4f07d654bcdf7ff40f335c2ff24ee07ab012421002f7484e246213130",
+    "inPlaceInstall": "PASS",
+    "installedBytesMatch": true,
+    "preferenceFilesChecked": 1,
+    "preferencesPreserved": true,
+    "launch": "Starting: Intent { cmp=com.heysig.batteryprototype/com.heysig.watch.WatchActivity }\nStatus: ok\nLaunchState: UNKNOWN (0)\nActivity: com.heysig.batteryprototype/com.heysig.watch.WatchActivity\nWaitTime: 1150\nComplete",
+    "microphoneTested": false,
+    "aidCommandsSent": false
+  }
+]

@@ -33,6 +33,15 @@ class NoiseAcceptance: Instrumentation() {
             waitForIdleSync()
             val activity=checkNotNull(screen)
             fun show(text: String) = runOnMainSync { activity.show(text) }
+            fun visibleUnlocked()=activity.foreground && !activity.cancelled &&
+                !activity.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked
+            fun awaitForeground() {
+                show("Keep this diagnostic open and the device unlocked. Tests wait without microphone capture until ready.")
+                val deadline=SystemClock.elapsedRealtime()+60_000
+                while(!activity.cancelled && !visibleUnlocked() && SystemClock.elapsedRealtime()<deadline) Thread.sleep(100)
+                check(visibleUnlocked()) { "Keep acceptance screen open and unlocked" }
+            }
+            awaitForeground()
             runOnMainSync {
                 val labels=listOf("Connect / refresh status","Start monitoring","Stop monitoring","Automatic on","Automatic off","Choose program","Voice command")
                 for(scale in listOf(1f,2f)) {
@@ -75,7 +84,7 @@ class NoiseAcceptance: Instrumentation() {
                 val cpu=Debug.threadCpuTimeNanos()
                 try {
                     Yamnet(activity).use { model ->
-                        check(model.classify(pcm) { activity.cancelled }.confidence.isFinite())
+                        check(model.classify(pcm) { !visibleUnlocked() }.confidence.isFinite())
                         check(runCatching { model.classify(pcm) { true } }.isFailure)
                     }
                 } finally { pcm.fill(0) }
@@ -111,7 +120,7 @@ class NoiseAcceptance: Instrumentation() {
                     val started=SystemClock.elapsedRealtime()
                     try {
                         java.nio.ByteBuffer.wrap(data).order(java.nio.ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(pcm)
-                        val prediction=model.classify(pcm) { activity.cancelled }
+                        val prediction=model.classify(pcm) { !visibleUnlocked() }
                         check(prediction.environment==expected && prediction.confidence>=com.heysig.noise.EnvironmentSettings().minimumConfidence) {
                             "Recorded development fixture $expected yielded ${prediction.environment} / ${prediction.confidence}"
                         }
@@ -132,7 +141,7 @@ class NoiseAcceptance: Instrumentation() {
             try {
                 java.nio.ByteBuffer.wrap(fallbackBytes).order(java.nio.ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(fallbackPcm)
                 Yamnet(activity).use { model ->
-                    val prediction=model.classify(fallbackPcm) { activity.cancelled }
+                    val prediction=model.classify(fallbackPcm) { !visibleUnlocked() }
                     check(prediction.environment==com.heysig.noise.ListeningEnvironment.SMALL_GROUP &&
                         kotlin.math.abs(prediction.confidence-fallback.getDouble("expectedScore"))<0.03) { "Native fallback diverged from shared reference" }
                     check(prediction.explanation=="Experimental Small Group estimate") { "Fallback regression did not use the specialist" }
@@ -147,7 +156,8 @@ class NoiseAcceptance: Instrumentation() {
                 while(activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED &&
                     !activity.cancelled && SystemClock.elapsedRealtime()<deadline) Thread.sleep(100)
                 check(activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)==PackageManager.PERMISSION_GRANTED) { "Microphone permission not granted" }
-                check(activity.foreground && !activity.cancelled) { "Keep acceptance screen open and unlocked" }
+                // Permission UI may temporarily pause the Activity; wait for a real foreground return.
+                awaitForeground()
                 for(seconds in listOf(3,5,10)) {
                     val done=CountDownLatch(1)
                     var error: String?=null

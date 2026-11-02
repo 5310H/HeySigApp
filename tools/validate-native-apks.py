@@ -10,10 +10,11 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--variants', nargs='+', choices=('debug','release'), default=['debug','release'])
+parser.add_argument('--modules', nargs='+', choices=('androidApp','wearApp'), default=['androidApp','wearApp'])
 args = parser.parse_args()
 litert = json.loads((ROOT/'third_party/litert/integrity.json').read_text())['native']
 sherpa = json.loads((ROOT/'third_party/sherpa-onnx/integrity.json').read_text())['native']
-for module, variant in ((m,v) for m in ('androidApp','wearApp') for v in args.variants):
+for module, variant in ((m,v) for m in args.modules for v in args.variants):
     expected = dict(litert, **sherpa) if module == 'androidApp' else litert
     apk = ROOT/f'{module}/build/outputs/apk/{variant}/{module}-{variant}.apk'
     with zipfile.ZipFile(apk) as archive, apk.open('rb') as source:

@@ -8,6 +8,7 @@ import com.google.android.gms.wearable.*
 import com.heysig.companion.CompanionSafety
 import com.heysig.voice.HandsFreeCompanion
 import com.heysig.voice.WatchSpeechChoices
+import com.heysig.noise.watchSampleAgeAfterGrant
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
@@ -94,13 +95,29 @@ internal class WatchVoiceClient(private val context: Context) : AutoCloseable {
                 .put("token",token).put("text",text).put("alternatives",JSONArray(alternatives)),done)
         }
     }
-    fun environment(body: JSONObject,done: (JSONObject)->Unit) {
+    fun environment(body: JSONObject, valid: ()->Boolean = { true },capturedAt: Long? = null,done: (JSONObject)->Unit) {
+        if(!valid()) { done(failure("Monitoring cancelled; restart explicitly"));return }
         if(path!=CompanionSafety.PATH) { done(failure("For monitoring, end phone hands-free and enable Watch connection with HeySig open on the phone."));return }
+        val sampleCapturedAt=if(body.optString("action")=="sample") {
+            capturedAt ?: run { done(failure("Missing monitoring capture time"));return }
+        } else null
         val id=UUID.randomUUID().toString()
         val started=SystemClock.elapsedRealtime()
+        if(sampleCapturedAt!=null) {
+            try { watchSampleAgeAfterGrant(0,sampleCapturedAt,started) }
+            catch(e: IllegalArgumentException) { done(failure("Monitoring sample expired; restart explicitly"));return }
+        }
         rpc(JSONObject().put("op","prepare").put("id",id).put("scope","environment")) { lease ->
-            if(lease.optString("phase")!="LEASE" || SystemClock.elapsedRealtime()-started>5000) {
+            if(!valid()) { done(failure("Monitoring cancelled; restart explicitly"));return@rpc }
+            val sendingAt=SystemClock.elapsedRealtime()
+            if(lease.optString("phase")!="LEASE" || sendingAt-started>5000) {
                 done(failure("Monitoring grant expired; reconnect explicitly"));return@rpc
+            }
+            if(sampleCapturedAt!=null) {
+                // Derive from capture completion, including queueing, body assembly and grant wait.
+                val updatedAge=try { watchSampleAgeAfterGrant(0,sampleCapturedAt,sendingAt) }
+                    catch(e: IllegalArgumentException) { done(failure("Monitoring sample expired; restart explicitly"));return@rpc }
+                body.put("ageMillis",updatedAge)
             }
             rpc(JSONObject().put("op","environment").put("id",id).put("token",lease.getString("token")).put("body",body),done)
         }

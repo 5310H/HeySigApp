@@ -1,5 +1,15 @@
 package com.heysig.noise
 
+/** Include grant acquisition in client-side sample age; final transit remains separately bounded. */
+fun watchSampleAgeAfterGrant(ageAtPrepareMillis: Long, prepareStartedAt: Long, sendingAt: Long): Long {
+    require(ageAtPrepareMillis in 0..5000 && prepareStartedAt>=0 && sendingAt>=prepareStartedAt) {
+        "Watch sample expired or clock changed"
+    }
+    val waiting=sendingAt-prepareStartedAt
+    require(waiting<=5000-ageAtPrepareMillis) { "Watch sample expired while awaiting a grant" }
+    return ageAtPrepareMillis+waiting
+}
+
 /** Reject windows that might include our own tones, including bounded watch transit uncertainty. */
 fun environmentSampleAfterPlayback(capturedAt: Long, durationSeconds: Int, uncertaintyMillis: Long, lastPlaybackAt: Long?): Boolean {
     require(capturedAt>=0 && durationSeconds in 3..10 && uncertaintyMillis in 0..5000)
