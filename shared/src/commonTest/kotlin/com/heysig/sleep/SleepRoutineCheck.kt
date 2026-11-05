@@ -13,6 +13,15 @@ fun main() {
         check(SleepVoice.time(input)==minute) { input }
     for(input in listOf("ten","7","7 or 8 pm","25:00","24:00","10:60 pm","0 pm","13 pm","7.5 pm","-1:00","07:00 tomorrow")) check(SleepVoice.time(input)==null) { input }
     fun parse(text: String)=SleepVoice.parse(text,fitting)
+    check(parse("therapy now") == SleepCommand.Now(true))
+    check(parse("end therapy routine") == SleepCommand.Now(false))
+    check(parse("configure therapy") == SleepCommand.Configure)
+    check(parse("enable automatic therapy") == SleepCommand.Enable)
+    check(parse("set therapy time to ten PM") == SleepCommand.Time(true,1320))
+    check(parse("set therapy program to Sleep") == SleepCommand.Program(true,2))
+    val therapyFitting=fitting.copy(programs=fitting.programs.map { if(it.slot==2) it.copy(name="Therapy") else it })
+    check(SleepVoice.parse("set therapy program to Therapy",therapyFitting)==SleepCommand.Program(true,2))
+    check(SleepVoice.parse("Therapy",therapyFitting)==null) // configured program name remains a manual command
     check(parse("set sleep time to ten PM") == SleepCommand.Time(true,1320))
     check(parse("wake at seven AM.") == SleepCommand.Time(false,420))
     check(parse("set sleep time to ten") is SleepCommand.Invalid)

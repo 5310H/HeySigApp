@@ -45,7 +45,7 @@ object AutomaticSleepAcceptance {
         try {
             val fit=requireNotNull(runtime.fitting)
             val store=runtime.sleepRoutine
-            check(!enable().startsWith("Automatic sleep On"))
+            check(!enable().startsWith("Automatic therapy On"))
             check(store.save(SleepRoutine(1320,420,2,1),fit,store.editorRevision()).startsWith("Routine saved"))
             val saved=core.getString("saved",null)
             check(scheduler.enable().contains("review"))
@@ -53,7 +53,7 @@ object AutomaticSleepAcceptance {
             backend.exact=true;backend.notifications=false;check(enable().contains("notifications"));check(!scheduler.enabled)
             backend.notifications=true
             store.transition(store.state.manual())
-            check(enable().startsWith("Automatic sleep On"));check(!store.state.override)
+            check(enable().startsWith("Automatic therapy On"));check(!store.state.override)
             check(backend.scheduled.size==2 && played==0)
             val beforeReopen=backend.scheduled.getValue(true)
             scheduler.refresh()
@@ -84,7 +84,7 @@ object AutomaticSleepAcceptance {
             fire(false,backend.scheduled.getValue(false))
             check(backend.dispatched.size==1 && prefs.getString("automaticResult","")!!.contains("paused"))
 
-            check(enable().startsWith("Automatic sleep On"))
+            check(enable().startsWith("Automatic therapy On"))
             val late=backend.scheduled.getValue(true)
             fire(true,late,late.due+120001)
             check(backend.dispatched.size==1 && prefs.getString("automaticResult","")!!.contains("missed"))
@@ -94,26 +94,26 @@ object AutomaticSleepAcceptance {
             backend.exact=true
 
             backend.scheduleFailure=true
-            check(!enable().startsWith("Automatic sleep On"))
+            check(!enable().startsWith("Automatic therapy On"))
             check(!scheduler.enabled && backend.scheduled.isEmpty())
-            backend.scheduleFailure=false;check(enable().startsWith("Automatic sleep On"))
+            backend.scheduleFailure=false;check(enable().startsWith("Automatic therapy On"))
             backend.dispatchFailure=true
             fire(true,backend.scheduled.getValue(true))
             check(!scheduler.enabled && !prefs.contains("automaticClaim") && played==1)
             backend.dispatchFailure=false
 
-            check(enable().startsWith("Automatic sleep On"))
+            check(enable().startsWith("Automatic therapy On"))
             val interrupted=backend.scheduled.getValue(true)
             fire(true,interrupted)
             check(prefs.contains("automaticClaim"))
             scheduler.refresh()
             check(!scheduler.enabled && store.state==SleepState(SleepMode.UNKNOWN,true))
             check(!prefs.contains("automaticClaim") && played==1)
-            check(enable().startsWith("Automatic sleep On"))
+            check(enable().startsWith("Automatic therapy On"))
             val stale=backend.scheduled.getValue(true)
             check(store.save(SleepRoutine(1260,420,2,1),fit,store.editorRevision()).startsWith("Routine saved"))
             check(!scheduler.enabled && scheduler.enable().contains("review"))
-            check(enable().startsWith("Automatic sleep On"))
+            check(enable().startsWith("Automatic therapy On"))
             val count=backend.dispatched.size
             fire(true,stale);check(backend.dispatched.size==count)
             val stopped=backend.scheduled.getValue(true)

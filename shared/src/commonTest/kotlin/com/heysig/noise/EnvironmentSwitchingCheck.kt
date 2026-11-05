@@ -121,8 +121,8 @@ fun main() {
         val phrase=if(environment==ListeningEnvironment.NON_SPEECH_NOISE) "noise mode" else "${environment.label} mode"
         check(EnvironmentVoice.parse(phrase)==EnvironmentCommand.Select(environment))
     }
-    check(EnvironmentVoice.parse("Automatic on")==EnvironmentCommand.Automatic(true))
-    check(EnvironmentVoice.parse("automatic off")==EnvironmentCommand.Automatic(false))
+    check(EnvironmentVoice.parse("Automatic on")==null)
+    check(EnvironmentVoice.parse("automatic off")==null)
     check(EnvironmentVoice.parse("Cooldown two minutes")==EnvironmentCommand.Cooldown(120))
     check(EnvironmentVoice.parse("Cooldown five minutes")==EnvironmentCommand.Cooldown(300))
     check(EnvironmentVoice.parse("Cooldown 11 minutes")==null)

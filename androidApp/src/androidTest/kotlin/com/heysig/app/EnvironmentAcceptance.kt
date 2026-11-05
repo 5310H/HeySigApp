@@ -16,7 +16,7 @@ object EnvironmentAcceptance {
                 val silence=model.classify(ShortArray(48000))
                 check(silence.confidence.isFinite() && silence.confidence in 0.0..1.0)
             }
-            check(!NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
+            check(!EnvironmentReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
         } finally { check(prefs.edit().clear().commit()) }
     }
 }

@@ -80,7 +80,7 @@ class FittingWorkflow(private val save: (Fitting) -> Boolean) {
                 "save aid setup" -> {
                     require(d.reviewed) { "Say review aid setup before saving" }
                     val fit = fitting(d)
-                    if(save(fit)) { cancel(); "Aid setup saved. Nothing sent. Review dependent noise/sleep settings and learned phrases before use." }
+                    if(save(fit)) { cancel(); "Aid setup saved. Nothing sent. Review dependent noise/therapy settings and learned phrases before use." }
                     else "Setup could not be saved. Previous setup retained. Review and try again or cancel."
                 }
                 else -> {

@@ -46,7 +46,7 @@ class EnvironmentFeature(
     }
     private fun now()=SystemClock.elapsedRealtime()
     private fun available()=programs().map { EnvironmentProgram(it.slot,it.name) }.toSet()
-    private fun sleepSlots()=programs().filter { it.name.equals("sleep",true) }.map { it.slot }.toSet() +
+    private fun sleepSlots()=programs().filter { isTherapyProgramName(it.name) }.map { it.slot }.toSet() +
         listOfNotNull(runCatching { JSONObject(prefs.getString("settings","{}")!!).optInt("sleepProgram",0).takeIf { it in 1..6 } }.getOrNull())
     private fun captureAllowed()=state.monitoring && source=="phone" && safety().let { it.foreground && it.unlocked && it.audioFree }
     fun dispatchAllowed()=state.monitoring && !simulation && EnvironmentReleaseGate.qualified()

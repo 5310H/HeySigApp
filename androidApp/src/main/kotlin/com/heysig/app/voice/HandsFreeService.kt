@@ -288,7 +288,7 @@ class HandsFreeService : Service() {
         if(text=="status") { reply("$status. ${runtime.lastResult}");return }
         if(FittingWorkflow.accepts(text) && !runtime.fittingWorkflow.pending &&
             (runtime.personalPhrases.awaitingConfirmation || runtime.sleepRoutine.hasDraft)) {
-            reply("Finish or cancel the current phrase or sleep review before starting aid setup.");return
+            reply("Finish or cancel the current phrase or therapy review before starting aid setup.");return
         }
         if(!runtime.busy.get() && pending == null && (runtime.fittingWorkflow.pending || FittingWorkflow.accepts(text))) {
             runtime.fittingWorkflow.handle(text,runtime.fitting,origin,SystemClock.elapsedRealtime())?.let {

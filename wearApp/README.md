@@ -1,5 +1,11 @@
 # HeySig watch app
 
+November 4 development update: More → Automatic noise sends On/Off/status
+requests to the phone's noise-level controller. More → Build ID shows only the
+Git revision. Therapy terminology and legacy voice aliases remain compatible.
+The in-place update preserved existing watch settings. See
+[verification and limits](../docs/acceptance/noise-threshold-learning-2026-11-04.md).
+
 The watch connects directly to its paired Android phone using Wear OS Data Layer.
 Both build types use the same connection code; there is no computer relay.
 The watch recognizes commands and displays/speaks replies. Only the phone sends

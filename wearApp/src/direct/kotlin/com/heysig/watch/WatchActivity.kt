@@ -154,10 +154,17 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
     private var wifiCheck: WatchWifiCheck?=null
     private fun checkWifi() { wifiCheck?.close();wifiCheck=WatchWifiCheck(this) { send("status",listOf("status")) }.show() }
     private fun more() {
-        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Phone hands-free","Shake to speak","Check Wi-Fi","Stop voice session","Environmental monitoring")
+        val items = arrayOf("Read status","Check last result","Connect phone","Type command","Speech options","Privacy and data","Public privacy policy","Disconnect","Full status","Phone hands-free","Shake to speak","Check Wi-Fi","Stop voice session","Automatic noise","Build ID")
         AlertDialog.Builder(this).setTitle("More").setItems(items) { _,index ->
             when(index) {
-                13 -> startActivityForResult(Intent(this,WatchMonitoringActivity::class.java),734)
+                14 -> AlertDialog.Builder(this).setTitle("HeySig Watch")
+                    .setMessage("Build ${BuildConfig.GIT_BUILD_ID}")
+                    .setPositiveButton("Close",null).show()
+                13 -> AlertDialog.Builder(this).setTitle("Automatic noise")
+                    .setMessage("Uses the phone microphone and saved noise-level program assignments. Keep HeySig open and unlocked on the phone. Calibration is optional. On starts real noise-level program switching.")
+                    .setPositiveButton("On") { _,_ -> send("automatic on",listOf("automatic on")) }
+                    .setNegativeButton("Off") { _,_ -> send("automatic off",listOf("automatic off")) }
+                    .setNeutralButton("Status") { _,_ -> send("noise status",listOf("noise status")) }.show()
                 12 -> WatchVoiceSessionService.stop(this)
                 11 -> checkWifi()
                 10 -> shakeOptions()

@@ -1,5 +1,13 @@
 # HeySig Android phone app
 
+November 4 development update: Automatic on/off controls foreground noise-level
+program switching. Automatic also learns threshold suggestions from its existing
+measurements; nothing is saved without review and approval. Calibration remains
+optional. Home and Settings show only Build plus the Git revision. Existing
+fitting/settings were preserved during the in-place update. See
+[how it works](../docs/how-automatic-noise-works.md) and
+[verification and limits](../docs/acceptance/noise-threshold-learning-2026-11-04.md).
+
 Native phone controls, saved fitting/settings, voice and reviewed background
 services share the validated acoustic executor. The watch connects directly
 through Wear OS Data Layer in both development and release builds.

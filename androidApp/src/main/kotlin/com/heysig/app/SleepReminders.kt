@@ -26,7 +26,7 @@ class SleepReminders internal constructor(private val context: Context,
         PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     fun available(): Boolean {
         backend?.let { return it.available() }
-        notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Sleep routine reminders",NotificationManager.IMPORTANCE_DEFAULT))
+        notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Therapy routine reminders",NotificationManager.IMPORTANCE_DEFAULT))
         return notifications.areNotificationsEnabled() && notifications.getNotificationChannel(CHANNEL)?.importance != NotificationManager.IMPORTANCE_NONE
     }
     fun setEnabled(enabled: Boolean): String {
@@ -34,15 +34,15 @@ class SleepReminders internal constructor(private val context: Context,
         if(enabled) {
             val fit=runtime.fitting ?: return "Save aid setup first"
             runCatching { runtime.sleepRoutine.target(true,fit);runtime.sleepRoutine.target(false,fit) }.getOrElse { return it.message ?: "Review routine first" }
-            if(!available()) return "Allow HeySig notifications before enabling sleep reminders"
+            if(!available()) return "Allow HeySig notifications before enabling therapy reminders"
         }
         if(!prefs.edit().putBoolean("reminders",enabled).commit()) return "Could not save reminder choice"
         return try {
             if(enabled) check(refresh()) { "Reminder scheduling unavailable" } else refresh()
             if(enabled) runtime.sleepRoutine.transition(runtime.sleepRoutine.state.resume())
-            if(enabled) "Sleep reminders On. Tap a reminder, then Sleep now or Wake now to switch. Android may delay reminders." else "Sleep reminders Off."
+            if(enabled) "Therapy reminders On. Tap a reminder, then Therapy now or Wake now to switch. Android may delay reminders." else "Therapy reminders Off."
         }
-        catch(e: Exception) { prefs.edit().putBoolean("reminders",false).commit();runCatching { cancel() };"Reminders could not be scheduled. Open sleep settings to try again." }
+        catch(e: Exception) { prefs.edit().putBoolean("reminders",false).commit();runCatching { cancel() };"Reminders could not be scheduled. Open therapy settings to try again." }
     }
     private fun cancel() {
         for(sleep in listOf(true,false)) {
@@ -66,10 +66,10 @@ class SleepReminders internal constructor(private val context: Context,
         return true
     }
     fun testReminder(): String = try {
-        if(!available()) "Allow HeySig sleep notifications in Android settings, then try again."
+        if(!available()) "Allow HeySig therapy notifications in Android settings, then try again."
         else {
             postReminder(true,test=true)
-            "Test reminder posted. Open notifications and tap Sleep reminder test. No program changed; your schedule is unchanged."
+            "Test reminder posted. Open notifications and tap Therapy reminder test. No program changed; your schedule is unchanged."
         }
     } catch(e: Exception) { "Test reminder could not be posted. Check Android notification settings. No program changed." }
 
@@ -80,8 +80,8 @@ class SleepReminders internal constructor(private val context: Context,
             Intent(context,HomeActivity::class.java).putExtra("openSleep",true),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         notifications.notify(id,Notification.Builder(context,CHANNEL)
             .setSmallIcon(com.heysig.app.R.drawable.ic_launcher_foreground)
-            .setContentTitle(if(test) "Sleep reminder test" else if(sleep) "Bedtime routine" else "Wake-up routine")
-            .setContentText(if(test) "Tap to open your sleep routine. No program will change." else "Tap to open HeySig and choose ${if(sleep) "Sleep now" else "Wake now"}.")
+            .setContentTitle(if(test) "Therapy reminder test" else if(sleep) "Bedtime routine" else "Wake-up routine")
+            .setContentText(if(test) "Tap to open your therapy routine. No program will change." else "Tap to open HeySig and choose ${if(sleep) "Therapy now" else "Wake now"}.")
             .setContentIntent(open).setAutoCancel(true).setVisibility(Notification.VISIBILITY_PRIVATE).build())
     }
     fun deliver(sleep: Boolean,now: Long=System.currentTimeMillis()) {
@@ -119,7 +119,7 @@ class SleepReminderReceiver: BroadcastReceiver() {
             }
         }.onFailure {
             context.getSharedPreferences("heysig-sleep-v1",Context.MODE_PRIVATE).edit()
-                .putString("reminderResult","Reminder delivery or rescheduling failed. Open sleep settings to review; no program changed.").commit()
+                .putString("reminderResult","Reminder delivery or rescheduling failed. Open therapy settings to review; no program changed.").commit()
         }
     }
 }

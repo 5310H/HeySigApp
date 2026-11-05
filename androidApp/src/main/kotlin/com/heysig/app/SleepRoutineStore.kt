@@ -19,11 +19,11 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
         SleepState(SleepMode.valueOf(prefs.getString("mode","AWAKE")!!),prefs.getBoolean("override",false),prefs.getBoolean("transition",false)).recovered()
     }.getOrElse { SleepState(SleepMode.UNKNOWN,true) }; private set
     fun transition(next: SleepState) {
-        check(prefs.edit().putString("mode",next.mode.name).putBoolean("override",next.override).putBoolean("transition",next.pending).commit()) { "Could not save sleep state; no routine command enabled" }
+        check(prefs.edit().putString("mode",next.mode.name).putBoolean("override",next.override).putBoolean("transition",next.pending).commit()) { "Could not save therapy state; no routine command enabled" }
         state=next
     }
     fun target(sleep: Boolean,fit: Fitting): Int {
-        val routine=requireNotNull(validSaved(fit)) { "Review and save a valid sleep routine first" }
+        val routine=requireNotNull(validSaved(fit)) { "Review and save a valid therapy routine first" }
         return requireNotNull(if(sleep) routine.sleepSlot else routine.wakeSlot)
     }
     init {
@@ -55,13 +55,13 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
     fun isDraftFor(origin: String)=draft?.origin==origin
     fun actionResult(): String? = prefs.getString("actionResult",null)
     fun recordActionResult(sleep: Boolean,success: Boolean,detail: String): String {
-        val text="${if(sleep) "Sleep now" else "Wake now"} ${if(success) "sent" else "did not complete"}. $detail" +
+        val text="${if(sleep) "Therapy now" else "Wake now"} ${if(success) "sent" else "did not complete"}. $detail" +
             if(success) " Playback completed; hearing-aid receipt is not verified." else ""
         return if(prefs.edit().putString("actionResult",text).commit()) text else "$text Result could not be saved."
     }
     private fun describe(value: SleepRoutine,fit: Fitting): String {
         fun name(slot: Int?)=fit.programs.find { it.slot==slot }?.name ?: "choose program"
-        return "Sleep ${SleepRoutine.clock(value.sleepMinute)}: ${name(value.sleepSlot)}. Wake ${SleepRoutine.clock(value.wakeMinute)}: ${name(value.wakeSlot)}."
+        return "Therapy ${SleepRoutine.clock(value.sleepMinute)}: ${name(value.sleepSlot)}. Wake ${SleepRoutine.clock(value.wakeMinute)}: ${name(value.wakeSlot)}."
     }
     fun dashboard(fit: Fitting): String {
         val routine=validSaved(fit) ?: return "Needs setup · Choose and save bedtime and morning programs. " +
@@ -86,7 +86,7 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
     }
     fun status(fit: Fitting): String {
         val valid=validSaved(fit)
-        return "Sleep mode: ${state.mode.name.lowercase()}. ${if(state.override) "Manual override On. " else ""}Reminders ${if(prefs.getBoolean("reminders",false)) "On" else "Off"}. " + (error ?: if(saved==null) "No saved routine. 22:00 and 07:00 are suggestions only." else if(valid==null) "Setup changed; review and save the routine again." else describe(valid,fit)) +
+        return "Therapy mode: ${when(state.mode) { SleepMode.ASLEEP -> "active"; SleepMode.AWAKE -> "inactive"; SleepMode.UNKNOWN -> "unknown" }}. ${if(state.override) "Manual override On. " else ""}Reminders ${if(prefs.getBoolean("reminders",false)) "On" else "Off"}. " + (error ?: if(saved==null) "No saved routine. 22:00 and 07:00 are suggestions only." else if(valid==null) "Setup changed; review and save the routine again." else describe(valid,fit)) +
             " " + prefs.getString("reminderResult","").orEmpty() + if(prefs.getBoolean("automaticEnabled",false)) " Automatic program switching is enabled." else " Automatic program switching is Off."
     }
     fun preview(fit: Fitting, now: ZonedDateTime=ZonedDateTime.now()): String {
@@ -99,8 +99,8 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
     fun save(value: SleepRoutine, fit: Fitting, expectedRevision: Long): String {
         try {
             value.validate(fit)
-            check(!state.pending) { "Wait for the current sleep/wake command before changing the routine" }
-            check(draft == null || draft?.choices == value) { "A voice sleep draft is active. Review/save it by voice or say cancel sleep setup before saving different screen choices." }
+            check(!state.pending) { "Wait for the current therapy/wake command before changing the routine" }
+            check(draft == null || draft?.choices == value) { "A voice therapy draft is active. Review/save it by voice or say cancel therapy setup before saving different screen choices." }
             check(expectedRevision==revision()) { "Routine changed elsewhere. Review it again before saving." }
             val json=JSONObject().put("version",1).put("sleepMinute",value.sleepMinute).put("wakeMinute",value.wakeMinute)
                 .put("sleepSlot",value.sleepSlot).put("wakeSlot",value.wakeSlot).put("fitting",fit.toString())
@@ -115,30 +115,30 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
     fun handle(command: SleepCommand,fit: Fitting,origin: String,now: Long=android.os.SystemClock.elapsedRealtime()): String {
         if(command==SleepCommand.Override || command==SleepCommand.Resume) return runCatching {
             transition(if(command==SleepCommand.Override) state.manual() else state.resume())
-            if(command==SleepCommand.Override) "Sleep automation paused. No command sent." else "Sleep automation resumed for future occurrences. No command sent."
-        }.getOrElse { it.message ?: "Sleep state could not be saved" }
-        if(command is SleepCommand.Now) return "Open HeySig to run the saved sleep or wake program."
-        if(command==SleepCommand.Disable) { cancel();return if(prefs.edit().putBoolean("reminders",false).commit()) "Sleep reminders Off. No pending sleep action." else "Could not disable reminders; try again" }
+            if(command==SleepCommand.Override) "Therapy automation paused. No command sent." else "Therapy automation resumed for future occurrences. No command sent."
+        }.getOrElse { it.message ?: "Therapy state could not be saved" }
+        if(command is SleepCommand.Now) return "Open HeySig to run the saved therapy or wake program."
+        if(command==SleepCommand.Disable) { cancel();return if(prefs.edit().putBoolean("reminders",false).commit()) "Therapy reminders Off. No pending therapy action." else "Could not disable reminders; try again" }
         if(command==SleepCommand.Enable) return "Schedule unavailable here: review Start automatic routine on the phone and allow Alarms & reminders. Nothing is armed."
         if(command==SleepCommand.Read) return status(fit)+" "+preview(fit)
-        if(command==SleepCommand.Cancel) { cancel();return "Sleep draft discarded. Saved choices retained. Nothing sent." }
+        if(command==SleepCommand.Cancel) { cancel();return "Therapy draft discarded. Saved choices retained. Nothing sent." }
         if(command is SleepCommand.Invalid) return command.reason
         if(command==SleepCommand.Configure) {
-            if(draft?.let { it.origin != origin && now <= it.expires } == true) return "Finish or cancel the sleep draft on the device that started it."
+            if(draft?.let { it.origin != origin && now <= it.expires } == true) return "Finish or cancel the therapy draft on the device that started it."
             draft=Draft(choices(fit),origin,fit.toString(),revision(),now+5*60_000)
-            return "Sleep routine draft. ${describe(draft!!.choices,fit)} Say set sleep time to ten PM, set wake time to seven AM, set sleep program to a configured name, set wake program to a configured name, review sleep routine, then save sleep routine. Save leaves scheduling Off."
+            return "Therapy routine draft. ${describe(draft!!.choices,fit)} Say set therapy time to ten PM, set wake time to seven AM, set therapy program to a configured name, set wake program to a configured name, review therapy routine, then save therapy routine. Save leaves scheduling Off."
         }
-        val current=draft ?: return "Say configure sleep first. No changes saved."
-        if(current.origin != origin) return "Finish or cancel the sleep draft on the device that started it."
+        val current=draft ?: return "Say configure therapy first. No changes saved."
+        if(current.origin != origin) return "Finish or cancel the therapy draft on the device that started it."
         if(now>current.expires || current.fitting != fit.toString() || current.revision != revision()) {
-            cancel();return "Sleep draft expired or setup changed. Say configure sleep to review again."
+            cancel();return "Therapy draft expired or setup changed. Say configure therapy to review again."
         }
-        if(command==SleepCommand.Review) return "Draft. ${describe(current.choices,fit)} Say save sleep routine or cancel sleep setup. Saving leaves scheduling Off."
+        if(command==SleepCommand.Review) return "Draft. ${describe(current.choices,fit)} Say save therapy routine or cancel therapy setup. Saving leaves scheduling Off."
         if(command==SleepCommand.Save) return save(current.choices,fit,current.revision)
         val next=when(command) {
             is SleepCommand.Time -> if(command.sleep) current.choices.copy(sleepMinute=command.minute) else current.choices.copy(wakeMinute=command.minute)
             is SleepCommand.Program -> if(command.sleep) current.choices.copy(sleepSlot=command.slot) else current.choices.copy(wakeSlot=command.slot)
-            else -> return "Say review sleep routine, save sleep routine or cancel sleep setup."
+            else -> return "Say review therapy routine, save therapy routine or cancel therapy setup."
         }
         draft=current.copy(choices=next)
         return "Draft updated. ${describe(next,fit)} Not saved."

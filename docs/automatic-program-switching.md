@@ -1,4 +1,10 @@
-# Automatic program switching — development build
+# Archived environment-classification experiment
+
+November 4, 2026: removed from the main phone/watch flow at the owner’s request.
+**Automatic on/off** now belongs exclusively to the
+[noise-level controller](noise-quick-start.md), not this classifier preference.
+Existing settings and experimental code are retained without migration. The
+instructions below describe the historical development interface.
 
 Open **Noise → Automatic program switching**. The new semantic monitor is
 separate from the existing relative-level experiment and its saved calibration.

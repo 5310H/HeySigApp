@@ -7,8 +7,8 @@ data class SleepRoutine(val sleepMinute: Int = 22*60, val wakeMinute: Int = 7*60
     val sleepSlot: Int? = null, val wakeSlot: Int? = null) {
     fun validate(fitting: Fitting) {
         require(sleepMinute in 0..1439 && wakeMinute in 0..1439) { "Choose valid local clock times" }
-        require(sleepMinute != wakeMinute) { "Sleep and wake times must differ" }
-        require(fitting.programs.any { it.slot == sleepSlot }) { "Choose a configured sleep program" }
+        require(sleepMinute != wakeMinute) { "Therapy and wake times must differ" }
+        require(fitting.programs.any { it.slot == sleepSlot }) { "Choose a configured therapy program" }
         require(fitting.programs.any { it.slot == wakeSlot }) { "Choose a configured wake program" }
     }
     companion object {
@@ -49,12 +49,14 @@ object SleepVoice {
         return (hour%12 + if(ampm.groupValues[3] == "pm") 12 else 0)*60+minute
     }
     fun parse(raw: String, fitting: Fitting): SleepCommand? {
-        val text=raw.trim().lowercase().replace(Regex("\\s+")," ").replace(Regex("[.!?]$"),"")
+        val normalized=raw.trim().lowercase().replace(Regex("\\s+")," ")
+        val alias=Regex("^((?:(?:set|choose|configure|open|read|review|save|cancel|discard|enable|disable|start|end|resume|pause|override) )?(?:automatic )?)therapy\\b")
+        val text=normalized.replace(alias) { it.groupValues[1]+"sleep" }.replace(Regex("[.!?]$"),"")
         val original=raw.trim().lowercase().replace(Regex("\\s+")," ")
-        if(fitting.programs.any { it.name.lowercase() in listOf(original,text) }) return null
-        Regex("^(?:set |choose )?(sleep|wake) program (?:to )?(.+)$").matchEntire(original)?.let { match ->
+        if(fitting.programs.any { it.name.lowercase() in listOf(original,normalized.trimEnd('.','!','?')) }) return null
+        Regex("^(?:set |choose )?(sleep|therapy|wake) program (?:to )?(.+)$").matchEntire(original)?.let { match ->
             fitting.programs.singleOrNull { it.name.lowercase()==match.groupValues[2] }?.let {
-                return SleepCommand.Program(match.groupValues[1]=="sleep",it.slot)
+                return SleepCommand.Program(match.groupValues[1]!="wake",it.slot)
             }
         }
         when(text) {

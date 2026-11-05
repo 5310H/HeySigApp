@@ -8,7 +8,8 @@ enum class ListeningEnvironment(val id: Int, val label: String) {
 /** Corpus/model and device acceptance is independent of legacy level-based physical acceptance. */
 object EnvironmentReleaseGate {
     const val CLASSIFIER_ACCEPTANCE_PASSED=false
-    fun qualified()=CLASSIFIER_ACCEPTANCE_PASSED && NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED
+    const val PHYSICAL_ACCEPTANCE_PASSED=false
+    fun qualified()=CLASSIFIER_ACCEPTANCE_PASSED && PHYSICAL_ACCEPTANCE_PASSED
 }
 
 /** Bind labels too: replacing or renaming a fitting never silently redirects automation. */
@@ -122,14 +123,14 @@ object EnvironmentSwitching {
         if(!previous.monitoring) return hold(SwitchingPhase.DISABLED,"Monitoring off")
         if(settings.schedule.expired(previous.startedAt,now)) return EnvironmentDecision(stop(previous).copy(reason="Monitoring session expired"))
         if(previous.pending != null) return hold(SwitchingPhase.CLASSIFICATION_PENDING,"Waiting for playback completion")
-        if(!safe || current == null || current in sleepSlots) return hold(SwitchingPhase.MANUAL_OVERRIDE,"Foreground, audio, manual or Sleep priority")
+        if(!safe || current == null || current in sleepSlots) return hold(SwitchingPhase.MANUAL_OVERRIDE,"Foreground, audio, manual or Therapy priority")
         if(now < previous.startedAt || previous.lastSampleAt?.let { now <= it } == true) return hold(SwitchingPhase.ERROR,"Invalid sample clock/order")
         val environment = result.environment
         if(environment == null || result.confidence < settings.minimumConfidence) return hold(SwitchingPhase.CLASSIFICATION_PENDING,"Uncertain classification; keeping current program")
         val target = settings.assignments[environment.ordinal]
             ?: return hold(SwitchingPhase.MONITORING,"${environment.label} is unassigned")
         if(target !in available) return hold(SwitchingPhase.ERROR,"Assigned program changed or is unavailable; review assignment")
-        if(target.slot in sleepSlots) return hold(SwitchingPhase.MANUAL_OVERRIDE,"Sleep requires manual selection")
+        if(target.slot in sleepSlots) return hold(SwitchingPhase.MANUAL_OVERRIDE,"Therapy requires manual selection")
         val gap = settings.schedule.intervalSeconds*2000L
         val stable = previous.candidate == environment && previous.lastSampleAt?.let { now-it <= gap } == true
         val state = previous.copy(candidate=environment,candidateSince=if(stable) previous.candidateSince else now,lastSampleAt=now)
@@ -165,8 +166,6 @@ object EnvironmentVoice {
     fun parse(raw: String): EnvironmentCommand? {
         val text=raw.lowercase().trim().trimEnd('.','!','?').replace('’','\'').replace(Regex("\\s+")," ")
         when(text) {
-            "automatic on" -> return EnvironmentCommand.Automatic(true)
-            "automatic off" -> return EnvironmentCommand.Automatic(false)
             "start monitoring" -> return EnvironmentCommand.Monitor(true)
             "stop monitoring" -> return EnvironmentCommand.Monitor(false)
             "what's my status", "what is my status", "environment status" -> return EnvironmentCommand.Status

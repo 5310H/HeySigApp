@@ -27,16 +27,22 @@ fun main() {
     check(!profile.matches(settings.copy(captureSeconds=4),"source-A"))
     check(!profile.matches(settings.copy(margin=1.0),"source-A"))
     check(!profile.matches(settings.copy(boundaries=listOf(-79.0,-66.0,-54.0,-42.0,-30.0)),"source-A"))
-    val safe = NoiseSafety(true,true,true,true,true)
+    val safe = NoiseSafety(foreground=true,unlocked=true,audioFree=true)
     check(automaticNoise(NoiseAutomaticState(),-10.0,1000,settings,safe,null).target == null)
-    check(!NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
-    listOf(safe.copy(calibrated=false),safe.copy(physicallyAccepted=false),safe.copy(foreground=false),
+    listOf(safe.copy(foreground=false),
         safe.copy(unlocked=false),safe.copy(audioFree=false),safe.copy(manualOverride=true),safe.copy(sleeping=true)).forEach {
         check(automaticNoise(NoiseAutomaticState(),-10.0,1000,settings,it,1).target == null)
     }
     check(automaticNoise(NoiseAutomaticState(),-10.0,1000,settings.copy(sleepProgram=1),safe,1).target == null)
     var asleepTarget = NoiseAutomaticState()
     repeat(4) { asleepTarget = automaticNoise(asleepTarget,-10.0,(it+1)*1000L,settings.copy(sleepProgram=5),safe,1).also { check(it.target == null) }.state }
+    val protected=safe.copy(protectedPrograms=setOf(4,5))
+    check(automaticNoise(NoiseAutomaticState(),-90.0,1000,settings,protected,4).target==null)
+    var protectedState=NoiseAutomaticState()
+    repeat(4) {
+        protectedState=automaticNoise(protectedState,-10.0,(it+1)*1000L,settings,protected,1)
+            .also { decision -> check(decision.target==null) }.state
+    }
     var state = NoiseAutomaticState()
     for(t in 1L..2) { val d=automaticNoise(state,-10.0,t*1000,settings,safe,1); check(d.target == null); state=d.state }
     val request = automaticNoise(state,-10.0,3000,settings,safe,1)
@@ -71,26 +77,14 @@ fun main() {
     check(runCatching { review.apply(reviewDraft,reviewSamples,"different mic","fitting A",1001) }.isFailure)
     check(runCatching { review.apply(reviewDraft,reviewSamples,"phone mic","fitting B",1001) }.isFailure)
     check(runCatching { review.apply(reviewDraft,NoiseCalibration(),"phone mic","fitting A",1001) }.isFailure)
-    check(!NoiseTrialGate.allowed(false,false) && !NoiseTrialGate.allowed(false,true) && !NoiseTrialGate.allowed(true,false))
-    check(NoiseTrialGate.allowed(true,true) && !NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
-    val trialSafety=safe.copy(calibrated=false,physicallyAccepted=false,developmentTrial=NoiseTrialGate.allowed(true,true))
-    check(trialSafety.blocked()==null)
-    check(trialSafety.copy(foreground=false).blocked()!=null)
-    check(trialSafety.copy(unlocked=false).blocked()!=null)
-    check(trialSafety.copy(audioFree=false).blocked()!=null)
-    check(trialSafety.copy(manualOverride=true).blocked()!=null)
-    check(trialSafety.copy(sleeping=true).blocked()!=null)
-    check(trialSafety.copy(developmentTrial=NoiseTrialGate.allowed(false,true)).blocked()!=null)
-    var trialState=NoiseAutomaticState()
-    repeat(3) { trialState=automaticNoise(trialState,-10.0,(it+1)*1000L,settings,trialSafety,1).state }
-    check(trialState.pendingTarget==5)
-    check(NoiseTrialGate.MAX_MILLIS==900_000L)
-    check(NoiseTrialGate.active(true,true,901_000,1000))
-    check(!NoiseTrialGate.active(true,true,901_000,999))
-    check(!NoiseTrialGate.active(true,true,901_000,901_000))
-    check(!NoiseTrialGate.active(true,true,901_000,901_001))
-    check(!NoiseTrialGate.active(true,false,901_000,1000))
-    check(!NoiseTrialGate.active(false,true,901_000,1000))
-    check(!NoiseTrialGate.active(true,true,0,1000))
-    println("PASS: scalar six-level calibration, rejected overlap, readiness gates, confirmation, cooldown, no-op, failure and stale completion")
+    // Saved illustrative thresholds work without calibration, acceptance flags or a trial.
+    val uncalibratedSettings=NoiseSettings(programs=listOf(1,1,null,3,4,5))
+    var normal=NoiseAutomaticState()
+    repeat(uncalibratedSettings.confirmations) {
+        normal=automaticNoise(normal,-10.0,(it+1)*1000L,uncalibratedSettings,safe,1).state
+    }
+    check(normal.pendingTarget==5)
+    check(safe.blocked()==null)
+    check(!EnvironmentReleaseGate.PHYSICAL_ACCEPTANCE_PASSED) // evidence is not fabricated
+    println("PASS: optional calibration, saved-threshold automatic decisions, runtime priorities, confirmation, cooldown, no-op, failure and stale completion")
 }

@@ -1,5 +1,22 @@
 # Google Play readiness — audited October 16, 2026
 
+November 4 threshold-learning follow-up: ordinary foreground Automatic reuses
+valid level measurements to suggest bounded threshold adjustments. Up to 240
+scalar levels/timestamps remain in phone memory; no extra microphone windows,
+raw audio storage, transcript history or learning upload is added. Explicit
+review/approval is required to replace saved thresholds. Program assignments
+and fitting are preserved. Review updated in-app data disclosures and final
+release configuration; this is not physical acceptance or Play approval.
+
+November 4, 2026 owner-directed update: ordinary level-based Automatic is now
+available through Automatic on/off using saved thresholds and assignments;
+calibration is optional and the acceptance lock/development trial are removed.
+See [current behavior](noise-quick-start.md) and
+[change/validation record](acceptance/automatic-noise-voice-2026-11-04.md).
+Earlier lock/trial statements below are historical. The archived semantic
+classifier remains unqualified; actual physical acceptance and Play release
+requirements remain outstanding. Enabling Automatic is not acceptance evidence.
+
 October 30 development update: a separate semantic environment monitor adds
 bundled YAMNet/LiteRT 1.4.2 inference, local settings, foreground intermittent
 phone/watch sampling and foreground shake-triggered bounded speech commands.

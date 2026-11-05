@@ -39,7 +39,7 @@ object SleepManagementAcceptance {
             check(store.save(SleepRoutine(1320,420,2,1),fit,store.editorRevision()).startsWith("Routine saved"))
             check(store.target(true,fit)==2 && store.target(false,fit)==1)
             check(play(2,true))
-            check(store.actionResult()!!.startsWith("Sleep now sent"))
+            check(store.actionResult()!!.startsWith("Therapy now sent"))
             check(store.state.mode==SleepMode.ASLEEP && store.state.blocksNoise)
             check(SleepRoutineStore(prefs).state==store.state)
             val before=played
@@ -54,7 +54,7 @@ object SleepManagementAcceptance {
             blocked=true
             check(!play(2,true))
             check(played==beforeBlocked && store.state==SleepState())
-            check(SleepRoutineStore(prefs).actionResult()!!.contains("Sleep now did not complete. Blocked: Injected audio blocker"))
+            check(SleepRoutineStore(prefs).actionResult()!!.contains("Therapy now did not complete. Blocked: Injected audio blocker"))
             blocked=false
             failed=true
             check(!play(2,true))

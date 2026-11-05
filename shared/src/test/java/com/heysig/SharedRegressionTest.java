@@ -3,6 +3,9 @@ package com.heysig;
 import org.junit.Test;
 
 public class SharedRegressionTest {
+    @Test public void noiseThresholdLearning() {
+        com.heysig.noise.NoiseThresholdLearningCheckKt.main();
+    }
     @Test public void environmentSwitching() {
         com.heysig.noise.EnvironmentSwitchingCheckKt.main();
     }

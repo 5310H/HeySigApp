@@ -88,11 +88,11 @@ class HomeActivity : Activity() {
         { noiseSafety().let { it.foreground && it.unlocked && it.audioFree } },{ text,speak -> tell(text,speak) },
         { noiseSafety() },{ requested.program },{ slot,done ->
             execute(listOf(ManualRequest.SelectProgram(slot)),false,automatic=true,onComplete=done)
-        },prepareTrial={
+        },prepareAutomatic={
             val old=runtime.sleepRoutine.state
             val schedule=getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE)
             check(old.mode==com.heysig.sleep.SleepMode.AWAKE && !old.pending) { "A waking baseline is required" }
-            check(!schedule.getBoolean("reminders",false) && !schedule.getBoolean("automaticEnabled",false)) { "Pause other schedules before resuming a noise-only trial" }
+            check(!schedule.getBoolean("reminders",false) && !schedule.getBoolean("automaticEnabled",false)) { "Turn other schedules off before starting Automatic noise" }
             runtime.sleepRoutine.transition(old.resume())
             val rollback: () -> Unit={ runtime.sleepRoutine.transition(old) }
             rollback
@@ -170,9 +170,10 @@ class HomeActivity : Activity() {
     private fun noiseSafety(): NoiseSafety {
         val keyguard = getSystemService(KEYGUARD_SERVICE) as android.app.KeyguardManager
         return NoiseSafety(foreground=resumed,unlocked=!keyguard.isKeyguardLocked,
+            protectedPrograms=fitting?.programs.orEmpty().filter { isTherapyProgramName(it.name) }.map { it.slot }.toSet(),
             audioFree=!busy.get() && !pendingVoice && pendingProgram == null && pendingRestore == null && (remoteReply == null || handlingNoiseRequest) && tts?.isSpeaking != true,
             manualOverride=runtime.sleepRoutine.state.override,
-            sleeping=runtime.sleepRoutine.state.blocksNoise || fitting?.programs?.find { it.slot == requested.program }?.name?.trim()?.equals("sleep",true) == true)
+            sleeping=runtime.sleepRoutine.state.blocksNoise || fitting?.programs?.find { it.slot == requested.program }?.name?.let { isTherapyProgramName(it) } == true)
     }
 
     override fun onCreate(state: Bundle?) {
@@ -226,7 +227,7 @@ class HomeActivity : Activity() {
             else {
                 if(command==NoiseCommand.Stop) { noise.stop();reply("Noise stopped") }
                 else if(busy.get() || remoteReply!=null || pendingProgram!=null || pendingRestore!=null || runtime.fittingWorkflow.pending || runtime.sleepRoutine.hasDraft || runtime.personalPhrases.awaitingConfirmation || page=="Setup") reply("Finish the current operation or review before noise setup. Nothing sent.")
-                else if(command in listOf(NoiseCommand.Sample,NoiseCommand.Observe,NoiseCommand.CalibrationSample,NoiseCommand.Preview,NoiseCommand.TrialAutomatic) && (!getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).getBoolean("microphoneDisclosureV2",false) || checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)!=android.content.pm.PackageManager.PERMISSION_GRANTED)) reply("On the phone, open Noise and review microphone use and permission before requesting capture from the watch.")
+                else if(command in listOf(NoiseCommand.Sample,NoiseCommand.Observe,NoiseCommand.CalibrationSample,NoiseCommand.Preview,NoiseCommand.Automatic) && (!getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).getBoolean("microphoneDisclosureV2",false) || checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)!=android.content.pm.PackageManager.PERMISSION_GRANTED)) reply("On the phone, open Noise and review microphone use and permission before requesting capture from the watch.")
                 else {
                     remoteReply={ result -> reply(result.optString("text","Noise request returned no result")) }
                     handleNoiseCommand(command)
@@ -306,7 +307,7 @@ class HomeActivity : Activity() {
     private fun navigate(target: String) {
         if(target=="Setup") HandsFreeService.running?.control(HandsFreeControl.END)
         if(page in listOf("Setup","Sleep") && target != page && setupChanged?.invoke() == true) {
-            android.app.AlertDialog.Builder(this).setTitle(if(page=="Sleep") "Sleep routine changes are not saved" else "Setup changes are not saved")
+            android.app.AlertDialog.Builder(this).setTitle(if(page=="Sleep") "Therapy routine changes are not saved" else "Setup changes are not saved")
                 .setMessage("Save the reviewed choices before leaving, or discard the changes.")
                 .setPositiveButton(if(page=="Sleep") "Save routine" else "Save setup") { _,_ -> saveSetupAction?.invoke() }
                 .setNegativeButton("Discard") { _,_ -> show(target) }
@@ -347,7 +348,7 @@ class HomeActivity : Activity() {
             "Saved" -> "Saved settings"
             "Setup" -> "Aid setup"
             "GettingStarted" -> "Getting started"
-            "Sleep" -> "Sleep routine"
+            "Sleep" -> "Therapy routine"
             "Voice" -> "Voice & speech"
             "VoiceTools" -> "Voice tools"
             "Watch" -> "Watch connection"
@@ -355,6 +356,7 @@ class HomeActivity : Activity() {
             else -> "Settings"
         }
         line(title).apply { PhoneStyle.text(this,minOf(25f,40f/resources.configuration.fontScale),true); isAccessibilityHeading = true }
+        if(page in listOf("Home","Settings")) line("Build ${BuildConfig.GIT_BUILD_ID}")
         val statusCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(PhoneStyle.dp(context,4),PhoneStyle.dp(context,4),PhoneStyle.dp(context,4),PhoneStyle.dp(context,12))
@@ -383,7 +385,6 @@ class HomeActivity : Activity() {
             "Voice" -> section("Voice & speech") { voicePage() }
             "VoiceTools" -> section("Voice tools") { voiceToolsPage() }
             "Noise", "NoiseCalibration", "NoiseSetup", "NoiseMeasure", "NoiseDetails" -> {
-                if(page=="Noise") button("Automatic program switching") { navigate("Environment") }
                 noise.render(content,page) { navigate(it) }
             }
             "Environment" -> { environment.render(content,if(companion.enabled) "Enabled for selected watch" else "Off; use Watch connection")
@@ -409,7 +410,7 @@ class HomeActivity : Activity() {
         val speak = Button(this).apply { setText(R.string.speak); contentDescription = "Speak command"; setOnClickListener { beginVoice() }; PhoneStyle.action(this,"primary") }
         val stop = Button(this).apply {
             setText(R.string.stop); PhoneStyle.action(this,"danger")
-            setOnClickListener { runCatching { AutomaticSleepScheduler(this@HomeActivity).disable() };HandsFreeService.running?.control(HandsFreeControl.OFF); noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); pendingVoice = false; environment.stop();foregroundVoice.close();cancelled.set(true); tell("Stop requested. Automatic sleep is Off. Already emitted tones cannot be undone.") }
+            setOnClickListener { runCatching { AutomaticSleepScheduler(this@HomeActivity).disable() };HandsFreeService.running?.control(HandsFreeControl.OFF); noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); pendingVoice = false; environment.stop();foregroundVoice.close();cancelled.set(true); tell("Stop requested. Automatic therapy is Off. Already emitted tones cannot be undone.") }
         }
         actions.addView(speak,LinearLayout.LayoutParams(0,-2,2f).apply { marginEnd = PhoneStyle.dp(this@HomeActivity,10) })
         actions.addView(stop,LinearLayout.LayoutParams(0,-2,1f))
@@ -466,7 +467,7 @@ class HomeActivity : Activity() {
     private fun settingsPage() {
         section("Your preferences") {
             button("Getting started") { navigate("GettingStarted") }
-            button("Sleep routine") { navigate("Sleep") }
+            button("Therapy routine") { navigate("Sleep") }
             button("Saved settings") { navigate("Saved") }
             button("Battery check") { navigate("Batteries") }
             button("Aid setup") { navigate("Setup") }
@@ -500,7 +501,7 @@ class HomeActivity : Activity() {
         section("3. Choose optional help") {
             line("Hands-free: enable a phone listening session, then say Hey Sig, pause and give a command. Microphone use is explained before you enable it. The watch still needs Speak or a gesture.")
             button("Set up voice & hands-free") { navigate("Voice") }
-            line("Sleep: save bedtime and morning programs, then enable reminders. A reminder asks you to open HeySig and confirm a switch; programs do not change automatically.")
+            line("Therapy: save bedtime and morning programs, then enable reminders. A reminder asks you to open HeySig and confirm a switch; programs do not change automatically.")
             button("Set up bedtime reminders") { navigate("Sleep") }
             line("Noise: measure your surroundings and preview suggested programs without changing your aids. Keep the app open and unlocked during measurement. Automatic switching is unavailable in this build.")
             button("Explore noise preview") { navigate("Noise") }
@@ -612,7 +613,7 @@ class HomeActivity : Activity() {
         val control = field("Program/level address",fitting?.controlAddress?.toString() ?: "12")
         val left = field("Left battery address",fitting?.leftAddress?.toString() ?: "12")
         val right = field("Right battery address",fitting?.rightAddress?.toString() ?: "12")
-        val defaults = listOf("Universal","Sleep","Noisy","Outdoor","TV","Very Noisy")
+        val defaults = listOf("Universal","Therapy","Noisy","Outdoor","TV","Very Noisy")
         val names = mutableListOf<EditText>(); val capabilities = mutableListOf<Spinner>()
         for(slot in 1..6) {
             val existing = fitting?.programs?.find { it.slot == slot }
@@ -660,7 +661,7 @@ class HomeActivity : Activity() {
         tell(result,true)
     }
     private fun sleepPage() {
-        val fit=fitting ?: run { line("Save aid setup before choosing a sleep routine."); return }
+        val fit=fitting ?: run { line("Save aid setup before choosing a therapy routine."); return }
         val store=runtime.sleepRoutine
         val ready=runCatching { store.target(true,fit);store.target(false,fit) }.isSuccess
         val remindersOn=getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getBoolean("reminders",false)
@@ -675,9 +676,9 @@ class HomeActivity : Activity() {
             getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).getString("automaticResult",null)?.let { line("Last automatic result: $it") }
             if(ready) {
                 val choices=store.choices(fit)
-                line("Sleep now: ${fit.programs.first { it.slot==choices.sleepSlot }.name}. Wake now: ${fit.programs.first { it.slot==choices.wakeSlot }.name}.")
+                line("Therapy now: ${fit.programs.first { it.slot==choices.sleepSlot }.name}. Wake now: ${fit.programs.first { it.slot==choices.wakeSlot }.name}.")
             } else line("Choose and save both programs below before starting.")
-            button("Sleep now",ready && !busy.get()) { confirmSleep(true) }
+            button("Therapy now",ready && !busy.get()) { confirmSleep(true) }
             button("Wake now",ready && !busy.get()) { confirmSleep(false) }
             line("These buttons ask before switching immediately. They do not start a schedule, power off or mute the aids.")
             store.actionResult()?.let { line("Last program result: $it") }
@@ -695,9 +696,9 @@ class HomeActivity : Activity() {
             button(if(remindersOn && store.state.override) "Resume routine reminders" else "Start routine reminders",ready && !busy.get()) { requestSleepReminder() }
             if(remindersOn) button("Stop reminders") { val result=SleepReminders(this).setEnabled(false);show("Sleep");tell(result,true) }
             button("Test reminder") { requestSleepReminder(test=true) }
-            line("Test reminder posts a notification now without changing a program or your saved schedule. Daily reminders open this screen so you can choose Sleep now or Wake now.")
+            line("Test reminder posts a notification now without changing a program or your saved schedule. Daily reminders open this screen so you can choose Therapy now or Wake now.")
             if(!SleepReminders(this).available()) {
-                line("Blocked: Android notifications are off. Allow HeySig notifications, including the Sleep routine reminders channel, in Android settings.")
+                line("Blocked: Android notifications are off. Allow HeySig notifications, including the Therapy routine reminders channel, in Android settings.")
                 button("Open notification settings") { startActivity(Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE,packageName)) }
             }
             line("Start also clears the manual pause for future reminders. Times are approximate; Android can delay delivery. A reminder more than 15 minutes late is skipped and recorded below.")
@@ -742,7 +743,7 @@ class HomeActivity : Activity() {
         fun choices()=SleepRoutine(sleepMinute,wakeMinute,programs.getOrNull(sleep.selectedItemPosition-1)?.slot,programs.getOrNull(wake.selectedItemPosition-1)?.slot)
         setupChanged={ choices()!=initial }
         val commitRoutine: (Boolean) -> Unit = { start ->
-            if(fitting != fit) tell("Aid setup changed. Reopen and review the sleep routine.",true)
+            if(fitting != fit) tell("Aid setup changed. Reopen and review the therapy routine.",true)
             else {
                 val result=store.save(choices(),fit,revision)
                 runCatching { SleepReminders(this).refresh() }
@@ -780,7 +781,7 @@ class HomeActivity : Activity() {
             line(store.status(fit))
             line(store.preview(fit))
             line("Manual program or level changes pause future reminders. Resume allows future reminders; it does not send a program command. Android may delay reminders, and reminders over 15 minutes late are skipped.")
-            button(if(store.state.override) "Resume sleep reminders" else "Pause sleep reminders",!busy.get()) {
+            button(if(store.state.override) "Resume therapy reminders" else "Pause therapy reminders",!busy.get()) {
                 tell(store.handle(if(store.state.override) SleepCommand.Resume else SleepCommand.Override,fit,"phone"),true);show("Sleep")
             }
             line("No reminder? Check that reminders are On, the routine is not paused, and Android allows HeySig notifications. No switch? Read the result at the top of this screen after confirming Switch.")
@@ -815,7 +816,7 @@ class HomeActivity : Activity() {
     }
     private fun requestSleepReminder(test: Boolean=false) {
         if(android.os.Build.VERSION.SDK_INT>=33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED) {
-            android.app.AlertDialog.Builder(this).setTitle(if(test) "Test sleep notification" else "Sleep routine reminders")
+            android.app.AlertDialog.Builder(this).setTitle(if(test) "Test therapy notification" else "Therapy routine reminders")
                 .setMessage(if(test) "Allow notifications to post one test reminder now. This will not start daily reminders or change your hearing-aid program." else "Allow bedtime and morning reminders. Each opens HeySig so you can choose a program switch. No microphone or automatic playback starts. Android may delay reminders.")
                 .setNegativeButton("Not now",null).setPositiveButton("Allow") { _,_ -> requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),if(test) 766 else 765) }.show()
         } else {
@@ -922,7 +923,7 @@ class HomeActivity : Activity() {
         PhoneStyle.heading(this,content,"Type a command")
         val input = EditText(this).apply { hint = "Try: program two"; setSingleLine(); content.addView(this) }
         button("Run typed command",!busy.get()) { route(input.text.toString()) }
-        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • refresh (resend current configuration) • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, noise sample, observe noise, noise status, stop noise. Guided calibration and automatic preview are available on Noise. Automatic switching remains locked pending physical acceptance. Sleep routine choices and preview are available in Settings; optional sleep reminders require your tap to request a program change. Use Watch connection for companion setup.")
+        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • refresh (resend current configuration) • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, automatic on, automatic off, noise status. Guided calibration and automatic preview are available on Noise. Automatic uses your saved noise-level assignments and thresholds; calibration is optional. Therapy routine choices and preview are available in Settings; optional therapy reminders require your tap to request a program change. Use Watch connection for companion setup.")
     }
     private fun privacyPage() {
         PrivacyNotice.sections.forEach { (title,text) -> section(title) { line(text) } }
@@ -1020,7 +1021,7 @@ class HomeActivity : Activity() {
         if(code==765 || code==766) {
             val result=if(grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED }) {
                 if(code==766) SleepReminders(this).testReminder() else { AutomaticSleepScheduler(this).disable();SleepReminders(this).setEnabled(true) }
-            } else "Notification permission was not granted. You can still use Sleep now and Wake now."
+            } else "Notification permission was not granted. You can still use Therapy now and Wake now."
             show("Sleep");tell(result,true)
         }
         if(code==764 && pendingHandsFreeStart) {
@@ -1188,10 +1189,14 @@ class HomeActivity : Activity() {
         }
         // Authenticated manual input ends automatic sessions even when playback is busy.
         // An already emitted command cannot be undone; never queue or replay the new request.
+        if(NoiseVoice.parse(text)==NoiseCommand.Stop) {
+            environment.stop();noise.stop()
+            record(remoteResult("FINAL","Automatic off. Noise capture stopped. Already emitted tones cannot be undone."));return
+        }
         if(NoiseVoice.parse(text) == null) noise.stop()
         if(busy.get() || remoteReply != null) { record(remoteResult("BUSY","HeySig is busy. Wait for its result or say Stop")); return }
         if(page == "Setup") { record(remoteResult("BLOCKED","Return to Home after reviewing and saving Setup")); return }
-        if(NoiseVoice.parse(text) in listOf(NoiseCommand.Sample,NoiseCommand.Observe,NoiseCommand.CalibrationSample,NoiseCommand.Preview,NoiseCommand.TrialAutomatic) &&
+        if(NoiseVoice.parse(text) in listOf(NoiseCommand.Sample,NoiseCommand.Observe,NoiseCommand.CalibrationSample,NoiseCommand.Preview,NoiseCommand.Automatic) &&
             (!getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).getBoolean("microphoneDisclosureV2",false) ||
                 checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != android.content.pm.PackageManager.PERMISSION_GRANTED)) {
             record(remoteResult("BLOCKED","On the phone, open Noise and review microphone use and permission before requesting watch noise capture.")); return
@@ -1213,6 +1218,12 @@ class HomeActivity : Activity() {
     }
     private fun voiceIdentity(text:String,fit:Fitting?): Any = EnvironmentVoice.parse(text) ?: HandsFreeControl.parse(text) ?: VoicePreference.parse(text) ?: NoiseVoice.parse(text) ?: DataVoice.parse(text) ?: if(FittingWorkflow.accepts(text)) "setup:${FittingWorkflow.normalize(text)}" else runtime.personalPhrases.identity(text,fit)
     private fun route(text: String, origin: String? = null) {
+        // Off must reach cancellation even while a command or review is pending.
+        if(NoiseVoice.parse(text)==NoiseCommand.Stop) {
+            environment.stop()
+            handleNoiseCommand(NoiseCommand.Stop)
+            return
+        }
         EnvironmentVoice.parse(text)?.let { command ->
             if(busy.get() || pendingProgram!=null || pendingRestore!=null || runtime.fittingWorkflow.pending || runtime.personalPhrases.awaitingConfirmation || runtime.sleepRoutine.hasDraft) {
                 tell("Finish or cancel the current operation first",true);return
@@ -1257,7 +1268,7 @@ class HomeActivity : Activity() {
         }
         if(FittingWorkflow.accepts(text) && !runtime.fittingWorkflow.pending &&
             (runtime.personalPhrases.awaitingConfirmation || runtime.sleepRoutine.hasDraft)) {
-            tell("Finish or cancel the current phrase or sleep review before starting aid setup.",true);return
+            tell("Finish or cancel the current phrase or therapy review before starting aid setup.",true);return
         }
         if(!busy.get() && pendingProgram == null && pendingRestore == null &&
             (runtime.fittingWorkflow.pending || FittingWorkflow.accepts(text))) {
@@ -1409,7 +1420,7 @@ class HomeActivity : Activity() {
         val slot=runCatching { runtime.sleepRoutine.target(sleep,fit) }.getOrElse { tell(it.message ?: "Review routine first",true);return }
         val revision=runtime.sleepRoutine.editorRevision()
         val deadline=SystemClock.elapsedRealtime()+60_000
-        android.app.AlertDialog.Builder(this).setTitle(if(sleep) "Sleep now?" else "Wake now?")
+        android.app.AlertDialog.Builder(this).setTitle(if(sleep) "Therapy now?" else "Wake now?")
             .setMessage("Switch to ${fit.programs.first { it.slot==slot }.name}?")
             .setNegativeButton("Cancel",null).setPositiveButton("Switch") { _,_ ->
                 if(fitting!=fit || runtime.sleepRoutine.editorRevision()!=revision || SystemClock.elapsedRealtime()>deadline)

@@ -148,7 +148,7 @@ class ManualRuntime private constructor(
         val fit = fitting ?: run { reject("Save setup first"); return }
         if(!foreground() && !backgroundAllowed()) { reject("Open HeySig before sending a command"); return }
         if(busy.get()) { reject("Busy; wait or Stop"); return }
-        if(automatic && this::sleepRoutine.isInitialized && sleepRoutine.state.blocksNoise) { reject("Automatic paused by sleep or manual override"); return }
+        if(automatic && this::sleepRoutine.isInitialized && sleepRoutine.state.blocksNoise) { reject("Automatic paused by therapy or manual override"); return }
         val executionPlan = try { if(restoring) plan else programPlan(plan,fit) }
             catch(e: Exception) { reject("Stored program settings need review: ${e.message}"); return }
         try {
@@ -211,7 +211,9 @@ class ManualRuntime private constructor(
                 }
                 // Playback updates only last-requested state. Explicit Save owns the restoration record.
                 playbackSucceeded = !cancelled.get()
-                result = "Played: ${completed.joinToString()}."
+                result = if(executionPlan.all { it is ManualRequest.Battery })
+                    "Battery request sent: ${completed.joinToString()}."
+                else "Set to ${completed.joinToString()}."
             } catch(e:Exception) { result = "${if(completed.isEmpty()) "No completed stages" else "Completed: ${completed.joinToString()}"}. ${e.message}. Current aid state may be uncertain." }
             finally {
                 durable = prefs.edit().putString("requested",encode(requested)).putBoolean("pending",false).commit() && durable
@@ -222,7 +224,7 @@ class ManualRuntime private constructor(
                 var success=playbackSucceeded && durable && !cancelled.get()
                 if(sleepTarget != null && this::sleepRoutine.isInitialized) {
                     try { sleepRoutine.transition(sleepRoutine.state.completed(sleepTarget,success)) }
-                    catch(e: Exception) { success=false;result+=" Sleep state could not be saved; review routine before continuing." }
+                    catch(e: Exception) { success=false;result+=" Therapy state could not be saved; review routine before continuing." }
                 }
                 result=recorded(result,success)
                 runCatching { sleepStateChanged?.invoke() }

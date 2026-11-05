@@ -1,5 +1,52 @@
 # HeySig remaining work checklist
 
+November 4, 2026 owner-directed update: ordinary level-based Automatic is now
+available through Automatic on/off using saved thresholds and assignments;
+calibration is optional and the acceptance lock/development trial are removed.
+See [current behavior](noise-quick-start.md) and
+[change/validation record](acceptance/automatic-noise-voice-2026-11-04.md).
+Earlier lock/trial statements below are historical. The archived semantic
+classifier remains unqualified; actual physical acceptance and Play release
+requirements remain outstanding. Enabling Automatic is not acceptance evidence.
+
+## Current checkpoint — November 4, 2026
+
+- [x] Implement Automatic on/off for saved noise-level program assignments, with
+  optional calibration and existing runtime priorities.
+- [x] Add bounded, memory-only learning and explicit review/approval of threshold
+  suggestions; preserve assignments, fitting and timing settings.
+- [x] Use Therapy wording/voice aliases and Git-only build displays.
+- [x] Pass 33 shared Gradle tests, phone/watch debug builds and lint, native APK
+  checks and phone compiled-class validation.
+- [x] Update and launch both devices in place; verify installed bytes and preserve
+  26 phone preference files and the watch preference file before launch.
+- [ ] Run updated Android instrumentation, large-font/round-layout checks and
+  real-user threshold/aid acceptance without treating build success as reception.
+- [ ] Complete endurance, release/Play and the other dated acceptance requirements.
+
+Evidence: [threshold learning and device update](acceptance/noise-threshold-learning-2026-11-04.md).
+
+## Historical checkpoint — November 1, 2026
+
+- [x] Update phone and watch in place to build **2026.11.001** (codes 16/13),
+  verify installed bytes and launch, and preserve all existing preference files.
+- [x] Use **Set to …** for successful program/level text and optional speech;
+  expose the build on phone Home/Settings and watch More → App version.
+- [x] Pass shared tests, both debug APK builds, native inventory/16 KB alignment
+  and phone required-class checks for this update.
+- [ ] Accept live speech with the new wording, physical watch monitoring,
+  independent classifier accuracy, aid reception and endurance. No microphone
+  capture or aid commands were used for the latest installation checks.
+- [ ] Complete accessibility and production release/Play validation. Both
+  automatic qualification gates remain disabled.
+
+Evidence: [current update](acceptance/wording-version-update-2026-11-01.md),
+[monitor scope](acceptance/environment-primary-preserving-fallback-2026-11-01.md)
+and [current status](current-status.md). Earlier dated checklist entries below
+remain historical evidence and do not override this checkpoint.
+
+## Earlier checklist — October 18, 2026
+
 Watch follow-up: [October 18 completion checks](acceptance/watch-completion-2026-10-18.md)
 record the direct-candidate updates and bounded request screen safeguard.
 Reviewed fitting import, direct status and spoken status input passed. Spoken

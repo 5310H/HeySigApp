@@ -39,7 +39,7 @@ object SleepReminderAcceptance {
             check(store.save(SleepRoutine(1320,420,2,1),fit,store.editorRevision()).startsWith("Routine saved"))
             val saved=prefs.getString("settings",null)
             store.transition(store.state.manual())
-            check(reminders.setEnabled(true).startsWith("Sleep reminders On"))
+            check(reminders.setEnabled(true).startsWith("Therapy reminders On"))
             check(!store.state.override && prefs.getBoolean("reminders",false))
             check(backend.scheduled.size==2)
             check(backend.scheduled[true]==prefs.getLong("sleepDue",0))

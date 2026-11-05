@@ -99,6 +99,11 @@ class Api36Smoke : Instrumentation() {
             open("‹ Back")
             open("Noise")
             capture("noise")
+            runOnMainSync {
+                val buttons=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                check(buttons.any { it.text=="Review learned thresholds" && it.isShown })
+                check(buttons.any { it.text=="Discard learned measurements" && it.isShown })
+            }
             open("2. Learn sound levels")
             var calibrationReady=false
             var calibrationControls=""
@@ -118,7 +123,7 @@ class Api36Smoke : Instrumentation() {
             open("1. Choose programs")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>()
-                    .any { it.contentDescription == "Protected Sleep program" })
+                    .any { it.contentDescription == "Protected Therapy program" })
             }
             open("Advanced measurement settings")
             open("‹ Back")
@@ -126,9 +131,9 @@ class Api36Smoke : Instrumentation() {
             open("3. Preview suggested changes")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
-                    .first { it.text == "Start Automatic" }.isEnabled == false)
-                check(!com.heysig.noise.NoiseReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
-                result.putString("noiseControls","PASS: focused overview, calibration, assignments, measurements and preview routes; Automatic locked; no capture/playback")
+                    .first { it.text == "Automatic on" }.isEnabled)
+                check(!com.heysig.noise.EnvironmentReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
+                result.putString("noiseControls","PASS: focused overview, calibration, assignments, measurements and preview routes; Automatic controls available; no capture/playback")
             }
             open("‹ Back")
             open("Settings")
@@ -136,7 +141,7 @@ class Api36Smoke : Instrumentation() {
             open("Getting started")
             capture("getting-started")
             open("‹ Back")
-            open("Sleep routine")
+            open("Therapy routine")
             capture("sleep-dashboard")
             runOnMainSync {
                 descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
@@ -246,7 +251,7 @@ class Api36Smoke : Instrumentation() {
             result.putString("personalPhrases","PASS: isolated explicit consent, restart persistence, disable/forget/reset, source confirmation, setup invalidation and corruption recovery; no microphone or playback")
             HandsFreeAcceptance.run(targetContext)
             result.putString("handsFree","PASS: isolated shared executor serializes locked-session playback, journals before transport, rejects inactive sessions/storage failure and never replays interrupted state; native keyword model decodes silence without capture")
-            // Version-1 migration and release lock use isolated preferences and a playback spy.
+            // Version-1 migration and runtime priorities use isolated preferences and a playback spy.
             runOnMainSync {
                 val store = targetContext.getSharedPreferences("acceptance-isolated-noise",0)
                 check(store.edit().clear().commit())
@@ -265,7 +270,7 @@ class Api36Smoke : Instrumentation() {
                     },{ false },{ text,_ -> reply=text },{ com.heysig.noise.NoiseSafety() },{ 1 },
                         { _,_ -> playback++ },store)
                     feature.handle(com.heysig.noise.NoiseCommand.Automatic)
-                    check(reply.contains("locked pending physical acceptance"))
+                    check(reply.contains("Keep HeySig open"))
                     check(!store.contains("microphoneDisclosureV2") && playback == 0)
                     val preservedNoise=store.all.toMap()
                     feature.handle(com.heysig.noise.NoiseCommand.CalibrationConfirmStart)
@@ -286,7 +291,7 @@ class Api36Smoke : Instrumentation() {
                     check(migrated.getJSONArray("boundaries").toString() == old.getJSONArray("boundaries").toString())
                     check(migrated.isNull("sleepProgram") && !store.contains("calibration"))
                     feature.stop()
-                    result.putString("noiseStorage","PASS: isolated v1 migration preserves mappings/thresholds; corrupt calibration fails closed; Automatic lock sends no playback or permission request")
+                    result.putString("noiseStorage","PASS: isolated v1 migration preserves mappings/thresholds; corrupt optional calibration discarded; foreground guard sends no playback or permission request")
                 } finally { check(store.edit().clear().commit()) }
             }
             // Exercise history deletion/expiry in isolated preferences, never the user's fitting.

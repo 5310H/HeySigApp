@@ -136,3 +136,12 @@ The helper fails on a runner failure even when ADB's instrumentation command
 itself exits zero, and never uninstalls the existing app to bypass an update failure.
 Real microphone, recognition, audio, fitting and aid-response checks remain
 separate acceptance tasks.
+
+## Visible build ID
+
+Phone Home/Settings and Watch More → Build ID show the short Git HEAD commit
+hash used by GitHub (seven characters, longer if needed for uniqueness). Gradle
+resolves it once for both apps. The visible label is only `Build <Git ID>`;
+build type, version name and numeric version code are omitted. Android version
+metadata remains separate. Local edits still show their base commit; the hash alone does
+not prove an APK contains only committed code. A Git checkout is required.

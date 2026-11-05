@@ -1,0 +1,12 @@
+{
+  "device": "192.168.69.130:37687",
+  "module": "androidApp",
+  "apkSha256": "72e7badbf54aacd510183174218e613ee512841380b8a5df54946a21c472c4a3",
+  "inPlaceInstall": "PASS",
+  "installedBytesMatch": true,
+  "preferenceFilesChecked": 26,
+  "preferencesPreserved": true,
+  "launch": "Starting: Intent { cmp=com.heysig.batteryprototype/com.heysig.app.HomeActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.heysig.batteryprototype/com.heysig.app.HomeActivity\nTotalTime: 661\nWaitTime: 663\nComplete",
+  "microphoneTested": false,
+  "aidCommandsSent": false
+}

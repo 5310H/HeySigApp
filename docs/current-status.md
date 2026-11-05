@@ -1,3 +1,63 @@
+# Current phone/watch checkpoint — November 4, 2026
+
+Phone and watch are updated in place, with installed APK bytes verified and all
+26 phone preference files plus the watch preference file preserved before launch.
+Noise-level Automatic uses saved assignments/thresholds through Automatic on/off;
+calibration is optional. It learns bounded threshold suggestions from existing
+valid foreground samples, with explicit approval required before saving changes.
+Therapy wording retains existing settings and legacy sleep voice commands.
+Build labels show only the Git revision; future updates push GitHub before final
+build/installation so that revision identifies the pushed code.
+
+All 33 shared Gradle tests, both debug APK builds/lint, native inventory/16 KB
+alignment, and phone compiled-class checks passed. No microphone tests or aid
+commands were used for this update. Android instrumentation was updated but not
+run; physical aid/threshold suitability, accessibility/endurance and Play release
+acceptance remain outstanding. The archived semantic classifier stays unqualified.
+
+See [the user explanation](how-automatic-noise-works.md) and
+[implementation, validation and device reports](acceptance/noise-threshold-learning-2026-11-04.md).
+Earlier checkpoints below retain their historical scope.
+
+# Historical phone/watch checkpoint — November 1, 2026
+
+November 4, 2026 owner-directed update: ordinary level-based Automatic is now
+available through Automatic on/off using saved thresholds and assignments;
+calibration is optional and the acceptance lock/development trial are removed.
+See [current behavior](noise-quick-start.md) and
+[change/validation record](acceptance/automatic-noise-voice-2026-11-04.md).
+Earlier lock/trial statements below are historical. The archived semantic
+classifier remains unqualified; actual physical acceptance and Play release
+requirements remain outstanding. Enabling Automatic is not acceptance evidence.
+
+Both the Pixel 9a and Pixel Watch 3 have development build **2026.11.001**
+installed (`yyyy.mm.###`), with Android version codes 16 and 13 respectively.
+Both were updated in place, their installed APK bytes matched the final builds,
+and their launcher activities returned `Status: ok`. All 25 phone preference
+files and the one watch preference file were preserved unchanged.
+
+Successful program/level results now use **Set to …** for visible text and
+optional spoken replies. Battery-only results use **Battery request sent: …**.
+These are command-completion reports, not confirmation of hearing-aid receipt.
+Find the build on phone Home/Settings and watch More → App version.
+
+The experimental semantic monitor includes the primary-preserving Small Group
+fallback and watch sample-age/cancellation fixes. It preserves every non-null
+primary estimate and only fills a complete primary abstention. Real automatic
+dispatch remains blocked; neither semantic nor six-level automatic qualification
+has been established.
+
+Shared tests, both debug APK builds, native inventory/16 KB alignment checks
+and the phone required-class check passed. The latest update did not exercise
+microphone capture, live spoken responses or hearing-aid commands. Physical
+monitoring/aid acceptance, independent classifier evaluation, endurance,
+accessibility and release/Play validation remain outstanding.
+
+See [wording/build and installation evidence](acceptance/wording-version-update-2026-11-01.md),
+[monitor implementation and limits](acceptance/environment-primary-preserving-fallback-2026-11-01.md)
+and [remaining work](remaining-checklist.md). No production release or Play
+approval is claimed. The dated checkpoints below retain their historical scope.
+
 # Noise automation checkpoint — October 28, 2026
 
 Phone development version 0.15 is installed; watch remains 0.12. Added voice
@@ -18,7 +78,7 @@ Background monitoring, calibration and physical acceptance remain unfinished.
 See [dated evidence](acceptance/noise-voice-calibration-2026-10-28.md) and
 [noise instructions](noise-quick-start.md). This is not a production release.
 
-# Current phone/watch checkpoint — October 27, 2026
+# Historical phone/watch checkpoint — October 27, 2026
 
 The active runtime is Android phone plus Wear OS watch. Both build types now
 share direct Data Layer connection code; the desktop runtime and relay have been

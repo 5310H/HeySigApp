@@ -56,8 +56,14 @@ See [phone/watch setup](docs/production-watch-connection.md).
 `ProtoRequest.kt` generates PCM command tones through the guarded phone speaker
 executor. Completed playback is remembered; it does not confirm hearing-aid receipt.
 Watch voice now has observed recognition and spoken status completion, with
-owner-reported operation. The current checkpoint is phone 0.13/watch 0.12;
-see [device evidence and remaining acceptance](docs/acceptance/phone-watch-only-2026-10-27.md).
+owner-reported operation. The November 4 phone/watch update adds voice-controlled
+noise-level Automatic switching, optional calibration, and learned threshold
+suggestions that require explicit approval. Therapy wording preserves existing
+settings and legacy commands. Both devices were updated in place with saved
+preferences preserved; build displays show only the Git revision.
+See [how Automatic works](docs/how-automatic-noise-works.md),
+[latest build/device evidence](docs/acceptance/noise-threshold-learning-2026-11-04.md)
+and [remaining acceptance](docs/remaining-checklist.md).
 
 Keep the shared core independent of Android classes. Android services implement its control interfaces; a future iPhone control implementation can reuse the command and decision logic.
 

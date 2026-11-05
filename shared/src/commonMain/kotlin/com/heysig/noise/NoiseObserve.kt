@@ -13,7 +13,7 @@ data class NoiseSettings(
     val sleepProgram: Int? = null
 ) {
     fun validate(configuredSlots: Set<Int>) {
-        require(sleepProgram == null || sleepProgram in configuredSlots) { "Protected Sleep program is unavailable; review settings" }
+        require(sleepProgram == null || sleepProgram in configuredSlots) { "Protected Therapy program is unavailable; review settings" }
         require(programs.size == 6) { "Choose six noise level assignments" }
         require(programs.all { it == null || it in configuredSlots }) { "A noise level refers to an unavailable program; review assignments" }
         require(boundaries.size == 5 && boundaries.all { it.isFinite() }) { "Enter five finite thresholds" }
@@ -60,7 +60,6 @@ sealed class NoiseCommand {
     data class SetField(val field: String, val value: Double) : NoiseCommand()
     data object Automatic : NoiseCommand()
     data object Preview : NoiseCommand()
-    data object TrialAutomatic : NoiseCommand()
     data object CalibrationStart : NoiseCommand()
     data object CalibrationConfirmStart : NoiseCommand()
     data object CalibrationSample : NoiseCommand()
@@ -96,11 +95,10 @@ object NoiseVoice {
             "noise status", "read noise assignments", "read noise settings" -> return NoiseCommand.Read
             "observe noise", "start observe noise" -> return NoiseCommand.Observe
             "noise sample", "sample noise" -> return NoiseCommand.Sample
-            "stop noise" -> return NoiseCommand.Stop
+            "stop noise", "automatic off" -> return NoiseCommand.Stop
             "save noise settings" -> return NoiseCommand.Save
             "discard noise changes" -> return NoiseCommand.Discard
-            "automatic noise", "start automatic noise" -> return NoiseCommand.Automatic
-            "start automatic noise trial", "start uncalibrated noise trial" -> return NoiseCommand.TrialAutomatic
+            "automatic on", "automatic noise", "start automatic noise" -> return NoiseCommand.Automatic
             "preview automatic noise", "start noise preview" -> return NoiseCommand.Preview
             "calibrate noise", "start noise calibration", "start new noise calibration" -> return NoiseCommand.CalibrationStart
             "confirm new noise calibration" -> return NoiseCommand.CalibrationConfirmStart
@@ -131,3 +129,6 @@ object NoiseVoice {
         return null
     }
 }
+
+/** Both names protect existing fittings during the Sleep → Therapy wording migration. */
+fun isTherapyProgramName(name: String) = name.trim().lowercase() in setOf("therapy", "sleep")

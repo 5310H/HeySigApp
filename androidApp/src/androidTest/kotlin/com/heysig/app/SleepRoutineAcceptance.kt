@@ -45,9 +45,9 @@ object SleepRoutineAcceptance {
             check(store.save(settings.copy(wakeMinute=480),fit,stale).contains("changed elsewhere"))
             store.setupChanged(fit.copy(controlAddress=13));store.setupChanged(fit)
             check(store.status(fit).contains("review"))
-            check(!store.preview(fit).contains("Next sleep"))
+            check(!store.preview(fit).contains("Next therapy"))
             check(store.save(settings,fit,store.editorRevision()).startsWith("Routine saved"))
-            check(store.preview(fit).contains("Next sleep"))
+            check(store.preview(fit).contains("Next therapy"))
             val corrupt="{broken"
             check(prefs.edit().putString("settings",corrupt).commit())
             store=SleepRoutineStore(prefs)

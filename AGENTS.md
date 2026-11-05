@@ -31,8 +31,29 @@ successful APK build is not Play approval.
   or that no data is collected without verifying the release configuration.
 - Do not declare this hearing-aid controller a non-medical app by assumption.
   Record the medical-device assessment and health-app declaration before release.
-- Keep six-level Automatic noise switching disabled until calibration,
-  confirmation/cooldown, override/sleep priority and physical acceptance pass.
+- Automatic noise switching uses explicitly saved noise-level assignments and
+  thresholds when the user says Automatic on; Automatic off stops capture and
+  future automatic requests. Calibration is optional. Do not add an acceptance
+  lock or trial requirement. Preserve confirmation/cooldown, foreground-only
+  microphone consent, manual/Therapy priority and the shared validated executor.
+  Record actual physical acceptance separately; enabling is not acceptance.
 - Publishing, account declarations and regulatory assertions require real
   verified information; never invent owner identity, contact details,
   certifications, manufacturer affiliation or compatibility claims.
+
+- Use Therapy for user-facing routine/protected-program wording. Keep legacy
+  sleep voice aliases, internal IDs and persisted keys compatible; never erase
+  saved fitting or routine choices for a terminology change.
+
+- Show only Build followed by the Git revision in user-facing build labels.
+  Omit build type, version name and numeric version code from those labels.
+
+- Automatic threshold learning reuses existing foreground samples only. Keep
+  learning bounded and memory-only; never save audio or transcript history.
+  Show proposed thresholds and require explicit review/approval before saving
+  them. Preserve program assignments, fitting and all existing runtime priorities.
+
+- For future app updates, validate the intended changes, commit and push them
+  to the project's GitHub repository before producing/installing final device
+  APKs. The displayed Build ID must identify that pushed commit. Preserve
+  unrelated local work and do not silently include it in an update commit.

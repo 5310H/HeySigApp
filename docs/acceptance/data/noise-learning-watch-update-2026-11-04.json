@@ -1,0 +1,12 @@
+{
+  "device": "192.168.69.190:35535",
+  "module": "wearApp",
+  "apkSha256": "f0e44b91f85c53d331316f48423dc4f528e9c535240e385106ac828daf79046f",
+  "inPlaceInstall": "PASS",
+  "installedBytesMatch": true,
+  "preferenceFilesChecked": 1,
+  "preferencesPreserved": true,
+  "launch": "Starting: Intent { cmp=com.heysig.batteryprototype/com.heysig.watch.WatchActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.heysig.batteryprototype/com.heysig.watch.WatchActivity\nTotalTime: 2746\nWaitTime: 2757\nComplete",
+  "microphoneTested": false,
+  "aidCommandsSent": false
+}

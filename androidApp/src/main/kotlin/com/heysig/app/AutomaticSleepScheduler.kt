@@ -30,7 +30,7 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
     fun exactAllowed()=backend?.exactAllowed() ?: (Build.VERSION.SDK_INT<31 || alarms.canScheduleExactAlarms())
     fun notificationsAllowed(): Boolean {
         backend?.let { return it.notificationsAllowed() }
-        notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Automatic sleep routine",NotificationManager.IMPORTANCE_LOW))
+        notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Automatic therapy routine",NotificationManager.IMPORTANCE_LOW))
         return notifications.areNotificationsEnabled() && notifications.getNotificationChannel(CHANNEL)?.importance!=NotificationManager.IMPORTANCE_NONE
     }
     private fun key(sleep: Boolean)=if(sleep) "automaticSleepDue" else "automaticWakeDue"
@@ -39,13 +39,13 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
             .putExtra("due",due).putExtra("generation",gen).putExtra("revision",revision),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     private fun valid()=runtime.fitting?.let { fit -> runCatching { runtime.sleepRoutine.target(true,fit);runtime.sleepRoutine.target(false,fit) }.isSuccess }==true
     fun enable(reviewedRevision: Long?=null): String {
-        if(!valid()) return "Review and save both sleep programs first. Automatic stays Off."
-        if(runtime.busy.get() || runtime.sleepRoutine.state.pending) return "Wait for the current command before starting automatic sleep."
+        if(!valid()) return "Review and save both therapy programs first. Automatic stays Off."
+        if(runtime.busy.get() || runtime.sleepRoutine.state.pending) return "Wait for the current command before starting automatic therapy."
         val revision=runtime.sleepRoutine.editorRevision()
         if((reviewedRevision ?: prefs.getLong("automaticReviewedRevision",-1))!=revision)
             return "On the phone, review Start automatic routine before enabling scheduled program changes."
         if(!exactAllowed()) return "Allow Alarms & reminders for HeySig on the phone, then start automatic again."
-        if(!notificationsAllowed()) return "Allow HeySig automatic sleep notifications, then start automatic again."
+        if(!notificationsAllowed()) return "Allow HeySig automatic therapy notifications, then start automatic again."
         return try {
             check(prefs.edit().putBoolean("automaticEnabled",true).putBoolean("reminders",false).putLong("automaticReviewedRevision",revision)
                 .putLong("automaticGeneration",Math.addExact(generation,1)).remove("automaticClaim").commit())
@@ -53,10 +53,10 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
             runtime.sleepRoutine.transition(runtime.sleepRoutine.state.resume())
             plan(ZonedDateTime.now())
             publishStatus()
-            "Automatic sleep On. Future bedtime and morning programs will play without a tap, including while locked."
+            "Automatic therapy On. Future bedtime and morning programs will play without a tap, including while locked."
         } catch(e: Exception) { disable("Automatic could not start. No program changed.",report=true);"Automatic could not start. Review permissions and the saved routine." }
     }
-    fun disable(result: String="Automatic sleep Off. No future automatic switches.",report: Boolean=false): String {
+    fun disable(result: String="Automatic therapy Off. No future automatic switches.",report: Boolean=false): String {
         check(prefs.edit().putBoolean("automaticEnabled",false).putLong("automaticGeneration",Math.addExact(generation,1))
             .remove("automaticSleepDue").remove("automaticWakeDue").remove("automaticClaim").remove("automaticClaimStarted")
             .putString("automaticResult",result).commit())
@@ -113,7 +113,7 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
         try {
             scheduleOne(sleep,java.time.Instant.ofEpochMilli(now).atZone(java.time.ZoneId.systemDefault()))
             if(backend!=null) backend.dispatch(token) else AutomaticSleepService.launch(context,token)
-        } catch(e: Exception) { disable("Automatic playback could not start. No retry; open the sleep routine to review.",report=true) }
+        } catch(e: Exception) { disable("Automatic playback could not start. No retry; open the therapy routine to review.",report=true) }
     }
     fun takeClaim(token: String,now: Long=System.currentTimeMillis()): Claim? {
         if(token.isEmpty() || prefs.getString("automaticClaim",null)!=token || prefs.getBoolean("automaticClaimStarted",false)) return null
@@ -136,7 +136,7 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
         if(!success) disable(text,report=true) else publishStatus()
     }
     fun publishStatus() {
-        val text=(runtime.fitting?.let { runtime.sleepRoutine.dashboard(it) } ?: "Review saved sleep routine")+
+        val text=(runtime.fitting?.let { runtime.sleepRoutine.dashboard(it) } ?: "Review saved therapy routine")+
             prefs.getString("automaticResult",null)?.let { "\nLast result: $it" }.orEmpty()
         if(backend!=null) backend.status(enabled,text)
         else if(!enabled) notifications.cancel(NOTIFICATION)
@@ -147,14 +147,14 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
         if(!notificationsAllowed()) return
         val open=PendingIntent.getActivity(context,827,Intent(context,HomeActivity::class.java).putExtra("openSleep",true),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         notifications.notify(827,Notification.Builder(context,CHANNEL).setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Automatic sleep needs review").setContentText(text).setStyle(Notification.BigTextStyle().bigText(text))
+            .setContentTitle("Automatic therapy needs review").setContentText(text).setStyle(Notification.BigTextStyle().bigText(text))
             .setContentIntent(open).setAutoCancel(true).setVisibility(Notification.VISIBILITY_PRIVATE).build())
     }
     fun notification(text: String): Notification {
-        notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Automatic sleep routine",NotificationManager.IMPORTANCE_LOW))
+        notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Automatic therapy routine",NotificationManager.IMPORTANCE_LOW))
         val open=PendingIntent.getActivity(context,826,Intent(context,HomeActivity::class.java).putExtra("openSleep",true),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val stop=PendingIntent.getBroadcast(context,826,Intent(context,AutomaticSleepReceiver::class.java).setAction(STOP),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(context,CHANNEL).setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle("HeySig automatic sleep")
+        return Notification.Builder(context,CHANNEL).setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle("HeySig automatic therapy")
             .setContentText(text).setStyle(Notification.BigTextStyle().bigText(text)).setContentIntent(open).setOngoing(true)
             .setVisibility(Notification.VISIBILITY_PRIVATE).addAction(Notification.Action.Builder(null,"Stop automatic",stop).build()).build()
     }
@@ -177,6 +177,6 @@ class AutomaticSleepReceiver: BroadcastReceiver() {
                 AutomaticSleepScheduler.STOP -> scheduler.disable()
                 else -> scheduler.refresh()
             }
-        }.onFailure { runCatching { scheduler.disable("Automatic sleep failed before dispatch. Open the routine to review; no retry.",report=true) } }
+        }.onFailure { runCatching { scheduler.disable("Automatic therapy failed before dispatch. Open the routine to review; no retry.",report=true) } }
     }
 }

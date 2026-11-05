@@ -24,8 +24,8 @@ android {
         applicationId = "com.heysig"
         minSdk = 30
         targetSdk = 35
-        versionCode = 12
-        versionName = "0.12"
+        versionCode = 13
+        versionName = "2026.11.001"
         testInstrumentationRunner = "com.heysig.audio.NoiseAcceptance"
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
@@ -35,6 +35,9 @@ android {
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
+    defaultConfig {
+        buildConfigField("String", "GIT_BUILD_ID", "\"${rootProject.extra["gitBuildId"]}\"")
+    }
     buildFeatures { buildConfig = true }
     defaultConfig { buildConfigField("String", "PRIVACY_POLICY_URL", "\"$privacyPolicyUrl\"") }
     buildTypes {

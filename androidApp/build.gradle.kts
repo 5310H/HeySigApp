@@ -25,8 +25,8 @@ android {
         applicationId = "com.heysig"
         minSdk = 29
         targetSdk = 36
-        versionCode = 15
-        versionName = "0.15"
+        versionCode = 16
+        versionName = "2026.11.001"
         testInstrumentationRunner = "com.heysig.app.Api36Smoke"
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
@@ -36,6 +36,9 @@ android {
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
+    defaultConfig {
+        buildConfigField("String", "GIT_BUILD_ID", "\"${rootProject.extra["gitBuildId"]}\"")
+    }
     buildFeatures { buildConfig = true }
     // Exercise the native watch style on isolated round-display contexts; never ship it in the phone app.
     sourceSets.getByName("androidTest").java.srcDir("../wearApp/src/main/kotlin")

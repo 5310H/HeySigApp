@@ -43,24 +43,20 @@ fun isFreshNoiseSample(capturedAt: Long, deliveredAt: Long, freshnessSeconds: In
     freshnessSeconds in 2..900 && capturedAt >= 0 && deliveredAt >= capturedAt &&
         deliveredAt-capturedAt <= freshnessSeconds*1000L
 
-/** Readiness is explicit and never inferred from illustrative thresholds or successful playback. */
+/** Runtime priorities; calibration is optional and acceptance is recorded separately. */
 data class NoiseSafety(
-    val calibrated: Boolean = false,
-    val physicallyAccepted: Boolean = false,
     val foreground: Boolean = false,
     val unlocked: Boolean = false,
     val audioFree: Boolean = false,
     val manualOverride: Boolean = false,
     val sleeping: Boolean = false,
-    val developmentTrial: Boolean = false
+    val protectedPrograms: Set<Int> = emptySet()
 ) {
     fun blocked(): String? = when {
-        !calibrated && !developmentTrial -> "Calibrate this microphone and review saved settings first"
-        !physicallyAccepted && !developmentTrial -> "Physical automatic-switching acceptance is pending"
         !foreground || !unlocked -> "Keep HeySig open and the device unlocked"
         !audioFree -> "Speech, playback or a pending command has priority"
         manualOverride -> "Manual override has priority; restart explicitly"
-        sleeping -> "Sleep has priority; choose a waking program manually before restarting"
+        sleeping -> "Therapy has priority; choose a waking program manually before restarting"
         else -> null
     }
 }
@@ -81,14 +77,14 @@ fun automaticNoise(previous: NoiseAutomaticState, index: Double?, now: Long, set
     fun blocked(reason:String) = NoiseDecision(previous.copy(observation=NoiseObservation()),reason=reason)
     safety.blocked()?.let { return blocked(it) }
     if(lastRequested == null) return blocked("Last requested program is unknown; select a waking program manually first")
-    if(settings.sleepProgram != null && lastRequested == settings.sleepProgram) return blocked("Sleep has priority; choose a waking program manually")
+    if((settings.sleepProgram != null && lastRequested == settings.sleepProgram) || lastRequested in safety.protectedPrograms) return blocked("Therapy has priority; choose a waking program manually")
     if(previous.halted) return blocked("Previous playback failed or was interrupted; restart explicitly")
     if(previous.pendingTarget != null) return blocked("Waiting for the current command result")
     if(index == null || !index.isFinite()) return blocked("Sample rejected; confirmations cleared")
     val last = previous.lastSuccessMillis
     if(last != null && (now < last || now-last < settings.cooldownSeconds*1000L)) return blocked("Cooldown; confirmations cleared")
     val observed = observeNoise(previous.observation,index,now,settings)
-    if(settings.sleepProgram != null && observed.target == settings.sleepProgram) return blocked("Sleep requires manual selection; no automatic request")
+    if((settings.sleepProgram != null && observed.target == settings.sleepProgram) || observed.target?.let { it in safety.protectedPrograms } == true) return blocked("Therapy requires manual selection; no automatic request")
     val state = previous.copy(observation=observed)
     val target = observed.proposed ?: return NoiseDecision(state,reason=if(observed.target == null) "Unused level" else "Confirming target")
     if(target == lastRequested) return NoiseDecision(state,reason="Already last requested; no command")
@@ -102,15 +98,4 @@ fun completeNoise(previous: NoiseAutomaticState, token: Long, success: Boolean, 
     if(previous.pendingTarget == null || token != previous.token) return previous
     return previous.copy(observation=NoiseObservation(),pendingTarget=null,
         lastSuccessMillis=if(success) now else previous.lastSuccessMillis,halted=!success)
-}
-
-/** Production gate. Change only with recorded physical acceptance, never through a preference. */
-object NoiseReleaseGate { const val PHYSICAL_ACCEPTANCE_PASSED = false }
-
-/** Explicit development-only acceptance trial; never changes production qualification. */
-object NoiseTrialGate {
-    const val MAX_MILLIS=15*60*1000L
-    fun allowed(debugBuild: Boolean,explicitTrial: Boolean)=debugBuild && explicitTrial
-    fun active(debugBuild: Boolean,explicitTrial: Boolean,expiresAt: Long,now: Long)=
-        allowed(debugBuild,explicitTrial) && now>=0 && expiresAt>now && expiresAt-now<=MAX_MILLIS
 }
