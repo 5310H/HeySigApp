@@ -532,7 +532,7 @@ class NoiseFeature(
             val myGeneration = ++generation
             automatic = NoiseAutomaticState(lastSuccessMillis=if(preview) null else lastAutomaticSuccessMillis ?: SystemClock.elapsedRealtime()); previewLast = lastRequested()
             observation = NoiseObservation(); mode = when { calibrationSample -> "Calibration sample"; preview -> "Automatic preview"; automaticMode -> "Automatic"; repeat -> "Observe"; else -> "Sample" }; detail = "Waiting ${captureSettings.waitSeconds.coerceAtLeast(10)} seconds before capture. "+if(automaticMode) "Automatic may send confirmed program requests." else "No commands will be sent."
-            val started = sampler.start(captureSettings,repeat) { value,error,capturedAt -> activity.runOnUiThread {
+            val started = sampler.start(captureSettings,repeat) { value,error,capturedAt,paused -> activity.runOnUiThread {
                 if(generation == myGeneration) {
                     val deliveredAt = SystemClock.elapsedRealtime()
                     if(!isFreshNoiseSample(capturedAt,deliveredAt,captureSettings.freshnessSeconds)) {
@@ -551,8 +551,11 @@ class NoiseFeature(
                         if(preview || automaticMode) automatic = automatic.copy(observation=NoiseObservation())
                         observation = NoiseObservation()
                         val settling = automaticMode && quietUntil > SystemClock.elapsedRealtime()
-                        if(value == null && !settling) stop()
-                        detail = if(settling) "Waiting for command completion and microphone settling" else error ?: "Sample rejected: ${value!!.flags.joinToString()}"
+                        val retryPause = repeat && paused
+                        if(value == null && !settling && !retryPause) stop()
+                        detail = if(settling) "Waiting for command completion and microphone settling"
+                            else if(retryPause) "Capture paused for audio priority; will retry with fresh confirmations"
+                            else error ?: "Sample rejected: ${value!!.flags.joinToString()}"
                     } else if(calibrationSample) {
                         val level = calibration.levels.indexOfFirst { it.size < 3 }+1
                         calibration = calibration.add(level,value)

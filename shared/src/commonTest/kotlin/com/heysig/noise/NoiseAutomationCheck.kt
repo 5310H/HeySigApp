@@ -55,6 +55,18 @@ fun main() {
     check(automaticNoise(completed,-90.0,4999,settings,safe,5).target == null)
     val after = automaticNoise(completed,-90.0,65000,settings,safe,5)
     check(after.target == null && after.state.observation.count == 1)
+    // Loud -> playback -> cooldown/priority pause -> quiet must request the quiet program.
+    // Interrupted captures clear confirmations and cannot count toward the return request.
+    var returning = after.state
+    returning = automaticNoise(returning,-90.0,66000,settings,safe.copy(audioFree=false),5).state
+    check(returning.observation.count == 0)
+    for(t in listOf(80000L,95000L)) {
+        val quiet = automaticNoise(returning,-90.0,t,settings,safe,5)
+        check(quiet.target == null)
+        returning = quiet.state
+    }
+    val quietRequest = automaticNoise(returning,-90.0,110000L,settings,safe,5)
+    check(quietRequest.target == 1 && quietRequest.state.pendingTarget == 1)
     val failed = completeNoise(request.state,request.state.token,false,5000)
     check(failed.halted && automaticNoise(failed,-10.0,99000,settings,safe,1).target == null)
     check(automaticNoise(state,null,3000,settings,safe,1).state.observation.count == 0)

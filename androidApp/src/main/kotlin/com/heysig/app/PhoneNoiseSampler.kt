@@ -11,10 +11,12 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /** Foreground-only, bounded capture. No PCM is retained or written to storage. */
 class PhoneNoiseSampler(private val context: Context, private val allowed: () -> Boolean) {
+    private class CapturePaused : IllegalStateException("Capture paused for speech, playback or inactive app")
+    private fun checkCaptureAllowed() { if(!allowed()) throw CapturePaused() }
     private var worker: Thread? = null
     @Volatile private var cancellation = AtomicBoolean(true)
     @Synchronized fun stop() { cancellation.set(true) }
-    @Synchronized fun start(settings: NoiseSettings, repeat: Boolean, report: (NoiseMeasurement?,String?,Long) -> Unit): Boolean {
+    @Synchronized fun start(settings: NoiseSettings, repeat: Boolean, report: (NoiseMeasurement?,String?,Long,Boolean) -> Unit): Boolean {
         if(worker?.isAlive == true) return false
         val cancel = AtomicBoolean(false); cancellation = cancel
         worker = Thread({
@@ -26,9 +28,11 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
                     if(cancel.get()) break
                     try {
                         val value = capture(settings.captureSeconds,cancel)
-                        if(!cancel.get()) report(value,null,SystemClock.elapsedRealtime())
+                        if(!cancel.get()) report(value,null,SystemClock.elapsedRealtime(),false)
                     } catch(e:Exception) {
-                        if(!cancel.get()) report(null,e.message ?: "Microphone capture failed",SystemClock.elapsedRealtime())
+                        // Priority pauses discard this capture, but must not end a repeating session.
+                        // Hardware/permission/route failures remain terminal in the adapter.
+                        if(!cancel.get()) report(null,e.message ?: "Microphone capture failed",SystemClock.elapsedRealtime(),e is CapturePaused)
                     }
                     if(!repeat) break
                     val until = SystemClock.elapsedRealtime()+settings.waitSeconds*1000L
@@ -45,7 +49,7 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
         return "${android.os.Build.FINGERPRINT}|${device.productName}|MIC|16000|PCM16|mono"
     }
     private fun capture(seconds: Int, cancel: AtomicBoolean): NoiseMeasurement {
-        check(allowed()) { "Capture paused for speech, playback or inactive app" }
+        checkCaptureAllowed()
         if(context.checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
             throw SecurityException("Allow microphone permission before sampling")
         }
@@ -68,7 +72,8 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
             recorder.startRecording()
             check(recorder.recordingState == AudioRecord.RECORDSTATE_RECORDING) { "Microphone capture did not start" }
             while(total < rate*seconds) {
-                check(!cancel.get() && allowed()) { "Capture interrupted; sample discarded" }
+                check(!cancel.get()) { "Capture interrupted; sample discarded" }
+                checkCaptureAllowed()
                 check(SystemClock.elapsedRealtime()<end) { "Microphone capture timed out" }
                 val count = recorder.read(buffer,0,minOf(buffer.size,rate*seconds-total),AudioRecord.READ_NON_BLOCKING)
                 check(count >= 0) { "Microphone read failed ($count)" }
@@ -76,7 +81,8 @@ class PhoneNoiseSampler(private val context: Context, private val allowed: () ->
                 check(recorder.routedDevice?.id == microphone.id) { "Built-in microphone route changed" }
                 accumulator.add(buffer,count); total += count
             }
-            check(!cancel.get() && allowed()) { "Capture interrupted; sample discarded" }
+            check(!cancel.get()) { "Capture interrupted; sample discarded" }
+            checkCaptureAllowed()
             return accumulator.measurement()
         } finally { runCatching { recorder.stop() };runCatching { recorder.release() };MicrophoneLease.release() }
     }
