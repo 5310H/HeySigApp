@@ -43,7 +43,20 @@ quiet = Not sure yet; conversation = Mostly speech; non-speech noise = Not sure
 yet. The last result is a known limitation of this provisional conservative
 reducer, not a successful noise-class accuracy test. Live local sound was
 Mostly speech; ambient identity was not independently established.
-Phone update/results will be recorded after the required commit and push. Test fixtures are
+
+Commit 44083ec was pushed to origin/main before producing final development
+phone/test/Wear APKs. Their final Gradle build passed; phone and Wear generated
+Build IDs both identify 44083ec. The phone was updated in place. On Pixel 9a
+Android 17, native fixture and route checks passed. The first live attempt
+correctly refused capture while the phone was locked/screen off; after the owner
+unlocked it, bounded live capture and foreground-loss cancellation passed. The
+live description was Not sure yet; no ambient accuracy inference is made.
+The sound check was left Off, its isolated test consent was removed, and no
+hearing-aid commands or tones were generated. Phone and 2.0-font local previews
+were visually checked. Four saved-setting SHA-256 fingerprints matched before
+installation and after the live test (core fitting, phrases, Therapy and noise).
+No stored fitting/program choices were changed. Actual field classification and
+speech-clarity benefit remain unaccepted; no sound-type-driven dispatch exists. Test fixtures are
 licensed development recordings and cannot establish independent field accuracy.
 Live microphone checks will not play sounds or hearing-aid tones. The owner must
 compare descriptions with actual comfortable everyday environments before any
