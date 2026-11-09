@@ -71,3 +71,38 @@ screen-off service check and full navigation checks. Its focused rerun returned
 three valid levels (-52.7, -58.0, -58.0 dBFS), with the screen verified
 non-interactive and no background learning or physical aid playback. A fresh
 normal-font screenshot was inspected and opened in the editor.
+
+## Final pushed build and Pixel 9a update
+
+Application source was committed and pushed as `53a2ffe` before generating final
+phone/Wear debug APKs. The pinned offline Gradle build passed `:shared:test`,
+`:androidApp:assembleDebug`, `:androidApp:assembleDebugAndroidTest` and
+`:wearApp:assembleDebug`. Both generated BuildConfig values identify `53a2ffe`.
+The final phone APK passed the development DEX-class check and installed with
+`adb install -r`; the existing development package/signing identity was retained.
+The watch APK was built, not installed on a watch during this update.
+
+On the Pixel 9a running Android 17, NoiseUiAcceptance passed against the installed
+Build 53a2ffe. The screen was verified non-interactive while the microphone
+returned four valid levels: -75.6, -75.8, -75.4 and -75.4 dBFS. Captures resumed
+after isolated silent program playback. Background measurements did not enter
+threshold learning, and the persistent notification's Off action stopped the
+session. No speaker transport or physical hearing-aid program change was used.
+These current measurements would fall in the owner's saved quiet levels; they
+are not measurements of the earlier reported failure.
+
+The phone's saved core, personal-phrase, routine and noise file fingerprints
+matched all four pre-update values above both immediately before installation
+and after the final UI/microphone tests. No saved fitting, program assignment,
+threshold or routine choice was changed. The new service remains Off after tests;
+its real-use screen-off disclosure still requires the owner's approval when
+Automatic is requested. A phone screenshot was visually inspected and opened in
+the editor. Its large text wraps and scrolls; the red Off control is visible.
+
+The final simpler wording also passed the separate 2x full-screen font check on
+the Android 13 device, restoring its prior 1.0 font setting. Actual aid reception
+and noisy-to-quiet physical acceptance, prolonged battery testing, production
+service declarations and the other Play release gates remain outstanding. This
+is a development-device update, not a Play submission or approval. This final
+evidence entry is documentation only; the installed application remains Build
+53a2ffe.
