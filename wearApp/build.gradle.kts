@@ -37,6 +37,7 @@ android {
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
     defaultConfig {
         buildConfigField("String", "GIT_BUILD_ID", "\"${rootProject.extra["gitBuildId"]}\"")
+        buildConfigField("String", "GIT_BUILD_DATE", "\"${rootProject.extra["gitBuildDate"]}\"")
     }
     buildFeatures { buildConfig = true }
     defaultConfig { buildConfigField("String", "PRIVACY_POLICY_URL", "\"$privacyPolicyUrl\"") }

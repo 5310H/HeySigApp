@@ -19,11 +19,19 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
                        private val release: ()->Unit = {},
                        // Optional bounded scalar evidence for display-only sound checks and diagnostics.
                        private val observeScores: ((Map<String,Double>)->Unit)? = null,
-                       private val observeFrames: ((List<Map<String,Double>>)->Unit)? = null) {
+                       private val observeFrames: ((List<Map<String,Double>>)->Unit)? = null,
+                       private val observeEvidence: ((ShortArray,DoubleArray?,List<Map<String,Double>>)->Unit)? = null,
+                       private val observeInferenceCpu: ((Long)->Unit)? = null,
+                       // Only the separately disclosed notification-backed phone Automatic may supply this.
+                       private val microphoneSession: ()->Boolean = { false }) {
     private val worker=EnvironmentSampleWorker(allowed,{ seconds,cancel ->
         check(acquire { cancel.get() }) { "Microphone busy or capture cancelled" }
         try { capture(seconds,cancel) } finally { release() }
-    },{ pcm,cancelled -> Yamnet(context,observeScores,observeFrames).use { model -> model.classify(pcm,cancelled) } },
+    },{ pcm,cancelled ->
+        val cpu=android.os.Debug.threadCpuTimeNanos()
+        try { Yamnet(context,observeScores,observeFrames,observeEvidence).use { model -> model.classify(pcm,cancelled) } }
+        finally { observeInferenceCpu?.invoke(android.os.Debug.threadCpuTimeNanos()-cpu) }
+    },
         { SystemClock.elapsedRealtime() })
     fun stop() = worker.stop()
     fun busy() = worker.busy()
@@ -32,7 +40,7 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
         fun checkAccess() {
             check(!cancel.get()) { "Capture interrupted; sample discarded" }
             val audio=context.getSystemService(AudioManager::class.java)
-            val access=EnvironmentCaptureAccess(allowed(),!context.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked,
+            val access=EnvironmentCaptureAccess(allowed(),microphoneSession() || !context.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked,
                 context.checkSelfPermission(Manifest.permission.RECORD_AUDIO)==PackageManager.PERMISSION_GRANTED,
                 !audio.isMicrophoneMute && audio.mode==AudioManager.MODE_NORMAL)
             check(access.blocked()==null) { access.blocked() ?: "Microphone unavailable" }
@@ -81,7 +89,8 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
 
 /** Pinned pretrained encoder and shared scene head; CPU only, one inference thread. */
 class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)->Unit)? = null,
-             private val observeFrames: ((List<Map<String,Double>>)->Unit)? = null): AutoCloseable {
+             private val observeFrames: ((List<Map<String,Double>>)->Unit)? = null,
+             private val observeEvidence: ((ShortArray,DoubleArray?,List<Map<String,Double>>)->Unit)? = null): AutoCloseable {
     private val labelBytes=context.assets.open("environment/labels.txt").use { it.readBytes() }
     private val labels=labelBytes.toString(Charsets.UTF_8).trimEnd().lines()
     private val selectedLabels=EnvironmentClassifier.requiredLabels.associateWith { labels.indexOf(it) }
@@ -140,6 +149,9 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
             observeScores?.invoke(EnvironmentClassifier.requiredLabels.associateWith { label -> frames.map { it.getValue(label) }.average() })
             observeFrames?.invoke(frames.map { it.toMap() })
             val features=pool.finish()
+            // Synchronous bounded observer. The worker erases PCM after inference; observers never own it.
+            observeEvidence?.invoke(pcm,features,frames)
+            check(!cancelled()) { "Inference cancelled; sample discarded" }
             val primary=head.classify(features,frames)
             // A specialist cannot overwrite even a low-confidence primary estimate.
             val result=if(primary.environment!=null) primary else {

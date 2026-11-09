@@ -8,7 +8,7 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -32,6 +32,14 @@ object PhoneStyle {
         view.setLineSpacing(dp(view.context,3).toFloat(),1f)
         view.includeFontPadding = true
     }
+    fun pressFeedback(view: Button, fill: Int, foreground: Int, radius: Int = 18) {
+        view.backgroundTintList = null
+        view.setTextColor(ColorStateList(arrayOf(intArrayOf(android.R.attr.state_pressed,android.R.attr.state_enabled),intArrayOf()),intArrayOf(fill,foreground)))
+        view.background = StateListDrawable().apply {
+            addState(intArrayOf(android.R.attr.state_pressed,android.R.attr.state_enabled),shape(view.context,foreground,radius,foreground))
+            addState(intArrayOf(),shape(view.context,fill,radius,foreground))
+        }
+    }
     fun action(view: Button, role: String = "secondary") {
         val context = view.context
         val primary = role == "primary" || role == "selected" || role == "noiseOn" || role == "noiseOff"
@@ -43,8 +51,8 @@ object PhoneStyle {
         view.isAllCaps = false
         view.minHeight = dp(context,52); view.minimumHeight = dp(context,52)
         view.setPadding(dp(context,16),dp(context,12),dp(context,16),dp(context,12))
-        view.backgroundTintList = null
-        view.background = RippleDrawable(ColorStateList.valueOf(0x18007070),shape(context,fill),null)
+        // Native pressed state also handles keyboard activation and canceled touches.
+        pressFeedback(view,fill,foreground)
         view.alpha = if(view.isEnabled) 1f else .45f
         view.stateListAnimator = null
         view.layoutParams = LinearLayout.LayoutParams(-1,-2).apply { topMargin = dp(context,4); bottomMargin = dp(context,4) }
@@ -88,6 +96,12 @@ object PhoneStyle {
     }
     fun icon(context: Context, kind: String, color: Int): Drawable = object : Drawable() {
         private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { this.color = color; style = Paint.Style.STROKE; strokeWidth = 1.8f; strokeCap = Paint.Cap.ROUND; strokeJoin = Paint.Join.ROUND }
+        override fun isStateful() = true
+        override fun onStateChange(state: IntArray): Boolean {
+            val next=if(android.R.attr.state_pressed in state && android.R.attr.state_enabled in state) Color.WHITE else color
+            if(paint.color==next) return false
+            paint.color=next;invalidateSelf();return true
+        }
         override fun draw(canvas: Canvas) {
             canvas.save(); canvas.translate(bounds.left.toFloat(),bounds.top.toFloat()); canvas.scale(bounds.width()/24f,bounds.height()/24f)
             when(kind) {

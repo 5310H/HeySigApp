@@ -1,6 +1,7 @@
 # Using Automatic in HeySig
 
-Automatic chooses one of your hearing-aid programs when sound around you changes.
+Automatic chooses your hearing-aid program from how much other sound masks speech.
+See [the speech-aware guide](speech-aware-automatic.md) for current behavior.
 
 ## First, choose your programs
 
@@ -8,9 +9,9 @@ First time: on **Home**, choose your usual daytime program.
 
 Then open **Noise → Choose programs**.
 
-Choose the programs you want for quiet and noisy places. You can use the same
-program in more than one box. A box left unused means no change at that sound
-level. Tap **Save noise settings**.
+Choose **Everyday**, **Noisy** and **Very Noisy** from your own program names.
+Use **Keep current program** for any situation you want left alone. Choices save
+with **Save speech program choices**, or when you turn Automatic on here. The six older sound-level choices stay unchanged.
 
 You do not need to do the optional sound setup to start.
 
@@ -50,10 +51,8 @@ Therapy before turning Automatic on again.
 
 Tap **How to use** on the Noise screen for these steps.
 
-**Try without changing programs** shows what HeySig would choose without
-changing your hearing aids. Keep HeySig open and the phone unlocked for this.
-
-If it stays on a noisy program, check that you chose a program for quiet places.
+If it stays on a noisy program, check that you chose an Everyday program.
+Uncertain checks keep the current program; this experimental model can make mistakes.
 The phone's position and nearby voices or music can affect its sound checks.
 The screen reports the program sent by HeySig; it cannot confirm that the aids
 received it.

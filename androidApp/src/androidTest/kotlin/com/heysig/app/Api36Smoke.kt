@@ -23,6 +23,8 @@ class Api36Smoke : Instrumentation() {
             activity = startActivitySync(Intent(targetContext,HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             waitForIdleSync()
             val screen = checkNotNull(activity)
+            runOnMainSync { ButtonFeedbackCheck.run(screen) }
+            result.putString("buttonFeedback","PASS: phone roles, watch actions and dialog buttons invert on press and restore after release/cancel; disabled actions stay inactive")
             fun descendants(view:View): List<View> = listOf(view) + if(view is ViewGroup)
                 (0 until view.childCount).flatMap { descendants(view.getChildAt(it)) } else emptyList()
             fun shellInput(command: String) {
@@ -120,6 +122,7 @@ class Api36Smoke : Instrumentation() {
             capture("calibration")
             open("‹ Back")
             open("Choose programs")
+            capture("speech-programs")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>()
                     .any { it.contentDescription == "Protected Therapy program" })
@@ -127,13 +130,13 @@ class Api36Smoke : Instrumentation() {
             open("Advanced measurement settings")
             open("‹ Back")
             open("‹ Back")
-            open("Try without changing programs")
+            open("Choose programs")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
                     .first { it.text == "Off" && it.isShown }.isEnabled)
-                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>().any { it.text=="Review learned thresholds" && it.isShown })
+                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>().count { it.isShown }>=3)
                 check(!com.heysig.noise.EnvironmentReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
-                result.putString("noiseControls","PASS: focused overview, calibration, assignments, measurements and preview routes; Automatic controls available; no capture/playback")
+                result.putString("noiseControls","PASS: focused overview, calibration, six assignments, measurements and live speech program choices; Automatic controls available; no capture/playback")
             }
             open("‹ Back")
             open("Settings")

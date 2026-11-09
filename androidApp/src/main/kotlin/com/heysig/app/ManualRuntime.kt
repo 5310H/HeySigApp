@@ -143,6 +143,7 @@ class ManualRuntime private constructor(
         foreground: () -> Boolean, backgroundAllowed: () -> Boolean,
         progress: (String) -> Unit, sleepTarget: Boolean? = null, done: (String, Boolean) -> Unit) {
         if(!automatic) AutomaticNoiseService.cancel()
+        if(!automatic) SpeechAutomaticService.cancel() // Manual and Therapy requests stop future speech-driven changes.
         fun recorded(text: String,success: Boolean) = if(sleepTarget!=null && this::sleepRoutine.isInitialized)
             sleepRoutine.recordActionResult(sleepTarget,success,text) else text
         fun reject(text: String) { val result=recorded(text,false);if(sleepTarget!=null) lastResult=result;done(result,false) }

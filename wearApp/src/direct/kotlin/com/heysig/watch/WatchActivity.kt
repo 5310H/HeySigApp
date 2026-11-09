@@ -158,7 +158,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         AlertDialog.Builder(this).setTitle("More").setItems(items) { _,index ->
             when(index) {
                 14 -> AlertDialog.Builder(this).setTitle("HeySig Watch")
-                    .setMessage("Build ${BuildConfig.GIT_BUILD_ID}")
+                    .setMessage("Build ${BuildConfig.GIT_BUILD_ID} · ${BuildConfig.GIT_BUILD_DATE}")
                     .setPositiveButton("Close",null).show()
                 13 -> AlertDialog.Builder(this).setTitle("Automatic noise")
                     .setMessage("Uses the phone microphone and saved noise-level program assignments. Keep HeySig open and unlocked on the phone. Calibration is optional. On starts real noise-level program switching.")

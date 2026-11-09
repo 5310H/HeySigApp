@@ -1,0 +1,91 @@
+{
+  "selected": {
+    "C": 0.1,
+    "temperature": 1.0,
+    "loss": 0.5251305784534294
+  },
+  "candidates": [
+    {
+      "C": 0.001,
+      "temperature": 1.0,
+      "loss": 0.7714609330748302
+    },
+    {
+      "C": 0.001,
+      "temperature": 2.0,
+      "loss": 0.9023505095158547
+    },
+    {
+      "C": 0.001,
+      "temperature": 4.0,
+      "loss": 0.991457647502985
+    },
+    {
+      "C": 0.001,
+      "temperature": 8.0,
+      "loss": 1.0427023209907533
+    },
+    {
+      "C": 0.01,
+      "temperature": 1.0,
+      "loss": 0.5420699622725095
+    },
+    {
+      "C": 0.01,
+      "temperature": 2.0,
+      "loss": 0.6967911000389106
+    },
+    {
+      "C": 0.01,
+      "temperature": 4.0,
+      "loss": 0.8544918468188735
+    },
+    {
+      "C": 0.01,
+      "temperature": 8.0,
+      "loss": 0.9641875201462913
+    },
+    {
+      "C": 0.1,
+      "temperature": 1.0,
+      "loss": 0.5251305784534294
+    },
+    {
+      "C": 0.1,
+      "temperature": 2.0,
+      "loss": 0.5591672978424574
+    },
+    {
+      "C": 0.1,
+      "temperature": 4.0,
+      "loss": 0.713657116935637
+    },
+    {
+      "C": 0.1,
+      "temperature": 8.0,
+      "loss": 0.8667632829481943
+    },
+    {
+      "C": 1.0,
+      "temperature": 1.0,
+      "loss": 0.750743676393611
+    },
+    {
+      "C": 1.0,
+      "temperature": 2.0,
+      "loss": 0.5562825005440502
+    },
+    {
+      "C": 1.0,
+      "temperature": 4.0,
+      "loss": 0.6143178034067369
+    },
+    {
+      "C": 1.0,
+      "temperature": 8.0,
+      "loss": 0.7688166326545489
+    }
+  ],
+  "selection": "development-speaker-only CV; backgrounds shared within inner folds; final evaluation excludes both speakers and background recordings; heldout previously viewed initial fit, not used to select C/temperature",
+  "headSha256": "884b7e0f1a925b3714f9c9b85a7bbce47a33b3c16ea891c1c6bf4e57a02e1812"
+}

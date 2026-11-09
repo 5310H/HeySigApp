@@ -5,6 +5,7 @@ import java.security.MessageDigest
 plugins { id("com.android.application"); kotlin("android") }
 apply(from = rootProject.file("gradle/app-signing.gradle"))
 apply(from = rootProject.file("gradle/environment-model.gradle"))
+apply(from = rootProject.file("gradle/masking-model.gradle"))
 
 
 val releasePublic = Properties().apply {
@@ -38,6 +39,7 @@ android {
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
     defaultConfig {
         buildConfigField("String", "GIT_BUILD_ID", "\"${rootProject.extra["gitBuildId"]}\"")
+        buildConfigField("String", "GIT_BUILD_DATE", "\"${rootProject.extra["gitBuildDate"]}\"")
     }
     buildFeatures { buildConfig = true }
     // Exercise the native watch style on isolated round-display contexts; never ship it in the phone app.

@@ -27,6 +27,7 @@
         </service>
         <service android:name="com.heysig.app.voice.HandsFreeService" android:exported="false" android:foregroundServiceType="microphone" android:stopWithTask="true" />
         <service android:name="com.heysig.app.AutomaticNoiseService" android:exported="false" android:foregroundServiceType="microphone|mediaPlayback" android:stopWithTask="true" />
+        <service android:name="com.heysig.app.SpeechAutomaticService" android:exported="false" android:foregroundServiceType="microphone|mediaPlayback" android:stopWithTask="true" />
         <service android:name="com.heysig.app.AutomaticSleepService" android:exported="false" android:foregroundServiceType="mediaPlayback" />
         <receiver android:name="com.heysig.app.AutomaticSleepReceiver" android:exported="false">
             <intent-filter>

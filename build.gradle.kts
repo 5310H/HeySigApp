@@ -11,6 +11,13 @@ val gitRevision = providers.exec {
 }.standardOutput.asText.get().trim()
 require(gitRevision.matches(Regex("[0-9a-f]{7,40}"))) { "Cannot determine Git build ID" }
 extra["gitBuildId"] = gitRevision
+// The commit date stays consistent across phone/watch and rebuilds of this revision.
+val gitCommitDate = providers.exec {
+    workingDir(rootDir)
+    commandLine("git", "show", "-s", "--format=%cs", "HEAD")
+}.standardOutput.asText.get().trim()
+extra["gitBuildDate"] = java.time.LocalDate.parse(gitCommitDate)
+    .format(java.time.format.DateTimeFormatter.ofPattern("MMM d, yyyy", java.util.Locale.US))
 
 tasks.register("releaseCandidates") {
     group = "build"

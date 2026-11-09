@@ -179,6 +179,7 @@ open class AutomaticNoiseService : Service() {
         @Volatile var foregroundSince: Long?=null
         val active get()=pending!=null || running!=null
         fun launch(activity: Activity, settings: NoiseSettings, fitting: String, learner: NoiseThresholdLearner?, service: Class<out AutomaticNoiseService> = AutomaticNoiseService::class.java) {
+            SpeechAutomaticService.cancel()
             check(!active) { "Automatic is already On" }
             val token=java.util.UUID.randomUUID().toString()
             pending=Request(token,settings,fitting,learner)

@@ -98,7 +98,10 @@ class HomeActivity : Activity() {
             runtime.sleepRoutine.transition(old.resume())
             val rollback: () -> Unit={ runtime.sleepRoutine.transition(old) }
             rollback
-        },openSoundType={ openSoundType() }) }
+        },openSoundType={ openSoundType() },prepareSpeechAutomatic={
+            foregroundVoice.close();soundType.stop();environment.stop()
+            HandsFreeService.running?.control(HandsFreeControl.OFF)
+        }) }
     private fun openSoundType() {
         if(busy.get()) { tell("Wait until the current program change finishes, then try again.",false);return }
         foregroundVoice.close();noise.stop();environment.stop()
@@ -108,7 +111,7 @@ class HomeActivity : Activity() {
     private val soundType: SoundTypeFeature by lazy { SoundTypeFeature(this,{ noiseSafety() },{
         foregroundVoice.close();noise.stop();environment.stop()
         HandsFreeService.running?.control(HandsFreeControl.OFF)
-    }) }
+    },openProgramPreview={ navigate("NoiseSetup") }) }
     private val environment: EnvironmentFeature by lazy { EnvironmentFeature(this,{ fitting?.programs.orEmpty() },{ requested.program },
         { noiseSafety() },{
             check(!busy.get() && pendingProgram==null && pendingRestore==null && !runtime.fittingWorkflow.pending && !runtime.personalPhrases.awaitingConfirmation && !runtime.sleepRoutine.hasDraft) { "Finish or cancel the current operation first" }
@@ -372,7 +375,7 @@ class HomeActivity : Activity() {
             else -> "Settings"
         }
         line(title).apply { PhoneStyle.text(this,minOf(25f,40f/resources.configuration.fontScale),true); isAccessibilityHeading = true }
-        if(page in listOf("Home","Settings")) line("Build ${BuildConfig.GIT_BUILD_ID}")
+        if(page in listOf("Home","Settings")) line("Build ${BuildConfig.GIT_BUILD_ID} · ${BuildConfig.GIT_BUILD_DATE}")
         val statusCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(PhoneStyle.dp(context,4),PhoneStyle.dp(context,4),PhoneStyle.dp(context,4),PhoneStyle.dp(context,12))
@@ -459,7 +462,7 @@ class HomeActivity : Activity() {
                     PhoneStyle.text(this,12f,active,if(active) PhoneStyle.blue else PhoneStyle.secondary)
                     isAllCaps = false; minHeight = PhoneStyle.dp(context,52); minimumHeight = minHeight
                     setPadding(PhoneStyle.dp(context,4),PhoneStyle.dp(context,8),PhoneStyle.dp(context,4),PhoneStyle.dp(context,8))
-                    background = PhoneStyle.shape(context,android.graphics.Color.WHITE,0)
+                    PhoneStyle.pressFeedback(this,android.graphics.Color.WHITE,if(active) PhoneStyle.blue else PhoneStyle.secondary,0)
                     if(resources.configuration.fontScale <= 1.3f) setCompoundDrawables(null,PhoneStyle.icon(context,target,if(active) PhoneStyle.blue else PhoneStyle.secondary),null,null)
                     compoundDrawablePadding = PhoneStyle.dp(context,5)
                     alpha = if(isEnabled) 1f else .45f

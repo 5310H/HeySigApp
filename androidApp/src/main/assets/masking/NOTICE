@@ -1,0 +1,33 @@
+HeySig speech-masking head, development build, November 9, 2026.
+This is an experimental speech/background masking classifier, not a clinical
+intelligibility measurement, speaker identity model or compatibility certification.
+
+The existing YAMNet encoder remains unchanged, under its existing Apache-2.0
+notice in environment/. A separately fitted 3-class linear head uses pooled
+encoder features plus envelope modulation, pitch periodicity and zero crossings.
+No separate inference runtime, speech recognition or network model is added.
+
+Fitting sources: LibriSpeech (c) 2014 Vassil Panayotov, CC BY 4.0,
+https://www.openslr.org/12/ . Prepared by V. Panayotov, G. Chen, D. Povey and
+S. Khudanpur from LibriVox audiobooks. Development readers: zinniz (2277),
+Sharon Bautista (2035), Nicodemus (2086), JenniferRutters (7976).
+The corpus license is retained in CC-BY-4.0.txt.
+
+Background source credits (development):
+AlexanderChe, "ambience, cafe, burger king, city, Moscow", CC0,
+https://freesound.org/people/AlexanderChe/sounds/363712/
+SpliceSound, "Indoor adult murmur, small group.wav", CC0,
+https://freesound.org/people/SpliceSound/sounds/260121/
+Angellu16, "Vacuum Cleaner.wav", CC0,
+https://freesound.org/people/Angellu16/sounds/533833/
+Additional crowd and traffic sources (201734, 212187), their credited creators,
+licenses, original descriptions and hashes are in the packaged sources.json.
+
+Transforms: decode/resample mono 16kHz, bounded three-second windows; normalized
+foreground/background mixes at +15/+3/-8dB SNR, matched -30/-45dBFS overall RMS;
+digital low-pass/echo position proxies; short background excerpts may be tiled.
+No foreground speech is tiled. No source recordings or transcripts are packaged
+in the application. Only fixed model weights, source credits and licenses ship.
+Heldout sources in sources.json are evaluation credits, not coefficient fitting.
+Model training and independent-field acceptance are different; no qualification
+is implied by packaging these weights. No source author endorses HeySig.

@@ -3,6 +3,9 @@ package com.heysig;
 import org.junit.Test;
 
 public class SharedRegressionTest {
+    @Test public void speechMasking() {
+        com.heysig.noise.SpeechMaskingCheckKt.main();
+    }
     @Test public void displayOnlySoundType() {
         com.heysig.noise.SoundTypeCheckKt.main();
     }

@@ -1,0 +1,5 @@
+Developer instrumentation fixtures only. Never played.
+LibriSpeech (c) 2014 Vassil Panayotov, CC BY 4.0. LibriVox readers credited in the accompanying source manifest.
+Background sources and authors: see sources.json. CC0/CC BY 3.0/4.0 as stated per source.
+Transforms: first three seconds, mono 16kHz PCM16, foreground/background normalized and mixed at +15/+3/-8dB SNR, then matched overall -30dBFS RMS.
+Source references, license links and original hashes are retained. No wearer recordings.

@@ -1,0 +1,1183 @@
+index	severity	score	maskingProposal	levelProposal	returnProposal	reason
+0	CLEAR	0.9732177900616376	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1	CLEAR	0.9734207147288648	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+2	CLEAR	0.9552026853598592	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+3	CLEAR	0.9501770986804499	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+4	MODERATE	0.9835491870233505	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+5	MODERATE	0.9828126679003496	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+6	MODERATE	0.8771721422534753	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+7	MODERATE	0.8637751011390531	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+8	HEAVY	0.9397601686520217	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+9	HEAVY	0.9459740153913312	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+10	HEAVY	0.9864452143207799	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+11	HEAVY	0.9880547695035439	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+12	CLEAR	0.9861919034241408	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+13	CLEAR	0.9830693175091897	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+14	CLEAR	0.9677229759212534	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+15	CLEAR	0.974280691771457	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+16	MODERATE	0.8274398488011764	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+17	MODERATE	0.8294181490217355	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+18	MODERATE	0.8169302635540994	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+19	MODERATE	0.8290728554969083	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+20	HEAVY	0.9774906912585479	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+21	HEAVY	0.9764989994304543	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+22	HEAVY	0.9646856349268391	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+23	HEAVY	0.9699843626615504	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+24	CLEAR	0.8329042253686515	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+25	CLEAR	0.8355402966388529	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+26	CLEAR	0.8870961841466611	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+27	CLEAR	0.9121709332577063	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+28	MODERATE	0.8781340584550489	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+29	MODERATE	0.8817443130334973	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+30	MODERATE	0.9589872495788236	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+31	MODERATE	0.9590381058309286	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+32	HEAVY	0.952337825897089	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+33	HEAVY	0.9501986923331015	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+34	HEAVY	0.9339331321460669	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+35	HEAVY	0.9261208381887226	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+36	CLEAR	0.987312634204987	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+37	CLEAR	0.9839137147894602	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+38	CLEAR	0.9573650136018632	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+39	CLEAR	0.9539234717327858	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+40	MODERATE	0.9448196448565657	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+41	MODERATE	0.9303663585200219	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+42	MODERATE	0.9677878643367247	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+43	MODERATE	0.9719734595281139	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+44	HEAVY	0.9863447088365236	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+45	HEAVY	0.9831081256802457	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+46	HEAVY	0.9935280564696751	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+47	HEAVY	0.9929997795483129	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+48	CLEAR	0.9862655449119688	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+49	CLEAR	0.986146411725423	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+50	CLEAR	0.9254100954183674	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+51	CLEAR	0.9242265214643038	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+52	MODERATE	0.9241155417129696	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+53	MODERATE	0.9302545727844378	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+54	MODERATE	0.9614893765477949	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+55	MODERATE	0.960272833565847	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+56	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+57	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+58	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+59	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+60	CLEAR	0.9171563863220569	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+61	CLEAR	0.8996889454288127	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+62	CLEAR	0.6695616573560805	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+63	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+64	MODERATE	0.6850518415725293	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+65	MODERATE	0.6513683369915226	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+66	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+67	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+68	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+69	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+70	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+71	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+72	CLEAR	0.9860916686392263	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+73	CLEAR	0.9829540604113857	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+74	CLEAR	0.9871880759010387	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+75	CLEAR	0.9897349184705133	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+76	MODERATE	0.9670109097621656	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+77	MODERATE	0.9740692931783321	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+78	MODERATE	0.9202190712535332	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+79	MODERATE	0.9170654354060755	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+80	HEAVY	0.9278674018539421	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+81	HEAVY	0.9351556915900955	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+82	HEAVY	0.9130557876659332	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+83	HEAVY	0.9135726473755593	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+84	CLEAR	0.996735425087884	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+85	CLEAR	0.9963707666507962	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+86	CLEAR	0.99052245520215	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+87	CLEAR	0.9898130232752678	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+88	MODERATE	0.9593796320585979	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+89	MODERATE	0.9605678866857488	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+90	MODERATE	0.909658069894708	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+91	MODERATE	0.9006693147666156	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+92	HEAVY	0.8758887011709092	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+93	HEAVY	0.896952543868458	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+94	HEAVY	0.9535739763508062	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+95	HEAVY	0.9498064171628535	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+96	CLEAR	0.9368027194078028	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+97	CLEAR	0.936237680206322	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+98	CLEAR	0.9700826913677388	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+99	CLEAR	0.9696208782402312	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+100	MODERATE	0.962302588048039	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+101	MODERATE	0.9667111853178577	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+102	MODERATE	0.9362865558211227	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+103	MODERATE	0.9345212511481438	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+104	HEAVY	0.8817573622990302	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+105	HEAVY	0.8846214699122922	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+106	HEAVY	0.8219110521403038	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+107	HEAVY	0.8011153743848481	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+108	CLEAR	0.9935564208107891	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+109	CLEAR	0.9934332498153142	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+110	CLEAR	0.9788109125829594	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+111	CLEAR	0.9817490814439553	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+112	MODERATE	0.8765118129017477	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+113	MODERATE	0.8718421255274188	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+114	MODERATE	0.8718013409628749	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+115	MODERATE	0.8710620466434129	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+116	HEAVY	0.9664161025966541	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+117	HEAVY	0.9604755650413997	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+118	HEAVY	0.9796627001638488	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+119	HEAVY	0.9781857210053714	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+120	CLEAR	0.9903221328855751	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+121	CLEAR	0.9912782168297243	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+122	CLEAR	0.9531315836004465	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+123	CLEAR	0.955509282149614	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+124	MODERATE	0.9303921908452755	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+125	MODERATE	0.9422127804152031	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+126	MODERATE	0.8430568736244611	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+127	MODERATE	0.8101270543512522	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+128	HEAVY	0.962050518017492	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+129	HEAVY	0.9724255300871536	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+130	HEAVY	0.9788993287937705	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+131	HEAVY	0.9830084840469373	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+132	CLEAR	0.8842874752706268	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+133	CLEAR	0.9015193288942946	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+134	CLEAR	0.8877344733546328	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+135	CLEAR	0.9161074504181437	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+136	MODERATE	0.7261630261836403	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+137	MODERATE	0.7731168079783928	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+138	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+139	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+140	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+141	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+142	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+143	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+144	CLEAR	0.9528128513464025	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+145	CLEAR	0.9479399067893545	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+146	CLEAR	0.9171414692541966	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+147	CLEAR	0.9194119926815454	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+148	MODERATE	0.9471983262201048	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+149	MODERATE	0.95254248132375	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+150	MODERATE	0.9125459266500487	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+151	MODERATE	0.8941923441252428	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+152	HEAVY	0.9557471610754527	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+153	HEAVY	0.9583922966496443	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+154	HEAVY	0.983954140000045	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+155	HEAVY	0.9869034899877289	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+156	CLEAR	0.9865306747915206	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+157	CLEAR	0.9867317002489046	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+158	CLEAR	0.9343012080466436	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+159	CLEAR	0.9366692279065632	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+160	MODERATE	0.8907396107316451	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+161	MODERATE	0.836044809290355	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+162	MODERATE	0.874763278701307	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+163	MODERATE	0.8700089948252873	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+164	HEAVY	0.9595243966274242	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+165	HEAVY	0.9579854885768142	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+166	HEAVY	0.9871347852595159	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+167	HEAVY	0.9866590786374311	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+168	CLEAR	0.9774275890747309	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+169	CLEAR	0.9772860677953313	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+170	CLEAR	0.9514206157420722	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+171	CLEAR	0.9514181717207658	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+172	MODERATE	0.9591852625440863	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+173	MODERATE	0.9629722867869127	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+174	MODERATE	0.9316630283216318	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+175	MODERATE	0.9402275833302364	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+176	HEAVY	0.9831973404013268	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+177	HEAVY	0.9830115001137276	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+178	HEAVY	0.9504300965502165	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+179	HEAVY	0.9465516575544238	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+180	CLEAR	0.9964872617698441	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+181	CLEAR	0.9956043159900851	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+182	CLEAR	0.9886036499950221	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+183	CLEAR	0.9879471405576975	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+184	MODERATE	0.9585829954782232	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+185	MODERATE	0.9559217382912023	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+186	MODERATE	0.9413702767752331	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+187	MODERATE	0.9397497395432252	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+188	HEAVY	0.9899098470571954	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+189	HEAVY	0.9895575225699442	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+190	HEAVY	0.9759627420621173	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+191	HEAVY	0.9736870716509267	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+192	CLEAR	0.9959106457267987	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+193	CLEAR	0.9957659926301559	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+194	CLEAR	0.9841089907782592	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+195	CLEAR	0.9835859163468086	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+196	MODERATE	0.9449186272046046	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+197	MODERATE	0.9400667063091541	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+198	MODERATE	0.9797247814056044	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+199	MODERATE	0.9769541999643787	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+200	HEAVY	0.9526380747738491	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+201	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+202	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+203	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+204	CLEAR	0.7625375924248224	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+205	CLEAR	0.7609598924786974	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+206	CLEAR	0.7113924437611605	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+207	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+208	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+209	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+210	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+211	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+212	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+213	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+214	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+215	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+216	CLEAR	0.9936257134837999	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+217	CLEAR	0.9943567415777942	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+218	CLEAR	0.9900145712078725	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+219	CLEAR	0.991585978745291	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+220	MODERATE	0.9868820344962806	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+221	MODERATE	0.9873504503485779	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+222	MODERATE	0.8908714895355272	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+223	MODERATE	0.9015776695684715	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+224	HEAVY	0.9786184027581921	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+225	HEAVY	0.9705609961018973	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+226	HEAVY	0.9779032683531419	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+227	HEAVY	0.9779879616017544	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+228	CLEAR	0.9030701867358768	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+229	CLEAR	0.9233738075825161	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+230	CLEAR	0.8765987581998321	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+231	CLEAR	0.8274597631466277	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+232	MODERATE	0.9564459434750103	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+233	MODERATE	0.9606779154810816	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+234	MODERATE	0.9717187779933196	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+235	MODERATE	0.968849906139044	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+236	HEAVY	0.9220802007976594	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+237	HEAVY	0.9151075538061405	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+238	HEAVY	0.9084196591031989	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+239	HEAVY	0.9127162100833541	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+240	CLEAR	0.974473607921016	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+241	CLEAR	0.9740181229691078	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+242	CLEAR	0.9926849128237005	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+243	CLEAR	0.9929586449858139	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+244	MODERATE	0.9412120849084377	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+245	MODERATE	0.9454678091512324	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+246	MODERATE	0.9499286894497733	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+247	MODERATE	0.955438563639274	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+248	HEAVY	0.9775470312870471	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+249	HEAVY	0.9802250229527417	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+250	HEAVY	0.9240645379146597	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+251	HEAVY	0.9286015136865489	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+252	CLEAR	0.9515845326418552	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+253	CLEAR	0.9538005300281125	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+254	CLEAR	0.9934395998808272	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+255	CLEAR	0.9953030659116767	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+256	MODERATE	0.9735977871635626	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+257	MODERATE	0.9738606259344661	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+258	MODERATE	0.9761097859780147	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+259	MODERATE	0.9753346561433553	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+260	HEAVY	0.9869377190865085	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+261	HEAVY	0.9886673582498601	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+262	HEAVY	0.9842854043321473	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+263	HEAVY	0.9839140171138161	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+264	CLEAR	0.97494949116254	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+265	CLEAR	0.9717993597119893	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+266	CLEAR	0.9537309512126084	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+267	CLEAR	0.9516521961960227	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+268	MODERATE	0.9404754135839671	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+269	MODERATE	0.9365673998667463	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+270	MODERATE	0.943578041825128	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+271	MODERATE	0.9313746070561364	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+272	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+273	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+274	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+275	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+276	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+277	CLEAR	0.6527011383367859	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+278	CLEAR	0.7503161837127278	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+279	CLEAR	0.7358306141505438	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+280	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+281	MODERATE	0.6690353745517442	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+282	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+283	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+284	HEAVY	0.6731552874618915	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+285	HEAVY	0.6732129774137453	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+286	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+287	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+288	CLEAR	0.9846979186497467	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+289	CLEAR	0.9855337484409702	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+290	CLEAR	0.9929660430929999	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+291	CLEAR	0.9888765786683738	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+292	MODERATE	0.9653230040854605	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+293	MODERATE	0.9571002368541639	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+294	MODERATE	0.8434489250528411	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+295	MODERATE	0.8365442849631077	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+296	HEAVY	0.9920838134281447	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+297	HEAVY	0.9902488047236506	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+298	HEAVY	0.9907458964282643	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+299	HEAVY	0.9905142116190361	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+300	CLEAR	0.9907932971003309	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+301	CLEAR	0.990858445739135	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+302	CLEAR	0.9895766353888134	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+303	CLEAR	0.9904841590898235	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+304	MODERATE	0.9481727208343879	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+305	MODERATE	0.9524210167802072	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+306	MODERATE	0.8932706763865975	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+307	MODERATE	0.8850541424894914	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+308	HEAVY	0.9593525059054707	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+309	HEAVY	0.9644020788188359	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+310	HEAVY	0.8782886965290423	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+311	HEAVY	0.893714852702682	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+312	CLEAR	0.796890990137236	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+313	CLEAR	0.7669681468569043	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+314	CLEAR	0.9780488745030723	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+315	CLEAR	0.9782845410770467	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+316	MODERATE	0.9367010182717256	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+317	MODERATE	0.9282085548725313	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+318	MODERATE	0.8731982556413688	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+319	MODERATE	0.8768256316363643	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+320	HEAVY	0.9816503192661755	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+321	HEAVY	0.9812682702551225	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+322	HEAVY	0.9836759152687716	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+323	HEAVY	0.9864359190798399	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+324	CLEAR	0.9168394435613301	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+325	CLEAR	0.9156068813098137	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+326	CLEAR	0.9573511355984812	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+327	CLEAR	0.9629757385730183	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+328	MODERATE	0.9420484257113307	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+329	MODERATE	0.9312229562663752	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+330	MODERATE	0.9026338949020288	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+331	MODERATE	0.9138312954133649	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+332	HEAVY	0.9833697141834695	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+333	HEAVY	0.9830865476188814	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+334	HEAVY	0.9968055278779467	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+335	HEAVY	0.9966464335404434	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+336	CLEAR	0.9775710862992152	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+337	CLEAR	0.9807467067788213	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+338	CLEAR	0.9784048744079451	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+339	CLEAR	0.9799477138447016	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+340	MODERATE	0.8980528011914856	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+341	MODERATE	0.9102373276328874	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+342	MODERATE	0.8212620506340841	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+343	MODERATE	0.8036249787336316	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+344	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+345	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+346	HEAVY	0.9649916456394407	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+347	HEAVY	0.9577821259121146	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+348	CLEAR	0.7791269574834219	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+349	CLEAR	0.8267388860273815	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+350	CLEAR	0.852725190378098	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+351	CLEAR	0.9078956448490598	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+352	MODERATE	0.6553508221738427	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+353	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+354	MODERATE	0.6720730520620096	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+355	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+356	HEAVY	0.7572114607444589	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+357	HEAVY	0.6868235366269099	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+358	HEAVY	0.7897457008167111	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+359	HEAVY	0.7832398203718908	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+360	CLEAR	0.9317089884449775	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+361	CLEAR	0.9489935395109378	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+362	CLEAR	0.9734956666942625	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+363	CLEAR	0.9767111068237587	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+364	MODERATE	0.9359203547315277	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+365	MODERATE	0.9307192846941289	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+366	MODERATE	0.7724725283319369	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+367	MODERATE	0.8005769273760811	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+368	HEAVY	0.9942355625788534	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+369	HEAVY	0.9928572458430128	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+370	HEAVY	0.9913975546520083	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+371	HEAVY	0.9900987289258076	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+372	CLEAR	0.9932361694529592	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+373	CLEAR	0.9908740347487152	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+374	CLEAR	0.9677668767287964	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+375	CLEAR	0.9761183211377802	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+376	MODERATE	0.857368366148251	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+377	MODERATE	0.8871955452299726	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+378	MODERATE	0.811188778201624	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+379	MODERATE	0.8339266846777313	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+380	HEAVY	0.9331948575784574	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+381	HEAVY	0.9411198677529818	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+382	HEAVY	0.8664863537438514	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+383	HEAVY	0.8901924088133242	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+384	CLEAR	0.7377679417175751	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+385	CLEAR	0.7494965502530224	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+386	CLEAR	0.9749885489742907	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+387	CLEAR	0.9665209382490947	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+388	MODERATE	0.9218714963438872	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+389	MODERATE	0.9120111579220594	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+390	MODERATE	0.801117999758571	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+391	MODERATE	0.7987145334088309	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+392	HEAVY	0.9714233469948621	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+393	HEAVY	0.97251715283341	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+394	HEAVY	0.941997170272397	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+395	HEAVY	0.9359951336627413	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+396	CLEAR	0.9290075377045538	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+397	CLEAR	0.9161387047879757	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+398	CLEAR	0.9450406178251454	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+399	CLEAR	0.9521112548196451	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+400	MODERATE	0.816524633600961	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+401	MODERATE	0.8291233013476363	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+402	MODERATE	0.9650153880610317	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+403	MODERATE	0.9525464117859265	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+404	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+405	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+406	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+407	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+408	CLEAR	0.9485413751266769	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+409	CLEAR	0.9607896640021563	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+410	CLEAR	0.978614323707822	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+411	CLEAR	0.9882905056820064	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+412	MODERATE	0.9243274195853591	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+413	MODERATE	0.9179106587513888	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+414	MODERATE	0.9350341766574433	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+415	MODERATE	0.9230966387743149	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+416	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+417	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+418	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+419	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+420	CLEAR	0.8661359069439585	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+421	CLEAR	0.8505694405836551	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+422	CLEAR	0.9035314804877599	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+423	CLEAR	0.9133147725356159	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+424	MODERATE	0.8618701017392301	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+425	MODERATE	0.8646924542617839	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+426	MODERATE	0.7184674739225195	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+427	MODERATE	0.7396481484524517	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+428	HEAVY	0.6864573324618743	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+429	HEAVY	0.6875948820046481	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+430	HEAVY	0.8006124002803295	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+431	HEAVY	0.8268775821129181	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+432	CLEAR	0.9234231337753639	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+433	CLEAR	0.9168306380231517	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+434	CLEAR	0.945573805743042	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+435	CLEAR	0.9357296679465896	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+436	MODERATE	0.9718479696011161	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+437	MODERATE	0.9712630138923818	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+438	MODERATE	0.802040766798657	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+439	MODERATE	0.74626695584691	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+440	HEAVY	0.93424525737191	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+441	HEAVY	0.9228354517959811	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+442	HEAVY	0.9932659555835381	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+443	HEAVY	0.9922488383276129	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+444	CLEAR	0.7846232071114418	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+445	CLEAR	0.8160828087229183	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+446	CLEAR	0.9147058934406666	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+447	CLEAR	0.9309255423497708	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+448	MODERATE	0.9524039935634975	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+449	MODERATE	0.9526131166403462	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+450	MODERATE	0.9366250843910258	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+451	MODERATE	0.9169350288360929	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+452	HEAVY	0.9724077408807155	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+453	HEAVY	0.9748164648613358	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+454	HEAVY	0.6946960627262048	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+455	HEAVY	0.7110897314092007	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+456	CLEAR	0.8326790776164233	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+457	CLEAR	0.8433538910343941	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+458	CLEAR	0.9249041198092964	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+459	CLEAR	0.8999880261248435	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+460	MODERATE	0.9657490778500477	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+461	MODERATE	0.9644752276826195	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+462	MODERATE	0.8997830727245295	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+463	MODERATE	0.899814076165791	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+464	HEAVY	0.8976418933848053	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+465	HEAVY	0.9013236418979957	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+466	HEAVY	0.9400803909607541	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+467	HEAVY	0.9411623389738082	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+468	CLEAR	0.9851934893157652	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+469	CLEAR	0.9850602975176815	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+470	CLEAR	0.9889087176449244	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+471	CLEAR	0.9902382547321623	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+472	MODERATE	0.9899944523118538	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+473	MODERATE	0.9891393902664393	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+474	MODERATE	0.9902588253110628	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+475	MODERATE	0.9861238487922179	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+476	HEAVY	0.9425529274100877	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+477	HEAVY	0.946586450866815	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+478	HEAVY	0.9373607604812314	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+479	HEAVY	0.9488051835051856	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+480	CLEAR	0.9382015974040468	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+481	CLEAR	0.9496476735655552	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+482	CLEAR	0.9036693144206441	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+483	CLEAR	0.9323915998661598	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+484	MODERATE	0.9747248388229939	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+485	MODERATE	0.9720018862117327	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+486	MODERATE	0.9514320039641062	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+487	MODERATE	0.9527571708477168	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+488	HEAVY	0.9554422716263078	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+489	HEAVY	0.9440162988479831	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+490	HEAVY	0.9822361403174568	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+491	HEAVY	0.9830570754350779	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+492	CLEAR	0.9026231723660226	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+493	CLEAR	0.9200033618666578	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+494	CLEAR	0.7425978430857343	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+495	CLEAR	0.7723088813732043	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+496	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+497	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+498	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+499	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+500	HEAVY	0.7391108339911956	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+501	HEAVY	0.7101546044981236	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+502	HEAVY	0.7361293242779444	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+503	HEAVY	0.7006834149168102	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+504	CLEAR	0.8413010170885081	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+505	CLEAR	0.8087777324171017	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+506	CLEAR	0.9727541419276424	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+507	CLEAR	0.9766249663360436	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+508	MODERATE	0.9347030098055157	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+509	MODERATE	0.9369412858002155	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+510	MODERATE	0.8769532555313015	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+511	MODERATE	0.8971419388976054	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+512	HEAVY	0.9883783314989077	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+513	HEAVY	0.991441512653191	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+514	HEAVY	0.9886090844232773	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+515	HEAVY	0.990125450534094	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+516	CLEAR	0.9751455073344832	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+517	CLEAR	0.9667874398933163	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+518	CLEAR	0.9898109227175301	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+519	CLEAR	0.9914134933045428	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+520	MODERATE	0.9650778985170252	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+521	MODERATE	0.9664270734753436	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+522	MODERATE	0.9655194571977995	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+523	MODERATE	0.9659980110163148	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+524	HEAVY	0.8642863169929105	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+525	HEAVY	0.8802155230286733	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+526	HEAVY	0.8500398470636225	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+527	HEAVY	0.8363521511770102	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+528	CLEAR	0.8606028701700934	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+529	CLEAR	0.8465807270680998	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+530	CLEAR	0.9917438637045548	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+531	CLEAR	0.9934510490545609	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+532	MODERATE	0.9675223449170923	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+533	MODERATE	0.9686456126316437	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+534	MODERATE	0.9571896333952775	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+535	MODERATE	0.9594175906812153	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+536	HEAVY	0.967423101982215	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+537	HEAVY	0.972681808112131	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+538	HEAVY	0.9323284517086354	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+539	HEAVY	0.9086964594644578	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+540	CLEAR	0.9729729966992279	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+541	CLEAR	0.9667904632377441	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+542	CLEAR	0.9941558182149498	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+543	CLEAR	0.9928197998942582	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+544	MODERATE	0.9593272985495983	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+545	MODERATE	0.9666708525263431	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+546	MODERATE	0.9363922386629477	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+547	MODERATE	0.9318099685906226	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+548	HEAVY	0.9463262846415108	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+549	HEAVY	0.9434777417364296	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+550	HEAVY	0.926176459754038	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+551	HEAVY	0.9394992666831725	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+552	CLEAR	0.923653873907299	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+553	CLEAR	0.9553151827043628	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+554	CLEAR	0.9563090688659368	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+555	CLEAR	0.9729900252710627	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+556	MODERATE	0.9320925433093964	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+557	MODERATE	0.9201987340545418	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+558	MODERATE	0.9607003207447727	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+559	MODERATE	0.9482506903437069	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+560	HEAVY	0.9761938752032978	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+561	HEAVY	0.9776331433551599	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+562	HEAVY	0.9886770254159855	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+563	HEAVY	0.9850132423545307	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+564	CLEAR	0.805543499835961	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+565	CLEAR	0.7601059200104803	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+566	CLEAR	0.9113398258902053	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+567	CLEAR	0.8987033693355512	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+568	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+569	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+570	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+571	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+572	HEAVY	0.654754698063977	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+573	HEAVY	0.7347668350172211	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+574	HEAVY	0.6630179133902716	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+575	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+576	HEAVY	0.996846625186574	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+577	HEAVY	0.9960296418693707	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+578	HEAVY	0.9854446658980835	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+579	HEAVY	0.9850214975206674	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+580	HEAVY	0.9867235165596241	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+581	HEAVY	0.9875369904896787	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+582	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+583	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+584	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+585	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+586	CLEAR	0.9982566346663801	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+587	CLEAR	0.996475330551485	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+588	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+589	UNKNOWN	0.0	hold	3	hold	Interrupted, clipped or isolated sound; keep current program
+590	QUIET	0.0	hold	hold	1	Quiet evidence; requires repeated checks
+591	CLEAR	0.9456506919070928	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+592	CLEAR	0.9550188974456132	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+593	CLEAR	0.9248080853276146	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+594	CLEAR	0.918412518954232	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+595	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+596	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+597	HEAVY	0.6849440202244528	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+598	HEAVY	0.7035875959205643	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+599	HEAVY	0.9989788226138886	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+600	HEAVY	0.9987539491056948	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+601	HEAVY	0.9987233562210213	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+602	HEAVY	0.9987893269241231	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+603	CLEAR	0.9124996055091477	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+604	CLEAR	0.9082318845538205	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+605	CLEAR	0.9571442765437904	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+606	CLEAR	0.9659755026081072	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+607	MODERATE	0.8607753681544059	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+608	MODERATE	0.8883514272202819	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+609	MODERATE	0.9067311396061407	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+610	MODERATE	0.9159737176410047	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+611	HEAVY	0.8231133255748407	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+612	HEAVY	0.7951812352610147	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+613	HEAVY	0.8415298153288202	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+614	HEAVY	0.8387009107034277	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+615	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+616	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+617	CLEAR	0.9872854455443881	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+618	CLEAR	0.9859169954147115	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+619	HEAVY	0.7993995711957187	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+620	HEAVY	0.7805699115678066	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+621	MODERATE	0.7657829489649571	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+622	MODERATE	0.8151677342701336	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+623	HEAVY	0.9953587845680453	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+624	HEAVY	0.995457888861093	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+625	HEAVY	0.7377910604294139	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+626	HEAVY	0.7489204075170344	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+627	CLEAR	0.8913853712315191	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+628	CLEAR	0.8778855221327834	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+629	CLEAR	0.9204281618261847	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+630	CLEAR	0.9532966344425946	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+631	HEAVY	0.8397428853650348	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+632	HEAVY	0.832617160386076	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+633	HEAVY	0.7028413337604987	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+634	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+635	HEAVY	0.9947301261236551	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+636	HEAVY	0.9943361272310574	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+637	HEAVY	0.997498874041929	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+638	HEAVY	0.9977969867822026	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+639	CLEAR	0.9926075496485797	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+640	CLEAR	0.9942764390557138	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+641	CLEAR	0.9341563773059585	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+642	CLEAR	0.9426520868351307	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+643	CLEAR	0.9632958657300856	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+644	CLEAR	0.9643090091945207	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+645	HEAVY	0.6933461646893765	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+646	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+647	HEAVY	0.9863324189931357	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+648	HEAVY	0.9883815438780784	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+649	HEAVY	0.9866233593100733	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+650	HEAVY	0.9820811871960757	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+651	CLEAR	0.9968958150564129	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+652	CLEAR	0.9977322145809854	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+653	CLEAR	0.9978121755686632	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+654	CLEAR	0.9964380858743174	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+655	CLEAR	0.905166062119579	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+656	CLEAR	0.9306404798225535	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+657	CLEAR	0.9699520386873498	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+658	CLEAR	0.9768541287860508	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+659	CLEAR	0.8973103691688333	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+660	CLEAR	0.9194460232003945	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+661	CLEAR	0.9756795178035604	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+662	CLEAR	0.9828062180221923	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+663	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+664	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+665	CLEAR	0.7570824732537276	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+666	CLEAR	0.727224338602436	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+667	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+668	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+669	HEAVY	0.9238375146076165	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+670	HEAVY	0.9277868018398308	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+671	HEAVY	0.9781694545096816	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+672	HEAVY	0.9707460428385379	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+673	HEAVY	0.9978064044882778	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+674	HEAVY	0.9968327143593538	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+675	CLEAR	0.9407452810259754	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+676	CLEAR	0.943502135814084	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+677	CLEAR	0.931449739084928	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+678	CLEAR	0.9286493405219786	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+679	HEAVY	0.7994373754154259	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+680	HEAVY	0.7810577346961899	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+681	HEAVY	0.6725854005559303	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+682	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+683	HEAVY	0.9398357531763937	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+684	HEAVY	0.9428254266692748	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+685	HEAVY	0.908620769915636	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+686	HEAVY	0.9123638441292673	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+687	UNKNOWN	0.0	hold	3	hold	Music or mixed media; keep current program
+688	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+689	CLEAR	0.9277794414474769	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+690	CLEAR	0.9551509586113738	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+691	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+692	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+693	MODERATE	0.9376547378053695	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+694	MODERATE	0.9282302631912758	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+695	HEAVY	0.990366538829627	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+696	HEAVY	0.9923255860778054	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+697	HEAVY	0.9487882561021997	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+698	HEAVY	0.9545591967754355	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+699	CLEAR	0.9596352025276524	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+700	CLEAR	0.9530740170079163	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+701	CLEAR	0.871784707471327	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+702	CLEAR	0.8264326809558853	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+703	HEAVY	0.9893456934737814	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+704	HEAVY	0.9873112220170783	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+705	HEAVY	0.666265614286839	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+706	HEAVY	0.6894727862654515	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+707	HEAVY	0.998367269394507	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+708	HEAVY	0.9984994752375987	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+709	HEAVY	0.9920123625987322	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+710	HEAVY	0.9920570060650507	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+711	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+712	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+713	CLEAR	0.9577752229594756	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+714	CLEAR	0.9501357025407345	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+715	HEAVY	0.7183274468658538	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+716	HEAVY	0.753483401239984	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+717	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+718	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+719	HEAVY	0.9968349015620533	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+720	HEAVY	0.9971070889521073	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+721	HEAVY	0.9738436331055419	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+722	HEAVY	0.9672257436733335	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+723	CLEAR	0.9291489391775005	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+724	CLEAR	0.9461336998390412	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+725	CLEAR	0.97665767837648	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+726	CLEAR	0.9849903212436933	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+727	CLEAR	0.7900781699337219	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+728	CLEAR	0.7989608470061756	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+729	CLEAR	0.8716540276956442	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+730	CLEAR	0.9018003261351885	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+731	CLEAR	0.7590569398651871	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+732	CLEAR	0.7894729349838709	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+733	CLEAR	0.9560284987749607	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+734	CLEAR	0.9714723279408347	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+735	CLEAR	0.9975131326551827	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+736	CLEAR	0.9974131912505336	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+737	CLEAR	0.9990632414065986	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+738	CLEAR	0.9992170133470474	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+739	CLEAR	0.7394462996156763	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+740	CLEAR	0.7389199748450958	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+741	CLEAR	0.7847297042731707	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+742	CLEAR	0.7825338673093436	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+743	HEAVY	0.9885309483998408	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+744	HEAVY	0.9868777149959541	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+745	HEAVY	0.994118188741877	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+746	HEAVY	0.9950449340119488	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+747	CLEAR	0.788523116375825	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+748	CLEAR	0.7385530833017281	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+749	CLEAR	0.9923955112032069	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+750	CLEAR	0.9917165643474348	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+751	MODERATE	0.7475092818372226	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+752	MODERATE	0.7331825816784667	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+753	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+754	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+755	HEAVY	0.8931247340059054	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+756	HEAVY	0.9052803845443769	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+757	HEAVY	0.8178120473832201	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+758	HEAVY	0.786273645307366	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+759	CLEAR	0.6825912723567084	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+760	CLEAR	0.6717850615081247	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+761	CLEAR	0.9981418010385366	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+762	CLEAR	0.9990550962561917	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+763	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+764	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+765	MODERATE	0.7270336235438265	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+766	MODERATE	0.7730849284767966	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+767	HEAVY	0.9937232344221573	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+768	HEAVY	0.9943158013551205	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+769	HEAVY	0.9234753338317503	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+770	HEAVY	0.9041790178194841	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+771	CLEAR	0.8229062704798948	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+772	CLEAR	0.8389142883134307	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+773	CLEAR	0.9788291254911269	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+774	CLEAR	0.9887862423625458	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+775	HEAVY	0.9597095478665928	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+776	HEAVY	0.9674582546790427	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+777	HEAVY	0.9580946458322108	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+778	HEAVY	0.9420925433136823	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+779	HEAVY	0.9985140316704523	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+780	HEAVY	0.9985721717528712	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+781	HEAVY	0.9996869245201435	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+782	HEAVY	0.9996929369617816	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+783	CLEAR	0.9961298734040046	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+784	CLEAR	0.9970368114185391	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+785	CLEAR	0.9997183624350935	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+786	CLEAR	0.9996417540340119	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+787	CLEAR	0.9139942096171936	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+788	CLEAR	0.9349779921855147	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+789	CLEAR	0.9905961036316822	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+790	CLEAR	0.9929088521580159	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+791	HEAVY	0.9492998451013517	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+792	HEAVY	0.9343260132323427	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+793	HEAVY	0.7504549858735056	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+794	HEAVY	0.7610474435834996	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+795	CLEAR	0.9577866558749389	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+796	CLEAR	0.9647671014160718	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+797	CLEAR	0.9931490688501895	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+798	CLEAR	0.9958885742317893	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+799	CLEAR	0.9330422852395748	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+800	CLEAR	0.9437022064022066	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+801	CLEAR	0.931608181695453	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+802	CLEAR	0.9670043854105381	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+803	CLEAR	0.9644402860178345	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+804	CLEAR	0.9761206290273934	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+805	CLEAR	0.99520901119575	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+806	CLEAR	0.9947751566887191	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+807	CLEAR	0.9781751314598172	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+808	CLEAR	0.9786191280669295	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+809	CLEAR	0.9949314493028303	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+810	CLEAR	0.9959109626575825	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+811	CLEAR	0.8074988625094294	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+812	CLEAR	0.8066143482562308	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+813	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+814	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+815	HEAVY	0.9985981821155527	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+816	HEAVY	0.9987124333438238	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+817	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+818	HEAVY	0.999781095056839	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+819	CLEAR	0.7530494173527446	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+820	CLEAR	0.7317494005813922	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+821	CLEAR	0.9772959196320016	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+822	CLEAR	0.9841959978535089	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+823	MODERATE	0.7896811574048744	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+824	MODERATE	0.8024787616964265	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+825	MODERATE	0.9201299506258109	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+826	MODERATE	0.9199714086319098	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+827	HEAVY	0.9897330388371466	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+828	HEAVY	0.9907894858031776	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+829	HEAVY	0.941816020978954	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+830	HEAVY	0.9347348998037289	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+831	MODERATE	0.7155620913479258	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+832	MODERATE	0.7277622496825967	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+833	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+834	CLEAR	0.7629362102657689	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+835	MODERATE	0.8052829659896795	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+836	MODERATE	0.8474871141995967	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+837	MODERATE	0.8107806768800982	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+838	MODERATE	0.8665149039789476	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+839	HEAVY	0.9747969327674677	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+840	HEAVY	0.9749471579307321	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+841	HEAVY	0.8682188348931772	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+842	HEAVY	0.8749590657577582	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+843	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+844	CLEAR	0.6705792917478757	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+845	CLEAR	0.9595901428916158	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+846	CLEAR	0.961513152037868	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+847	HEAVY	0.9830214487560347	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+848	HEAVY	0.98299567075414	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+849	HEAVY	0.9233692939307238	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+850	HEAVY	0.9233403717002651	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+851	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+852	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+853	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+854	HEAVY	0.9971227251067878	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+855	CLEAR	0.9184976484404606	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+856	CLEAR	0.8957611792179991	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+857	CLEAR	0.9162729602287564	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+858	CLEAR	0.9256171794627746	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+859	HEAVY	0.6922704477516693	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+860	HEAVY	0.6738606712600648	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+861	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+862	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+863	HEAVY	0.9847134861183372	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+864	HEAVY	0.9864451832065655	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+865	HEAVY	0.9824434291046081	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+866	HEAVY	0.9809595900476427	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+867	CLEAR	0.9762284174960119	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+868	CLEAR	0.9761314819929132	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+869	CLEAR	0.9483236868690925	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+870	CLEAR	0.9640529865109094	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+871	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+872	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+873	CLEAR	0.8981512333745316	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+874	CLEAR	0.9503054918821147	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+875	CLEAR	0.932343645029899	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+876	CLEAR	0.9580688028025279	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+877	CLEAR	0.6805420577365965	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+878	CLEAR	0.8304009617335921	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+879	CLEAR	0.9829951522929297	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+880	CLEAR	0.9773031877652024	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+881	CLEAR	0.9868936798645593	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+882	CLEAR	0.985278378298002	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+883	HEAVY	0.7889818768388123	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+884	HEAVY	0.8240498096559449	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+885	HEAVY	0.782876141135072	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+886	HEAVY	0.7945149249743405	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+887	HEAVY	0.9998128604261618	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+888	HEAVY	0.9996979031940934	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+889	HEAVY	0.9999140764303494	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+890	HEAVY	0.9999214557201774	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+891	CLEAR	0.9057877573667016	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+892	CLEAR	0.9214434939013666	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+893	CLEAR	0.7919563922850082	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+894	CLEAR	0.7800071713438015	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+895	MODERATE	0.7421556798644933	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+896	MODERATE	0.7476678202856464	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+897	MODERATE	0.8784473182887019	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+898	MODERATE	0.8716781682814874	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+899	HEAVY	0.9702136738024862	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+900	HEAVY	0.9637480365458134	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+901	HEAVY	0.9152929800555217	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+902	HEAVY	0.8957731681489725	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+903	MODERATE	0.7662970815556149	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+904	MODERATE	0.744105725043766	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+905	CLEAR	0.65960531500891	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+906	CLEAR	0.6831562161386907	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+907	HEAVY	0.7883184473911479	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+908	HEAVY	0.7674269912868533	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+909	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+910	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+911	HEAVY	0.9867289440580643	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+912	HEAVY	0.98720873761081	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+913	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+914	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+915	CLEAR	0.9942729024901189	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+916	CLEAR	0.9948893548512623	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+917	CLEAR	0.9773020325625515	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+918	CLEAR	0.975213438450794	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+919	HEAVY	0.987390033177633	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+920	HEAVY	0.9875063536269196	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+921	HEAVY	0.996174243261057	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+922	HEAVY	0.9953660964076946	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+923	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+924	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+925	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+926	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+927	CLEAR	0.9775202202342391	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+928	CLEAR	0.983494521657743	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+929	CLEAR	0.9285378782048829	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+930	CLEAR	0.9346330479397085	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+931	CLEAR	0.6837145688146135	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+932	CLEAR	0.6521089622241288	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+933	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+934	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+935	HEAVY	0.956845295944189	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+936	HEAVY	0.9507548164001725	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+937	HEAVY	0.9345499493589368	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+938	HEAVY	0.9454486029550145	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+939	CLEAR	0.9969783032148926	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+940	CLEAR	0.9973722145945326	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+941	CLEAR	0.9877798739771496	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+942	CLEAR	0.9836991191814127	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+943	CLEAR	0.668779456096407	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+944	CLEAR	0.706061321060851	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+945	MODERATE	0.769644267966028	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+946	MODERATE	0.8132818255139823	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+947	CLEAR	0.9384975578712215	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+948	CLEAR	0.9518554116780249	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+949	CLEAR	0.7263691895943085	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+950	CLEAR	0.7540106886439023	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+951	CLEAR	0.9634949990191333	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+952	CLEAR	0.9654506613856261	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+953	CLEAR	0.9865612720291983	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+954	CLEAR	0.9817764054098886	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+955	HEAVY	0.9530933982630307	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+956	HEAVY	0.9468181561632915	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+957	HEAVY	0.9623328452054022	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+958	HEAVY	0.9524960472391861	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+959	HEAVY	0.999707222489751	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+960	HEAVY	0.9996698384074132	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+961	HEAVY	0.9999533305226594	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+962	HEAVY	0.9999450075412539	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+963	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+964	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+965	CLEAR	0.9203302293864528	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+966	CLEAR	0.8874018670558287	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+967	HEAVY	0.9079470565567594	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+968	HEAVY	0.9109677342401222	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+969	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+970	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+971	HEAVY	0.9846339919921832	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+972	HEAVY	0.9854333184787083	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+973	HEAVY	0.9757054176198711	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+974	HEAVY	0.9763277361881929	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+975	MODERATE	0.6860162960708477	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+976	MODERATE	0.6907728426285182	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+977	CLEAR	0.7097239351477892	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+978	CLEAR	0.752558403246749	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+979	MODERATE	0.9743294545237077	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+980	MODERATE	0.9757957997941772	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+981	MODERATE	0.9869466786237149	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+982	MODERATE	0.9831064615058908	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+983	HEAVY	0.8195849210930664	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+984	HEAVY	0.8033738207420047	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+985	HEAVY	0.745212962233706	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+986	HEAVY	0.7704955646192212	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+987	HEAVY	0.6911204592713656	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+988	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+989	CLEAR	0.9376897443422857	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+990	CLEAR	0.930193200216995	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+991	HEAVY	0.9992342082661106	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+992	HEAVY	0.9993349258357743	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+993	HEAVY	0.997344087656612	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+994	HEAVY	0.9966239362785552	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+995	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+996	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+997	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+998	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+999	CLEAR	0.9275831616316812	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1000	CLEAR	0.9410594992230964	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1001	CLEAR	0.6698498555872374	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1002	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1003	HEAVY	0.8993786332558619	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1004	HEAVY	0.9152829581470208	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1005	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1006	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1007	HEAVY	0.9839184830969883	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1008	HEAVY	0.9840637098560192	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1009	HEAVY	0.8979655849363462	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1010	HEAVY	0.8760833176527697	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1011	CLEAR	0.9975907771536203	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1012	CLEAR	0.9981385163480733	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1013	CLEAR	0.9948111569342694	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1014	CLEAR	0.9944241001598195	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1015	CLEAR	0.9357553071750392	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1016	CLEAR	0.9505649998662244	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1017	CLEAR	0.9843921086915149	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1018	CLEAR	0.99005125398126	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1019	CLEAR	0.9875581470147349	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1020	CLEAR	0.9877626946965445	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1021	CLEAR	0.950037744064251	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1022	CLEAR	0.9765563906107093	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1023	CLEAR	0.7768144098854634	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1024	CLEAR	0.821398727412268	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1025	CLEAR	0.6674859650679743	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1026	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1027	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1028	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1029	HEAVY	0.7358043938313319	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1030	HEAVY	0.7480006710001373	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1031	HEAVY	0.9763173464824858	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1032	HEAVY	0.9777889238520979	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1033	HEAVY	0.986652127302464	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1034	HEAVY	0.986584061737304	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1035	CLEAR	0.9270793539974961	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1036	CLEAR	0.9127004082942982	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1037	CLEAR	0.9744827944004539	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1038	CLEAR	0.9736364768682976	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1039	MODERATE	0.6594437986610655	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1040	MODERATE	0.654637892213012	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1041	MODERATE	0.8549534637624998	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1042	MODERATE	0.8698657610306237	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1043	HEAVY	0.9131942224230641	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1044	HEAVY	0.9020812409233	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1045	HEAVY	0.8784700097364939	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1046	HEAVY	0.8556085786902441	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1047	CLEAR	0.8276316409266032	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1048	CLEAR	0.8032887794039142	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1049	CLEAR	0.7881666110693261	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1050	CLEAR	0.7998776008693755	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1051	MODERATE	0.9627239542344718	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1052	MODERATE	0.9627655965888886	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1053	MODERATE	0.9513594964067028	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1054	MODERATE	0.9533769011921278	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1055	HEAVY	0.9577772335965489	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1056	HEAVY	0.9470000232081435	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1057	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1058	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1059	CLEAR	0.9976118582497242	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1060	CLEAR	0.9969611648003252	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1061	CLEAR	0.9822514115048264	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1062	CLEAR	0.9830267408939211	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1063	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1064	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1065	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1066	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1067	HEAVY	0.9799521995276864	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1068	HEAVY	0.9805607761162408	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1069	HEAVY	0.9875670308594644	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1070	HEAVY	0.9874495862656513	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1071	CLEAR	0.8082950366127042	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1072	CLEAR	0.8161609496504728	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1073	CLEAR	0.8245038667725063	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1074	CLEAR	0.7916935158030415	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1075	HEAVY	0.7694347306386145	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1076	HEAVY	0.7508519814223938	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1077	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1078	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1079	HEAVY	0.9727325001146488	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1080	HEAVY	0.9717287447647817	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1081	HEAVY	0.9605516871583919	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1082	HEAVY	0.9723844719926814	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1083	CLEAR	0.9832876394342039	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1084	CLEAR	0.9805896559637983	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1085	CLEAR	0.9638841825093885	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1086	CLEAR	0.9577419068720011	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1087	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1088	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1089	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1090	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1091	CLEAR	0.6648092072392562	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1092	CLEAR	0.6949463292825796	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1093	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1094	HEAVY	0.6805316928042069	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1095	CLEAR	0.6500697450776758	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1096	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1097	CLEAR	0.6906769732515348	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1098	CLEAR	0.725886633196433	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1099	MODERATE	0.6713572768882297	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1100	MODERATE	0.7022374289557807	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1101	HEAVY	0.7546684882436528	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1102	HEAVY	0.7350831019370829	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1103	HEAVY	0.8873338021513258	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1104	HEAVY	0.8825952322359569	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1105	HEAVY	0.9698485963011919	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1106	HEAVY	0.967236722703163	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1107	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1108	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1109	CLEAR	0.8583116652171048	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1110	CLEAR	0.8388766496896977	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1111	MODERATE	0.8264763685471685	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1112	MODERATE	0.7992935305786256	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1113	MODERATE	0.8251192121594755	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1114	MODERATE	0.8253196386529086	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1115	HEAVY	0.8875280844531717	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1116	HEAVY	0.9014143562778503	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1117	HEAVY	0.8306249189439283	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1118	HEAVY	0.8428946304928341	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1119	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1120	HEAVY	0.7016250122926991	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1121	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1122	MODERATE	0.6893934101921421	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1123	HEAVY	0.6514297901263147	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1124	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1125	MODERATE	0.9781637631177015	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1126	MODERATE	0.9779931268916219	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1127	HEAVY	0.9891603823070654	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1128	HEAVY	0.9854689249543251	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1129	HEAVY	0.8058524093450479	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1130	HEAVY	0.7769657838577281	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1131	CLEAR	0.9400952951281505	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1132	CLEAR	0.9359454661190832	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1133	CLEAR	0.8228830054276519	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1134	CLEAR	0.7983100738633165	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1135	HEAVY	0.8164083700637609	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1136	HEAVY	0.8367975437519554	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1137	MODERATE	0.6740362081828586	2	3	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1138	MODERATE	0.6575516672125956	2	2	hold	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1139	HEAVY	0.9172975952009021	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1140	HEAVY	0.9250837942293058	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1141	HEAVY	0.9413682266605573	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1142	HEAVY	0.952051916644247	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1143	CLEAR	0.7770423547954112	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1144	CLEAR	0.778357083403304	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1145	CLEAR	0.8429000716444521	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1146	CLEAR	0.8041559384162341	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1147	HEAVY	0.836595545418206	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1148	HEAVY	0.7605795089506082	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1149	HEAVY	0.7027417604615168	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1150	HEAVY	0.6679593638789911	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1151	HEAVY	0.9901683477930154	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1152	HEAVY	0.9892476472563101	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1153	HEAVY	0.9655613458893988	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1154	HEAVY	0.9627222241376715	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1155	CLEAR	0.9165151983967736	hold	3	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1156	CLEAR	0.935548202357449	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1157	CLEAR	0.8627458990734336	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1158	CLEAR	0.8666564907526795	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1159	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1160	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1161	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1162	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1163	CLEAR	0.6954952738729823	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1164	CLEAR	0.6663785465702731	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1165	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1166	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1167	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1168	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1169	HEAVY	0.98228464724237	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1170	HEAVY	0.9807596146813943	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1171	HEAVY	0.9986135289647933	3	3	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1172	HEAVY	0.9988102755663616	3	2	3	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1173	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1174	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1175	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+1176	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1177	CLEAR	0.9998586734114369	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1178	CLEAR	0.9877236332053632	hold	2	1	Experimental masking estimate, not measured intelligibility or target-speaker identity
+1179	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+1180	UNKNOWN	0.0	hold	3	hold	Interrupted, clipped or isolated sound; keep current program
+1181	UNKNOWN	0.0	hold	hold	hold	No reliable speech evidence; keep current program

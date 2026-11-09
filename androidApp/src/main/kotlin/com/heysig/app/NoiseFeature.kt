@@ -21,8 +21,14 @@ class NoiseFeature(
     private val sendProgram: (Int, (Boolean) -> Unit) -> Unit,
     private val prefs: android.content.SharedPreferences = activity.getSharedPreferences("heysig-noise-v1",Activity.MODE_PRIVATE),
     private val prepareAutomatic: (() -> (() -> Unit))?=null,
-    private val openSoundType: (() -> Unit)?=null
+    private val openSoundType: (() -> Unit)?=null,
+    private val prepareSpeechAutomatic: (() -> Unit)?=null
 ) {
+    private val speechAutomatic by lazy { SpeechAutomaticFeature(activity,programs,{
+        automaticSettings().let { if(stored && reviewedFitting==fittingSignature()) it else it.copy(programs=List(6) { null }) }
+    },safety,{
+        stop();prepareSpeechAutomatic?.invoke();checkNotNull(prepareAutomatic) { "Automatic needs the visible phone adapter" }.invoke()
+    }) }
     private var settings = NoiseSettings()
     private var stored = false
     private var loadError: String? = null
@@ -49,7 +55,7 @@ class NoiseFeature(
     }
     private fun learningStatus(): String {
         AutomaticNoiseService.running?.learner?.let { learner=it }
-        val learned=learner ?: return "Threshold learning: starts with Automatic; no changes without approval."
+        val learned=learner ?: return "Speech-aware Automatic uses a fixed model; it does not learn or change saved thresholds."
         return if(learned.suggest(SystemClock.elapsedRealtime())!=null) "Threshold suggestion ready · Review learned thresholds."
         else "Learning thresholds: ${learned.sampleCount} valid measurements · saved thresholds unchanged."
     }
@@ -145,11 +151,13 @@ class NoiseFeature(
     } else if(calibrated()) "Measured calibration matches this device and saved capture settings." else "Calibration optional; Automatic uses saved thresholds."
 
     fun detachEditor() {
+        speechAutomatic.detach()
         // Preserve invalid text by refusing navigation until it is fixed or discarded.
         readEditor?.let { draft = it() }
         readEditor = null; refreshEditor = null; runtime = null; automaticButton = null; graph = null; calibrationRuntime = null; refreshCalibration = null
     }
     fun stop() {
+        SpeechAutomaticService.cancel()
         AutomaticNoiseService.stop(activity)
         stopLocal()
     }
@@ -164,7 +172,7 @@ class NoiseFeature(
             val description=next;if(contentDescription?.toString()!=description) contentDescription=description
         }
         automaticButton?.apply {
-            val on=AutomaticNoiseService.active || mode=="Automatic"
+            val on=SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic"
             val next=if(on) "On" else "Off"
             if(text.toString()!=next) text=next
             contentDescription=if(on) "Automatic On. Tap to turn Off" else "Automatic Off. Tap to turn On"
@@ -174,6 +182,7 @@ class NoiseFeature(
         AutomaticNoiseService.running?.samples?.takeIf { it.isNotEmpty() }?.let { samples ->
             recentSamples.clear();recentSamples.addAll(samples)
         }
+        SpeechAutomaticService.running?.soundLevels?.takeIf { it.isNotEmpty() }?.let { samples -> recentSamples.clear();recentSamples.addAll(samples) }
         graph?.apply { boundaries=settings.boundaries;samples=recentSamples.toList() }
         calibrationRuntime?.text=calibrationProgress()
         refreshCalibration?.invoke()
@@ -195,8 +204,11 @@ class NoiseFeature(
         return if(extra.isEmpty()) progress else activity.getString(R.string.two_lines,progress,extra)
     }
     private fun summary(): String {
+        SpeechAutomaticService.running?.let { return it.summary() }
+        if(SpeechAutomaticService.active) return "Speech-aware Automatic starting…"
         AutomaticNoiseService.running?.let { return it.summary() }
         if(AutomaticNoiseService.active) return "Automatic starting…"
+        if(mode=="Off") speechAutomatic.offStatus()?.let { return "Automatic Off\n$it" }
         return buildString {
         append(when {
             mode == "Automatic" -> "Automatic is On"
@@ -218,7 +230,7 @@ class NoiseFeature(
             (measurement?.let { "RMS index: ${"%.1f".format(java.util.Locale.US,it.rmsDbfs)} dBFS (relative digital level, not sound-pressure dB)\n" } ?: "") +
             (observation.level?.let { "Noise level $it → ${label(observation.target)}; confirmations ${observation.count}/${settings.confirmations}; age ${age}s\n" } ?: "") +
             (observation.proposed?.takeIf { mode == "Observe" || mode == "Automatic preview" }?.let { "Would select ${label(it)}. No command sent.\n" } ?: "") +
-            calibrationText()+"\n${learningStatus()}\nAutomatic uses saved thresholds and can continue in its notified microphone session with the screen off. Preview and calibration require an open, unlocked app. Physical aid reception is unconfirmed."
+            calibrationText()+"\n${learningStatus()}\nSpeech-aware Automatic uses its fixed masking model and chosen programs. Level-only tools retain your saved thresholds. Preview and calibration require an open, unlocked app. Physical aid reception is unconfirmed."
     }
     fun render(content: LinearLayout, page: String = "Noise", navigate: (String) -> Unit = {}) {
         val firstView = content.childCount
@@ -237,8 +249,8 @@ class NoiseFeature(
             try { PhoneStyle.heading(activity,target,title); build() } finally { target = parent }
         }
         group("Automatic noise") {
-            line("HeySig can choose your hearing-aid program as sound around you changes. Tap the button to turn this on or off.")
-            automaticButton=button("Off") { handle(if(AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
+            line("HeySig chooses your program from how much other sound masks speech. Quiet or clear speech returns to Everyday after repeated checks. Unsure means keep the current program.")
+            automaticButton=button("Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
             openSoundType?.let { open -> button("Check speech and noise",open) }
             runtime = line(summary()).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_NONE; contentDescription=summary() }
             graph=NoiseGraphView(activity).also { target.addView(it,LinearLayout.LayoutParams(-1,PhoneStyle.dp(activity,(180*activity.resources.configuration.fontScale).toInt()))) }
@@ -248,7 +260,7 @@ class NoiseFeature(
         }
         group("Guided calibration") {
             calibrationRuntime = line(calibrationProgress())
-            line("Optional: help HeySig recognise sound levels on this phone. Follow the prompts to check six everyday places, from quietest to loudest. Use comfortable sounds already around you. You do not need to do this to use Automatic. Your choices stay the same until you review and save.")
+            line("Optional measurements for the older level-only tools. Speech-aware Automatic does not use calibration. Your saved measurements stay unchanged until you review and save.")
             button("Start new calibration") {
                 android.app.AlertDialog.Builder(activity).setTitle("Measure six listening levels?")
                     .setMessage("This replaces only unfinished calibration samples. Saved settings stay unchanged until you apply and save. Use naturally occurring, comfortable environments; if six levels cannot be separated, keep using Observe.")
@@ -383,18 +395,17 @@ class NoiseFeature(
         if(page == "Noise") {
             button("How to use") {
                 android.app.AlertDialog.Builder(activity).setTitle("Using Automatic")
-                    .setMessage("First time: on Home, choose your usual daytime program.\n\n1. Tap Choose programs. Choose the programs you want for quiet and noisy places, then Save.\n\n2. Tap the red Off button to turn Automatic on. The button turns green and says On. The first time, follow the microphone and notification prompts.\n\n3. Keep the phone where your hearing aids can hear its program-change tones. You can lock the screen or use another app.\n\nWhen the room gets quieter, HeySig waits before changing back. With the usual settings, allow about a minute and a half after the last change. The screen shows the wait.\n\nTo stop, tap the green On button. If you are on another screen, swipe down from the top of the phone. Find the HeySig message and tap Off.\n\nAutomatic stops after 8 hours. Choosing a program yourself also stops it. Turn it on again when you want. Therapy stays under your control.\n\nOptional sound setup and Try without changing programs are there if you want extra help. You do not need them to start.")
+                    .setMessage("First time: on Home, choose your usual daytime program.\n\n1. Tap Choose programs. Pick Everyday, Noisy and Very Noisy from your own program names. Tap Save speech program choices before going back. Turning Automatic on here also saves your choices.\n\n2. Tap the red Off button to turn Automatic on. The button turns green and says On. The first time, follow the microphone and notification prompts.\n\n3. Keep the phone where your hearing aids can hear its program-change tones. You can lock the screen or use another app.\n\nWhen the room gets quieter, HeySig waits before changing back. With the usual settings, allow about a minute and a half after the last change. The screen shows the wait.\n\nTo stop, tap the green On button. If you are on another screen, swipe down from the top of the phone. Find the HeySig message and tap Off.\n\nAutomatic stops after 8 hours. Choosing a program yourself also stops it. Turn it on again when you want. Therapy stays under your control.\n\nNo recordings, calibration or learning period is needed. The model estimates speech masking, not just loudness. It can make mistakes; unsure means keep the current program.")
                     .setPositiveButton("Got it",null).show()
             }
             button("Choose programs") { navigate("NoiseSetup") }
             button("Optional sound setup") { navigate("NoiseCalibration") }
-            button("Try without changing programs") { navigate("NoiseDetails") }
         }
         if(page == "NoiseSetup") {
+            speechAutomatic.render(content,firstView)
             button("Optional: check sound levels") { navigate("NoiseCalibration") }
             button("Advanced measurement settings") { navigate("NoiseMeasure") }
         }
-        if(page == "NoiseCalibration") button("Try without changing programs") { navigate("NoiseDetails") }
         refreshCalibration = {
             val complete=calibration.levels.all { it.size == 3 }
             fun show(label:String, visible:Boolean) { calibrationButtons[label]?.visibility=if(visible) android.view.View.VISIBLE else android.view.View.GONE }
@@ -424,7 +435,7 @@ class NoiseFeature(
             val details=TextView(activity).apply { text=status();PhoneStyle.text(this,16f,color=PhoneStyle.secondary);visibility=android.view.View.GONE }
             button("Extra details") { details.text=status();details.visibility=if(details.visibility==android.view.View.VISIBLE) android.view.View.GONE else android.view.View.VISIBLE }
             content.addView(details)
-            automaticButton=button("Off") { handle(if(AutomaticNoiseService.active) NoiseCommand.Stop else NoiseCommand.Automatic) }
+            automaticButton=button("Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active) NoiseCommand.Stop else NoiseCommand.Automatic) }
             update()
 
         }
@@ -506,7 +517,7 @@ class NoiseFeature(
                 NoiseCommand.CalibrationApply -> { applyCalibration();tell(detail,true) }
                 NoiseCommand.CalibrationCancel -> { cancelCalibration();tell(detail,true) }
                 NoiseCommand.Automatic -> {
-                    start(true,automaticMode=true)
+                    speechAutomatic.start()
                 }
                 NoiseCommand.Discard -> { stop();calibrationStartUntil=0;calibrationReview=null; draft = settings; proof = savedProof; refreshEditor?.invoke(); update(); tell("Noise draft discarded",true) }
                 NoiseCommand.Save -> saveNoiseSettings()
@@ -536,6 +547,7 @@ class NoiseFeature(
         } catch(e:Exception) { tell("Noise: ${e.message}",true) }
     }
     private fun start(repeat:Boolean, calibrationSample:Boolean = false, preview:Boolean = false, automaticMode:Boolean = false) {
+        SpeechAutomaticService.cancel()
         com.heysig.app.voice.HandsFreeService.running?.control(com.heysig.voice.HandsFreeControl.OFF)
         readEditor?.let { draft = it() }
         check(mode == "Off" && !AutomaticNoiseService.active) { "Noise capture already active; turn Off first" }

@@ -1,5 +1,17 @@
 # Google Play readiness — audited October 16, 2026
 
+November 9 owner-directed change: normal phone Automatic now uses a separately
+trained local speech-masking head and speech-focused features, without calibration
+or wearer learning. The owner explicitly removed the preview/acceptance enable
+lock and authorized live program changes. This is not detector or physical
+acceptance. See the [service/data-flow review](speech-automatic-background-design-2026-11-09.md)
+and [user guide](speech-aware-automatic.md). The existing shared validated executor,
+manual/Therapy priority and cooldown remain. Saved fitting and six legacy
+assignments are retained. No new runtime dependency or manifest permission is
+added. Real field accuracy, intended-speaker handling, sustained battery testing,
+physical aid reception and release-specific review remain open; no submission
+or Play approval is asserted.
+
 November 8 speech/noise follow-up: a separately disclosed foreground-only,
 five-minute display experiment reuses the pinned local event model in bounded
 three-second captures. It does not select programs or qualify the experimental

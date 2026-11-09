@@ -49,8 +49,9 @@ successful APK build is not Play approval.
   sleep voice aliases, internal IDs and persisted keys compatible; never erase
   saved fitting or routine choices for a terminology change.
 
-- Show only Build followed by the Git revision in user-facing build labels.
-  Omit build type, version name and numeric version code from those labels.
+- Show Build followed by the Git revision and its date in user-facing build
+  labels (owner update, November 9, 2026). Omit build type, version name and
+  numeric version code from those labels.
 
 - Automatic threshold learning reuses existing foreground samples only. Keep
   learning bounded and memory-only; never save audio or transcript history.
@@ -61,3 +62,12 @@ successful APK build is not Play approval.
   to the project's GitHub repository before producing/installing final device
   APKs. The displayed Build ID must identify that pushed commit. Preserve
   unrelated local work and do not silently include it in an update commit.
+
+- November 9 owner-directed Automatic change: the owner explicitly removed the
+  speech-masking preview/acceptance enable lock and authorized live program
+  changes. Normal phone Automatic uses saved speech roles and the fixed local
+  masking head, with no calibration/enrollment/learning period. Preserve the six
+  legacy assignments and all manual/Therapy/cooldown/executor protections.
+  Follow [the speech service review](docs/speech-automatic-background-design-2026-11-09.md).
+  Live enablement is not detector/physical acceptance; record measured errors
+  and actual physical results honestly. Older six-scene gates remain unchanged.

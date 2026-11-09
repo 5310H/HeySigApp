@@ -16,7 +16,8 @@ class SoundTypeFeature(
     private val activity: Activity,
     private val safety: () -> NoiseSafety,
     private val prepare: () -> Unit,
-    private val prefs: android.content.SharedPreferences=activity.getSharedPreferences("heysig-sound-type-v1",0)
+    private val prefs: android.content.SharedPreferences=activity.getSharedPreferences("heysig-sound-type-v1",0),
+    private val openProgramPreview:(()->Unit)?=null
 ) {
     private val handler=Handler(Looper.getMainLooper())
     @Volatile private var active=false
@@ -105,6 +106,7 @@ class SoundTypeFeature(
         PhoneStyle.heading(activity,card,"What does HeySig hear?")
         fun line(value:String)=TextView(activity).also { it.text=value;PhoneStyle.text(it);it.setPadding(0,8,0,16);card.addView(it) }
         line("Try a sound check. It only shows a description. Your hearing aids will not change.")
+        openProgramPreview?.let { open -> card.addView(Button(activity).apply { text="Choose Automatic programs for speech";setOnClickListener { stop();open() } }) }
         toggle=Button(activity).also { button ->
             card.addView(button);button.setOnClickListener { if(active) stop() else start() }
         }

@@ -5,7 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
 import android.view.View
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -32,9 +32,14 @@ object WatchStyle {
                 val danger = view.text.toString() == "Stop"
                 view.isAllCaps = false; view.textSize = 15f
                 view.typeface = Typeface.create("sans-serif",Typeface.BOLD)
-                view.setTextColor(if(primary) Color.BLACK else if(danger) Color.rgb(255,177,183) else Color.WHITE)
+                val foreground = if(primary) Color.BLACK else if(danger) Color.rgb(255,177,183) else Color.WHITE
+                val fill = if(primary) blue else if(danger) Color.rgb(66,25,30) else Color.rgb(32,34,40)
+                view.setTextColor(ColorStateList(arrayOf(intArrayOf(android.R.attr.state_pressed,android.R.attr.state_enabled),intArrayOf()),intArrayOf(fill,foreground)))
                 view.backgroundTintList = null
-                view.background = RippleDrawable(ColorStateList.valueOf(0x22FFFFFF),pill(context,if(primary) blue else if(danger) Color.rgb(66,25,30) else Color.rgb(32,34,40)),null)
+                view.background = StateListDrawable().apply {
+                    addState(intArrayOf(android.R.attr.state_pressed,android.R.attr.state_enabled),pill(context,foreground))
+                    addState(intArrayOf(),pill(context,fill))
+                }
                 view.minHeight = dp(context,52); view.minimumHeight = dp(context,52)
                 view.setPadding(dp(context,12),dp(context,12),dp(context,12),dp(context,12))
                 view.stateListAnimator = null

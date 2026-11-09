@@ -1,0 +1,508 @@
+{
+  "speech": {
+    "archiveSha256": "76f87d090650617fca0cac8f88b9416e0ebf80350acb97b343a85fa903728ab3",
+    "recordings": [
+      {
+        "id": "2277-149896-0032",
+        "file": "2277-149896-0032.flac",
+        "speaker": "2277",
+        "partition": "development",
+        "sha256": "56b640a079f27f9473478a20f068b8bd8af3afa7030d7a07cbbc7b3f19211689",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/2277/149896/2277-149896-0032.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "2277-149897-0005",
+        "file": "2277-149897-0005.flac",
+        "speaker": "2277",
+        "partition": "development",
+        "sha256": "61a532c7d431449bfc8d5ed7573007007abd3407d1a16254762ae50f5c9fe56d",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/2277/149897/2277-149897-0005.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "2035-152373-0005",
+        "file": "2035-152373-0005.flac",
+        "speaker": "2035",
+        "partition": "development",
+        "sha256": "2678f3763a53fddda4d39fcf946ce2f4304b14f0f26ce2691eb6f16dacf66212",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/2035/152373/2035-152373-0005.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "2035-152373-0013",
+        "file": "2035-152373-0013.flac",
+        "speaker": "2035",
+        "partition": "development",
+        "sha256": "aaa615b41c4e11cf552e2d39cdb06ae733bae2c53cb6ce5fa27a07e9fabb8bb7",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/2035/152373/2035-152373-0013.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "2086-149214-0004",
+        "file": "2086-149214-0004.flac",
+        "speaker": "2086",
+        "partition": "development",
+        "sha256": "290a02e83ad972fd69406da0a5507ae842fc19ebb75d0a2b2efbdecf45abad06",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/2086/149214/2086-149214-0004.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "2086-149214-0002",
+        "file": "2086-149214-0002.flac",
+        "speaker": "2086",
+        "partition": "development",
+        "sha256": "d8a554239028644d4b946cfb066e9dfec54dbec6bb6ba6f6928d035e66d193a6",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/2086/149214/2086-149214-0002.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "7976-110124-0006",
+        "file": "7976-110124-0006.flac",
+        "speaker": "7976",
+        "partition": "development",
+        "sha256": "049125de667d6e1a7d6ede9dc9bb44ccfa6caebfa12a9eff7cd24573c94aaff7",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/7976/110124/7976-110124-0006.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "7976-105575-0013",
+        "file": "7976-105575-0013.flac",
+        "speaker": "7976",
+        "partition": "development",
+        "sha256": "419445869894abdb7e4a4375f2011de10e167a557b304879bb29f6dbed6e43f6",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/7976/105575/7976-105575-0013.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "1988-147956-0001",
+        "file": "1988-147956-0001.flac",
+        "speaker": "1988",
+        "partition": "heldout",
+        "sha256": "84a4c71c2f297de0ec8f3d1519bfda4944a0b360b8a52329aff8709a6e5718eb",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/1988/147956/1988-147956-0001.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "1988-147956-0000",
+        "file": "1988-147956-0000.flac",
+        "speaker": "1988",
+        "partition": "heldout",
+        "sha256": "dd619997014d3a6d45b909f1295c847e81942193ef85c7366c2dade42244f102",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/1988/147956/1988-147956-0000.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "777-126732-0057",
+        "file": "777-126732-0057.flac",
+        "speaker": "777",
+        "partition": "heldout",
+        "sha256": "35653fa56f18e7a20c83ff8d10afbeacef3b126352b45c30c6682f1148800b8f",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/777/126732/777-126732-0057.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "777-126732-0079",
+        "file": "777-126732-0079.flac",
+        "speaker": "777",
+        "partition": "heldout",
+        "sha256": "fe3286759a125416f7106ffd2ec2d4d780f73913d7b62cb786d5bd1f03efe1ad",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/777/126732/777-126732-0079.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "84-121123-0002",
+        "file": "84-121123-0002.flac",
+        "speaker": "84",
+        "partition": "heldout",
+        "sha256": "453d47cd8fc7329ac868128a4ac919d7ced28fda9ee72303d2189f064f8d1324",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/84/121123/84-121123-0002.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "84-121123-0026",
+        "file": "84-121123-0026.flac",
+        "speaker": "84",
+        "partition": "heldout",
+        "sha256": "7c99da8a7fee04cc877eeee4e1826845b9798f20c8e7795d2daefa2a2b04e80a",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/84/121123/84-121123-0026.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "1673-143396-0014",
+        "file": "1673-143396-0014.flac",
+        "speaker": "1673",
+        "partition": "heldout",
+        "sha256": "a74094488de3a7371072b07497450c750b3ce1863fad3f3bf2338b097ea13f58",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/1673/143396/1673-143396-0014.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      },
+      {
+        "id": "1673-143396-0000",
+        "file": "1673-143396-0000.flac",
+        "speaker": "1673",
+        "partition": "heldout",
+        "sha256": "3e04afe2f2ce5cb949db8dfb3750eb758c2ea7ce30cd318df2e80c883d620b3c",
+        "source": "https://openslr.elda.org/resources/12/dev-clean.tar.gz",
+        "archiveMember": "LibriSpeech/dev-clean/1673/143396/1673-143396-0000.flac",
+        "license": "CC-BY-4.0",
+        "attribution": "LibriSpeech, V. Panayotov, G. Chen, D. Povey and S. Khudanpur; LibriVox readers; see SPEAKERS.TXT",
+        "transform": "first ten seconds, mono 16 kHz; no transcripts extracted"
+      }
+    ]
+  },
+  "backgrounds": [
+    {
+      "id": "fs-363712",
+      "source": "https://freesound.org/people/AlexanderChe/sounds/363712/",
+      "download": "https://cdn.freesound.org/previews/363/363712_6598647-hq.mp3",
+      "author": "AlexanderChe",
+      "title": "ambience, cafe, burger king, city, Moscow by AlexanderChe",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "28a143ad270d00f3cb963a92f3b0ea79437c23799f515aff576a54da7f572c52",
+      "reference": "RESTAURANT",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "AlexanderChe/363712",
+      "file": "363712.mp3",
+      "splitGroup": "AlexanderChe"
+    },
+    {
+      "id": "fs-260121",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260121/",
+      "download": "https://cdn.freesound.org/previews/260/260121_1480854-hq.mp3",
+      "author": "SpliceSound",
+      "title": "Indoor adult murmur, small group.wav by SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "b0b08a216892e874679d4afca0abc8857a46261728a93e62a8c189fc28c5d766",
+      "reference": "SMALL_GROUP",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "SpliceSound/crowd-murmur",
+      "file": "260121.mp3",
+      "splitGroup": "SpliceSound"
+    },
+    {
+      "id": "fsd-201734",
+      "source": "https://freesound.org/people/univ_lyon3/sounds/201734/",
+      "author": "univ_lyon3",
+      "title": "AMIZET_Hugo_2013_2014_son5.wav",
+      "description": ".:: Recorded sound ::.\r\n\r\n- Go to the university's main hall. Record three differents times.\r\n\r\nIn the Audacity software :\r\n\r\n- Put the three recording on three separate tracks, giving the impression of massive crowd.\r\n\r\n.:: Typologie ::.\r\n\r\nContinu complexe.\r\n\r\n.:: Morphologie ::.\r\n\r\nMasse : Groupe nodal\r\nTimbre harmonique : Riche, massif\r\nGrain : Rugueux\r\nAllure : Pas de vibrato\r\nDynamique : Autre (continue)\r\nProfil m\u00e9lodique : Aucun\r\nProfil de masse : Calibre",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 10788,
+      "mirrorRowName": "dev_audio/201734_0.ogg",
+      "sha256": "b16d12dc39ff51d4fd239733c019d386449db95efb63a5134e93ffc4f2523dc5",
+      "file": "fsd-201734.wav",
+      "reference": "LARGE_GROUP",
+      "partition": "development",
+      "sourceGroup": "univ_lyon3/scene-session",
+      "splitGroup": "univ_lyon3",
+      "referenceBasis": "Creator description; not independent annotation: Three main-hall recordings mixed into massive crowd; synthetic training example",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-212187",
+      "source": "https://freesound.org/people/blaukreuz/sounds/212187/",
+      "author": "blaukreuz",
+      "title": "120308_NYTbldg06n.wav",
+      "description": "Mid range field recording of the area in front of the New York Times building in New York, taken next to the building on the corner of 8th Ave and West 40th St. Cars can be heard driving by, horns are honked, brakes are trodden etc. A sweeper vehicle features sometimes.\r\nPeople can rarely be heard, as the recording was done at about 6 AM on a Saturday morning in March 2012.\r\nRecorded with a Zoom H2, mics set to 90\u00b0 dispersion.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "dev",
+      "mirrorRowIndex": 11709,
+      "mirrorRowName": "dev_audio/212187_0.ogg",
+      "sha256": "793e302de8bcae9ecc12d82d495a366e5d3be49e9df105c430cb5811cd5cc4a6",
+      "file": "fsd-212187.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "development",
+      "sourceGroup": "blaukreuz/scene-session",
+      "splitGroup": "blaukreuz",
+      "referenceBasis": "Creator description; not independent annotation: Mid-range New York street traffic",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fs-533833",
+      "source": "https://freesound.org/people/Angellu16/sounds/533833/",
+      "download": "https://cdn.freesound.org/previews/533/533833_11852214-hq.mp3",
+      "author": "Angellu16",
+      "title": "Vacuum Cleaner.wav by Angellu16",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "2333a18f1d6ea0526d6021d4ce92efa7cfb356512e2d2352935061816cced16e",
+      "reference": "NON_SPEECH_NOISE",
+      "referenceBasis": "creator description; not independent annotation",
+      "partition": "development",
+      "sourceGroup": "Angellu16/533833",
+      "file": "533833.mp3",
+      "splitGroup": "Angellu16"
+    },
+    {
+      "id": "fsd-414297",
+      "source": "https://freesound.org/people/gusgus26/sounds/414297/",
+      "author": "gusgus26",
+      "title": "Asian Restaurant. wav",
+      "description": "This Sound was recorded in an asian fast food Restaurant in germany. You can hear the Sound of Cooking and people chatting in the background.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 8209,
+      "mirrorRowName": "eval_audio/414297_0.ogg",
+      "sha256": "04683e40bd6d4a3e894e906dc671ad50b81e04c854619e8971dd66d35b9ef944",
+      "file": "fsd-414297.wav",
+      "reference": "RESTAURANT",
+      "partition": "validation",
+      "sourceGroup": "gusgus26/scene-session",
+      "splitGroup": "gusgus26",
+      "referenceBasis": "Creator description; not independent annotation: Asian fast food restaurant, cooking and people chatting",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-338254",
+      "source": "https://freesound.org/people/leo153/sounds/338254/",
+      "author": "leo153",
+      "title": "theater_audience_mincing.wav",
+      "description": "150 people in a small theater low talking before play starts- 16 seconds.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 5629,
+      "mirrorRowName": "eval_audio/338254_0.ogg",
+      "sha256": "82c4543513e96ef99f8d890c35149c171301f8dfe47f44b01a7912f492dee63e",
+      "file": "fsd-338254.wav",
+      "reference": "LARGE_GROUP",
+      "partition": "validation",
+      "sourceGroup": "leo153/scene-session",
+      "splitGroup": "leo153",
+      "referenceBasis": "Creator description; not independent annotation: 150 people talking in a theater before a play",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-156091",
+      "source": "https://freesound.org/people/marcolo91/sounds/156091/",
+      "author": "marcolo91",
+      "title": "traffic and klaxon of a car.wav",
+      "description": "Barcelona traffic (gran via de les corts catalanes) and a klaxon of an angry driver.\r\n\r\nRecorded with a zoom H2",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 1493,
+      "mirrorRowName": "eval_audio/156091_0.ogg",
+      "sha256": "61844aac72f0aded55ad2348e0856d62921ba510e0c7cf79ab29949c70c152cc",
+      "file": "fsd-156091.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "validation",
+      "sourceGroup": "marcolo91/scene-session",
+      "splitGroup": "marcolo91",
+      "referenceBasis": "Creator description; not independent annotation: Barcelona traffic and car horn",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-423267",
+      "source": "https://freesound.org/people/ANARKYA/sounds/423267/",
+      "author": "ANARKYA",
+      "title": "Washing Machine [spinning cycle]",
+      "description": "Washing machine recorded at home on the spinning cycle.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 8442,
+      "mirrorRowName": "eval_audio/423267_0.ogg",
+      "sha256": "01746441c5e4c01b68c207e2f52be36550c4ad63e86311e53cb7c48c4d35b5e4",
+      "file": "fsd-423267.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "validation",
+      "sourceGroup": "ANARKYA/scene-session",
+      "splitGroup": "ANARKYA",
+      "referenceBasis": "Creator description; not independent annotation: Washing machine spinning cycle",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    },
+    {
+      "id": "fsd-389755",
+      "source": "https://freesound.org/people/buzbe20/sounds/389755/",
+      "author": "buzbe20",
+      "title": "Vacuum cleaner on off.wav",
+      "description": "Vacuum cleaner being turn on and off",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mirror": "https://huggingface.co/datasets/philgzl/fsd50k",
+      "mirrorRevision": "8c3eabe48487ba60c1e0f3c9845c6b09b69bc642",
+      "mirrorSplit": "eval",
+      "mirrorRowIndex": 7221,
+      "mirrorRowName": "eval_audio/389755_0.ogg",
+      "sha256": "7d5c87b1d9b4d0003a329b31d8ca2d7ddb253878018e9e765a3c6365d79fad1b",
+      "file": "fsd-389755.wav",
+      "reference": "NON_SPEECH_NOISE",
+      "partition": "validation",
+      "sourceGroup": "buzbe20/scene-session",
+      "splitGroup": "buzbe20",
+      "referenceBasis": "Creator description; not independent annotation: Vacuum cleaner turned on/off",
+      "transforms": "Mirror transcodes original FSD50K audio to mono Opus at 48 kHz; viewer serves decoded WAV. Source file hash pins this derived WAV."
+    }
+  ],
+  "policy": {
+    "snrDb": [
+      15,
+      3,
+      -8
+    ],
+    "confidence": 0.65,
+    "margin": 0.15,
+    "C": 0.1,
+    "positions": "digital low-pass and echo proxies only",
+    "training": "development mixtures only; no wearer learning; no controls or heldout fitting",
+    "finalFit": {
+      "selected": {
+        "C": 0.1,
+        "temperature": 1.0,
+        "loss": 0.5251305784534294
+      },
+      "candidates": [
+        {
+          "C": 0.001,
+          "temperature": 1.0,
+          "loss": 0.7714609330748302
+        },
+        {
+          "C": 0.001,
+          "temperature": 2.0,
+          "loss": 0.9023505095158547
+        },
+        {
+          "C": 0.001,
+          "temperature": 4.0,
+          "loss": 0.991457647502985
+        },
+        {
+          "C": 0.001,
+          "temperature": 8.0,
+          "loss": 1.0427023209907533
+        },
+        {
+          "C": 0.01,
+          "temperature": 1.0,
+          "loss": 0.5420699622725095
+        },
+        {
+          "C": 0.01,
+          "temperature": 2.0,
+          "loss": 0.6967911000389106
+        },
+        {
+          "C": 0.01,
+          "temperature": 4.0,
+          "loss": 0.8544918468188735
+        },
+        {
+          "C": 0.01,
+          "temperature": 8.0,
+          "loss": 0.9641875201462913
+        },
+        {
+          "C": 0.1,
+          "temperature": 1.0,
+          "loss": 0.5251305784534294
+        },
+        {
+          "C": 0.1,
+          "temperature": 2.0,
+          "loss": 0.5591672978424574
+        },
+        {
+          "C": 0.1,
+          "temperature": 4.0,
+          "loss": 0.713657116935637
+        },
+        {
+          "C": 0.1,
+          "temperature": 8.0,
+          "loss": 0.8667632829481943
+        },
+        {
+          "C": 1.0,
+          "temperature": 1.0,
+          "loss": 0.750743676393611
+        },
+        {
+          "C": 1.0,
+          "temperature": 2.0,
+          "loss": 0.5562825005440502
+        },
+        {
+          "C": 1.0,
+          "temperature": 4.0,
+          "loss": 0.6143178034067369
+        },
+        {
+          "C": 1.0,
+          "temperature": 8.0,
+          "loss": 0.7688166326545489
+        }
+      ],
+      "selection": "development-speaker-only CV; backgrounds shared within inner folds; final evaluation excludes both speakers and background recordings; heldout previously viewed initial fit, not used to select C/temperature",
+      "headSha256": "884b7e0f1a925b3714f9c9b85a7bbce47a33b3c16ea891c1c6bf4e57a02e1812"
+    },
+    "backgroundTiling": "Short backgrounds repeated to three seconds; foreground speech never repeated",
+    "newLiveAuthorization": "Owner explicitly requested removal of preview and live switching on November 9, before detector/physical acceptance; no qualification asserted"
+  }
+}
