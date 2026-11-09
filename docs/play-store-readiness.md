@@ -1,5 +1,11 @@
 # Google Play readiness — audited October 16, 2026
 
+November 8 speech/noise follow-up: a separately disclosed foreground-only,
+five-minute display experiment reuses the pinned local event model in bounded
+three-second captures. It does not select programs or qualify the experimental
+classifier. It saves consent only, not audio/transcripts/answer history. See
+[validation and actual data flow](acceptance/speech-and-noise-tryout-2026-11-08.md).
+
 November 8: ordinary Automatic now has an explicitly disclosed, eight-hour
 microphone/media-playback foreground service with notification Off, screen-off
 sampling and memory-only graph. See [separate design review](automatic-noise-background-design-2026-11-08.md).

@@ -3,6 +3,9 @@ package com.heysig;
 import org.junit.Test;
 
 public class SharedRegressionTest {
+    @Test public void displayOnlySoundType() {
+        com.heysig.noise.SoundTypeCheckKt.main();
+    }
     @Test public void noiseThresholdLearning() {
         com.heysig.noise.NoiseThresholdLearningCheckKt.main();
     }

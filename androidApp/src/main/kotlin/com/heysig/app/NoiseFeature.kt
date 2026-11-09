@@ -20,7 +20,8 @@ class NoiseFeature(
     private val lastRequested: () -> Int?,
     private val sendProgram: (Int, (Boolean) -> Unit) -> Unit,
     private val prefs: android.content.SharedPreferences = activity.getSharedPreferences("heysig-noise-v1",Activity.MODE_PRIVATE),
-    private val prepareAutomatic: (() -> (() -> Unit))?=null
+    private val prepareAutomatic: (() -> (() -> Unit))?=null,
+    private val openSoundType: (() -> Unit)?=null
 ) {
     private var settings = NoiseSettings()
     private var stored = false
@@ -238,6 +239,7 @@ class NoiseFeature(
         group("Automatic noise") {
             line("HeySig can choose your hearing-aid program as sound around you changes. Tap the button to turn this on or off.")
             automaticButton=button("Off") { handle(if(AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
+            openSoundType?.let { open -> button("Check speech and noise",open) }
             runtime = line(summary()).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_NONE; contentDescription=summary() }
             graph=NoiseGraphView(activity).also { target.addView(it,LinearLayout.LayoutParams(-1,PhoneStyle.dp(activity,(180*activity.resources.configuration.fontScale).toInt()))) }
             line("Sound around you: the line rises when it gets louder and falls when it gets quieter. Each dot is one short sound check.")

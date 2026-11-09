@@ -17,12 +17,13 @@ import java.util.concurrent.atomic.AtomicBoolean
 class EnvironmentAudio(private val context: Context, private val allowed: () -> Boolean,
                        private val acquire: ((()->Boolean)->Boolean) = { true },
                        private val release: ()->Unit = {},
-                       // Explicit development diagnostics only; ordinary monitoring has no observer.
-                       private val observeScores: ((Map<String,Double>)->Unit)? = null) {
+                       // Optional bounded scalar evidence for display-only sound checks and diagnostics.
+                       private val observeScores: ((Map<String,Double>)->Unit)? = null,
+                       private val observeFrames: ((List<Map<String,Double>>)->Unit)? = null) {
     private val worker=EnvironmentSampleWorker(allowed,{ seconds,cancel ->
         check(acquire { cancel.get() }) { "Microphone busy or capture cancelled" }
         try { capture(seconds,cancel) } finally { release() }
-    },{ pcm,cancelled -> Yamnet(context,observeScores).use { model -> model.classify(pcm,cancelled) } },
+    },{ pcm,cancelled -> Yamnet(context,observeScores,observeFrames).use { model -> model.classify(pcm,cancelled) } },
         { SystemClock.elapsedRealtime() })
     fun stop() = worker.stop()
     fun busy() = worker.busy()
@@ -79,7 +80,8 @@ class EnvironmentAudio(private val context: Context, private val allowed: () -> 
 }
 
 /** Pinned pretrained encoder and shared scene head; CPU only, one inference thread. */
-class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)->Unit)? = null): AutoCloseable {
+class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)->Unit)? = null,
+             private val observeFrames: ((List<Map<String,Double>>)->Unit)? = null): AutoCloseable {
     private val labelBytes=context.assets.open("environment/labels.txt").use { it.readBytes() }
     private val labels=labelBytes.toString(Charsets.UTF_8).trimEnd().lines()
     private val selectedLabels=EnvironmentClassifier.requiredLabels.associateWith { labels.indexOf(it) }
@@ -136,6 +138,7 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
             }
             check(!cancelled()) { "Inference cancelled; sample discarded" }
             observeScores?.invoke(EnvironmentClassifier.requiredLabels.associateWith { label -> frames.map { it.getValue(label) }.average() })
+            observeFrames?.invoke(frames.map { it.toMap() })
             val features=pool.finish()
             val primary=head.classify(features,frames)
             // A specialist cannot overwrite even a low-confidence primary estimate.

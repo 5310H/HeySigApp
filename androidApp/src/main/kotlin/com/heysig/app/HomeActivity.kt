@@ -98,7 +98,17 @@ class HomeActivity : Activity() {
             runtime.sleepRoutine.transition(old.resume())
             val rollback: () -> Unit={ runtime.sleepRoutine.transition(old) }
             rollback
-        }) }
+        },openSoundType={ openSoundType() }) }
+    private fun openSoundType() {
+        if(busy.get()) { tell("Wait until the current program change finishes, then try again.",false);return }
+        foregroundVoice.close();noise.stop();environment.stop()
+        HandsFreeService.running?.control(HandsFreeControl.OFF)
+        navigate("SoundType")
+    }
+    private val soundType: SoundTypeFeature by lazy { SoundTypeFeature(this,{ noiseSafety() },{
+        foregroundVoice.close();noise.stop();environment.stop()
+        HandsFreeService.running?.control(HandsFreeControl.OFF)
+    }) }
     private val environment: EnvironmentFeature by lazy { EnvironmentFeature(this,{ fitting?.programs.orEmpty() },{ requested.program },
         { noiseSafety() },{
             check(!busy.get() && pendingProgram==null && pendingRestore==null && !runtime.fittingWorkflow.pending && !runtime.personalPhrases.awaitingConfirmation && !runtime.sleepRoutine.hasDraft) { "Finish or cancel the current operation first" }
@@ -134,7 +144,7 @@ class HomeActivity : Activity() {
         if(checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)!=android.content.pm.PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(android.Manifest.permission.RECORD_AUDIO),402);tell("Allow microphone access, then tap Speak again");return
         }
-        environment.manualPriority();noise.stop();tts?.stop();HandsFreeService.running?.control(HandsFreeControl.OFF)
+        soundType.stop();environment.manualPriority();noise.stop();tts?.stop();HandsFreeService.running?.control(HandsFreeControl.OFF)
         foregroundVoice.start(automaticVoicePrefs.getInt("timeout",10))
     }
     private fun foregroundVoiceSettings() {
@@ -164,6 +174,7 @@ class HomeActivity : Activity() {
     }
     private var handlingNoiseRequest=false
     private fun handleNoiseCommand(command: NoiseCommand) {
+        soundType.stop()
         foregroundVoice.close()
         handlingNoiseRequest=true
         environment.stop("Sound-level measurement has microphone priority")
@@ -210,7 +221,7 @@ class HomeActivity : Activity() {
             if(resumed && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
         }
         if(seenRuntimeRevision!=runtime.revision && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
-        HandsFreeService.stopNoise={ foregroundVoice.close();noise.stop();environment.stop() }
+        HandsFreeService.stopNoise={ soundType.stop();foregroundVoice.close();noise.stop();environment.stop() }
         HandsFreeService.foregroundEnvironment={ command,reply ->
             if(!resumed || getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) false
             else {
@@ -265,17 +276,17 @@ class HomeActivity : Activity() {
             pendingHandsFreeStart=false;startHandsFree()
         }
     }
-    override fun onPause() { environment.stop(); foregroundVoice.close(); foregroundShake.stop(); noise.pause(); if(companionDelegate.isInitialized()) companion.pause(); resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.foregroundNoise=null;HandsFreeService.foregroundEnvironment=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
+    override fun onPause() { soundType.stop();environment.stop(); foregroundVoice.close(); foregroundShake.stop(); noise.pause(); if(companionDelegate.isInitialized()) companion.pause(); resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.foregroundNoise=null;HandsFreeService.foregroundEnvironment=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
     override fun onDestroy() {
         if(android.os.Build.VERSION.SDK_INT >= 33) backCallback?.let { onBackInvokedDispatcher.unregisterOnBackInvokedCallback(it) }
-        environment.stop();foregroundVoice.close();foregroundShake.stop();noise.pause(); if(companionDelegate.isInitialized()) companion.pause(); exportDocument = null; if(!runtime.backgroundExecution) cancelled.set(true); tts?.shutdown(); super.onDestroy()
+        soundType.stop();environment.stop();foregroundVoice.close();foregroundShake.stop();noise.pause(); if(companionDelegate.isInitialized()) companion.pause(); exportDocument = null; if(!runtime.backgroundExecution) cancelled.set(true); tts?.shutdown(); super.onDestroy()
     }
     @Deprecated("Fallback for Android 10–12; newer versions use OnBackInvokedDispatcher")
     @android.annotation.SuppressLint("GestureBackNavigation") // API 33+ dispatcher is registered in onCreate; retain the pre-33 framework fallback.
     override fun onBackPressed() { leavePage() }
     private fun leavePage() {
         when {
-            page == "Environment" -> navigate("Noise")
+            page == "Environment" || page == "SoundType" -> navigate("Noise")
             page == "NoiseMeasure" -> navigate("NoiseSetup")
             page.startsWith("Noise") && page != "Noise" -> navigate("Noise")
             page == "VoiceTools" -> navigate("Voice")
@@ -317,6 +328,8 @@ class HomeActivity : Activity() {
         } else show(target)
     }
     private fun show(destination: String = page) {
+        soundType.detach()
+        if(destination!="SoundType") soundType.stop()
         environment.detach()
         try { noise.detachEditor() } catch(e:Exception) { tell("Noise draft: ${e.message}. Correct the field or discard noise changes."); return }
         page = destination
@@ -338,6 +351,7 @@ class HomeActivity : Activity() {
         val title = when(page) {
             "Home" -> "HeySig"
             "Noise" -> "Noise"
+            "SoundType" -> "Speech and noise"
             "Environment" -> "Automatic programs"
             "NoiseCalibration" -> "Calibration"
             "NoiseSetup" -> "Noise programs"
@@ -389,6 +403,7 @@ class HomeActivity : Activity() {
             "Noise", "NoiseCalibration", "NoiseSetup", "NoiseMeasure", "NoiseDetails" -> {
                 noise.render(content,page) { navigate(it) }
             }
+            "SoundType" -> soundType.render(content)
             "Environment" -> { environment.render(content,if(companion.enabled) "Enabled for selected watch" else "Off; use Watch connection")
                 foregroundVoiceSettings() }
 
@@ -412,7 +427,7 @@ class HomeActivity : Activity() {
         val speak = Button(this).apply { setText(R.string.speak); contentDescription = "Speak command"; setOnClickListener { beginVoice() }; PhoneStyle.action(this,"primary") }
         val stop = Button(this).apply {
             setText(R.string.stop); PhoneStyle.action(this,"danger")
-            setOnClickListener { runCatching { AutomaticSleepScheduler(this@HomeActivity).disable() };HandsFreeService.running?.control(HandsFreeControl.OFF); noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); pendingVoice = false; environment.stop();foregroundVoice.close();cancelled.set(true); tell("Stop requested. Automatic therapy is Off. Already emitted tones cannot be undone.") }
+            setOnClickListener { runCatching { AutomaticSleepScheduler(this@HomeActivity).disable() };HandsFreeService.running?.control(HandsFreeControl.OFF); soundType.stop();noise.stop(); tts?.stop(); pendingProgram = null; pendingRestore = null; runtime.personalPhrases.cancel(); runtime.sleepRoutine.cancel(); runtime.fittingWorkflow.cancel(); pendingVoice = false; environment.stop();foregroundVoice.close();cancelled.set(true); tell("Stop requested. Automatic therapy is Off. Already emitted tones cannot be undone.") }
         }
         actions.addView(speak,LinearLayout.LayoutParams(0,-2,2f).apply { marginEnd = PhoneStyle.dp(this@HomeActivity,10) })
         actions.addView(stop,LinearLayout.LayoutParams(0,-2,1f))
@@ -1397,6 +1412,7 @@ class HomeActivity : Activity() {
     }
     private fun dispatch(request: ManualRequest, force: Boolean = false) {
         foregroundVoice.close();environment.manualPriority()
+        soundType.stop()
         noise.stop() // Any manual request, including a repeat/no-op, takes priority.
         if(busy.get()) { tell("Busy; wait or Stop"); return }
         val fit = fitting ?: run { tell("Save setup first",true); return }
@@ -1436,6 +1452,7 @@ class HomeActivity : Activity() {
         execute(listOf(ManualRequest.SelectProgram(slot)),false,sleepTarget=sleep)
     }
     private fun execute(plan: List<ManualRequest>,restoring: Boolean, automatic: Boolean = false, sleepTarget: Boolean? = null, refreshing: Boolean = false, onComplete: ((Boolean) -> Unit)? = null) {
+        soundType.stop()
         foregroundVoice.close()
         if(!automatic) { environment.manualPriority();noise.stop() }
         fun reject(text:String) { tell(text,true); onComplete?.invoke(false) }

@@ -57,3 +57,9 @@ If it stays on a noisy program, check that you chose a program for quiet places.
 The phone's position and nearby voices or music can affect its sound checks.
 The screen reports the program sent by HeySig; it cannot confirm that the aids
 received it.
+
+## Try the new speech and noise check
+
+Open **Noise → Check speech and noise** to see what HeySig thinks it hears.
+This stops Automatic and does not change your aids. Keep the screen open.
+See [the short try-out guide](speech-and-noise-tryout.md).

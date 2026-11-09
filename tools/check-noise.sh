@@ -9,6 +9,7 @@ kotlinc shared/src/commonMain/kotlin/com/heysig/noise/*.kt \
   -include-runtime -d shared/build/noise-check.jar
 java -cp shared/build/noise-check.jar com.heysig.noise.NoiseMeasurementCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.NoiseObserveCheckKt
+java -cp shared/build/noise-check.jar com.heysig.noise.SoundTypeCheckKt
 
 java -cp shared/build/noise-check.jar com.heysig.noise.NoiseAutomationCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.NoiseThresholdLearningCheckKt
