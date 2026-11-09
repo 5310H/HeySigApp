@@ -1,5 +1,12 @@
 # Google Play readiness — audited October 16, 2026
 
+November 8: ordinary Automatic now has an explicitly disclosed, eight-hour
+microphone/media-playback foreground service with notification Off, screen-off
+sampling and memory-only graph. See [separate design review](automatic-noise-background-design-2026-11-08.md).
+This supersedes foreground-only statements for ordinary phone Automatic only.
+Review the new service use in Play Console, privacy disclosures, battery and
+locked-screen behavior before release. No submission or Play approval is claimed.
+
 November 4 threshold-learning follow-up: ordinary foreground Automatic reuses
 valid level measurements to suggest bounded threshold adjustments. Up to 240
 scalar levels/timestamps remain in phone memory; no extra microphone windows,

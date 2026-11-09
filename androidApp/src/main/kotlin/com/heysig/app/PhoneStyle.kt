@@ -34,9 +34,9 @@ object PhoneStyle {
     }
     fun action(view: Button, role: String = "secondary") {
         val context = view.context
-        val primary = role == "primary" || role == "selected"
+        val primary = role == "primary" || role == "selected" || role == "noiseOn" || role == "noiseOff"
         val destructive = role == "danger"
-        val fill = if(primary) blue else if(destructive) Color.rgb(255,235,237) else if(role == "program") background else Color.WHITE
+        val fill = if(role == "noiseOn") Color.rgb(20,110,65) else if(role == "noiseOff") Color.rgb(150,44,48) else if(primary) blue else if(destructive) Color.rgb(255,235,237) else if(role == "program") background else Color.WHITE
         val foreground = if(primary) Color.WHITE else if(destructive) red else if(role == "program") ink else blue
         view.tag = role
         text(view,16f,true,foreground)

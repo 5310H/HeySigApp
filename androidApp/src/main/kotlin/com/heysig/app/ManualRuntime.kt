@@ -142,6 +142,7 @@ class ManualRuntime private constructor(
     fun execute(plan: List<ManualRequest>, restoring: Boolean, automatic: Boolean,
         foreground: () -> Boolean, backgroundAllowed: () -> Boolean,
         progress: (String) -> Unit, sleepTarget: Boolean? = null, done: (String, Boolean) -> Unit) {
+        if(!automatic) AutomaticNoiseService.cancel()
         fun recorded(text: String,success: Boolean) = if(sleepTarget!=null && this::sleepRoutine.isInitialized)
             sleepRoutine.recordActionResult(sleepTarget,success,text) else text
         fun reject(text: String) { val result=recorded(text,false);if(sleepTarget!=null) lastResult=result;done(result,false) }
@@ -234,8 +235,9 @@ class ManualRuntime private constructor(
     }
     private fun gap() { repeat(100) { check(!cancelled.get()) { "Stopped" }; Thread.sleep(10) } }
     companion object {
-        internal fun isolated(prefs: android.content.SharedPreferences, transport: CommandTransport, sleepPrefs: android.content.SharedPreferences? = null) = ManualRuntime(prefs,transport).also {
+        internal fun isolated(prefs: android.content.SharedPreferences, transport: CommandTransport, sleepPrefs: android.content.SharedPreferences? = null, phrasePrefs: android.content.SharedPreferences? = null) = ManualRuntime(prefs,transport).also {
             if(sleepPrefs != null) it.sleepRoutine=SleepRoutineStore(sleepPrefs)
+            if(phrasePrefs != null) it.personalPhrases=PersonalPhraseStore(phrasePrefs)
         }
         @Volatile private var instance: ManualRuntime?=null
         fun get(context: Context): ManualRuntime = instance ?: synchronized(this) {

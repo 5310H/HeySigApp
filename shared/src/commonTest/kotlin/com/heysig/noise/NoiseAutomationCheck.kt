@@ -67,6 +67,17 @@ fun main() {
     }
     val quietRequest = automaticNoise(returning,-90.0,110000L,settings,safe,5)
     check(quietRequest.target == 1 && quietRequest.state.pendingTarget == 1)
+    // An explicit microphone service can return to Quiet with the screen locked.
+    val lockedService=safe.copy(foreground=false,unlocked=false,microphoneSession=true)
+    var lockedReturn=completed
+    for(t in listOf(80000L,95000L,110000L)) {
+        lockedReturn=automaticNoise(lockedReturn,-90.0,t,settings,lockedService,5).state
+    }
+    check(lockedReturn.pendingTarget==1)
+    check(automaticNoise(completed,-90.0,110000,settings,lockedService.copy(microphoneSession=false),5).state.observation.count==0)
+    listOf(lockedService.copy(manualOverride=true),lockedService.copy(sleeping=true),lockedService.copy(audioFree=false)).forEach {
+        check(automaticNoise(completed,-90.0,110000,settings,it,5).target==null)
+    }
     val failed = completeNoise(request.state,request.state.token,false,5000)
     check(failed.halted && automaticNoise(failed,-10.0,99000,settings,safe,1).target == null)
     check(automaticNoise(state,null,3000,settings,safe,1).state.observation.count == 0)

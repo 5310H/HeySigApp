@@ -50,10 +50,12 @@ data class NoiseSafety(
     val audioFree: Boolean = false,
     val manualOverride: Boolean = false,
     val sleeping: Boolean = false,
-    val protectedPrograms: Set<Int> = emptySet()
+    val protectedPrograms: Set<Int> = emptySet(),
+    /** Explicit, visible-notification microphone service; never a persisted enable flag. */
+    val microphoneSession: Boolean = false
 ) {
     fun blocked(): String? = when {
-        !foreground || !unlocked -> "Keep HeySig open and the device unlocked"
+        (!foreground || !unlocked) && !microphoneSession -> "Keep HeySig open and the device unlocked"
         !audioFree -> "Speech, playback or a pending command has priority"
         manualOverride -> "Manual override has priority; restart explicitly"
         sleeping -> "Therapy has priority; choose a waking program manually before restarting"
@@ -86,7 +88,7 @@ fun automaticNoise(previous: NoiseAutomaticState, index: Double?, now: Long, set
     val observed = observeNoise(previous.observation,index,now,settings)
     if((settings.sleepProgram != null && observed.target == settings.sleepProgram) || observed.target?.let { it in safety.protectedPrograms } == true) return blocked("Therapy requires manual selection; no automatic request")
     val state = previous.copy(observation=observed)
-    val target = observed.proposed ?: return NoiseDecision(state,reason=if(observed.target == null) "Unused level" else "Confirming target")
+    val target = observed.proposed ?: return NoiseDecision(state,reason=if(observed.target == null) "Level ${observed.level} has no assigned program; keeping current program" else "Confirming target")
     if(target == lastRequested) return NoiseDecision(state,reason="Already last requested; no command")
     check(previous.token < Long.MAX_VALUE)
     return NoiseDecision(state.copy(pendingTarget=target,token=previous.token+1),target,"Confirmed target")

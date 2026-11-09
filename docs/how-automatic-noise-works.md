@@ -1,183 +1,85 @@
-# How Automatic noise works
+# How Automatic helps
 
-Automatic measures the sound level around your phone and selects the hearing-aid
-program you assigned to that level.
+HeySig checks sound around your phone and chooses the hearing-aid program you
+saved for that sound level. You choose the programs; HeySig does not change your
+hearing-aid fitting.
 
-## Set up your choices
+For everyday instructions, see [Using Automatic](noise-quick-start.md).
 
-Open **Noise → 1. Choose programs**. Assign your configured programs to six noise
-levels, from **level 1 (quietest)** to **level 6 (loudest)**, then save.
+## What happens when sound changes
 
-Several levels may use the same program. An unused level causes no change.
-Review the five level thresholds under **Advanced measurement settings**.
-Calibration is optional; saved thresholds can be used without it.
+HeySig takes a short sound check, then pauses before checking again. It waits
+for several checks to agree before changing programs. After a change, it waits
+again. This helps avoid repeated changes when sound briefly gets louder or quieter.
 
-## Turn Automatic on
+With the usual settings, a sound check takes five seconds, checks are separated
+by ten seconds, and three checks need to agree. After a program change, there is
+also a one-minute wait. A return to the quiet program can therefore take about a
+minute and a half after the last change. Your saved choices may use other times.
+The Noise screen shows what it is waiting for.
 
-Say **“Automatic on”** or tap **Automatic on** on the Noise screen.
+A sound level with no program chosen keeps the current program. If the chosen
+program is already the last one HeySig sent, it does not send it again.
 
-Keep HeySig open and the phone unlocked. Review the microphone explanation and
-allow microphone access when requested. If Android asks for permission, request
-Automatic on again after granting it.
+Phone position, nearby voices and music affect the checks. The graph shows
+changes measured at the phone. It is not a medical sound-level meter.
 
-Start from a known program outside Therapy. Other routine schedules must be Off
-before starting Automatic noise.
+## Keeping Automatic on
 
-## How it chooses a program
+Turn it on while HeySig is open and the phone is unlocked. Follow the microphone
+and notification prompts. Then you can lock the screen or use another app.
 
-1. **Measure sound.** With default settings, the phone waits ten seconds,
-   measures sound for five seconds, then repeats with a ten-second pause between
-   measurements. Speech, music and other sounds all contribute to the level.
-2. **Find the assigned program.** The measured level is compared with your saved
-   thresholds to choose one of the six noise levels and its assigned program.
-3. **Wait for agreement.** By default, three consecutive valid measurements must
-   point to the same program. Small fluctuations near a threshold are ignored
-   to reduce unnecessary switching. Invalid or stale measurements clear that
-   agreement.
-4. **Check priorities.** Therapy protection, manual control, audio availability
-   and cooldown can prevent a change. Unused levels send nothing. If the target
-   is already the last requested program, no command is repeated.
-5. **Send the change.** HeySig plays the existing program-change tones through
-   the phone speaker. Position the phone so the hearing aids can receive them.
-6. **Wait before changing again.** Successful playback starts the saved cooldown
-   and allows at least ten seconds for sound to settle before fresh measurements.
-   Failed or interrupted playback stops Automatic.
+A HeySig phone notification shows that Automatic is on and has an **Off** button.
+Automatic runs for up to eight hours and uses more battery while running.
 
-The default cooldown is **60 seconds**. An initial cooldown also applies, so the
-first eligible change can take about **90 seconds** with default timing. Your
-saved settings may use different timings.
+Choosing a program yourself, using Therapy, stopping the app or a microphone or
+program-playback problem stops Automatic. It does not restart by itself. If
+speech or other playback briefly needs the microphone, Automatic pauses and
+tries again afterward.
 
-## Example
+Automatic does not switch into or out of Therapy. Choose a daytime program
+after Therapy before turning Automatic on again. Other automatic schedules
+must be off before starting Automatic noise changes.
 
-Suppose a louder noise level is assigned to your **Noisy** program. When repeated
-measurements qualify for that program and cooldown has finished, HeySig requests
-Noisy. When quieter sound consistently qualifies for another assigned program,
-it can request that program after cooldown.
+## Optional help
 
-This process follows measured loudness and your assignments. Phone position,
-nearby speech and music affect the result.
+**Try without changing programs** shows which program HeySig would choose
+without sending a change to the aids. Keep the app open and unlocked for this.
 
-## Turn Automatic off
+**Optional sound setup** helps check this phone in six everyday places, from
+quietest to loudest. Use comfortable sounds that are already around you. There
+is no need to create loud sounds. Your saved choices stay the same until you
+review and save changes.
 
-Say **“Automatic off”** or tap **Automatic off**. This stops microphone capture
-and future automatic requests. It cannot undo tones already emitted.
+HeySig can also suggest changes from sound checks already taken while the app
+is visible. It does not change your saved sound settings unless you choose
+**Review learned thresholds**, review the suggestion, and tap **Approve & save**.
+These extra controls are on the try-out/details screen. You do not need to use
+them to turn Automatic on.
 
-Leaving or locking HeySig, making a manual adjustment, or a microphone/playback
-interruption also stops the process. Restart explicitly; it does not silently
-resume.
+## Microphone and privacy
 
-Starting Automatic turns hands-free listening off. Use the visible **Automatic
-off** button when voice input is unavailable. After updating the watch, its
-Automatic noise controls send the same requests to the phone; this process uses
-the phone microphone.
+Noise checks process sound in memory and discard it afterward. This feature
+does not save or upload audio recordings. The graph keeps only recent sound-level
+numbers in memory. Optional learning also keeps a limited set of numbers in
+memory. Optional sound setup saves level numbers and microphone settings locally
+only when you save them.
 
-## Therapy protection
+Voice commands are separate. Your installed speech service may use a network;
+follow its explanation before using speech.
 
-Automatic will neither select nor switch away from your protected Therapy
-program. Programs named **Therapy**, and existing programs named **Sleep**, are
-also protected. Select a program outside Therapy manually before restarting
-Automatic.
+## If the quiet program does not return
 
-## Why and when to calibrate
+Check the Noise screen. It shows the wait and the program being checked.
 
-**Calibration is optional. You do not need it to turn Automatic on.** If your
-saved thresholds select programs at the sound levels you want, leave them alone.
+Make sure you chose a program for quiet places. If the phone still measures the
+sound as belonging to a noisy setting, HeySig follows that saved choice. You can
+try the optional sound setup or review the extra sound settings. Do not make
+sounds louder to test it.
 
-Calibration helps match the five boundaries between noise levels to readings
-from your phone in the places where you use it. The supplied thresholds are
-starting values; they were not measured for your particular phone and placement.
-The same surroundings can produce different readings with a different phone,
-microphone position, or an obstructed microphone.
+HeySig reports what program it sent. It cannot read back the actual hearing-aid
+program or confirm that the aids received the tones.
 
-Consider calibration when:
-
-- Ordinary quiet surroundings repeatedly qualify for a louder level, or louder
-  surroundings repeatedly qualify for a quieter level than you intended.
-- Program changes consistently happen at the wrong sound levels, after allowing
-  enough time for confirmation and cooldown.
-- You change phones or consistently change where you place the phone while
-  Automatic runs.
-- A microphone or system change makes the previous readings behave differently.
-
-Keep phone placement consistent first. Moving it between a table and a pocket
-can change readings; one calibration cannot compensate for every placement.
-
-**Calibration will not fix a wrong program assignment, cooldown delay, Therapy
-protection, a stopped session, microphone permission, or tones the aids do not
-receive.** Check those causes before changing thresholds. Changing which program
-a level selects usually needs only an assignment change and Save.
-
-### Automatic learning: fewer manual measurements
-
-While **Automatic is on**, HeySig also learns from the valid sound-level
-measurements it already takes. This starts with Automatic; no separate learning
-session or extra microphone capture is needed. Your saved thresholds continue
-controlling program selection throughout learning.
-
-It keeps up to **240 level numbers in memory**, trimming older measurements when
-new ones arrive after an hour. It does not save recordings, transcripts, or a
-learning history to disk, and it does not upload learning measurements. Closing
-the app process loses this temporary data. **Discard learned measurements**
-clears it without changing saved settings; Automatic can start collecting again
-with its next valid measurement.
-
-A suggestion requires measurements spanning at least **five minutes**, with at
-least **ten valid measurements on each side** of a boundary. The middle portions
-of those two measured ranges must be separated enough to allow for the switching
-margin. A single steady noise level cannot produce a useful suggestion. You do
-not need to visit all six levels; boundaries without enough evidence stay as
-saved. Never create louder sounds just to fill a level.
-
-HeySig suggests a midpoint between the central measured ranges and limits each
-boundary change to **2 dBFS per review**. Tiny changes below 0.5 dBFS and changes
-that would invalidate threshold spacing are omitted or rejected. This is a
-conservative suggestion based on observed loudness, not proof of where you want
-a program change. Phone placement, speech and music still affect the result.
-
-When the Noise screen says **Threshold suggestion ready**, choose **Review
-learned thresholds**. The review shows all five old and proposed boundaries and
-the number of measurements per level. Opening a ready review stops Automatic.
-Choose **Keep current** to retain your thresholds, or **Approve & save** to save
-the proposal. No threshold changes without that approval. Program assignments,
-hearing-aid fitting and other timing settings remain unchanged.
-
-The review expires after one minute. Changed settings, fitting, microphone or
-measurements require a new review. Learning resets when saved noise settings or
-fitting change; a different microphone configuration starts fresh learning.
-Changing thresholds clears any guided calibration proof tied to the old values.
-Approved suggestions are not marked as guided calibration proof. Automatic
-stays Off after approval; request **Automatic on** to use the saved changes.
-
-### What calibration does
-
-The guided **Learn sound levels** flow takes three explicitly requested
-measurements at each of six progressively louder everyday sound levels: eighteen
-measurements in total. It suggests a boundary halfway between each pair of
-adjacent measured ranges. Those ranges must be far enough apart to allow for the
-margin that prevents switching back and forth near a boundary.
-
-If the ranges overlap or are too close, calibration refuses to suggest
-thresholds. Use comfortable, naturally occurring sounds; do not create louder
-sound just to complete calibration. You can continue using your saved thresholds
-without completing it.
-
-Review the suggested thresholds, choose **Apply to draft**, and then **Save noise
-settings** to use them. Applying alone does not replace saved settings. Saving
-leaves Automatic Off; request **Automatic on** when ready.
-
-Calibration adjusts noise-level thresholds only. It does not change the fitting,
-volume, or processing settings inside a hearing-aid program, and it does not
-teach HeySig to recognize particular kinds of sounds.
-
-## What the measurements mean
-
-The displayed level is relative microphone **dBFS**, not calibrated sound-pressure
-decibels or a hearing-safety measurement. Calibration can help match thresholds
-to the phone and its placement, but it is optional.
-
-Noise audio is processed in memory and discarded by this feature. Optional
-calibration saves scalar measurements and capture settings, not recordings.
-Voice-command recognition is separate and its provider may use a network.
-
-Completed playback confirms that the phone sent tones. HeySig has no electronic
-readback confirming that the hearing aids received or applied the change.
+Implementation and validation details are kept in the
+[service design review](automatic-noise-background-design-2026-11-08.md) and
+[validation record](acceptance/automatic-noise-usability-2026-11-08.md).

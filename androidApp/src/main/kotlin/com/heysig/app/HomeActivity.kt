@@ -84,11 +84,13 @@ class HomeActivity : Activity() {
     private val remotePrefs by lazy { getSharedPreferences("heysig-watch-results",MODE_PRIVATE) }
     private fun remoteResult(phase: String, text: String) = JSONObject().put("phase",phase).put("text",text)
     private val profile = AcousticProfile(44100,15360,512,0.0625,1.2,true)
-    private val noise by lazy { NoiseFeature(this,{ fitting?.programs.orEmpty() },
+    private val noise: NoiseFeature by lazy { NoiseFeature(this,{ fitting?.programs.orEmpty() },
         { noiseSafety().let { it.foreground && it.unlocked && it.audioFree } },{ text,speak -> tell(text,speak) },
         { noiseSafety() },{ requested.program },{ slot,done ->
             execute(listOf(ManualRequest.SelectProgram(slot)),false,automatic=true,onComplete=done)
         },prepareAutomatic={
+            foregroundVoice.close()
+            environment.stop("Automatic noise has microphone priority")
             val old=runtime.sleepRoutine.state
             val schedule=getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE)
             check(old.mode==com.heysig.sleep.SleepMode.AWAKE && !old.pending) { "A waking baseline is required" }
@@ -97,7 +99,7 @@ class HomeActivity : Activity() {
             val rollback: () -> Unit={ runtime.sleepRoutine.transition(old) }
             rollback
         }) }
-    private val environment by lazy { EnvironmentFeature(this,{ fitting?.programs.orEmpty() },{ requested.program },
+    private val environment: EnvironmentFeature by lazy { EnvironmentFeature(this,{ fitting?.programs.orEmpty() },{ requested.program },
         { noiseSafety() },{
             check(!busy.get() && pendingProgram==null && pendingRestore==null && !runtime.fittingWorkflow.pending && !runtime.personalPhrases.awaitingConfirmation && !runtime.sleepRoutine.hasDraft) { "Finish or cancel the current operation first" }
             foregroundVoice.close();noise.stop();HandsFreeService.running?.control(HandsFreeControl.OFF)
@@ -202,7 +204,7 @@ class HomeActivity : Activity() {
         show(if(intent?.action=="com.heysig.OPEN_HANDSFREE") "Voice" else "Home")
     }
     override fun onResume() {
-        super.onResume(); resumed = true;
+        super.onResume(); resumed = true; noise.resume();
         if(automaticVoicePrefs.getBoolean("shake",false)) foregroundShake.start()
         runtime.stateChanged={
             if(resumed && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
@@ -263,10 +265,10 @@ class HomeActivity : Activity() {
             pendingHandsFreeStart=false;startHandsFree()
         }
     }
-    override fun onPause() { environment.stop(); foregroundVoice.close(); foregroundShake.stop(); noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.foregroundNoise=null;HandsFreeService.foregroundEnvironment=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
+    override fun onPause() { environment.stop(); foregroundVoice.close(); foregroundShake.stop(); noise.pause(); if(companionDelegate.isInitialized()) companion.pause(); resumed = false; pendingVoice = false; if(!runtime.backgroundExecution) cancelled.set(true); tts?.stop(); runtime.stateChanged=null; HandsFreeService.stopNoise=null; HandsFreeService.foregroundNoise=null;HandsFreeService.foregroundEnvironment=null; HandsFreeService.externalSpeechBusy=null; HandsFreeService.statusListener=null; super.onPause() }
     override fun onDestroy() {
         if(android.os.Build.VERSION.SDK_INT >= 33) backCallback?.let { onBackInvokedDispatcher.unregisterOnBackInvokedCallback(it) }
-        environment.stop();foregroundVoice.close();foregroundShake.stop();noise.stop(); if(companionDelegate.isInitialized()) companion.pause(); exportDocument = null; if(!runtime.backgroundExecution) cancelled.set(true); tts?.shutdown(); super.onDestroy()
+        environment.stop();foregroundVoice.close();foregroundShake.stop();noise.pause(); if(companionDelegate.isInitialized()) companion.pause(); exportDocument = null; if(!runtime.backgroundExecution) cancelled.set(true); tts?.shutdown(); super.onDestroy()
     }
     @Deprecated("Fallback for Android 10–12; newer versions use OnBackInvokedDispatcher")
     @android.annotation.SuppressLint("GestureBackNavigation") // API 33+ dispatcher is registered in onCreate; retain the pre-33 framework fallback.
@@ -503,7 +505,7 @@ class HomeActivity : Activity() {
             button("Set up voice & hands-free") { navigate("Voice") }
             line("Therapy: save bedtime and morning programs, then enable reminders. A reminder asks you to open HeySig and confirm a switch; programs do not change automatically.")
             button("Set up bedtime reminders") { navigate("Sleep") }
-            line("Noise: measure your surroundings and preview suggested programs without changing your aids. Keep the app open and unlocked during measurement. Automatic switching is unavailable in this build.")
+            line("Noise: choose programs for quiet through loud surroundings. Automatic can switch using your saved choices, including with the screen off. Preview lets you check suggestions without sending commands.")
             button("Explore noise preview") { navigate("Noise") }
         }
     }

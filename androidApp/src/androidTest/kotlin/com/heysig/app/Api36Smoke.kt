@@ -101,10 +101,9 @@ class Api36Smoke : Instrumentation() {
             capture("noise")
             runOnMainSync {
                 val buttons=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
-                check(buttons.any { it.text=="Review learned thresholds" && it.isShown })
-                check(buttons.any { it.text=="Discard learned measurements" && it.isShown })
+                check(buttons.count { it.text=="Off" && it.isShown }==1)
             }
-            open("2. Learn sound levels")
+            open("Optional sound setup")
             var calibrationReady=false
             var calibrationControls=""
             val calibrationDeadline=android.os.SystemClock.elapsedRealtime()+5000
@@ -120,7 +119,7 @@ class Api36Smoke : Instrumentation() {
             check(calibrationReady) { "Calibration screen did not settle: $calibrationControls" }
             capture("calibration")
             open("‹ Back")
-            open("1. Choose programs")
+            open("Choose programs")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>()
                     .any { it.contentDescription == "Protected Therapy program" })
@@ -128,10 +127,11 @@ class Api36Smoke : Instrumentation() {
             open("Advanced measurement settings")
             open("‹ Back")
             open("‹ Back")
-            open("3. Preview suggested changes")
+            open("Try without changing programs")
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
-                    .first { it.text == "Automatic on" }.isEnabled)
+                    .first { it.text == "Off" && it.isShown }.isEnabled)
+                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>().any { it.text=="Review learned thresholds" && it.isShown })
                 check(!com.heysig.noise.EnvironmentReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
                 result.putString("noiseControls","PASS: focused overview, calibration, assignments, measurements and preview routes; Automatic controls available; no capture/playback")
             }
@@ -154,7 +154,7 @@ class Api36Smoke : Instrumentation() {
                 check(controls.any { it.text.toString() in listOf("Start routine reminders","Resume routine reminders") })
                 check(controls.any { it.text.toString()=="Test reminder" })
                 check(controls.any { it.text.toString() in listOf("Start automatic routine","Review automatic routine") })
-                check(controls.any { it.text.toString()=="Sleep now" })
+                check(controls.any { it.text.toString()=="Therapy now" })
                 check(controls.any { it.text.toString()=="Wake now" })
             }
             capture("sleep")
@@ -285,7 +285,7 @@ class Api36Smoke : Instrumentation() {
                     feature.handle(com.heysig.noise.NoiseCommand.CalibrationCancel)
                     check(store.all==preservedNoise && playback==0 && !store.contains("microphoneDisclosureV2"))
                     feature.handle(com.heysig.noise.NoiseCommand.Save)
-                    check(reply.startsWith("Noise settings saved"))
+                    check(reply.startsWith("Your program choices are saved"))
                     val migrated = org.json.JSONObject(checkNotNull(store.getString("settings",null)))
                     check(migrated.getJSONArray("programs").toString() == old.getJSONArray("programs").toString())
                     check(migrated.getJSONArray("boundaries").toString() == old.getJSONArray("boundaries").toString())

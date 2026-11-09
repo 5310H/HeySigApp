@@ -15,7 +15,10 @@ successful APK build is not Play approval.
 - Ask for runtime permissions only for a requested feature. Explain microphone
   purpose and data handling before access. Keep microphone capture bounded,
   cancellable and foreground-only until a separately reviewed background design
-  is implemented. Never add transcript/audio collection or analytics silently.
+  is implemented. Ordinary phone Automatic uses the separately reviewed
+  [November 8 service design](docs/automatic-noise-background-design-2026-11-08.md);
+  all other noise capture retains its foreground constraints. Never add
+  transcript/audio collection or analytics silently.
 - Keep prompts and responses independently optional; expose visible status when
   speech is off. Test accessibility, large fonts and round-watch layouts.
 - Run relevant shared checks and APK builds for changes. Release validation
@@ -35,7 +38,8 @@ successful APK build is not Play approval.
   thresholds when the user says Automatic on; Automatic off stops capture and
   future automatic requests. Calibration is optional. Do not add an acceptance
   lock or trial requirement. Preserve confirmation/cooldown, foreground-only
-  microphone consent, manual/Therapy priority and the shared validated executor.
+  microphone consent (or the separately disclosed phone Automatic service),
+  manual/Therapy priority and the shared validated executor.
   Record actual physical acceptance separately; enabling is not acceptance.
 - Publishing, account declarations and regulatory assertions require real
   verified information; never invent owner identity, contact details,

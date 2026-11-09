@@ -136,7 +136,7 @@ class HandsFreeService : Service() {
         currentUtterance=null;synthesis?.stop();speaking=false
         if(foreground && SystemClock.elapsedRealtime()>=sessionEndsAt) { end();return }
         when(control) {
-            HandsFreeControl.ON -> { pending=null;restoreSnapshot=null;releaseIdleCommandLock();cancelResumeAlarm();stopNoise?.invoke(); stopInputs();session.on();update("Listening for Hey Sig");resumeWhenQuiet() }
+            HandsFreeControl.ON -> { AutomaticNoiseService.stop(this);pending=null;restoreSnapshot=null;releaseIdleCommandLock();cancelResumeAlarm();stopNoise?.invoke(); stopInputs();session.on();update("Listening for Hey Sig");resumeWhenQuiet() }
             HandsFreeControl.OFF -> { releaseIdleCommandLock();cancelResumeAlarm();session.off();pending=null;stopInputs();currentUtterance=null;synthesis?.stop();speaking=false;update("Hands-free Off · microphone released") }
             HandsFreeControl.PAUSE -> {
                 releaseIdleCommandLock();stopInputs();pending=null;session.pause(SystemClock.elapsedRealtime())
@@ -268,9 +268,13 @@ class HandsFreeService : Service() {
         handle(text,origin) { result -> reply(result.replace("Listening for Hey Sig","Phone listening On"));update(result);resumeWhenQuiet() }
     }
     private fun handle(text: String,origin: String,reply: (String)->Unit) {
+        if(NoiseVoice.parse(text)==NoiseCommand.Stop) {
+            AutomaticNoiseService.stop(this);stopNoise?.invoke()
+            reply("Automatic Off. Noise microphone stopped.");return
+        }
         if(closed || !foreground || SystemClock.elapsedRealtime()>=sessionEndsAt) { reply("Hands-free session expired; start it on the phone again");end();return }
         HandsFreeControl.parse(text)?.let { if(it==HandsFreeControl.END) { reply("Hands-free session ending");handler.post { end() } } else { control(it);reply(status) };return }
-        if(text.lowercase().trim() in listOf("stop","cancel")) { if(text.lowercase().trim()=="stop") runCatching { AutomaticSleepScheduler(this).disable() };stopNoise?.invoke();runtime.cancelled.set(true);pending=null;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();reply("Stop requested");return }
+        if(text.lowercase().trim() in listOf("stop","cancel")) { if(text.lowercase().trim()=="stop") runCatching { AutomaticSleepScheduler(this).disable() };AutomaticNoiseService.stop(this);stopNoise?.invoke();runtime.cancelled.set(true);pending=null;runtime.personalPhrases.cancel();runtime.sleepRoutine.cancel();runtime.fittingWorkflow.cancel();reply("Stop requested");return }
         VoicePreference.parse(text)?.let {
             val ok=prefs.edit().putBoolean(it.key,it.enabled).commit()
             if(!it.enabled) { currentUtterance=null;synthesis?.stop();speaking=false }
@@ -376,8 +380,14 @@ class HandsFreeService : Service() {
             }
             AppIntent.RestoreSettings -> {
                 val saved=runtime.saved
-                if(saved?.program==null) reply(runtime.savedIssue ?: "No known saved settings")
-                else { restoreSnapshot=saved;pending=origin to intent;pendingUntil=SystemClock.elapsedRealtime()+60000;reply("Restore saved program ${saved.program} and known levels? Say confirm restore or cancel after the wake phrase.") }
+                if(saved?.program==null) {
+                    reply(runtime.savedIssue ?: "No known saved settings")
+                } else {
+                    restoreSnapshot=saved
+                    pending=origin to intent
+                    pendingUntil=SystemClock.elapsedRealtime()+60000
+                    reply("Restore saved program ${saved.program} and known levels? Say confirm restore or cancel after the wake phrase.")
+                }
             }
             AppIntent.SaveSettings -> reply(runtime.saveSnapshot())
             AppIntent.ReadSavedSettings -> {
