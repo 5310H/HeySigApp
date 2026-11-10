@@ -98,24 +98,50 @@ Very Noisy can select only the wearer's configured waking programs.
 
 ## Validation and remaining acceptance
 
-The full noise shell suite passed, including new sustained return, unassigned
-hold, fresh/duplicate/stale checks, cooldown, manual/Therapy priority, token
-completion and invalid evidence tests. Gradle shared tests: **35 passed**, zero
-failures/errors. Phone/Wear debug builds passed. Six Android 13 JNI fixture decisions match
-host classes and scores within .01. The initial overly strict pooled-feature
-check failed: maximum scaled-feature differences .1305–.1959 (features are
-pooled values times 20), despite matching DSP features within 1e-7. Host LiteRT
-1.4.0 and Android 1.4.2 quantized encoder results are not bit-identical. The
-regression now bounds maximum scaled-feature drift at .25 and cosine at .99,
-while retaining unchanged classes and score tolerance .01. This is six-fixture
-consistency evidence, not native evaluation of all 576 mixes. Phone and watch lint passed with zero errors (33/18 warnings). The initial
-local lifecycle harness stalled without a completed result, so screen-off and
-executor acceptance are not credited from that run. The revised harness emits
-progress and avoids synchronously waiting for a reused Activity. Final
-upgrade, screen-off,
-executor and Pixel battery/physical observations will be recorded after their
-actual runs. Six licensed development/heldout JNI fixtures are test assets only,
-never played and never packaged in the main application.
+Installed development code revision: **81267cf**, pushed before final APK builds.
+Phone and watch labels: `Build 81267cf · Nov 9, 2026`.
+
+- Full noise shell suite passed: sustained return, unassigned holds, fresh,
+  duplicate and stale evidence, cooldown, manual/Therapy priority, token
+  completion and invalid evidence. Gradle shared tests: **35 passed**, zero failures.
+- Final phone, phone-test and watch debug APK builds passed. Phone/watch lint:
+  zero errors, 33/18 warnings. These are development checks, not Play approval.
+- Android 13 UI smoke passed, including every phone button role, navigation,
+  watch actions, dialog feedback, disabled actions, minimum targets and round
+  watch layouts at font scales 1/2. See the [button report](button-feedback-2026-11-09.md).
+- All six native fixtures pass on Android 13 and Pixel 9a Android 17: classes
+  match host decisions, scores differ by less than .01, DSP by less than 1e-7.
+  The original .005 scaled-embedding tolerance failed; measured maximum drift
+  was .1305–.1959 between host LiteRT 1.4.0 and Android 1.4.2. The regression
+  bounds scaled-feature drift at .25 and cosine at .99 while retaining the
+  class/score checks. This is six-fixture consistency, not native evaluation of
+  all 576 heldout mixtures or a field accuracy qualification.
+- First-use and isolated choice-save/recreation/stale-fitting checks passed on
+  both Android 13 and Pixel. No calibration, examples or wearer training data.
+- The revised Android 13 lifecycle harness passed actual microphone capture
+  with the screen off, controlled debug masking evidence, Noisy dispatch,
+  cooldown, fresh sustained Everyday return, duplicate prevention, manual
+  cancellation and notification Off. Its transport is silent and cannot reach
+  speakers. The initial harness stalled waiting for an Activity; that run is
+  not counted. Production detector fixtures are tested separately.
+- Pixel upgrade fingerprints exactly match the pre-update core, personal
+  phrases, Therapy and noise files before live testing. Six assignments,
+  thresholds and timings were not migrated or overwritten.
+- The automated Pixel live-service start timed out after native/choice checks;
+  the original failure reason was not captured. Starting with the actual
+  visible On/Off UI and its disclosure then worked. The real service remained
+  On after screen-off; Android app-ops reported a three-second microphone
+  capture ending about seven seconds before inspection. Its existing Off
+  action stopped the service, verified by the absence of a running service.
+  Automatic was left **Off** after testing. No physical reception is inferred.
+- Short uncontrolled Pixel battery observation: charge counter 2,817,500 to
+  2,780,000 microamp-hours, level 59% at both readings, temperature 24.5 to
+  24.3 C. Wi-Fi debugging/UI activity were present. No daily-life rate,
+  inference CPU measurement or sustained battery qualification is claimed.
+
+Six licensed development/heldout JNI recordings are test assets only, never
+played and never packaged in the main application. All actual microphone
+samples were processed locally in memory and discarded.
 
 Outstanding accuracy work includes more independent speakers/backgrounds,
 representative real music/TV and transient controls, actual phone placements,
