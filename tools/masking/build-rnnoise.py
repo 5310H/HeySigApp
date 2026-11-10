@@ -70,6 +70,7 @@ def main():
                 '-Wl,-z,max-page-size=16384','-Wl,-z,common-page-size=16384','-Wl,--no-undefined',
                 '-I'+str(cache/'include'),'-I'+str(cache/'src'),str(bridge),str(resampler),
                 *(str(cache/'src'/name) for name in sources),'-o',str(destination),'-lm')
+            run(str(compiler.parent/'llvm-strip'),'--strip-unneeded',str(destination))
             native[abi+'/libheysig_rnnoise.so']=sha(destination)
         proof['android']=dict(ndkRevision='27.2.12479018',minSdk=29,native=native)
         (output_root/'build.json').write_text(json.dumps(proof,indent=2)+'\n')
