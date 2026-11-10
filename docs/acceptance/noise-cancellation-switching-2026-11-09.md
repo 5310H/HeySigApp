@@ -83,3 +83,37 @@ device checks are recorded separately after the source commit. No new battery,
 physical aid reception, clinical, regulatory or Google Play acceptance is claimed
 by these corpus results. Existing acceptance flags remain false evidence records,
 not enable locks. Automatic is live only when the wearer explicitly turns it On.
+
+## Final build and device verification
+
+Code revision **d48f349** was committed and pushed before final device APKs.
+Both the Pixel 9a and Pixel Watch 3 were updated in place successfully to
+`Build d48f349 · Nov 9, 2026`. Initial installation requests were declined;
+installation proceeded only after the owner supplied the phone and watch ports
+again. No uninstall or data clearing was used.
+
+- Final shared tests: 35 passed. Full noise shell suite and added cancellation
+  regressions passed. Phone, phone-test and watch debug APK builds passed.
+- Phone/watch lint: zero errors; 31/18 warnings. The ARM host required the existing
+  documented `-Pandroid.aapt2FromMavenOverride=/tmp/heysig-arm-tools/build-tools/aapt2`.
+  The initial default x86 packaging tool failed to execute; the corrected build
+  passed. No release/Play approval is implied.
+- Final phone/watch APKs contain the expected pushed build identity. Both phone
+  model assets and source-credit pins match; no PCM fixtures are packaged in the
+  main phone APK. Native inventory and ELF/ZIP 16KB alignment checks passed:
+  20 phone libraries, four watch libraries.
+- All five checked phone preference files are byte-identical before/after the
+  update: core/fitting, noise, speech-role choices, Therapy and personal phrases.
+  The watch preference file is also byte-identical.
+- Pixel instrumentation passed all six native fixtures, including both heads'
+  agreement decisions and DSP feature checks. Expected severities:
+  development CLEAR/MODERATE/HEAVY; heldout CLEAR/UNKNOWN/HEAVY. Native score and
+  encoder consistency bounds passed. This verifies consistency, not accuracy.
+- First-use, isolated explicit choice saving/recreation, unassigned choice and
+  stale-fitting rejection checks passed. Instrumentation confirmed real fitting,
+  saved user snapshot and six noise assignments/thresholds/timings were retained.
+- This verification used recorded fixtures and UI checks, with live microphone,
+  screen-off and hearing-aid playback tests disabled. No hearing-aid tones were
+  sent. Automatic was left Off by the test cleanup. No new sustained battery or
+  physical aid reception acceptance is claimed. The accuracy limitations and
+  increased-hold tradeoff above remain unchanged.
