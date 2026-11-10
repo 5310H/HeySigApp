@@ -1,0 +1,28 @@
+name: Build pinned speech denoiser
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install pinned Android NDK
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;27.2.12479018"'
+      - name: Build host and four Android ABIs
+        run: >-
+          python3 tools/masking/build-rnnoise.py
+          --cache "$RUNNER_TEMP/heysig-rnnoise"
+          --download
+          --android-ndk "$ANDROID_HOME/ndk/27.2.12479018"
+          --android-output "$RUNNER_TEMP/heysig-rnnoise-android"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: heysig-rnnoise-android
+          path: ${{ runner.temp }}/heysig-rnnoise-android/
+          if-no-files-found: error
+          retention-days: 14
