@@ -26,9 +26,13 @@ class SpeechAutomaticAcceptance:Instrumentation() {
         try {
             val bytes=targetContext.assets.open("masking/masking-head.txt").use { it.readBytes() }
             check(digest(bytes)==MaskingModelIdentity.HEAD_SHA256)
-            val head=SpeechMaskingHead.decode(bytes.toString(Charsets.UTF_8))
+            val baselineBytes=targetContext.assets.open("masking/masking-baseline.txt").use { it.readBytes() }
+            check(digest(baselineBytes)==MaskingModelIdentity.BASELINE_SHA256)
+            val head=CancellationAwareMaskingHead(SpeechMaskingHead.decode(baselineBytes.toString(Charsets.UTF_8)),
+                SpeechMaskingHead.decode(bytes.toString(Charsets.UTF_8)))
             val fixtures=JSONObject(context.assets.open("masking-fixtures/manifest.json").bufferedReader().use { it.readText() })
             check(fixtures.getString("headSha256")==MaskingModelIdentity.HEAD_SHA256)
+            check(fixtures.getString("baselineSha256")==MaskingModelIdentity.BASELINE_SHA256)
             val entries=fixtures.getJSONArray("fixtures");val native=mutableListOf<String>();val driftFailures=mutableListOf<String>()
             for(i in 0 until entries.length()) {
                 val fixture=entries.getJSONObject(i);val raw=context.assets.open("masking-fixtures/${fixture.getString("file")}").use { it.readBytes() }
@@ -39,6 +43,10 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                     Yamnet(targetContext,observeEvidence={ capture,pool,frames ->
                         val expected=fixture.getJSONArray("features");val speech=MaskingSignal.features(capture)
                         check((0..3).all { kotlin.math.abs(speech[it]-expected.getDouble(2048+it))<1e-7 }) { "Speech features differ from developer extraction" }
+                        if(head.featureCount==2058) {
+                            val cancellation=NoiseCancellationSignal.features(capture)
+                            check(cancellation.indices.all { kotlin.math.abs(cancellation[it]-expected.getDouble(2052+it))<1e-7 }) { "Noise suppression features differ from developer extraction" }
+                        }
                         val drift=pool?.indices?.maxOf { kotlin.math.abs(pool[it]*20-expected.getDouble(it)) } ?: Double.POSITIVE_INFINITY
                         // LiteRT host 1.4.0 vs Android 1.4.2 quantized embeddings differ;
                         // retain a bounded feature check plus the stricter class/score check below.

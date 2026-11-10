@@ -4,6 +4,7 @@ import groovy.json.JsonSlurper
 def maskingIntegrity = new JsonSlurper().parse(rootProject.file('third_party/masking/integrity.json'))
 def verifySpeechMasking = tasks.register('verifySpeechMasking') {
     inputs.file(rootProject.file('androidApp/src/main/assets/masking/masking-head.txt'))
+    inputs.file(rootProject.file('androidApp/src/main/assets/masking/masking-baseline.txt'))
     inputs.file(rootProject.file('androidApp/src/main/assets/masking/NOTICE'))
     inputs.file(rootProject.file('androidApp/src/main/assets/masking/sources.json'))
     inputs.file(rootProject.file('androidApp/src/main/assets/masking/CC-BY-4.0.txt'))
@@ -11,7 +12,7 @@ def verifySpeechMasking = tasks.register('verifySpeechMasking') {
     doLast {
         def file=rootProject.file('androidApp/src/main/assets/masking/masking-head.txt')
         assert MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() ==
-            '884b7e0f1a925b3714f9c9b85a7bbce47a33b3c16ea891c1c6bf4e57a02e1812': 'Unexpected speech masking head'
+            'c1ff70dfadf1993fff1ef98dea77cb790dd9d9b52599817878d99398fa7ce200': 'Unexpected speech masking head'
         maskingIntegrity.artifacts.each { name, expected ->
             def asset=rootProject.file('androidApp/src/main/assets/masking/'+name)
             assert MessageDigest.getInstance('SHA-256').digest(asset.bytes).encodeHex().toString()==expected: 'Unexpected masking artifact '+name

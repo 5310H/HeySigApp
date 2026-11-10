@@ -1,9 +1,10 @@
 {
   "artifacts": {
-    "masking-head.txt": "884b7e0f1a925b3714f9c9b85a7bbce47a33b3c16ea891c1c6bf4e57a02e1812",
+    "masking-head.txt": "c1ff70dfadf1993fff1ef98dea77cb790dd9d9b52599817878d99398fa7ce200",
     "CC-BY-4.0.txt": "511b44e9dcdbb4a6492efd45ee1171a102e24ccd20bd51377f63fcda6b7fc14f",
-    "NOTICE": "1e89e0603753ddb668f66f04dd1ef6050fd84a7de12f34c0b99f71baa47a9b5e",
-    "sources.json": "e18d06310939b0dd04728b35551708829c8389302de47d020f6dc4ce5a645d8b"
+    "NOTICE": "f1e0e88344cdab11f4cfcfb38951477c52648bbdd31350aef1c751652b0f1636",
+    "sources.json": "a090c4a163162bf59566cc5bf14f27c9bb43a2fc7d67af90365045c6b1206b94",
+    "masking-baseline.txt": "884b7e0f1a925b3714f9c9b85a7bbce47a33b3c16ea891c1c6bf4e57a02e1812"
   },
   "encoder": "b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4",
   "runtime": "existing LiteRT 1.4.2; no new dependency"

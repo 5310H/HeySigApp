@@ -10,10 +10,13 @@ data class MaskingEvidence(val severity: MaskingSeverity=MaskingSeverity.UNKNOWN
 
 /** No calibration, enrollment, transcript or wearer learning. Fixed, development-trained weights. */
 class SpeechMaskingHead private constructor(private val bias: DoubleArray,private val weights: List<DoubleArray>) {
+    val featureCount: Int get() = weights.first().size
     fun classify(pcm: ShortArray, pooled: DoubleArray?, frames: List<Map<String,Double>>): MaskingEvidence {
         if(pcm.size!=48000) return MaskingEvidence(reason="Masking requires a complete three-second capture")
         val measurement=NoiseAccumulator(16000,3).apply { add(pcm,pcm.size) }.measurement()
-        return classifyFeatures(pooled,MaskingSignal.features(pcm),frames,measurement)
+        val acoustic=MaskingSignal.features(pcm)
+        val features=if(featureCount==2058) acoustic+NoiseCancellationSignal.features(pcm) else acoustic
+        return classifyFeatures(pooled,features,frames,measurement)
     }
     /** Identical scalar boundary for native capture and reproducible developer-corpus reporting. */
     fun classifyFeatures(pooled:DoubleArray?,speechFeatures:DoubleArray,frames:List<Map<String,Double>>,measurement:NoiseMeasurement):MaskingEvidence {
@@ -21,7 +24,7 @@ class SpeechMaskingHead private constructor(private val bias: DoubleArray,privat
         if(measurement.sampleRate!=16000 || measurement.sampleCount!=48000L ||
             !measurement.rmsDbfs.isFinite() || measurement.rmsDbfs !in -120.0..0.0 ||
             !measurement.peakDbfs.isFinite() || measurement.peakDbfs !in measurement.rmsDbfs..0.0 ||
-            speechFeatures.size!=4 || speechFeatures.any { !it.isFinite() || it !in 0.0..1.0 } ||
+            speechFeatures.size!=featureCount-2048 || speechFeatures.any { !it.isFinite() || it !in 0.0..1.0 } ||
             pooled?.size!=2048 || pooled.any { !it.isFinite() || it !in 0.0..1.0 } ||
             pooled.sumOf { it*it } !in .99..1.01 || frames.size !in 3..32 || frames.any { f ->
                 !f.keys.containsAll(EnvironmentClassifier.requiredLabels) || f.values.any { !it.isFinite() || it !in 0.0..1.0 }
@@ -35,23 +38,53 @@ class SpeechMaskingHead private constructor(private val bias: DoubleArray,privat
         if(measurement.rmsDbfs<=-65 && event("Silence")>=.6 && max(speech,babble)<.15)
             return MaskingEvidence(MaskingSeverity.QUIET,type,reason="Quiet evidence; requires repeated checks")
         if(max(speech,babble)<.15) return hold("No reliable speech evidence; keep current program")
-        val x=DoubleArray(2052) { if(it<2048) pooled[it]*20 else 0.0 }
+        val x=DoubleArray(featureCount) { if(it<2048) pooled[it]*20 else 0.0 }
         speechFeatures.copyInto(x,2048)
         val logits=DoubleArray(3) { c -> bias[c]+x.indices.sumOf { weights[c][it]*x[it] } }
         val peak=logits.max();val scores=logits.map { exp(it-peak) };val total=scores.sum()
         val ordered=scores.indices.sortedByDescending { scores[it] };val top=scores[ordered[0]]/total
         if(top<.65 || top-scores[ordered[1]]/total<.15) return hold("Masking estimates disagree; keep current program")
         return MaskingEvidence(listOf(MaskingSeverity.CLEAR,MaskingSeverity.MODERATE,MaskingSeverity.HEAVY)[ordered[0]],type,top,
-            "Experimental masking estimate, not measured intelligibility or target-speaker identity")
+            if(featureCount==2058) "Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity" else "Experimental masking estimate, not measured intelligibility or target-speaker identity")
     }
     companion object {
         fun decode(text:String): SpeechMaskingHead {
             require(text.length in 20..300000)
-            val lines=text.trimEnd('\n').split('\n');require(lines.size==6 && lines[0]=="HSGMASK1" && lines[1]=="2052")
+            val lines=text.trimEnd('\n').split('\n');require(lines.size==6)
+            val count=when(lines[0]) { "HSGMASK1" -> 2052; "HSGMASK2" -> 2058; else -> error("Unknown masking head") }
+            require(lines[1]==count.toString())
             fun row(line:String,size:Int)=line.split(',').map { it.toDouble().also { n -> require(n.isFinite() && abs(n)<10000) } }.toDoubleArray().also { require(it.size==size) }
-            return SpeechMaskingHead(row(lines[2],3),(3..5).map { row(lines[it],2052) })
+            return SpeechMaskingHead(row(lines[2],3),(3..5).map { row(lines[it],count) })
         }
     }
+}
+
+/** Noise suppression is corroboration, not a replacement for original speech evidence.
+ * These heads share the encoder and are not statistically independent detectors.
+ */
+class CancellationAwareMaskingHead(private val original:SpeechMaskingHead,private val cancellation:SpeechMaskingHead) {
+    init { require(original.featureCount==2052 && cancellation.featureCount==2058) }
+    val featureCount:Int get()=2058
+    fun classify(pcm:ShortArray,pooled:DoubleArray?,frames:List<Map<String,Double>>):MaskingEvidence {
+        if(pcm.size!=48000) return MaskingEvidence(reason="Masking requires a complete three-second capture")
+        val measurement=NoiseAccumulator(16000,3).apply { add(pcm,pcm.size) }.measurement()
+        return classifyFeatures(pooled,MaskingSignal.features(pcm)+NoiseCancellationSignal.features(pcm),frames,measurement)
+    }
+    fun classifyFeatures(pooled:DoubleArray?,features:DoubleArray,frames:List<Map<String,Double>>,measurement:NoiseMeasurement):MaskingEvidence {
+        if(features.size!=10) return MaskingEvidence(reason="Incomplete noise-suppression evidence")
+        return agreeCancellationEvidence(original.classifyFeatures(pooled,features.copyOfRange(0,4),frames,measurement),
+            cancellation.classifyFeatures(pooled,features,frames,measurement))
+    }
+}
+
+fun agreeCancellationEvidence(original:MaskingEvidence,cancellation:MaskingEvidence):MaskingEvidence {
+    if(original.severity==MaskingSeverity.UNKNOWN) return original
+    if(original.severity!=cancellation.severity || original.soundType!=cancellation.soundType ||
+        listOf(original.score,cancellation.score).any { !it.isFinite() || it !in 0.0..1.0 } ||
+        (original.severity!=MaskingSeverity.QUIET && min(original.score,cancellation.score)<.65))
+        return MaskingEvidence(soundType=original.soundType,reason="Speech and noise-reduction estimates disagree; keep current program")
+    return original.copy(score=min(original.score,cancellation.score),reason=if(original.severity==MaskingSeverity.QUIET)
+        original.reason else "Speech and noise-reduction estimates agree; requires repeated fresh checks")
 }
 
 /** Speech envelope modulation and pitch periodicity; scalars only, no saved waveform. */

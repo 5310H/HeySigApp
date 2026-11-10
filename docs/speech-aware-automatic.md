@@ -21,6 +21,14 @@ cooldown also applies before returning to Everyday. During this wait the screen
 shows what is happening. It does not change programs just because a place sounds
 like a restaurant or a crowd.
 
+Automatic also uses a noise-reduction analysis to help judge speech against the
+background. It compares the original sound with an internal estimate of what
+remains after background reduction. Both speech estimates must agree before
+Automatic can change. If they disagree, it keeps the current program. This helps
+choose a program; it does not
+play cleaned sound through the phone or add noise cancellation to your aids.
+There is no noise-profile setup or learning period.
+
 Tap the green **On** button to stop, or swipe down and tap **Off** in the HeySig
 notification. Choosing a program yourself stops Automatic. Therapy remains under
 your control. Sessions end after eight hours and do not restart by themselves.

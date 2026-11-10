@@ -5,6 +5,9 @@ intelligibility measurement, speaker identity model or compatibility certificati
 The existing YAMNet encoder remains unchanged, under its existing Apache-2.0
 notice in environment/. A separately fitted 3-class linear head uses pooled
 encoder features plus envelope modulation, pitch periodicity and zero crossings.
+The original head is retained as masking-baseline.txt. A second head adds six
+shared Kotlin spectral noise-suppression features. Both must agree before the
+existing repeated-check policy can switch programs. No cleaned audio is played.
 No separate inference runtime, speech recognition or network model is added.
 
 Fitting sources: LibriSpeech (c) 2014 Vassil Panayotov, CC BY 4.0,

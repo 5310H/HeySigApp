@@ -62,3 +62,27 @@ as actual results. Short tests do not establish all-day battery impact or actual
 hearing-aid reception. No Play submission, medical classification, compatibility
 claim or approval is asserted. Release review must cover the changed local
 model, service usage, data disclosures, field errors, accessibility and hardware.
+
+## Noise-suppression decision evidence — November 9 follow-up
+
+The owner requested using noise cancellation to determine program switches.
+A fixed HSGMASK2 second-opinion head adds six scalar features from shared Kotlin spectral
+noise suppression to the existing encoder and four speech features. It estimates
+a temporary per-frequency background floor inside each existing three-second
+capture and measures retained/removed power and envelope structure. This is an
+analysis-only Wiener-style suppression, not headphone active cancellation,
+target-speaker separation or measured intelligibility. No waveform is reconstructed
+or played. Arrays are erased after extraction; no floor persists between captures.
+
+No extra microphone windows, service lifetime, permission, network connection,
+transcript, stored audio, wearer enrollment, noise-profile setup or background
+service capability is introduced. Existing role choices, six legacy assignments,
+confirmation count, cooldown, manual/Therapy priority and the validated shared
+chirp executor are unchanged. The unchanged HSGMASK1 head must agree with
+the second-opinion head before evidence reaches that policy. Disagreement holds
+the current program; the heads share an encoder and are not independent. The same owner-authorized live mode remains live;
+no preview or acceptance lock is added. Existing quiet/music/transient/uncertainty
+guards still apply. Steady-floor estimation can mistake continuous speech for
+background and cannot identify the desired talker. Accuracy and physical
+acceptance remain separate from enabling Automatic. See the follow-up
+[evaluation](acceptance/noise-cancellation-switching-2026-11-09.md).

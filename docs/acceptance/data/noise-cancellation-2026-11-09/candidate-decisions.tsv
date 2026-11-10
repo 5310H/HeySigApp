@@ -1,0 +1,1183 @@
+index	severity	score	maskingProposal	levelProposal	returnProposal	reason
+0	CLEAR	0.9702032728562535	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1	CLEAR	0.9706495252214515	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+2	CLEAR	0.9553838201105535	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+3	CLEAR	0.9504960841817983	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+4	MODERATE	0.9886456453872057	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+5	MODERATE	0.988534524928821	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+6	MODERATE	0.9268467913872575	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+7	MODERATE	0.9182457188954842	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+8	HEAVY	0.9425501448930992	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+9	HEAVY	0.9490992365050827	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+10	HEAVY	0.9854993794755963	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+11	HEAVY	0.9870062910319222	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+12	CLEAR	0.9836809800056664	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+13	CLEAR	0.9802964347310142	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+14	CLEAR	0.9311331336952441	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+15	CLEAR	0.9423297695866194	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+16	MODERATE	0.8629634865142127	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+17	MODERATE	0.865152010025565	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+18	MODERATE	0.7931978246257514	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+19	MODERATE	0.8214819472764963	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+20	HEAVY	0.9867540534785456	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+21	HEAVY	0.9866606330391368	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+22	HEAVY	0.9795941528250851	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+23	HEAVY	0.9833730958493967	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+24	CLEAR	0.8660424249867182	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+25	CLEAR	0.8690331403688257	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+26	CLEAR	0.8983411709094494	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+27	CLEAR	0.9194488837924948	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+28	MODERATE	0.9407549372117947	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+29	MODERATE	0.9413866421468581	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+30	MODERATE	0.9732491088311137	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+31	MODERATE	0.9737731626155344	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+32	HEAVY	0.9701396987762514	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+33	HEAVY	0.9692322087759938	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+34	HEAVY	0.9529386388678437	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+35	HEAVY	0.9437371098867097	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+36	CLEAR	0.9857144313186659	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+37	CLEAR	0.983289573432889	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+38	CLEAR	0.95603981376293	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+39	CLEAR	0.9523518605906901	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+40	MODERATE	0.9753504846590948	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+41	MODERATE	0.970252489613414	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+42	MODERATE	0.9826194264755105	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+43	MODERATE	0.9844785374453038	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+44	HEAVY	0.9941405862500283	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+45	HEAVY	0.9926730493096423	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+46	HEAVY	0.9949175052948654	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+47	HEAVY	0.9945820482294836	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+48	CLEAR	0.9777061562814646	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+49	CLEAR	0.9771107306382796	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+50	CLEAR	0.941805023068127	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+51	CLEAR	0.9423438702901386	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+52	MODERATE	0.9522595178123705	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+53	MODERATE	0.9560320158227392	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+54	MODERATE	0.9741075064081064	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+55	MODERATE	0.975161780912555	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+56	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+57	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+58	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+59	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+60	CLEAR	0.8694217447288651	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+61	CLEAR	0.8487794835462265	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+62	CLEAR	0.6700191688432536	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+63	CLEAR	0.6512995203653119	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+64	MODERATE	0.6958981231175099	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+65	MODERATE	0.679087757917082	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+66	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+67	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+68	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+69	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+70	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+71	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+72	CLEAR	0.9849047048670703	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+73	CLEAR	0.9817427904163629	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+74	CLEAR	0.9897879092448542	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+75	CLEAR	0.9916075885514296	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+76	MODERATE	0.9642353621102653	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+77	MODERATE	0.9710606908380818	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+78	MODERATE	0.9200574436808019	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+79	MODERATE	0.918960656528408	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+80	HEAVY	0.9520375605472166	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+81	HEAVY	0.9560359804648272	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+82	HEAVY	0.9041883021586125	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+83	HEAVY	0.9146244493414184	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+84	CLEAR	0.9949637940796057	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+85	CLEAR	0.9946472779938224	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+86	CLEAR	0.9882032040727023	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+87	CLEAR	0.9880235911895554	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+88	MODERATE	0.9785181845785262	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+89	MODERATE	0.9786044191237752	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+90	MODERATE	0.9518815331777818	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+91	MODERATE	0.9406345911851385	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+92	HEAVY	0.8977019929600385	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+93	HEAVY	0.9110826283064516	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+94	HEAVY	0.9594140289971171	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+95	HEAVY	0.9582190252830274	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+96	CLEAR	0.9631038623531235	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+97	CLEAR	0.961380868830236	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+98	CLEAR	0.9789691088633395	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+99	CLEAR	0.9781799119848912	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+100	MODERATE	0.9768527306886459	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+101	MODERATE	0.9788275225643777	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+102	MODERATE	0.9616663115894847	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+103	MODERATE	0.9596386221843364	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+104	HEAVY	0.9374203572824603	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+105	HEAVY	0.9382924621480685	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+106	HEAVY	0.9108231888609355	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+107	HEAVY	0.8991773005123364	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+108	CLEAR	0.9949497801731283	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+109	CLEAR	0.9948249102052231	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+110	CLEAR	0.9820421562085343	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+111	CLEAR	0.9837321884398843	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+112	MODERATE	0.9315809102510637	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+113	MODERATE	0.9288909217456988	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+114	MODERATE	0.9351133229533699	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+115	MODERATE	0.9359961211055605	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+116	HEAVY	0.9762779874846944	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+117	HEAVY	0.973596936684889	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+118	HEAVY	0.9830481653021854	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+119	HEAVY	0.9814267817606537	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+120	CLEAR	0.9907839673315758	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+121	CLEAR	0.9917288494025008	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+122	CLEAR	0.9700939772220235	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+123	CLEAR	0.9734806413303048	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+124	MODERATE	0.9434985897490227	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+125	MODERATE	0.9524293064301451	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+126	MODERATE	0.9099977689729581	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+127	MODERATE	0.8907136376656778	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+128	HEAVY	0.97834450074154	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+129	HEAVY	0.9830489427734428	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+130	HEAVY	0.9851673018929056	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+131	HEAVY	0.9860263752982176	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+132	CLEAR	0.8826584717412954	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+133	CLEAR	0.8984561182108913	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+134	CLEAR	0.9201545806346519	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+135	CLEAR	0.9388110791954569	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+136	MODERATE	0.7322044267012623	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+137	MODERATE	0.7831787384729935	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+138	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+139	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+140	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+141	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+142	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+143	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+144	CLEAR	0.9621453793735937	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+145	CLEAR	0.9605471516518373	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+146	CLEAR	0.9299252710391653	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+147	CLEAR	0.9327540623593459	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+148	MODERATE	0.9609391363660648	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+149	MODERATE	0.9622535274185239	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+150	MODERATE	0.9016411741693608	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+151	MODERATE	0.8716227221315275	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+152	HEAVY	0.9724898101448889	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+153	HEAVY	0.9728602201095106	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+154	HEAVY	0.9880740193067877	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+155	HEAVY	0.989539250986462	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+156	CLEAR	0.9860636143080576	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+157	CLEAR	0.9860282928158367	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+158	CLEAR	0.9396684434516802	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+159	CLEAR	0.9431056082586118	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+160	MODERATE	0.9334693391740708	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+161	MODERATE	0.9035148269121941	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+162	MODERATE	0.8976272631051138	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+163	MODERATE	0.8921055573389034	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+164	HEAVY	0.9650470524972062	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+165	HEAVY	0.9628435451874279	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+166	HEAVY	0.9874171543360073	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+167	HEAVY	0.9856939775330099	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+168	CLEAR	0.9863184777684999	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+169	CLEAR	0.9866362226851876	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+170	CLEAR	0.9647311862431828	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+171	CLEAR	0.965389664202181	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+172	MODERATE	0.9714716915328034	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+173	MODERATE	0.9738798123218025	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+174	MODERATE	0.9617264584124612	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+175	MODERATE	0.9644357553033759	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+176	HEAVY	0.9911024086108556	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+177	HEAVY	0.9908046445928408	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+178	HEAVY	0.9660172520647329	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+179	HEAVY	0.9649121802934625	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+180	CLEAR	0.9958709931145606	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+181	CLEAR	0.9950615945031919	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+182	CLEAR	0.9866963230798755	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+183	CLEAR	0.985663228675023	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+184	MODERATE	0.9790456098434074	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+185	MODERATE	0.9791884304837368	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+186	MODERATE	0.9700802288768884	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+187	MODERATE	0.9702439204386439	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+188	HEAVY	0.9945059620281897	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+189	HEAVY	0.9943112216777611	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+190	HEAVY	0.9878387952312109	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+191	HEAVY	0.9869323081538508	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+192	CLEAR	0.9938981260229587	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+193	CLEAR	0.993539451686509	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+194	CLEAR	0.9854349780742434	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+195	CLEAR	0.9859699602240598	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+196	MODERATE	0.971815181757029	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+197	MODERATE	0.9698783757053435	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+198	MODERATE	0.9876337140618006	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+199	MODERATE	0.9858074107541178	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+200	HEAVY	0.9608494296961807	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+201	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+202	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+203	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+204	CLEAR	0.8037309346873484	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+205	CLEAR	0.8023446741085726	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+206	CLEAR	0.7917365265019868	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+207	CLEAR	0.7548024180494082	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+208	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+209	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+210	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+211	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+212	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+213	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+214	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+215	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+216	CLEAR	0.9979238469879095	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+217	CLEAR	0.9981171060134145	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+218	CLEAR	0.9950840541308864	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+219	CLEAR	0.9954251719194195	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+220	MODERATE	0.9848698741397734	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+221	MODERATE	0.9855660778747245	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+222	MODERATE	0.8832135728786048	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+223	MODERATE	0.8919937100343264	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+224	HEAVY	0.9817983321896774	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+225	HEAVY	0.9762259334785861	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+226	HEAVY	0.9744154483058718	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+227	HEAVY	0.9735926736865534	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+228	CLEAR	0.9505470943938453	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+229	CLEAR	0.9594981101468711	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+230	CLEAR	0.9052839817330348	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+231	CLEAR	0.8768059494844717	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+232	MODERATE	0.9617008129264093	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+233	MODERATE	0.9663613996074402	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+234	MODERATE	0.9607273941739874	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+235	MODERATE	0.9625101035865223	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+236	HEAVY	0.912910001214957	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+237	HEAVY	0.9051415278474214	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+238	HEAVY	0.9009015046863994	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+239	HEAVY	0.9066701331983454	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+240	CLEAR	0.9939132233595862	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+241	CLEAR	0.9936779347811444	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+242	CLEAR	0.9947874570322558	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+243	CLEAR	0.9950573581285249	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+244	MODERATE	0.9648951791366952	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+245	MODERATE	0.9672881258791112	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+246	MODERATE	0.9615938162564363	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+247	MODERATE	0.9654425714177045	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+248	HEAVY	0.9786820182873385	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+249	HEAVY	0.9820933411380763	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+250	HEAVY	0.935750041969631	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+251	HEAVY	0.9358532487415167	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+252	CLEAR	0.9918782141572113	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+253	CLEAR	0.9924092910539558	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+254	CLEAR	0.9959383570944514	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+255	CLEAR	0.9967187642966414	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+256	MODERATE	0.9787910347861	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+257	MODERATE	0.979317978300363	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+258	MODERATE	0.9823744752962336	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+259	MODERATE	0.9827979123767094	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+260	HEAVY	0.990533408354304	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+261	HEAVY	0.9918868232136192	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+262	HEAVY	0.9912993824764159	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+263	HEAVY	0.9912270946012606	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+264	CLEAR	0.9940448844867212	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+265	CLEAR	0.9935014426118552	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+266	CLEAR	0.9882389674252541	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+267	CLEAR	0.9881286271168227	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+268	MODERATE	0.9523248925747819	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+269	MODERATE	0.9500712385212656	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+270	MODERATE	0.9827390190677122	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+271	MODERATE	0.9782520940951949	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+272	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+273	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+274	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+275	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+276	CLEAR	0.7990740219600213	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+277	CLEAR	0.8369636546092394	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+278	CLEAR	0.8511572160825316	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+279	CLEAR	0.8439112157212735	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+280	MODERATE	0.7199988800509594	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+281	MODERATE	0.7269799068587497	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+282	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+283	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+284	HEAVY	0.7672771057725375	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+285	HEAVY	0.7895096981977812	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+286	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+287	HEAVY	0.6630535437832259	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+288	CLEAR	0.9909162192816043	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+289	CLEAR	0.9919108402820223	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+290	CLEAR	0.9959614692489567	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+291	CLEAR	0.9938941579747904	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+292	MODERATE	0.9773662212094584	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+293	MODERATE	0.9726310201139071	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+294	MODERATE	0.8900510717397867	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+295	MODERATE	0.8894291309238713	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+296	HEAVY	0.9881641039651122	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+297	HEAVY	0.9866705050851791	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+298	HEAVY	0.9911284112527574	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+299	HEAVY	0.9901053114097983	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+300	CLEAR	0.993786677499096	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+301	CLEAR	0.9933819596839915	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+302	CLEAR	0.992727321146599	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+303	CLEAR	0.9933233929152885	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+304	MODERATE	0.9543944227915254	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+305	MODERATE	0.9577652624224711	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+306	MODERATE	0.8958167378865046	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+307	MODERATE	0.8944813189333278	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+308	HEAVY	0.9651604973737729	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+309	HEAVY	0.9685400009748791	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+310	HEAVY	0.9076371964282283	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+311	HEAVY	0.9178097850347935	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+312	CLEAR	0.9234887242483344	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+313	CLEAR	0.9121638846775175	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+314	CLEAR	0.9854096533001245	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+315	CLEAR	0.9860428401563213	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+316	MODERATE	0.9691982875511025	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+317	MODERATE	0.966041395028132	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+318	MODERATE	0.9046576193533465	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+319	MODERATE	0.9037658186294274	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+320	HEAVY	0.9899048019415928	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+321	HEAVY	0.9898027750851789	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+322	HEAVY	0.9869792255649744	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+323	HEAVY	0.9893152597271718	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+324	CLEAR	0.9853236926338754	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+325	CLEAR	0.9854743790463801	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+326	CLEAR	0.9842788738618566	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+327	CLEAR	0.9849876967705664	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+328	MODERATE	0.9409668376735222	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+329	MODERATE	0.9347942139329227	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+330	MODERATE	0.904222134270255	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+331	MODERATE	0.9093308960658005	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+332	HEAVY	0.995127379421626	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+333	HEAVY	0.9950153303739007	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+334	HEAVY	0.9987044675850795	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+335	HEAVY	0.9986555695862059	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+336	CLEAR	0.9946641345305013	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+337	CLEAR	0.9952146962643522	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+338	CLEAR	0.9895411316800273	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+339	CLEAR	0.9909507342474159	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+340	MODERATE	0.9119675334666913	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+341	MODERATE	0.9182220486545043	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+342	MODERATE	0.8273453960922442	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+343	MODERATE	0.8112582442494654	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+344	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+345	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+346	HEAVY	0.9607697936759317	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+347	HEAVY	0.9552662004452405	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+348	CLEAR	0.9298887117677064	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+349	CLEAR	0.9447358162635444	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+350	CLEAR	0.964663620098193	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+351	CLEAR	0.9739693732851115	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+352	MODERATE	0.7825522324521159	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+353	MODERATE	0.7728220161682718	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+354	MODERATE	0.7998099489094714	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+355	MODERATE	0.7774404261734696	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+356	HEAVY	0.7749417710978777	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+357	HEAVY	0.7128031585240004	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+358	HEAVY	0.7499211796509248	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+359	HEAVY	0.727676868329252	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+360	CLEAR	0.9485259774636847	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+361	CLEAR	0.9558412933231958	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+362	CLEAR	0.97001107239406	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+363	CLEAR	0.9703019038373776	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+364	MODERATE	0.9709857832530506	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+365	MODERATE	0.9685853986657186	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+366	MODERATE	0.8391181174822818	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+367	MODERATE	0.8682656739380731	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+368	HEAVY	0.9960337635595816	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+369	HEAVY	0.9948834082389606	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+370	HEAVY	0.994207799521944	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+371	HEAVY	0.993251939556026	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+372	CLEAR	0.9905367358223708	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+373	CLEAR	0.9879757175405073	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+374	CLEAR	0.9454359059110703	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+375	CLEAR	0.9577233501524255	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+376	MODERATE	0.879302049362117	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+377	MODERATE	0.9032365144382707	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+378	MODERATE	0.8582801553744499	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+379	MODERATE	0.8560491275583177	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+380	HEAVY	0.9684733659573868	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+381	HEAVY	0.972143841954429	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+382	HEAVY	0.9605774264059088	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+383	HEAVY	0.9644521887501515	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+384	CLEAR	0.8057641183365992	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+385	CLEAR	0.8124520628811218	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+386	CLEAR	0.9680441374225929	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+387	CLEAR	0.959911783902572	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+388	MODERATE	0.9544750393174068	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+389	MODERATE	0.949315582892358	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+390	MODERATE	0.8656948361036253	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+391	MODERATE	0.8647829295141738	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+392	HEAVY	0.9878007058350599	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+393	HEAVY	0.9881271113989478	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+394	HEAVY	0.968276017223784	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+395	HEAVY	0.9629318244341418	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+396	CLEAR	0.9465641640996975	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+397	CLEAR	0.9418164591938063	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+398	CLEAR	0.9313256610918885	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+399	CLEAR	0.9356328058539275	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+400	MODERATE	0.9433653975029571	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+401	MODERATE	0.9463168248391803	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+402	MODERATE	0.9771096582027853	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+403	MODERATE	0.9703841323558683	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+404	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+405	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+406	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+407	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+408	CLEAR	0.9601533240457346	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+409	CLEAR	0.9692647269369593	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+410	CLEAR	0.9648920335906201	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+411	CLEAR	0.9783207224020087	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+412	MODERATE	0.9480786243049437	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+413	MODERATE	0.9482974531313001	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+414	MODERATE	0.9635303914206008	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+415	MODERATE	0.958229960708745	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+416	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+417	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+418	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+419	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+420	CLEAR	0.8652467273490666	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+421	CLEAR	0.8564904154901859	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+422	CLEAR	0.8945564078208221	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+423	CLEAR	0.907879819167687	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+424	MODERATE	0.8355752783781772	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+425	MODERATE	0.8303033923763864	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+426	MODERATE	0.7542783386556634	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+427	MODERATE	0.7735594090635445	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+428	HEAVY	0.6766481780580533	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+429	HEAVY	0.6798653202749126	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+430	HEAVY	0.8161359722915962	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+431	HEAVY	0.8161483841480492	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+432	CLEAR	0.9594643686927163	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+433	CLEAR	0.9564550706992991	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+434	CLEAR	0.9764505109953128	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+435	CLEAR	0.9733339353153584	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+436	MODERATE	0.9780359878803823	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+437	MODERATE	0.9777265591405193	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+438	MODERATE	0.883030989922793	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+439	MODERATE	0.8510470877161859	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+440	HEAVY	0.9381189713111425	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+441	HEAVY	0.9283525044852494	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+442	HEAVY	0.9915444512605786	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+443	HEAVY	0.9903798579609712	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+444	CLEAR	0.8790124787056823	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+445	CLEAR	0.8938031212182278	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+446	CLEAR	0.9691996054590395	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+447	CLEAR	0.9743050075025778	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+448	MODERATE	0.9708610864603794	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+449	MODERATE	0.9709355284952508	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+450	MODERATE	0.9379351893764296	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+451	MODERATE	0.9327238967929478	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+452	HEAVY	0.9595503300305935	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+453	HEAVY	0.9615725719652967	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+454	HEAVY	0.7748152307450566	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+455	HEAVY	0.7822473786506067	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+456	CLEAR	0.9510597560743931	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+457	CLEAR	0.9536726607803142	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+458	CLEAR	0.9723931128776783	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+459	CLEAR	0.9656013121725326	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+460	MODERATE	0.9716752967384291	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+461	MODERATE	0.972233218886475	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+462	MODERATE	0.9190206474768275	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+463	MODERATE	0.9194742200304479	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+464	HEAVY	0.9459480372432952	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+465	HEAVY	0.9482872429813023	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+466	HEAVY	0.965666419448656	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+467	HEAVY	0.9676396525901002	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+468	CLEAR	0.9963317405358234	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+469	CLEAR	0.9963430911309782	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+470	CLEAR	0.9957774496963415	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+471	CLEAR	0.9961258074097679	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+472	MODERATE	0.9895952435058845	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+473	MODERATE	0.9891914310620851	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+474	MODERATE	0.9911484171049364	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+475	MODERATE	0.9877185039727817	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+476	HEAVY	0.9741573766978286	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+477	HEAVY	0.9753811574327744	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+478	HEAVY	0.975462985870298	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+479	HEAVY	0.9788191715973105	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+480	CLEAR	0.9792478896877786	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+481	CLEAR	0.9830177956658045	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+482	CLEAR	0.9813255069320868	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+483	CLEAR	0.9866123050657382	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+484	MODERATE	0.9796390620387595	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+485	MODERATE	0.976979459239796	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+486	MODERATE	0.9788888381079411	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+487	MODERATE	0.977663171778455	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+488	HEAVY	0.9669631488533639	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+489	HEAVY	0.9612171948917753	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+490	HEAVY	0.9756724959889965	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+491	HEAVY	0.9768237001695997	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+492	CLEAR	0.937161390764201	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+493	CLEAR	0.9471371215536398	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+494	CLEAR	0.8983585404841875	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+495	CLEAR	0.9132817086347251	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+496	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+497	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+498	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+499	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+500	HEAVY	0.6822123687323794	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+501	HEAVY	0.6541819896783706	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+502	HEAVY	0.7004347992039086	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+503	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+504	CLEAR	0.9086084536955957	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+505	CLEAR	0.8894376984360987	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+506	CLEAR	0.9677812310631472	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+507	CLEAR	0.9717930184834945	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+508	MODERATE	0.9432855290599639	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+509	MODERATE	0.9425655482262368	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+510	MODERATE	0.9194753241082944	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+511	MODERATE	0.9294293642568175	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+512	HEAVY	0.9841095498080373	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+513	HEAVY	0.9868666982708885	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+514	HEAVY	0.9811560349618608	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+515	HEAVY	0.9834151194337831	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+516	CLEAR	0.9677237553760875	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+517	CLEAR	0.9601562693314785	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+518	CLEAR	0.9851870796404822	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+519	CLEAR	0.9871287557501822	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+520	MODERATE	0.9678285189109288	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+521	MODERATE	0.9683187607510549	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+522	MODERATE	0.9778025007869967	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+523	MODERATE	0.9763619728266554	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+524	HEAVY	0.9075008829295051	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+525	HEAVY	0.9160755912769173	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+526	HEAVY	0.903987846930765	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+527	HEAVY	0.8892536499365555	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+528	CLEAR	0.9346979745762208	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+529	CLEAR	0.9267976359159972	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+530	CLEAR	0.9895190380540227	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+531	CLEAR	0.9911908481091267	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+532	MODERATE	0.9709623410469194	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+533	MODERATE	0.9716294513217928	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+534	MODERATE	0.9646402521541079	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+535	MODERATE	0.9653115035963412	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+536	HEAVY	0.9849082526874994	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+537	HEAVY	0.9863270090522749	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+538	HEAVY	0.9560023868372456	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+539	HEAVY	0.943746042585683	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+540	CLEAR	0.9794017715606262	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+541	CLEAR	0.9754901923479867	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+542	CLEAR	0.9921223362851948	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+543	CLEAR	0.9910541063089751	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+544	MODERATE	0.9734293341096252	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+545	MODERATE	0.9770430326888617	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+546	MODERATE	0.9547625081507705	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+547	MODERATE	0.9503224582439055	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+548	HEAVY	0.9613885768734961	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+549	HEAVY	0.9604956127290099	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+550	HEAVY	0.9629086330934168	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+551	HEAVY	0.9696150259575578	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+552	CLEAR	0.9467479155976817	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+553	CLEAR	0.9660485530591717	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+554	CLEAR	0.9695544001306371	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+555	CLEAR	0.9805595774400481	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+556	MODERATE	0.9661131540090294	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+557	MODERATE	0.9619420658942931	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+558	MODERATE	0.9677054170037673	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+559	MODERATE	0.9577459796883122	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+560	HEAVY	0.9808216814302294	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+561	HEAVY	0.9821513154252245	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+562	HEAVY	0.9808252050399978	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+563	HEAVY	0.9756674703745073	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+564	CLEAR	0.8221754495207525	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+565	CLEAR	0.7896993761717621	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+566	CLEAR	0.9252561393255345	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+567	CLEAR	0.9251080004591067	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+568	MODERATE	0.6546493561976965	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+569	MODERATE	0.6778466753397511	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+570	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+571	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+572	HEAVY	0.7020650054989453	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+573	HEAVY	0.7603277585890522	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+574	HEAVY	0.6993077286347599	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+575	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+576	HEAVY	0.9962920025832862	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+577	HEAVY	0.9955345619678155	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+578	HEAVY	0.9947455478923583	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+579	HEAVY	0.9947387769279178	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+580	HEAVY	0.9931840756632903	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+581	HEAVY	0.9935052959697408	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+582	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+583	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+584	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+585	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+586	CLEAR	0.9982406741666334	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+587	CLEAR	0.9978155056138727	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+588	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+589	UNKNOWN	0.0	hold	3	hold	Interrupted, clipped or isolated sound; keep current program
+590	QUIET	0.0	hold	hold	1	Quiet evidence; requires repeated checks
+591	CLEAR	0.995148738422422	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+592	CLEAR	0.9959215796391774	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+593	CLEAR	0.9909072910314395	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+594	CLEAR	0.9904247630723212	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+595	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+596	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+597	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+598	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+599	HEAVY	0.9996293298049885	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+600	HEAVY	0.9995375210442986	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+601	HEAVY	0.9992035941111764	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+602	HEAVY	0.9992290070851838	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+603	CLEAR	0.9917780216455524	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+604	CLEAR	0.9914879648803366	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+605	CLEAR	0.9972285474988858	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+606	CLEAR	0.997614754064032	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+607	MODERATE	0.9263889303254567	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+608	MODERATE	0.9366759550288114	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+609	MODERATE	0.9383490488053038	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+610	MODERATE	0.9410534411248201	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+611	HEAVY	0.819737475454262	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+612	HEAVY	0.7984801136008732	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+613	HEAVY	0.857411078168937	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+614	HEAVY	0.852541143135981	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+615	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+616	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+617	CLEAR	0.9974754662040544	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+618	CLEAR	0.9972844457418862	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+619	MODERATE	0.7397498936592201	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+620	MODERATE	0.7491580248854164	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+621	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+622	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+623	HEAVY	0.8922332162411801	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+624	HEAVY	0.8865791591280727	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+625	MODERATE	0.847189001549539	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+626	MODERATE	0.848857603724489	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+627	CLEAR	0.997974065857252	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+628	CLEAR	0.9976201474155894	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+629	CLEAR	0.989354764004365	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+630	CLEAR	0.9931726741046877	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+631	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+632	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+633	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+634	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+635	HEAVY	0.9975808191457215	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+636	HEAVY	0.9973483638166564	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+637	HEAVY	0.9993467327898012	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+638	HEAVY	0.9994329760654042	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+639	CLEAR	0.9992388000653721	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+640	CLEAR	0.9994007962953387	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+641	CLEAR	0.9956495815682003	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+642	CLEAR	0.9960267929855124	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+643	CLEAR	0.9928789417865983	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+644	CLEAR	0.9922734788757086	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+645	CLEAR	0.945056018005869	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+646	CLEAR	0.9504083873399414	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+647	CLEAR	0.8067567774518023	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+648	CLEAR	0.7537219495906198	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+649	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+650	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+651	CLEAR	0.9995562170914442	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+652	CLEAR	0.9996782645809615	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+653	CLEAR	0.9997558283947664	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+654	CLEAR	0.9995791147890994	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+655	CLEAR	0.9526916699925275	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+656	CLEAR	0.9656784330349375	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+657	CLEAR	0.9829395271817197	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+658	CLEAR	0.986814575876011	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+659	CLEAR	0.9484921998709079	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+660	CLEAR	0.9560148424729008	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+661	CLEAR	0.9902127618880879	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+662	CLEAR	0.9938038207769277	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+663	CLEAR	0.993732535088368	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+664	CLEAR	0.9934696511094719	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+665	CLEAR	0.9921210527915897	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+666	CLEAR	0.9911488722266184	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+667	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+668	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+669	HEAVY	0.8893043244217039	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+670	HEAVY	0.8869783057063738	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+671	HEAVY	0.991501709123556	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+672	HEAVY	0.9888174625944156	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+673	HEAVY	0.9985663211685109	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+674	HEAVY	0.9980783856505572	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+675	CLEAR	0.9981078560737945	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+676	CLEAR	0.9981879695431323	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+677	CLEAR	0.9971255719830525	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+678	CLEAR	0.9968489070044281	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+679	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+680	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+681	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+682	MODERATE	0.6552531942842409	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+683	HEAVY	0.9218375649874957	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+684	HEAVY	0.9239295254581539	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+685	HEAVY	0.9299943026101548	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+686	HEAVY	0.9317879237336466	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+687	UNKNOWN	0.0	hold	3	hold	Music or mixed media; keep current program
+688	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+689	CLEAR	0.9979375403400594	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+690	CLEAR	0.9983970808898041	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+691	MODERATE	0.6937206230780824	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+692	MODERATE	0.6930312015691001	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+693	MODERATE	0.7229760953373469	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+694	MODERATE	0.7455964637460205	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+695	HEAVY	0.8356659232373279	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+696	HEAVY	0.8575362885222649	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+697	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+698	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+699	CLEAR	0.9995889891084309	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+700	CLEAR	0.9995187714651457	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+701	CLEAR	0.9954481682295007	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+702	CLEAR	0.993997907755174	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+703	HEAVY	0.9260730547099953	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+704	HEAVY	0.9219148500371122	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+705	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+706	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+707	HEAVY	0.9992334233198885	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+708	HEAVY	0.9992516948769674	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+709	HEAVY	0.9980322309856937	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+710	HEAVY	0.9980065615373758	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+711	CLEAR	0.9929486909886966	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+712	CLEAR	0.9942035700754404	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+713	CLEAR	0.9983572214673476	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+714	CLEAR	0.9981077805584762	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+715	CLEAR	0.8220002337524565	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+716	CLEAR	0.8255036869686074	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+717	CLEAR	0.9321816327075261	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+718	CLEAR	0.9299807183342474	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+719	HEAVY	0.67713683598553	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+720	HEAVY	0.7147572792552961	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+721	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+722	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+723	CLEAR	0.9988273857903657	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+724	CLEAR	0.9991824681471263	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+725	CLEAR	0.9993204824804642	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+726	CLEAR	0.9994915910468727	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+727	CLEAR	0.8817898193865036	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+728	CLEAR	0.8890610134018068	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+729	CLEAR	0.9395996723915807	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+730	CLEAR	0.9451757637642912	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+731	CLEAR	0.8192322040778388	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+732	CLEAR	0.8353472766561426	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+733	CLEAR	0.9798098130990972	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+734	CLEAR	0.9854543406842095	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+735	CLEAR	0.9990531078248684	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+736	CLEAR	0.9990162708602551	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+737	CLEAR	0.9993501316927407	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+738	CLEAR	0.999416731699704	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+739	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+740	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+741	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+742	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+743	HEAVY	0.998687066816852	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+744	HEAVY	0.9985692512730134	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+745	HEAVY	0.9983686812002394	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+746	HEAVY	0.9986114131502228	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+747	CLEAR	0.978181434844122	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+748	CLEAR	0.9733150707809349	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+749	CLEAR	0.9983906546423209	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+750	CLEAR	0.9982662186161213	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+751	MODERATE	0.8727500298444626	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+752	MODERATE	0.8681897515807452	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+753	MODERATE	0.6856405400533806	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+754	MODERATE	0.7210833275444667	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+755	HEAVY	0.9000642496720248	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+756	HEAVY	0.9092993717580637	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+757	HEAVY	0.8384706468415482	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+758	HEAVY	0.8258123559055884	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+759	CLEAR	0.9640309751940982	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+760	CLEAR	0.9611787182955162	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+761	CLEAR	0.999390136765512	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+762	CLEAR	0.9995997197848223	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+763	MODERATE	0.8740093291506676	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+764	MODERATE	0.8736559703102946	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+765	MODERATE	0.8803710897236151	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+766	MODERATE	0.9006898163589263	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+767	HEAVY	0.8954916765727094	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+768	HEAVY	0.9031502139265526	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+769	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+770	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+771	CLEAR	0.9931018164278713	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+772	CLEAR	0.9938363331649417	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+773	CLEAR	0.9948077640767241	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+774	CLEAR	0.9970209611352225	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+775	HEAVY	0.8122622488135106	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+776	HEAVY	0.8384740735814131	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+777	HEAVY	0.9396059740626106	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+778	HEAVY	0.9222021170455921	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+779	HEAVY	0.999388594042678	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+780	HEAVY	0.999421172986793	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+781	HEAVY	0.9998784005210872	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+782	HEAVY	0.9998761304660241	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+783	CLEAR	0.9988538473213731	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+784	CLEAR	0.9990453432753175	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+785	CLEAR	0.9998925991833881	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+786	CLEAR	0.9998626812484865	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+787	CLEAR	0.988866460448729	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+788	CLEAR	0.9908574850690901	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+789	CLEAR	0.9982630242018332	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+790	CLEAR	0.9983625195477918	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+791	CLEAR	0.8026745813932241	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+792	CLEAR	0.820705229998584	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+793	CLEAR	0.8903371314567218	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+794	CLEAR	0.8771765271202645	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+795	CLEAR	0.9895392186388728	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+796	CLEAR	0.9909431634467446	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+797	CLEAR	0.9983182821364743	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+798	CLEAR	0.9989530424245574	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+799	CLEAR	0.9470092437609093	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+800	CLEAR	0.9526181975340768	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+801	CLEAR	0.963034211241784	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+802	CLEAR	0.9794461393504268	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+803	CLEAR	0.9912730011294916	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+804	CLEAR	0.9938807870268337	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+805	CLEAR	0.9984930859453999	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+806	CLEAR	0.9982733603816775	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+807	CLEAR	0.9899263975738446	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+808	CLEAR	0.9906976964774764	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+809	CLEAR	0.9978498848538643	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+810	CLEAR	0.9982718961267542	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+811	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+812	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+813	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+814	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+815	HEAVY	0.9997164360627347	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+816	HEAVY	0.9997458395775236	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+817	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+818	HEAVY	0.9998627333576241	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+819	CLEAR	0.9119376494664662	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+820	CLEAR	0.9106308167453382	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+821	CLEAR	0.9934488201429578	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+822	CLEAR	0.9949411224223466	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+823	MODERATE	0.8892945473031915	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+824	MODERATE	0.894347303673156	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+825	MODERATE	0.9624108779118756	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+826	MODERATE	0.9612500900361027	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+827	HEAVY	0.9871616713506858	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+828	HEAVY	0.9880296349774631	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+829	HEAVY	0.9576241803710092	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+830	HEAVY	0.9528995218905227	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+831	CLEAR	0.6946302255735199	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+832	CLEAR	0.6803519712115051	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+833	CLEAR	0.9045903986532995	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+834	CLEAR	0.9459431242985425	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+835	MODERATE	0.8875449763336761	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+836	MODERATE	0.8904108291536061	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+837	MODERATE	0.8064188520519908	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+838	MODERATE	0.8394783213606484	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+839	HEAVY	0.662476581941256	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+840	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+841	MODERATE	0.7261287503902341	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+842	MODERATE	0.7289526660854847	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+843	CLEAR	0.9757500532840361	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+844	CLEAR	0.9782724306737455	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+845	CLEAR	0.9820524250863586	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+846	CLEAR	0.9837999230636656	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+847	HEAVY	0.9342914613274452	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+848	HEAVY	0.9304209949003891	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+849	HEAVY	0.9456580883757907	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+850	HEAVY	0.9421624390643635	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+851	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+852	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+853	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+854	HEAVY	0.9993144088135927	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+855	CLEAR	0.9944643716173733	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+856	CLEAR	0.9947507194472941	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+857	CLEAR	0.9882114579480566	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+858	CLEAR	0.9903046183126274	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+859	CLEAR	0.8898322382961497	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+860	CLEAR	0.8888185237953001	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+861	CLEAR	0.8818713422654886	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+862	CLEAR	0.8952377695287127	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+863	CLEAR	0.7872352620406692	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+864	CLEAR	0.7738620992205847	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+865	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+866	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+867	CLEAR	0.9941344800110188	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+868	CLEAR	0.993762887076441	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+869	CLEAR	0.9899751813026978	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+870	CLEAR	0.9929953369362687	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+871	CLEAR	0.8232995692566382	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+872	CLEAR	0.8640094175310901	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+873	CLEAR	0.9702153924562904	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+874	CLEAR	0.9856993571350092	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+875	CLEAR	0.9866080519995353	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+876	CLEAR	0.9914557012855307	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+877	CLEAR	0.9578344016139635	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+878	CLEAR	0.9772242173587361	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+879	CLEAR	0.9513220774034906	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+880	CLEAR	0.9404650025999662	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+881	CLEAR	0.9781491337414294	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+882	CLEAR	0.9753367796635191	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+883	HEAVY	0.9039731729413293	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+884	HEAVY	0.9210286163165206	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+885	HEAVY	0.8348788447017741	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+886	HEAVY	0.8498639879278136	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+887	HEAVY	0.999932732969715	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+888	HEAVY	0.9999009153130907	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+889	HEAVY	0.9999137504483279	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+890	HEAVY	0.9999155630325729	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+891	CLEAR	0.7704124475063097	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+892	CLEAR	0.7933165696160579	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+893	CLEAR	0.7196527492010414	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+894	CLEAR	0.701292918095	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+895	MODERATE	0.8217677839347334	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+896	MODERATE	0.8315812463152922	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+897	MODERATE	0.8823087723131804	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+898	MODERATE	0.8805415545490963	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+899	HEAVY	0.9749566070712314	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+900	HEAVY	0.9711899627916628	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+901	HEAVY	0.9492776068639478	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+902	HEAVY	0.9365432556117769	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+903	MODERATE	0.7353684425778797	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+904	MODERATE	0.7149960705128103	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+905	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+906	CLEAR	0.66172578417686	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+907	MODERATE	0.6998369604386149	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+908	MODERATE	0.7321490651572417	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+909	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+910	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+911	HEAVY	0.8462298144992559	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+912	HEAVY	0.8500085408978294	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+913	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+914	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+915	CLEAR	0.9889649380518217	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+916	CLEAR	0.990183264084414	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+917	CLEAR	0.9527487097075291	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+918	CLEAR	0.949728939711253	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+919	HEAVY	0.9680014505551284	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+920	HEAVY	0.9670949088218949	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+921	HEAVY	0.9960306444407094	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+922	HEAVY	0.9958973658561112	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+923	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+924	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+925	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+926	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+927	CLEAR	0.9434462565762407	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+928	CLEAR	0.9572317078864011	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+929	CLEAR	0.8650275047199482	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+930	CLEAR	0.8801038244810172	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+931	CLEAR	0.6972213167472011	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+932	CLEAR	0.6902905267858502	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+933	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+934	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+935	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+936	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+937	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+938	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+939	CLEAR	0.9874532239206998	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+940	CLEAR	0.9894964734590356	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+941	CLEAR	0.9775229842488609	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+942	CLEAR	0.9729646416977253	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+943	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+944	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+945	MODERATE	0.7681247301175915	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+946	MODERATE	0.8062836684689627	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+947	CLEAR	0.9558436932430188	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+948	CLEAR	0.9668669454914913	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+949	CLEAR	0.9177979094028675	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+950	CLEAR	0.9236959963335978	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+951	CLEAR	0.9919681979686995	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+952	CLEAR	0.9917334246318578	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+953	CLEAR	0.9972642488943672	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+954	CLEAR	0.9963454876466269	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+955	HEAVY	0.9423635636608786	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+956	HEAVY	0.9358076409899794	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+957	HEAVY	0.9137134498537828	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+958	HEAVY	0.9015082694265996	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+959	HEAVY	0.9998847789146447	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+960	HEAVY	0.9998677237137843	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+961	HEAVY	0.9999536074264717	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+962	HEAVY	0.9999468861730741	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+963	CLEAR	0.8090276753576314	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+964	CLEAR	0.8138862131589218	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+965	CLEAR	0.9783387318808263	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+966	CLEAR	0.9723641277368086	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+967	HEAVY	0.8093060721947537	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+968	HEAVY	0.8238143738136207	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+969	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+970	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+971	HEAVY	0.982067112304098	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+972	HEAVY	0.9833362600233858	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+973	HEAVY	0.9818543352667405	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+974	HEAVY	0.9818657542920601	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+975	CLEAR	0.7491720531075322	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+976	CLEAR	0.74420255961151	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+977	CLEAR	0.9245870849479808	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+978	CLEAR	0.9227421867202502	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+979	MODERATE	0.983910939945894	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+980	MODERATE	0.9840520696002479	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+981	MODERATE	0.9913336949495084	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+982	MODERATE	0.98875204216168	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+983	MODERATE	0.6729577450524498	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+984	MODERATE	0.7027053499394808	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+985	MODERATE	0.7553526128978232	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+986	MODERATE	0.7698571629610085	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+987	CLEAR	0.9343212775270188	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+988	CLEAR	0.9499575379894917	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+989	CLEAR	0.9854618274386755	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+990	CLEAR	0.9845613263411931	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+991	HEAVY	0.9955342617528953	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+992	HEAVY	0.9962170759516271	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+993	HEAVY	0.9940448153408159	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+994	HEAVY	0.9916951593534777	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+995	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+996	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+997	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+998	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+999	CLEAR	0.9905111135055522	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1000	CLEAR	0.9912799416035637	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1001	CLEAR	0.9678265812866219	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1002	CLEAR	0.955828978047873	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1003	CLEAR	0.771607015463444	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1004	CLEAR	0.7278020009360188	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1005	CLEAR	0.8329522582836258	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1006	CLEAR	0.79883976589761	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1007	CLEAR	0.6503186268409878	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1008	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1009	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1010	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1011	CLEAR	0.9984607797476244	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1012	CLEAR	0.9987021758398219	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1013	CLEAR	0.9985987437191262	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1014	CLEAR	0.9982968362621213	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1015	CLEAR	0.9453336650159898	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1016	CLEAR	0.9542045320947158	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1017	CLEAR	0.9919219499197133	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1018	CLEAR	0.9936463098804282	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1019	CLEAR	0.9954306933228636	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1020	CLEAR	0.9953676283233055	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1021	CLEAR	0.9913827451084039	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1022	CLEAR	0.9955840996760836	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1023	CLEAR	0.9178902023685112	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1024	CLEAR	0.9313131369141786	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1025	CLEAR	0.8808827615268949	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1026	CLEAR	0.8703911056582414	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1027	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1028	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1029	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1030	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1031	HEAVY	0.991638487130909	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1032	HEAVY	0.9922615441472615	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1033	HEAVY	0.9814735632950264	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1034	HEAVY	0.9816995028365201	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1035	CLEAR	0.9583121007642379	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1036	CLEAR	0.9523371325524267	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1037	CLEAR	0.9819534426948658	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1038	CLEAR	0.9811883200506636	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1039	MODERATE	0.8861912952670545	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1040	MODERATE	0.8876497103871834	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1041	MODERATE	0.9254290325914503	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1042	MODERATE	0.9323626750621188	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1043	HEAVY	0.8854627179850206	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1044	HEAVY	0.8725546927875315	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1045	HEAVY	0.9155059554850995	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1046	HEAVY	0.8969091309909943	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1047	CLEAR	0.9226646594647191	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1048	CLEAR	0.9152403630299494	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1049	CLEAR	0.9101427907345968	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1050	CLEAR	0.9175470340188925	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1051	MODERATE	0.983671753618439	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1052	MODERATE	0.9850113772073077	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1053	MODERATE	0.9470960750093688	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1054	MODERATE	0.9487823012246086	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1055	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1056	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1057	MODERATE	0.9204280225432155	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1058	MODERATE	0.9399580660844623	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1059	CLEAR	0.9984968428832622	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1060	CLEAR	0.9982090203102634	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1061	CLEAR	0.9853789042726381	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1062	CLEAR	0.984858923742715	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1063	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1064	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1065	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1066	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1067	HEAVY	0.9957392684900219	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1068	HEAVY	0.9958695857185181	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1069	HEAVY	0.997616678256764	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1070	HEAVY	0.9974487513699027	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1071	CLEAR	0.9694915603676598	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1072	CLEAR	0.9681538761476399	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1073	CLEAR	0.9356095590555507	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1074	CLEAR	0.9351525318120604	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1075	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1076	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1077	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1078	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1079	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1080	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1081	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1082	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1083	CLEAR	0.9890180081654535	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1084	CLEAR	0.987734003126431	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1085	CLEAR	0.9863741267565738	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1086	CLEAR	0.9835433701310513	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1087	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1088	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1089	CLEAR	0.6529020954120798	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1090	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1091	CLEAR	0.7892003545335504	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1092	CLEAR	0.7994863116614407	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1093	CLEAR	0.7413487079845906	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1094	CLEAR	0.7415291952929713	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1095	CLEAR	0.9031219991086724	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1096	CLEAR	0.8987471230037581	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1097	CLEAR	0.7950908598458291	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1098	CLEAR	0.8114509503498281	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1099	MODERATE	0.8678357381661357	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1100	MODERATE	0.8753709089500691	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1101	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1102	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1103	HEAVY	0.9464301365274738	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1104	HEAVY	0.9427829159878874	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1105	HEAVY	0.9700235248208668	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1106	HEAVY	0.9696853835183881	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1107	CLEAR	0.7881865166075386	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1108	CLEAR	0.7672766576979128	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1109	CLEAR	0.9217235063197712	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1110	CLEAR	0.9108618758629221	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1111	MODERATE	0.9574746294588916	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1112	MODERATE	0.9497739874119746	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1113	MODERATE	0.9164505772575526	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1114	MODERATE	0.9191569932057405	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1115	HEAVY	0.8948907754999073	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1116	HEAVY	0.9047897557170479	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1117	HEAVY	0.8891135101870347	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1118	HEAVY	0.8974125180441038	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1119	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1120	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1121	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1122	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1123	MODERATE	0.9203596037554655	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1124	MODERATE	0.9198367568194212	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1125	MODERATE	0.9895958060449945	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1126	MODERATE	0.9888444547973079	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1127	HEAVY	0.7259849526272029	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1128	HEAVY	0.6571759333807047	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1129	MODERATE	0.834078924261403	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1130	MODERATE	0.860461437586987	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1131	CLEAR	0.9676696162037327	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1132	CLEAR	0.965581019793246	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1133	CLEAR	0.8446557500613509	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1134	CLEAR	0.846030673289385	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1135	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1136	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1137	MODERATE	0.9064243765810256	2	3	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1138	MODERATE	0.8982725318798439	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1139	HEAVY	0.9730795230003586	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1140	HEAVY	0.9752462622414633	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1141	HEAVY	0.9881012373930965	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1142	HEAVY	0.9904195528664729	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1143	CLEAR	0.9286152669950741	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1144	CLEAR	0.9348407080888074	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1145	CLEAR	0.8925853273695383	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1146	CLEAR	0.8820739897558595	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1147	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1148	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1149	MODERATE	0.6631473217666404	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1150	MODERATE	0.7075954744689048	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1151	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1152	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1153	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1154	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1155	CLEAR	0.9666305413480497	hold	3	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1156	CLEAR	0.9705939896574037	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1157	CLEAR	0.9245788885300272	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1158	CLEAR	0.9251527258031881	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1159	MODERATE	0.8415269143149079	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1160	MODERATE	0.8030851957759974	2	2	hold	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1161	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1162	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1163	CLEAR	0.8255482155386055	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1164	CLEAR	0.8193208757175706	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1165	CLEAR	0.8204207775730291	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1166	CLEAR	0.8371537148216694	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1167	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1168	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1169	HEAVY	0.9800298374194687	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1170	HEAVY	0.9797943422253663	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1171	HEAVY	0.9718338983827822	3	3	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1172	HEAVY	0.9756655556921442	3	2	3	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1173	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1174	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1175	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+1176	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1177	CLEAR	0.9999844272090777	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1178	CLEAR	0.999928751659057	hold	2	1	Speech and noise-suppression estimate; not measured intelligibility or target-speaker identity
+1179	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+1180	UNKNOWN	0.0	hold	3	hold	Interrupted, clipped or isolated sound; keep current program
+1181	UNKNOWN	0.0	hold	hold	hold	No reliable speech evidence; keep current program

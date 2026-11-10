@@ -1,0 +1,348 @@
+{
+  "development": {
+    "mixtures": 576,
+    "confusion": {
+      "CLEAR": {
+        "CLEAR": 192,
+        "MODERATE": 0,
+        "HEAVY": 0,
+        "QUIET": 0,
+        "UNKNOWN": 0
+      },
+      "MODERATE": {
+        "CLEAR": 0,
+        "MODERATE": 176,
+        "HEAVY": 0,
+        "QUIET": 0,
+        "UNKNOWN": 16
+      },
+      "HEAVY": {
+        "CLEAR": 0,
+        "MODERATE": 0,
+        "HEAVY": 156,
+        "QUIET": 0,
+        "UNKNOWN": 36
+      }
+    },
+    "uncertain": 52,
+    "noisyVsVeryNoisyConfusions": 0,
+    "maskingCorrect": 524,
+    "levelOnlyCorrect": 195,
+    "matchedLoudnessPairs": 192,
+    "clearVersusBuriedPairsBothCorrect": 156,
+    "controls": [
+      {
+        "kind": "background-only",
+        "background": "fs-363712",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-363712",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-260121",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-260121",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-201734",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-201734",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-212187",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-212187",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-533833",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-533833",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "synthetic-music",
+        "background": null,
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "impulse",
+        "background": null,
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "quiet-surrogate",
+        "background": null,
+        "severity": "QUIET",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      }
+    ]
+  },
+  "heldout": {
+    "mixtures": 576,
+    "confusion": {
+      "CLEAR": {
+        "CLEAR": 181,
+        "MODERATE": 2,
+        "HEAVY": 0,
+        "QUIET": 0,
+        "UNKNOWN": 9
+      },
+      "MODERATE": {
+        "CLEAR": 43,
+        "MODERATE": 63,
+        "HEAVY": 30,
+        "QUIET": 0,
+        "UNKNOWN": 56
+      },
+      "HEAVY": {
+        "CLEAR": 41,
+        "MODERATE": 12,
+        "HEAVY": 97,
+        "QUIET": 0,
+        "UNKNOWN": 42
+      }
+    },
+    "uncertain": 107,
+    "noisyVsVeryNoisyConfusions": 42,
+    "maskingCorrect": 341,
+    "levelOnlyCorrect": 200,
+    "matchedLoudnessPairs": 192,
+    "clearVersusBuriedPairsBothCorrect": 89,
+    "controls": [
+      {
+        "kind": "background-only",
+        "background": "fsd-414297",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-414297",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-338254",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-338254",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-156091",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-156091",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-423267",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-423267",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-389755",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-389755",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "synthetic-music",
+        "background": null,
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "impulse",
+        "background": null,
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "quiet-surrogate",
+        "background": null,
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      }
+    ]
+  },
+  "limitations": [
+    "Correlated mix variants, not independent users/trials.",
+    "Heldout sources never fit coefficients, but not guaranteed absent from YAMNet pretraining.",
+    "Digital filters/echoes are position proxies, not physical phone placements.",
+    "TV and music controls are surrogates, not representative TV/music recordings.",
+    "SNR references describe constructed mixtures, not measured wearer intelligibility.",
+    "No detector or physical acceptance claimed."
+  ]
+}

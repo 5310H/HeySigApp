@@ -5,10 +5,11 @@ import numpy as np
 from scipy.signal import lfilter
 from ai_edge_litert.interpreter import Interpreter
 from sklearn.linear_model import LogisticRegression
+from threadpoolctl import threadpool_limits
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'environment'))
 from scene_corpus import load_manifest,cached_source
 
-p=argparse.ArgumentParser();p.add_argument('--speech',type=Path,required=True);p.add_argument('--background',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--speech',type=Path,required=True);p.add_argument('--background',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--cancellation-jar',type=Path);a=p.parse_args()
 a.output.mkdir(parents=True,exist_ok=True)
 root=Path(__file__).resolve().parents[2]
 manifest=load_manifest(root/'shared/src/commonTest/fixtures/environment/scene-head/expanded-corpus.json')
@@ -38,6 +39,7 @@ def acoustic(pcm):
         voiced.append(best)
     crossing=np.mean((x[1:]>0)!=(x[:-1]>0))
     return np.array([depth,modulation,np.mean(voiced),crossing])
+cancellation = subprocess.Popen(['java','-jar',str(a.cancellation_jar)],stdin=subprocess.PIPE,stdout=subprocess.PIPE,text=False) if a.cancellation_jar else None
 def extract(samples):
     pcm=np.clip(np.rint(samples*32768),-32768,32767).astype(np.int16)
     x=pcm.astype(np.float64)/32768;rms=np.sqrt(np.mean(x*x));peak=np.max(np.abs(x))
@@ -48,7 +50,12 @@ def extract(samples):
         events.append(engine.get_tensor(outs[0]['index']).reshape(-1).astype(np.float64))
         embeddings.append(engine.get_tensor(outs[1]['index']).reshape(-1).astype(np.float64)+128)
     pooled=np.concatenate([np.mean(embeddings,axis=0),np.std(embeddings,axis=0)]);pooled/=np.linalg.norm(pooled)
-    feat=np.concatenate([pooled*20,acoustic(pcm)])
+    extra=[]
+    if cancellation:
+        cancellation.stdin.write(pcm.astype('<i2').tobytes());cancellation.stdin.flush()
+        extra=list(map(float,cancellation.stdout.readline().decode().strip().split(',')))
+        assert len(extra)==6 and all(np.isfinite(extra))
+    feat=np.concatenate([pooled*20,acoustic(pcm),extra])
     return feat,np.mean(events,axis=0),20*np.log10(max(rms,1e-6)),20*np.log10(max(peak,1e-6))
 backgroundIds={'development':['fs-363712','fs-260121','fsd-201734','fsd-212187','fs-533833'],'heldout':['fsd-414297','fsd-338254','fsd-156091','fsd-423267','fsd-389755']}
 sources={c['id']:c for c in manifest['recordings']}; bgs={}
@@ -95,11 +102,14 @@ for partition in ('development','heldout'):
     add(impulse,dict(partition=partition,reference=-1,kind='impulse'))
     quiet=sources['fs-565535' if partition=='development' else 'fsd-348830'];q=decode(cached_source(a.background,quiet))[:48000]
     add(normalize(q)*10**(-75/20),dict(partition=partition,reference=0,kind='quiet-surrogate',note='gain-reduced real ambience; not calibrated quiet SPL'))
+if cancellation:
+    cancellation.stdin.close();assert cancellation.wait(timeout=30)==0
 X=np.stack(features);E=np.stack(events)
 np.savez(a.output/'features.npz',features=X,events=E,records=json.dumps(records))
 train=np.array([r['partition']=='development' and r['kind']=='mixture' for r in records]);y=np.array([r['reference'] for r in records])
-clf=LogisticRegression(C=1.0,max_iter=2000,solver='lbfgs').fit(X[train],y[train])
-head='HSGMASK1\n'+str(X.shape[1])+'\n'+','.join(map(str,clf.intercept_))+'\n'+'\n'.join(','.join(map(str,row)) for row in clf.coef_)+'\n'
+with threadpool_limits(limits=1):
+    clf=LogisticRegression(C=1.0,max_iter=2000,solver='lbfgs').fit(X[train],y[train])
+head=('HSGMASK2\n' if cancellation else 'HSGMASK1\n')+str(X.shape[1])+'\n'+','.join(map(str,clf.intercept_))+'\n'+'\n'.join(','.join(map(str,row)) for row in clf.coef_)+'\n'
 (a.output/'masking-head.txt').write_text(head)
-(a.output/'sources.json').write_text(json.dumps(dict(speech=speech,backgrounds=[sources[id] for ids in backgroundIds.values() for id in ids],policy=dict(snrDb=[15,3,-8],confidence=.65,margin=.15,C=1.0,positions='digital low-pass and echo proxies only',training='development mixtures only; no wearer learning; no controls or heldout fitting')),indent=2)+'\n')
+(a.output/'sources.json').write_text(json.dumps(dict(speech=speech,backgrounds=[sources[id] for ids in backgroundIds.values() for id in ids],policy=dict(snrDb=[15,3,-8],confidence=.65,margin=.15,C=1.0,cancellation='six shared Kotlin spectral suppression features' if cancellation else 'none',positions='digital low-pass and echo proxies only',training='development mixtures only; no wearer learning; no controls or heldout fitting')),indent=2)+'\n')
 print('FIT',int(train.sum()),'TOTAL',len(records),'head',hashlib.sha256(head.encode()).hexdigest(),flush=True)

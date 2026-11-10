@@ -59,3 +59,40 @@ review any new artifact pins. Native fixtures compare DSP, pooled encoder
 features and Kotlin decisions with host extraction; they never establish field
 accuracy or hearing-aid reception. All source credits and transformation notes
 accompany fixtures and the packaged head.
+
+## Noise-suppression evidence
+
+Compile the shared Kotlin feature extractor, then pass it to the corpus runner:
+
+```
+kotlinc shared/src/commonMain/kotlin/com/heysig/noise/NoiseCancellationSignal.kt tools/masking/CancellationFeatures.kt -include-runtime -d /tmp/heysig-cancellation-features.jar
+python tools/masking/evaluate.py --speech /tmp/heysig-masking-corpus --background /tmp/heysig-environment-corpus --output shared/build/masking-cancellation --cancellation-jar /tmp/heysig-cancellation-features.jar
+python tools/masking/fit.py --work shared/build/masking-cancellation
+python tools/masking/report.py --work shared/build/masking-cancellation
+```
+
+The HSGMASK2 head includes six additional analysis-only spectral suppression
+features. The runner feeds bounded PCM to the actual Kotlin implementation over
+stdin and receives only six scalars, avoiding a separate Python approximation.
+The first 2052 features, event scores, source splits and decision policy remain
+the same as the baseline. HSGMASK1 remains readable for baseline comparisons.
+Do not compare a v2 head against v1 feature rows or reuse a stale reporter JAR.
+To evaluate the shipped agreement policy, add:
+`--baseline-head androidApp/src/main/assets/masking/masking-baseline.txt` to the
+report command. Without that option, the reporter measures the candidate alone.
+The candidate-alone result is retained separately; it is not the live policy.
+
+A per-bin 20th-percentile power estimate within each three-second capture supplies
+a temporary background floor. A bounded Wiener-style attenuation estimates retained
+and removed spectral power. Features describe removed fraction, speech-band
+retention, retained-envelope range/variation, floor flatness and active-frame
+fraction. No cleaned waveform is reconstructed or played. No noise profile is
+carried between captures. These quantities are not target-speaker SNR, clinical
+intelligibility or proof that competing talkers have been separated. Continuous
+speech, music and overlapping voices can contaminate the estimated floor.
+
+The model combines these features with original speech/event evidence; cancellation
+strength alone never selects a program. Tune coefficients, uncertainty and the relative weight of the six cancellation
+features using development-speaker folds only. The fixed candidate scale grid is
+1/4/16; the selected scale is folded into serialized weights, not user settings. The existing outer set has already been viewed:
+new scores are regression evidence, not a fresh blind acceptance study.

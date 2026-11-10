@@ -23,7 +23,7 @@ for part in ('development','heldout'):
         noise=norm(bg[:48000]);mix=norm(target+noise*10**(-r['snr']/20))*10**(-30/20)
         pcm=np.clip(np.rint(mix*32768),-32768,32767).astype('<i2').tobytes();name=f'{part}-{r["reference"]}.pcm';(a.output/name).write_bytes(pcm)
         result.append(dict(file=name,sha256=hashlib.sha256(pcm).hexdigest(),sourceIndex=i,reference=r['reference'],snr=r['snr'],severity=decisions[i]['severity'],score=float(decisions[i]['score']),rms=r['rms'],features=data['features'][i].tolist()))
-(a.output/'manifest.json').write_text(json.dumps(dict(headSha256=hashlib.sha256((a.work/'masking-head.txt').read_bytes()).hexdigest(),fixtures=result),indent=2)+'\n')
+(a.output/'manifest.json').write_text(json.dumps(dict(headSha256=hashlib.sha256((a.work/'masking-head.txt').read_bytes()).hexdigest(),baselineSha256=sources.get('baselineSha256'),fixtures=result),indent=2)+'\n')
 (a.output/'NOTICE').write_text('Developer instrumentation fixtures only. Never played.\nLibriSpeech (c) 2014 Vassil Panayotov, CC BY 4.0. LibriVox readers credited in the accompanying source manifest.\nBackground sources and authors: see sources.json. CC0/CC BY 3.0/4.0 as stated per source.\nTransforms: first three seconds, mono 16kHz PCM16, foreground/background normalized and mixed at +15/+3/-8dB SNR, then matched overall -30dBFS RMS.\nSource references, license links and original hashes are retained. No wearer recordings.\n')
 (a.output/'sources.json').write_text(json.dumps(sources,indent=2)+'\n')
 print('Generated',len(result),'pinned native fixtures')

@@ -1,0 +1,1183 @@
+index	severity	score	maskingProposal	levelProposal	returnProposal	reason
+0	CLEAR	0.9702032728562535	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1	CLEAR	0.9706495252214515	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+2	CLEAR	0.9552026853598592	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+3	CLEAR	0.9501770986804499	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+4	MODERATE	0.9835491870233505	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+5	MODERATE	0.9828126679003496	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+6	MODERATE	0.8771721422534753	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+7	MODERATE	0.8637751011390531	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+8	HEAVY	0.9397601686520217	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+9	HEAVY	0.9459740153913312	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+10	HEAVY	0.9854993794755963	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+11	HEAVY	0.9870062910319222	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+12	CLEAR	0.9836809800056664	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+13	CLEAR	0.9802964347310142	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+14	CLEAR	0.9311331336952441	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+15	CLEAR	0.9423297695866194	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+16	MODERATE	0.8274398488011764	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+17	MODERATE	0.8294181490217355	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+18	MODERATE	0.7931978246257514	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+19	MODERATE	0.8214819472764963	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+20	HEAVY	0.9774906912585479	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+21	HEAVY	0.9764989994304543	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+22	HEAVY	0.9646856349268391	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+23	HEAVY	0.9699843626615504	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+24	CLEAR	0.8329042253686515	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+25	CLEAR	0.8355402966388529	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+26	CLEAR	0.8870961841466611	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+27	CLEAR	0.9121709332577063	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+28	MODERATE	0.8781340584550489	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+29	MODERATE	0.8817443130334973	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+30	MODERATE	0.9589872495788236	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+31	MODERATE	0.9590381058309286	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+32	HEAVY	0.952337825897089	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+33	HEAVY	0.9501986923331015	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+34	HEAVY	0.9339331321460669	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+35	HEAVY	0.9261208381887226	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+36	CLEAR	0.9857144313186659	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+37	CLEAR	0.983289573432889	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+38	CLEAR	0.95603981376293	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+39	CLEAR	0.9523518605906901	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+40	MODERATE	0.9448196448565657	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+41	MODERATE	0.9303663585200219	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+42	MODERATE	0.9677878643367247	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+43	MODERATE	0.9719734595281139	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+44	HEAVY	0.9863447088365236	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+45	HEAVY	0.9831081256802457	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+46	HEAVY	0.9935280564696751	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+47	HEAVY	0.9929997795483129	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+48	CLEAR	0.9777061562814646	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+49	CLEAR	0.9771107306382796	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+50	CLEAR	0.9254100954183674	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+51	CLEAR	0.9242265214643038	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+52	MODERATE	0.9241155417129696	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+53	MODERATE	0.9302545727844378	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+54	MODERATE	0.9614893765477949	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+55	MODERATE	0.960272833565847	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+56	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+57	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+58	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+59	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+60	CLEAR	0.8694217447288651	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+61	CLEAR	0.8487794835462265	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+62	CLEAR	0.6695616573560805	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+63	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+64	MODERATE	0.6850518415725293	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+65	MODERATE	0.6513683369915226	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+66	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+67	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+68	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+69	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+70	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+71	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+72	CLEAR	0.9849047048670703	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+73	CLEAR	0.9817427904163629	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+74	CLEAR	0.9871880759010387	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+75	CLEAR	0.9897349184705133	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+76	MODERATE	0.9642353621102653	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+77	MODERATE	0.9710606908380818	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+78	MODERATE	0.9200574436808019	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+79	MODERATE	0.9170654354060755	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+80	HEAVY	0.9278674018539421	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+81	HEAVY	0.9351556915900955	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+82	HEAVY	0.9041883021586125	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+83	HEAVY	0.9135726473755593	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+84	CLEAR	0.9949637940796057	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+85	CLEAR	0.9946472779938224	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+86	CLEAR	0.9882032040727023	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+87	CLEAR	0.9880235911895554	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+88	MODERATE	0.9593796320585979	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+89	MODERATE	0.9605678866857488	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+90	MODERATE	0.909658069894708	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+91	MODERATE	0.9006693147666156	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+92	HEAVY	0.8758887011709092	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+93	HEAVY	0.896952543868458	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+94	HEAVY	0.9535739763508062	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+95	HEAVY	0.9498064171628535	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+96	CLEAR	0.9368027194078028	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+97	CLEAR	0.936237680206322	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+98	CLEAR	0.9700826913677388	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+99	CLEAR	0.9696208782402312	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+100	MODERATE	0.962302588048039	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+101	MODERATE	0.9667111853178577	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+102	MODERATE	0.9362865558211227	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+103	MODERATE	0.9345212511481438	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+104	HEAVY	0.8817573622990302	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+105	HEAVY	0.8846214699122922	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+106	HEAVY	0.8219110521403038	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+107	HEAVY	0.8011153743848481	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+108	CLEAR	0.9935564208107891	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+109	CLEAR	0.9934332498153142	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+110	CLEAR	0.9788109125829594	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+111	CLEAR	0.9817490814439553	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+112	MODERATE	0.8765118129017477	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+113	MODERATE	0.8718421255274188	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+114	MODERATE	0.8718013409628749	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+115	MODERATE	0.8710620466434129	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+116	HEAVY	0.9664161025966541	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+117	HEAVY	0.9604755650413997	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+118	HEAVY	0.9796627001638488	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+119	HEAVY	0.9781857210053714	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+120	CLEAR	0.9903221328855751	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+121	CLEAR	0.9912782168297243	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+122	CLEAR	0.9531315836004465	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+123	CLEAR	0.955509282149614	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+124	MODERATE	0.9303921908452755	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+125	MODERATE	0.9422127804152031	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+126	MODERATE	0.8430568736244611	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+127	MODERATE	0.8101270543512522	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+128	HEAVY	0.962050518017492	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+129	HEAVY	0.9724255300871536	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+130	HEAVY	0.9788993287937705	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+131	HEAVY	0.9830084840469373	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+132	CLEAR	0.8826584717412954	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+133	CLEAR	0.8984561182108913	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+134	CLEAR	0.8877344733546328	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+135	CLEAR	0.9161074504181437	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+136	MODERATE	0.7261630261836403	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+137	MODERATE	0.7731168079783928	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+138	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+139	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+140	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+141	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+142	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+143	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+144	CLEAR	0.9528128513464025	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+145	CLEAR	0.9479399067893545	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+146	CLEAR	0.9171414692541966	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+147	CLEAR	0.9194119926815454	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+148	MODERATE	0.9471983262201048	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+149	MODERATE	0.95254248132375	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+150	MODERATE	0.9016411741693608	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+151	MODERATE	0.8716227221315275	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+152	HEAVY	0.9557471610754527	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+153	HEAVY	0.9583922966496443	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+154	HEAVY	0.983954140000045	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+155	HEAVY	0.9869034899877289	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+156	CLEAR	0.9860636143080576	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+157	CLEAR	0.9860282928158367	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+158	CLEAR	0.9343012080466436	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+159	CLEAR	0.9366692279065632	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+160	MODERATE	0.8907396107316451	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+161	MODERATE	0.836044809290355	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+162	MODERATE	0.874763278701307	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+163	MODERATE	0.8700089948252873	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+164	HEAVY	0.9595243966274242	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+165	HEAVY	0.9579854885768142	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+166	HEAVY	0.9871347852595159	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+167	HEAVY	0.9856939775330099	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+168	CLEAR	0.9774275890747309	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+169	CLEAR	0.9772860677953313	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+170	CLEAR	0.9514206157420722	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+171	CLEAR	0.9514181717207658	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+172	MODERATE	0.9591852625440863	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+173	MODERATE	0.9629722867869127	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+174	MODERATE	0.9316630283216318	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+175	MODERATE	0.9402275833302364	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+176	HEAVY	0.9831973404013268	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+177	HEAVY	0.9830115001137276	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+178	HEAVY	0.9504300965502165	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+179	HEAVY	0.9465516575544238	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+180	CLEAR	0.9958709931145606	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+181	CLEAR	0.9950615945031919	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+182	CLEAR	0.9866963230798755	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+183	CLEAR	0.985663228675023	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+184	MODERATE	0.9585829954782232	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+185	MODERATE	0.9559217382912023	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+186	MODERATE	0.9413702767752331	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+187	MODERATE	0.9397497395432252	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+188	HEAVY	0.9899098470571954	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+189	HEAVY	0.9895575225699442	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+190	HEAVY	0.9759627420621173	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+191	HEAVY	0.9736870716509267	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+192	CLEAR	0.9938981260229587	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+193	CLEAR	0.993539451686509	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+194	CLEAR	0.9841089907782592	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+195	CLEAR	0.9835859163468086	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+196	MODERATE	0.9449186272046046	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+197	MODERATE	0.9400667063091541	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+198	MODERATE	0.9797247814056044	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+199	MODERATE	0.9769541999643787	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+200	HEAVY	0.9526380747738491	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+201	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+202	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+203	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+204	CLEAR	0.7625375924248224	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+205	CLEAR	0.7609598924786974	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+206	CLEAR	0.7113924437611605	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+207	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+208	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+209	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+210	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+211	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+212	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+213	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+214	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+215	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+216	CLEAR	0.9936257134837999	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+217	CLEAR	0.9943567415777942	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+218	CLEAR	0.9900145712078725	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+219	CLEAR	0.991585978745291	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+220	MODERATE	0.9848698741397734	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+221	MODERATE	0.9855660778747245	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+222	MODERATE	0.8832135728786048	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+223	MODERATE	0.8919937100343264	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+224	HEAVY	0.9786184027581921	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+225	HEAVY	0.9705609961018973	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+226	HEAVY	0.9744154483058718	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+227	HEAVY	0.9735926736865534	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+228	CLEAR	0.9030701867358768	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+229	CLEAR	0.9233738075825161	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+230	CLEAR	0.8765987581998321	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+231	CLEAR	0.8274597631466277	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+232	MODERATE	0.9564459434750103	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+233	MODERATE	0.9606779154810816	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+234	MODERATE	0.9607273941739874	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+235	MODERATE	0.9625101035865223	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+236	HEAVY	0.912910001214957	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+237	HEAVY	0.9051415278474214	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+238	HEAVY	0.9009015046863994	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+239	HEAVY	0.9066701331983454	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+240	CLEAR	0.974473607921016	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+241	CLEAR	0.9740181229691078	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+242	CLEAR	0.9926849128237005	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+243	CLEAR	0.9929586449858139	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+244	MODERATE	0.9412120849084377	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+245	MODERATE	0.9454678091512324	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+246	MODERATE	0.9499286894497733	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+247	MODERATE	0.955438563639274	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+248	HEAVY	0.9775470312870471	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+249	HEAVY	0.9802250229527417	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+250	HEAVY	0.9240645379146597	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+251	HEAVY	0.9286015136865489	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+252	CLEAR	0.9515845326418552	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+253	CLEAR	0.9538005300281125	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+254	CLEAR	0.9934395998808272	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+255	CLEAR	0.9953030659116767	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+256	MODERATE	0.9735977871635626	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+257	MODERATE	0.9738606259344661	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+258	MODERATE	0.9761097859780147	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+259	MODERATE	0.9753346561433553	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+260	HEAVY	0.9869377190865085	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+261	HEAVY	0.9886673582498601	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+262	HEAVY	0.9842854043321473	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+263	HEAVY	0.9839140171138161	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+264	CLEAR	0.97494949116254	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+265	CLEAR	0.9717993597119893	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+266	CLEAR	0.9537309512126084	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+267	CLEAR	0.9516521961960227	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+268	MODERATE	0.9404754135839671	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+269	MODERATE	0.9365673998667463	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+270	MODERATE	0.943578041825128	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+271	MODERATE	0.9313746070561364	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+272	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+273	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+274	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+275	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+276	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+277	CLEAR	0.6527011383367859	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+278	CLEAR	0.7503161837127278	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+279	CLEAR	0.7358306141505438	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+280	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+281	MODERATE	0.6690353745517442	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+282	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+283	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+284	HEAVY	0.6731552874618915	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+285	HEAVY	0.6732129774137453	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+286	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+287	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+288	CLEAR	0.9846979186497467	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+289	CLEAR	0.9855337484409702	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+290	CLEAR	0.9929660430929999	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+291	CLEAR	0.9888765786683738	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+292	MODERATE	0.9653230040854605	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+293	MODERATE	0.9571002368541639	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+294	MODERATE	0.8434489250528411	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+295	MODERATE	0.8365442849631077	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+296	HEAVY	0.9881641039651122	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+297	HEAVY	0.9866705050851791	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+298	HEAVY	0.9907458964282643	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+299	HEAVY	0.9901053114097983	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+300	CLEAR	0.9907932971003309	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+301	CLEAR	0.990858445739135	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+302	CLEAR	0.9895766353888134	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+303	CLEAR	0.9904841590898235	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+304	MODERATE	0.9481727208343879	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+305	MODERATE	0.9524210167802072	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+306	MODERATE	0.8932706763865975	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+307	MODERATE	0.8850541424894914	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+308	HEAVY	0.9593525059054707	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+309	HEAVY	0.9644020788188359	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+310	HEAVY	0.8782886965290423	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+311	HEAVY	0.893714852702682	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+312	CLEAR	0.796890990137236	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+313	CLEAR	0.7669681468569043	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+314	CLEAR	0.9780488745030723	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+315	CLEAR	0.9782845410770467	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+316	MODERATE	0.9367010182717256	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+317	MODERATE	0.9282085548725313	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+318	MODERATE	0.8731982556413688	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+319	MODERATE	0.8768256316363643	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+320	HEAVY	0.9816503192661755	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+321	HEAVY	0.9812682702551225	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+322	HEAVY	0.9836759152687716	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+323	HEAVY	0.9864359190798399	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+324	CLEAR	0.9168394435613301	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+325	CLEAR	0.9156068813098137	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+326	CLEAR	0.9573511355984812	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+327	CLEAR	0.9629757385730183	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+328	MODERATE	0.9409668376735222	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+329	MODERATE	0.9312229562663752	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+330	MODERATE	0.9026338949020288	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+331	MODERATE	0.9093308960658005	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+332	HEAVY	0.9833697141834695	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+333	HEAVY	0.9830865476188814	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+334	HEAVY	0.9968055278779467	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+335	HEAVY	0.9966464335404434	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+336	CLEAR	0.9775710862992152	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+337	CLEAR	0.9807467067788213	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+338	CLEAR	0.9784048744079451	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+339	CLEAR	0.9799477138447016	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+340	MODERATE	0.8980528011914856	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+341	MODERATE	0.9102373276328874	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+342	MODERATE	0.8212620506340841	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+343	MODERATE	0.8036249787336316	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+344	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+345	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+346	HEAVY	0.9607697936759317	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+347	HEAVY	0.9552662004452405	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+348	CLEAR	0.7791269574834219	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+349	CLEAR	0.8267388860273815	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+350	CLEAR	0.852725190378098	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+351	CLEAR	0.9078956448490598	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+352	MODERATE	0.6553508221738427	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+353	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+354	MODERATE	0.6720730520620096	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+355	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+356	HEAVY	0.7572114607444589	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+357	HEAVY	0.6868235366269099	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+358	HEAVY	0.7499211796509248	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+359	HEAVY	0.727676868329252	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+360	CLEAR	0.9317089884449775	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+361	CLEAR	0.9489935395109378	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+362	CLEAR	0.97001107239406	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+363	CLEAR	0.9703019038373776	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+364	MODERATE	0.9359203547315277	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+365	MODERATE	0.9307192846941289	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+366	MODERATE	0.7724725283319369	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+367	MODERATE	0.8005769273760811	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+368	HEAVY	0.9942355625788534	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+369	HEAVY	0.9928572458430128	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+370	HEAVY	0.9913975546520083	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+371	HEAVY	0.9900987289258076	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+372	CLEAR	0.9905367358223708	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+373	CLEAR	0.9879757175405073	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+374	CLEAR	0.9454359059110703	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+375	CLEAR	0.9577233501524255	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+376	MODERATE	0.857368366148251	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+377	MODERATE	0.8871955452299726	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+378	MODERATE	0.811188778201624	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+379	MODERATE	0.8339266846777313	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+380	HEAVY	0.9331948575784574	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+381	HEAVY	0.9411198677529818	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+382	HEAVY	0.8664863537438514	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+383	HEAVY	0.8901924088133242	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+384	CLEAR	0.7377679417175751	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+385	CLEAR	0.7494965502530224	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+386	CLEAR	0.9680441374225929	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+387	CLEAR	0.959911783902572	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+388	MODERATE	0.9218714963438872	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+389	MODERATE	0.9120111579220594	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+390	MODERATE	0.801117999758571	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+391	MODERATE	0.7987145334088309	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+392	HEAVY	0.9714233469948621	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+393	HEAVY	0.97251715283341	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+394	HEAVY	0.941997170272397	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+395	HEAVY	0.9359951336627413	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+396	CLEAR	0.9290075377045538	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+397	CLEAR	0.9161387047879757	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+398	CLEAR	0.9313256610918885	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+399	CLEAR	0.9356328058539275	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+400	MODERATE	0.816524633600961	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+401	MODERATE	0.8291233013476363	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+402	MODERATE	0.9650153880610317	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+403	MODERATE	0.9525464117859265	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+404	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+405	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+406	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+407	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+408	CLEAR	0.9485413751266769	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+409	CLEAR	0.9607896640021563	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+410	CLEAR	0.9648920335906201	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+411	CLEAR	0.9783207224020087	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+412	MODERATE	0.9243274195853591	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+413	MODERATE	0.9179106587513888	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+414	MODERATE	0.9350341766574433	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+415	MODERATE	0.9230966387743149	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+416	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+417	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+418	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+419	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+420	CLEAR	0.8652467273490666	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+421	CLEAR	0.8505694405836551	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+422	CLEAR	0.8945564078208221	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+423	CLEAR	0.907879819167687	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+424	MODERATE	0.8355752783781772	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+425	MODERATE	0.8303033923763864	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+426	MODERATE	0.7184674739225195	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+427	MODERATE	0.7396481484524517	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+428	HEAVY	0.6766481780580533	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+429	HEAVY	0.6798653202749126	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+430	HEAVY	0.8006124002803295	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+431	HEAVY	0.8161483841480492	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+432	CLEAR	0.9234231337753639	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+433	CLEAR	0.9168306380231517	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+434	CLEAR	0.945573805743042	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+435	CLEAR	0.9357296679465896	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+436	MODERATE	0.9718479696011161	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+437	MODERATE	0.9712630138923818	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+438	MODERATE	0.802040766798657	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+439	MODERATE	0.74626695584691	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+440	HEAVY	0.93424525737191	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+441	HEAVY	0.9228354517959811	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+442	HEAVY	0.9915444512605786	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+443	HEAVY	0.9903798579609712	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+444	CLEAR	0.7846232071114418	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+445	CLEAR	0.8160828087229183	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+446	CLEAR	0.9147058934406666	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+447	CLEAR	0.9309255423497708	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+448	MODERATE	0.9524039935634975	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+449	MODERATE	0.9526131166403462	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+450	MODERATE	0.9366250843910258	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+451	MODERATE	0.9169350288360929	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+452	HEAVY	0.9595503300305935	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+453	HEAVY	0.9615725719652967	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+454	HEAVY	0.6946960627262048	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+455	HEAVY	0.7110897314092007	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+456	CLEAR	0.8326790776164233	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+457	CLEAR	0.8433538910343941	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+458	CLEAR	0.9249041198092964	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+459	CLEAR	0.8999880261248435	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+460	MODERATE	0.9657490778500477	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+461	MODERATE	0.9644752276826195	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+462	MODERATE	0.8997830727245295	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+463	MODERATE	0.899814076165791	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+464	HEAVY	0.8976418933848053	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+465	HEAVY	0.9013236418979957	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+466	HEAVY	0.9400803909607541	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+467	HEAVY	0.9411623389738082	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+468	CLEAR	0.9851934893157652	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+469	CLEAR	0.9850602975176815	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+470	CLEAR	0.9889087176449244	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+471	CLEAR	0.9902382547321623	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+472	MODERATE	0.9895952435058845	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+473	MODERATE	0.9891393902664393	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+474	MODERATE	0.9902588253110628	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+475	MODERATE	0.9861238487922179	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+476	HEAVY	0.9425529274100877	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+477	HEAVY	0.946586450866815	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+478	HEAVY	0.9373607604812314	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+479	HEAVY	0.9488051835051856	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+480	CLEAR	0.9382015974040468	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+481	CLEAR	0.9496476735655552	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+482	CLEAR	0.9036693144206441	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+483	CLEAR	0.9323915998661598	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+484	MODERATE	0.9747248388229939	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+485	MODERATE	0.9720018862117327	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+486	MODERATE	0.9514320039641062	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+487	MODERATE	0.9527571708477168	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+488	HEAVY	0.9554422716263078	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+489	HEAVY	0.9440162988479831	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+490	HEAVY	0.9756724959889965	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+491	HEAVY	0.9768237001695997	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+492	CLEAR	0.9026231723660226	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+493	CLEAR	0.9200033618666578	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+494	CLEAR	0.7425978430857343	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+495	CLEAR	0.7723088813732043	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+496	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+497	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+498	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+499	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+500	HEAVY	0.6822123687323794	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+501	HEAVY	0.6541819896783706	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+502	HEAVY	0.7004347992039086	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+503	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+504	CLEAR	0.8413010170885081	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+505	CLEAR	0.8087777324171017	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+506	CLEAR	0.9677812310631472	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+507	CLEAR	0.9717930184834945	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+508	MODERATE	0.9347030098055157	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+509	MODERATE	0.9369412858002155	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+510	MODERATE	0.8769532555313015	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+511	MODERATE	0.8971419388976054	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+512	HEAVY	0.9841095498080373	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+513	HEAVY	0.9868666982708885	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+514	HEAVY	0.9811560349618608	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+515	HEAVY	0.9834151194337831	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+516	CLEAR	0.9677237553760875	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+517	CLEAR	0.9601562693314785	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+518	CLEAR	0.9851870796404822	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+519	CLEAR	0.9871287557501822	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+520	MODERATE	0.9650778985170252	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+521	MODERATE	0.9664270734753436	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+522	MODERATE	0.9655194571977995	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+523	MODERATE	0.9659980110163148	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+524	HEAVY	0.8642863169929105	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+525	HEAVY	0.8802155230286733	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+526	HEAVY	0.8500398470636225	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+527	HEAVY	0.8363521511770102	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+528	CLEAR	0.8606028701700934	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+529	CLEAR	0.8465807270680998	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+530	CLEAR	0.9895190380540227	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+531	CLEAR	0.9911908481091267	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+532	MODERATE	0.9675223449170923	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+533	MODERATE	0.9686456126316437	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+534	MODERATE	0.9571896333952775	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+535	MODERATE	0.9594175906812153	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+536	HEAVY	0.967423101982215	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+537	HEAVY	0.972681808112131	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+538	HEAVY	0.9323284517086354	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+539	HEAVY	0.9086964594644578	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+540	CLEAR	0.9729729966992279	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+541	CLEAR	0.9667904632377441	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+542	CLEAR	0.9921223362851948	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+543	CLEAR	0.9910541063089751	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+544	MODERATE	0.9593272985495983	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+545	MODERATE	0.9666708525263431	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+546	MODERATE	0.9363922386629477	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+547	MODERATE	0.9318099685906226	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+548	HEAVY	0.9463262846415108	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+549	HEAVY	0.9434777417364296	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+550	HEAVY	0.926176459754038	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+551	HEAVY	0.9394992666831725	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+552	CLEAR	0.923653873907299	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+553	CLEAR	0.9553151827043628	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+554	CLEAR	0.9563090688659368	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+555	CLEAR	0.9729900252710627	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+556	MODERATE	0.9320925433093964	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+557	MODERATE	0.9201987340545418	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+558	MODERATE	0.9607003207447727	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+559	MODERATE	0.9482506903437069	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+560	HEAVY	0.9761938752032978	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+561	HEAVY	0.9776331433551599	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+562	HEAVY	0.9808252050399978	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+563	HEAVY	0.9756674703745073	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+564	CLEAR	0.805543499835961	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+565	CLEAR	0.7601059200104803	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+566	CLEAR	0.9113398258902053	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+567	CLEAR	0.8987033693355512	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+568	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+569	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+570	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+571	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+572	HEAVY	0.654754698063977	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+573	HEAVY	0.7347668350172211	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+574	HEAVY	0.6630179133902716	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+575	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+576	HEAVY	0.9962920025832862	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+577	HEAVY	0.9955345619678155	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+578	HEAVY	0.9854446658980835	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+579	HEAVY	0.9850214975206674	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+580	HEAVY	0.9867235165596241	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+581	HEAVY	0.9875369904896787	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+582	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+583	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+584	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+585	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+586	CLEAR	0.9982406741666334	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+587	CLEAR	0.996475330551485	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+588	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+589	UNKNOWN	0.0	hold	3	hold	Interrupted, clipped or isolated sound; keep current program
+590	QUIET	0.0	hold	hold	1	Quiet evidence; requires repeated checks
+591	CLEAR	0.9456506919070928	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+592	CLEAR	0.9550188974456132	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+593	CLEAR	0.9248080853276146	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+594	CLEAR	0.918412518954232	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+595	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+596	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+597	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+598	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+599	HEAVY	0.9989788226138886	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+600	HEAVY	0.9987539491056948	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+601	HEAVY	0.9987233562210213	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+602	HEAVY	0.9987893269241231	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+603	CLEAR	0.9124996055091477	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+604	CLEAR	0.9082318845538205	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+605	CLEAR	0.9571442765437904	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+606	CLEAR	0.9659755026081072	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+607	MODERATE	0.8607753681544059	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+608	MODERATE	0.8883514272202819	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+609	MODERATE	0.9067311396061407	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+610	MODERATE	0.9159737176410047	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+611	HEAVY	0.819737475454262	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+612	HEAVY	0.7951812352610147	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+613	HEAVY	0.8415298153288202	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+614	HEAVY	0.8387009107034277	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+615	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+616	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+617	CLEAR	0.9872854455443881	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+618	CLEAR	0.9859169954147115	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+619	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+620	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+621	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+622	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+623	HEAVY	0.8922332162411801	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+624	HEAVY	0.8865791591280727	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+625	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+626	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+627	CLEAR	0.8913853712315191	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+628	CLEAR	0.8778855221327834	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+629	CLEAR	0.9204281618261847	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+630	CLEAR	0.9532966344425946	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+631	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+632	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+633	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+634	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+635	HEAVY	0.9947301261236551	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+636	HEAVY	0.9943361272310574	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+637	HEAVY	0.997498874041929	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+638	HEAVY	0.9977969867822026	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+639	CLEAR	0.9926075496485797	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+640	CLEAR	0.9942764390557138	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+641	CLEAR	0.9341563773059585	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+642	CLEAR	0.9426520868351307	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+643	CLEAR	0.9632958657300856	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+644	CLEAR	0.9643090091945207	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+645	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+646	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+647	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+648	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+649	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+650	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+651	CLEAR	0.9968958150564129	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+652	CLEAR	0.9977322145809854	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+653	CLEAR	0.9978121755686632	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+654	CLEAR	0.9964380858743174	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+655	CLEAR	0.905166062119579	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+656	CLEAR	0.9306404798225535	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+657	CLEAR	0.9699520386873498	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+658	CLEAR	0.9768541287860508	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+659	CLEAR	0.8973103691688333	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+660	CLEAR	0.9194460232003945	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+661	CLEAR	0.9756795178035604	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+662	CLEAR	0.9828062180221923	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+663	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+664	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+665	CLEAR	0.7570824732537276	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+666	CLEAR	0.727224338602436	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+667	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+668	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+669	HEAVY	0.8893043244217039	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+670	HEAVY	0.8869783057063738	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+671	HEAVY	0.9781694545096816	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+672	HEAVY	0.9707460428385379	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+673	HEAVY	0.9978064044882778	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+674	HEAVY	0.9968327143593538	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+675	CLEAR	0.9407452810259754	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+676	CLEAR	0.943502135814084	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+677	CLEAR	0.931449739084928	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+678	CLEAR	0.9286493405219786	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+679	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+680	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+681	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+682	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+683	HEAVY	0.9218375649874957	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+684	HEAVY	0.9239295254581539	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+685	HEAVY	0.908620769915636	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+686	HEAVY	0.9123638441292673	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+687	UNKNOWN	0.0	hold	3	hold	Music or mixed media; keep current program
+688	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+689	CLEAR	0.9277794414474769	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+690	CLEAR	0.9551509586113738	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+691	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+692	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+693	MODERATE	0.7229760953373469	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+694	MODERATE	0.7455964637460205	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+695	HEAVY	0.8356659232373279	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+696	HEAVY	0.8575362885222649	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+697	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+698	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+699	CLEAR	0.9596352025276524	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+700	CLEAR	0.9530740170079163	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+701	CLEAR	0.871784707471327	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+702	CLEAR	0.8264326809558853	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+703	HEAVY	0.9260730547099953	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+704	HEAVY	0.9219148500371122	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+705	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+706	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+707	HEAVY	0.998367269394507	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+708	HEAVY	0.9984994752375987	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+709	HEAVY	0.9920123625987322	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+710	HEAVY	0.9920570060650507	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+711	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+712	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+713	CLEAR	0.9577752229594756	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+714	CLEAR	0.9501357025407345	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+715	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+716	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+717	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+718	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+719	HEAVY	0.67713683598553	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+720	HEAVY	0.7147572792552961	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+721	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+722	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+723	CLEAR	0.9291489391775005	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+724	CLEAR	0.9461336998390412	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+725	CLEAR	0.97665767837648	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+726	CLEAR	0.9849903212436933	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+727	CLEAR	0.7900781699337219	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+728	CLEAR	0.7989608470061756	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+729	CLEAR	0.8716540276956442	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+730	CLEAR	0.9018003261351885	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+731	CLEAR	0.7590569398651871	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+732	CLEAR	0.7894729349838709	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+733	CLEAR	0.9560284987749607	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+734	CLEAR	0.9714723279408347	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+735	CLEAR	0.9975131326551827	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+736	CLEAR	0.9974131912505336	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+737	CLEAR	0.9990632414065986	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+738	CLEAR	0.9992170133470474	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+739	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+740	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+741	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+742	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+743	HEAVY	0.9885309483998408	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+744	HEAVY	0.9868777149959541	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+745	HEAVY	0.994118188741877	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+746	HEAVY	0.9950449340119488	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+747	CLEAR	0.788523116375825	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+748	CLEAR	0.7385530833017281	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+749	CLEAR	0.9923955112032069	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+750	CLEAR	0.9917165643474348	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+751	MODERATE	0.7475092818372226	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+752	MODERATE	0.7331825816784667	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+753	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+754	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+755	HEAVY	0.8931247340059054	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+756	HEAVY	0.9052803845443769	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+757	HEAVY	0.8178120473832201	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+758	HEAVY	0.786273645307366	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+759	CLEAR	0.6825912723567084	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+760	CLEAR	0.6717850615081247	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+761	CLEAR	0.9981418010385366	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+762	CLEAR	0.9990550962561917	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+763	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+764	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+765	MODERATE	0.7270336235438265	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+766	MODERATE	0.7730849284767966	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+767	HEAVY	0.8954916765727094	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+768	HEAVY	0.9031502139265526	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+769	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+770	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+771	CLEAR	0.8229062704798948	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+772	CLEAR	0.8389142883134307	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+773	CLEAR	0.9788291254911269	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+774	CLEAR	0.9887862423625458	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+775	HEAVY	0.8122622488135106	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+776	HEAVY	0.8384740735814131	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+777	HEAVY	0.9396059740626106	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+778	HEAVY	0.9222021170455921	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+779	HEAVY	0.9985140316704523	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+780	HEAVY	0.9985721717528712	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+781	HEAVY	0.9996869245201435	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+782	HEAVY	0.9996929369617816	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+783	CLEAR	0.9961298734040046	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+784	CLEAR	0.9970368114185391	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+785	CLEAR	0.9997183624350935	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+786	CLEAR	0.9996417540340119	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+787	CLEAR	0.9139942096171936	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+788	CLEAR	0.9349779921855147	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+789	CLEAR	0.9905961036316822	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+790	CLEAR	0.9929088521580159	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+791	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+792	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+793	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+794	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+795	CLEAR	0.9577866558749389	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+796	CLEAR	0.9647671014160718	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+797	CLEAR	0.9931490688501895	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+798	CLEAR	0.9958885742317893	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+799	CLEAR	0.9330422852395748	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+800	CLEAR	0.9437022064022066	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+801	CLEAR	0.931608181695453	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+802	CLEAR	0.9670043854105381	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+803	CLEAR	0.9644402860178345	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+804	CLEAR	0.9761206290273934	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+805	CLEAR	0.99520901119575	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+806	CLEAR	0.9947751566887191	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+807	CLEAR	0.9781751314598172	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+808	CLEAR	0.9786191280669295	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+809	CLEAR	0.9949314493028303	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+810	CLEAR	0.9959109626575825	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+811	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+812	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+813	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+814	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+815	HEAVY	0.9985981821155527	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+816	HEAVY	0.9987124333438238	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+817	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+818	HEAVY	0.999781095056839	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+819	CLEAR	0.7530494173527446	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+820	CLEAR	0.7317494005813922	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+821	CLEAR	0.9772959196320016	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+822	CLEAR	0.9841959978535089	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+823	MODERATE	0.7896811574048744	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+824	MODERATE	0.8024787616964265	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+825	MODERATE	0.9201299506258109	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+826	MODERATE	0.9199714086319098	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+827	HEAVY	0.9871616713506858	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+828	HEAVY	0.9880296349774631	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+829	HEAVY	0.941816020978954	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+830	HEAVY	0.9347348998037289	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+831	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+832	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+833	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+834	CLEAR	0.7629362102657689	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+835	MODERATE	0.8052829659896795	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+836	MODERATE	0.8474871141995967	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+837	MODERATE	0.8064188520519908	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+838	MODERATE	0.8394783213606484	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+839	HEAVY	0.662476581941256	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+840	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+841	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+842	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+843	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+844	CLEAR	0.6705792917478757	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+845	CLEAR	0.9595901428916158	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+846	CLEAR	0.961513152037868	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+847	HEAVY	0.9342914613274452	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+848	HEAVY	0.9304209949003891	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+849	HEAVY	0.9233692939307238	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+850	HEAVY	0.9233403717002651	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+851	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+852	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+853	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+854	HEAVY	0.9971227251067878	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+855	CLEAR	0.9184976484404606	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+856	CLEAR	0.8957611792179991	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+857	CLEAR	0.9162729602287564	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+858	CLEAR	0.9256171794627746	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+859	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+860	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+861	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+862	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+863	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+864	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+865	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+866	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+867	CLEAR	0.9762284174960119	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+868	CLEAR	0.9761314819929132	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+869	CLEAR	0.9483236868690925	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+870	CLEAR	0.9640529865109094	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+871	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+872	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+873	CLEAR	0.8981512333745316	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+874	CLEAR	0.9503054918821147	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+875	CLEAR	0.932343645029899	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+876	CLEAR	0.9580688028025279	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+877	CLEAR	0.6805420577365965	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+878	CLEAR	0.8304009617335921	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+879	CLEAR	0.9513220774034906	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+880	CLEAR	0.9404650025999662	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+881	CLEAR	0.9781491337414294	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+882	CLEAR	0.9753367796635191	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+883	HEAVY	0.7889818768388123	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+884	HEAVY	0.8240498096559449	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+885	HEAVY	0.782876141135072	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+886	HEAVY	0.7945149249743405	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+887	HEAVY	0.9998128604261618	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+888	HEAVY	0.9996979031940934	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+889	HEAVY	0.9999137504483279	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+890	HEAVY	0.9999155630325729	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+891	CLEAR	0.7704124475063097	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+892	CLEAR	0.7933165696160579	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+893	CLEAR	0.7196527492010414	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+894	CLEAR	0.701292918095	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+895	MODERATE	0.7421556798644933	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+896	MODERATE	0.7476678202856464	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+897	MODERATE	0.8784473182887019	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+898	MODERATE	0.8716781682814874	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+899	HEAVY	0.9702136738024862	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+900	HEAVY	0.9637480365458134	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+901	HEAVY	0.9152929800555217	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+902	HEAVY	0.8957731681489725	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+903	MODERATE	0.7353684425778797	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+904	MODERATE	0.7149960705128103	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+905	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+906	CLEAR	0.66172578417686	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+907	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+908	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+909	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+910	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+911	HEAVY	0.8462298144992559	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+912	HEAVY	0.8500085408978294	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+913	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+914	UNKNOWN	0.0	hold	2	hold	Music or mixed media; keep current program
+915	CLEAR	0.9889649380518217	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+916	CLEAR	0.990183264084414	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+917	CLEAR	0.9527487097075291	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+918	CLEAR	0.949728939711253	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+919	HEAVY	0.9680014505551284	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+920	HEAVY	0.9670949088218949	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+921	HEAVY	0.9960306444407094	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+922	HEAVY	0.9953660964076946	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+923	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+924	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+925	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+926	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+927	CLEAR	0.9434462565762407	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+928	CLEAR	0.9572317078864011	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+929	CLEAR	0.8650275047199482	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+930	CLEAR	0.8801038244810172	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+931	CLEAR	0.6837145688146135	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+932	CLEAR	0.6521089622241288	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+933	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+934	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+935	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+936	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+937	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+938	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+939	CLEAR	0.9874532239206998	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+940	CLEAR	0.9894964734590356	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+941	CLEAR	0.9775229842488609	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+942	CLEAR	0.9729646416977253	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+943	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+944	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+945	MODERATE	0.7681247301175915	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+946	MODERATE	0.8062836684689627	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+947	CLEAR	0.9384975578712215	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+948	CLEAR	0.9518554116780249	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+949	CLEAR	0.7263691895943085	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+950	CLEAR	0.7540106886439023	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+951	CLEAR	0.9634949990191333	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+952	CLEAR	0.9654506613856261	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+953	CLEAR	0.9865612720291983	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+954	CLEAR	0.9817764054098886	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+955	HEAVY	0.9423635636608786	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+956	HEAVY	0.9358076409899794	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+957	HEAVY	0.9137134498537828	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+958	HEAVY	0.9015082694265996	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+959	HEAVY	0.999707222489751	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+960	HEAVY	0.9996698384074132	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+961	HEAVY	0.9999533305226594	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+962	HEAVY	0.9999450075412539	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+963	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+964	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+965	CLEAR	0.9203302293864528	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+966	CLEAR	0.8874018670558287	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+967	HEAVY	0.8093060721947537	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+968	HEAVY	0.8238143738136207	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+969	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+970	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+971	HEAVY	0.982067112304098	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+972	HEAVY	0.9833362600233858	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+973	HEAVY	0.9757054176198711	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+974	HEAVY	0.9763277361881929	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+975	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+976	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+977	CLEAR	0.7097239351477892	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+978	CLEAR	0.752558403246749	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+979	MODERATE	0.9743294545237077	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+980	MODERATE	0.9757957997941772	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+981	MODERATE	0.9869466786237149	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+982	MODERATE	0.9831064615058908	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+983	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+984	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+985	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+986	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+987	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+988	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+989	CLEAR	0.9376897443422857	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+990	CLEAR	0.930193200216995	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+991	HEAVY	0.9955342617528953	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+992	HEAVY	0.9962170759516271	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+993	HEAVY	0.9940448153408159	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+994	HEAVY	0.9916951593534777	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+995	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+996	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+997	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+998	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+999	CLEAR	0.9275831616316812	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1000	CLEAR	0.9410594992230964	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1001	CLEAR	0.6698498555872374	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1002	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1003	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+1004	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1005	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1006	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1007	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1008	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1009	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1010	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1011	CLEAR	0.9975907771536203	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1012	CLEAR	0.9981385163480733	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1013	CLEAR	0.9948111569342694	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1014	CLEAR	0.9944241001598195	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1015	CLEAR	0.9357553071750392	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1016	CLEAR	0.9505649998662244	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1017	CLEAR	0.9843921086915149	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1018	CLEAR	0.99005125398126	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1019	CLEAR	0.9875581470147349	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1020	CLEAR	0.9877626946965445	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1021	CLEAR	0.950037744064251	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1022	CLEAR	0.9765563906107093	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1023	CLEAR	0.7768144098854634	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1024	CLEAR	0.821398727412268	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1025	CLEAR	0.6674859650679743	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1026	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1027	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1028	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1029	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1030	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1031	HEAVY	0.9763173464824858	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1032	HEAVY	0.9777889238520979	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1033	HEAVY	0.9814735632950264	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1034	HEAVY	0.9816995028365201	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1035	CLEAR	0.9270793539974961	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1036	CLEAR	0.9127004082942982	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1037	CLEAR	0.9744827944004539	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1038	CLEAR	0.9736364768682976	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1039	MODERATE	0.6594437986610655	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1040	MODERATE	0.654637892213012	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1041	MODERATE	0.8549534637624998	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1042	MODERATE	0.8698657610306237	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1043	HEAVY	0.8854627179850206	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1044	HEAVY	0.8725546927875315	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1045	HEAVY	0.8784700097364939	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1046	HEAVY	0.8556085786902441	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1047	CLEAR	0.8276316409266032	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1048	CLEAR	0.8032887794039142	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1049	CLEAR	0.7881666110693261	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1050	CLEAR	0.7998776008693755	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1051	MODERATE	0.9627239542344718	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1052	MODERATE	0.9627655965888886	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1053	MODERATE	0.9470960750093688	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1054	MODERATE	0.9487823012246086	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1055	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+1056	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1057	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1058	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1059	CLEAR	0.9976118582497242	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1060	CLEAR	0.9969611648003252	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1061	CLEAR	0.9822514115048264	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1062	CLEAR	0.9830267408939211	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1063	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1064	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1065	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1066	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1067	HEAVY	0.9799521995276864	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1068	HEAVY	0.9805607761162408	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1069	HEAVY	0.9875670308594644	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1070	HEAVY	0.9874495862656513	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1071	CLEAR	0.8082950366127042	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1072	CLEAR	0.8161609496504728	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1073	CLEAR	0.8245038667725063	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1074	CLEAR	0.7916935158030415	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1075	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1076	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1077	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1078	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1079	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+1080	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1081	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+1082	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1083	CLEAR	0.9832876394342039	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1084	CLEAR	0.9805896559637983	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1085	CLEAR	0.9638841825093885	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1086	CLEAR	0.9577419068720011	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1087	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1088	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1089	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1090	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1091	CLEAR	0.6648092072392562	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1092	CLEAR	0.6949463292825796	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1093	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1094	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1095	CLEAR	0.6500697450776758	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1096	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1097	CLEAR	0.6906769732515348	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1098	CLEAR	0.725886633196433	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1099	MODERATE	0.6713572768882297	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1100	MODERATE	0.7022374289557807	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1101	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1102	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1103	HEAVY	0.8873338021513258	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1104	HEAVY	0.8825952322359569	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1105	HEAVY	0.9698485963011919	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1106	HEAVY	0.967236722703163	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1107	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1108	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1109	CLEAR	0.8583116652171048	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1110	CLEAR	0.8388766496896977	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1111	MODERATE	0.8264763685471685	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1112	MODERATE	0.7992935305786256	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1113	MODERATE	0.8251192121594755	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1114	MODERATE	0.8253196386529086	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1115	HEAVY	0.8875280844531717	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1116	HEAVY	0.9014143562778503	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1117	HEAVY	0.8306249189439283	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1118	HEAVY	0.8428946304928341	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1119	UNKNOWN	0.0	hold	3	hold	Masking estimates disagree; keep current program
+1120	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1121	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1122	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1123	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1124	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1125	MODERATE	0.9781637631177015	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1126	MODERATE	0.9779931268916219	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1127	HEAVY	0.7259849526272029	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1128	HEAVY	0.6571759333807047	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1129	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1130	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1131	CLEAR	0.9400952951281505	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1132	CLEAR	0.9359454661190832	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1133	CLEAR	0.8228830054276519	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1134	CLEAR	0.7983100738633165	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1135	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+1136	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1137	MODERATE	0.6740362081828586	2	3	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1138	MODERATE	0.6575516672125956	2	2	hold	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1139	HEAVY	0.9172975952009021	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1140	HEAVY	0.9250837942293058	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1141	HEAVY	0.9413682266605573	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1142	HEAVY	0.952051916644247	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1143	CLEAR	0.7770423547954112	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1144	CLEAR	0.778357083403304	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1145	CLEAR	0.8429000716444521	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1146	CLEAR	0.8041559384162341	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1147	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1148	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1149	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1150	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1151	UNKNOWN	0.0	hold	3	hold	Speech and noise-reduction estimates disagree; keep current program
+1152	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1153	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1154	UNKNOWN	0.0	hold	2	hold	Speech and noise-reduction estimates disagree; keep current program
+1155	CLEAR	0.9165151983967736	hold	3	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1156	CLEAR	0.935548202357449	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1157	CLEAR	0.8627458990734336	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1158	CLEAR	0.8666564907526795	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1159	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1160	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1161	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1162	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1163	CLEAR	0.6954952738729823	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1164	CLEAR	0.6663785465702731	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1165	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1166	UNKNOWN	0.0	hold	2	hold	Masking estimates disagree; keep current program
+1167	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1168	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1169	HEAVY	0.9800298374194687	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1170	HEAVY	0.9797943422253663	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1171	HEAVY	0.9718338983827822	3	3	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1172	HEAVY	0.9756655556921442	3	2	3	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1173	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1174	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1175	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+1176	UNKNOWN	0.0	hold	2	hold	No reliable speech evidence; keep current program
+1177	CLEAR	0.9998586734114369	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1178	CLEAR	0.9877236332053632	hold	2	1	Speech and noise-reduction estimates agree; requires repeated fresh checks
+1179	UNKNOWN	0.0	hold	3	hold	No reliable speech evidence; keep current program
+1180	UNKNOWN	0.0	hold	3	hold	Interrupted, clipped or isolated sound; keep current program
+1181	UNKNOWN	0.0	hold	hold	hold	No reliable speech evidence; keep current program

@@ -1,0 +1,10 @@
+{
+  "originalFeatureCount": 2052,
+  "newFeatureCount": 2058,
+  "recordCount": 1182,
+  "originalFeaturesAndEventsIdentical": true,
+  "baselineSha256": "884b7e0f1a925b3714f9c9b85a7bbce47a33b3c16ea891c1c6bf4e57a02e1812",
+  "candidateSha256": "c1ff70dfadf1993fff1ef98dea77cb790dd9d9b52599817878d99398fa7ce200",
+  "sourceCases": "../speech-masking-2026-11-09/cases.json",
+  "selection": "development-speaker CV only; candidate scale grid added after first outer regression was viewed; final agreement policy chosen after candidate-alone errors were reviewed; exploratory regression evidence, not blind acceptance"
+}

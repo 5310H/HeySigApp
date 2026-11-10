@@ -82,7 +82,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         if(index!=null) { content.removeView(card);content.addView(card,index) }
         PhoneStyle.heading(activity,card,"Speech-aware Automatic")
         fun line(value:String)=TextView(activity).also { it.text=value;PhoneStyle.text(it);it.setPadding(0,8,0,16);card.addView(it) }
-        line("Choose the programs Automatic can send to your hearing aids. No setup recordings or waiting to learn.")
+        line("Choose the programs Automatic can send to your hearing aids. It checks speech and background noise before changing. No setup recordings or waiting to learn.")
         val available=programs().filterNot { isTherapyProgramName(it.name) }
         val saved=savedChoices()
         fun choice(label:String,slot:Int?):Spinner {
@@ -111,7 +111,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
             update()
         } }
         status=line("").apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
-        line("Uses your saved repeated-check count (at least two checks) and cooldown. Quiet or clear speech must also agree before returning to Everyday. No chosen program, uncertain sound, manual control or Therapy means hold. Sound type and masking are separate.")
+        line("Speech and noise-reduction checks must agree before a change. If they disagree, your program stays as it is. Uses your saved repeated-check count (at least two checks) and cooldown. Quiet or clear speech must also agree before returning to Everyday. Manual control and Therapy take priority.")
         line("You may lock the screen while Automatic is On. Keep the phone where your aids can hear its tones. Use the notification Off button to stop. It stops after eight hours. This experimental model can make mistakes; choosing a program yourself stops Automatic.")
         handler.removeCallbacksAndMessages(null);handler.post(refresh);update()
     }

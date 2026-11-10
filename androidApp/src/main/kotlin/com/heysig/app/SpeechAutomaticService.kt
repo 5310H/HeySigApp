@@ -30,9 +30,13 @@ open class SpeechAutomaticService: Service() {
     @Volatile private var rms:Double?=null
     @Volatile private var analysisCpuNanos=0L
     private val head by lazy {
-        val bytes=assets.open("masking/masking-head.txt").use { it.readBytes() }
-        check(java.security.MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }==MaskingModelIdentity.HEAD_SHA256) { "Unexpected speech masking model" }
-        SpeechMaskingHead.decode(bytes.toString(Charsets.UTF_8))
+        fun load(name:String,expected:String):SpeechMaskingHead {
+            val bytes=assets.open("masking/$name").use { it.readBytes() }
+            check(java.security.MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }==expected) { "Unexpected speech masking model" }
+            return SpeechMaskingHead.decode(bytes.toString(Charsets.UTF_8))
+        }
+        CancellationAwareMaskingHead(load("masking-baseline.txt",MaskingModelIdentity.BASELINE_SHA256),
+            load("masking-head.txt",MaskingModelIdentity.HEAD_SHA256))
     }
     private fun safety()=NoiseSafety(microphoneSession=!closed && running===this,
         manualOverride=runtime.sleepRoutine.state.override,

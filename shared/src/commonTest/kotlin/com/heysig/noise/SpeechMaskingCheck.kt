@@ -46,12 +46,54 @@ fun main() {
     val two=observeMasking(first,evidence(MaskingSeverity.MODERATE),11000,11100,settings.copy(confirmations=1),choices,safe,1)
     check(two.proposed==2) // at least two even with a one-check legacy preference
     check(!SpeechMaskingValidation.qualified() && !EnvironmentReleaseGate.qualified())
+    check(agreeCancellationEvidence(evidence(MaskingSeverity.HEAVY),evidence(MaskingSeverity.MODERATE)).severity==MaskingSeverity.UNKNOWN)
+    check(agreeCancellationEvidence(evidence(MaskingSeverity.CLEAR),evidence(MaskingSeverity.HEAVY)).severity==MaskingSeverity.UNKNOWN)
+    check(agreeCancellationEvidence(evidence(MaskingSeverity.MODERATE),evidence(MaskingSeverity.MODERATE)).severity==MaskingSeverity.MODERATE)
+    check(agreeCancellationEvidence(evidence(MaskingSeverity.UNKNOWN),evidence(MaskingSeverity.HEAVY)).severity==MaskingSeverity.UNKNOWN)
+    check(agreeCancellationEvidence(evidence(MaskingSeverity.HEAVY),evidence(MaskingSeverity.UNKNOWN)).severity==MaskingSeverity.UNKNOWN)
+    check(agreeCancellationEvidence(evidence(MaskingSeverity.QUIET).copy(score=0.0),evidence(MaskingSeverity.QUIET).copy(score=0.0)).severity==MaskingSeverity.QUIET)
     check(runCatching { SpeechMaskingHead.decode("HSGMASK1\n2052\nNaN") }.isFailure)
     val pcm=ShortArray(48000) { (sinForTest(it)*5000).toInt().toShort() }
     val acoustic=MaskingSignal.features(pcm);check(acoustic.size==4 && acoustic.all { it.isFinite() && it in 0.0..1.0 })
     val scaled=ShortArray(pcm.size) { (pcm[it]/2).toShort() };val quieter=MaskingSignal.features(scaled)
     check(acoustic.zip(quieter).all { (a,b) -> kotlin.math.abs(a-b)<.01 })
     pcm.fill(0);scaled.fill(0)
+    cancellationChecks()
     println("PASS: speech masking first-use decisions, sustained return, unassigned hold, fresh agreement, duplicate/stale rejection, cooldown, manual/Therapy priority, completion tokens, protected targets; validation remains unaccepted")
+}
+private fun cancellationChecks() {
+    check(NoiseCancellationSignal.features(ShortArray(48000)).all { it==0.0 })
+    check(runCatching { NoiseCancellationSignal.features(ShortArray(47999)) }.isFailure)
+    val random=kotlin.random.Random(42)
+    val noise=DoubleArray(48000) { random.nextDouble(-1.0,1.0) }
+    val voice=DoubleArray(48000) { i ->
+        if(i%8000<4800) sinForTest(i)*(.5+.5*kotlin.math.sin(2*kotlin.math.PI*4*i/16000)) else 0.0
+    }
+    fun normalize(x:DoubleArray) { val rms=kotlin.math.sqrt(x.sumOf { it*it }/x.size);for(i in x.indices) x[i]/=rms }
+    normalize(noise);normalize(voice)
+    fun mix(ratio:Double):ShortArray {
+        val x=DoubleArray(48000) { voice[it]+noise[it]*ratio };normalize(x)
+        return try { ShortArray(48000) { (x[it]*2000).toInt().toShort() } } finally { x.fill(0.0) }
+    }
+    val clear=mix(.178);val buried=mix(2.512)
+    val first=NoiseCancellationSignal.features(clear);val heavy=NoiseCancellationSignal.features(buried)
+    check(first.all { it.isFinite() && it in 0.0..1.0 } && heavy.all { it.isFinite() && it in 0.0..1.0 })
+    // Matched overall power, different foreground/background ratio: cancellation sees the difference.
+    check(heavy[0]>first[0]+.15 && first[2]>heavy[2]+.15)
+    val quiet=ShortArray(clear.size) { (clear[it]/2).toShort() }
+    val scaled=NoiseCancellationSignal.features(quiet)
+    check(first.zip(scaled).all { (a,b) -> kotlin.math.abs(a-b)<.003 })
+    // Exercise the serialized v2 head through the same PCM entry point used by Automatic.
+    // Artificial coefficients test wiring, not detector accuracy (measured on the corpus).
+    val rows=List(3) { c -> DoubleArray(2058).apply { this[2052]=when(c) { 0 -> -80.0;2 -> 80.0;else -> 0.0 } }.joinToString(",") }
+    val head=SpeechMaskingHead.decode("HSGMASK2\n2058\n8,-8,-8\n"+rows.joinToString("\n")+"\n")
+    val pool=DoubleArray(2048).apply { this[0]=1.0 }
+    val frame=EnvironmentClassifier.requiredLabels.associateWith { if(it=="Speech") .9 else 0.0 }
+    check(head.classify(clear,pool,List(5) { frame }).severity==MaskingSeverity.CLEAR)
+    check(head.classify(buried,pool,List(5) { frame }).severity==MaskingSeverity.HEAVY)
+    check(runCatching { SpeechMaskingHead.decode("HSGMASK2\n2052\n8,-8,-8\n"+rows.joinToString("\n")) }.isFailure)
+    // No persistent floor learned from the preceding noisy recording.
+    check(first.contentEquals(NoiseCancellationSignal.features(clear)))
+    clear.fill(0);buried.fill(0);quiet.fill(0);noise.fill(0.0);voice.fill(0.0)
 }
 private fun sinForTest(i:Int)=kotlin.math.sin(2*kotlin.math.PI*200*i/16000)

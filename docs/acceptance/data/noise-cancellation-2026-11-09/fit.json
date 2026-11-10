@@ -1,0 +1,300 @@
+{
+  "selected": {
+    "C": 0.1,
+    "temperature": 1.0,
+    "cancellationScale": 16.0,
+    "loss": 0.35203610943564095
+  },
+  "candidates": [
+    {
+      "C": 0.001,
+      "temperature": 1.0,
+      "cancellationScale": 1.0,
+      "loss": 0.7710519830222936
+    },
+    {
+      "C": 0.001,
+      "temperature": 2.0,
+      "cancellationScale": 1.0,
+      "loss": 0.9020986327304222
+    },
+    {
+      "C": 0.001,
+      "temperature": 4.0,
+      "cancellationScale": 1.0,
+      "loss": 0.9913168706662474
+    },
+    {
+      "C": 0.001,
+      "temperature": 8.0,
+      "cancellationScale": 1.0,
+      "loss": 1.042627890786835
+    },
+    {
+      "C": 0.01,
+      "temperature": 1.0,
+      "cancellationScale": 1.0,
+      "loss": 0.5408836633992317
+    },
+    {
+      "C": 0.01,
+      "temperature": 2.0,
+      "cancellationScale": 1.0,
+      "loss": 0.6960699784420674
+    },
+    {
+      "C": 0.01,
+      "temperature": 4.0,
+      "cancellationScale": 1.0,
+      "loss": 0.854058129913441
+    },
+    {
+      "C": 0.01,
+      "temperature": 8.0,
+      "cancellationScale": 1.0,
+      "loss": 0.9639444000525867
+    },
+    {
+      "C": 0.1,
+      "temperature": 1.0,
+      "cancellationScale": 1.0,
+      "loss": 0.5224079853057928
+    },
+    {
+      "C": 0.1,
+      "temperature": 2.0,
+      "cancellationScale": 1.0,
+      "loss": 0.5577350293754891
+    },
+    {
+      "C": 0.1,
+      "temperature": 4.0,
+      "cancellationScale": 1.0,
+      "loss": 0.7128813599281938
+    },
+    {
+      "C": 0.1,
+      "temperature": 8.0,
+      "cancellationScale": 1.0,
+      "loss": 0.8663414193111857
+    },
+    {
+      "C": 1.0,
+      "temperature": 1.0,
+      "cancellationScale": 1.0,
+      "loss": 0.7448845511618213
+    },
+    {
+      "C": 1.0,
+      "temperature": 2.0,
+      "cancellationScale": 1.0,
+      "loss": 0.5530132757809658
+    },
+    {
+      "C": 1.0,
+      "temperature": 4.0,
+      "cancellationScale": 1.0,
+      "loss": 0.6123540324312253
+    },
+    {
+      "C": 1.0,
+      "temperature": 8.0,
+      "cancellationScale": 1.0,
+      "loss": 0.7675975219887573
+    },
+    {
+      "C": 0.001,
+      "temperature": 1.0,
+      "cancellationScale": 4.0,
+      "loss": 0.765154857637621
+    },
+    {
+      "C": 0.001,
+      "temperature": 2.0,
+      "cancellationScale": 4.0,
+      "loss": 0.8984477586175075
+    },
+    {
+      "C": 0.001,
+      "temperature": 4.0,
+      "cancellationScale": 4.0,
+      "loss": 0.9892733594582993
+    },
+    {
+      "C": 0.001,
+      "temperature": 8.0,
+      "cancellationScale": 4.0,
+      "loss": 1.0415469220601037
+    },
+    {
+      "C": 0.01,
+      "temperature": 1.0,
+      "cancellationScale": 4.0,
+      "loss": 0.5266150711448567
+    },
+    {
+      "C": 0.01,
+      "temperature": 2.0,
+      "cancellationScale": 4.0,
+      "loss": 0.6874992916513418
+    },
+    {
+      "C": 0.01,
+      "temperature": 4.0,
+      "cancellationScale": 4.0,
+      "loss": 0.8489497322400423
+    },
+    {
+      "C": 0.01,
+      "temperature": 8.0,
+      "cancellationScale": 4.0,
+      "loss": 0.9610917697946473
+    },
+    {
+      "C": 0.1,
+      "temperature": 1.0,
+      "cancellationScale": 4.0,
+      "loss": 0.4898254453742436
+    },
+    {
+      "C": 0.1,
+      "temperature": 2.0,
+      "cancellationScale": 4.0,
+      "loss": 0.539407458655734
+    },
+    {
+      "C": 0.1,
+      "temperature": 4.0,
+      "cancellationScale": 4.0,
+      "loss": 0.701876065720979
+    },
+    {
+      "C": 0.1,
+      "temperature": 8.0,
+      "cancellationScale": 4.0,
+      "loss": 0.859820462337647
+    },
+    {
+      "C": 1.0,
+      "temperature": 1.0,
+      "cancellationScale": 4.0,
+      "loss": 0.6869966507522149
+    },
+    {
+      "C": 1.0,
+      "temperature": 2.0,
+      "cancellationScale": 4.0,
+      "loss": 0.5227390496359792
+    },
+    {
+      "C": 1.0,
+      "temperature": 4.0,
+      "cancellationScale": 4.0,
+      "loss": 0.5956072010724002
+    },
+    {
+      "C": 1.0,
+      "temperature": 8.0,
+      "cancellationScale": 4.0,
+      "loss": 0.7578993754697092
+    },
+    {
+      "C": 0.001,
+      "temperature": 1.0,
+      "cancellationScale": 16.0,
+      "loss": 0.7064518781133557
+    },
+    {
+      "C": 0.001,
+      "temperature": 2.0,
+      "cancellationScale": 16.0,
+      "loss": 0.8588524967387302
+    },
+    {
+      "C": 0.001,
+      "temperature": 4.0,
+      "cancellationScale": 16.0,
+      "loss": 0.9661796377033363
+    },
+    {
+      "C": 0.001,
+      "temperature": 8.0,
+      "cancellationScale": 16.0,
+      "loss": 1.029092958208806
+    },
+    {
+      "C": 0.01,
+      "temperature": 1.0,
+      "cancellationScale": 16.0,
+      "loss": 0.4359385302766489
+    },
+    {
+      "C": 0.01,
+      "temperature": 2.0,
+      "cancellationScale": 16.0,
+      "loss": 0.6214268899837352
+    },
+    {
+      "C": 0.01,
+      "temperature": 4.0,
+      "cancellationScale": 16.0,
+      "loss": 0.8047154394457302
+    },
+    {
+      "C": 0.01,
+      "temperature": 8.0,
+      "cancellationScale": 16.0,
+      "loss": 0.9348864669535923
+    },
+    {
+      "C": 0.1,
+      "temperature": 1.0,
+      "cancellationScale": 16.0,
+      "loss": 0.35203610943564095
+    },
+    {
+      "C": 0.1,
+      "temperature": 2.0,
+      "cancellationScale": 16.0,
+      "loss": 0.4466212760508973
+    },
+    {
+      "C": 0.1,
+      "temperature": 4.0,
+      "cancellationScale": 16.0,
+      "loss": 0.636260569441587
+    },
+    {
+      "C": 0.1,
+      "temperature": 8.0,
+      "cancellationScale": 16.0,
+      "loss": 0.816961422527105
+    },
+    {
+      "C": 1.0,
+      "temperature": 1.0,
+      "cancellationScale": 16.0,
+      "loss": 0.4674727709853499
+    },
+    {
+      "C": 1.0,
+      "temperature": 2.0,
+      "cancellationScale": 16.0,
+      "loss": 0.40028002576238686
+    },
+    {
+      "C": 1.0,
+      "temperature": 4.0,
+      "cancellationScale": 16.0,
+      "loss": 0.5176300995003094
+    },
+    {
+      "C": 1.0,
+      "temperature": 8.0,
+      "cancellationScale": 16.0,
+      "loss": 0.706191196378875
+    }
+  ],
+  "selection": "development-speaker-only CV; backgrounds shared within inner folds; final evaluation excludes both speakers and background recordings; heldout previously viewed initial fit, not used to select C/temperature/cancellationScale",
+  "headSha256": "c1ff70dfadf1993fff1ef98dea77cb790dd9d9b52599817878d99398fa7ce200"
+}
