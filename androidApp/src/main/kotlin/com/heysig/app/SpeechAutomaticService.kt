@@ -178,7 +178,7 @@ open class SpeechAutomaticService: Service() {
         append("\nSound type: ${latest.soundType.label}. Masking: ${latest.severity.label}.")
         val considered=request.choices.target(latest.severity)
         append("\nProgram considered: ${if(considered!=null) label(considered) else "keep current program"}.")
-        if(ownsPlayback) append("\nProgram request in progress: ${label(proposal)}.")
+        if(ownsPlayback) append("\nProgram request in progress: ${label(state.pending)}.")
         append("\nLast program requested: ${label(runtime.requested.program)}.")
         append("\nAid reception and improved understanding are not confirmed.")
         val remaining=state.lastSuccess?.let { ((request.settings.cooldownSeconds*1000L-(SystemClock.elapsedRealtime()-it)).coerceAtLeast(0)+999)/1000 } ?: 0
