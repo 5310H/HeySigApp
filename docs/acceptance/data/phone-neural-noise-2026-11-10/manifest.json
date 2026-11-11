@@ -1,0 +1,17 @@
+{
+  "records": 1182,
+  "sourceBaselineSha256": "d5a09e4a02f388823ed626b9aa1b849b3b877a0bb8bf1e6b4538bd246769b348",
+  "nativeLibrarySha256": "3162f711add7592ca92c2349d9a75400d7622133d69412cf89e99ce9cf52fbb2",
+  "kotlinJarSha256": "8c55aa89b7b3756250b6fb9473cb3f621274582177a45b35945435042b7f3b54",
+  "alignment": {
+    "impulsePeak": 4096,
+    "expectedPeak": 4096,
+    "relativeRmsError": 0.00017031465878319203,
+    "delay48kSamples": 960
+  },
+  "elapsedSeconds": 809.9514934820181,
+  "workers": 2,
+  "normalization": "same bounded digital gain as YAMNet, 1..16, target .05 RMS; not SPL calibration",
+  "separation": "matched high-pass and unity FFT synthesis reference, two-frame delay flushed/cropped identically; independent residual VAD pass",
+  "policy": "measurements only; no automatic program commands or installed-model changes"
+}

@@ -2,7 +2,7 @@
 
 1. On Home, choose your usual daytime program.
 2. Open **Noise → Choose programs**. Choose your own program for:
-   - **Everyday** — quiet or speech that stands out.
+   - **Universal** — quiet or speech that stands out.
    - **Noisy** — speech partly masked by other sound.
    - **Very Noisy** — speech heavily masked by other sound.
 3. Tap **Save speech program choices**, then tap the red **Off** button to turn Automatic on. Read the microphone
@@ -17,11 +17,11 @@ assignments and fitting are retained. Initial speech choices reuse levels 1, 4
 and 6, but can be changed independently.
 
 HeySig waits for matching fresh checks before changing either way. Your saved
-cooldown also applies before returning to Everyday. During this wait the screen
+cooldown also applies before returning to Universal. During this wait the screen
 shows what is happening. It does not change programs just because a place sounds
 like a restaurant or a crowd.
 
-Automatic also uses a noise-reduction analysis to help judge speech against the
+Automatic also uses a local neural noise-reduction analysis to help judge speech against the
 background. It compares the original sound with an internal estimate of what
 remains after background reduction. Both speech estimates must agree before
 Automatic can change. If they disagree, it keeps the current program. This helps

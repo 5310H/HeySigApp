@@ -6,6 +6,7 @@ plugins { id("com.android.application"); kotlin("android") }
 apply(from = rootProject.file("gradle/app-signing.gradle"))
 apply(from = rootProject.file("gradle/environment-model.gradle"))
 apply(from = rootProject.file("gradle/masking-model.gradle"))
+apply(from = rootProject.file("gradle/separation-model.gradle"))
 
 
 val releasePublic = Properties().apply {

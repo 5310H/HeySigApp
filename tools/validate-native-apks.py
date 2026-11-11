@@ -14,8 +14,9 @@ parser.add_argument('--modules', nargs='+', choices=('androidApp','wearApp'), de
 args = parser.parse_args()
 litert = json.loads((ROOT/'third_party/litert/integrity.json').read_text())['native']
 sherpa = json.loads((ROOT/'third_party/sherpa-onnx/integrity.json').read_text())['native']
+rnnoise = json.loads((ROOT/'third_party/rnnoise/integrity.json').read_text())['native']
 for module, variant in ((m,v) for m in args.modules for v in args.variants):
-    expected = dict(litert, **sherpa) if module == 'androidApp' else litert
+    expected = dict(litert, **sherpa, **rnnoise) if module == 'androidApp' else litert
     apk = ROOT/f'{module}/build/outputs/apk/{variant}/{module}-{variant}.apk'
     with zipfile.ZipFile(apk) as archive, apk.open('rb') as source:
         assert hashlib.sha256(archive.read('assets/environment/yamnet.tflite')).hexdigest() == 'b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4', 'Bundled encoder mismatch'
@@ -25,6 +26,13 @@ for module, variant in ((m,v) for m in args.modules for v in args.variants):
         assert hashlib.sha256(archive.read('assets/environment/NOTICE')).hexdigest() == 'e237d4cee44da23a7ac5297a86765f8bc9e00b528bec16920f0066df98f1fcc2', 'Bundled monitoring profile notice mismatch'
         assert not any(name.startswith('assets/scene-fixtures/') for name in archive.namelist()), 'Test recordings packaged in app'
         assert hashlib.sha256(archive.read('assets/environment/labels.txt')).hexdigest() == '8e1267a120c1932b7273c0d0e0c5529edbb9a35512b437b1c8982baa59047051', 'Bundled labels mismatch'
+        if module == 'androidApp':
+            assert 'assets/masking/masking-head.txt' not in archive.namelist(), 'Retired spectral head packaged'
+            assert not any(name.startswith('assets/masking-fixtures/') for name in archive.namelist()), 'Masking test audio packaged'
+            for folder, manifest in [('masking', 'third_party/masking/integrity.json'), ('separation', 'third_party/rnnoise/integrity.json')]:
+                pins = json.loads((ROOT/manifest).read_text())
+                for name, expected_hash in pins.get('artifacts', pins.get('assets', {})).items():
+                    assert hashlib.sha256(archive.read(f'assets/{folder}/{name}')).hexdigest() == expected_hash, f'Unexpected {folder}/{name}'
         libraries = {item.filename: item for item in archive.infolist() if item.filename.endswith('.so')}
         assert set(libraries) == {name.replace('jni/', 'lib/', 1) for name in expected}, 'Unexpected native library inventory'
         for name, item in libraries.items():

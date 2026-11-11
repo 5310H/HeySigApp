@@ -86,3 +86,17 @@ guards still apply. Steady-floor estimation can mistake continuous speech for
 background and cannot identify the desired talker. Accuracy and physical
 acceptance remain separate from enabling Automatic. See the follow-up
 [evaluation](acceptance/noise-cancellation-switching-2026-11-09.md).
+
+## November 10 phone replacement
+
+Normal phone Automatic replaces HSGMASK2 spectral-suppression agreement with
+HSGMASK1 plus a pinned RNNoise neural denoiser, aligned reference/residual
+measurement and fixed shared Kotlin bands. Native libraries are packaged for
+four Android ABIs; this is a new native dependency and needs release inventory
+and device verification. PCM and neural working buffers remain local and are
+erased; no extra capture, microphone permission, upload, persistent profile or
+cleaned-audio playback is added. The three-second schedule, session limits and
+shared validated executor are unchanged. Universal replaces Everyday in visible
+role wording; saved keys and fitting names are untouched. The earlier two-head
+path is retired from normal Automatic. See the [current report](acceptance/phone-neural-noise-2026-11-10.md)
+and [completion checklist](phone-noise-completion-checklist.md).

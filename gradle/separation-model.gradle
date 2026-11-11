@@ -1,0 +1,23 @@
+import java.security.MessageDigest
+import groovy.json.JsonSlurper
+def separationIntegrity = new JsonSlurper().parse(rootProject.file('third_party/rnnoise/integrity.json'))
+def verifySpeechSeparation = tasks.register('verifySpeechSeparation') {
+    inputs.file(rootProject.file('third_party/rnnoise/integrity.json'))
+    separationIntegrity.assets.each { name, expected ->
+        inputs.file(rootProject.file('androidApp/src/main/assets/separation/'+name))
+    }
+    separationIntegrity.native.each { name, expected ->
+        inputs.file(rootProject.file('androidApp/src/main/jniLibs/'+name.substring(4)))
+    }
+    doLast {
+        separationIntegrity.assets.each { name, expected ->
+            def file=rootProject.file('androidApp/src/main/assets/separation/'+name)
+            assert MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString()==expected: 'Unexpected separation asset '+name
+        }
+        separationIntegrity.native.each { name, expected ->
+            def file=rootProject.file('androidApp/src/main/jniLibs/'+name.substring(4))
+            assert MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString()==expected: 'Unexpected speech denoiser '+name
+        }
+    }
+}
+tasks.named('preBuild') { dependsOn(verifySpeechSeparation) }

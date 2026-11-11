@@ -1,8 +1,7 @@
 {
   "artifacts": {
-    "masking-head.txt": "c1ff70dfadf1993fff1ef98dea77cb790dd9d9b52599817878d99398fa7ce200",
     "CC-BY-4.0.txt": "511b44e9dcdbb4a6492efd45ee1171a102e24ccd20bd51377f63fcda6b7fc14f",
-    "NOTICE": "f1e0e88344cdab11f4cfcfb38951477c52648bbdd31350aef1c751652b0f1636",
+    "NOTICE": "22ebd7a89feeb78060db696acc9e5d65d6f250e670d03f5782141b98b5c14e3d",
     "sources.json": "a090c4a163162bf59566cc5bf14f27c9bb43a2fc7d67af90365045c6b1206b94",
     "masking-baseline.txt": "884b7e0f1a925b3714f9c9b85a7bbce47a33b3c16ea891c1c6bf4e57a02e1812"
   },

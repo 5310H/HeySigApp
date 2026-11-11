@@ -1,5 +1,12 @@
 # Google Play readiness — audited October 16, 2026
 
+November 10: phone Automatic now replaces the spectral-suppression head with
+local RNNoise neural analysis. This introduces pinned native libraries; older
+statements that the masking update has no new dependency no longer describe
+the latest phone build. See the [service review](speech-automatic-background-design-2026-11-09.md)
+and [phone checklist](phone-noise-completion-checklist.md). No store submission
+is prepared by this development update.
+
 November 9 owner-directed change: normal phone Automatic now uses a separately
 trained local speech-masking head and speech-focused features, without calibration
 or wearer learning. The owner explicitly removed the preview/acceptance enable

@@ -34,3 +34,8 @@ in the application. Only fixed model weights, source credits and licenses ship.
 Heldout sources in sources.json are evaluation credits, not coefficient fitting.
 Model training and independent-field acceptance are different; no qualification
 is implied by packaging these weights. No source author endorses HeySig.
+
+November 10, 2026: the HSGMASK2 spectral-suppression head is retired from
+the phone package. Historical training provenance above is retained. The active
+phone path combines masking-baseline.txt (HSGMASK1) with the neural denoiser
+and fixed bands credited in separation/NOTICE. No wearer training is required.

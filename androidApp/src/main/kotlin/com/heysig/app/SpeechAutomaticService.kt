@@ -35,8 +35,10 @@ open class SpeechAutomaticService: Service() {
             check(java.security.MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }==expected) { "Unexpected speech masking model" }
             return SpeechMaskingHead.decode(bytes.toString(Charsets.UTF_8))
         }
-        CancellationAwareMaskingHead(load("masking-baseline.txt",MaskingModelIdentity.BASELINE_SHA256),
-            load("masking-head.txt",MaskingModelIdentity.HEAD_SHA256))
+        val bands=assets.open("separation/bands.txt").use { it.readBytes() }
+        check(java.security.MessageDigest.getInstance("SHA-256").digest(bands).joinToString("") { "%02x".format(it) }==SeparationModelIdentity.BANDS_SHA256) { "Unexpected speech/background bands" }
+        SpeechSeparationDetector(load("masking-baseline.txt",MaskingModelIdentity.BASELINE_SHA256),
+            SeparationMaskingBands.decode(bands.toString(Charsets.UTF_8)))
     }
     private fun safety()=NoiseSafety(microphoneSession=!closed && running===this,
         manualOverride=runtime.sleepRoutine.state.override,

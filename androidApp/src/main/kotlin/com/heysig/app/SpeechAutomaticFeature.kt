@@ -52,7 +52,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         check(!activity.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) { "Unlock the phone to start Automatic" }
         if(!prefs.getBoolean("disclosureV1",false)) {
             AlertDialog.Builder(activity).setTitle("Turn on speech-aware Automatic?")
-                .setMessage("Automatic sends tones to select your chosen hearing-aid programs. It uses Everyday for sustained quiet or speech that stands out, Noisy for partly masked speech, and Very Noisy for heavily masked speech. Uncertain sound or an unassigned choice keeps the current program.\n\nNo calibration, examples or learning period is needed. This experimental model can make mistakes. It cannot identify the person you want to hear or measure how clearly you understand words. Other listening features stop first.\n\nThe microphone checks for three seconds, then pauses for your saved wait time (at least ten seconds). Audio is processed on this phone in memory, then discarded. No recordings, transcripts or listening history are saved or uploaded. Only your program choices and consent are saved. Existing fitting and six sound-level choices stay unchanged.\n\nYou can lock the screen. A HeySig notification has an Off button. Tap Off here or in that notification to stop. Automatic stops after eight hours, on manual control or Therapy, if permissions/notifications are removed, or if the app is stopped. It never restarts by itself.")
+                .setMessage("Automatic sends tones to select your chosen hearing-aid programs. It uses Universal for sustained quiet or speech that stands out, Noisy for partly masked speech, and Very Noisy for heavily masked speech. Uncertain sound or an unassigned choice keeps the current program.\n\nNo calibration, examples or learning period is needed. This experimental model can make mistakes. It cannot identify the person you want to hear or measure how clearly you understand words. Other listening features stop first.\n\nThe microphone checks for three seconds, then pauses for your saved wait time (at least ten seconds). Audio is processed on this phone in memory, then discarded. No recordings, transcripts or listening history are saved or uploaded. Only your program choices and consent are saved. Existing fitting and six sound-level choices stay unchanged.\n\nYou can lock the screen. A HeySig notification has an Off button. Tap Off here or in that notification to stop. Automatic stops after eight hours, on manual control or Therapy, if permissions/notifications are removed, or if the app is stopped. It never restarts by itself.")
                 .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
                     if(prefs.edit().putBoolean("disclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
                 }.show();return
@@ -94,7 +94,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
                 selectors.add(spinner)
             }
         }
-        val everyday=choice("Everyday · quiet or speech that stands out",saved.everyday)
+        val everyday=choice("Universal · quiet or speech that stands out",saved.everyday)
         val noisy=choice("Noisy · speech partly masked",saved.noisy)
         val very=choice("Very Noisy · speech heavily masked",saved.veryNoisy)
         readChoices={ fun slot(s:Spinner)=available.getOrNull(s.selectedItemPosition-1)?.slot
@@ -111,7 +111,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
             update()
         } }
         status=line("").apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
-        line("Speech and noise-reduction checks must agree before a change. If they disagree, your program stays as it is. Uses your saved repeated-check count (at least two checks) and cooldown. Quiet or clear speech must also agree before returning to Everyday. Manual control and Therapy take priority.")
+        line("Speech detection and neural speech/background estimates must agree before a change. If they disagree, your program stays as it is. Uses your saved repeated-check count (at least two checks) and cooldown. Quiet or clear speech must also agree before returning to Universal. Manual control and Therapy take priority.")
         line("You may lock the screen while Automatic is On. Keep the phone where your aids can hear its tones. Use the notification Off button to stop. It stops after eight hours. This experimental model can make mistakes; choosing a program yourself stops Automatic.")
         handler.removeCallbacksAndMessages(null);handler.post(refresh);update()
     }

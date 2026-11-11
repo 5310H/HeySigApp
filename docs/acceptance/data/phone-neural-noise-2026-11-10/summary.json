@@ -1,0 +1,458 @@
+{
+  "development": {
+    "mixtures": 576,
+    "confusion": {
+      "CLEAR": {
+        "CLEAR": 159,
+        "MODERATE": 0,
+        "HEAVY": 0,
+        "UNKNOWN": 33
+      },
+      "MODERATE": {
+        "CLEAR": 0,
+        "MODERATE": 147,
+        "HEAVY": 0,
+        "UNKNOWN": 45
+      },
+      "HEAVY": {
+        "CLEAR": 0,
+        "MODERATE": 0,
+        "HEAVY": 118,
+        "UNKNOWN": 74
+      }
+    },
+    "correct": 424,
+    "wrong": 0,
+    "uncertain": 152,
+    "correctAmongNonUncertain": 1.0,
+    "noisyVsVeryNoisyConfusions": 0,
+    "matchedLoudnessPairs": 192,
+    "clearVersusBuriedPairsBothCorrect": 101,
+    "matchedPairsRatioOrderingCorrect": 171,
+    "ratioVsKnownSource": {
+      "count": 563,
+      "maeDb": 4.870003801224661,
+      "medianAbsoluteErrorDb": 2.7324703410398072,
+      "p90AbsoluteErrorDb": 13.25909178827282
+    },
+    "removedSignalSpeechLike": 352,
+    "clearForegroundProjectionLossOver3Db": 15,
+    "byBackground": {
+      "fs-260121": {
+        "count": 96,
+        "correct": 55,
+        "held": 41
+      },
+      "fs-363712": {
+        "count": 96,
+        "correct": 92,
+        "held": 4
+      },
+      "fs-533833": {
+        "count": 96,
+        "correct": 76,
+        "held": 20
+      },
+      "fsd-201734": {
+        "count": 96,
+        "correct": 85,
+        "held": 11
+      },
+      "fsd-212187": {
+        "count": 96,
+        "correct": 92,
+        "held": 4
+      },
+      "overlap": {
+        "count": 96,
+        "correct": 24,
+        "held": 72
+      }
+    },
+    "controls": [
+      {
+        "kind": "background-only",
+        "background": "fs-363712",
+        "status": "ESTIMATED",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-363712",
+        "status": "ESTIMATED",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-260121",
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-260121",
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-201734",
+        "status": "ESTIMATED",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-201734",
+        "status": "ESTIMATED",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-212187",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-212187",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-533833",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fs-533833",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "synthetic-music",
+        "background": null,
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "impulse",
+        "background": null,
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "quiet-surrogate",
+        "background": null,
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "QUIET",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      }
+    ]
+  },
+  "heldout": {
+    "mixtures": 576,
+    "confusion": {
+      "CLEAR": {
+        "CLEAR": 162,
+        "MODERATE": 0,
+        "HEAVY": 0,
+        "UNKNOWN": 30
+      },
+      "MODERATE": {
+        "CLEAR": 6,
+        "MODERATE": 48,
+        "HEAVY": 0,
+        "UNKNOWN": 138
+      },
+      "HEAVY": {
+        "CLEAR": 17,
+        "MODERATE": 0,
+        "HEAVY": 125,
+        "UNKNOWN": 50
+      }
+    },
+    "correct": 335,
+    "wrong": 23,
+    "uncertain": 218,
+    "correctAmongNonUncertain": 0.9357541899441341,
+    "noisyVsVeryNoisyConfusions": 0,
+    "matchedLoudnessPairs": 192,
+    "clearVersusBuriedPairsBothCorrect": 101,
+    "matchedPairsRatioOrderingCorrect": 190,
+    "ratioVsKnownSource": {
+      "count": 576,
+      "maeDb": 3.411867418627838,
+      "medianAbsoluteErrorDb": 1.6263477183861448,
+      "p90AbsoluteErrorDb": 9.429208368176742
+    },
+    "removedSignalSpeechLike": 406,
+    "clearForegroundProjectionLossOver3Db": 0,
+    "byBackground": {
+      "fsd-156091": {
+        "count": 96,
+        "correct": 65,
+        "held": 31
+      },
+      "fsd-338254": {
+        "count": 96,
+        "correct": 82,
+        "held": 14
+      },
+      "fsd-389755": {
+        "count": 96,
+        "correct": 42,
+        "held": 54
+      },
+      "fsd-414297": {
+        "count": 96,
+        "correct": 61,
+        "held": 35
+      },
+      "fsd-423267": {
+        "count": 96,
+        "correct": 52,
+        "held": 44
+      },
+      "overlap": {
+        "count": 96,
+        "correct": 33,
+        "held": 40
+      }
+    },
+    "controls": [
+      {
+        "kind": "background-only",
+        "background": "fsd-414297",
+        "status": "ESTIMATED",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-414297",
+        "status": "ESTIMATED",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-338254",
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-338254",
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-156091",
+        "status": "ESTIMATED",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-156091",
+        "status": "ESTIMATED",
+        "severity": "HEAVY",
+        "proposalFromEveryday": "3",
+        "proposalFromNoisy": "3",
+        "falseSwitchFromEveryday": true,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-423267",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-423267",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-389755",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "background-only",
+        "background": "fsd-389755",
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "TV-surrogate",
+        "background": null,
+        "status": "SPEECH_IN_RESIDUAL",
+        "severity": "CLEAR",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "1",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": true
+      },
+      {
+        "kind": "synthetic-music",
+        "background": null,
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "impulse",
+        "background": null,
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      },
+      {
+        "kind": "quiet-surrogate",
+        "background": null,
+        "status": "NO_RELIABLE_SPEECH",
+        "severity": "UNKNOWN",
+        "proposalFromEveryday": "hold",
+        "proposalFromNoisy": "hold",
+        "falseSwitchFromEveryday": false,
+        "falseSwitchFromNoisy": false
+      }
+    ]
+  },
+  "hostCpuSecondsMedian": 0.9780741159999877,
+  "limitations": [
+    "Viewed correlated regression corpus, not fresh blind field acceptance.",
+    "Developer speakers/backgrounds are disjoint across partitions, not guaranteed unseen in pretrained denoisers.",
+    "Ratio is retained speech/residual, not target-speaker acoustic SNR; residual can contain wanted speech.",
+    "SNR references describe constructed mixtures, not wearer intelligibility.",
+    "TV/music/quiet controls include surrogates; positions are digital filter/echo proxies.",
+    "Known-source projections and SI-SDR are offline diagnostics, unavailable during first use.",
+    "Host CPU time is not Pixel battery impact."
+  ]
+}

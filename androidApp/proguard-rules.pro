@@ -2,3 +2,4 @@
 
 # JNI reads native wake-engine configuration classes and members by name.
 -keep class com.k2fsa.sherpa.onnx.** { *; }
+-keep class com.heysig.app.NeuralSeparation { native <methods>; }

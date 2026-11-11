@@ -1,0 +1,18 @@
+{
+  "native": {
+    "jni/arm64-v8a/libheysig_rnnoise.so": "710dcc6a6ab8ade4095a61b90b4a5436b130773a021101bb37988241423a546c",
+    "jni/armeabi-v7a/libheysig_rnnoise.so": "4bb398aba4ec3c7d0896d4c8959b50cf2dc501f2293b622e85b8c2e80ea3634f",
+    "jni/x86/libheysig_rnnoise.so": "e0e6933ea08bca5f1260d98ed472a797612f02af0f15697b7872f0c1a55adb11",
+    "jni/x86_64/libheysig_rnnoise.so": "461ee3260a1f40c31c91904ca675114617c2fc97a59489ef9bad9f03730bf858"
+  },
+  "assets": {
+    "COPYING": "45d37ca1cdb278c088e1aa85e0e65ca3a534ed86a28dcc96ca16810248a61d35",
+    "NOTICE": "2840110edde28bae6b836f967ad8657e4e080976ad3ff281cca3d343d9069acf",
+    "SOURCE-NOTICES": "1143bb2568f0736280ea38431f07d22e595c6a3d53b31507eecd91f97333e101",
+    "bands.txt": "45556e0d39cd60c949fb823d3fbb434145e6e79633759170e9ee44238427b30d"
+  },
+  "sourceRevision": "70f1d256acd4b34a572f999a05c87bf00b67730d",
+  "modelArchiveSha256": "0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37",
+  "buildRun": "https://github.com/5310H/HeySigApp/actions/runs/42751830862",
+  "adapterCommit": "dd17e36bb5f223793ca37142d2630af45a985c42"
+}

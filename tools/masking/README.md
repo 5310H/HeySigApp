@@ -96,3 +96,18 @@ strength alone never selects a program. Tune coefficients, uncertainty and the r
 features using development-speaker folds only. The fixed candidate scale grid is
 1/4/16; the selected scale is folded into serialized weights, not user settings. The existing outer set has already been viewed:
 new scores are regression evidence, not a fresh blind acceptance study.
+
+## Current phone neural path (November 10)
+
+The live phone path now uses HSGMASK1 plus RNNoise retained/residual bands.
+HSGMASK2 is archived at `third_party/masking/legacy-cancellation-head.txt` and
+is not packaged. Its reproduction commands above remain historical research.
+`evaluate-separation.py` executes licensed mixtures through the aligned native
+resampler/denoiser and `SeparationReport.kt`; `fit-separation.py` fits fixed bands
+on development mixtures only. `SeparationDecisionReport.kt` applies the shared
+Kotlin policy to those measurements and baseline decisions.
+`summarize-separation.py --work shared/build/neural-separation-native --baseline shared/build/masking/features.npz`
+produces scalar regression summaries without heldout refitting.
+The saved evidence and limitations are under
+`docs/acceptance/data/phone-neural-noise-2026-11-10`. Native fixture consistency
+is a separate Android instrumentation check, not accuracy or aid reception.

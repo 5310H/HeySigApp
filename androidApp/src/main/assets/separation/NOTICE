@@ -1,0 +1,17 @@
+HeySig phone-only speech/residual analysis, experimental development feature.
+RNNoise source: https://github.com/xiph/rnnoise
+Revision: 70f1d256acd4b34a572f999a05c87bf00b67730d
+Pretrained default little model archive SHA-256:
+0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37
+Copyright/license notices: COPYING and SOURCE-NOTICES in this directory.
+
+This local speech denoiser does not identify the person the wearer wants to hear.
+Removed sound can contain wanted speech; retained sound can contain other voices.
+The fixed speech/residual bands are development-derived operational decisions,
+not measured acoustic SNR or wearer intelligibility. They must agree with the
+existing speech-masking head before the original fresh-check/cooldown policy.
+No wearer training, enrollment or stored noise profile. No cleaned audio playback,
+recordings, transcripts or network inference. Source audio is not packaged.
+
+Fixed bands use the licensed development mixes credited in masking/sources.json.
+No heldout examples or wearer data fit these bands.

@@ -1,0 +1,1183 @@
+index	ratioSeverity	severity	score	maskingProposal	returnProposal	reason
+0	CLEAR	CLEAR	0.9732177900616376	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1	CLEAR	CLEAR	0.9734207147288648	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+2	CLEAR	CLEAR	0.9552026853598592	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+3	CLEAR	CLEAR	0.9501770986804499	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+4	MODERATE	MODERATE	0.9835491870233505	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+5	MODERATE	MODERATE	0.9828126679003496	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+6	MODERATE	MODERATE	0.8771721422534753	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+7	MODERATE	MODERATE	0.8637751011390531	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+8	HEAVY	HEAVY	0.9397601686520217	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+9	HEAVY	HEAVY	0.9459740153913312	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+10	HEAVY	HEAVY	0.9864452143207799	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+11	HEAVY	HEAVY	0.9880547695035439	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+12	CLEAR	CLEAR	0.9861919034241408	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+13	CLEAR	CLEAR	0.9830693175091897	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+14	CLEAR	CLEAR	0.9677229759212534	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+15	CLEAR	CLEAR	0.974280691771457	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+16	MODERATE	MODERATE	0.8274398488011764	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+17	MODERATE	MODERATE	0.8294181490217355	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+18	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+19	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+20	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+21	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+22	HEAVY	HEAVY	0.9646856349268391	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+23	HEAVY	HEAVY	0.9699843626615504	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+24	CLEAR	CLEAR	0.8329042253686515	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+25	CLEAR	CLEAR	0.8355402966388529	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+26	CLEAR	CLEAR	0.8870961841466611	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+27	CLEAR	CLEAR	0.9121709332577063	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+28	MODERATE	MODERATE	0.8781340584550489	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+29	MODERATE	MODERATE	0.8817443130334973	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+30	MODERATE	MODERATE	0.9589872495788236	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+31	MODERATE	MODERATE	0.9590381058309286	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+32	HEAVY	HEAVY	0.952337825897089	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+33	HEAVY	HEAVY	0.9501986923331015	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+34	HEAVY	HEAVY	0.9339331321460669	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+35	HEAVY	HEAVY	0.9261208381887226	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+36	CLEAR	CLEAR	0.987312634204987	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+37	CLEAR	CLEAR	0.9839137147894602	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+38	CLEAR	CLEAR	0.9573650136018632	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+39	CLEAR	CLEAR	0.9539234717327858	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+40	MODERATE	MODERATE	0.9448196448565657	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+41	MODERATE	MODERATE	0.9303663585200219	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+42	MODERATE	MODERATE	0.9677878643367247	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+43	MODERATE	MODERATE	0.9719734595281139	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+44	HEAVY	HEAVY	0.9863447088365236	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+45	HEAVY	HEAVY	0.9831081256802457	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+46	HEAVY	HEAVY	0.9935280564696751	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+47	HEAVY	HEAVY	0.9929997795483129	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+48	CLEAR	CLEAR	0.9862655449119688	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+49	CLEAR	CLEAR	0.986146411725423	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+50	CLEAR	CLEAR	0.9254100954183674	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+51	CLEAR	CLEAR	0.9242265214643038	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+52	MODERATE	MODERATE	0.9241155417129696	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+53	MODERATE	MODERATE	0.9302545727844378	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+54	MODERATE	MODERATE	0.9614893765477949	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+55	MODERATE	MODERATE	0.960272833565847	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+56	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+57	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+58	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+59	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+60	CLEAR	CLEAR	0.9171563863220569	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+61	CLEAR	CLEAR	0.8996889454288127	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+62	CLEAR	CLEAR	0.6695616573560805	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+63	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+64	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+65	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+66	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+67	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+68	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+69	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+70	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+71	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+72	CLEAR	CLEAR	0.9860916686392263	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+73	CLEAR	CLEAR	0.9829540604113857	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+74	CLEAR	CLEAR	0.9871880759010387	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+75	CLEAR	CLEAR	0.9897349184705133	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+76	MODERATE	MODERATE	0.9670109097621656	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+77	MODERATE	MODERATE	0.9740692931783321	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+78	MODERATE	MODERATE	0.9202190712535332	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+79	MODERATE	MODERATE	0.9170654354060755	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+80	HEAVY	HEAVY	0.9278674018539421	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+81	HEAVY	HEAVY	0.9351556915900955	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+82	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+83	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+84	CLEAR	CLEAR	0.996735425087884	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+85	CLEAR	CLEAR	0.9963707666507962	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+86	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+87	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+88	MODERATE	MODERATE	0.9593796320585979	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+89	MODERATE	MODERATE	0.9605678866857488	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+90	MODERATE	MODERATE	0.909658069894708	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+91	MODERATE	MODERATE	0.9006693147666156	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+92	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+93	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+94	HEAVY	HEAVY	0.9535739763508062	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+95	HEAVY	HEAVY	0.9498064171628535	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+96	CLEAR	CLEAR	0.9368027194078028	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+97	CLEAR	CLEAR	0.936237680206322	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+98	CLEAR	CLEAR	0.9700826913677388	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+99	CLEAR	CLEAR	0.9696208782402312	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+100	MODERATE	MODERATE	0.962302588048039	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+101	MODERATE	MODERATE	0.9667111853178577	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+102	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+103	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+104	HEAVY	HEAVY	0.8817573622990302	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+105	HEAVY	HEAVY	0.8846214699122922	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+106	HEAVY	HEAVY	0.8219110521403038	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+107	HEAVY	HEAVY	0.8011153743848481	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+108	CLEAR	CLEAR	0.9935564208107891	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+109	CLEAR	CLEAR	0.9934332498153142	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+110	CLEAR	CLEAR	0.9788109125829594	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+111	CLEAR	CLEAR	0.9817490814439553	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+112	MODERATE	MODERATE	0.8765118129017477	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+113	MODERATE	MODERATE	0.8718421255274188	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+114	MODERATE	MODERATE	0.8718013409628749	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+115	MODERATE	MODERATE	0.8710620466434129	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+116	HEAVY	HEAVY	0.9664161025966541	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+117	HEAVY	HEAVY	0.9604755650413997	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+118	HEAVY	HEAVY	0.9796627001638488	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+119	HEAVY	HEAVY	0.9781857210053714	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+120	CLEAR	CLEAR	0.9903221328855751	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+121	CLEAR	CLEAR	0.9912782168297243	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+122	CLEAR	CLEAR	0.9531315836004465	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+123	CLEAR	CLEAR	0.955509282149614	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+124	MODERATE	MODERATE	0.9303921908452755	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+125	MODERATE	MODERATE	0.9422127804152031	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+126	MODERATE	MODERATE	0.8430568736244611	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+127	MODERATE	MODERATE	0.8101270543512522	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+128	HEAVY	HEAVY	0.962050518017492	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+129	HEAVY	HEAVY	0.9724255300871536	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+130	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+131	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+132	CLEAR	CLEAR	0.8842874752706268	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+133	CLEAR	CLEAR	0.9015193288942946	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+134	CLEAR	CLEAR	0.8877344733546328	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+135	CLEAR	CLEAR	0.9161074504181437	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+136	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+137	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+138	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+139	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+140	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+141	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+142	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+143	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+144	CLEAR	CLEAR	0.9528128513464025	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+145	CLEAR	CLEAR	0.9479399067893545	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+146	CLEAR	CLEAR	0.9171414692541966	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+147	CLEAR	CLEAR	0.9194119926815454	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+148	MODERATE	MODERATE	0.9471983262201048	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+149	MODERATE	MODERATE	0.95254248132375	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+150	MODERATE	MODERATE	0.9125459266500487	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+151	MODERATE	MODERATE	0.8941923441252428	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+152	HEAVY	HEAVY	0.9557471610754527	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+153	HEAVY	HEAVY	0.9583922966496443	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+154	HEAVY	HEAVY	0.983954140000045	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+155	HEAVY	HEAVY	0.9869034899877289	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+156	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+157	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+158	CLEAR	CLEAR	0.9343012080466436	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+159	CLEAR	CLEAR	0.9366692279065632	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+160	MODERATE	MODERATE	0.8907396107316451	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+161	MODERATE	MODERATE	0.836044809290355	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+162	MODERATE	MODERATE	0.874763278701307	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+163	MODERATE	MODERATE	0.8700089948252873	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+164	HEAVY	HEAVY	0.9595243966274242	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+165	HEAVY	HEAVY	0.9579854885768142	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+166	HEAVY	HEAVY	0.9871347852595159	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+167	HEAVY	HEAVY	0.9866590786374311	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+168	CLEAR	CLEAR	0.9774275890747309	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+169	CLEAR	CLEAR	0.9772860677953313	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+170	CLEAR	CLEAR	0.9514206157420722	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+171	CLEAR	CLEAR	0.9514181717207658	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+172	MODERATE	MODERATE	0.9591852625440863	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+173	MODERATE	MODERATE	0.9629722867869127	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+174	MODERATE	MODERATE	0.9316630283216318	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+175	MODERATE	MODERATE	0.9402275833302364	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+176	HEAVY	HEAVY	0.9831973404013268	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+177	HEAVY	HEAVY	0.9830115001137276	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+178	HEAVY	HEAVY	0.9504300965502165	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+179	HEAVY	HEAVY	0.9465516575544238	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+180	CLEAR	CLEAR	0.9964872617698441	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+181	CLEAR	CLEAR	0.9956043159900851	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+182	CLEAR	CLEAR	0.9886036499950221	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+183	CLEAR	CLEAR	0.9879471405576975	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+184	MODERATE	MODERATE	0.9585829954782232	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+185	MODERATE	MODERATE	0.9559217382912023	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+186	MODERATE	MODERATE	0.9413702767752331	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+187	MODERATE	MODERATE	0.9397497395432252	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+188	HEAVY	HEAVY	0.9899098470571954	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+189	HEAVY	HEAVY	0.9895575225699442	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+190	HEAVY	HEAVY	0.9759627420621173	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+191	HEAVY	HEAVY	0.9736870716509267	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+192	CLEAR	CLEAR	0.9959106457267987	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+193	CLEAR	CLEAR	0.9957659926301559	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+194	CLEAR	CLEAR	0.9841089907782592	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+195	CLEAR	CLEAR	0.9835859163468086	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+196	MODERATE	MODERATE	0.9449186272046046	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+197	MODERATE	MODERATE	0.9400667063091541	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+198	MODERATE	MODERATE	0.9797247814056044	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+199	MODERATE	MODERATE	0.9769541999643787	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+200	HEAVY	HEAVY	0.9526380747738491	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+201	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+202	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+203	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+204	CLEAR	CLEAR	0.7625375924248224	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+205	CLEAR	CLEAR	0.7609598924786974	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+206	CLEAR	CLEAR	0.7113924437611605	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+207	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+208	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+209	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+210	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+211	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+212	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+213	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+214	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+215	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+216	CLEAR	CLEAR	0.9936257134837999	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+217	CLEAR	CLEAR	0.9943567415777942	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+218	CLEAR	CLEAR	0.9900145712078725	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+219	CLEAR	CLEAR	0.991585978745291	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+220	MODERATE	MODERATE	0.9868820344962806	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+221	MODERATE	MODERATE	0.9873504503485779	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+222	MODERATE	MODERATE	0.8908714895355272	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+223	MODERATE	MODERATE	0.9015776695684715	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+224	HEAVY	HEAVY	0.9786184027581921	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+225	HEAVY	HEAVY	0.9705609961018973	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+226	HEAVY	HEAVY	0.9779032683531419	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+227	HEAVY	HEAVY	0.9779879616017544	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+228	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+229	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+230	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+231	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+232	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+233	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+234	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+235	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+236	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+237	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+238	HEAVY	HEAVY	0.9084196591031989	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+239	HEAVY	HEAVY	0.9127162100833541	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+240	CLEAR	CLEAR	0.974473607921016	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+241	CLEAR	CLEAR	0.9740181229691078	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+242	CLEAR	CLEAR	0.9926849128237005	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+243	CLEAR	CLEAR	0.9929586449858139	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+244	MODERATE	MODERATE	0.9412120849084377	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+245	MODERATE	MODERATE	0.9454678091512324	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+246	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+247	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+248	HEAVY	HEAVY	0.9775470312870471	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+249	HEAVY	HEAVY	0.9802250229527417	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+250	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+251	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+252	CLEAR	CLEAR	0.9515845326418552	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+253	CLEAR	CLEAR	0.9538005300281125	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+254	CLEAR	CLEAR	0.9934395998808272	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+255	CLEAR	CLEAR	0.9953030659116767	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+256	MODERATE	MODERATE	0.9735977871635626	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+257	MODERATE	MODERATE	0.9738606259344661	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+258	MODERATE	MODERATE	0.9761097859780147	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+259	MODERATE	MODERATE	0.9753346561433553	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+260	HEAVY	HEAVY	0.9869377190865085	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+261	HEAVY	HEAVY	0.9886673582498601	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+262	HEAVY	HEAVY	0.9842854043321473	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+263	HEAVY	HEAVY	0.9839140171138161	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+264	CLEAR	CLEAR	0.97494949116254	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+265	CLEAR	CLEAR	0.9717993597119893	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+266	CLEAR	CLEAR	0.9537309512126084	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+267	CLEAR	CLEAR	0.9516521961960227	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+268	MODERATE	MODERATE	0.9404754135839671	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+269	MODERATE	MODERATE	0.9365673998667463	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+270	MODERATE	MODERATE	0.943578041825128	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+271	MODERATE	MODERATE	0.9313746070561364	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+272	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+273	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+274	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+275	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+276	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+277	CLEAR	CLEAR	0.6527011383367859	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+278	CLEAR	CLEAR	0.7503161837127278	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+279	CLEAR	CLEAR	0.7358306141505438	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+280	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+281	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+282	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+283	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+284	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+285	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+286	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+287	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+288	CLEAR	CLEAR	0.9846979186497467	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+289	CLEAR	CLEAR	0.9855337484409702	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+290	CLEAR	CLEAR	0.9929660430929999	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+291	CLEAR	CLEAR	0.9888765786683738	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+292	MODERATE	MODERATE	0.9653230040854605	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+293	MODERATE	MODERATE	0.9571002368541639	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+294	MODERATE	MODERATE	0.8434489250528411	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+295	MODERATE	MODERATE	0.8365442849631077	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+296	HEAVY	HEAVY	0.9920838134281447	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+297	HEAVY	HEAVY	0.9902488047236506	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+298	HEAVY	HEAVY	0.9907458964282643	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+299	HEAVY	HEAVY	0.9905142116190361	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+300	CLEAR	CLEAR	0.9907932971003309	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+301	CLEAR	CLEAR	0.990858445739135	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+302	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+303	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+304	MODERATE	MODERATE	0.9481727208343879	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+305	MODERATE	MODERATE	0.9524210167802072	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+306	MODERATE	MODERATE	0.8932706763865975	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+307	MODERATE	MODERATE	0.8850541424894914	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+308	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+309	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+310	HEAVY	HEAVY	0.8782886965290423	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+311	HEAVY	HEAVY	0.893714852702682	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+312	CLEAR	CLEAR	0.796890990137236	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+313	CLEAR	CLEAR	0.7669681468569043	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+314	CLEAR	CLEAR	0.9780488745030723	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+315	CLEAR	CLEAR	0.9782845410770467	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+316	MODERATE	MODERATE	0.9367010182717256	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+317	MODERATE	MODERATE	0.9282085548725313	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+318	MODERATE	MODERATE	0.8731982556413688	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+319	MODERATE	MODERATE	0.8768256316363643	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+320	HEAVY	HEAVY	0.9816503192661755	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+321	HEAVY	HEAVY	0.9812682702551225	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+322	HEAVY	HEAVY	0.9836759152687716	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+323	HEAVY	HEAVY	0.9864359190798399	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+324	CLEAR	CLEAR	0.9168394435613301	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+325	CLEAR	CLEAR	0.9156068813098137	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+326	CLEAR	CLEAR	0.9573511355984812	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+327	CLEAR	CLEAR	0.9629757385730183	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+328	MODERATE	MODERATE	0.9420484257113307	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+329	MODERATE	MODERATE	0.9312229562663752	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+330	MODERATE	MODERATE	0.9026338949020288	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+331	MODERATE	MODERATE	0.9138312954133649	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+332	HEAVY	HEAVY	0.9833697141834695	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+333	HEAVY	HEAVY	0.9830865476188814	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+334	HEAVY	HEAVY	0.9968055278779467	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+335	HEAVY	HEAVY	0.9966464335404434	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+336	CLEAR	CLEAR	0.9775710862992152	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+337	CLEAR	CLEAR	0.9807467067788213	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+338	CLEAR	CLEAR	0.9784048744079451	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+339	CLEAR	CLEAR	0.9799477138447016	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+340	MODERATE	MODERATE	0.8980528011914856	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+341	MODERATE	MODERATE	0.9102373276328874	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+342	MODERATE	MODERATE	0.8212620506340841	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+343	MODERATE	MODERATE	0.8036249787336316	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+344	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+345	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+346	HEAVY	HEAVY	0.9649916456394407	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+347	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+348	CLEAR	CLEAR	0.7791269574834219	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+349	CLEAR	CLEAR	0.8267388860273815	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+350	CLEAR	CLEAR	0.852725190378098	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+351	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+352	MODERATE	MODERATE	0.6553508221738427	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+353	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+354	MODERATE	MODERATE	0.6720730520620096	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+355	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+356	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+357	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+358	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+359	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+360	CLEAR	CLEAR	0.9317089884449775	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+361	CLEAR	CLEAR	0.9489935395109378	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+362	CLEAR	CLEAR	0.9734956666942625	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+363	CLEAR	CLEAR	0.9767111068237587	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+364	MODERATE	MODERATE	0.9359203547315277	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+365	MODERATE	MODERATE	0.9307192846941289	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+366	MODERATE	MODERATE	0.7724725283319369	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+367	MODERATE	MODERATE	0.8005769273760811	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+368	HEAVY	HEAVY	0.9942355625788534	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+369	HEAVY	HEAVY	0.9928572458430128	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+370	HEAVY	HEAVY	0.9913975546520083	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+371	HEAVY	HEAVY	0.9900987289258076	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+372	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+373	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+374	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+375	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+376	MODERATE	MODERATE	0.857368366148251	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+377	MODERATE	MODERATE	0.8871955452299726	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+378	MODERATE	MODERATE	0.811188778201624	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+379	MODERATE	MODERATE	0.8339266846777313	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+380	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+381	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+382	HEAVY	HEAVY	0.8664863537438514	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+383	HEAVY	HEAVY	0.8901924088133242	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+384	CLEAR	CLEAR	0.7377679417175751	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+385	CLEAR	CLEAR	0.7494965502530224	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+386	CLEAR	CLEAR	0.9749885489742907	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+387	CLEAR	CLEAR	0.9665209382490947	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+388	MODERATE	MODERATE	0.9218714963438872	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+389	MODERATE	MODERATE	0.9120111579220594	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+390	MODERATE	MODERATE	0.801117999758571	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+391	MODERATE	MODERATE	0.7987145334088309	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+392	HEAVY	HEAVY	0.9714233469948621	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+393	HEAVY	HEAVY	0.97251715283341	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+394	HEAVY	HEAVY	0.941997170272397	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+395	HEAVY	HEAVY	0.9359951336627413	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+396	CLEAR	CLEAR	0.9290075377045538	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+397	CLEAR	CLEAR	0.9161387047879757	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+398	CLEAR	CLEAR	0.9450406178251454	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+399	CLEAR	CLEAR	0.9521112548196451	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+400	MODERATE	MODERATE	0.816524633600961	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+401	MODERATE	MODERATE	0.8291233013476363	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+402	MODERATE	MODERATE	0.9650153880610317	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+403	MODERATE	MODERATE	0.9525464117859265	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+404	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+405	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+406	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+407	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+408	CLEAR	CLEAR	0.9485413751266769	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+409	CLEAR	CLEAR	0.9607896640021563	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+410	CLEAR	CLEAR	0.978614323707822	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+411	CLEAR	CLEAR	0.9882905056820064	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+412	MODERATE	MODERATE	0.9243274195853591	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+413	MODERATE	MODERATE	0.9179106587513888	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+414	MODERATE	MODERATE	0.9350341766574433	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+415	MODERATE	MODERATE	0.9230966387743149	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+416	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+417	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+418	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+419	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+420	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+421	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+422	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+423	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+424	MODERATE	MODERATE	0.8618701017392301	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+425	MODERATE	MODERATE	0.8646924542617839	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+426	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+427	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+428	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+429	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+430	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+431	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+432	CLEAR	CLEAR	0.9234231337753639	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+433	CLEAR	CLEAR	0.9168306380231517	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+434	CLEAR	CLEAR	0.945573805743042	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+435	CLEAR	CLEAR	0.9357296679465896	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+436	MODERATE	MODERATE	0.9718479696011161	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+437	MODERATE	MODERATE	0.9712630138923818	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+438	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+439	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+440	HEAVY	HEAVY	0.93424525737191	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+441	HEAVY	HEAVY	0.9228354517959811	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+442	HEAVY	HEAVY	0.9932659555835381	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+443	HEAVY	HEAVY	0.9922488383276129	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+444	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+445	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+446	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+447	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+448	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+449	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+450	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+451	HEAVY	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+452	HEAVY	HEAVY	0.9724077408807155	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+453	HEAVY	HEAVY	0.9748164648613358	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+454	HEAVY	HEAVY	0.6946960627262048	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+455	HEAVY	HEAVY	0.7110897314092007	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+456	CLEAR	CLEAR	0.8326790776164233	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+457	CLEAR	CLEAR	0.8433538910343941	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+458	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+459	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+460	MODERATE	MODERATE	0.9657490778500477	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+461	MODERATE	MODERATE	0.9644752276826195	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+462	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+463	MODERATE	MODERATE	0.899814076165791	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+464	HEAVY	HEAVY	0.8976418933848053	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+465	HEAVY	HEAVY	0.9013236418979957	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+466	HEAVY	HEAVY	0.9400803909607541	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+467	HEAVY	HEAVY	0.9411623389738082	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+468	CLEAR	CLEAR	0.9851934893157652	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+469	CLEAR	CLEAR	0.9850602975176815	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+470	CLEAR	CLEAR	0.9889087176449244	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+471	CLEAR	CLEAR	0.9902382547321623	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+472	MODERATE	MODERATE	0.9899944523118538	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+473	MODERATE	MODERATE	0.9891393902664393	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+474	MODERATE	MODERATE	0.9902588253110628	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+475	MODERATE	MODERATE	0.9861238487922179	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+476	HEAVY	HEAVY	0.9425529274100877	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+477	HEAVY	HEAVY	0.946586450866815	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+478	HEAVY	HEAVY	0.9373607604812314	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+479	HEAVY	HEAVY	0.9488051835051856	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+480	CLEAR	CLEAR	0.9382015974040468	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+481	CLEAR	CLEAR	0.9496476735655552	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+482	CLEAR	CLEAR	0.9036693144206441	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+483	CLEAR	CLEAR	0.9323915998661598	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+484	MODERATE	MODERATE	0.9747248388229939	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+485	MODERATE	MODERATE	0.9720018862117327	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+486	MODERATE	MODERATE	0.9514320039641062	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+487	MODERATE	MODERATE	0.9527571708477168	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+488	HEAVY	HEAVY	0.9554422716263078	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+489	HEAVY	HEAVY	0.9440162988479831	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+490	HEAVY	HEAVY	0.9822361403174568	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+491	HEAVY	HEAVY	0.9830570754350779	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+492	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+493	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+494	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+495	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+496	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+497	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+498	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+499	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+500	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+501	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+502	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+503	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+504	CLEAR	CLEAR	0.8413010170885081	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+505	CLEAR	CLEAR	0.8087777324171017	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+506	CLEAR	CLEAR	0.9727541419276424	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+507	CLEAR	CLEAR	0.9766249663360436	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+508	MODERATE	MODERATE	0.9347030098055157	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+509	MODERATE	MODERATE	0.9369412858002155	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+510	MODERATE	MODERATE	0.8769532555313015	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+511	MODERATE	MODERATE	0.8971419388976054	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+512	HEAVY	HEAVY	0.9883783314989077	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+513	HEAVY	HEAVY	0.991441512653191	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+514	HEAVY	HEAVY	0.9886090844232773	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+515	HEAVY	HEAVY	0.990125450534094	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+516	CLEAR	CLEAR	0.9751455073344832	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+517	CLEAR	CLEAR	0.9667874398933163	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+518	CLEAR	CLEAR	0.9898109227175301	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+519	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+520	MODERATE	MODERATE	0.9650778985170252	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+521	MODERATE	MODERATE	0.9664270734753436	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+522	MODERATE	MODERATE	0.9655194571977995	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+523	MODERATE	MODERATE	0.9659980110163148	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+524	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+525	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+526	HEAVY	HEAVY	0.8500398470636225	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+527	HEAVY	HEAVY	0.8363521511770102	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+528	CLEAR	CLEAR	0.8606028701700934	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+529	CLEAR	CLEAR	0.8465807270680998	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+530	CLEAR	CLEAR	0.9917438637045548	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+531	CLEAR	CLEAR	0.9934510490545609	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+532	MODERATE	MODERATE	0.9675223449170923	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+533	MODERATE	MODERATE	0.9686456126316437	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+534	MODERATE	MODERATE	0.9571896333952775	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+535	MODERATE	MODERATE	0.9594175906812153	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+536	HEAVY	HEAVY	0.967423101982215	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+537	HEAVY	HEAVY	0.972681808112131	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+538	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+539	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+540	CLEAR	CLEAR	0.9729729966992279	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+541	CLEAR	CLEAR	0.9667904632377441	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+542	CLEAR	CLEAR	0.9941558182149498	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+543	CLEAR	CLEAR	0.9928197998942582	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+544	MODERATE	MODERATE	0.9593272985495983	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+545	MODERATE	MODERATE	0.9666708525263431	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+546	MODERATE	MODERATE	0.9363922386629477	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+547	MODERATE	MODERATE	0.9318099685906226	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+548	HEAVY	HEAVY	0.9463262846415108	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+549	HEAVY	HEAVY	0.9434777417364296	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+550	HEAVY	HEAVY	0.926176459754038	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+551	HEAVY	HEAVY	0.9394992666831725	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+552	CLEAR	CLEAR	0.923653873907299	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+553	CLEAR	CLEAR	0.9553151827043628	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+554	CLEAR	CLEAR	0.9563090688659368	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+555	CLEAR	CLEAR	0.9729900252710627	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+556	MODERATE	MODERATE	0.9320925433093964	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+557	MODERATE	MODERATE	0.9201987340545418	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+558	MODERATE	MODERATE	0.9607003207447727	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+559	MODERATE	MODERATE	0.9482506903437069	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+560	HEAVY	HEAVY	0.9761938752032978	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+561	HEAVY	HEAVY	0.9776331433551599	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+562	HEAVY	HEAVY	0.9886770254159855	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+563	HEAVY	HEAVY	0.9850132423545307	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+564	CLEAR	CLEAR	0.805543499835961	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+565	CLEAR	CLEAR	0.7601059200104803	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+566	CLEAR	CLEAR	0.9113398258902053	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+567	CLEAR	CLEAR	0.8987033693355512	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+568	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+569	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+570	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+571	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+572	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+573	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+574	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+575	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+576	HEAVY	HEAVY	0.996846625186574	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+577	HEAVY	HEAVY	0.9960296418693707	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+578	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+579	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+580	HEAVY	HEAVY	0.9867235165596241	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+581	HEAVY	HEAVY	0.9875369904896787	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+582	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+583	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+584	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+585	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+586	CLEAR	CLEAR	0.9982566346663801	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+587	CLEAR	CLEAR	0.996475330551485	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+588	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+589	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+590	UNKNOWN	QUIET	0.0	hold	1	Original speech evidence holds
+591	CLEAR	CLEAR	0.9456506919070928	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+592	CLEAR	CLEAR	0.9550188974456132	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+593	CLEAR	CLEAR	0.9248080853276146	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+594	CLEAR	CLEAR	0.918412518954232	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+595	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+596	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+597	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+598	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+599	HEAVY	HEAVY	0.9989788226138886	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+600	HEAVY	HEAVY	0.9987539491056948	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+601	HEAVY	HEAVY	0.9987233562210213	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+602	HEAVY	HEAVY	0.9987893269241231	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+603	CLEAR	CLEAR	0.9124996055091477	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+604	CLEAR	CLEAR	0.9082318845538205	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+605	CLEAR	CLEAR	0.9571442765437904	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+606	CLEAR	CLEAR	0.9659755026081072	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+607	MODERATE	MODERATE	0.8607753681544059	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+608	MODERATE	MODERATE	0.8883514272202819	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+609	MODERATE	MODERATE	0.9067311396061407	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+610	MODERATE	MODERATE	0.9159737176410047	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+611	HEAVY	HEAVY	0.8231133255748407	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+612	HEAVY	HEAVY	0.7951812352610147	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+613	HEAVY	HEAVY	0.8415298153288202	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+614	HEAVY	HEAVY	0.8387009107034277	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+615	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+616	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+617	CLEAR	CLEAR	0.9872854455443881	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+618	CLEAR	CLEAR	0.9859169954147115	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+619	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+620	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+621	MODERATE	MODERATE	0.7657829489649571	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+622	MODERATE	MODERATE	0.8151677342701336	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+623	HEAVY	HEAVY	0.9953587845680453	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+624	HEAVY	HEAVY	0.995457888861093	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+625	HEAVY	HEAVY	0.7377910604294139	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+626	HEAVY	HEAVY	0.7489204075170344	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+627	CLEAR	CLEAR	0.8913853712315191	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+628	CLEAR	CLEAR	0.8778855221327834	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+629	CLEAR	CLEAR	0.9204281618261847	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+630	CLEAR	CLEAR	0.9532966344425946	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+631	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+632	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+633	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+634	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+635	HEAVY	HEAVY	0.9947301261236551	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+636	HEAVY	HEAVY	0.9943361272310574	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+637	HEAVY	HEAVY	0.997498874041929	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+638	HEAVY	HEAVY	0.9977969867822026	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+639	CLEAR	CLEAR	0.9926075496485797	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+640	CLEAR	CLEAR	0.9942764390557138	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+641	CLEAR	CLEAR	0.9341563773059585	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+642	CLEAR	CLEAR	0.9426520868351307	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+643	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+644	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+645	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+646	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+647	HEAVY	HEAVY	0.9863324189931357	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+648	HEAVY	HEAVY	0.9883815438780784	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+649	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+650	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+651	CLEAR	CLEAR	0.9968958150564129	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+652	CLEAR	CLEAR	0.9977322145809854	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+653	CLEAR	CLEAR	0.9978121755686632	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+654	CLEAR	CLEAR	0.9964380858743174	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+655	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+656	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+657	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+658	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+659	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+660	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+661	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+662	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+663	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+664	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+665	CLEAR	CLEAR	0.7570824732537276	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+666	CLEAR	CLEAR	0.727224338602436	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+667	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+668	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+669	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+670	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+671	HEAVY	HEAVY	0.9781694545096816	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+672	HEAVY	HEAVY	0.9707460428385379	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+673	HEAVY	HEAVY	0.9978064044882778	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+674	HEAVY	HEAVY	0.9968327143593538	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+675	CLEAR	CLEAR	0.9407452810259754	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+676	CLEAR	CLEAR	0.943502135814084	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+677	CLEAR	CLEAR	0.931449739084928	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+678	CLEAR	CLEAR	0.9286493405219786	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+679	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+680	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+681	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+682	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+683	HEAVY	HEAVY	0.9398357531763937	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+684	HEAVY	HEAVY	0.9428254266692748	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+685	HEAVY	HEAVY	0.908620769915636	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+686	HEAVY	HEAVY	0.9123638441292673	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+687	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+688	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+689	CLEAR	CLEAR	0.9277794414474769	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+690	CLEAR	CLEAR	0.9551509586113738	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+691	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+692	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+693	MODERATE	MODERATE	0.9376547378053695	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+694	MODERATE	MODERATE	0.9282302631912758	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+695	HEAVY	HEAVY	0.990366538829627	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+696	HEAVY	HEAVY	0.9923255860778054	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+697	HEAVY	HEAVY	0.9487882561021997	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+698	HEAVY	HEAVY	0.9545591967754355	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+699	CLEAR	CLEAR	0.9596352025276524	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+700	CLEAR	CLEAR	0.9530740170079163	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+701	CLEAR	CLEAR	0.871784707471327	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+702	CLEAR	CLEAR	0.8264326809558853	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+703	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+704	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+705	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+706	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+707	HEAVY	HEAVY	0.998367269394507	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+708	HEAVY	HEAVY	0.9984994752375987	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+709	HEAVY	HEAVY	0.9920123625987322	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+710	HEAVY	HEAVY	0.9920570060650507	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+711	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+712	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+713	CLEAR	CLEAR	0.9577752229594756	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+714	CLEAR	CLEAR	0.9501357025407345	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+715	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+716	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+717	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+718	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+719	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+720	HEAVY	HEAVY	0.9971070889521073	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+721	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+722	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+723	CLEAR	CLEAR	0.9291489391775005	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+724	CLEAR	CLEAR	0.9461336998390412	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+725	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+726	CLEAR	CLEAR	0.9849903212436933	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+727	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+728	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+729	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+730	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+731	CLEAR	CLEAR	0.7590569398651871	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+732	CLEAR	CLEAR	0.7894729349838709	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+733	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+734	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+735	CLEAR	CLEAR	0.9975131326551827	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+736	CLEAR	CLEAR	0.9974131912505336	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+737	CLEAR	CLEAR	0.9990632414065986	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+738	CLEAR	CLEAR	0.9992170133470474	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+739	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+740	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+741	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+742	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+743	HEAVY	HEAVY	0.9885309483998408	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+744	HEAVY	HEAVY	0.9868777149959541	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+745	HEAVY	HEAVY	0.994118188741877	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+746	HEAVY	HEAVY	0.9950449340119488	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+747	CLEAR	CLEAR	0.788523116375825	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+748	CLEAR	CLEAR	0.7385530833017281	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+749	CLEAR	CLEAR	0.9923955112032069	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+750	CLEAR	CLEAR	0.9917165643474348	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+751	MODERATE	MODERATE	0.7475092818372226	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+752	MODERATE	MODERATE	0.7331825816784667	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+753	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+754	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+755	HEAVY	HEAVY	0.8931247340059054	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+756	HEAVY	HEAVY	0.9052803845443769	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+757	HEAVY	HEAVY	0.8178120473832201	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+758	HEAVY	HEAVY	0.786273645307366	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+759	CLEAR	CLEAR	0.6825912723567084	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+760	CLEAR	CLEAR	0.6717850615081247	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+761	CLEAR	CLEAR	0.9981418010385366	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+762	CLEAR	CLEAR	0.9990550962561917	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+763	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+764	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+765	MODERATE	MODERATE	0.7270336235438265	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+766	MODERATE	MODERATE	0.7730849284767966	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+767	HEAVY	HEAVY	0.9937232344221573	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+768	HEAVY	HEAVY	0.9943158013551205	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+769	HEAVY	HEAVY	0.9234753338317503	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+770	HEAVY	HEAVY	0.9041790178194841	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+771	CLEAR	CLEAR	0.8229062704798948	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+772	CLEAR	CLEAR	0.8389142883134307	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+773	CLEAR	CLEAR	0.9788291254911269	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+774	CLEAR	CLEAR	0.9887862423625458	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+775	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+776	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+777	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+778	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+779	HEAVY	HEAVY	0.9985140316704523	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+780	HEAVY	HEAVY	0.9985721717528712	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+781	HEAVY	HEAVY	0.9996869245201435	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+782	HEAVY	HEAVY	0.9996929369617816	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+783	CLEAR	CLEAR	0.9961298734040046	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+784	CLEAR	CLEAR	0.9970368114185391	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+785	CLEAR	CLEAR	0.9997183624350935	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+786	CLEAR	CLEAR	0.9996417540340119	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+787	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+788	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+789	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+790	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+791	HEAVY	HEAVY	0.9492998451013517	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+792	HEAVY	HEAVY	0.9343260132323427	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+793	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+794	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+795	CLEAR	CLEAR	0.9577866558749389	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+796	CLEAR	CLEAR	0.9647671014160718	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+797	CLEAR	CLEAR	0.9931490688501895	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+798	CLEAR	CLEAR	0.9958885742317893	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+799	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+800	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+801	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+802	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+803	CLEAR	CLEAR	0.9644402860178345	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+804	CLEAR	CLEAR	0.9761206290273934	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+805	CLEAR	CLEAR	0.99520901119575	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+806	CLEAR	CLEAR	0.9947751566887191	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+807	CLEAR	CLEAR	0.9781751314598172	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+808	CLEAR	CLEAR	0.9786191280669295	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+809	CLEAR	CLEAR	0.9949314493028303	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+810	CLEAR	CLEAR	0.9959109626575825	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+811	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+812	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+813	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+814	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+815	HEAVY	HEAVY	0.9985981821155527	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+816	HEAVY	HEAVY	0.9987124333438238	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+817	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+818	HEAVY	HEAVY	0.999781095056839	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+819	CLEAR	CLEAR	0.7530494173527446	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+820	CLEAR	CLEAR	0.7317494005813922	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+821	CLEAR	CLEAR	0.9772959196320016	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+822	CLEAR	CLEAR	0.9841959978535089	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+823	MODERATE	MODERATE	0.7896811574048744	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+824	MODERATE	MODERATE	0.8024787616964265	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+825	MODERATE	MODERATE	0.9201299506258109	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+826	MODERATE	MODERATE	0.9199714086319098	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+827	HEAVY	HEAVY	0.9897330388371466	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+828	HEAVY	HEAVY	0.9907894858031776	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+829	HEAVY	HEAVY	0.941816020978954	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+830	HEAVY	HEAVY	0.9347348998037289	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+831	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+832	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+833	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+834	CLEAR	CLEAR	0.7629362102657689	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+835	MODERATE	MODERATE	0.8052829659896795	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+836	MODERATE	MODERATE	0.8474871141995967	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+837	MODERATE	MODERATE	0.8107806768800982	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+838	MODERATE	MODERATE	0.8665149039789476	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+839	HEAVY	HEAVY	0.9747969327674677	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+840	HEAVY	HEAVY	0.9749471579307321	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+841	HEAVY	HEAVY	0.8682188348931772	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+842	HEAVY	HEAVY	0.8749590657577582	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+843	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+844	CLEAR	CLEAR	0.6705792917478757	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+845	CLEAR	CLEAR	0.9595901428916158	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+846	CLEAR	CLEAR	0.961513152037868	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+847	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+848	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+849	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+850	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+851	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+852	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+853	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+854	HEAVY	HEAVY	0.9971227251067878	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+855	CLEAR	CLEAR	0.9184976484404606	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+856	CLEAR	CLEAR	0.8957611792179991	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+857	CLEAR	CLEAR	0.9162729602287564	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+858	CLEAR	CLEAR	0.9256171794627746	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+859	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+860	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+861	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+862	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+863	HEAVY	HEAVY	0.9847134861183372	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+864	HEAVY	HEAVY	0.9864451832065655	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+865	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+866	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+867	CLEAR	CLEAR	0.9762284174960119	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+868	CLEAR	CLEAR	0.9761314819929132	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+869	CLEAR	CLEAR	0.9483236868690925	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+870	CLEAR	CLEAR	0.9640529865109094	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+871	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+872	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+873	CLEAR	CLEAR	0.8981512333745316	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+874	CLEAR	CLEAR	0.9503054918821147	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+875	CLEAR	CLEAR	0.932343645029899	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+876	CLEAR	CLEAR	0.9580688028025279	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+877	CLEAR	CLEAR	0.6805420577365965	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+878	CLEAR	CLEAR	0.8304009617335921	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+879	CLEAR	CLEAR	0.9829951522929297	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+880	CLEAR	CLEAR	0.9773031877652024	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+881	CLEAR	CLEAR	0.9868936798645593	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+882	CLEAR	CLEAR	0.985278378298002	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+883	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+884	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+885	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+886	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+887	HEAVY	HEAVY	0.9998128604261618	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+888	HEAVY	HEAVY	0.9996979031940934	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+889	HEAVY	HEAVY	0.9999140764303494	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+890	HEAVY	HEAVY	0.9999214557201774	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+891	CLEAR	CLEAR	0.9057877573667016	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+892	CLEAR	CLEAR	0.9214434939013666	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+893	CLEAR	CLEAR	0.7919563922850082	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+894	CLEAR	CLEAR	0.7800071713438015	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+895	MODERATE	MODERATE	0.7421556798644933	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+896	MODERATE	MODERATE	0.7476678202856464	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+897	MODERATE	MODERATE	0.8784473182887019	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+898	MODERATE	MODERATE	0.8716781682814874	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+899	HEAVY	HEAVY	0.9702136738024862	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+900	HEAVY	HEAVY	0.9637480365458134	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+901	HEAVY	HEAVY	0.9152929800555217	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+902	HEAVY	HEAVY	0.8957731681489725	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+903	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+904	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+905	CLEAR	CLEAR	0.65960531500891	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+906	CLEAR	CLEAR	0.6831562161386907	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+907	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+908	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+909	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+910	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+911	HEAVY	HEAVY	0.9867289440580643	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+912	HEAVY	HEAVY	0.98720873761081	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+913	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+914	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+915	CLEAR	CLEAR	0.9942729024901189	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+916	CLEAR	CLEAR	0.9948893548512623	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+917	CLEAR	CLEAR	0.9773020325625515	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+918	CLEAR	CLEAR	0.975213438450794	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+919	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+920	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+921	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+922	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+923	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+924	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+925	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+926	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+927	CLEAR	CLEAR	0.9775202202342391	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+928	CLEAR	CLEAR	0.983494521657743	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+929	CLEAR	CLEAR	0.9285378782048829	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+930	CLEAR	CLEAR	0.9346330479397085	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+931	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+932	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+933	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+934	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+935	HEAVY	HEAVY	0.956845295944189	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+936	HEAVY	HEAVY	0.9507548164001725	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+937	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+938	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+939	CLEAR	CLEAR	0.9969783032148926	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+940	CLEAR	CLEAR	0.9973722145945326	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+941	CLEAR	CLEAR	0.9877798739771496	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+942	CLEAR	CLEAR	0.9836991191814127	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+943	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+944	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+945	MODERATE	MODERATE	0.769644267966028	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+946	MODERATE	MODERATE	0.8132818255139823	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+947	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+948	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+949	CLEAR	CLEAR	0.7263691895943085	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+950	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+951	CLEAR	CLEAR	0.9634949990191333	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+952	CLEAR	CLEAR	0.9654506613856261	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+953	CLEAR	CLEAR	0.9865612720291983	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+954	CLEAR	CLEAR	0.9817764054098886	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+955	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+956	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+957	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+958	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+959	HEAVY	HEAVY	0.999707222489751	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+960	HEAVY	HEAVY	0.9996698384074132	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+961	HEAVY	HEAVY	0.9999533305226594	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+962	HEAVY	HEAVY	0.9999450075412539	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+963	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+964	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+965	CLEAR	CLEAR	0.9203302293864528	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+966	CLEAR	CLEAR	0.8874018670558287	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+967	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+968	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+969	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+970	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+971	HEAVY	HEAVY	0.9846339919921832	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+972	HEAVY	HEAVY	0.9854333184787083	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+973	HEAVY	HEAVY	0.9757054176198711	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+974	HEAVY	HEAVY	0.9763277361881929	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+975	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+976	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+977	CLEAR	CLEAR	0.7097239351477892	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+978	CLEAR	CLEAR	0.752558403246749	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+979	MODERATE	MODERATE	0.9743294545237077	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+980	MODERATE	MODERATE	0.9757957997941772	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+981	MODERATE	MODERATE	0.9869466786237149	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+982	MODERATE	MODERATE	0.9831064615058908	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+983	HEAVY	HEAVY	0.8195849210930664	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+984	HEAVY	HEAVY	0.8033738207420047	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+985	HEAVY	HEAVY	0.745212962233706	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+986	HEAVY	HEAVY	0.7704955646192212	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+987	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+988	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+989	CLEAR	CLEAR	0.9376897443422857	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+990	CLEAR	CLEAR	0.930193200216995	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+991	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+992	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+993	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+994	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+995	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+996	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+997	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+998	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+999	CLEAR	CLEAR	0.9275831616316812	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1000	CLEAR	CLEAR	0.9410594992230964	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1001	CLEAR	CLEAR	0.6698498555872374	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1002	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1003	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1004	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1005	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1006	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1007	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1008	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1009	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1010	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1011	CLEAR	CLEAR	0.9975907771536203	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1012	CLEAR	CLEAR	0.9981385163480733	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1013	CLEAR	CLEAR	0.9948111569342694	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1014	CLEAR	CLEAR	0.9944241001598195	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1015	CLEAR	CLEAR	0.9357553071750392	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1016	CLEAR	CLEAR	0.9505649998662244	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1017	CLEAR	CLEAR	0.9843921086915149	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1018	CLEAR	CLEAR	0.99005125398126	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1019	CLEAR	CLEAR	0.9875581470147349	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1020	CLEAR	CLEAR	0.9877626946965445	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1021	CLEAR	CLEAR	0.950037744064251	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1022	CLEAR	CLEAR	0.9765563906107093	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1023	CLEAR	CLEAR	0.7768144098854634	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1024	CLEAR	CLEAR	0.821398727412268	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1025	CLEAR	CLEAR	0.6674859650679743	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1026	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1027	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1028	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1029	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1030	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1031	HEAVY	HEAVY	0.9763173464824858	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1032	HEAVY	HEAVY	0.9777889238520979	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1033	HEAVY	HEAVY	0.986652127302464	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1034	HEAVY	HEAVY	0.986584061737304	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1035	CLEAR	CLEAR	0.9270793539974961	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1036	CLEAR	CLEAR	0.9127004082942982	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+1037	CLEAR	CLEAR	0.9744827944004539	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1038	CLEAR	CLEAR	0.9736364768682976	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1039	MODERATE	MODERATE	0.6594437986610655	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1040	MODERATE	MODERATE	0.654637892213012	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1041	MODERATE	MODERATE	0.8549534637624998	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1042	MODERATE	MODERATE	0.8698657610306237	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1043	HEAVY	HEAVY	0.9131942224230641	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1044	HEAVY	HEAVY	0.9020812409233	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1045	HEAVY	HEAVY	0.8784700097364939	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1046	HEAVY	HEAVY	0.8556085786902441	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1047	CLEAR	CLEAR	0.8276316409266032	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1048	CLEAR	CLEAR	0.8032887794039142	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+1049	CLEAR	CLEAR	0.7881666110693261	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1050	CLEAR	CLEAR	0.7998776008693755	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1051	MODERATE	MODERATE	0.9627239542344718	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1052	MODERATE	MODERATE	0.9627655965888886	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1053	MODERATE	MODERATE	0.9513594964067028	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1054	MODERATE	MODERATE	0.9533769011921278	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1055	HEAVY	HEAVY	0.9577772335965489	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1056	HEAVY	HEAVY	0.9470000232081435	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1057	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1058	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1059	CLEAR	CLEAR	0.9976118582497242	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1060	CLEAR	CLEAR	0.9969611648003252	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1061	CLEAR	CLEAR	0.9822514115048264	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1062	CLEAR	CLEAR	0.9830267408939211	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1063	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1064	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1065	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1066	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1067	HEAVY	HEAVY	0.9799521995276864	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1068	HEAVY	HEAVY	0.9805607761162408	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1069	HEAVY	HEAVY	0.9875670308594644	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1070	HEAVY	HEAVY	0.9874495862656513	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1071	CLEAR	CLEAR	0.8082950366127042	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1072	CLEAR	CLEAR	0.8161609496504728	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1073	CLEAR	CLEAR	0.8245038667725063	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1074	CLEAR	CLEAR	0.7916935158030415	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1075	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1076	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1077	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1078	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1079	HEAVY	HEAVY	0.9727325001146488	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1080	HEAVY	HEAVY	0.9717287447647817	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1081	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1082	UNKNOWN	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1083	CLEAR	CLEAR	0.9832876394342039	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1084	CLEAR	CLEAR	0.9805896559637983	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1085	CLEAR	CLEAR	0.9638841825093885	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1086	CLEAR	CLEAR	0.9577419068720011	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1087	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1088	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1089	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1090	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1091	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1092	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1093	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1094	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1095	CLEAR	CLEAR	0.6500697450776758	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1096	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1097	CLEAR	CLEAR	0.6906769732515348	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1098	CLEAR	CLEAR	0.725886633196433	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1099	MODERATE	MODERATE	0.6713572768882297	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1100	MODERATE	MODERATE	0.7022374289557807	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1101	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1102	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1103	HEAVY	HEAVY	0.8873338021513258	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1104	HEAVY	HEAVY	0.8825952322359569	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1105	HEAVY	HEAVY	0.9698485963011919	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1106	HEAVY	HEAVY	0.967236722703163	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1107	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1108	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1109	CLEAR	CLEAR	0.8583116652171048	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+1110	CLEAR	CLEAR	0.8388766496896977	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+1111	MODERATE	MODERATE	0.8264763685471685	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1112	MODERATE	MODERATE	0.7992935305786256	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1113	MODERATE	MODERATE	0.8251192121594755	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1114	MODERATE	MODERATE	0.8253196386529086	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1115	HEAVY	HEAVY	0.8875280844531717	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1116	HEAVY	HEAVY	0.9014143562778503	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1117	HEAVY	HEAVY	0.8306249189439283	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1118	HEAVY	HEAVY	0.8428946304928341	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1119	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1120	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1121	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1122	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1123	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1124	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1125	MODERATE	MODERATE	0.9781637631177015	2	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1126	MODERATE	MODERATE	0.9779931268916219	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1127	HEAVY	HEAVY	0.9891603823070654	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1128	HEAVY	HEAVY	0.9854689249543251	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1129	HEAVY	HEAVY	0.8058524093450479	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1130	HEAVY	HEAVY	0.7769657838577281	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1131	CLEAR	CLEAR	0.9400952951281505	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+1132	CLEAR	CLEAR	0.9359454661190832	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1133	CLEAR	CLEAR	0.8228830054276519	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+1134	CLEAR	CLEAR	0.7983100738633165	hold	1	Speech and separated-background estimates agree; requires repeated fresh checks
+1135	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1136	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1137	MODERATE	MODERATE	0.6740362081828586	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1138	MODERATE	MODERATE	0.6575516672125956	2	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+1139	HEAVY	HEAVY	0.9172975952009021	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1140	HEAVY	HEAVY	0.9250837942293058	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1141	HEAVY	HEAVY	0.9413682266605573	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1142	HEAVY	HEAVY	0.952051916644247	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1143	CLEAR	CLEAR	0.7770423547954112	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1144	CLEAR	CLEAR	0.778357083403304	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1145	CLEAR	CLEAR	0.8429000716444521	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1146	CLEAR	CLEAR	0.8041559384162341	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1147	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1148	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1149	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1150	CLEAR	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1151	HEAVY	HEAVY	0.9901683477930154	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1152	HEAVY	HEAVY	0.9892476472563101	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1153	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1154	MODERATE	UNKNOWN	0.0	hold	hold	Speech and separated-background estimates disagree; keep current program
+1155	CLEAR	CLEAR	0.9165151983967736	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1156	CLEAR	CLEAR	0.935548202357449	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1157	CLEAR	CLEAR	0.8627458990734336	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1158	CLEAR	CLEAR	0.8666564907526795	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1159	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1160	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1161	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1162	MODERATE	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1163	CLEAR	CLEAR	0.6954952738729823	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1164	CLEAR	CLEAR	0.6663785465702731	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1165	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1166	CLEAR	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1167	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1168	HEAVY	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1169	HEAVY	HEAVY	0.98228464724237	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1170	HEAVY	HEAVY	0.9807596146813943	3	3	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1171	HEAVY	HEAVY	0.9986135289647933	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1172	HEAVY	HEAVY	0.9988102755663616	3	3	Speech and separated-background estimates agree; requires repeated fresh checks
+1173	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1174	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1175	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1176	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1177	CLEAR	CLEAR	0.9998586734114369	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1178	CLEAR	CLEAR	0.9877236332053632	hold	1	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+1179	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1180	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds
+1181	UNKNOWN	UNKNOWN	0.0	hold	hold	Original speech evidence holds

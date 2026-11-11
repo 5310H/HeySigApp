@@ -1,0 +1,24 @@
+{
+  "sourceRevision": "70f1d256acd4b34a572f999a05c87bf00b67730d",
+  "modelArchiveSha256": "0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37",
+  "modelVariant": "little",
+  "modelSourceSha256": "eea1aa6fd8726d161876508a6f7d79022bf6ec82508660b4c1ac27c4f9b76c04",
+  "modelHeaderSha256": "09ff880bddd0fc74a2ae0e5ec6c8d65714031b08d0c3f672493acd9e189c5855",
+  "bridgeSha256": "b70a1657fa871cf4f7bf3657af85cc52f81a453847e9de96c1d56005d91fe481",
+  "resamplerSha256": "7469844a0716f2c47806af339833ac4b353c24aa9199a0c74bfc361b5504b952",
+  "librarySha256": "02f0b20f391310736fea240606f242123f5edd34b35dad894f278f1e7603654d",
+  "licenseSha256": "45d37ca1cdb278c088e1aa85e0e65ca3a534ed86a28dcc96ca16810248a61d35",
+  "machine": "x86_64",
+  "compiler": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "scope": "development-only host library; not an Android ABI/runtime qualification or licensed-data independence claim",
+  "android": {
+    "ndkRevision": "27.2.12479018",
+    "minSdk": 29,
+    "native": {
+      "arm64-v8a/libheysig_rnnoise.so": "710dcc6a6ab8ade4095a61b90b4a5436b130773a021101bb37988241423a546c",
+      "armeabi-v7a/libheysig_rnnoise.so": "4bb398aba4ec3c7d0896d4c8959b50cf2dc501f2293b622e85b8c2e80ea3634f",
+      "x86/libheysig_rnnoise.so": "e0e6933ea08bca5f1260d98ed472a797612f02af0f15697b7872f0c1a55adb11",
+      "x86_64/libheysig_rnnoise.so": "461ee3260a1f40c31c91904ca675114617c2fc97a59489ef9bad9f03730bf858"
+    }
+  }
+}

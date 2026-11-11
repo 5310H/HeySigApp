@@ -24,16 +24,18 @@ class SpeechAutomaticAcceptance:Instrumentation() {
         val fitting=core.getString("fitting",null);val saved=core.getString("saved",null)
         val noiseBytes=targetContext.getSharedPreferences("heysig-noise-v1",0).getString("settings",null)
         try {
-            val bytes=targetContext.assets.open("masking/masking-head.txt").use { it.readBytes() }
-            check(digest(bytes)==MaskingModelIdentity.HEAD_SHA256)
             val baselineBytes=targetContext.assets.open("masking/masking-baseline.txt").use { it.readBytes() }
             check(digest(baselineBytes)==MaskingModelIdentity.BASELINE_SHA256)
-            val head=CancellationAwareMaskingHead(SpeechMaskingHead.decode(baselineBytes.toString(Charsets.UTF_8)),
-                SpeechMaskingHead.decode(bytes.toString(Charsets.UTF_8)))
+            val bandBytes=targetContext.assets.open("separation/bands.txt").use { it.readBytes() }
+            check(digest(bandBytes)==SeparationModelIdentity.BANDS_SHA256)
+            val head=SpeechSeparationDetector(SpeechMaskingHead.decode(baselineBytes.toString(Charsets.UTF_8)),
+                SeparationMaskingBands.decode(bandBytes.toString(Charsets.UTF_8)))
             val fixtures=JSONObject(context.assets.open("masking-fixtures/manifest.json").bufferedReader().use { it.readText() })
-            check(fixtures.getString("headSha256")==MaskingModelIdentity.HEAD_SHA256)
+            check(fixtures.getString("headSha256")==MaskingModelIdentity.BASELINE_SHA256)
             check(fixtures.getString("baselineSha256")==MaskingModelIdentity.BASELINE_SHA256)
+            check(fixtures.getString("separationBandsSha256")==SeparationModelIdentity.BANDS_SHA256)
             val entries=fixtures.getJSONArray("fixtures");val native=mutableListOf<String>();val driftFailures=mutableListOf<String>()
+            var separationCpu=0L
             for(i in 0 until entries.length()) {
                 val fixture=entries.getJSONObject(i);val raw=context.assets.open("masking-fixtures/${fixture.getString("file")}").use { it.readBytes() }
                 check(digest(raw)==fixture.getString("sha256"))
@@ -43,16 +45,24 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                     Yamnet(targetContext,observeEvidence={ capture,pool,frames ->
                         val expected=fixture.getJSONArray("features");val speech=MaskingSignal.features(capture)
                         check((0..3).all { kotlin.math.abs(speech[it]-expected.getDouble(2048+it))<1e-7 }) { "Speech features differ from developer extraction" }
-                        if(head.featureCount==2058) {
-                            val cancellation=NoiseCancellationSignal.features(capture)
-                            check(cancellation.indices.all { kotlin.math.abs(cancellation[it]-expected.getDouble(2052+it))<1e-7 }) { "Noise suppression features differ from developer extraction" }
-                        }
                         val drift=pool?.indices?.maxOf { kotlin.math.abs(pool[it]*20-expected.getDouble(it)) } ?: Double.POSITIVE_INFINITY
                         // LiteRT host 1.4.0 vs Android 1.4.2 quantized embeddings differ;
                         // retain a bounded feature check plus the stricter class/score check below.
                         val cosine=pool?.indices?.sumOf { pool[it]*expected.getDouble(it)/20 } ?: 0.0
                         if(drift>=.25 || cosine<.99) driftFailures.add("${fixture.getString("file")}: feature max $drift, cosine $cosine")
+                        val cpuBefore=Debug.threadCpuTimeNanos()
                         evidence=head.classify(capture,pool,frames)
+                        separationCpu+=Debug.threadCpuTimeNanos()-cpuBefore
+                        val measured=checkNotNull(head.latestMeasurement) { "Fixture skipped neural separation" }
+                        val reference=fixture.getJSONObject("separation")
+                        fun near(name:String,value:Double?,tolerance:Double) {
+                            if(reference.isNull(name)) check(value==null)
+                            else check(value!=null && kotlin.math.abs(value-reference.getDouble(name))<tolerance) { "Separation $name differs: $value / ${reference.getDouble(name)}" }
+                        }
+                        near("ratioDb",measured.retainedToResidualDb,.3)
+                        near("retainedDbfs",measured.retainedDbfs,.3);near("residualDbfs",measured.residualDbfs,.3)
+                        near("speechScore",measured.speechScore,.035);near("speechActivity",measured.speechActivity,.04)
+                        near("residualSpeechScore",measured.residualSpeechScore,.05)
                     }).use { it.classify(pcm) }
                     val actual=checkNotNull(evidence)
                     if(actual.severity.name!=fixture.getString("severity") || kotlin.math.abs(actual.score-fixture.getDouble("score"))>=.01) driftFailures.add("${fixture.getString("file")}: expected ${fixture.getString("severity")}/${fixture.getDouble("score")}, actual $actual")
@@ -60,6 +70,7 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                 } finally { pcm.fill(0);raw.fill(0) }
             }
             result.putString("native",native.joinToString("; ")+"; consistency, not accuracy acceptance")
+            result.putString("separationCpu","${separationCpu/1e9}s for six recorded decisions (includes masking DSP, excludes YAMNet); not a battery-life qualification")
             check(driftFailures.isEmpty()) { driftFailures.joinToString("; ") }
             sendStatus(0,Bundle().apply { putString("phase","native fixtures passed") })
             activity=startActivitySync(Intent(targetContext,HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));val screen=checkNotNull(activity)
@@ -68,7 +79,7 @@ class SpeechAutomaticAcceptance:Instrumentation() {
             click("Noise");click("Choose programs")
             runOnMainSync {
                 val views=descendants(screen.findViewById(android.R.id.content));val text=views.filterIsInstance<TextView>().map { it.text.toString() }
-                check(text.any { it=="Speech-aware Automatic" } && text.any { it.contains("Everyday ·") } && text.any { it.contains("Noisy ·") } && text.any { it.contains("Very Noisy ·") })
+                check(text.any { it=="Speech-aware Automatic" } && text.any { it.contains("Universal ·") } && text.any { it.contains("Noisy ·") } && text.any { it.contains("Very Noisy ·") })
                 check(views.filterIsInstance<Spinner>().count { it.isShown }>=3)
                 check(!SpeechMaskingValidation.qualified() && !EnvironmentReleaseGate.qualified())
             }
