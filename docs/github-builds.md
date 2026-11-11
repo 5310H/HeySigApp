@@ -21,6 +21,21 @@ original hash manifest separately; signing changes APK hashes. This small local
 operation does not compile code. Never uninstall an existing app to bypass a
 signature mismatch, because that can erase fitting and saved settings.
 
+Use the signing helper after extracting a successful run's artifact:
+
+```sh
+python3 tools/sign-cloud-development.py \
+  --artifact /tmp/heysig-cloud \
+  --commit FULL_40_CHARACTER_COMMIT \
+  --output /tmp/heysig-device-candidate \
+  --apksigner /path/to/android-sdk/build-tools/35.0.0/apksigner
+```
+
+It checks the expected source and original APK hashes, signs all four app/test
+APKs with the existing local development key, verifies their certificates and
+writes new hashes. It refuses to overwrite an output directory and does not
+install anything. Confirm the workflow run succeeded before invoking it.
+
 Paired phone/watch Data Layer checks, actual microphone behavior, screen-off
 lifecycle, battery measurements and hearing-aid reception/listening acceptance
 still require the physical devices. The emulator does not establish those facts.

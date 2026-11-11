@@ -66,15 +66,25 @@ jobs:
           python3 tools/check-development-apk.py androidApp/build/outputs/apk/debug/androidApp-debug.apk
           python3 tools/validate-native-apks.py --variants debug
       - name: Run API 36 emulator smoke checks (silent transport)
+        timeout-minutes: 12
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p ci-results
+          trap 'adb -s emulator-5554 logcat -d > ci-results/emulator-logcat.txt 2>&1 || true; cat ci-results/emulator-boot.txt; adb -s emulator-5554 emu kill || true' EXIT
           sudo chmod 666 /dev/kvm
           echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name heysig-ci --package 'system-images;android-36;google_apis;x86_64'
-          "$ANDROID_HOME/emulator/emulator" -avd heysig-ci -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect > "$RUNNER_TEMP/emulator.log" 2>&1 &
-          timeout 240 bash -c 'until adb -s emulator-5554 shell getprop sys.boot_completed 2>/dev/null | grep -q 1; do sleep 3; done'
+          "$ANDROID_HOME/emulator/emulator" -version
+          "$ANDROID_HOME/emulator/emulator" -avd heysig-ci -port 5554 -no-window -no-audio -no-boot-anim -no-snapshot -no-metrics -memory 2048 -cores 2 -gpu swiftshader > ci-results/emulator-boot.txt 2>&1 &
+          emulator_pid=$!
+          for attempt in $(seq 1 150); do
+            if adb -s emulator-5554 shell getprop sys.boot_completed 2>/dev/null | grep -q 1; then break; fi
+            kill -0 "$emulator_pid" || exit 1
+            sleep 3
+          done
+          test "$(adb -s emulator-5554 shell getprop sys.boot_completed | tr -d '\r')" = 1
           adb -s emulator-5554 shell input keyevent 82
-          python3 tools/run-device-smoke.py --device emulator-5554 --report ci-results/emulator-smoke.txt
+          timeout 180 python3 tools/run-device-smoke.py --device emulator-5554 --report ci-results/emulator-smoke.txt
       - name: Record exact source and APK hashes
         if: always()
         run: |
