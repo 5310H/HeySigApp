@@ -69,3 +69,25 @@ and masking fixture audio are absent from the main APK. Gradle shared tests:
 
 Phone and phone-test debug APK builds and Android lint passed on November 10.
 Lint issue counts: {'Warning': 31}. Existing warnings remain; no release approval is implied.
+
+## November 11 physical-phone follow-up
+
+Pushed code 62e2396 was rebuilt and upgraded in place on the Pixel phone. The
+visible label was Build 62e2396 · Nov 11, 2026. All five pre-upgrade preference
+files (core/fitting, noise, masking choices, Therapy, personal phrases) were
+byte-identical immediately after installation.
+
+All six native fixture severities and score/feature/ratio checks passed. Native
+severities: development CLEAR/MODERATE/HEAVY; heldout CLEAR/UNKNOWN/HEAVY.
+First-use UI and isolated saved-choice/recreation/stale-fitting checks passed.
+An initial harness assumption that every fixture must reach the denoiser failed
+on the expected UNKNOWN case; the test now checks its neural measurements
+separately and retains all complete-pipeline severity/score assertions.
+
+The silent lifecycle test exposed a startup race: its first tick stopped with
+Automatic notification removed before Android registered the foreground
+notification. A follow-up requests immediate notification display on API31+,
+waits up to five seconds for registration, and forbids microphone capture until
+the notification is present. Notification/permission disablement still stops
+immediately; disappearance after first visibility stops immediately as before.
+A timeout fails closed. Device validation of this fix is tracked below.

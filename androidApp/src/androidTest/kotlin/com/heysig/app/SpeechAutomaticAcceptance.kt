@@ -52,8 +52,16 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                         if(drift>=.25 || cosine<.99) driftFailures.add("${fixture.getString("file")}: feature max $drift, cosine $cosine")
                         val cpuBefore=Debug.threadCpuTimeNanos()
                         evidence=head.classify(capture,pool,frames)
+                        // UNKNOWN/QUIET legitimately bypass the denoiser in production.
+                        // Still exercise its native measurements independently for that fixture;
+                        // retain the full pipeline severity/score assertions below.
+                        val measured=head.latestMeasurement ?: run {
+                            check(evidence?.severity in listOf(MaskingSeverity.UNKNOWN,MaskingSeverity.QUIET)) {
+                                "${fixture.getString("file")}: missing neural measurement for $evidence"
+                            }
+                            NeuralSeparation().measure(capture)
+                        }
                         separationCpu+=Debug.threadCpuTimeNanos()-cpuBefore
-                        val measured=checkNotNull(head.latestMeasurement) { "Fixture skipped neural separation" }
                         val reference=fixture.getJSONObject("separation")
                         fun near(name:String,value:Double?,tolerance:Double) {
                             if(reference.isNull(name)) check(value==null)
@@ -116,11 +124,17 @@ class SpeechAutomaticAcceptance:Instrumentation() {
             if(isolated) {
                 val config=NoiseSettings(programs=listOf(1,1,2,2,3,3),confirmations=2,cooldownSeconds=30)
                 val choices=MaskingChoices(1,2,3);val signature="1:Everyday|2:Noisy|3:Very Noisy"
+                waitUntil("visible Activity before isolated session") { screen.hasWindowFocus() }
                 runOnMainSync {
                     SpeechServiceAcceptanceService.severity=MaskingSeverity.MODERATE;SpeechServiceAcceptanceService.plays=0
                     SpeechAutomaticService.launch(screen,config,choices,signature,SpeechServiceAcceptanceService::class.java)
                 }
                 waitUntil("isolated microphone") { SpeechAutomaticService.running?.microphoneBusy==true }
+                runOnMainSync {
+                    check(targetContext.getSystemService(NotificationManager::class.java).activeNotifications.any { it.id==7305 }) {
+                        "Microphone started before the Automatic notification was visible"
+                    }
+                }
                 uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME)
                 uiAutomation.executeShellCommand("input keyevent 223").close()
                 waitUntil("isolated Noisy dispatch") { (SpeechAutomaticService.running as? SpeechServiceAcceptanceService)?.let { it.program==2 && it.idle }==true }
@@ -187,7 +201,10 @@ class SpeechAutomaticAcceptance:Instrumentation() {
             result.putString("preservation","PASS: saved fitting, saved user snapshot and all six noise assignments/thresholds/timing unchanged; live last-requested state may change")
             result.putString("result","PASS: speech-aware Automatic native regression and UI; physical aid reception requires wearer confirmation")
             finish(Activity.RESULT_OK,result)
-        } catch(e:Throwable) { result.putString("result","FAIL: ${e.message}");finish(Activity.RESULT_CANCELED,result) }
+        } catch(e:Throwable) {
+            result.putString("serviceStatus",SpeechAutomaticService.running?.summary() ?: SpeechAutomaticService.lastStatus)
+            result.putString("result","FAIL: ${e.message}");finish(Activity.RESULT_CANCELED,result)
+        }
         finally { runOnMainSync { SpeechAutomaticService.cancel();activity?.finish() } }
     }
 }

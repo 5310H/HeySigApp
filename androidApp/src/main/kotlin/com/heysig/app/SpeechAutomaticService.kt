@@ -19,6 +19,8 @@ open class SpeechAutomaticService: Service() {
     @Volatile private var closed=false
     private var deadline=0L
     private var nextAt=0L
+    private var notificationReadyBy=0L
+    private var notificationSeen=false
     private var wakeLock:PowerManager.WakeLock?=null
     private var state=MaskingState()
     private var ownsPlayback=false
@@ -81,6 +83,7 @@ open class SpeechAutomaticService: Service() {
             val notifications=getSystemService(NotificationManager::class.java)
             notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Speech-aware Automatic",NotificationManager.IMPORTANCE_LOW))
             check(notifications.areNotificationsEnabled() && notifications.getNotificationChannel(CHANNEL)?.importance!=NotificationManager.IMPORTANCE_NONE) { "Allow Automatic notifications first" }
+            notificationReadyBy=SystemClock.elapsedRealtime()+5_000L
             if(Build.VERSION.SDK_INT>=30) startForeground(NOTIFICATION,notification(),ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE or ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
             else startForeground(NOTIFICATION,notification(),ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
             wakeLock=getSystemService(PowerManager::class.java).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"HeySig:SpeechAutomatic").apply { acquire(8*60*60_000L+10_000) }
@@ -93,16 +96,22 @@ open class SpeechAutomaticService: Service() {
         override fun run() {
             if(closed) return
             val now=SystemClock.elapsedRealtime();val manager=getSystemService(NotificationManager::class.java)
+            val notificationPresent=manager.activeNotifications.any { it.id==NOTIFICATION }
+            if(notificationPresent) notificationSeen=true
             val stopReason=when {
                 now>=deadline -> "Eight-hour Automatic session finished"
                 checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED -> "Microphone permission removed"
-                !manager.areNotificationsEnabled() || manager.getNotificationChannel(CHANNEL)?.importance==NotificationManager.IMPORTANCE_NONE || manager.activeNotifications.none { it.id==NOTIFICATION } -> "Automatic notification removed"
+                !manager.areNotificationsEnabled() || manager.getNotificationChannel(CHANNEL)?.importance==NotificationManager.IMPORTANCE_NONE -> "Automatic notification removed"
+                !notificationPresent && (notificationSeen || now>=notificationReadyBy) -> "Automatic notification removed"
                 signature()!=request.fitting -> "Program setup changed; review choices"
                 getSharedPreferences("heysig-noise-v1",0).getString("settings",null)!=settingsBytes || getSharedPreferences("heysig-masking-v1",0).getString("choices",null)!=roleBytes -> "Saved choices changed; restart Automatic"
                 runtime.sleepRoutine.state!=baseline -> "Manual control or Therapy has priority"
                 else -> null
             }
             if(stopReason!=null) { finish(stopReason);return }
+            // Android may register the foreground notification asynchronously. Never
+            // capture before it is visible; fail closed if registration times out.
+            if(!notificationPresent) { handler.postDelayed(this,100);return }
             if(safety().blocked()!=null) { audio.stop();reset(if(ownsPlayback) "Sending program change" else "Paused for speech or manual control; checking again afterward") }
             else if(!audio.busy() && now>=nextAt && now>=settleUntil) {
                 evidence=MaskingEvidence();rms=null
@@ -152,7 +161,9 @@ open class SpeechAutomaticService: Service() {
     private fun notification():Notification {
         val open=PendingIntent.getActivity(this,7305,Intent(this,HomeActivity::class.java),PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val off=PendingIntent.getService(this,7305,Intent(this,javaClass).setAction(OFF),PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this,CHANNEL).setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle("HeySig · speech-aware Automatic On")
+        return Notification.Builder(this,CHANNEL).apply {
+            if(Build.VERSION.SDK_INT>=31) setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE)
+        }.setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle("HeySig · speech-aware Automatic On")
             .setContentText(detail).setOngoing(true).setOnlyAlertOnce(true).setContentIntent(open)
             .addAction(Notification.Action.Builder(null,"Off",off).build()).build()
     }
