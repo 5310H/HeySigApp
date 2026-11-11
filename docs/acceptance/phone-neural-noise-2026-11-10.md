@@ -91,3 +91,36 @@ waits up to five seconds for registration, and forbids microphone capture until
 the notification is present. Notification/permission disablement still stops
 immediately; disappearance after first visibility stops immediately as before.
 A timeout fails closed. Device validation of this fix is tracked below.
+
+## Final November 11 device verification
+
+Notification fix **7b51fe2** was committed and pushed before rebuilding the final
+phone/test APKs. Both builds and phone lint passed; no lint errors, 31 existing
+warnings. The final phone APK passed all 24 native-library hash and 16KB ELF/ZIP
+alignment checks, active asset pins and retired-head/test-audio exclusion.
+The phone was upgraded in place with no uninstall or data clearing.
+
+The [screen-off log](data/phone-neural-noise-2026-11-10/phone-screen-off.txt)
+records native/choice passes, actual microphone capture with the notification
+present, screen-off Noisy dispatch, cooldown, sustained Universal return, no
+duplicate playback and manual cancellation through the shared validated executor
+with silent transport. `isolatedScreenOff=true`. The run then timed out at the
+secured lock screen before its second explicit foreground start; that timeout
+is retained and is not reported as an overall passing run.
+
+After the owner unlocked the phone, a separately selectable notification-only
+mode ran the same native/choice checks and an isolated explicit start, waited
+for the notification, sent its Off action and verified the session stopped.
+That [foreground run](data/phone-neural-noise-2026-11-10/phone-notification-off.txt)
+passed. The split avoids requiring another phone lock/unlock cycle. The final
+main-app code was unchanged between those two runs.
+
+All five real preference files (core/fitting, noise, masking choices, Therapy and
+personal phrases) remained byte-identical both after the final install and after
+all tests. Native six-fixture separation/masking DSP CPU totaled about 2.47s in
+the screen-off run and 2.41s in the notification-only run, excluding YAMNet.
+These are fixture consistency observations, not sustained battery estimates.
+Automatic is left Off after cleanup; no hearing-aid tones were emitted by these
+tests. No actual aid reception, listening benefit, fresh blind accuracy, sustained
+battery, regulatory or Play acceptance is claimed. The watch connected on retry
+but was not updated in this phone-only scope.

@@ -1,5 +1,7 @@
 # Phone Automatic completion checklist — November 10, 2026
 
+Last verified November 11: installed phone Build 7b51fe2 · Nov 11, 2026.
+
 Owner scope: replace the earlier live spectral-suppression detector with the
 neural speech/residual detector; finish the phone first. Watch inference is
 outside this update. Checked items need evidence; unknown results remain open.
@@ -23,9 +25,11 @@ listening benefit and Google Play readiness.
 - [x] Complete shared noise shell regressions (all passed November 10).
 - [x] Complete Gradle shared tests (35 passed), phone/test APK builds and Android lint (zero errors).
 - [x] Verify native APK inventory, alignment, active assets and absence of retired head (24 pinned libraries; ELF/ZIP >=16KB).
-- [ ] Run Android native fixtures, UI/choice preservation and silent lifecycle checks.
-- [ ] Commit and push only this update; build final device APK from that pushed commit.
-- [ ] Upgrade the physical phone in place; verify Build revision/date and unchanged preferences.
+- [x] Run Android native fixtures, UI/choice preservation and silent lifecycle checks on the phone (screen-off/manual and foreground notification-Off runs).
+- [x] Commit and push only this update; build final device APK from pushed commit 7b51fe2.
+- [x] Upgrade the physical phone in place; verify Build revision/date and five unchanged preference files, including after all tests.
+
+- [x] Fix and verify foreground notification startup: no microphone before notification registration; bounded startup wait; notification Off stops the session.
 
 ## Measured detector evidence
 

@@ -1,0 +1,13 @@
+INSTRUMENTATION_STATUS: phase=native fixtures passed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=Activity opened
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=first-use and saved choices passed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: choices=PASS: isolated explicit Save survives recreation; unused choice retained; stale fitting refuses rebinding; no microphone or program command
+INSTRUMENTATION_RESULT: firstUse=PASS: pretrained packaged head, choices available without calibration/examples/learning; no acceptance lock
+INSTRUMENTATION_RESULT: native=development-0.pcm: CLEAR; development-1.pcm: MODERATE; development-2.pcm: HEAVY; heldout-0.pcm: CLEAR; heldout-1.pcm: UNKNOWN; heldout-2.pcm: HEAVY; consistency, not accuracy acceptance
+INSTRUMENTATION_RESULT: preservation=PASS: saved fitting, saved user snapshot and all six noise assignments/thresholds/timing unchanged; live last-requested state may change
+INSTRUMENTATION_RESULT: result=PASS: speech-aware Automatic native regression and UI; physical aid reception requires wearer confirmation
+INSTRUMENTATION_RESULT: separationCpu=2.413047304s for six recorded decisions (includes masking DSP, excludes YAMNet); not a battery-life qualification
+INSTRUMENTATION_CODE: -1

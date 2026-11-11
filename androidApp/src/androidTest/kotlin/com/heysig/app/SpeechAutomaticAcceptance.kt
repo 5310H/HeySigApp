@@ -12,8 +12,8 @@ import java.security.MessageDigest
 
 /** Native consistency/UI checks. Live/screen-off capture is a separate explicit instrument argument. */
 class SpeechAutomaticAcceptance:Instrumentation() {
-    private var live=false;private var isolated=false;private var seconds=90
-    override fun onCreate(arguments:Bundle?) { super.onCreate(arguments);live=arguments?.getString("live")=="true";isolated=arguments?.getString("isolated")=="true";seconds=(arguments?.getString("seconds")?.toIntOrNull() ?: 90).coerceIn(30,600);start() }
+    private var live=false;private var isolated=false;private var notificationOnly=false;private var seconds=90
+    override fun onCreate(arguments:Bundle?) { super.onCreate(arguments);live=arguments?.getString("live")=="true";notificationOnly=arguments?.getString("notificationOnly")=="true";isolated=arguments?.getString("isolated")=="true" || notificationOnly;seconds=(arguments?.getString("seconds")?.toIntOrNull() ?: 90).coerceIn(30,600);start() }
     override fun onStart() {
         val result=Bundle();var activity:Activity?=null
         fun digest(bytes:ByteArray)=MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
@@ -124,31 +124,34 @@ class SpeechAutomaticAcceptance:Instrumentation() {
             if(isolated) {
                 val config=NoiseSettings(programs=listOf(1,1,2,2,3,3),confirmations=2,cooldownSeconds=30)
                 val choices=MaskingChoices(1,2,3);val signature="1:Everyday|2:Noisy|3:Very Noisy"
-                waitUntil("visible Activity before isolated session") { screen.hasWindowFocus() }
-                runOnMainSync {
-                    SpeechServiceAcceptanceService.severity=MaskingSeverity.MODERATE;SpeechServiceAcceptanceService.plays=0
-                    SpeechAutomaticService.launch(screen,config,choices,signature,SpeechServiceAcceptanceService::class.java)
-                }
-                waitUntil("isolated microphone") { SpeechAutomaticService.running?.microphoneBusy==true }
-                runOnMainSync {
-                    check(targetContext.getSystemService(NotificationManager::class.java).activeNotifications.any { it.id==7305 }) {
-                        "Microphone started before the Automatic notification was visible"
+                if(!notificationOnly) {
+                    waitUntil("visible Activity before isolated session") { screen.hasWindowFocus() }
+                    runOnMainSync {
+                        SpeechServiceAcceptanceService.severity=MaskingSeverity.MODERATE;SpeechServiceAcceptanceService.plays=0
+                        SpeechAutomaticService.launch(screen,config,choices,signature,SpeechServiceAcceptanceService::class.java)
                     }
+                    waitUntil("isolated microphone") { SpeechAutomaticService.running?.microphoneBusy==true }
+                    runOnMainSync {
+                        check(targetContext.getSystemService(NotificationManager::class.java).activeNotifications.any { it.id==7305 }) {
+                            "Microphone started before the Automatic notification was visible"
+                        }
+                    }
+                    uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME)
+                    uiAutomation.executeShellCommand("input keyevent 223").close()
+                    waitUntil("isolated Noisy dispatch") { (SpeechAutomaticService.running as? SpeechServiceAcceptanceService)?.let { it.program==2 && it.idle }==true }
+                    sendStatus(0,Bundle().apply { putString("phase","screen-off Noisy dispatch passed") })
+                    val held=SpeechAutomaticService.running as SpeechServiceAcceptanceService
+                    val count=SpeechServiceAcceptanceService.plays
+                    runOnMainSync { SpeechServiceAcceptanceService.severity=MaskingSeverity.QUIET }
+                    SystemClock.sleep(29_000)
+                    runOnMainSync { check(held.program==2 && SpeechServiceAcceptanceService.plays==count) { "Cooldown did not prevent a return/duplicate send" } }
+                    waitUntil("fresh sustained return to Everyday") { held.program==1 && held.idle }
+                    result.putString("isolatedScreenOff",(!targetContext.getSystemService(PowerManager::class.java).isInteractive).toString())
+                    runOnMainSync { held.manual() }
+                    waitUntil("manual cancels Automatic") { !SpeechAutomaticService.active }
+                    result.putString("isolatedExecutor","PASS: actual microphone/hidden Activity, forced debug evidence -> shared validated executor -> silent transport, Noisy then cooldown then sustained Everyday; no duplicate play; manual request cancels; no real hearing-aid output")
                 }
-                uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME)
-                uiAutomation.executeShellCommand("input keyevent 223").close()
-                waitUntil("isolated Noisy dispatch") { (SpeechAutomaticService.running as? SpeechServiceAcceptanceService)?.let { it.program==2 && it.idle }==true }
-                sendStatus(0,Bundle().apply { putString("phase","screen-off Noisy dispatch passed") })
-                val held=SpeechAutomaticService.running as SpeechServiceAcceptanceService
-                val count=SpeechServiceAcceptanceService.plays
-                runOnMainSync { SpeechServiceAcceptanceService.severity=MaskingSeverity.QUIET }
-                SystemClock.sleep(29_000)
-                runOnMainSync { check(held.program==2 && SpeechServiceAcceptanceService.plays==count) { "Cooldown did not prevent a return/duplicate send" } }
-                waitUntil("fresh sustained return to Everyday") { held.program==1 && held.idle }
-                result.putString("isolatedScreenOff",(!targetContext.getSystemService(PowerManager::class.java).isInteractive).toString())
-                runOnMainSync { held.manual() }
-                waitUntil("manual cancels Automatic") { !SpeechAutomaticService.active }
-                result.putString("isolatedExecutor","PASS: actual microphone/hidden Activity, forced debug evidence -> shared validated executor -> silent transport, Noisy then cooldown then sustained Everyday; no duplicate play; manual request cancels; no real hearing-aid output")
+                // This check can run independently after a wearer unlocks a secured phone.
                 // A new explicit session exercises notification Off without restoring/replaying a command.
                 uiAutomation.executeShellCommand("input keyevent 224").close()
                 uiAutomation.executeShellCommand("wm dismiss-keyguard").close()
@@ -156,6 +159,7 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                 waitUntil("visible Activity for second explicit start") { screen.hasWindowFocus() }
                 runOnMainSync { SpeechAutomaticService.launch(screen,config,choices,signature,SpeechServiceAcceptanceService::class.java) }
                 waitUntil("second isolated session") { SpeechAutomaticService.running!=null }
+                waitUntil("isolated notification") { targetContext.getSystemService(NotificationManager::class.java).activeNotifications.any { it.id==7305 } }
                 runOnMainSync {
                     targetContext.getSystemService(NotificationManager::class.java).activeNotifications.first { it.id==7305 }.notification.actions.single().actionIntent.send()
                 }

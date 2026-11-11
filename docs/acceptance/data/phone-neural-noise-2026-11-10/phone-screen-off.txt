@@ -1,0 +1,17 @@
+INSTRUMENTATION_STATUS: phase=native fixtures passed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=Activity opened
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=first-use and saved choices passed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=screen-off Noisy dispatch passed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: choices=PASS: isolated explicit Save survives recreation; unused choice retained; stale fitting refuses rebinding; no microphone or program command
+INSTRUMENTATION_RESULT: firstUse=PASS: pretrained packaged head, choices available without calibration/examples/learning; no acceptance lock
+INSTRUMENTATION_RESULT: isolatedExecutor=PASS: actual microphone/hidden Activity, forced debug evidence -> shared validated executor -> silent transport, Noisy then cooldown then sustained Everyday; no duplicate play; manual request cancels; no real hearing-aid output
+INSTRUMENTATION_RESULT: isolatedScreenOff=true
+INSTRUMENTATION_RESULT: native=development-0.pcm: CLEAR; development-1.pcm: MODERATE; development-2.pcm: HEAVY; heldout-0.pcm: CLEAR; heldout-1.pcm: UNKNOWN; heldout-2.pcm: HEAVY; consistency, not accuracy acceptance
+INSTRUMENTATION_RESULT: result=FAIL: Timeout: visible Activity for second explicit start
+INSTRUMENTATION_RESULT: separationCpu=2.469652369s for six recorded decisions (includes masking DSP, excludes YAMNet); not a battery-life qualification
+INSTRUMENTATION_RESULT: serviceStatus=Automatic Off; microphone stopped
+INSTRUMENTATION_CODE: 0
