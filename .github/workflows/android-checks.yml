@@ -86,9 +86,9 @@ jobs:
           mkdir -p ci-results
           mkdir -p "$ANDROID_AVD_HOME"
           touch ci-results/emulator-boot.txt
-          trap 'adb -s emulator-5554 logcat -d > ci-results/emulator-logcat.txt 2>&1 || true; cat ci-results/emulator-boot.txt; adb -s emulator-5554 emu kill || true' EXIT
+          trap 'adb -s emulator-5554 logcat -d > ci-results/emulator-logcat.txt 2>&1 || true; adb -s emulator-5554 logcat -b crash -d > ci-results/emulator-crash.txt 2>&1 || true; cat ci-results/emulator-crash.txt; cat ci-results/emulator-boot.txt; adb -s emulator-5554 emu kill || true' EXIT
           sudo chmod 666 /dev/kvm
-          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name heysig-ci --path "$ANDROID_AVD_HOME/heysig-ci.avd" --package 'system-images;android-36;google_apis;x86_64'
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name heysig-ci --device pixel_7 --path "$ANDROID_AVD_HOME/heysig-ci.avd" --package 'system-images;android-36;google_apis;x86_64'
           "$ANDROID_HOME/emulator/emulator" -list-avds
           "$ANDROID_HOME/emulator/emulator" -version
           "$ANDROID_HOME/emulator/emulator" -avd heysig-ci -port 5554 -no-window -no-audio -no-boot-anim -no-snapshot -no-metrics -memory 2048 -cores 2 -gpu swiftshader > ci-results/emulator-boot.txt 2>&1 &

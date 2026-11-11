@@ -13,6 +13,12 @@ fitting on the fresh CI emulator. The test refuses this mode unless hardware is
 opens the microphone or emits hearing-aid commands. Physical tests use their
 existing settings and do not enable this fixture mode.
 
+The API 36 baseline uses the Pixel 7 hardware profile. An initial generic
+320×640dp emulator required scrolling to reach the Home “Teach a phrase” action,
+failing the baseline test's all-actions-visible assertion. That result is
+retained as a small-viewport limitation; this workflow does not establish full
+phone screen-size coverage. Round-watch controls have separate device checks.
+
 Download `development-checks-<full commit>` from the run's artifacts. It includes
 APKs, source revision, APK hashes, test and lint reports. These are development
 builds, never production or Play submission artifacts. A failed job can still
