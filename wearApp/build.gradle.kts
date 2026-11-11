@@ -28,11 +28,12 @@ android {
         targetSdk = 35
         versionCode = 13
         versionName = "2026.11.001"
-        testInstrumentationRunner = "com.heysig.audio.NoiseAcceptance"
+        testInstrumentationRunner = "com.heysig.watch.WatchAutomaticAcceptance"
     }
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("debug").java.srcDir("../audioAndroid/src/debug/kotlin")
     sourceSets.getByName("androidTest").java.srcDir("../audioAndroid/src/androidTest/kotlin")
+    sourceSets.getByName("androidTest").manifest.srcFile("src/androidTest/AndroidManifest.xml")
     sourceSets.getByName("androidTest").assets.srcDir("../androidApp/src/androidTest/assets")
     sourceSets.getByName("androidTest").assets.srcDir("../shared/src/commonTest/fixtures/environment/scene-head/device")
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")

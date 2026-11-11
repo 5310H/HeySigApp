@@ -70,6 +70,8 @@ jobs:
         run: |
           python3 tools/check-development-apk.py androidApp/build/outputs/apk/debug/androidApp-debug.apk
           python3 tools/validate-native-apks.py --variants debug
+          "$ANDROID_HOME/build-tools/35.0.0/aapt2" dump xmltree wearApp/build/outputs/apk/androidTest/debug/wearApp-debug-androidTest.apk --file AndroidManifest.xml | grep -F 'com.heysig.watch.WatchAutomaticAcceptance'
+          "$ANDROID_HOME/build-tools/35.0.0/aapt2" dump xmltree androidApp/build/outputs/apk/androidTest/debug/androidApp-debug-androidTest.apk --file AndroidManifest.xml | grep -F 'com.heysig.app.WatchAutomaticPhoneAcceptance'
       - name: Save successful compilation cache before emulator checks
         if: steps.gradle-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
