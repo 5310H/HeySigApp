@@ -9,6 +9,13 @@ import com.heysig.noise.*
 class WatchAutomaticPhoneAcceptance:Instrumentation() {
     private var seconds=240;private var mode="remote";private var screenOff=false;private var restart=false
     override fun onCreate(args:Bundle?) { super.onCreate(args);seconds=(args?.getString("seconds")?.toIntOrNull() ?: 240).coerceIn(30,600);mode=args?.getString("mode") ?: "remote";screenOff=args?.getString("screenOff")=="true";restart=args?.getString("restart")=="true";start() }
+    override fun callActivityOnCreate(activity:Activity,state:Bundle?) {
+        if(activity is HomeActivity) {
+            activity.setTurnScreenOn(true)
+            activity.window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        super.callActivityOnCreate(activity,state)
+    }
     override fun onStart() {
         val result=Bundle();var activity:Activity?=null
         val core=targetContext.getSharedPreferences("heysig-core-v1",0)
@@ -23,7 +30,6 @@ class WatchAutomaticPhoneAcceptance:Instrumentation() {
             val focusBy=SystemClock.elapsedRealtime()+60_000
             while(!screen.hasWindowFocus() && SystemClock.elapsedRealtime()<focusBy) SystemClock.sleep(100)
             check(screen.hasWindowFocus()) { "Unlock the phone before starting the receiver test" }
-            if(!screenOff) runOnMainSync { screen.window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
             runOnMainSync {
                 check(!SpeechAutomaticService.active) { "Turn current Automatic Off before isolated testing" }
                 SpeechServiceAcceptanceService.plays=0
@@ -41,6 +47,7 @@ class WatchAutomaticPhoneAcceptance:Instrumentation() {
             check(service.summary().let { it.contains("Microphone: watch") && it.contains("Program considered:") && it.contains("Last program requested:") }) { "Automatic status must distinguish microphone source, considered program and last request" }
             sendStatus(0,Bundle().apply { putString("phase","Selected-watch silent receiver armed; start the watch test") })
             if(screenOff) {
+                runOnMainSync { screen.setTurnScreenOn(false);screen.window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
                 uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME)
                 uiAutomation.executeShellCommand("input keyevent 223").close()
             }

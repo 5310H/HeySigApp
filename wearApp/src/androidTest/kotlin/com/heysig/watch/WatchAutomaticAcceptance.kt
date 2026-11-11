@@ -20,6 +20,13 @@ import java.util.UUID
 class WatchAutomaticAcceptance:Instrumentation() {
     private var mode="native";private var screenOff=false;private var fixtures=true;private var restart=false
     override fun onCreate(args:Bundle?) { super.onCreate(args);mode=args?.getString("mode") ?: "native";screenOff=args?.getString("screenOff")=="true";fixtures=mode=="native" || args?.getString("fixtures")!="false";restart=args?.getString("restart")=="true";start() }
+    override fun callActivityOnCreate(activity:Activity,state:Bundle?) {
+        if(activity is WatchAutomaticActivity) {
+            activity.setTurnScreenOn(true)
+            activity.window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        super.callActivityOnCreate(activity,state)
+    }
     override fun onStart() {
         val result=Bundle();var activity:Activity?=null;var client:WatchAutomaticClient?=null
         fun descendants(v:View):List<View> = listOf(v)+if(v is ViewGroup) (0 until v.childCount).flatMap { descendants(v.getChildAt(it)) } else emptyList()
@@ -68,7 +75,7 @@ class WatchAutomaticAcceptance:Instrumentation() {
                 val focusBy=SystemClock.elapsedRealtime()+60_000
                 while(!screen.hasWindowFocus() && SystemClock.elapsedRealtime()<focusBy) SystemClock.sleep(100)
                 check(screen.hasWindowFocus()) { "Unlock watch before paired testing" }
-                if(!screenOff) runOnMainSync { screen.window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
+                sendStatus(0,Bundle().apply { putString("phase","Watch Automatic Activity has foreground focus") })
                 if(mode=="controlled") {
                     var ended:String?=null
                     val paired=WatchAutomaticClient(targetContext) { ended=it };client=paired
@@ -107,6 +114,7 @@ class WatchAutomaticAcceptance:Instrumentation() {
                     while(service==null && SystemClock.elapsedRealtime()<until) { service=WatchAutomaticService.running;SystemClock.sleep(100) }
                     val running=checkNotNull(service) { WatchAutomaticService.lastStatus }
                     if(screenOff) {
+                        runOnMainSync { screen.setTurnScreenOn(false);screen.window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
                         uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME)
                         uiAutomation.executeShellCommand("input keyevent 223").close()
                     }
