@@ -54,13 +54,15 @@ open class SpeechAutomaticService: Service() {
     var proposal:Int?=null;private set
     val soundLevels=ArrayDeque<Pair<Long,Double>>()
     val microphoneBusy get()=!watchMode && audio.busy()
+    internal val watchInputReady get()=watchMode && watchEndpoint?.ready==true
     private fun signature()=runtime.fitting?.programs.orEmpty().sortedBy { it.slot }.joinToString("|") { "${it.slot}:${it.name}" }
     override fun onBind(intent:Intent?)=null
     override fun onStartCommand(intent:Intent?,flags:Int,startId:Int):Int {
         if(intent?.action==OFF) { cancel();return START_NOT_STICKY }
         if(running===this) return START_NOT_STICKY
-        val pendingRequest=pending?.takeIf { it.token==intent?.getStringExtra("token") };pending=null
-        if(pendingRequest==null) { stopSelf();return START_NOT_STICKY }
+        val pendingRequest=pending?.takeIf { it.token==intent?.getStringExtra("token") }
+        if(pendingRequest==null) { stopSelf(startId);return START_NOT_STICKY }
+        pending=null
         try {
             request=pendingRequest;watchMode=request.watchNode!=null;check(signature()==request.fitting) { "Program setup changed" }
             request.settings.validate(runtime.fitting?.programs.orEmpty().map { it.slot }.toSet())

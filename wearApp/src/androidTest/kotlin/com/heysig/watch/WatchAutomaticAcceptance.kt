@@ -18,8 +18,8 @@ import java.util.UUID
 
 /** Licensed native fixtures, actual round controls and optional paired silent-controller tests. */
 class WatchAutomaticAcceptance:Instrumentation() {
-    private var mode="native";private var screenOff=false;private var fixtures=true
-    override fun onCreate(args:Bundle?) { super.onCreate(args);mode=args?.getString("mode") ?: "native";screenOff=args?.getString("screenOff")=="true";fixtures=mode=="native" || args?.getString("fixtures")!="false";start() }
+    private var mode="native";private var screenOff=false;private var fixtures=true;private var restart=false
+    override fun onCreate(args:Bundle?) { super.onCreate(args);mode=args?.getString("mode") ?: "native";screenOff=args?.getString("screenOff")=="true";fixtures=mode=="native" || args?.getString("fixtures")!="false";restart=args?.getString("restart")=="true";start() }
     override fun onStart() {
         val result=Bundle();var activity:Activity?=null;var client:WatchAutomaticClient?=null
         fun descendants(v:View):List<View> = listOf(v)+if(v is ViewGroup) (0 until v.childCount).flatMap { descendants(v.getChildAt(it)) } else emptyList()
@@ -98,7 +98,11 @@ class WatchAutomaticAcceptance:Instrumentation() {
                     }
                     runOnMainSync { paired.stopPhone() };result.putString("paired","PASS: Noisy, Universal return and Very Noisy through selected-phone grants/session/fresh sequence; phone uses silent executor")
                 } else {
-                    runOnMainSync { WatchAutomaticService.launch(screen) }
+                    runOnMainSync {
+                        if(restart) { WatchAutomaticService.launch(screen);WatchAutomaticService.stop(targetContext) }
+                        WatchAutomaticService.launch(screen)
+                    }
+                    result.putBoolean("rapidRestart",restart)
                     val until=SystemClock.elapsedRealtime()+180_000;var service:WatchAutomaticService?=null
                     while(service==null && SystemClock.elapsedRealtime()<until) { service=WatchAutomaticService.running;SystemClock.sleep(100) }
                     val running=checkNotNull(service) { WatchAutomaticService.lastStatus }

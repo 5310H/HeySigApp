@@ -46,8 +46,9 @@ class WatchAutomaticService:Service() {
     override fun onStartCommand(intent:Intent?,flags:Int,startId:Int):Int {
         if(intent?.action==OFF) { finish("Watch Automatic Off");return START_NOT_STICKY }
         if(running===this) return START_NOT_STICKY
-        val token=pendingStart;pendingStart=null
-        if(token==null || token!=intent?.getStringExtra("token")) { stopSelf();return START_NOT_STICKY }
+        val token=pendingStart
+        if(token==null || token!=intent?.getStringExtra("token")) { stopSelf(startId);return START_NOT_STICKY }
+        pendingStart=null
         try {
             check(checkSelfPermission(Manifest.permission.RECORD_AUDIO)==PackageManager.PERMISSION_GRANTED) { "Allow the watch microphone first" }
             check(!getSystemService(KeyguardManager::class.java).isKeyguardLocked) { "Unlock the watch to start Automatic" }

@@ -7,13 +7,14 @@ import com.heysig.noise.*
 
 /** Paired watch receiver test: isolated fitting and silent transport; real settings are read only. */
 class WatchAutomaticPhoneAcceptance:Instrumentation() {
-    private var seconds=240;private var mode="remote";private var screenOff=false
-    override fun onCreate(args:Bundle?) { super.onCreate(args);seconds=(args?.getString("seconds")?.toIntOrNull() ?: 240).coerceIn(30,600);mode=args?.getString("mode") ?: "remote";screenOff=args?.getString("screenOff")=="true";start() }
+    private var seconds=240;private var mode="remote";private var screenOff=false;private var restart=false
+    override fun onCreate(args:Bundle?) { super.onCreate(args);seconds=(args?.getString("seconds")?.toIntOrNull() ?: 240).coerceIn(30,600);mode=args?.getString("mode") ?: "remote";screenOff=args?.getString("screenOff")=="true";restart=args?.getString("restart")=="true";start() }
     override fun onStart() {
         val result=Bundle();var activity:Activity?=null
         val core=targetContext.getSharedPreferences("heysig-core-v1",0)
         val fitting=core.getString("fitting",null);val saved=core.getString("saved",null)
         try {
+            result.putString("capabilityLifecycle",WatchCapabilityAcceptance.verify(this))
             val prefs=targetContext.getSharedPreferences("heysig-companion",0)
             val node=checkNotNull(prefs.getString("node",null)) { "Select a paired watch first" }
             check(prefs.getBoolean("foregroundEnabledV1",false)) { "Enable the selected watch first" }
@@ -26,12 +27,16 @@ class WatchAutomaticPhoneAcceptance:Instrumentation() {
             runOnMainSync {
                 check(!SpeechAutomaticService.active) { "Turn current Automatic Off before isolated testing" }
                 SpeechServiceAcceptanceService.plays=0
-                SpeechAutomaticService.launch(screen,NoiseSettings(programs=listOf(1,1,2,2,3,3),confirmations=2,cooldownSeconds=10),
+                fun launch()=SpeechAutomaticService.launch(screen,NoiseSettings(programs=listOf(1,1,2,2,3,3),confirmations=2,cooldownSeconds=10),
                     MaskingChoices(1,2,3),"1:Everyday|2:Noisy|3:Very Noisy",SpeechServiceAcceptanceService::class.java,watchNode=node)
+                if(restart) { launch();SpeechAutomaticService.cancel() }
+                launch()
             }
-            val startBy=SystemClock.elapsedRealtime()+10_000
-            while(SpeechAutomaticService.running==null && SystemClock.elapsedRealtime()<startBy) SystemClock.sleep(100)
+            val startBy=SystemClock.elapsedRealtime()+15_000
+            while(SpeechAutomaticService.active && SpeechAutomaticService.running?.watchInputReady!=true && SystemClock.elapsedRealtime()<startBy) SystemClock.sleep(100)
             val service=checkNotNull(SpeechAutomaticService.running) { SpeechAutomaticService.lastStatus }
+            check(service.watchInputReady) { "Watch discovery did not become ready: ${SpeechAutomaticService.lastStatus}" }
+            result.putBoolean("rapidRestart",restart)
             check(!service.microphoneBusy)
             check(service.summary().let { it.contains("Microphone: watch") && it.contains("Program considered:") && it.contains("Last program requested:") }) { "Automatic status must distinguish microphone source, considered program and last request" }
             sendStatus(0,Bundle().apply { putString("phase","Selected-watch silent receiver armed; start the watch test") })

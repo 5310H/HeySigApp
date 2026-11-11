@@ -24,6 +24,7 @@ internal class WatchAutomaticEndpoint(private val context:Context,private val no
     private var closed=false
     private val issued=mutableMapOf<String,Long>()
     var hasPeer=false;private set
+    var ready=false;private set
     var lastContact=SystemClock.elapsedRealtime();private set
     private val listener=MessageClient.OnMessageReceivedListener { event ->
         if(event.path==WatchAutomaticProfile.PATH && event.sourceNodeId==node && event.data.size in 1..WatchAutomaticProfile.MAX_BYTES) {
@@ -34,9 +35,10 @@ internal class WatchAutomaticEndpoint(private val context:Context,private val no
     fun start() {
         messages.addListener(listener).addOnSuccessListener {
             if(closed) messages.removeListener(listener)
-            else capabilities.addLocalCapability(WatchAutomaticProfile.CAPABILITY).addOnSuccessListener {
-                if(closed) capabilities.removeLocalCapability(WatchAutomaticProfile.CAPABILITY)
+            else capabilityChanges.update(true,{ capabilities.addLocalCapability(WatchAutomaticProfile.CAPABILITY) },{ !closed }).addOnSuccessListener {
+                if(!closed) ready=true
             }.addOnFailureListener {
+                if(BuildConfig.DEBUG) android.util.Log.w("HeySigWatchAutomatic","Capability registration failed",it)
                 handler.post { if(!closed) stop("Watch connection unavailable") }
             }
         }.addOnFailureListener { handler.post { if(!closed) stop("Watch connection unavailable") } }
@@ -86,9 +88,11 @@ internal class WatchAutomaticEndpoint(private val context:Context,private val no
     }
     override fun close() {
         if(closed) return
-        closed=true;gate.close();samples.close();issued.clear();handler.removeCallbacksAndMessages(null)
-        messages.removeListener(listener);capabilities.removeLocalCapability(WatchAutomaticProfile.CAPABILITY)
+        closed=true;ready=false;gate.close();samples.close();issued.clear();handler.removeCallbacksAndMessages(null)
+        messages.removeListener(listener)
+        capabilityChanges.update(false,{ capabilities.removeLocalCapability(WatchAutomaticProfile.CAPABILITY) })
         val body=JSONObject().put("op","closed").put("session",session).put("text","Phone Automatic stopped")
         messages.sendMessage(node,WatchAutomaticProfile.PATH,body.toString().toByteArray(Charsets.UTF_8))
     }
+    private companion object { val capabilityChanges=WatchAutomaticCapabilityQueue() }
 }
