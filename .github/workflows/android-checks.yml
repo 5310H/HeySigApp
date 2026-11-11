@@ -26,6 +26,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        id: gradle-cache
         with:
           path: |
             ~/.gradle/caches
@@ -36,6 +37,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y libpulse0 libgl1 libxkbcommon-x11-0 libxcb-cursor0
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36' 'build-tools;35.0.0' 'platform-tools' 'emulator' 'system-images;android-36;google_apis;x86_64'
           curl --fail --location --retry 3 https://github.com/JetBrains/kotlin/releases/download/v2.2.10/kotlin-compiler-2.2.10.zip -o "$RUNNER_TEMP/kotlin.zip"
           echo "302d1d8e671e5c3207e6ed62ff11fb555462a628e22a1158254dcaaf7e7394bc  $RUNNER_TEMP/kotlin.zip" | sha256sum --check
@@ -65,12 +68,21 @@ jobs:
         run: |
           python3 tools/check-development-apk.py androidApp/build/outputs/apk/debug/androidApp-debug.apk
           python3 tools/validate-native-apks.py --variants debug
+      - name: Save successful compilation cache before emulator checks
+        if: steps.gradle-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: android-${{ runner.os }}-${{ hashFiles('**/*.gradle*', 'gradle/**', 'gradle.properties') }}
       - name: Run API 36 emulator smoke checks (silent transport)
         timeout-minutes: 12
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p ci-results
+          touch ci-results/emulator-boot.txt
           trap 'adb -s emulator-5554 logcat -d > ci-results/emulator-logcat.txt 2>&1 || true; cat ci-results/emulator-boot.txt; adb -s emulator-5554 emu kill || true' EXIT
           sudo chmod 666 /dev/kvm
           echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name heysig-ci --package 'system-images;android-36;google_apis;x86_64'
