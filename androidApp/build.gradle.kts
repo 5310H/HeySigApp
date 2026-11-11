@@ -38,6 +38,7 @@ android {
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
+    sourceSets.getByName("main").jniLibs.srcDir("../audioAndroid/src/main/jniLibs")
     defaultConfig {
         buildConfigField("String", "GIT_BUILD_ID", "\"${rootProject.extra["gitBuildId"]}\"")
         buildConfigField("String", "GIT_BUILD_DATE", "\"${rootProject.extra["gitBuildDate"]}\"")

@@ -1,4 +1,4 @@
-HeySig phone-only speech/residual analysis, experimental development feature.
+HeySig phone/watch speech/residual analysis, experimental development feature.
 RNNoise source: https://github.com/xiph/rnnoise
 Revision: 70f1d256acd4b34a572f999a05c87bf00b67730d
 Pretrained default little model archive SHA-256:

@@ -1,5 +1,18 @@
 # Release data inventory and Data safety worksheet
 
+November 11 watch-microphone Automatic update: after explicit source selection
+and foreground starts on both devices, watch PCM and neural intermediate
+waveforms are processed on the watch and erased. Compact masking/type/score,
+relative level, sample age/sequence, session controls and requested-program status
+use Wear OS MessageClient and may route through encrypted Google servers. No
+audio, cleaned audio or transcript is transferred or saved by this path. The
+phone microphone stays idle in watch mode. Phone source choice and separate
+phone/watch consent flags are saved locally; session tokens, bounded evidence
+and replay state are memory-only. Both devices have notification Off, bounded
+sessions and no restart/replay. Review the new Wear microphone foreground service,
+shared RNNoise/model inventory, background/locked-screen behavior and actual field
+results before release forms. See the [service/data-flow review](watch-automatic-background-design-2026-11-11.md).
+
 October 21 automatic-sleep scope update: the owner now requests automatic
 scheduled program changes while locked. This supersedes the historical
 reminder-only/setup-only descriptions below for the optional automatic mode.

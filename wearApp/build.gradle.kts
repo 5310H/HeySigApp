@@ -4,6 +4,8 @@ import java.net.URI
 plugins { id("com.android.application"); kotlin("android") }
 apply(from = rootProject.file("gradle/app-signing.gradle"))
 apply(from = rootProject.file("gradle/environment-model.gradle"))
+apply(from = rootProject.file("gradle/masking-model.gradle"))
+apply(from = rootProject.file("gradle/separation-model.gradle"))
 
 
 val releasePublic = Properties().apply {
@@ -31,10 +33,12 @@ android {
     sourceSets.getByName("debug").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("debug").java.srcDir("../audioAndroid/src/debug/kotlin")
     sourceSets.getByName("androidTest").java.srcDir("../audioAndroid/src/androidTest/kotlin")
+    sourceSets.getByName("androidTest").assets.srcDir("../androidApp/src/androidTest/assets")
     sourceSets.getByName("androidTest").assets.srcDir("../shared/src/commonTest/fixtures/environment/scene-head/device")
     sourceSets.getByName("release").java.srcDir("src/direct/kotlin")
     sourceSets.getByName("main").java.srcDir("../audioAndroid/src/main/kotlin")
     sourceSets.getByName("main").assets.srcDir("../audioAndroid/src/main/assets")
+    sourceSets.getByName("main").jniLibs.srcDir("../audioAndroid/src/main/jniLibs")
     defaultConfig {
         buildConfigField("String", "GIT_BUILD_ID", "\"${rootProject.extra["gitBuildId"]}\"")
         buildConfigField("String", "GIT_BUILD_DATE", "\"${rootProject.extra["gitBuildDate"]}\"")

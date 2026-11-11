@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:label="HeySig" android:theme="@style/HeySigTheme" android:allowBackup="false" android:fullBackupContent="false" android:dataExtractionRules="@xml/data_extraction_rules" android:usesCleartextTraffic="false">
+        <service android:name="com.heysig.watch.WatchAutomaticService" android:exported="false" android:stopWithTask="true" android:foregroundServiceType="microphone" />
+        <activity android:name="com.heysig.watch.WatchAutomaticActivity" android:exported="false" android:taskAffinity="${applicationId}" />
         <service android:name="com.heysig.watch.WatchVoiceSessionService" android:exported="false" android:stopWithTask="true" android:foregroundServiceType="microphone|specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="User-started eight-hour shake voice session; wake-up motion in memory and at most ten seconds of microphone recognition per deliberate shake. No continuous microphone or reboot restart." />
         </service>

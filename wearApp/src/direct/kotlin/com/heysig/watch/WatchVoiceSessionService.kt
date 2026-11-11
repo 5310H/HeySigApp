@@ -76,6 +76,7 @@ class WatchVoiceSessionService : Service(), SensorEventListener {
         if(intent?.action==STOP) { stopListening();return START_NOT_STICKY }
         if(intent?.action!=START || !startAuthorized) { if(instance==null) stopSelf();return START_NOT_STICKY }
         startAuthorized=false
+        WatchAutomaticService.stop(this)
         if(checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED ||
             !SpeechRecognizer.isRecognitionAvailable(this) || !getSystemService(NotificationManager::class.java).areNotificationsEnabled()) { stopSelf();return START_NOT_STICKY }
         val sensor=sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER,true)

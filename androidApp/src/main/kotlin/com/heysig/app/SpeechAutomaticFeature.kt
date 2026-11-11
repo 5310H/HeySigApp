@@ -18,6 +18,8 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
     private var status:TextView?=null
     private var toggle:Button?=null
     private var saveButton:Button?=null
+    private var sourceSwitch:Switch?=null
+    private fun watchSource()=sourceSwitch?.isChecked ?: (prefs.getString("captureSource","phone")=="watch")
     private var message:String?=null
     private val selectors=mutableListOf<Spinner>()
     private var readChoices:(()->MaskingChoices)?=null
@@ -37,12 +39,13 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
     private val refresh=object:Runnable {
         override fun run() { update();handler.postDelayed(this,1000) }
     }
-    fun detach() { handler.removeCallbacksAndMessages(null);status=null;toggle=null;saveButton=null;readChoices=null;renderedFitting=null;selectors.clear() }
+    fun detach() { handler.removeCallbacksAndMessages(null);status=null;toggle=null;saveButton=null;readChoices=null;renderedFitting=null;selectors.clear();sourceSwitch=null }
     private fun update() {
         val on=SpeechAutomaticService.active
         toggle?.apply { text=if(on) "On" else "Off";contentDescription="Speech-aware Automatic ${text}. Tap to turn ${if(on) "Off" else "On"}";PhoneStyle.action(this,if(on) "noiseOn" else "noiseOff") }
         selectors.forEach { it.isEnabled=!on }
         saveButton?.isEnabled=!on
+        sourceSwitch?.isEnabled=!on
         status?.text=SpeechAutomaticService.running?.summary() ?: message ?: SpeechAutomaticService.lastStatus.ifBlank { "Automatic Off. Microphone stopped." }
     }
     fun start() {
@@ -50,14 +53,27 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         check(readChoices==null || renderedFitting==signature()) { "Your program setup changed. Reopen Choose programs and review the choices." }
         check(safety().let { it.foreground && it.unlocked && it.audioFree }) { "Keep HeySig open and unlocked, and wait until speech or the current command finishes." }
         check(!activity.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) { "Unlock the phone to start Automatic" }
-        if(!prefs.getBoolean("disclosureV1",false)) {
+        val watch=watchSource()
+        val watchPrefs=activity.getSharedPreferences("heysig-companion",0)
+        val watchNode=if(watch) watchPrefs.getString("node",null) else null
+        if(watch) {
+            check(watchNode!=null && watchPrefs.getBoolean("foregroundEnabledV1",false)) { "Use Watch connection to select and enable your paired watch first" }
+            if(!prefs.getBoolean("watchAutomaticDisclosureV1",false)) {
+                AlertDialog.Builder(activity).setTitle("Use the watch microphone for Automatic?")
+                    .setMessage("This phone will accept speech/noise estimates only from your selected watch and can send real hearing-aid program tones, including with the screen locked. The phone microphone stays idle. Next, open Automatic noise on the watch and tap On after its microphone disclosure.\n\nThe watch processes three-second audio windows locally in memory. Only compact estimates, session controls and status cross Google's encrypted Wear OS Data Layer, which may route through Google servers. No audio, cleaned audio or transcripts are transferred or saved by this feature. It cannot identify your intended speaker or measure understanding.\n\nBoth devices show notifications with Off. Off on either, disconnection, manual control, Therapy, changed settings or eight-hour expiry stops Automatic; it never restarts itself. Keep the phone where your aids can hear its tones. Starting this mode stops phone microphone analysis. Battery and wrist-position accuracy need real-world validation.")
+                    .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
+                        if(prefs.edit().putBoolean("watchAutomaticDisclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
+                    }.show();return
+            }
+        }
+        if(!watch && !prefs.getBoolean("disclosureV1",false)) {
             AlertDialog.Builder(activity).setTitle("Turn on speech-aware Automatic?")
                 .setMessage("Automatic sends tones to select your chosen hearing-aid programs. It uses Universal for sustained quiet or speech that stands out, Noisy for partly masked speech, and Very Noisy for heavily masked speech. Uncertain sound or an unassigned choice keeps the current program.\n\nNo calibration, examples or learning period is needed. This experimental model can make mistakes. It cannot identify the person you want to hear or measure how clearly you understand words. Other listening features stop first.\n\nThe microphone checks for three seconds, then pauses for your saved wait time (at least ten seconds). Audio is processed on this phone in memory, then discarded. No recordings, transcripts or listening history are saved or uploaded. Only your program choices and consent are saved. Existing fitting and six sound-level choices stay unchanged.\n\nYou can lock the screen. A HeySig notification has an Off button. Tap Off here or in that notification to stop. Automatic stops after eight hours, on manual control or Therapy, if permissions/notifications are removed, or if the app is stopped. It never restarts by itself.")
                 .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
                     if(prefs.edit().putBoolean("disclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
                 }.show();return
         }
-        if(activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED) {
+        if(!watch && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED) {
             activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO),402);message="Allow microphone access, then tap Off again.";update();return
         }
         if(Build.VERSION.SDK_INT>=33 && activity.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED) {
@@ -65,7 +81,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         }
         val selected=saveChoices()
         val rollback=prepare()
-        try { SpeechAutomaticService.launch(activity,settings(),selected,signature()) } catch(e:Exception) { rollback();throw e }
+        try { SpeechAutomaticService.launch(activity,settings(),selected,signature(),watchNode=watchNode) } catch(e:Exception) { rollback();throw e }
         update()
     }
     private fun saveChoices():MaskingChoices {
@@ -73,7 +89,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         val selected=readChoices?.invoke() ?: savedChoices()
         val choices=JSONObject().put("version",1).put("fitting",signature()).put("everyday",selected.everyday ?: JSONObject.NULL)
             .put("noisy",selected.noisy ?: JSONObject.NULL).put("veryNoisy",selected.veryNoisy ?: JSONObject.NULL)
-        check(prefs.edit().putString("choices",choices.toString()).commit()) { "Could not save speech program choices" }
+        check(prefs.edit().putString("choices",choices.toString()).putString("captureSource",if(watchSource()) "watch" else "phone").commit()) { "Could not save speech program choices" }
         return selected
     }
     fun render(content:LinearLayout,index:Int?=null) {
@@ -99,6 +115,12 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         val very=choice("Very Noisy · speech heavily masked",saved.veryNoisy)
         readChoices={ fun slot(s:Spinner)=available.getOrNull(s.selectedItemPosition-1)?.slot
             MaskingChoices(slot(everyday),slot(noisy),slot(very)) }
+        sourceSwitch=Switch(activity).also { control ->
+            control.text="Use watch microphone for Automatic";control.contentDescription=control.text
+            control.isChecked=prefs.getString("captureSource","phone")=="watch"
+            control.minHeight=PhoneStyle.dp(activity,48);card.addView(control)
+        }
+        line("Phone microphone is the default. For watch input, select and enable your watch in Watch connection, save this choice, turn Automatic On here, then open Automatic noise on the watch and tap On. Both screens may sleep after the sessions start.")
         saveButton=Button(activity).also { button ->
             button.text="Save speech program choices";PhoneStyle.action(button);card.addView(button)
             button.setOnClickListener { runCatching { saveChoices();message="Your speech program choices are saved. You can go back to Noise and turn Automatic on." }.onFailure { message=it.message };update() }

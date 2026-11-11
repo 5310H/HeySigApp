@@ -1,5 +1,8 @@
 # Speech-aware Automatic
 
+The default uses the phone microphone. For local watch-microphone analysis, see
+[Watch Automatic setup](watch-automatic.md); your saved program roles are reused.
+
 1. On Home, choose your usual daytime program.
 2. Open **Noise → Choose programs**. Choose your own program for:
    - **Universal** — quiet or speech that stands out.

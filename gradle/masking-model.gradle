@@ -1,16 +1,16 @@
-// Phone-only head; same pinned encoder and inference runtime as existing monitoring.
+// Shared phone/watch head; same pinned encoder and inference runtime as existing monitoring.
 import java.security.MessageDigest
 import groovy.json.JsonSlurper
 def maskingIntegrity = new JsonSlurper().parse(rootProject.file('third_party/masking/integrity.json'))
 def verifySpeechMasking = tasks.register('verifySpeechMasking') {
-    inputs.file(rootProject.file('androidApp/src/main/assets/masking/masking-baseline.txt'))
-    inputs.file(rootProject.file('androidApp/src/main/assets/masking/NOTICE'))
-    inputs.file(rootProject.file('androidApp/src/main/assets/masking/sources.json'))
-    inputs.file(rootProject.file('androidApp/src/main/assets/masking/CC-BY-4.0.txt'))
+    inputs.file(rootProject.file('audioAndroid/src/main/assets/masking/masking-baseline.txt'))
+    inputs.file(rootProject.file('audioAndroid/src/main/assets/masking/NOTICE'))
+    inputs.file(rootProject.file('audioAndroid/src/main/assets/masking/sources.json'))
+    inputs.file(rootProject.file('audioAndroid/src/main/assets/masking/CC-BY-4.0.txt'))
     inputs.file(rootProject.file('third_party/masking/integrity.json'))
     doLast {
         maskingIntegrity.artifacts.each { name, expected ->
-            def asset=rootProject.file('androidApp/src/main/assets/masking/'+name)
+            def asset=rootProject.file('audioAndroid/src/main/assets/masking/'+name)
             assert MessageDigest.getInstance('SHA-256').digest(asset.bytes).encodeHex().toString()==expected: 'Unexpected masking artifact '+name
         }
     }

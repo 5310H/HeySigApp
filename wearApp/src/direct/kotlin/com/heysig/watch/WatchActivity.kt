@@ -94,6 +94,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
         } else beginVoiceSession(false)
     }
     private fun beginVoiceSession(capture: Boolean) {
+        WatchAutomaticService.stop(this)
         if(!active) return
         if(working) { reply("Wait for the result or press Stop.");return }
         WatchVoiceSessionService.instance?.let { if(capture) it.capture();return }
@@ -160,11 +161,7 @@ class WatchActivity : Activity(), MessageClient.OnMessageReceivedListener {
                 14 -> AlertDialog.Builder(this).setTitle("HeySig Watch")
                     .setMessage("Build ${BuildConfig.GIT_BUILD_ID} · ${BuildConfig.GIT_BUILD_DATE}")
                     .setPositiveButton("Close",null).show()
-                13 -> AlertDialog.Builder(this).setTitle("Automatic noise")
-                    .setMessage("Uses the phone microphone and saved noise-level program assignments. Keep HeySig open and unlocked on the phone. Calibration is optional. On starts real noise-level program switching.")
-                    .setPositiveButton("On") { _,_ -> send("automatic on",listOf("automatic on")) }
-                    .setNegativeButton("Off") { _,_ -> send("automatic off",listOf("automatic off")) }
-                    .setNeutralButton("Status") { _,_ -> send("noise status",listOf("noise status")) }.show()
+                13 -> startActivity(Intent(this,WatchAutomaticActivity::class.java))
                 12 -> WatchVoiceSessionService.stop(this)
                 11 -> checkWifi()
                 10 -> shakeOptions()

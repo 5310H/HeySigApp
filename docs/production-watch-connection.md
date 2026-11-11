@@ -1,5 +1,12 @@
 # Production phone/watch connection
 
+November 11: watch-microphone Automatic has a separate explicitly armed,
+selected-node service route while both foreground sessions are active. Its
+compact masking evidence uses fresh one-use grants and a session/model/age/sequence
+guard. It can continue with both screens off after explicit startup; ordinary
+foreground manual connection rules below remain unchanged. No audio crosses
+this route. See [setup](watch-automatic.md) and the [background review](watch-automatic-background-design-2026-11-11.md).
+
 Both build variants use Wear OS Data Layer MessageClient 20.0.1. They do not
 use the Linux relay, ADB forwarding, pairing files, shared relay tokens or raw
 network sockets. Google Play services restricts communication to apps with the

@@ -3,7 +3,7 @@ package com.heysig.app
 import com.heysig.noise.SpeechNoiseEstimate
 import com.heysig.noise.SpeechNoiseSeparation
 
-/** Phone-only audio adapter. Owned waveform buffers are discarded before returning scalars. */
+/** Phone/watch audio adapter (package retained for pinned JNI compatibility). Owned waveform buffers are discarded before returning scalars. */
 class NeuralSeparation {
     init { loaded }
     private external fun analyzeNative(pcm:ShortArray):FloatArray?

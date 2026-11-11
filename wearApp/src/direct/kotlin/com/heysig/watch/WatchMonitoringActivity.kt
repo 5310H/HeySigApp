@@ -35,8 +35,8 @@ class WatchMonitoringActivity: Activity() {
         button("Connect / refresh status") { connect() }
         button("Start monitoring") { start() }
         button("Stop monitoring") { stop("Monitoring off",notify=true) }
-        button("Automatic on") { command("automatic on") }
-        button("Automatic off") { command("automatic off") }
+        button("Automatic on") { startActivity(android.content.Intent(this,WatchAutomaticActivity::class.java)) }
+        button("Automatic off") { WatchAutomaticService.stop(this);status.text="Watch Automatic Off" }
         button("Choose program") {
             if(!connected || programs.isEmpty()) { status.text="Connect / refresh status first";return@button }
             AlertDialog.Builder(this).setTitle("Phone programs").setItems(programs.map { it.second }.toTypedArray()) { _,i ->
@@ -95,7 +95,7 @@ class WatchMonitoringActivity: Activity() {
             requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO),733);return
         }
         if(getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) { status.text="Unlock before monitoring";return }
-        WatchVoiceSessionService.stop(this);SleepingShakeService.stop(this)
+        WatchAutomaticService.stop(this);WatchVoiceSessionService.stop(this);SleepingShakeService.stop(this)
         session=UUID.randomUUID().toString();sequence=0;val token=++generation
         client.environment(JSONObject().put("action","start").put("session",session)
             .put("classifierProfile",EnvironmentSceneProfile.PROFILE_ID),

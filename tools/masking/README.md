@@ -78,7 +78,7 @@ The first 2052 features, event scores, source splits and decision policy remain
 the same as the baseline. HSGMASK1 remains readable for baseline comparisons.
 Do not compare a v2 head against v1 feature rows or reuse a stale reporter JAR.
 To evaluate the shipped agreement policy, add:
-`--baseline-head androidApp/src/main/assets/masking/masking-baseline.txt` to the
+`--baseline-head audioAndroid/src/main/assets/masking/masking-baseline.txt` to the
 report command. Without that option, the reporter measures the candidate alone.
 The candidate-alone result is retained separately; it is not the live policy.
 

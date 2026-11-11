@@ -1,5 +1,12 @@
 # Google Play readiness — audited October 16, 2026
 
+November 11: owner-directed watch-microphone Automatic adds an explicit Wear
+microphone foreground session and selected-watch phone receiver. Models/native
+adapters are shared between APKs; no raw audio crosses Data Layer. Review the
+[watch background/data-flow design](watch-automatic-background-design-2026-11-11.md)
+and [watch checklist](watch-noise-completion-checklist.md) before release. This
+development update does not prepare or approve a Play submission.
+
 November 10: phone Automatic now replaces the spectral-suppression head with
 local RNNoise neural analysis. This introduces pinned native libraries; older
 statements that the masking update has no new dependency no longer describe
