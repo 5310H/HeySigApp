@@ -12,14 +12,28 @@ import android.view.ViewGroup
 /** No microphone or aid playback. Run on the explicitly selected phone. */
 class Api36Smoke : Instrumentation() {
     private var captureScreens = false
+    private var freshEmulator = false
     override fun onCreate(arguments: Bundle?) {
-        super.onCreate(arguments); captureScreens = arguments?.getString("screenshots") == "true"; start()
+        super.onCreate(arguments); captureScreens = arguments?.getString("screenshots") == "true"
+        freshEmulator = arguments?.getString("freshEmulator") == "true"; start()
     }
     override fun onStart() {
         val result = Bundle()
         var activity: Activity? = null
         try {
             check(targetContext.applicationInfo.targetSdkVersion == 36)
+            if(freshEmulator) {
+                check(Build.HARDWARE == "ranchu") { "Fresh test fitting is restricted to the Android emulator" }
+                check(targetContext.getSharedPreferences("heysig-core-v1",0).all.isEmpty()) { "Fresh emulator requires empty app settings" }
+                val runtime=ManualRuntime.get(targetContext)
+                check(runtime.fitting==null)
+                // Memory-only navigation fixture, never saved as a wearer fitting or played.
+                runtime.fitting=com.heysig.control.Fitting(12,12,12,listOf("CI Universal","CI Noisy","CI Very Noisy","CI Therapy").mapIndexed { index,name ->
+                    com.heysig.control.Program(index+1,name,com.heysig.control.TinnitusCapability.SUPPORTED)
+                })
+                runtime.requested=com.heysig.control.RequestedState(program=1)
+                result.putString("fixture","Fresh ranchu emulator only; synthetic in-memory fitting, no aid output")
+            }
             activity = startActivitySync(Intent(targetContext,HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             waitForIdleSync()
             val screen = checkNotNull(activity)
@@ -79,10 +93,15 @@ class Api36Smoke : Instrumentation() {
             }
 
             fun open(label:String) {
+                var selected:Button?=null
+                var available=""
                 runOnMainSync {
-                    descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
-                        .first { it.text.toString().equals(label,true) }.performClick()
+                    val buttons=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
+                    selected=buttons.firstOrNull { it.text.toString().equals(label,true) }
+                    available=buttons.joinToString { it.text.toString() }
                 }
+                val button=checkNotNull(selected) { "Missing button '$label'; available: $available" }
+                runOnMainSync { button.performClick() }
                 waitForIdleSync()
             }
             capture("home")

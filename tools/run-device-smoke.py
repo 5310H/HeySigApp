@@ -12,6 +12,7 @@ def main():
     parser.add_argument('--device', required=True, help='Exact authorized ADB serial/IP:port')
     parser.add_argument('--report', type=Path)
     parser.add_argument('--screenshots', action='store_true', help='Capture local UI previews in the development app external files directory')
+    parser.add_argument('--fresh-emulator', action='store_true', help='Use a synthetic memory-only fitting; runner requires ranchu hardware and empty app settings')
     args = parser.parse_args()
     for apk in ('androidApp/build/outputs/apk/debug/androidApp-debug.apk',
                 'androidApp/build/outputs/apk/androidTest/debug/androidApp-debug-androidTest.apk'):
@@ -21,6 +22,8 @@ def main():
     command = ['adb','-s',args.device,'shell','am','instrument','-w']
     if args.screenshots:
         command += ['-e','screenshots','true']
+    if args.fresh_emulator:
+        command += ['-e','freshEmulator','true']
     command += ['com.heysig.batteryprototype.test/com.heysig.app.Api36Smoke']
     completed = subprocess.run(command,capture_output=True,text=True)
     output = completed.stdout+completed.stderr

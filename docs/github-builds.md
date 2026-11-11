@@ -7,6 +7,12 @@ APK/native contents, and runs the silent API 36 emulator smoke runner. The pinne
 Gradle wrapper and Kotlin compiler are used on GitHub's Ubuntu runner. Heavy
 compilation and emulator work no longer need to run on the Chromebook.
 
+The navigation smoke test uses an explicitly requested synthetic in-memory
+fitting on the fresh CI emulator. The test refuses this mode unless hardware is
+`ranchu` and the app's core settings are empty. It never saves a wearer fitting,
+opens the microphone or emits hearing-aid commands. Physical tests use their
+existing settings and do not enable this fixture mode.
+
 Download `development-checks-<full commit>` from the run's artifacts. It includes
 APKs, source revision, APK hashes, test and lint reports. These are development
 builds, never production or Play submission artifacts. A failed job can still

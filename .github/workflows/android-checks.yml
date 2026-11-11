@@ -100,7 +100,7 @@ jobs:
           done
           test "$(adb -s emulator-5554 shell getprop sys.boot_completed | tr -d '\r')" = 1
           adb -s emulator-5554 shell input keyevent 82
-          timeout 180 python3 tools/run-device-smoke.py --device emulator-5554 --report ci-results/emulator-smoke.txt
+          timeout 180 python3 tools/run-device-smoke.py --device emulator-5554 --fresh-emulator --report ci-results/emulator-smoke.txt
       - name: Record exact source and APK hashes
         if: always()
         run: |
