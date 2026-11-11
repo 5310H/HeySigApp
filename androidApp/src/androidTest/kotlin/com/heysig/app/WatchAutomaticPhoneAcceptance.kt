@@ -33,6 +33,7 @@ class WatchAutomaticPhoneAcceptance:Instrumentation() {
             while(SpeechAutomaticService.running==null && SystemClock.elapsedRealtime()<startBy) SystemClock.sleep(100)
             val service=checkNotNull(SpeechAutomaticService.running) { SpeechAutomaticService.lastStatus }
             check(!service.microphoneBusy)
+            check(service.summary().let { it.contains("Microphone: watch") && it.contains("Program considered:") && it.contains("Last program requested:") }) { "Automatic status must distinguish microphone source, considered program and last request" }
             sendStatus(0,Bundle().apply { putString("phase","Selected-watch silent receiver armed; start the watch test") })
             if(screenOff) {
                 uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME)

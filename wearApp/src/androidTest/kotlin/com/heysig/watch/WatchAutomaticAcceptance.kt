@@ -18,16 +18,17 @@ import java.util.UUID
 
 /** Licensed native fixtures, actual round controls and optional paired silent-controller tests. */
 class WatchAutomaticAcceptance:Instrumentation() {
-    private var mode="native";private var screenOff=false
-    override fun onCreate(args:Bundle?) { super.onCreate(args);mode=args?.getString("mode") ?: "native";screenOff=args?.getString("screenOff")=="true";start() }
+    private var mode="native";private var screenOff=false;private var fixtures=true
+    override fun onCreate(args:Bundle?) { super.onCreate(args);mode=args?.getString("mode") ?: "native";screenOff=args?.getString("screenOff")=="true";fixtures=mode=="native" || args?.getString("fixtures")!="false";start() }
     override fun onStart() {
         val result=Bundle();var activity:Activity?=null;var client:WatchAutomaticClient?=null
         fun descendants(v:View):List<View> = listOf(v)+if(v is ViewGroup) (0 until v.childCount).flatMap { descendants(v.getChildAt(it)) } else emptyList()
         try {
+            check(mode in listOf("native","controlled","capture","watchOff")) { "Unknown watch test mode; no capture started" }
             val manifest=JSONObject(context.assets.open("masking-fixtures/manifest.json").bufferedReader().use { it.readText() })
             val fixtures=manifest.getJSONArray("fixtures");val detector=SpeechSeparationDetector.load(targetContext);val denoiser=com.heysig.app.NeuralSeparation()
             val classes=mutableListOf<String>();var nativeCpu=0L
-            for(i in 0 until fixtures.length()) {
+            for(i in 0 until if(this.fixtures) fixtures.length() else 0) {
                 val fixture=fixtures.getJSONObject(i);val raw=context.assets.open("masking-fixtures/${fixture.getString("file")}").use { it.readBytes() }
                 check(MessageDigest.getInstance("SHA-256").digest(raw).joinToString("") { "%02x".format(it) }==fixture.getString("sha256"))
                 val pcm=ShortArray(raw.size/2) { n -> ((raw[n*2].toInt() and 255) or (raw[n*2+1].toInt() shl 8)).toShort() }
@@ -46,15 +47,18 @@ class WatchAutomaticAcceptance:Instrumentation() {
                     check(evidence?.severity?.name==fixture.getString("severity") && kotlin.math.abs(checkNotNull(evidence).score-fixture.getDouble("score"))<.01) { "Native watch decision differs: $evidence" }
                     classes.add("${fixture.getString("file")}: ${evidence?.severity}")
                 } finally { pcm.fill(0);raw.fill(0) }
+                sendStatus(0,Bundle().apply { putString("phase","Native fixture ${i+1} of ${fixtures.length()} passed") })
             }
-            result.putString("native",classes.joinToString("; "));result.putString("nativeCpu","${nativeCpu/1e9}s excluding YAMNet; consistency only")
+            result.putString("native",if(this.fixtures) classes.joinToString("; ") else "SKIPPED by explicit fixtures=false; retain separate native-run evidence")
+            result.putString("nativeCpu","${nativeCpu/1e9}s excluding YAMNet; consistency only")
             runOnMainSync {
                 for(scale in listOf(1f,2f)) {
                     val config=Configuration(targetContext.resources.configuration).apply { fontScale=scale;screenWidthDp=192;screenHeightDp=192;screenLayout=(screenLayout and Configuration.SCREENLAYOUT_ROUND_MASK.inv()) or Configuration.SCREENLAYOUT_ROUND_YES }
                     val ctx=targetContext.createConfigurationContext(config);val width=(192*ctx.resources.displayMetrics.density).toInt()
-                    val view=WatchAutomaticLayout.create(ctx,"Build test",{},{}).view
+                    val layout=WatchAutomaticLayout.create(ctx,"Build test",{},{});val view=layout.view
                     view.measure(View.MeasureSpec.makeMeasureSpec(width,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(width,View.MeasureSpec.EXACTLY));view.layout(0,0,width,width)
                     check(descendants(view).filterIsInstance<Button>().all { it.measuredHeight>=48*ctx.resources.displayMetrics.density && it.right<=width }) { "Round/large-font buttons clipped or too small" }
+                    check(layout.toggle.top<layout.status.top && layout.toggle.bottom<=width) { "Automatic On/Off must remain above long status and visible without scrolling" }
                 }
             }
             result.putString("layout","PASS: actual 192dp round Automatic controls at font scales 1 and 2, >=48dp buttons")
@@ -75,6 +79,7 @@ class WatchAutomaticAcceptance:Instrumentation() {
                         return checkNotNull(reply).also { check(it.optBoolean("active",false)) { it.optString("text") } }
                     }
                     rpc { paired.connect(it) };var sequence=0L
+                    sendStatus(0,Bundle().apply { putString("phase","Selected-phone controlled session connected") })
                     fun sample(severity:MaskingSeverity) {
                         val captured=SystemClock.elapsedRealtime();val id=UUID.randomUUID().toString()
                         val lease=rpc { paired.request("prepare",JSONObject().put("id",id),it) }
