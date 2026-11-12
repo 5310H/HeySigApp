@@ -1,0 +1,22 @@
+INSTRUMENTATION_STATUS: sample={"sample":1,"elapsedMillis":3844,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":479825108}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":2,"elapsedMillis":17826,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":842633957}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=Two full-native phone samples complete; ready for interruption
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: analysisCpuNanos=842633957
+INSTRUMENTATION_RESULT: elapsedMillis=17944
+INSTRUMENTATION_RESULT: finalStatus=Speech-aware Automatic On
+Microphone: phone.
+Not sure yet. Speech and separated-background estimates disagree; keep current program.
+Sound type: Mostly speech. Masking: Not sure yet.
+Program considered: keep current program.
+Last program requested: Everyday.
+Aid reception and improved understanding are not confirmed.
+2 completed checks. Automatic can send program-change tones.
+INSTRUMENTATION_RESULT: result=PASS: full native phone captures with isolated silent executor; not field accuracy, listening benefit or endurance qualification
+INSTRUMENTATION_RESULT: samples=2
+INSTRUMENTATION_RESULT: screenOff=false
+INSTRUMENTATION_RESULT: silentPlays=0
+INSTRUMENTATION_RESULT: stop=Automatic Off; microphone stopped
+INSTRUMENTATION_CODE: -1

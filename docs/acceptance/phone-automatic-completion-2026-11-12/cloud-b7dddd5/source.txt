@@ -1,0 +1,7 @@
+commit b7dddd54ad970c8125c34ec5a78a1d5a8fe222b6
+Author:     5310H <5310@trahreg.com>
+AuthorDate: Thu Nov 12 11:05:35 2026 -0500
+Commit:     5310H <5310@trahreg.com>
+CommitDate: Thu Nov 12 11:05:35 2026 -0500
+
+    test: register native phone interruption runner

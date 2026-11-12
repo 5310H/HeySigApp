@@ -1,0 +1,7 @@
+commit 0b55016b55e61f39f9d9568d2865d4c51c14e20d
+Author:     5310H <5310@trahreg.com>
+AuthorDate: Wed Nov 11 19:47:22 2026 -0500
+Commit:     5310H <5310@trahreg.com>
+CommitDate: Wed Nov 11 19:47:22 2026 -0500
+
+    fix: recheck comparison audio readiness on each tap

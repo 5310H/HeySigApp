@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-12",
+  "build": "0b55016",
+  "conditions": "owner-confirmed TV playing and nearby person available; unblinded, no recording",
+  "sequence": [
+    "Universal baseline",
+    "Noisy approximately 30 seconds",
+    "Universal return"
+  ],
+  "understanding": "about the same",
+  "effort": "uncertain",
+  "comfort": "uncertain",
+  "awareness": "uncertain",
+  "reception": "Heard both; back in Universal",
+  "benefit": "no demonstrated advantage in this trial",
+  "limitations": [
+    "single subjective trial",
+    "saved per-program levels apply",
+    "no word score or calibrated acoustic SNR"
+  ]
+}

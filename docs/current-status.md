@@ -1,22 +1,34 @@
-# Current phone/watch checkpoint — November 11, 2026
+# Current phone/watch checkpoint — November 12, 2026
 
-Pixel 9a and Pixel Watch 3 have **HeySig — Build 4a25d01 · Nov 11, 2026**
-installed. The owner requested dropping the Dev label and removing older copies.
-Old phone/watch HeySig and watch-only legacy packages were removed with their
-stored data retained. The current paired package/signing identity is unchanged;
-this remains a development artifact. Exact installed APK hashes and HeySig labels
-were verified, and all 13 phone and one watch user-preference files survived the
-in-place update. See [the rename record](acceptance/app-name-cleanup-2026-11-11.md).
+Phone and watch have **HeySig — Build b7dddd5 · Nov 12, 2026** installed from
+pushed source and successful cloud checks (37 shared tests, builds/lint, native
+pins/alignment and emulator smoke). All 13 phone and one watch user-preference
+files survived in-place updates. The separate older copies remain removed, with
+their stored data retained. Development IDs/signers and pairing are unchanged.
+See [the rename record](acceptance/app-name-cleanup-2026-11-11.md).
 
-The preceding Build c53746e passed rapid restart/controlled transitions, real
-watch capture with both screens off, both notification Off actions, manual
-priority and recording-access-loss checks. Phone microphone activity remained
-absent in watch mode. Phone smoke passed on SDK 37; reopening both apps without
-On did not restart capture. See [behavioral evidence](acceptance/automatic-completion-2026-11-11.md).
+The optional Noise → Compare saved programs workflow is implemented: explicit
+review, manual A/B/return, Therapy exclusion, stale/pending/audio guards and four
+memory-only feedback choices. It does not start capture, train the detector or
+require enrollment. The physical SDK 37 phone smoke/comparison regression passed.
+All model/native packaged bytes are unchanged from Build 4a25d01.
 
-The owner authorized a short real Noisy → Universal check using existing saved
-per-program targets, heard both changes and confirmed Universal restored. This
-is physical reception evidence for that sequence, not speech-benefit evidence.
+Owner-confirmed manual reception now covers Noisy → Universal and Very Noisy →
+Universal. The TV/nearby-person comparison found understanding about the same;
+effort, comfort and awareness were uncertain. Both changes were heard and
+Universal restored. No listening advantage was demonstrated in this trial.
+
+Final-build full-native phone checks passed notification Off, microphone privacy
+loss/restoration, microphone/notification permission removal with exact grant/flag
+restoration, explicit process stop, manual priority and no capture restart on
+reopening. Android process termination during permission revocation was expected
+and is reported separately from an instrumentation pass. A one-minute TV-only
+control produced five UNKNOWN holds and zero program requests. A ten-minute screen-off native pilot completed 43 samples with zero requests;
+18.64 seconds analysis CPU and battery/thermal endpoints are recorded without an
+all-day claim. Real calls were explicitly deferred. See [November 12 evidence](acceptance/phone-automatic-completion-2026-11-12.md).
+
+Earlier paired watch transitions, screen-off delivery and round/large-font results
+remain versioned in [November 11 evidence](acceptance/automatic-completion-2026-11-11.md).
 
 Normal Automatic uses local speech evidence and RNNoise corroboration with saved
 speech roles. Watch-source mode analyzes on the watch and leaves command execution

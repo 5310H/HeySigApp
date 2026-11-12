@@ -1,0 +1,20 @@
+{
+  "phone": {
+    "label": "HeySig",
+    "build": "b7dddd5",
+    "installedApkMatches": true,
+    "installedPackages": [
+      "package:com.heysig.batteryprototype",
+      "package:com.heysig.batteryprototype.test"
+    ]
+  },
+  "watch": {
+    "label": "HeySig",
+    "build": "b7dddd5",
+    "installedApkMatches": true,
+    "installedPackages": [
+      "package:com.heysig.batteryprototype",
+      "package:com.heysig.batteryprototype.test"
+    ]
+  }
+}

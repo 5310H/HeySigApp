@@ -1,6 +1,9 @@
 # Watch microphone Automatic checklist — November 11, 2026
 
-Latest installed: **Build c53746e · Nov 11, 2026** on Pixel 9a and Pixel Watch 3.
+Latest installed: **HeySig — Build b7dddd5 · Nov 12, 2026** on phone and watch.
+The [phone follow-up](acceptance/phone-automatic-completion-2026-11-12.md) adds
+a phone comparison workflow/test runner; watch behavioral passes below retain
+their November 11 versioned evidence. Model/native assets are unchanged.
 See [final update and paired evidence](acceptance/automatic-completion-2026-11-11.md)
 and [earlier preservation/fixture evidence](acceptance/research-update-2026-11-11.md).
 Checked engineering items do not imply listening benefit or field accuracy.

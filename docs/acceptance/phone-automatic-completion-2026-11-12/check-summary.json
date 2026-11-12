@@ -1,0 +1,58 @@
+{
+  "notification-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": false,
+    "instrumentationResult": "PASS: full native phone captures with isolated silent executor; not field accuracy, listening benefit or endurance qualification",
+    "sampleReports": 2
+  },
+  "privacy-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": false,
+    "instrumentationResult": "PASS: full native phone captures with isolated silent executor; not field accuracy, listening benefit or endurance qualification",
+    "sampleReports": 2
+  },
+  "mic-permission-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": true,
+    "instrumentationResult": "Process crashed.",
+    "sampleReports": 2
+  },
+  "notification-permission-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": true,
+    "instrumentationResult": "Process crashed.",
+    "sampleReports": 2
+  },
+  "manual-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": false,
+    "instrumentationResult": "PASS: full native phone captures with isolated silent executor; not field accuracy, listening benefit or endurance qualification",
+    "sampleReports": 2
+  },
+  "process-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": true,
+    "instrumentationResult": "Process crashed.",
+    "sampleReports": 2
+  },
+  "tv-only-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": false,
+    "instrumentationResult": "PASS: full native phone captures with isolated silent executor; not field accuracy, listening benefit or endurance qualification",
+    "sampleReports": 5
+  },
+  "screen-off-10min-b7dddd5": {
+    "preferencesPreserved": true,
+    "userPreferenceFiles": 13,
+    "expectedProcessTermination": false,
+    "instrumentationResult": "PASS: full native phone captures with isolated silent executor; not field accuracy, listening benefit or endurance qualification",
+    "sampleReports": 43
+  }
+}

@@ -1,0 +1,15 @@
+SENSOR PRIVACY MANAGER STATE (dumpsys sensor_privacy)
+{
+  storage_implementation=com.android.server.sensorprivacy.SensorPrivacyStateControllerImpl
+  users={
+    user_id=0
+    sensors={
+      sensor=1
+      toggles={
+        toggle_type=1
+        state_type=2
+        last_change=2255166754
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "elapsedMillis": 600117,
+  "samples": 43,
+  "capturedSeconds": 129,
+  "severities": {
+    "UNKNOWN": 40,
+    "HEAVY": 3
+  },
+  "silentPlays": 0,
+  "analysisCpuSeconds": 18.637242492,
+  "batteryBefore": {
+    "level": 88,
+    "temperature": 261,
+    "Charge counter": 4182500,
+    "status": 3
+  },
+  "batteryAfter": {
+    "level": 88,
+    "temperature": 251,
+    "Charge counter": 4155000,
+    "status": 3
+  },
+  "thermalStatusBefore": 0,
+  "thermalStatusAfter": 0,
+  "limits": "whole-phone snapshots, no matched Off baseline; not an all-day estimate or field-accuracy qualification"
+}

@@ -1,0 +1,2 @@
+Uid mode: RECORD_AUDIO: foreground
+RECORD_AUDIO: allow; time=+5s558ms ago; rejectTime=+47s626ms ago; duration=+3s149ms

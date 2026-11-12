@@ -1,6 +1,6 @@
 # HeySig remaining work checklist
 
-## Current checkpoint — November 11, 2026
+## Current checkpoint — November 12, 2026
 
 This checkpoint and the current [phone](phone-noise-completion-checklist.md) and
 [watch](watch-noise-completion-checklist.md) checklists take precedence over
@@ -14,7 +14,7 @@ The older experimental six-scene qualification gates remain unchanged.
   preserving saved assignments, fitting, manual/Therapy priority and one executor.
 - [x] Validate pushed app source with cloud shared checks, builds, lint,
   native/model/license pins and API 36 emulator smoke checks.
-- [x] Update Pixel 9a and Pixel Watch 3 to **Build c53746e · Nov 11, 2026**,
+- [x] Update Pixel 9a and Pixel Watch 3 to **HeySig — Build b7dddd5 · Nov 12, 2026**,
   preserving 13 phone and one watch user-preference files through upgrade and tests.
 - [x] Pass phone silent smoke tests on SDK 37 and all six watch native fixtures;
   verify 192dp round Automatic controls at font scales 1 and 2.
@@ -26,11 +26,17 @@ The older experimental six-scene qualification gates remain unchanged.
   phone-mic-idle, recording-access-loss and watch notification Off checks.
 - [x] Confirm short manual physical reception: wearer heard Noisy → Universal
   and confirmed Universal restored using existing saved per-program settings.
+- [x] Implement optional manual saved-program comparison with memory-only feedback.
+- [x] Verify final-build native phone notification Off, privacy/permission loss and restoration, process stop, manual priority and no restart on reopening.
+- [x] Confirm Very Noisy → Universal reception and run preliminary TV/nearby-person comparison; no demonstrated advantage.
+- [x] Run one-minute TV-only native control: five holds, zero requests; retain its limited denominator.
+- [x] Record initial ten-minute phone screen-off resource pilot: 43 samples, zero requests; longer endurance still open.
 - [ ] Measure independent real-world accuracy, source placement, listening benefit
   and sustained battery/thermal behavior; preserve failures and denominators.
 - [ ] Complete wider automatic field/listening acceptance and separate release/Play requirements.
 
-Evidence: [final update and device checks](acceptance/automatic-completion-2026-11-11.md),
+Evidence: [November 12 phone completion](acceptance/phone-automatic-completion-2026-11-12.md),
+[paired update and device checks](acceptance/automatic-completion-2026-11-11.md),
 [watch implementation](acceptance/watch-automatic-2026-11-11.md) and
 [research findings and limits](research/hearing-aid-concepts-2026-11-11.md).
 
@@ -39,8 +45,10 @@ Evidence: [final update and device checks](acceptance/automatic-completion-2026-
 1. **Finish remaining interruption acceptance.** Controlled transitions, rapid
    restart, real screen-off capture, phone-mic-idle, recording-access loss and
    notification Off on both devices and manual priority passed on Build c53746e.
-   Actual radio outage, notification-permission loss and maximum
-   session expiry remain open. Preserve failures and distinguish process loss
+   Phone native notification/permission/privacy checks, process stop and reopen
+   checks also passed on Build b7dddd5. Actual calls are owner-deferred. Actual
+   radio outage, watch notification-permission loss and maximum session expiry
+   remain open. Preserve failures and distinguish process loss
    from a real radio outage.
 2. **Retain clear decision status.** Source, masking estimate, hold reason,
    proposed program and last request are now exposed. Continue checking their
@@ -57,8 +65,9 @@ Evidence: [final update and device checks](acceptance/automatic-completion-2026-
    existing program configuration and record actual reception separately. Offer
    an optional manual comparison of two saved daytime programs with an immediate
    return action; assess words understood, effort, comfort and environmental
-   awareness separately. New comparison UI is proposed work, not implemented.
-   Feedback stays memory-only by default; saving needs explicit review. This is
+   awareness separately. The optional comparison UI is implemented; the first
+   trial found understanding about the same and other outcomes uncertain. Feedback
+   stays memory-only and no saving feature is implemented. This is
    not an enrollment/learning prerequisite for Automatic.
 5. **Finish endurance and release work.** Measure sustained phone/watch battery,
    thermal and interruption behavior, then complete the release checklist and

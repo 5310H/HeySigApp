@@ -1,6 +1,8 @@
-# Phone Automatic completion checklist — November 10, 2026
+# Phone Automatic completion checklist — November 12, 2026
 
-Last verified November 11: installed phone **Build c53746e · Nov 11, 2026**.
+Latest installed: **HeySig — Build b7dddd5 · Nov 12, 2026** (phone and watch).
+The November 12 [follow-up](acceptance/phone-automatic-completion-2026-11-12.md)
+tracks the new comparison workflow, native interruption checks and wearer reports.
 The [final update record](acceptance/automatic-completion-2026-11-11.md) covers
 the in-place upgrade, paired checks and preserved user preferences. Earlier
 SDK 37 phone smoke and pinned watch fixtures remain version-specific evidence.
@@ -28,11 +30,11 @@ listening benefit and Google Play readiness.
   priority, and the one validated executor. Do not infer aid reception from playback.
 - [x] Pin denoiser libraries/model bands and include their source/license notices.
 - [x] Complete shared noise shell regressions (all passed November 10).
-- [x] Complete Gradle shared tests (35 passed), phone/test APK builds and Android lint (zero errors).
+- [x] Complete Gradle shared tests (37 passed on the latest candidate), phone/test APK builds and Android lint (zero errors).
 - [x] Verify native APK inventory, alignment, active assets and absence of retired head (24 pinned libraries; ELF/ZIP >=16KB).
 - [x] Run Android native fixtures, UI/choice preservation and silent lifecycle checks on the phone (screen-off/manual and foreground notification-Off runs).
-- [x] Commit and push only this update; build final device APK from pushed commit 7b51fe2.
-- [x] Upgrade the physical phone in place; verify Build revision/date and five unchanged preference files, including after all tests.
+- [x] Commit/push app updates before final APKs; initial neural fix 7b51fe2 and latest candidate b7dddd5 have separate versioned evidence.
+- [x] Upgrade the physical phone in place and verify Build revision/date; initial five-file preservation and latest 13 phone/one watch user-preference preservation are recorded separately.
 
 - [x] Fix and verify foreground notification startup: no microphone before notification registration; bounded startup wait; notification Off stops the session.
 
@@ -42,6 +44,7 @@ listening benefit and Google Play readiness.
   [the acceptance report](acceptance/phone-neural-noise-2026-11-10.md).
 - [ ] Evaluate independent, previously unseen speakers/backgrounds with real TV,
   music, quiet, appliance, traffic and overlapping-conversation controls.
+- [x] Run one new TV-only native control: five UNKNOWN holds, zero requests over 60 seconds (not broad accuracy acceptance).
 - [ ] Reduce background-only false changes and TV mistaken for wanted speech.
 - [ ] Improve moderate masking coverage without increasing wrong accepted changes.
 - [ ] Validate sustained return to Universal in representative quiet environments.
@@ -56,12 +59,12 @@ listening benefit and Google Play readiness.
 Use the [manufacturer-source review](research/hearing-aid-concepts-2026-11-11.md)
 as design input; it does not establish equivalent hardware capabilities or benefit.
 
-- [ ] Audit visible source, masking estimate, hold reason, confirmation/cooldown
+- [x] Audit visible source, masking estimate, hold reason, confirmation/cooldown
   and proposed saved program together; use existing bounded samples only.
-- [ ] Design an optional comparison of two saved daytime programs with immediate
+- [x] Implement an optional comparison of two saved daytime programs with immediate
   return, separate understanding/effort/comfort/awareness questions and memory-only
   feedback by default. No enrollment, adaptive wearer learning or enable lock.
-- [ ] Keep RNNoise retained/residual ratio and classifier confidence labelled as
+- [x] Keep RNNoise retained/residual ratio and classifier confidence labelled as
   estimates, not ear-level target-speaker SNR or measured intelligibility.
 
 ## Listening and physical acceptance
@@ -69,12 +72,18 @@ as design input; it does not establish equivalent hardware capabilities or benef
 - [ ] Obtain the audiologist's existing Universal/Noisy/Very Noisy configuration
   and intended use by email; no appointment or fitting changes requested.
 - [ ] Verify saved role-to-program numbers against that configuration.
-- [ ] Record actual aid reception for each program command with wearer confirmation.
+- [x] Record owner-confirmed Noisy → Universal reception and Universal restored (November 11).
+- [x] Confirm Very Noisy reception and return to Universal; owner confirmed both on November 12.
+- [x] Run a preliminary Universal/Noisy comparison with TV and a nearby speaker: understanding about the same; effort/comfort/awareness uncertain; Universal restored.
 - [ ] Compare understanding, effort, comfort and environmental awareness in representative situations;
   record both benefits and worse outcomes. Do not label model SNR as intelligibility.
-- [ ] Measure sustained screen-off operation, CPU/battery use and thermal impact.
-- [ ] Verify phone calls/audio interruptions, permission removal, microphone privacy
-  toggle, notification Off and process/task stop on the physical phone.
+- [x] Measure an initial ten-minute screen-off native pilot: 43 samples, no requests, 18.64 seconds analysis CPU, battery/thermal endpoints recorded; settings preserved.
+- [ ] Qualify longer representative battery/thermal endurance with appropriate baseline and workload; the short pilot is not all-day evidence.
+- [x] Verify native phone notification Off and manual cancellation (Build b7dddd5; earlier evidence remains versioned).
+- [x] Verify phone microphone permission removal and microphone privacy toggle with restoration (Build b7dddd5).
+- [x] Verify notification-permission removal and restoration; expected Android process termination and capture stop confirmed.
+- [x] Verify explicit process stop and reopening both apps without Automatic restart on final candidate.
+- [ ] Verify actual phone calls and other audio interruptions on the physical phone (owner deferred real call check November 12).
 
 ## Release and later work
 

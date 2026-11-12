@@ -1,0 +1,8 @@
+INSTRUMENTATION_STATUS: sample={"sample":1,"elapsedMillis":3840,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":472251124}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":2,"elapsedMillis":17632,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":578025903}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=Two full-native phone samples complete; ready for interruption
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+INSTRUMENTATION_CODE: 0

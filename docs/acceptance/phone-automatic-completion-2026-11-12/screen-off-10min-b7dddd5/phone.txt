@@ -1,0 +1,104 @@
+INSTRUMENTATION_STATUS: sample={"sample":1,"elapsedMillis":4273,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":930841831}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":2,"elapsedMillis":18536,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":1460735381}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: phase=Two full-native phone samples complete; ready for interruption
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":3,"elapsedMillis":32747,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":1986629802}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":4,"elapsedMillis":46836,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":2458099331}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":5,"elapsedMillis":60737,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":2620738527}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":6,"elapsedMillis":74731,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":3140648764}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":7,"elapsedMillis":88825,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":3664689905}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":8,"elapsedMillis":102999,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":4187379129}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":9,"elapsedMillis":117195,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":4704946593}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":10,"elapsedMillis":130965,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":4873963359}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":11,"elapsedMillis":144961,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":5389548395}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":12,"elapsedMillis":159165,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":5902838558}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":13,"elapsedMillis":173359,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":6458417585}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":14,"elapsedMillis":187137,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Music or mixed media; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":6612358588}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":15,"elapsedMillis":201126,"severity":"HEAVY","soundType":"UNKNOWN","score":0.9970217210629704,"reason":"Masking estimates agree; removed sound includes speech-like activity, not verified pure noise","programRequested":1,"silentPlays":0,"analysisCpuNanos":7123856760}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":16,"elapsedMillis":214909,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":7277491447}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":17,"elapsedMillis":228610,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Music or mixed media; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":7388992879}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":18,"elapsedMillis":242587,"severity":"HEAVY","soundType":"SPEECH","score":0.912157742174742,"reason":"Speech and separated-background estimates agree; requires repeated fresh checks","programRequested":1,"silentPlays":0,"analysisCpuNanos":7902922245}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":19,"elapsedMillis":256786,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":8415960359}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":20,"elapsedMillis":270574,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Music or mixed media; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":8572098179}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":21,"elapsedMillis":284250,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":8712885605}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":22,"elapsedMillis":298223,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":9232113872}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":23,"elapsedMillis":312030,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":9383761533}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":24,"elapsedMillis":326001,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":9901959881}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":25,"elapsedMillis":340200,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":10418326304}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":26,"elapsedMillis":353984,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":10576267184}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":27,"elapsedMillis":367968,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":11094388527}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":28,"elapsedMillis":382160,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":11610151590}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":29,"elapsedMillis":396350,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":12124564304}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":30,"elapsedMillis":410530,"severity":"HEAVY","soundType":"SPEECH","score":0.6931993682570105,"reason":"Masking estimates agree; removed sound includes speech-like activity, not verified pure noise","programRequested":1,"silentPlays":0,"analysisCpuNanos":12642623021}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":31,"elapsedMillis":424616,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":13157912009}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":32,"elapsedMillis":438494,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Masking estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":13315353579}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":33,"elapsedMillis":452164,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Interrupted, clipped or isolated sound; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":13470548477}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":34,"elapsedMillis":466155,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":13989217081}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":35,"elapsedMillis":480335,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":14507992712}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":36,"elapsedMillis":494426,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":15026399982}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":37,"elapsedMillis":508618,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":15538531043}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":38,"elapsedMillis":522822,"severity":"UNKNOWN","soundType":"UNKNOWN","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":16056980547}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":39,"elapsedMillis":537005,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":16569016356}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":40,"elapsedMillis":551099,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":17077373535}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":41,"elapsedMillis":565298,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":17597081271}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":42,"elapsedMillis":579367,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":18118655337}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: sample={"sample":43,"elapsedMillis":593544,"severity":"UNKNOWN","soundType":"SPEECH","score":0,"reason":"Speech and separated-background estimates disagree; keep current program","programRequested":1,"silentPlays":0,"analysisCpuNanos":18637242492}
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: analysisCpuNanos=18637242492
+INSTRUMENTATION_RESULT: elapsedMillis=600117
+INSTRUMENTATION_RESULT: finalStatus=Speech-aware Automatic On
+Microphone: phone.
+Not sure yet. Speech and separated-background estimates disagree; keep current program.
+Sound type: Mostly speech. Masking: Not sure yet.
+Program considered: keep current program.
+Last program requested: Everyday.
+Aid reception and improved understanding are not confirmed.
+43 completed checks. Automatic can send program-change tones.
+INSTRUMENTATION_RESULT: result=PASS: full native phone captures with isolated silent executor; not field accuracy, listening benefit or endurance qualification
+INSTRUMENTATION_RESULT: samples=43
+INSTRUMENTATION_RESULT: screenOff=true
+INSTRUMENTATION_RESULT: silentPlays=0
+INSTRUMENTATION_RESULT: stop=Automatic Off; microphone stopped
+INSTRUMENTATION_CODE: -1

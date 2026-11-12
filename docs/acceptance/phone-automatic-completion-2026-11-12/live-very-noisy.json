@@ -1,0 +1,18 @@
+{
+  "build": "4a25d01",
+  "sequence": [
+    {
+      "program": "Very Noisy",
+      "slot": 6,
+      "appReportsCompleted": true
+    },
+    {
+      "program": "Universal",
+      "slot": 1,
+      "appReportsCompleted": true
+    }
+  ],
+  "protectedSettingsUnchanged": true,
+  "ownerConfirmation": "Heard both; back in Universal",
+  "confirmationDate": "2026-11-12"
+}
