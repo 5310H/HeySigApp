@@ -1,0 +1,4 @@
+ceaa6c2ab7a3eb829a163496daab0b4a342c96567d6c8fa1c2e8b3258be4286c  androidApp/build/outputs/apk/androidTest/debug/androidApp-debug-androidTest.apk
+fc95d3e3a438997629583945a55598845a857d0c1c4f67478ba9468b6b085940  androidApp/build/outputs/apk/debug/androidApp-debug.apk
+77ff5f17e568e82b8b69d8b84e1e0e774e8aad637a4fac1c5505f0bdf888f01b  wearApp/build/outputs/apk/androidTest/debug/wearApp-debug-androidTest.apk
+772b16b2dfba4a3b19c2cb8bedab3e279616ceab90ab1d06ad617732fd733205  wearApp/build/outputs/apk/debug/wearApp-debug.apk

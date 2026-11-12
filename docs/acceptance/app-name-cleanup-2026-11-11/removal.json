@@ -1,0 +1,23 @@
+[
+  {
+    "device": "phone",
+    "package": "com.heysig.app",
+    "keepData": true,
+    "result": "Success",
+    "error": ""
+  },
+  {
+    "device": "watch",
+    "package": "com.heysig.app",
+    "keepData": true,
+    "result": "Success",
+    "error": ""
+  },
+  {
+    "device": "watch",
+    "package": "com.heysig.watchdev",
+    "keepData": true,
+    "result": "Success",
+    "error": ""
+  }
+]

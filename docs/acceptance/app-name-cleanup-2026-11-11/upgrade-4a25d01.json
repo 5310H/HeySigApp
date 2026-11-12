@@ -1,0 +1,48 @@
+{
+  "phone": {
+    "serial": "192.168.69.130:45303",
+    "files": 13,
+    "before": {
+      "com.heysig.app.BatteryActivity.xml": "371d3f07803ceb90391e1f57e4a04e5a96c44d5f0c04ca16d3868ecdde90e1f3",
+      "heysig-companion-results-v1.xml": "3325d2a819fdd8062c2cdc48a09b995c9b012915bcdf88b1cf9742a7f057c793",
+      "heysig-companion.xml": "ed8ffe91e55fab4aa39d52bf4b3f63ed6061b3d27f0e9873c9bce24966d3b4f5",
+      "heysig-core-v1.xml": "f35dd98503d82f3a5fac837b3ff606de795902f9dbccd74e5d73986f218d476a",
+      "heysig-environment-voice.xml": "332624da087776806cd4a43db4779a283176800df3125bfab803ac730ded4422",
+      "heysig-handsfree.xml": "a103e6556815c0c3a7300b6b84ce182464d181d65fb4430774ded9a2eb10075d",
+      "heysig-masking-v1.xml": "5592dd24b800e657febb2277fcfef1b8272b2098e42bd73b3034b2dd5703e459",
+      "heysig-noise-v1.xml": "7266bf983307a28e8be51b35d3d498dfc444255a1b5bb7430925a97e7df88a35",
+      "heysig-personal-phrases-v1.xml": "03d545773e96eb515d849b04b9e1a43e4ae5216fddd7f42e68ca90d462412baa",
+      "heysig-sleep-v1.xml": "ca63fad25bf5082c2be099c29f0c469108b78c6188752a26e0bc066bc668aa03",
+      "heysig-sound-type-v1.xml": "b8b97d22eadf7c88b19309e8284108b331c6270f90a3575aab0fe0b264d0d676",
+      "heysig-watch-dev.xml": "607e49c14cc802094b7af5fe7820c87b05be7e4b21fe08460ededc6ce483a4ba",
+      "heysig-watch-results.xml": "8e81387b16b6dca3f299b3e9ee63e56b1897d26c035bdc44fbea12f5ad2b4a7d"
+    },
+    "after": {
+      "com.heysig.app.BatteryActivity.xml": "371d3f07803ceb90391e1f57e4a04e5a96c44d5f0c04ca16d3868ecdde90e1f3",
+      "heysig-companion-results-v1.xml": "3325d2a819fdd8062c2cdc48a09b995c9b012915bcdf88b1cf9742a7f057c793",
+      "heysig-companion.xml": "ed8ffe91e55fab4aa39d52bf4b3f63ed6061b3d27f0e9873c9bce24966d3b4f5",
+      "heysig-core-v1.xml": "f35dd98503d82f3a5fac837b3ff606de795902f9dbccd74e5d73986f218d476a",
+      "heysig-environment-voice.xml": "332624da087776806cd4a43db4779a283176800df3125bfab803ac730ded4422",
+      "heysig-handsfree.xml": "a103e6556815c0c3a7300b6b84ce182464d181d65fb4430774ded9a2eb10075d",
+      "heysig-masking-v1.xml": "5592dd24b800e657febb2277fcfef1b8272b2098e42bd73b3034b2dd5703e459",
+      "heysig-noise-v1.xml": "7266bf983307a28e8be51b35d3d498dfc444255a1b5bb7430925a97e7df88a35",
+      "heysig-personal-phrases-v1.xml": "03d545773e96eb515d849b04b9e1a43e4ae5216fddd7f42e68ca90d462412baa",
+      "heysig-sleep-v1.xml": "ca63fad25bf5082c2be099c29f0c469108b78c6188752a26e0bc066bc668aa03",
+      "heysig-sound-type-v1.xml": "b8b97d22eadf7c88b19309e8284108b331c6270f90a3575aab0fe0b264d0d676",
+      "heysig-watch-dev.xml": "607e49c14cc802094b7af5fe7820c87b05be7e4b21fe08460ededc6ce483a4ba",
+      "heysig-watch-results.xml": "8e81387b16b6dca3f299b3e9ee63e56b1897d26c035bdc44fbea12f5ad2b4a7d"
+    },
+    "preserved": true
+  },
+  "watch": {
+    "serial": "192.168.69.190:41535",
+    "files": 1,
+    "before": {
+      "heysig-watch-v1.xml": "88180051545332a30497c1446ed38a171dc2056d25b8b88d055692c7bb624b3a"
+    },
+    "after": {
+      "heysig-watch-v1.xml": "88180051545332a30497c1446ed38a171dc2056d25b8b88d055692c7bb624b3a"
+    },
+    "preserved": true
+  }
+}

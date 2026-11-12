@@ -1,14 +1,18 @@
 # Current phone/watch checkpoint — November 11, 2026
 
-Pixel 9a and Pixel Watch 3 have **Build c53746e · Nov 11, 2026** installed in
-**HeySig Dev** from the pushed, successful cloud candidate. The separate HeySig
-installation remains present. All 13 phone and one watch user-preference files
-were preserved through upgrade and silent checks. Cloud shared tests, builds,
-lint and emulator smoke passed. Physical rapid restart/controlled transitions,
-watch capture with both screens off and watch notification Off passed; phone
-microphone activity remained absent in watch mode. Recording-access loss stopped
-the session and its prior AppOps mode was restored. See the
-[final device evidence](acceptance/automatic-completion-2026-11-11.md).
+Pixel 9a and Pixel Watch 3 have **HeySig — Build 4a25d01 · Nov 11, 2026**
+installed. The owner requested dropping the Dev label and removing older copies.
+Old phone/watch HeySig and watch-only legacy packages were removed with their
+stored data retained. The current paired package/signing identity is unchanged;
+this remains a development artifact. Exact installed APK hashes and HeySig labels
+were verified, and all 13 phone and one watch user-preference files survived the
+in-place update. See [the rename record](acceptance/app-name-cleanup-2026-11-11.md).
+
+The preceding Build c53746e passed rapid restart/controlled transitions, real
+watch capture with both screens off, both notification Off actions, manual
+priority and recording-access-loss checks. Phone microphone activity remained
+absent in watch mode. Phone smoke passed on SDK 37; reopening both apps without
+On did not restart capture. See [behavioral evidence](acceptance/automatic-completion-2026-11-11.md).
 
 The owner authorized a short real Noisy → Universal check using existing saved
 per-program targets, heard both changes and confirmed Universal restored. This
