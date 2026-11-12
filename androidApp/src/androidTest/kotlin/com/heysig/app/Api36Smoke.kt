@@ -345,6 +345,8 @@ class Api36Smoke : Instrumentation() {
                     check(root.paddingTop == bars.top && root.paddingBottom == bars.bottom)
                 }
             }
+            runOnMainSync { ProgramComparisonAcceptance.run(screen) }
+            result.putString("programComparison","PASS: explicit review, Therapy exclusion, manual A/B/return, pending/stale guards and memory-only clear; injected silent callback, no aid output")
             result.putString("result","PASS: target 36; navigation and current-runtime insets; Android SDK ${Build.VERSION.SDK_INT}")
             if(Build.VERSION.SDK_INT < 36) result.putString("limitation","Android 16 runtime coverage still pending")
             finish(Activity.RESULT_OK,result)

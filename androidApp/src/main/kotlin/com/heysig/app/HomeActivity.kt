@@ -51,6 +51,14 @@ class HomeActivity : Activity() {
     private var foregroundSpeechDeadline=0L
     private var speechId=0L
     private var page = "Home"
+    private val programComparison by lazy { ProgramComparisonFeature(this,{ fitting },{ requested.program },{
+        resumed && !busy.get() && pendingProgram==null && pendingRestore==null && !pendingVoice &&
+            !runtime.fittingWorkflow.pending && !runtime.personalPhrases.awaitingConfirmation && !runtime.sleepRoutine.hasDraft && noiseSafety().audioFree
+    },{ request,done ->
+        if(!resumed || busy.get() || pendingProgram!=null || pendingRestore!=null || pendingVoice) done(false)
+        else execute(listOf(request),false,onComplete=done)
+    },{ if(!isDestroyed) show() }) }
+
     private var setupChanged: (() -> Boolean)? = null
     private var saveSetupAction: (() -> Unit)? = null
     private var message = "Ready. Nothing is sent until you ask."
@@ -335,6 +343,7 @@ class HomeActivity : Activity() {
         if(destination!="SoundType") soundType.stop()
         environment.detach()
         try { noise.detachEditor() } catch(e:Exception) { tell("Noise draft: ${e.message}. Correct the field or discard noise changes."); return }
+        if(page=="NoiseComparison" && destination!=page) programComparison.clear()
         page = destination
         voiceSessionStatus = null
         setupChanged = null; saveSetupAction = null
@@ -360,6 +369,7 @@ class HomeActivity : Activity() {
             "NoiseSetup" -> "Noise programs"
             "NoiseMeasure" -> "Measurement"
             "NoiseDetails" -> "Noise details"
+            "NoiseComparison" -> "Compare saved programs"
             "Volume" -> "Volume"
             "Balance" -> "Balance"
             "Tinnitus" -> "Tinnitus"
@@ -406,6 +416,7 @@ class HomeActivity : Activity() {
             "Noise", "NoiseCalibration", "NoiseSetup", "NoiseMeasure", "NoiseDetails" -> {
                 noise.render(content,page) { navigate(it) }
             }
+            "NoiseComparison" -> programComparison.render(content)
             "SoundType" -> soundType.render(content)
             "Environment" -> { environment.render(content,if(companion.enabled) "Enabled for selected watch" else "Off; use Watch connection")
                 foregroundVoiceSettings() }

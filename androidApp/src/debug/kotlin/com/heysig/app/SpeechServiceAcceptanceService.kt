@@ -19,9 +19,9 @@ class SpeechServiceAcceptanceService:SpeechAutomaticService() {
             }
         },sleep,phrases)
     }
-    override fun detect(pcm:ShortArray,features:DoubleArray?,frames:List<Map<String,Double>>)=MaskingEvidence(severity,SoundType.SPEECH,.9,"debug-only controlled evidence; native detector tested separately")
+    override fun detect(pcm:ShortArray,features:DoubleArray?,frames:List<Map<String,Double>>)=if(useNativeEvidence) super.detect(pcm,features,frames) else MaskingEvidence(severity,SoundType.SPEECH,.9,"debug-only controlled evidence; native detector tested separately")
     val program get()=runtime.requested.program
     val idle get()=!runtime.busy.get()
     fun manual() { runtime.execute(listOf(ManualRequest.SelectProgram(3)),false,false,{true},{true},{}) { _,_ -> } }
-    companion object { var severity=MaskingSeverity.MODERATE;var plays=0 }
+    companion object { var useNativeEvidence=false;var severity=MaskingSeverity.MODERATE;var plays=0 }
 }

@@ -399,6 +399,7 @@ class NoiseFeature(
                     .setPositiveButton("Got it",null).show()
             }
             button("Choose programs") { navigate("NoiseSetup") }
+            button("Compare saved programs") { navigate("NoiseComparison") }
             button("Optional sound setup") { navigate("NoiseCalibration") }
         }
         if(page == "NoiseSetup") {
