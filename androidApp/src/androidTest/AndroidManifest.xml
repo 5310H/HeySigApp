@@ -2,6 +2,7 @@
     <!-- Explicit opt-in silent-audio runner; never part of production manifests. -->
     <instrumentation android:name="com.heysig.app.Api36Smoke" android:targetPackage="com.heysig.batteryprototype" />
     <instrumentation android:name="com.heysig.app.WatchAutomaticPhoneAcceptance" android:targetPackage="com.heysig.batteryprototype" />
+    <instrumentation android:name="com.heysig.app.PhoneAutomaticInterruptionAcceptance" android:targetPackage="com.heysig.batteryprototype" />
     <instrumentation android:name="com.heysig.app.SpeechAutomaticAcceptance" android:targetPackage="com.heysig.batteryprototype" />
     <instrumentation android:name="com.heysig.app.SoundTypeAcceptance" android:targetPackage="com.heysig.batteryprototype" />
     <instrumentation android:name="com.heysig.app.NoiseUiAcceptance" android:targetPackage="com.heysig.batteryprototype" />
