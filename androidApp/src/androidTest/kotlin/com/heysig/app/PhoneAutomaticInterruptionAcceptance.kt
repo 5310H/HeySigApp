@@ -32,8 +32,16 @@ class PhoneAutomaticInterruptionAcceptance:Instrumentation() {
             waitFor("Automatic service",15_000) { SpeechAutomaticService.running!=null }
             val service=checkNotNull(SpeechAutomaticService.running)
             check(service.summary().contains("Microphone: phone"))
-            val started=SystemClock.elapsedRealtime();var microphoneObserved=false
+            val started=SystemClock.elapsedRealtime();var microphoneObserved=false;var reported=0
             fun observe() {
+                if(service.samples>reported) {
+                    val sample=org.json.JSONObject().put("sample",service.samples).put("elapsedMillis",SystemClock.elapsedRealtime()-started)
+                        .put("severity",service.latest.severity.name).put("soundType",service.latest.soundType.name)
+                        .put("score",service.latest.score).put("reason",service.latest.reason)
+                        .put("programRequested",(service as SpeechServiceAcceptanceService).program ?: org.json.JSONObject.NULL)
+                        .put("silentPlays",SpeechServiceAcceptanceService.plays).put("analysisCpuNanos",service.cpuNanos)
+                    sendStatus(0,Bundle().apply { putString("sample",sample.toString()) });reported=service.samples
+                }
                 if(targetContext.getSystemService(AppOpsManager::class.java).isOpActive(AppOpsManager.OPSTR_RECORD_AUDIO,android.os.Process.myUid(),targetContext.packageName)) microphoneObserved=true
             }
             if(screenOff) {
