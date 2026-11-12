@@ -34,11 +34,11 @@ class ProgramComparisonFeature(private val activity:Activity,private val fitting
                 pending=true
                 send(command) { success -> pending=false;message=if(success) "${name(slot)} requested. Confirm reception yourself; this does not prove better understanding." else "Request incomplete. Aid state may be uncertain; check before continuing.";redraw() }
             }
-            button("Return to ${name(current.returnTo)}",valid && !pending && ready()) { request(current.returnTo) }
+            button("Return to ${name(current.returnTo)}",valid && !pending) { request(current.returnTo) }
             line("Return is a manual request. Closing or leaving does not return automatically. Saved per-program levels apply to every switch.")
             line(message.ifBlank { "Compare the same speaker and background with each program. Stop if listening becomes uncomfortable." })
-            button("Try A: ${name(current.first)}",valid && !pending && ready()) { request(current.first) }
-            button("Try B: ${name(current.second)}",valid && !pending && ready()) { request(current.second) }
+            button("Try A: ${name(current.first)}",valid && !pending) { request(current.first) }
+            button("Try B: ${name(current.second)}",valid && !pending) { request(current.second) }
             if(!valid) line("Program setup or current daytime program changed. Review a new comparison; nothing will be sent here.")
             line("Which worked better? A = ${name(current.first)}; B = ${name(current.second)}. Unknown is a valid answer. These are your observations, not a measured speech score.")
             for((aspect,label) in listOf(ProgramComparison.Aspect.UNDERSTANDING to "Words understood",ProgramComparison.Aspect.EFFORT to "Less listening effort",ProgramComparison.Aspect.COMFORT to "Comfort",ProgramComparison.Aspect.AWARENESS to "Environmental awareness")) {
