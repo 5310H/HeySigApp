@@ -1,0 +1,14 @@
+{
+  "build": "c53746e",
+  "date": "2026-11-11",
+  "start": "Universal",
+  "sequence": [
+    "Noisy",
+    "Universal"
+  ],
+  "transport": "normal HeySig Dev UI and validated shared executor",
+  "savedTargets": "owner explicitly authorized existing saved per-program targets",
+  "ownerReport": "Heard both changes; back in Universal",
+  "benefit": "not evaluated",
+  "audiologistConfiguration": "no feedback yet"
+}

@@ -1,0 +1,7 @@
+commit 9a23fb866a6542cff6fd84126836d86fdfbe5ed4
+Author:     5310H <5310@trahreg.com>
+AuthorDate: Wed Nov 11 18:33:41 2026 -0500
+Commit:     5310H <5310@trahreg.com>
+CommitDate: Wed Nov 11 18:33:41 2026 -0500
+
+    Serialize Automatic discovery lifecycle and preserve newer explicit starts

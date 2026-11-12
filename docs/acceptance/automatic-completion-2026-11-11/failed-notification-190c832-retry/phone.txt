@@ -1,0 +1,5 @@
+INSTRUMENTATION_STATUS: phase=Selected-watch silent receiver armed; start the watch test
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: result=FAIL: Too few accepted watch samples: 0; Watch connection unavailable
+INSTRUMENTATION_RESULT: stop=Watch connection unavailable
+INSTRUMENTATION_CODE: 0

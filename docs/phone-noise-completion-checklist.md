@@ -1,10 +1,15 @@
 # Phone Automatic completion checklist — November 10, 2026
 
-Last verified November 11: installed phone Build 7b51fe2 · Nov 11, 2026.
+Last verified November 11: installed phone **Build c53746e · Nov 11, 2026**.
+The [final update record](acceptance/automatic-completion-2026-11-11.md) covers
+the in-place upgrade, paired checks and preserved user preferences. Earlier
+SDK 37 phone smoke and pinned watch fixtures remain version-specific evidence.
 
 Owner scope: replace the earlier live spectral-suppression detector with the
-neural speech/residual detector; finish the phone first. Watch inference is
-outside this update. Checked items need evidence; unknown results remain open.
+neural speech/residual detector; finish the phone first. That phone-first scope
+is retained here; subsequent watch inference has its own
+[completion checklist](watch-noise-completion-checklist.md).
+Checked items need evidence; unknown results remain open.
 Live operation remains available on explicit On, without enrollment, calibration
 or an acceptance lock. Completion of engineering is separate from demonstrated
 listening benefit and Google Play readiness.
@@ -43,6 +48,21 @@ listening benefit and Google Play readiness.
 - [ ] Measure complete transitions: response delay, false switches/hour, holds,
   repeated toggles and return delay; record denominators and actual conditions.
 - [ ] Test phone on table, held, in pocket and in bag; record blocked-microphone behavior.
+- [ ] Include wind, microphone rub, own voice and distant speech as distinct
+  controls; evaluate missed useful changes as well as false changes and quiet return.
+
+## Research-informed follow-up — November 11
+
+Use the [manufacturer-source review](research/hearing-aid-concepts-2026-11-11.md)
+as design input; it does not establish equivalent hardware capabilities or benefit.
+
+- [ ] Audit visible source, masking estimate, hold reason, confirmation/cooldown
+  and proposed saved program together; use existing bounded samples only.
+- [ ] Design an optional comparison of two saved daytime programs with immediate
+  return, separate understanding/effort/comfort/awareness questions and memory-only
+  feedback by default. No enrollment, adaptive wearer learning or enable lock.
+- [ ] Keep RNNoise retained/residual ratio and classifier confidence labelled as
+  estimates, not ear-level target-speaker SNR or measured intelligibility.
 
 ## Listening and physical acceptance
 
@@ -50,7 +70,7 @@ listening benefit and Google Play readiness.
   and intended use by email; no appointment or fitting changes requested.
 - [ ] Verify saved role-to-program numbers against that configuration.
 - [ ] Record actual aid reception for each program command with wearer confirmation.
-- [ ] Compare understanding, effort and comfort in representative situations;
+- [ ] Compare understanding, effort, comfort and environmental awareness in representative situations;
   record both benefits and worse outcomes. Do not label model SNR as intelligibility.
 - [ ] Measure sustained screen-off operation, CPU/battery use and thermal impact.
 - [ ] Verify phone calls/audio interruptions, permission removal, microphone privacy
@@ -61,7 +81,8 @@ listening benefit and Google Play readiness.
 - [x] Refresh in-app/service data disclosures and include model notices and pinned dependency inventory.
 - [ ] Complete remaining [Play readiness](play-store-readiness.md) requirements,
   signed AAB/release validation, physical tests and applicable Console track.
-- [ ] Later: separately scope watch control versus standalone watch inference.
+- [x] Separately scope and implement watch-local inference with phone execution;
+  physical completion remains tracked in the [watch checklist](watch-noise-completion-checklist.md).
 
 Do not mark physical/listening or release items complete based on host fixtures,
 an emulator, command synthesis, a successful APK build or enabling Automatic.

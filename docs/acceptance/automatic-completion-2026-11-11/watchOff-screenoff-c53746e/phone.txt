@@ -1,0 +1,11 @@
+INSTRUMENTATION_STATUS: phase=Selected-watch silent receiver armed; start the watch test
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: capabilityLifecycle=PASS: serialized add/remove/restart, stale duplicate and missing cleanup, real failures retained, cancelled start skipped; fake SDK tasks only
+INSTRUMENTATION_RESULT: mode=remote
+INSTRUMENTATION_RESULT: phoneScreenOff=true
+INSTRUMENTATION_RESULT: rapidRestart=false
+INSTRUMENTATION_RESULT: result=PASS: paired selected-watch evidence and isolated shared executor; no aid output or real fitting changes
+INSTRUMENTATION_RESULT: silentPlays=0
+INSTRUMENTATION_RESULT: source=PASS: 2 accepted watch samples; phone microphone worker idle and Android RECORD_AUDIO inactive throughout checks
+INSTRUMENTATION_RESULT: stop=Watch Automatic Off
+INSTRUMENTATION_CODE: -1

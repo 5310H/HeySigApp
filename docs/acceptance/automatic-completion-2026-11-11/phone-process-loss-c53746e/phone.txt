@@ -1,0 +1,4 @@
+INSTRUMENTATION_STATUS: phase=Selected-watch silent receiver armed; start the watch test
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+INSTRUMENTATION_CODE: 0

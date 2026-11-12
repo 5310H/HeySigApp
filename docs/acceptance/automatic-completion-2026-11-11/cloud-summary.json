@@ -1,0 +1,17 @@
+{
+  "commit": "190c832933d16b98390f82d4f75cd8a9d191f9e4",
+  "shared": {
+    "tests": 35,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "androidApp": {
+      "Warning": 35
+    },
+    "wearApp": {
+      "Warning": 23
+    }
+  }
+}

@@ -1,0 +1,8 @@
+INSTRUMENTATION_RESULT: capture=PASS: 2 actual watch captures; 8.959048091s inference CPU; Phone Automatic stopped
+INSTRUMENTATION_RESULT: layout=PASS: actual 192dp round Automatic controls at font scales 1 and 2, >=48dp buttons
+INSTRUMENTATION_RESULT: microphoneObserved=true
+INSTRUMENTATION_RESULT: native=SKIPPED by explicit fixtures=false; retain separate native-run evidence
+INSTRUMENTATION_RESULT: nativeCpu=0.0s excluding YAMNet; consistency only
+INSTRUMENTATION_RESULT: result=PASS: watch Automatic capture; no claim of field accuracy, battery endurance or physical aid reception
+INSTRUMENTATION_RESULT: screenOff=false
+INSTRUMENTATION_CODE: -1

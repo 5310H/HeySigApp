@@ -1,0 +1,6 @@
+INSTRUMENTATION_RESULT: layout=PASS: actual 192dp round Automatic controls at font scales 1 and 2, >=48dp buttons
+INSTRUMENTATION_RESULT: native=development-0.pcm: CLEAR; development-1.pcm: MODERATE; development-2.pcm: HEAVY; heldout-0.pcm: CLEAR; heldout-1.pcm: UNKNOWN; heldout-2.pcm: HEAVY
+INSTRUMENTATION_RESULT: nativeCpu=36.207255887s excluding YAMNet; consistency only
+INSTRUMENTATION_RESULT: result=FAIL: Unlock watch before paired testing
+INSTRUMENTATION_RESULT: watchStatus=
+INSTRUMENTATION_CODE: 0

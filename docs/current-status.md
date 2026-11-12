@@ -1,4 +1,36 @@
-# Current phone/watch checkpoint — November 4, 2026
+# Current phone/watch checkpoint — November 11, 2026
+
+Pixel 9a and Pixel Watch 3 have **Build c53746e · Nov 11, 2026** installed in
+**HeySig Dev** from the pushed, successful cloud candidate. The separate HeySig
+installation remains present. All 13 phone and one watch user-preference files
+were preserved through upgrade and silent checks. Cloud shared tests, builds,
+lint and emulator smoke passed. Physical rapid restart/controlled transitions,
+watch capture with both screens off and watch notification Off passed; phone
+microphone activity remained absent in watch mode. Recording-access loss stopped
+the session and its prior AppOps mode was restored. See the
+[final device evidence](acceptance/automatic-completion-2026-11-11.md).
+
+The owner authorized a short real Noisy → Universal check using existing saved
+per-program targets, heard both changes and confirmed Universal restored. This
+is physical reception evidence for that sequence, not speech-benefit evidence.
+
+Normal Automatic uses local speech evidence and RNNoise corroboration with saved
+speech roles. Watch-source mode analyzes on the watch and leaves command execution
+on the phone. Explicit On/Off, confirmation/cooldown, manual/Therapy priority and
+the shared validated executor remain; calibration/enrollment/learning and an
+acceptance lock are not required. Saved six-level assignments and the older
+experimental six-scene gates remain separate and unchanged.
+
+Remaining checks include independent scene/placement accuracy, audiologist
+program configuration, wearer benefit and sustained battery/thermal behavior. The
+[research review](research/hearing-aid-concepts-2026-11-11.md) adds clearer
+source/uncertainty status and separate understanding, effort, comfort and awareness
+evaluation to the [current checklist](remaining-checklist.md). No live decision
+rules changed for the research. Full review of the two videos remains incomplete
+because playback/captions were inaccessible. Listening benefit and release/Play
+acceptance remain open.
+
+# Historical phone/watch checkpoint — November 4, 2026
 
 Phone and watch are updated in place, with installed APK bytes verified and all
 26 phone preference files plus the watch preference file preserved before launch.

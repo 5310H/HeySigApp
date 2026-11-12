@@ -1,0 +1,4 @@
+INSTRUMENTATION_RESULT: capabilityLifecycle=PASS: serialized add/remove/restart, stale duplicate and missing cleanup, real failures retained, cancelled start skipped; fake SDK tasks only
+INSTRUMENTATION_RESULT: result=FAIL: Unlock the phone before starting the receiver test
+INSTRUMENTATION_RESULT: stop=
+INSTRUMENTATION_CODE: 0

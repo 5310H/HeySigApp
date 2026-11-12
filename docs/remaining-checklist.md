@@ -1,5 +1,77 @@
 # HeySig remaining work checklist
 
+## Current checkpoint — November 11, 2026
+
+This checkpoint and the current [phone](phone-noise-completion-checklist.md) and
+[watch](watch-noise-completion-checklist.md) checklists take precedence over
+historical sections below. Normal speech-aware Automatic is available on explicit
+On with saved roles, without calibration, enrollment, learning or an acceptance
+lock. Phone and watch use the pinned neural detector; watch-source Automatic
+analyzes locally on the watch and sends compact evidence to the phone executor.
+The older experimental six-scene qualification gates remain unchanged.
+
+- [x] Implement phone neural speech/residual analysis and watch-source Automatic,
+  preserving saved assignments, fitting, manual/Therapy priority and one executor.
+- [x] Validate pushed app source with cloud shared checks, builds, lint,
+  native/model/license pins and API 36 emulator smoke checks.
+- [x] Update Pixel 9a and Pixel Watch 3 to **Build c53746e · Nov 11, 2026**,
+  preserving 13 phone and one watch user-preference files through upgrade and tests.
+- [x] Pass phone silent smoke tests on SDK 37 and all six watch native fixtures;
+  verify 192dp round Automatic controls at font scales 1 and 2.
+- [x] Record manufacturer-source research and distinguish scene selection from
+  audio processing and demonstrated listening benefit.
+- [ ] Complete review of the two supplied videos when playback/captions become
+  accessible; verified titles and manufacturer research are not full video review.
+- [x] Complete paired silent transitions, rapid restart, screen-off watch capture,
+  phone-mic-idle, recording-access-loss and watch notification Off checks.
+- [x] Confirm short manual physical reception: wearer heard Noisy → Universal
+  and confirmed Universal restored using existing saved per-program settings.
+- [ ] Measure independent real-world accuracy, source placement, listening benefit
+  and sustained battery/thermal behavior; preserve failures and denominators.
+- [ ] Complete wider automatic field/listening acceptance and separate release/Play requirements.
+
+Evidence: [final update and device checks](acceptance/automatic-completion-2026-11-11.md),
+[watch implementation](acceptance/watch-automatic-2026-11-11.md) and
+[research findings and limits](research/hearing-aid-concepts-2026-11-11.md).
+
+## Next work in order
+
+1. **Finish remaining interruption acceptance.** Controlled transitions, rapid
+   restart, real screen-off capture, phone-mic-idle, recording-access loss and
+   notification Off on both devices and manual priority passed on Build c53746e.
+   Actual radio outage, notification-permission loss and maximum
+   session expiry remain open. Preserve failures and distinguish process loss
+   from a real radio outage.
+2. **Retain clear decision status.** Source, masking estimate, hold reason,
+   proposed program and last request are now exposed. Continue checking their
+   clarity during field trials; requests do not establish reception or benefit.
+   No recording, transcript history or extra capture was added.
+3. **Evaluate difficult scenes and placement.** Use independent speakers and
+   backgrounds: TV, music, quiet, appliances, traffic, wind, own voice, overlapping
+   talkers and distant speech. Compare table/held/pocket/bag phone placement and
+   natural wrist positions, including rub/occlusion. Record false switches/hour,
+   missed useful switches, holds, response/return delay and repeated toggles.
+   Evaluate any policy adjustment offline before changing live decisions, including
+   regressions for sustained quiet/clear return to Universal.
+4. **Verify wearer benefit.** Confirm saved roles against the audiologist's
+   existing program configuration and record actual reception separately. Offer
+   an optional manual comparison of two saved daytime programs with an immediate
+   return action; assess words understood, effort, comfort and environmental
+   awareness separately. New comparison UI is proposed work, not implemented.
+   Feedback stays memory-only by default; saving needs explicit review. This is
+   not an enrollment/learning prerequisite for Automatic.
+5. **Finish endurance and release work.** Measure sustained phone/watch battery,
+   thermal and interruption behavior, then complete the release checklist and
+   dated readiness audit. Do not substitute short CPU observations or fixture
+   consistency for field accuracy, intelligibility or all-day endurance.
+
+Manufacturer ideas inform these tasks; they do not establish target-speaker
+identity, ear-level SNR, head direction or a HeySig listening benefit. Sensor
+fusion, speaker identification and cleaned-audio streaming remain separate design
+work, not additions to this completion scope.
+
+## Historical checkpoints
+
 November 4, 2026 owner-directed update: ordinary level-based Automatic is now
 available through Automatic on/off using saved thresholds and assignments;
 calibration is optional and the acceptance lock/development trial are removed.
@@ -9,7 +81,7 @@ Earlier lock/trial statements below are historical. The archived semantic
 classifier remains unqualified; actual physical acceptance and Play release
 requirements remain outstanding. Enabling Automatic is not acceptance evidence.
 
-## Current checkpoint — November 4, 2026
+## Historical checkpoint — November 4, 2026
 
 - [x] Implement Automatic on/off for saved noise-level program assignments, with
   optional calibration and existing runtime priorities.
@@ -143,7 +215,13 @@ fitting was subsequently reviewed and saved; lifecycle/physical acceptance remai
 pending. Existing development settings were preserved. See
 [direct setup evidence](acceptance/watch-production-setup-2026-10-18.md).
 
-## 1. Noise — next priority
+## 1. Historical level-based Noise acceptance matrix
+
+Retain this matrix for the level-based path and its dated evidence. Calibration
+is optional, and these older preview/gate instructions do not restrict current
+speech-aware Automatic. Use the current phone/watch checklists above for the
+normal neural path. Sleep in this historical matrix means Therapy; persisted
+keys and legacy aliases remain compatible.
 
 Use the [Noise quick start](noise-quick-start.md) and
 [physical acceptance matrix](acceptance/noise-calibration-automation-2026-10-16.md).

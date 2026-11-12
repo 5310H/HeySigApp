@@ -1,0 +1,6 @@
+INSTRUMENTATION_RESULT: layout=PASS: actual 192dp round Automatic controls at font scales 1 and 2, >=48dp buttons
+INSTRUMENTATION_RESULT: native=SKIPPED by explicit fixtures=false; retain separate native-run evidence
+INSTRUMENTATION_RESULT: nativeCpu=0.0s excluding YAMNet; consistency only
+INSTRUMENTATION_RESULT: result=FAIL: Watch capture session did not stop
+INSTRUMENTATION_RESULT: watchStatus=
+INSTRUMENTATION_CODE: 0
