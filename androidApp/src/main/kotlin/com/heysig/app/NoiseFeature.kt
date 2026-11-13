@@ -224,6 +224,8 @@ class NoiseFeature(
         }
     }
     fun status(): String {
+        SpeechAutomaticService.running?.let { return it.summary() }
+        if(SpeechAutomaticService.active) return "Speech-aware Automatic starting…"
         AutomaticNoiseService.running?.let { return it.summary(detailed=true)+"\n"+learningStatus() }
         val age = observation.lastSampleMillis?.let { (SystemClock.elapsedRealtime()-it)/1000 }
         return "Noise: $mode • Source: this device's built-in microphone\n$detail\n" +
@@ -250,7 +252,7 @@ class NoiseFeature(
         }
         group("Automatic noise") {
             line("HeySig chooses your program from how much other sound masks speech. Quiet or clear speech returns to Everyday after repeated checks. Unsure means keep the current program.")
-            automaticButton=button("Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
+            automaticButton=button(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") "On" else "Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
             openSoundType?.let { open -> button("Check speech and noise",open) }
             runtime = line(summary()).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_NONE; contentDescription=summary() }
             graph=NoiseGraphView(activity).also { target.addView(it,LinearLayout.LayoutParams(-1,PhoneStyle.dp(activity,(180*activity.resources.configuration.fontScale).toInt()))) }
@@ -436,7 +438,7 @@ class NoiseFeature(
             val details=TextView(activity).apply { text=status();PhoneStyle.text(this,16f,color=PhoneStyle.secondary);visibility=android.view.View.GONE }
             button("Extra details") { details.text=status();details.visibility=if(details.visibility==android.view.View.VISIBLE) android.view.View.GONE else android.view.View.VISIBLE }
             content.addView(details)
-            automaticButton=button("Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active) NoiseCommand.Stop else NoiseCommand.Automatic) }
+            automaticButton=button(if(SpeechAutomaticService.active || AutomaticNoiseService.active) "On" else "Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active) NoiseCommand.Stop else NoiseCommand.Automatic) }
             update()
 
         }

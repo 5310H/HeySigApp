@@ -48,7 +48,8 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         saveButton?.isEnabled=!on
         sourceSwitch?.isEnabled=!on
         tvSwitch?.isEnabled=!on
-        status?.text=SpeechAutomaticService.running?.summary() ?: message ?: SpeechAutomaticService.lastStatus.ifBlank { "Automatic Off. Microphone stopped." }
+        status?.text=SpeechAutomaticService.running?.summary()
+            ?: if(on) "Speech-aware Automatic starting…" else message ?: SpeechAutomaticService.lastStatus.ifBlank { "Automatic Off. Microphone stopped." }
     }
     fun start() {
         message=null
