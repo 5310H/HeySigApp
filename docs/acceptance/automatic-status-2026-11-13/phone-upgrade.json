@@ -1,0 +1,14 @@
+{
+  "commit": "aef19f7ea2149f2302c30d1a2b1c58f17b020ab1",
+  "form": "phone",
+  "allPreferenceFilesMatched": 37,
+  "userPreferenceFilesMatched": 13,
+  "installedApkMatches": true,
+  "installedApkSha256": "c8981adf9ba2b96aac5e24c1a78aa764daf8cc1363aeceb6152b68fce7fe3715",
+  "signerMatched": true,
+  "programCommandsSent": false,
+  "visibleBuildLabel": "Build aef19f7 \u00b7 Nov 13, 2026",
+  "preferencesMatchedAfterLaunch": true,
+  "automaticRestarted": false,
+  "lastProgramRequested": "TV"
+}

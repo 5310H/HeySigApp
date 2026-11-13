@@ -1,6 +1,9 @@
 # Phone Automatic completion checklist — November 13, 2026
 
-Latest installed: **HeySig — Build 747a1fe · Nov 13, 2026** (phone and watch).
+Latest installed: **HeySig — Build aef19f7 · Nov 13, 2026** (phone and watch).
+The [status follow-up](acceptance/automatic-status-2026-11-13.md) records the
+status-only correction and latest in-place update; active-use label observation
+remains separate from build/install validation.
 The [TV update and installation record](acceptance/tv-automatic-2026-11-13.md)
 covers the new explicit Watching TV choice, passed build/UI checks and preserved
 settings. It does not automatically recognize TV or fix the early TV switch in

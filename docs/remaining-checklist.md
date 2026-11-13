@@ -14,8 +14,10 @@ The older experimental six-scene qualification gates remain unchanged.
   preserving saved assignments, fitting, manual/Therapy priority and one executor.
 - [x] Validate pushed app source with cloud shared checks, builds, lint,
   native/model/license pins and API 36 emulator smoke checks.
-- [x] Update Pixel 9a and Pixel Watch 3 to **HeySig — Build 747a1fe · Nov 13, 2026**,
+- [x] Update Pixel 9a and Pixel Watch 3 to **HeySig — Build aef19f7 · Nov 13, 2026**,
   preserving 13 phone and one watch user-preference files through upgrade and tests.
+- [x] Correct stale speech-aware Automatic startup/detailed-status paths;
+  record [Build aef19f7 validation and installation](acceptance/automatic-status-2026-11-13.md).
 - [x] Add explicit Watching TV context, preserve normal roles, and verify TV
   preference persistence in the emulator; record the [installed TV update](acceptance/tv-automatic-2026-11-13.md).
 - [ ] Confirm live TV-program reception and quiet return; normal-mode early

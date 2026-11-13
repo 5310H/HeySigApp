@@ -1,6 +1,9 @@
 # Watch microphone Automatic checklist — November 13, 2026
 
-Latest installed: **HeySig — Build 747a1fe · Nov 13, 2026** on phone and watch.
+Latest installed: **HeySig — Build aef19f7 · Nov 13, 2026** on phone and watch.
+The [status follow-up](acceptance/automatic-status-2026-11-13.md) records the
+status-only correction and latest in-place update; active-use label observation
+remains separate from build/install validation.
 The [TV update](acceptance/tv-automatic-2026-11-13.md) adds phone-owned Watching TV
 routing using the same watch estimates. Both APKs were verified and installed
 in place; the watch preference file was unchanged after installation and launch.

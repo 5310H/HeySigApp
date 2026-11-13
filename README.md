@@ -6,7 +6,9 @@ The [coding specification](docs/coding-spec.md) defines screens, functions, data
 
 Track outstanding tests, owner inputs and release work in the [remaining work checklist](docs/remaining-checklist.md).
 
-Latest phone/watch update: **Build 747a1fe · Nov 13, 2026** adds an explicit
+Latest phone/watch update: **Build aef19f7 · Nov 13, 2026** corrects stale
+Automatic status paths ([validation and installation](docs/acceptance/automatic-status-2026-11-13.md)).
+The preceding TV update adds an explicit
 **Watching TV** choice to Automatic. Repeated speech checks select the assigned
 TV program; sustained quiet returns to Universal; uncertain checks hold. See
 [setup and behavior](docs/speech-aware-automatic.md#watching-tv) and the
