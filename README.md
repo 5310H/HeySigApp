@@ -6,6 +6,14 @@ The [coding specification](docs/coding-spec.md) defines screens, functions, data
 
 Track outstanding tests, owner inputs and release work in the [remaining work checklist](docs/remaining-checklist.md).
 
+Latest phone/watch update: **Build 747a1fe · Nov 13, 2026** adds an explicit
+**Watching TV** choice to Automatic. Repeated speech checks select the assigned
+TV program; sustained quiet returns to Universal; uncertain checks hold. See
+[setup and behavior](docs/speech-aware-automatic.md#watching-tv) and the
+[change, validation and installation record](docs/acceptance/tv-automatic-2026-11-13.md).
+TV recognition and normal-mode early switching remain unresolved; the new choice
+is Off until explicitly configured.
+
 Google Play release work follows the [dated readiness audit and release gates](docs/play-store-readiness.md). The [Gradle build guide](docs/gradle-release-builds.md) covers preserved development signing, separated release identities, API 36 and signed app-bundle validation. These candidates are not ready for store submission. After bundle validation, run `python3 tools/check-play-readiness.py` for release-manifest checks; this does not replace Play review.
 
 The [HeySigApp program specification](docs/program-spec.md) defines the replacement app, including voice access to every function through both phone and watch.

@@ -1,6 +1,12 @@
-# Phone Automatic completion checklist — November 12, 2026
+# Phone Automatic completion checklist — November 13, 2026
 
-Latest installed: **HeySig — Build b7dddd5 · Nov 12, 2026** (phone and watch).
+Latest installed: **HeySig — Build 747a1fe · Nov 13, 2026** (phone and watch).
+The [TV update and installation record](acceptance/tv-automatic-2026-11-13.md)
+covers the new explicit Watching TV choice, passed build/UI checks and preserved
+settings. It does not automatically recognize TV or fix the early TV switch in
+normal listening. TV remains unassigned, Watching TV Off and Automatic Off after
+installation; the owner can assign the confirmed TV program 5 and enable it.
+Earlier listening/lifecycle passes below remain tied to their recorded builds.
 The November 12 [follow-up](acceptance/phone-automatic-completion-2026-11-12.md)
 tracks the new comparison workflow, native interruption checks and wearer reports.
 The [final update record](acceptance/automatic-completion-2026-11-11.md) covers
@@ -99,3 +105,24 @@ not complete audiologist configuration or benefit/accuracy acceptance.
 
 Do not mark physical/listening or release items complete based on host fixtures,
 an emulator, command synthesis, a successful APK build or enabling Automatic.
+
+## November 13 Watching TV update
+
+- [x] Add an optional saved TV program and explicit Watching TV choice without
+  changing the three normal speech roles or six legacy assignments.
+- [x] Route confirmed clear/partly/heavily masked speech to TV in that context;
+  route confirmed quiet to saved Universal; uncertain checks hold.
+- [x] Preserve confirmation/cooldown, manual/Therapy priority and the validated
+  shared executor; do not change detector thresholds or model assets.
+- [x] Pass shared policy checks, both app/test builds, lint, APK/native checks
+  and isolated TV save/restore emulator checks for Build 747a1fe.
+- [x] Install phone/watch in place; verify matching signed APK hashes and
+  preserve all 13 phone user-setting files and the watch preference file.
+- [x] Verify the phone's build label and new TV controls without enabling
+  Automatic or sending aid commands.
+- [ ] Verify actual TV-program reception and a live TV → sustained quiet →
+  Universal sequence; record listening observations separately.
+- [ ] Reproduce and resolve the owner's early Noisy switch during TV plus
+  wanted nearby speech in normal listening. This context is not that fix.
+
+Setup and persistent-context limitations: [Watching TV guide](speech-aware-automatic.md#watching-tv).

@@ -1,0 +1,15 @@
+{
+  "commit": "747a1fe03c4291769f195a8f6720fc720e4e371d",
+  "form": "phone",
+  "allPreferenceFilesMatched": 37,
+  "userPreferenceFilesMatched": 13,
+  "installedApkMatches": true,
+  "installedApkSha256": "84a4561b808dfebe3adf3595cb9960a05caa6a3873082e8f8a8cf8a9b57fc025",
+  "signerMatched": true,
+  "programCommandsSent": false,
+  "visibleBuildLabel": "Build 747a1fe \u00b7 Nov 13, 2026",
+  "preferencesMatchedAfterLaunch": true,
+  "tvControlsVisible": true,
+  "watchingTvEnabled": false,
+  "automaticStarted": false
+}

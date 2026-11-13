@@ -1,0 +1,14 @@
+{
+  "commit": "747a1fe03c4291769f195a8f6720fc720e4e371d",
+  "form": "watch",
+  "allPreferenceFilesMatched": 1,
+  "userPreferenceFilesMatched": 1,
+  "installedApkMatches": true,
+  "installedApkSha256": "3266060f0f6d1cba82da0404b7d1635201cbbec13e7b7dd856392b2c4611110e",
+  "signerMatched": true,
+  "programCommandsSent": false,
+  "preferencesMatchedAfterLaunch": true,
+  "visibleBuildLabelVerified": false,
+  "uiCheck": "Wear OS UI hierarchy unavailable after launch; installed APK hash matches verified build",
+  "automaticStarted": false
+}

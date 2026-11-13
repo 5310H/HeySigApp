@@ -1,6 +1,6 @@
 # HeySig remaining work checklist
 
-## Current checkpoint — November 12, 2026
+## Current checkpoint — November 13, 2026
 
 This checkpoint and the current [phone](phone-noise-completion-checklist.md) and
 [watch](watch-noise-completion-checklist.md) checklists take precedence over
@@ -14,10 +14,15 @@ The older experimental six-scene qualification gates remain unchanged.
   preserving saved assignments, fitting, manual/Therapy priority and one executor.
 - [x] Validate pushed app source with cloud shared checks, builds, lint,
   native/model/license pins and API 36 emulator smoke checks.
-- [x] Update Pixel 9a and Pixel Watch 3 to **HeySig — Build b7dddd5 · Nov 12, 2026**,
+- [x] Update Pixel 9a and Pixel Watch 3 to **HeySig — Build 747a1fe · Nov 13, 2026**,
   preserving 13 phone and one watch user-preference files through upgrade and tests.
-- [x] Pass phone silent smoke tests on SDK 37 and all six watch native fixtures;
-  verify 192dp round Automatic controls at font scales 1 and 2.
+- [x] Add explicit Watching TV context, preserve normal roles, and verify TV
+  preference persistence in the emulator; record the [installed TV update](acceptance/tv-automatic-2026-11-13.md).
+- [ ] Confirm live TV-program reception and quiet return; normal-mode early
+  switching with TV and wanted nearby speech remains unresolved.
+- [x] Retain earlier phone SDK 37 silent smoke and six watch native-fixture
+  evidence, plus 192dp round controls at font scales 1 and 2. These are earlier
+  version-specific passes, not rerun physical checks for the TV update.
 - [x] Record manufacturer-source research and distinguish scene selection from
   audio processing and demonstrated listening benefit.
 - [ ] Complete review of the two supplied videos when playback/captions become
