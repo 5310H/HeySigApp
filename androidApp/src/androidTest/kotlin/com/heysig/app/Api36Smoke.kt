@@ -39,6 +39,7 @@ class Api36Smoke : Instrumentation() {
             waitForIdleSync()
             val screen = checkNotNull(activity)
             runOnMainSync { ButtonFeedbackCheck.run(screen) }
+            runOnMainSync { result.putString("tvAutomaticChoices",TvAutomaticUiCheck.verify(screen)) }
             result.putString("buttonFeedback","PASS: phone roles, watch actions and dialog buttons invert on press and restore after release/cancel; disabled actions stay inactive")
             fun descendants(view:View): List<View> = listOf(view) + if(view is ViewGroup)
                 (0 until view.childCount).flatMap { descendants(view.getChildAt(it)) } else emptyList()
@@ -154,7 +155,7 @@ class Api36Smoke : Instrumentation() {
             runOnMainSync {
                 check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
                     .first { it.text == "Off" && it.isShown }.isEnabled)
-                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>().count { it.isShown }>=3)
+                check(descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>().count { it.isShown }>=4)
                 check(!com.heysig.noise.EnvironmentReleaseGate.PHYSICAL_ACCEPTANCE_PASSED)
                 result.putString("noiseControls","PASS: focused overview, calibration, six assignments, measurements and live speech program choices; Automatic controls available; no capture/playback")
             }

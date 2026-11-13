@@ -1,5 +1,12 @@
 # Google Play readiness — audited October 16, 2026
 
+November 13: explicit Watching TV adds an optional TV program choice and listening
+context to speech-aware Automatic. It does not recognize televisions or alter
+models, permissions, capture schedule, data recipients or aid fitting. See the
+[service review](speech-automatic-background-design-2026-11-09.md) and
+[TV validation record](acceptance/tv-automatic-2026-11-13.md). No store submission
+is prepared by this development update.
+
 November 11: owner-directed watch-microphone Automatic adds an explicit Wear
 microphone foreground session and selected-watch phone receiver. Models/native
 adapters are shared between APKs; no raw audio crosses Data Layer. Review the

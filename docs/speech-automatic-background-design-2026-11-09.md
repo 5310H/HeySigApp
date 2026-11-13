@@ -100,3 +100,34 @@ shared validated executor are unchanged. Universal replaces Everyday in visible
 role wording; saved keys and fitting names are untouched. The earlier two-head
 path is retired from normal Automatic. See the [current report](acceptance/phone-neural-noise-2026-11-10.md)
 and [completion checklist](phone-noise-completion-checklist.md).
+
+## November 13: explicit Watching TV context
+
+The owner confirmed an existing TV program in slot 5 and requested adding TV to
+Automatic. A fourth optional role (`television`) and explicit `watchingTv` choice
+extend the existing version-1 fitting-bound preferences; absent fields default
+to unassigned/Off without changing the three previous choices. Enabling Watching
+TV requires an assigned TV role. No slot or manufacturer capability is inferred.
+The user selects their own role in Choose programs. Therapy-labelled programs
+remain excluded and all four roles are validated against the current fitting.
+
+The shared `MaskingChoices.target` maps valid CLEAR/MODERATE/HEAVY evidence to
+TV when this context is on; QUIET maps to the existing Universal role and UNKNOWN
+still holds. Shared confirmation, freshness, cooldown, pending/completion tokens,
+duplicate prevention, manual/Therapy priority and failure halt remain unchanged.
+No classifier score/threshold or detector asset changed. Quiet must be repeated
+before return; clear speech remains TV. The choice persists until explicitly
+turned off, so later speech can select TV again after a quiet return. A specific
+first-use explanation and visible context status describe this behavior. It is
+not automatic TV recognition or a correction to normal-mode TV misclassification.
+
+The phone owns this routing even with watch input; the existing watch evidence
+protocol/model profile is unchanged. No new permissions, microphone windows,
+background lifetime, model, network request, data recipient, audio/transcript
+storage or aid transport was introduced. Only the two new choice fields and
+TV disclosure flag persist locally. All commands still use the existing shared
+validated executor and per-program saved-setting restoration. This is not fitting
+software and does not define or alter what the audiologist's TV program changes.
+
+Validation and uncompleted physical checks are recorded in
+[the TV update report](acceptance/tv-automatic-2026-11-13.md).

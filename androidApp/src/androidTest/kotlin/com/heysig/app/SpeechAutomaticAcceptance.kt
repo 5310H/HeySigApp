@@ -112,7 +112,7 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                     check(!SpeechAutomaticService.active)
                     renderIsolated()
                     val restored=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Spinner>()
-                    check(restored.map { it.selectedItemPosition }==listOf(2,3,0)) { "Saved speech choices lost on navigation/recreation" }
+                    check(restored.map { it.selectedItemPosition }==listOf(2,3,0,0)) { "Saved speech choices lost on navigation/recreation" }
                     val previous=isolatedChoices.getString("choices",null)
                     namedPrograms=namedPrograms.map { if(it.slot==1) it.copy(name="Renamed program") else it }
                     descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>().first { it.text=="Save speech program choices" }.performClick()
@@ -172,7 +172,7 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                 val choiceRaw=targetContext.getSharedPreferences("heysig-masking-v1",0).getString("choices",null)
                 val choices=if(choiceRaw==null) MaskingChoices(config.programs[0],config.programs[3],config.programs[5]) else JSONObject(choiceRaw).let { j ->
                     fun slot(k:String)=if(j.isNull(k)) null else j.getInt(k)
-                    MaskingChoices(slot("everyday"),slot("noisy"),slot("veryNoisy")) }
+                    MaskingChoices(slot("everyday"),slot("noisy"),slot("veryNoisy"),slot("television"),j.optBoolean("watchingTv",false)) }
                 val signature=runtime.fitting!!.programs.sortedBy { it.slot }.joinToString("|") { "${it.slot}:${it.name}" }
                 val battery=targetContext.getSystemService(BatteryManager::class.java)
                 val chargeBefore=battery.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)

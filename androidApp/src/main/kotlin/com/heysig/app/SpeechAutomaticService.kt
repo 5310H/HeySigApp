@@ -67,7 +67,7 @@ open class SpeechAutomaticService: Service() {
             request=pendingRequest;watchMode=request.watchNode!=null;check(signature()==request.fitting) { "Program setup changed" }
             request.settings.validate(runtime.fitting?.programs.orEmpty().map { it.slot }.toSet())
             val slots=runtime.fitting?.programs.orEmpty().filterNot { isTherapyProgramName(it.name) }.map { it.slot }.toSet()
-            check(listOf(request.choices.everyday,request.choices.noisy,request.choices.veryNoisy).all { it==null || it in slots }) { "Review speech program choices" }
+            check(listOf(request.choices.everyday,request.choices.noisy,request.choices.veryNoisy,request.choices.television).all { it==null || it in slots }) { "Review speech program choices" }
             baseline=runtime.sleepRoutine.state
             check(baseline!!.mode==com.heysig.sleep.SleepMode.AWAKE && !baseline!!.pending) { "Therapy has priority" }
             check(runtime.requested.program!=null && runtime.requested.program in slots) { "Choose a daytime program on Home first" }
@@ -177,6 +177,7 @@ open class SpeechAutomaticService: Service() {
     private fun label(slot:Int?)=runtime.fitting?.programs?.find { it.slot==slot }?.name ?: "Unassigned"
     fun summary()=buildString {
         append("Speech-aware Automatic On\nMicrophone: ${if(watchMode) "watch" else "phone"}.\n$detail")
+        if(request.choices.watchingTv) append("\nWatching TV: speech uses ${label(request.choices.television)}; sustained quiet uses ${label(request.choices.everyday)}. This is your listening choice, not TV recognition.")
         append("\nSound type: ${latest.soundType.label}. Masking: ${latest.severity.label}.")
         val considered=request.choices.target(latest.severity)
         append("\nProgram considered: ${if(considered!=null) label(considered) else "keep current program"}.")

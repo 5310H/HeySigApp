@@ -117,12 +117,18 @@ object MaskingSignal {
     }
 }
 
-data class MaskingChoices(val everyday:Int?,val noisy:Int?,val veryNoisy:Int?) {
-    init { require(listOf(everyday,noisy,veryNoisy).all { it==null || it in 1..6 }) }
+/** Watching TV is an explicit listening choice, never an inferred sound-source identity. */
+data class MaskingChoices(val everyday:Int?,val noisy:Int?,val veryNoisy:Int?,
+    val television:Int?=null,val watchingTv:Boolean=false) {
+    init {
+        require(listOf(everyday,noisy,veryNoisy,television).all { it==null || it in 1..6 })
+        require(!watchingTv || television!=null) { "Choose your TV program before using Watching TV" }
+    }
     fun target(severity:MaskingSeverity)=when(severity) {
-        MaskingSeverity.QUIET,MaskingSeverity.CLEAR -> everyday
-        MaskingSeverity.MODERATE -> noisy
-        MaskingSeverity.HEAVY -> veryNoisy
+        MaskingSeverity.QUIET -> everyday
+        MaskingSeverity.CLEAR -> if(watchingTv) television else everyday
+        MaskingSeverity.MODERATE -> if(watchingTv) television else noisy
+        MaskingSeverity.HEAVY -> if(watchingTv) television else veryNoisy
         MaskingSeverity.UNKNOWN -> null
     }
 }

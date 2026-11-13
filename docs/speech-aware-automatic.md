@@ -48,3 +48,27 @@ audio is discarded after processing. No listening recordings, transcripts or
 sound history are saved or uploaded. Choices and consent are saved locally.
 The graph keeps at most 120 sound-level points in memory for the current session.
 Voice-command speech recognition is separate and retains its own disclosure.
+
+## Watching TV
+
+For a TV session, open **Noise → Choose programs**, assign **TV** to your existing
+hearing-aid TV program, turn **Watching TV** on and save. The owner's confirmed
+TV program is slot 5; other fittings must use their actual TV slot. No TV slot
+is guessed or assigned automatically.
+
+With Watching TV selected, repeated clear, partly masked or heavily masked
+speech evidence selects TV instead of Universal, Noisy or Very Noisy. Repeated
+quiet evidence returns to your saved Universal choice. Clear speech does not
+trigger a return during this TV session. Uncertain checks—including music-only
+passages—hold the current program, so TV selection may wait for speech evidence.
+The existing confirmation count and cooldown apply in both directions. Leaving
+Universal unassigned holds TV during quiet instead of sending a return.
+
+This is your explicit listening choice, **not automatic television recognition**.
+While Watching TV remains selected, speech after quiet can select TV again,
+including nearby conversation after the television has been turned off. To resume
+normal speech-aware choices, turn Automatic Off, turn Watching TV off, save, then
+turn Automatic On again. Your normal three role choices remain saved. Manual
+program controls, Therapy, notification Off and all existing session stops retain
+priority. The same behavior applies when the selected watch supplies estimates;
+there is no new capture, inference model or audio transfer.
