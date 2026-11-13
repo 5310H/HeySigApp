@@ -67,6 +67,10 @@ as design input; it does not establish equivalent hardware capabilities or benef
 - [x] Keep RNNoise retained/residual ratio and classifier confidence labelled as
   estimates, not ear-level target-speaker SNR or measured intelligibility.
 
+Clinical follow-up: [November 13 evidence and proposed program brief](research/noisy-program-clinical-practices-2026-11-13.md)
+separates professional fitting/verification from HeySig program selection. It does
+not complete audiologist configuration or benefit/accuracy acceptance.
+
 ## Listening and physical acceptance
 
 - [ ] Obtain the audiologist's existing Universal/Noisy/Very Noisy configuration
