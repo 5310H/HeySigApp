@@ -126,10 +126,10 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         val very=choice("Very Noisy · speech heavily masked",saved.veryNoisy)
         val television=choice("TV · your saved television program",saved.television)
         tvSwitch=Switch(activity).also { control ->
-            control.text="Watching TV";control.contentDescription="Watching TV. Use the TV program for speech and return to Universal for sustained quiet."
+            control.text="Watching TV";control.contentDescription="Watching TV. Use TV for masked speech and Universal for quiet or clear speech."
             control.isChecked=saved.watchingTv;control.minHeight=PhoneStyle.dp(activity,48);card.addView(control)
         }
-        line("For a TV session, choose your existing TV program (for example, program 5) and turn Watching TV on. Speech checks use TV instead of Noisy or Very Noisy. Sustained quiet returns to Universal; clear speech still uses TV. Uncertain checks hold. This does not detect whether a sound comes from a television. Turn Watching TV off and save to resume normal choices.")
+        line("For a TV session, choose your existing TV program (for example, program 5) and turn Watching TV on. Partly or heavily masked speech uses TV instead of Noisy or Very Noisy. Quiet or clear speech returns to Universal after two matching checks. TV can be selected again if speech becomes masked; this can happen during the same TV session. Uncertain checks hold. This does not detect whether a sound comes from a television. Turn Watching TV off and save to resume normal choices.")
         readChoices={ fun slot(s:Spinner)=available.getOrNull(s.selectedItemPosition-1)?.slot
             MaskingChoices(slot(everyday),slot(noisy),slot(very),slot(television),tvSwitch?.isChecked==true) }
         sourceSwitch=Switch(activity).also { control ->
@@ -150,7 +150,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
             update()
         } }
         status=line("").apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
-        line("Speech detection and neural speech/background estimates must agree before a change. If they disagree, your program stays as it is. Uses your saved repeated-check count (at least two checks) and cooldown. Normal listening returns to Universal for sustained quiet or clear speech; Watching TV returns only for sustained quiet. Manual control and Therapy take priority.")
+        line("Speech detection and neural speech/background estimates must agree before a change. If they disagree, your program stays as it is. Quiet return and clear-speech return from TV use two matching checks. Other changes use your saved repeated-check count (at least two). The saved cooldown still applies. Normal listening and Watching TV return to Universal for quiet or clear speech. Manual control and Therapy take priority.")
         line("You may lock the screen while Automatic is On. Keep the phone where your aids can hear its tones. Use the notification Off button to stop. It stops after eight hours. This experimental model can make mistakes; choosing a program yourself stops Automatic.")
         handler.removeCallbacksAndMessages(null);handler.post(refresh);update()
     }

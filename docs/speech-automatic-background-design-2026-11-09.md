@@ -131,3 +131,25 @@ software and does not define or alter what the audiologist's TV program changes.
 
 Validation and uncompleted physical checks are recorded in
 [the TV update report](acceptance/tv-automatic-2026-11-13.md).
+
+## November 14: quiet-room return correction
+
+The owner reported TV staying selected indefinitely in a silent room. A second
+quiet path now combines low digital input levels, per-frame absence of tracked
+speech/media/activity, a tonal-sound veto and neural input/residual speech checks.
+It uses the existing bounded capture, not a silence timeout. Invalid/muted samples
+remain uncertain. The owner requested faster return: quiet now needs two fresh
+checks; other severities retain saved confirmations. Saved cooldown and all
+runtime/executor priorities remain in force. No fitting or saved settings change.
+Both peers use detector profile `hsgmask1-rnnoise-45556e0d-quiet-v2`.
+
+Extra neural work on quiet candidates and a transient low-frequency-energy scalar
+remain in memory. No wearer audio or transcript is retained. Battery impact and
+physical quiet-return acceptance require device evidence. See the
+[dated correction and measured limits](acceptance/quiet-return-2026-11-14.md).
+
+The owner then clarified that return should also work with ordinary conversation
+and accepted potential Universal/TV changes during TV dialogue. CLEAR now maps
+to Universal in Watching TV and needs two matching checks when leaving TV;
+MODERATE/HEAVY retain TV mapping and saved entry counts. This does not identify
+a TV source. Saved cooldown still prevents rapid re-entry.

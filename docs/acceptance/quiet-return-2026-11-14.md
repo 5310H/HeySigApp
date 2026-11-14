@@ -56,3 +56,14 @@ transcript or new history is saved. Neural work now also runs on qualifying quie
 candidates that previously returned UNKNOWN early. Battery cost is unqualified.
 Older six-scene acceptance gates are unchanged. Device validation and actual
 quiet-return reception remain pending until recorded after installation.
+
+## Owner clarification before installation
+
+The owner clarified that return need not require quiet: “just not TV.” The current
+explicit Watching TV context is not TV-source recognition. The committed fix does
+not establish that TV has stopped while nearby people continue talking. The owner accepted return to Universal during clear/low-noise speech, including
+during clear TV dialogue, and later re-entry to TV when speech becomes masked.
+CLEAR now maps to Universal even in Watching TV; exit from the TV program uses
+two matching CLEAR checks. MODERATE/HEAVY still map to TV with saved confirmation
+counts. QUIET also uses two matching checks. Saved cooldown and priority guards
+remain unchanged. This is a masking-based program choice, not TV recognition.

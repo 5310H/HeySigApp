@@ -136,7 +136,7 @@ data class MaskingChoices(val everyday:Int?,val noisy:Int?,val veryNoisy:Int?,
     }
     fun target(severity:MaskingSeverity)=when(severity) {
         MaskingSeverity.QUIET -> everyday
-        MaskingSeverity.CLEAR -> if(watchingTv) television else everyday
+        MaskingSeverity.CLEAR -> everyday
         MaskingSeverity.MODERATE -> if(watchingTv) television else noisy
         MaskingSeverity.HEAVY -> if(watchingTv) television else veryNoisy
         MaskingSeverity.UNKNOWN -> null
@@ -161,8 +161,9 @@ fun observeMasking(previous:MaskingState,evidence:MaskingEvidence,capturedAt:Lon
     val target=choices.target(evidence.severity) ?: return hold(if(evidence.severity==MaskingSeverity.UNKNOWN) evidence.reason else "No program chosen for this situation; keeping current program")
     if(target==settings.sleepProgram || target in safety.protectedPrograms) return hold("Therapy stays under manual control")
     val fresh=previous.lastCapture?.let { capturedAt-it<=settings.freshnessSeconds*1000L }==true
-    // Owner-requested faster quiet return; louder-scene entry retains saved confirmation count.
-    val needed=if(evidence.severity==MaskingSeverity.QUIET) 2 else maxOf(2,settings.confirmations)
+    // Faster quiet return and clear-speech TV exit; louder-scene entry retains saved confirmations.
+    val needed=if(evidence.severity==MaskingSeverity.QUIET ||
+        (evidence.severity==MaskingSeverity.CLEAR && choices.watchingTv && lastRequested==choices.television)) 2 else maxOf(2,settings.confirmations)
     val count=if(fresh && previous.severity==evidence.severity) minOf(needed,previous.count+1) else 1
     val next=previous.copy(severity=evidence.severity,count=count,lastCapture=capturedAt)
     if(count<needed) return MaskingDecision(next,reason="Checking again: $count of $needed")

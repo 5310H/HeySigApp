@@ -56,17 +56,19 @@ hearing-aid TV program, turn **Watching TV** on and save. The owner's confirmed
 TV program is slot 5; other fittings must use their actual TV slot. No TV slot
 is guessed or assigned automatically.
 
-With Watching TV selected, repeated clear, partly masked or heavily masked
-speech evidence selects TV instead of Universal, Noisy or Very Noisy. Repeated
-quiet evidence returns to your saved Universal choice. Clear speech does not
-trigger a return during this TV session. Uncertain checks—including music-only
-passages—hold the current program, so TV selection may wait for speech evidence.
-The existing confirmation count and cooldown apply in both directions. Leaving
-Universal unassigned holds TV during quiet instead of sending a return.
+With Watching TV selected, repeated partly or heavily masked speech evidence
+selects TV instead of Noisy or Very Noisy. Quiet or clear speech returns to your
+saved Universal choice after two matching fresh checks. Other changes use your
+saved confirmation count (at least two). Your saved cooldown applies in both
+directions. At the owner's three-second capture and ten-second pause, two checks
+remove approximately 13 seconds from the former three-check confirmation, plus
+variable inference time; this is not an exact return-time guarantee. Leaving
+Universal unassigned holds the current program instead of sending a return.
+Uncertain checks—including music-only passages—hold and reset confirmations.
 
 This is your explicit listening choice, **not automatic television recognition**.
-While Watching TV remains selected, speech after quiet can select TV again,
-including nearby conversation after the television has been turned off. To resume
+A clear TV scene can return to Universal, and masked speech can select TV again
+later in the same session. The owner accepts this behavior. To resume
 normal speech-aware choices, turn Automatic Off, turn Watching TV off, save, then
 turn Automatic On again. Your normal three role choices remain saved. Manual
 program controls, Therapy, notification Off and all existing session stops retain
