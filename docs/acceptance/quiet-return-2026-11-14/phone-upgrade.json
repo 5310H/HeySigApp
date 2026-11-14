@@ -1,0 +1,10 @@
+{
+  "commit": "f5ecd3671f852cd19a705e58328c718ecbd57e10",
+  "form": "phone",
+  "allPreferenceFilesMatched": 37,
+  "userPreferenceFilesMatched": 13,
+  "installedApkMatches": true,
+  "installedApkSha256": "842da3b9294f1bbdbdff9f481116e1feeb6d1adb5cc82f2fe3717e0853b3b397",
+  "signerMatched": true,
+  "programCommandsSent": false
+}

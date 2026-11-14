@@ -1,0 +1,13 @@
+{
+  "automaticOn": true,
+  "captureSource": "phone",
+  "program": "Universal",
+  "completedChecks": 1,
+  "userPreferenceFilesUnchangedAfterLaunch": 12,
+  "userPreferenceFilesChangedAfterLaunch": [
+    "heysig-core-v1.xml"
+  ],
+  "visibleBuildLabel": false,
+  "installedSourceVerifiedByApkHash": true,
+  "physicalReturnVerified": false
+}

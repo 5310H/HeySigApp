@@ -1,5 +1,15 @@
 # HeySig remaining work checklist
 
+## November 14 TV-return update
+
+- [x] Fix low-level quiet-room detection and allow clear speech to return from TV to Universal.
+- [x] Use two matching return checks; retain saved cooldown and manual/Therapy safeguards.
+- [x] Push validated source, pass cloud builds/lint/emulator checks, and update phone to **Build f5ecd36 · Nov 14, 2026**, preserving all 37 preference files.
+- [ ] Install matching watch update when charged and connected; watch remains **Build aef19f7 · Nov 13, 2026**. Use phone microphone meanwhile.
+- [ ] Record real-room return timing and physical reception on this build.
+
+[Measured limits and installation evidence](acceptance/quiet-return-2026-11-14.md).
+
 ## Current checkpoint — November 13, 2026
 
 This checkpoint and the current [phone](phone-noise-completion-checklist.md) and

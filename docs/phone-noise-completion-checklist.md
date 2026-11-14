@@ -1,5 +1,15 @@
 # Phone Automatic completion checklist — November 13, 2026
 
+November 14 update: phone **Build f5ecd36 · Nov 14, 2026** is installed;
+watch **Build aef19f7 · Nov 13, 2026** remains installed while charging.
+The matching watch APK is built/signed but not yet installed. Use phone-microphone
+Automatic until both peers share the new detector profile. Quiet and clear-speech
+TV return use two matching checks, with saved cooldown retained. See the
+[correction and current evidence](acceptance/quiet-return-2026-11-14.md).
+Physical return timing/listening acceptance for this build remain open.
+
+Previous November 13 checkpoint follows:
+
 Latest installed: **HeySig — Build aef19f7 · Nov 13, 2026** (phone and watch).
 The [status follow-up](acceptance/automatic-status-2026-11-13.md) records the
 status-only correction and latest in-place update; active-use label observation

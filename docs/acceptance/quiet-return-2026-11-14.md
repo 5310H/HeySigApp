@@ -20,7 +20,7 @@ music. The neural check must independently report no reliable speech, speech
 activity <= .05, and both input/residual speech scores <= .15.
 
 The owner then requested quicker switching: QUIET now requires **two** consecutive
-fresh checks rather than the saved three. Other severities retain saved counts.
+fresh checks rather than the saved three. Clear-speech return from TV also uses two checks, as clarified below; other changes retain saved counts.
 At the owner's current three-second capture and ten-second wait, this removes
 approximately 13 seconds, plus variable inference time, from confirmation.
 It is not an exact return-time guarantee: capture phase, inference and the saved
@@ -54,8 +54,7 @@ All added processing uses the existing bounded capture. A transient low-frequenc
 energy scalar and neural corroboration are computed in memory; no wearer audio,
 transcript or new history is saved. Neural work now also runs on qualifying quiet
 candidates that previously returned UNKNOWN early. Battery cost is unqualified.
-Older six-scene acceptance gates are unchanged. Device validation and actual
-quiet-return reception remain pending until recorded after installation.
+Older six-scene acceptance gates are unchanged. Installation evidence is recorded below; actual quiet-return reception remains pending.
 
 ## Owner clarification before installation
 
@@ -67,3 +66,35 @@ CLEAR now maps to Universal even in Watching TV; exit from the TV program uses
 two matching CLEAR checks. MODERATE/HEAVY still map to TV with saved confirmation
 counts. QUIET also uses two matching checks. Saved cooldown and priority guards
 remain unchanged. This is a masking-based program choice, not TV recognition.
+
+## Final build and phone installation
+
+**Build f5ecd36 · Nov 14, 2026**, source
+`f5ecd3671f852cd19a705e58328c718ecbd57e10`, was committed and pushed before
+final APK production. [Cloud run 43643782627](https://github.com/5310H/HeySigApp/actions/runs/43643782627)
+passed pinned shared checks, both app/test builds, Android lint, APK/native pins
+and alignment checks, and API 36 silent emulator smoke checks (including TV UI
+and watch font/layout checks). The explicit TV clear-speech round-trip test also
+passed locally against the revised shared policy.
+
+The phone was updated in place with the existing development signer. All 37
+preference files, including 13 HeySig user preference files, matched before and
+after installation; installed APK SHA-256 matched the signed artifact. See
+`quiet-return-2026-11-14/phone-upgrade.json`. Automatic was already stopped. No
+hearing-aid commands were sent to verify installation.
+
+Watch APK is built and signed but installation awaits the charging watch and a
+current debugging address. Last installed watch remains Build aef19f7 · Nov 13,
+2026. Watch-source Automatic requires the matching quiet-v2 profile update; use
+the phone microphone until both devices are updated. Real-room return timing,
+physical reception and listening benefit remain unverified for this build.
+These are development artifacts, not a production release or Play approval.
+
+After launch, the owner enabled phone Automatic. A read-only UI snapshot showed
+the revised Watching TV wording, Automatic On, one completed check and Universal
+already selected. No return transition or physical reception is established by
+that snapshot. Twelve of thirteen HeySig preference files still matched the
+pre-install snapshot; `heysig-core-v1.xml` changed during post-launch/live use.
+The all-37 match above is specifically the completed installation checkpoint,
+not a claim that runtime state never changes afterward. The build label was not
+visible on the Noise screen; exact installed source was verified by APK hash.

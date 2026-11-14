@@ -6,15 +6,15 @@ The [coding specification](docs/coding-spec.md) defines screens, functions, data
 
 Track outstanding tests, owner inputs and release work in the [remaining work checklist](docs/remaining-checklist.md).
 
-Latest phone/watch update: **Build aef19f7 · Nov 13, 2026** corrects stale
-Automatic status paths ([validation and installation](docs/acceptance/automatic-status-2026-11-13.md)).
-The preceding TV update adds an explicit
-**Watching TV** choice to Automatic. Repeated speech checks select the assigned
-TV program; sustained quiet returns to Universal; uncertain checks hold. See
-[setup and behavior](docs/speech-aware-automatic.md#watching-tv) and the
-[change, validation and installation record](docs/acceptance/tv-automatic-2026-11-13.md).
-TV recognition and normal-mode early switching remain unresolved; the new choice
-is Off until explicitly configured.
+Latest phone update: **Build f5ecd36 · Nov 14, 2026** fixes ordinary quiet-room
+return and allows Universal during clear speech while Watching TV is selected.
+Quiet return and clear-speech return from TV use two matching checks; masked
+speech can select TV again with saved confirmation/cooldown safeguards.
+[Validation and installation](docs/acceptance/quiet-return-2026-11-14.md).
+The watch remains **Build aef19f7 · Nov 13, 2026**, pending its charging/connection;
+use the phone microphone until the matching watch update is installed.
+This is explicit TV listening context, not automatic TV recognition. See
+[setup and behavior](docs/speech-aware-automatic.md#watching-tv).
 
 Google Play release work follows the [dated readiness audit and release gates](docs/play-store-readiness.md). The [Gradle build guide](docs/gradle-release-builds.md) covers preserved development signing, separated release identities, API 36 and signed app-bundle validation. These candidates are not ready for store submission. After bundle validation, run `python3 tools/check-play-readiness.py` for release-manifest checks; this does not replace Play review.
 
