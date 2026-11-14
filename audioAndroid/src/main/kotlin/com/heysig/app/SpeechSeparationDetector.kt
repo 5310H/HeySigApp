@@ -22,6 +22,10 @@ class SpeechSeparationDetector(private val original:SpeechMaskingHead,private va
     fun classify(pcm:ShortArray,pooled:DoubleArray?,frames:List<Map<String,Double>>):MaskingEvidence {
         latestMeasurement=null
         val before=original.classify(pcm,pooled,frames)
+        if(before.quietCandidate) {
+            val measurement=denoiser.measure(pcm);latestMeasurement=measurement
+            return QuietRoomReturn.corroborate(before,measurement)
+        }
         if(before.severity in listOf(MaskingSeverity.QUIET,MaskingSeverity.UNKNOWN)) return before
         val measurement=denoiser.measure(pcm);latestMeasurement=measurement
         return bands.corroborate(before,measurement)

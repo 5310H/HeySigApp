@@ -16,6 +16,7 @@ fun main() {
         {send(gate(),rms=1.0)},{send(gate(),severity="invalid")})) check(runCatching(bad).isFailure)
     check(send(gate(),score=0.0,severity="UNKNOWN").first.severity==MaskingSeverity.UNKNOWN)
     check(send(gate(),score=0.0,severity="QUIET").first.severity==MaskingSeverity.QUIET)
+    check(runCatching { send(gate(),profile="hsgmask1-rnnoise-45556e0d-v1") }.isFailure)
     g.close();check(runCatching { send(g,sequence=2) }.isFailure)
     // Rejecting a stale sample does not consume the next sequence.
     val stale=gate();check(runCatching { send(stale,age=15_001) }.isFailure);send(stale)

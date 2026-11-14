@@ -1,0 +1,36 @@
+{
+  "cases": 22,
+  "roomTone": {
+    "cases": 4,
+    "quiet": 4
+  },
+  "softSpeech": {
+    "cases": 8,
+    "quiet": 0
+  },
+  "conversation": {
+    "cases": 4,
+    "quiet": 0
+  },
+  "syntheticMusic": {
+    "cases": 2,
+    "quiet": 0
+  },
+  "forestContext": {
+    "cases": 4,
+    "quiet": 0,
+    "notScoredAsSilence": true
+  },
+  "frozenCases": 1182,
+  "frozenMixtures": 1152,
+  "frozenNewQuietMixtures": 0,
+  "frozenSeverityChanges": [
+    {
+      "index": 1181,
+      "kind": "quiet-surrogate",
+      "before": "UNKNOWN",
+      "after": "QUIET"
+    }
+  ],
+  "modelFitting": false
+}

@@ -2,7 +2,7 @@ package com.heysig.noise
 
 /** Version identifies the fixed masking head, RNNoise and bands, not wearer settings. */
 object WatchAutomaticProfile {
-    const val ID="hsgmask1-rnnoise-45556e0d-v1"
+    const val ID="hsgmask1-rnnoise-45556e0d-quiet-v2"
     const val PATH="/heysig/watch-automatic/v1"
     const val CAPABILITY="heysig_watch_automatic_phone_v1"
     const val MAX_BYTES=4096

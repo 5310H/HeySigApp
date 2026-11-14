@@ -7,7 +7,7 @@ fun main() {
     fun evidence(s:MaskingSeverity)=MaskingEvidence(s,SoundType.UNKNOWN,.9,"test scalar evidence")
     fun feed(severity:MaskingSeverity,current:Int=1,start:Long=1000,initial:MaskingState=MaskingState(),config:NoiseSettings=settings,mapping:MaskingChoices=choices,guard:NoiseSafety=safe):MaskingDecision {
         var state=initial;var last=MaskingDecision(state,reason="")
-        for(i in 0..2) { val t=start+i*10000;last=observeMasking(state,evidence(severity),t,t+20,config,mapping,guard,current);state=last.state }
+        for(i in 0 until if(severity==MaskingSeverity.QUIET) 2 else 3) { val t=start+i*10000;last=observeMasking(state,evidence(severity),t,t+20,config,mapping,guard,current);state=last.state }
         return last
     }
     check(feed(MaskingSeverity.MODERATE).proposed==2)

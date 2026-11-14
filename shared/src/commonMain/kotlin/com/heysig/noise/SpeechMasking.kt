@@ -6,7 +6,9 @@ enum class MaskingSeverity(val label: String) {
     QUIET("Quiet"), CLEAR("Speech stands out"), MODERATE("Speech partly masked"), HEAVY("Speech heavily masked"), UNKNOWN("Not sure yet")
 }
 data class MaskingEvidence(val severity: MaskingSeverity=MaskingSeverity.UNKNOWN,
-    val soundType: SoundType=SoundType.UNKNOWN, val score: Double=0.0, val reason: String="Uncertain sound; keep current program")
+    val soundType: SoundType=SoundType.UNKNOWN, val score: Double=0.0, val reason: String="Uncertain sound; keep current program",
+    /** Not a program decision: a separate neural absence-of-speech check must agree. */
+    val quietCandidate:Boolean=false)
 
 /** No calibration, enrollment, transcript or wearer learning. Fixed, development-trained weights. */
 class SpeechMaskingHead private constructor(private val bias: DoubleArray,private val weights: List<DoubleArray>) {
@@ -16,10 +18,11 @@ class SpeechMaskingHead private constructor(private val bias: DoubleArray,privat
         val measurement=NoiseAccumulator(16000,3).apply { add(pcm,pcm.size) }.measurement()
         val acoustic=MaskingSignal.features(pcm)
         val features=if(featureCount==2058) acoustic+NoiseCancellationSignal.features(pcm) else acoustic
-        return classifyFeatures(pooled,features,frames,measurement)
+        return classifyFeatures(pooled,features,frames,measurement,QuietRoomSignal.lowFrequencyFraction(pcm))
     }
     /** Identical scalar boundary for native capture and reproducible developer-corpus reporting. */
-    fun classifyFeatures(pooled:DoubleArray?,speechFeatures:DoubleArray,frames:List<Map<String,Double>>,measurement:NoiseMeasurement):MaskingEvidence {
+    fun classifyFeatures(pooled:DoubleArray?,speechFeatures:DoubleArray,frames:List<Map<String,Double>>,measurement:NoiseMeasurement,
+        quietLowFrequencyFraction:Double?=null):MaskingEvidence {
         fun hold(why:String)=MaskingEvidence(reason=why)
         if(measurement.sampleRate!=16000 || measurement.sampleCount!=48000L ||
             !measurement.rmsDbfs.isFinite() || measurement.rmsDbfs !in -120.0..0.0 ||
@@ -29,14 +32,21 @@ class SpeechMaskingHead private constructor(private val bias: DoubleArray,privat
             pooled.sumOf { it*it } !in .99..1.01 || frames.size !in 3..32 || frames.any { f ->
                 !f.keys.containsAll(EnvironmentClassifier.requiredLabels) || f.values.any { !it.isFinite() || it !in 0.0..1.0 }
             }) return hold("Incomplete or invalid masking evidence")
-        if(measurement.flags.isNotEmpty() || measurement.peakDbfs-measurement.rmsDbfs>24) return hold("Interrupted, clipped or isolated sound; keep current program")
+        if(measurement.flags.isNotEmpty()) return hold("Interrupted, clipped or isolated sound; keep current program")
         fun event(vararg labels:String)=frames.map { f -> labels.maxOf { f.getValue(it) } }.average()
         val speech=event("Speech","Conversation","Narration, monologue")
         val babble=event("Hubbub, speech noise, speech babble","Crowd","Chatter")
         val type=SoundTypeClassifier.classify(frames)
-        if(event("Music")>=.15) return hold("Music or mixed media; keep current program")
-        if(measurement.rmsDbfs<=-65 && event("Silence")>=.6 && max(speech,babble)<.15)
+        val isolated=measurement.peakDbfs-measurement.rmsDbfs>24
+        if(!isolated && event("Music")<.15 && measurement.rmsDbfs<=-65 && event("Silence")>=.6 && max(speech,babble)<.15)
             return MaskingEvidence(MaskingSeverity.QUIET,type,reason="Quiet evidence; requires repeated checks")
+        // Quiet room tone need not be near digital zero or have a high Silence
+        // score after bounded model-input gain. This remains UNKNOWN until the
+        // neural speech/residual observer independently supplies low activity.
+        if(QuietRoomReturn.candidate(measurement,frames,speechFeatures.take(4).toDoubleArray(),quietLowFrequencyFraction)) return MaskingEvidence(soundType=type,
+            reason="Low-level room sound; verifying absence of speech",quietCandidate=true)
+        if(isolated) return hold("Interrupted, clipped or isolated sound; keep current program")
+        if(event("Music")>=.15) return hold("Music or mixed media; keep current program")
         if(max(speech,babble)<.15) return hold("No reliable speech evidence; keep current program")
         val x=DoubleArray(featureCount) { if(it<2048) pooled[it]*20 else 0.0 }
         speechFeatures.copyInto(x,2048)
@@ -151,7 +161,8 @@ fun observeMasking(previous:MaskingState,evidence:MaskingEvidence,capturedAt:Lon
     val target=choices.target(evidence.severity) ?: return hold(if(evidence.severity==MaskingSeverity.UNKNOWN) evidence.reason else "No program chosen for this situation; keeping current program")
     if(target==settings.sleepProgram || target in safety.protectedPrograms) return hold("Therapy stays under manual control")
     val fresh=previous.lastCapture?.let { capturedAt-it<=settings.freshnessSeconds*1000L }==true
-    val needed=maxOf(2,settings.confirmations)
+    // Owner-requested faster quiet return; louder-scene entry retains saved confirmation count.
+    val needed=if(evidence.severity==MaskingSeverity.QUIET) 2 else maxOf(2,settings.confirmations)
     val count=if(fresh && previous.severity==evidence.severity) minOf(needed,previous.count+1) else 1
     val next=previous.copy(severity=evidence.severity,count=count,lastCapture=capturedAt)
     if(count<needed) return MaskingDecision(next,reason="Checking again: $count of $needed")

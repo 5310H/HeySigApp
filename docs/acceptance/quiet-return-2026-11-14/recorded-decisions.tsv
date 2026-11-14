@@ -1,0 +1,23 @@
+index	before	quietCandidate	severity	returnProposal	reason
+0	UNKNOWN	true	QUIET	1	Quiet room: low level and both speech checks inactive; requires repeated checks
+1	UNKNOWN	true	QUIET	1	Quiet room: low level and both speech checks inactive; requires repeated checks
+2	UNKNOWN	true	QUIET	1	Quiet room: low level and both speech checks inactive; requires repeated checks
+3	UNKNOWN	true	QUIET	1	Quiet room: low level and both speech checks inactive; requires repeated checks
+4	UNKNOWN	true	UNKNOWN	hold	Quiet return not confirmed by neural speech checks; keep current program
+5	UNKNOWN	true	UNKNOWN	hold	Quiet return not confirmed by neural speech checks; keep current program
+6	UNKNOWN	true	UNKNOWN	hold	Quiet return not confirmed by neural speech checks; keep current program
+7	UNKNOWN	true	UNKNOWN	hold	Quiet return not confirmed by neural speech checks; keep current program
+8	CLEAR	false	UNKNOWN	hold	Speech and separated-background estimates disagree; keep current program
+9	CLEAR	false	UNKNOWN	hold	Speech and separated-background estimates disagree; keep current program
+10	HEAVY	false	UNKNOWN	hold	Speech and separated-background estimates disagree; keep current program
+11	HEAVY	false	UNKNOWN	hold	Speech and separated-background estimates disagree; keep current program
+12	CLEAR	false	CLEAR	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+13	CLEAR	false	CLEAR	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+14	CLEAR	false	CLEAR	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+15	CLEAR	false	CLEAR	hold	Speech and separated-background estimates agree; requires repeated fresh checks
+16	CLEAR	false	CLEAR	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+17	CLEAR	false	CLEAR	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+18	CLEAR	false	CLEAR	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+19	CLEAR	false	CLEAR	hold	Masking estimates agree; removed sound includes speech-like activity, not verified pure noise
+20	UNKNOWN	false	UNKNOWN	hold	No reliable speech evidence; keep current program
+21	UNKNOWN	false	UNKNOWN	hold	No reliable speech evidence; keep current program

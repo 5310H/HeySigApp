@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-14",
+  "build": "aef19f7",
+  "ownerReport": "TV turned off; never returned to Universal",
+  "currentSummary": "Speech-aware Automatic On\nMicrophone: phone.\nNot sure yet. No reliable speech evidence; keep current program.\nWatching TV: speech uses TV; sustained quiet uses Universal. This is your listening choice, not TV recognition.\nSound type: Not sure yet. Masking: Not sure yet.\nProgram considered: keep current program.\nLast program requested: TV.\nAid reception and improved understanding are not confirmed.\n1249 completed checks. Automatic can send program-change tones.",
+  "savedTiming": {
+    "confirmations": 3,
+    "cooldownSeconds": 60,
+    "legacyCaptureSeconds": 5,
+    "liveSpeechCaptureSeconds": 3,
+    "waitSeconds": 10,
+    "freshnessSeconds": 30
+  },
+  "watchingTv": true,
+  "television": 5,
+  "universal": 1,
+  "captureSource": "phone",
+  "currentProcessFilteredErrorLines": 0,
+  "limitations": [
+    "Latest status only; no persisted per-sample decision history exists.",
+    "No waveform or transcript collected.",
+    "Current rejection does not identify which interruption/clipping/isolated-sound subcondition failed.",
+    "No settings or program commands changed for this diagnosis."
+  ]
+}
