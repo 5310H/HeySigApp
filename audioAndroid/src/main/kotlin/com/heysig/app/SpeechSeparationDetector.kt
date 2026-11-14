@@ -19,15 +19,27 @@ class SpeechSeparationDetector(private val original:SpeechMaskingHead,private va
         }
     }
     var latestMeasurement:SpeechNoiseEstimate?=null;private set
+    var latestDiagnostics="";private set
     fun classify(pcm:ShortArray,pooled:DoubleArray?,frames:List<Map<String,Double>>):MaskingEvidence {
         latestMeasurement=null
         val before=original.classify(pcm,pooled,frames)
+        fun report(result:MaskingEvidence):MaskingEvidence {
+            fun number(value:Double?)=value?.let { "%.3f".format(java.util.Locale.US,it) } ?: "unavailable"
+            val input=if(pcm.isNotEmpty() && pcm.size<=48000) NoiseAccumulator(16000,3).apply { add(pcm,pcm.size) }.measurement() else null
+            fun maximum(labels:Set<String>)=frames.maxOfOrNull { frame -> labels.maxOf { frame[it] ?: 0.0 } }
+            val speech=setOf("Speech","Conversation","Narration, monologue","Hubbub, speech noise, speech babble","Crowd","Chatter")
+            val neural=latestMeasurement
+            latestDiagnostics="Last completed check: input ${number(input?.rmsDbfs)} dBFS, peak ${number(input?.peakDbfs)}; original ${before.severity}, flags ${input?.flags}."+
+                "\nEvent speech ${number(maximum(speech))}, music ${number(maximum(setOf("Music")))}; quiet candidate ${before.quietCandidate}."+
+                "\nNeural ${neural?.status ?: "not run"}: speech ${number(neural?.speechScore)}, activity ${number(neural?.speechActivity)}, residual speech ${number(neural?.residualSpeechScore)}, ratio ${number(neural?.retainedToResidualDb)}."
+            return result
+        }
         if(before.quietCandidate) {
             val measurement=denoiser.measure(pcm);latestMeasurement=measurement
-            return QuietRoomReturn.corroborate(before,measurement)
+            return report(QuietRoomReturn.corroborate(before,measurement))
         }
-        if(before.severity in listOf(MaskingSeverity.QUIET,MaskingSeverity.UNKNOWN)) return before
+        if(before.severity in listOf(MaskingSeverity.QUIET,MaskingSeverity.UNKNOWN)) return report(before)
         val measurement=denoiser.measure(pcm);latestMeasurement=measurement
-        return bands.corroborate(before,measurement)
+        return report(bands.corroborate(before,measurement))
     }
 }

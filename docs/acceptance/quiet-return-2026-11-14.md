@@ -98,3 +98,22 @@ pre-install snapshot; `heysig-core-v1.xml` changed during post-launch/live use.
 The all-37 match above is specifically the completed installation checkpoint,
 not a claim that runtime state never changes afterward. The build label was not
 visible on the Noise screen; exact installed source was verified by APK hash.
+
+## Owner failure and live reproduction after installation
+
+The owner tested the updated phone in a quiet room and reported no return.
+Automatic was Off when inspected; after explicit owner re-enablement, TV remained
+requested after two and nine completed checks. Both live snapshots reported
+“Speech and separated-background estimates disagree; keep current program,”
+without a cooldown indication. One snapshot labeled the room Mostly speech.
+This is a reproduced failure on Build f5ecd36, not physical acceptance.
+
+A diagnostic follow-up exposes only the most recent completed phone check's
+scalar input RMS/peak/flags, original class, maximum speech/music event scores,
+quiet-candidate status and existing neural status/scores/ratio on the Noise
+status screen. It changes no detector threshold or program decision, adds no
+capture and stores no waveform/transcript/history. The string lives in memory
+and is replaced each check. The adapter computes scalar input statistics from
+the same bounded buffer. Diagnostic performance/battery impact is unqualified.
+This is needed before changing a gate based on the actual phone environment;
+the public-room-tone success did not establish this phone's quiet-room behavior.

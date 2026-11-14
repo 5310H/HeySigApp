@@ -34,6 +34,7 @@ open class SpeechAutomaticService: Service() {
     @Volatile private var evidence=MaskingEvidence()
     @Volatile private var rms:Double?=null
     @Volatile private var analysisCpuNanos=0L
+    @Volatile private var analysisDetail=""
     private val head by lazy { SpeechSeparationDetector.load(this) }
     private fun safety()=NoiseSafety(microphoneSession=!closed && running===this,
         manualOverride=runtime.sleepRoutine.state.override,
@@ -47,7 +48,9 @@ open class SpeechAutomaticService: Service() {
             rms=NoiseAccumulator(16000,3).apply { add(pcm,pcm.size) }.measurement().rmsDbfs
         },observeInferenceCpu={ analysisCpuNanos=it },microphoneSession={ !closed && running===this }) }
     var detail="Starting speech-aware Automatic"; private set
-    protected open fun detect(pcm:ShortArray,features:DoubleArray?,frames:List<Map<String,Double>>)=head.classify(pcm,features,frames)
+    protected open fun detect(pcm:ShortArray,features:DoubleArray?,frames:List<Map<String,Double>>)=head.classify(pcm,features,frames).also {
+        analysisDetail=head.latestDiagnostics
+    }
     var samples=0;private set
     var cpuNanos=0L;private set
     var latest=MaskingEvidence();private set
@@ -187,6 +190,7 @@ open class SpeechAutomaticService: Service() {
         val remaining=state.lastSuccess?.let { ((request.settings.cooldownSeconds*1000L-(SystemClock.elapsedRealtime()-it)).coerceAtLeast(0)+999)/1000 } ?: 0
         if(remaining>0) append("\nNext change can happen in $remaining seconds")
         append("\n$samples completed checks. Automatic can send program-change tones.")
+        if(!watchMode && samples>0 && analysisDetail.isNotEmpty()) append("\n$analysisDetail")
     }
     private fun notification():Notification {
         val open=PendingIntent.getActivity(this,7305,Intent(this,HomeActivity::class.java),PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
