@@ -107,6 +107,7 @@ object PhoneStyle {
             when(kind) {
                 "Home" -> { val p=android.graphics.Path(); p.moveTo(3f,11f); p.lineTo(12f,3f); p.lineTo(21f,11f); canvas.drawPath(p,paint); canvas.drawRoundRect(6f,10f,18f,21f,2f,2f,paint) }
                 "Noise" -> { listOf(6f to 6f,10f to 11f,14f to 8f,18f to 4f).forEach { (x,h) -> canvas.drawLine(x,12-h/2,x,12+h/2,paint) } }
+                "Therapy" -> { canvas.drawCircle(12f,12f,8f,paint); canvas.drawLine(12f,7f,12f,12f,paint); canvas.drawLine(12f,12f,16f,14f,paint) }
                 "Saved" -> { canvas.drawRoundRect(5f,3f,19f,21f,2f,2f,paint); canvas.drawLine(9f,8f,15f,8f,paint); canvas.drawLine(9f,12f,15f,12f,paint) }
                 else -> { canvas.drawCircle(12f,12f,7f,paint); canvas.drawCircle(12f,12f,2.5f,paint); for(a in 0..7) { val angle=a*Math.PI/4; canvas.drawLine((12+7*kotlin.math.cos(angle)).toFloat(),(12+7*kotlin.math.sin(angle)).toFloat(),(12+9*kotlin.math.cos(angle)).toFloat(),(12+9*kotlin.math.sin(angle)).toFloat(),paint) } }
             }

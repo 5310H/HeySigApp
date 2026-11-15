@@ -461,10 +461,10 @@ class HomeActivity : Activity() {
             setOnClickListener { navigate("Voice") }
             accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
         }.also { shell.addView(it) }
-        val tabs = listOf("Home","Noise","Settings")
-        val selected = when { page.startsWith("Noise") || page=="Environment" -> "Noise"; page in listOf("Volume","Balance","Tinnitus","Batteries") -> "Home"; page in tabs -> page; else -> "Settings" }
+        val tabs = listOf("Home","Noise","Therapy","Settings")
+        val selected = when { page=="Sleep" -> "Therapy"; page.startsWith("Noise") || page=="Environment" -> "Noise"; page in listOf("Volume","Balance","Tinnitus","Batteries") -> "Home"; page in tabs -> page; else -> "Settings" }
         val navigation = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(android.graphics.Color.WHITE) }
-        val count = 3
+        val count = if(resources.configuration.fontScale>1.3f) 2 else 4
         tabs.chunked(count).forEach { rowTabs ->
             val row = LinearLayout(this)
             rowTabs.forEach { target ->
@@ -479,7 +479,7 @@ class HomeActivity : Activity() {
                     compoundDrawablePadding = PhoneStyle.dp(context,5)
                     alpha = if(isEnabled) 1f else .45f
                     isSelected = active; contentDescription = "$target${if(active) ", selected" else ""}"
-                    setOnClickListener { navigate(target) }
+                    setOnClickListener { navigate(if(target=="Therapy") "Sleep" else target) }
                 }
                 row.addView(tab,LinearLayout.LayoutParams(0,-2,1f))
             }; navigation.addView(row)
