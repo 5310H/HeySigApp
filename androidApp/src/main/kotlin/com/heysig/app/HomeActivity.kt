@@ -499,7 +499,6 @@ class HomeActivity : Activity() {
     private fun settingsPage() {
         section("Your preferences") {
             button("Getting started") { navigate("GettingStarted") }
-            button("Therapy routine") { navigate("Sleep") }
             button("Saved settings") { navigate("Saved") }
             button("Battery check") { navigate("Batteries") }
             button("Aid setup") { navigate("Setup") }
@@ -1022,7 +1021,7 @@ class HomeActivity : Activity() {
         PhoneStyle.heading(this,content,"Type a command")
         val input = EditText(this).apply { hint = "Try: program two"; setSingleLine(); content.addView(this) }
         button("Run typed command",!busy.get()) { route(input.text.toString()) }
-        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • refresh (resend current configuration) • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, automatic on, automatic off, noise status. Guided calibration and automatic preview are available on Noise. Phone Automatic uses your saved Universal, Noisy and Very Noisy choices with speech/background estimates; calibration is optional for legacy level tools. Therapy routine choices and preview are available in Settings; optional therapy reminders require your tap to request a program change. Use Watch connection for companion setup.")
+        line("Programs by name or number • volume 0–15 • balance −8 to +7 • tin 0–15 • current program/volume/balance/tin • battery check • refresh (resend current configuration) • save settings • restore settings • cancel.\nNoise: configure noise, read noise settings, assign program three to noise level five, set noise threshold one to minus sixty, save noise settings, automatic on, automatic off, noise status. Guided calibration and automatic preview are available on Noise. Phone Automatic uses your saved Universal, Noisy and Very Noisy choices with speech/background estimates; calibration is optional for legacy level tools. Therapy routine choices, timer and preview are available from the bottom Therapy button; optional therapy reminders require your tap to request a program change. Use Watch connection for companion setup.")
     }
     private fun privacyPage() {
         PrivacyNotice.sections.forEach { (title,text) -> section(title) { line(text) } }

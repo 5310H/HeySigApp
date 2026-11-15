@@ -165,7 +165,7 @@ class Api36Smoke : Instrumentation() {
             open("Getting started")
             capture("getting-started")
             open("‹ Back")
-            open("Therapy routine")
+            open("Therapy")
             capture("sleep-dashboard")
             runOnMainSync {
                 descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()
