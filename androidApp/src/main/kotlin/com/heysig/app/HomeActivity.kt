@@ -464,7 +464,7 @@ class HomeActivity : Activity() {
         val tabs = listOf("Home","Noise","Therapy","Settings")
         val selected = when { page=="Sleep" -> "Therapy"; page.startsWith("Noise") || page=="Environment" -> "Noise"; page in listOf("Volume","Balance","Tinnitus","Batteries") -> "Home"; page in tabs -> page; else -> "Settings" }
         val navigation = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(android.graphics.Color.WHITE) }
-        val count = if(resources.configuration.fontScale>1.3f) 2 else 4
+        val count = if(resources.configuration.fontScale>2f) 2 else 4
         tabs.chunked(count).forEach { rowTabs ->
             val row = LinearLayout(this)
             rowTabs.forEach { target ->
