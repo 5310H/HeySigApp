@@ -398,7 +398,28 @@ class NoiseFeature(
         if(page == "Noise") {
             button("How to use") {
                 android.app.AlertDialog.Builder(activity).setTitle("Using Automatic")
-                    .setMessage("First time: on Home, choose your usual daytime program.\n\n1. Tap Choose programs. Pick Everyday, Noisy and Very Noisy from your own program names. Tap Save speech program choices before going back. Turning Automatic on here also saves your choices.\n\n2. Tap the red Off button to turn Automatic on. The button turns green and says On. The first time, follow the microphone and notification prompts.\n\n3. Keep the phone where your hearing aids can hear its program-change tones. You can lock the screen or use another app.\n\nWhen the room gets quieter, HeySig waits before changing back. With the usual settings, allow about a minute and a half after the last change. The screen shows the wait.\n\nTo stop, tap the green On button. If you are on another screen, swipe down from the top of the phone. Find the HeySig message and tap Off.\n\nAutomatic stops after 8 hours. Choosing a program yourself also stops it. Turn it on again when you want. Therapy stays under your control.\n\nNo recordings, calibration or learning period is needed. The model estimates speech masking, not just loudness. It can make mistakes; unsure means keep the current program.")
+                    .setMessage("""
+                        On Home, choose your usual daytime program. Open Choose programs, assign Universal, Noisy and Very Noisy, then save. For a TV session, also assign TV and turn Watching TV on; otherwise leave it off.
+
+                        Expected choices after repeated checks:
+                        • Quiet → Universal.
+                        • Clear speech → Universal, or TV when Watching TV is on.
+                        • Partly masked speech → Noisy.
+                        • Heavily masked speech → Very Noisy, even when Watching TV is on.
+                        • Unsure or unassigned → keep the current program.
+
+                        Watching TV is your choice, not TV recognition. Turn it off and save when that session ends. A falling graph alone does not mean quiet has been confirmed.
+
+                        Tap the red Off button to start; it turns green and says On. Read the microphone explanation and allow the requested access. Keep the phone where the aids can hear its tones; you may lock the screen.
+
+                        Each capture lasts three seconds, then pauses at least ten seconds plus processing time. Noisy, Very Noisy and TV use your saved repeated-check count (normally three, at least two). Universal return uses two fresh checks agreeing on Universal. After playback, the saved cooldown (normally 60 seconds) must finish before fresh confirmation starts. Return can take over a minute; the status shows the wait. Unsure checks clear confirmation and do not turn into quiet after a timeout.
+
+                        The model estimates speech masking rather than loudness alone. Pure noise, music or conflicting estimates can hold the current program. It can choose wrongly or miss a quiet return. Sent means playback completed, not confirmed aid reception or improved understanding.
+
+                        To stop, tap green On or notification Off. Manual control and Therapy take priority. Timed Wake does not restart Noise Automatic. Sessions end after eight hours and never restart themselves.
+
+                        No calibration or learning period is required. Noise captures are processed in memory and discarded; this feature does not save or upload recordings. Voice commands have a separate disclosure.
+                    """.trimIndent())
                     .setPositiveButton("Got it",null).show()
             }
             button("Choose programs") { navigate("NoiseSetup") }
