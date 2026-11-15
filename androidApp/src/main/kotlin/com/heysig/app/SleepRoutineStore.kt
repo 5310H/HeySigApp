@@ -69,13 +69,17 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
         val enabled=prefs.getBoolean("reminders",false)
         val automatic=prefs.getBoolean("automaticEnabled",false)
         val stateLabel=when {
+            automatic && prefs.getBoolean("therapyTimer",false) -> "Therapy timer On · Saved Wake program plays once when the timer finishes."
             automatic && state.override -> "Automatic switching paused by a manual change. Review and start automatic again."
             automatic -> "Automatic switching On · Saved programs play at bedtime and morning, including while locked."
             !enabled -> "Routine Off · Start automatic switching or use reminder options."
             state.override -> "Paused · Choose Resume routine reminders."
             else -> "Reminders On · Each program switch needs your confirmation."
         }
-        val next=if((enabled || automatic) && !state.override) {
+        val next=if(automatic && prefs.getBoolean("therapyTimer",false)) {
+            val left=((prefs.getLong("automaticWakeDue",0)-android.os.SystemClock.elapsedRealtime()).coerceAtLeast(0)+59_999)/60_000
+            "\nTimer: $left minutes remaining. Daily schedule is Off."
+        } else if((enabled || automatic) && !state.override) {
             val now=ZonedDateTime.now()
             val event=listOf("Bedtime" to prefs.getLong(if(automatic) "automaticSleepDue" else "sleepDue",0),"Morning" to prefs.getLong(if(automatic) "automaticWakeDue" else "wakeDue",0))
                 .filter { it.second>now.toInstant().toEpochMilli() }.minByOrNull { it.second }

@@ -8,7 +8,7 @@ fun main() {
     fun feed(severity:MaskingSeverity,current:Int=1,start:Long=1000,initial:MaskingState=MaskingState(),config:NoiseSettings=settings,mapping:MaskingChoices=choices,guard:NoiseSafety=safe):MaskingDecision {
         var state=initial;var last=MaskingDecision(state,reason="")
         for(i in 0 until if(severity==MaskingSeverity.QUIET ||
-            (severity==MaskingSeverity.CLEAR && mapping.watchingTv && current==mapping.television)) 2 else 3) { val t=start+i*10000;last=observeMasking(state,evidence(severity),t,t+20,config,mapping,guard,current);state=last.state }
+            (severity==MaskingSeverity.CLEAR && !mapping.watchingTv)) 2 else 3) { val t=start+i*10000;last=observeMasking(state,evidence(severity),t,t+20,config,mapping,guard,current);state=last.state }
         return last
     }
     check(feed(MaskingSeverity.MODERATE).proposed==2)
@@ -18,36 +18,40 @@ fun main() {
     check(feed(MaskingSeverity.CLEAR).proposed==null)
     check(feed(MaskingSeverity.UNKNOWN).state.count==0)
     val tv=choices.copy(television=5,watchingTv=true)
-    check(feed(MaskingSeverity.CLEAR,mapping=tv).proposed==null)
-    check(feed(MaskingSeverity.MODERATE,mapping=tv).proposed==5)
-    check(feed(MaskingSeverity.HEAVY,mapping=tv).proposed==5)
+    check(feed(MaskingSeverity.CLEAR,mapping=tv).proposed==5)
+    check(feed(MaskingSeverity.MODERATE,mapping=tv).proposed==2)
+    check(feed(MaskingSeverity.HEAVY,mapping=tv).proposed==3)
     check(feed(MaskingSeverity.UNKNOWN,current=5,mapping=tv).proposed==null)
-    check(feed(MaskingSeverity.CLEAR,current=5,mapping=tv).proposed==1)
-    check(feed(MaskingSeverity.HEAVY,current=5,mapping=tv).proposed==null)
+    check(feed(MaskingSeverity.CLEAR,current=5,mapping=tv).proposed==null)
+    check(feed(MaskingSeverity.HEAVY,current=5,mapping=tv).proposed==3)
     check(feed(MaskingSeverity.QUIET,current=5,mapping=tv).proposed==1)
     check(feed(MaskingSeverity.QUIET,current=5,mapping=tv.copy(everyday=null)).proposed==null)
-    check(feed(MaskingSeverity.HEAVY,mapping=tv,guard=safe.copy(protectedPrograms=setOf(5))).proposed==null)
-    check(feed(MaskingSeverity.HEAVY,mapping=tv,config=settings.copy(sleepProgram=5)).proposed==null)
+    check(feed(MaskingSeverity.CLEAR,mapping=tv,guard=safe.copy(protectedPrograms=setOf(5))).proposed==null)
+    check(feed(MaskingSeverity.HEAVY,mapping=tv,config=settings.copy(sleepProgram=3)).proposed==null)
     check(feed(MaskingSeverity.HEAVY,mapping=tv,guard=safe.copy(manualOverride=true)).proposed==null)
     check(feed(MaskingSeverity.HEAVY,mapping=tv,guard=safe.copy(audioFree=false)).proposed==null)
-    val tvPending=feed(MaskingSeverity.MODERATE,mapping=tv).state
+    val tvPending=feed(MaskingSeverity.CLEAR,mapping=tv).state
     val tvComplete=completeMasking(tvPending,tvPending.token,true,22000)
     check(feed(MaskingSeverity.QUIET,current=5,start=23000,initial=tvComplete,mapping=tv).state.count==0)
-    val tvReturn=feed(MaskingSeverity.QUIET,current=5,start=83000,initial=tvComplete,mapping=tv)
-    check(tvReturn.proposed==1)
-    check(feed(MaskingSeverity.CLEAR,current=5,start=83000,initial=tvComplete,mapping=tv).proposed==1)
-    // TV -> Universal on two clear checks, then TV again on three masked checks.
-    val clearStart=observeMasking(MaskingState(),evidence(MaskingSeverity.CLEAR),1000,1020,settings,tv,safe,5)
-    check(clearStart.proposed==null && clearStart.state.count==1)
-    val clearExit=observeMasking(clearStart.state,evidence(MaskingSeverity.CLEAR),14000,14020,settings,tv,safe,5)
-    check(clearExit.proposed==1)
-    val clearDone=completeMasking(clearExit.state,clearExit.state.token,true,15000)
-    check(feed(MaskingSeverity.MODERATE,current=1,start=16000,initial=clearDone,mapping=tv).state.count==0)
-    check(feed(MaskingSeverity.MODERATE,current=1,start=76000,initial=clearDone,mapping=tv).proposed==5)
-    check(feed(MaskingSeverity.CLEAR,current=5,guard=safe.copy(manualOverride=true),mapping=tv).proposed==null)
-    check(feed(MaskingSeverity.CLEAR,current=5,guard=safe.copy(protectedPrograms=setOf(1)),mapping=tv).proposed==null)
-    val uncertainExit=observeMasking(clearStart.state,evidence(MaskingSeverity.UNKNOWN),14000,14020,settings,tv,safe,5)
-    check(observeMasking(uncertainExit.state,evidence(MaskingSeverity.CLEAR),27000,27020,settings,tv,safe,5).proposed==null)
+    check(feed(MaskingSeverity.QUIET,current=5,start=83000,initial=tvComplete,mapping=tv).proposed==1)
+    // Full session: TV -> Very Noisy -> Noisy -> TV -> quiet Universal.
+    var session=MaskingState()
+    var current=1
+    var at=1000L
+    for((severity,target) in listOf(MaskingSeverity.CLEAR to 5,MaskingSeverity.HEAVY to 3,
+        MaskingSeverity.MODERATE to 2,MaskingSeverity.CLEAR to 5,MaskingSeverity.QUIET to 1)) {
+        val decision=feed(severity,current,at,session,mapping=tv)
+        check(decision.proposed==target)
+        session=completeMasking(decision.state,decision.state.token,true,at+22000)
+        current=target;at+=83000
+    }
+    // Normal quiet/clear labels alternate, but both independently select Universal.
+    val quietStart=observeMasking(MaskingState(),evidence(MaskingSeverity.QUIET),1000,1020,settings,choices,safe,3)
+    check(observeMasking(quietStart.state,evidence(MaskingSeverity.CLEAR),14000,14020,settings,choices,safe,3).proposed==1)
+    // In TV context the same alternation has different targets and cannot confirm either.
+    check(observeMasking(quietStart.state,evidence(MaskingSeverity.CLEAR),14000,14020,settings,tv,safe,3).proposed==null)
+    val uncertain=observeMasking(quietStart.state,evidence(MaskingSeverity.UNKNOWN),14000,14020,settings,choices,safe,3)
+    check(observeMasking(uncertain.state,evidence(MaskingSeverity.CLEAR),27000,27020,settings,choices,safe,3).proposed==null)
     check(feed(MaskingSeverity.HEAVY,mapping=tv.copy(watchingTv=false)).proposed==3)
     check(runCatching { choices.copy(watchingTv=true) }.isFailure)
     check(runCatching { choices.copy(television=7) }.isFailure)

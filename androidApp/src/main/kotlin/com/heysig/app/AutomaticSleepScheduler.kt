@@ -26,7 +26,12 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
     private val alarms=context.getSystemService(AlarmManager::class.java)
     private val notifications=context.getSystemService(NotificationManager::class.java)
     val enabled get()=prefs.getBoolean("automaticEnabled",false)
+    val timerActive get()=enabled && prefs.getBoolean("therapyTimer",false)
+    fun timerRemainingMinutes(now: Long=android.os.SystemClock.elapsedRealtime()) =
+        if(timerActive) ((prefs.getLong("automaticWakeDue",0)-now).coerceAtLeast(0)+59_999)/60_000 else 0
     private val generation get()=prefs.getLong("automaticGeneration",0)
+    private fun bootCount()=if(backend!=null) 0 else android.provider.Settings.Global.getInt(context.contentResolver,android.provider.Settings.Global.BOOT_COUNT,-1)
+    private fun timerBootValid()=!timerActive || prefs.getInt("therapyTimerBoot",-2)==bootCount()
     fun exactAllowed()=backend?.exactAllowed() ?: (Build.VERSION.SDK_INT<31 || alarms.canScheduleExactAlarms())
     fun notificationsAllowed(): Boolean {
         backend?.let { return it.notificationsAllowed() }
@@ -47,7 +52,7 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
         if(!exactAllowed()) return "Allow Alarms & reminders for HeySig on the phone, then start automatic again."
         if(!notificationsAllowed()) return "Allow HeySig automatic therapy notifications, then start automatic again."
         return try {
-            check(prefs.edit().putBoolean("automaticEnabled",true).putBoolean("reminders",false).putLong("automaticReviewedRevision",revision)
+            check(prefs.edit().putBoolean("automaticEnabled",true).remove("therapyTimer").putBoolean("reminders",false).putLong("automaticReviewedRevision",revision)
                 .putLong("automaticGeneration",Math.addExact(generation,1)).remove("automaticClaim").commit())
             if(backend==null) SleepReminders(context).setEnabled(false)
             runtime.sleepRoutine.transition(runtime.sleepRoutine.state.resume())
@@ -56,8 +61,32 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
             "Automatic therapy On. Future bedtime and morning programs will play without a tap, including while locked."
         } catch(e: Exception) { disable("Automatic could not start. No program changed.",report=true);"Automatic could not start. Review permissions and the saved routine." }
     }
+    /** Called only after the explicitly reviewed Therapy command completes successfully. */
+    fun startTimer(minutes: Int,reviewedRevision: Long,now: Long=android.os.SystemClock.elapsedRealtime()): String {
+        val due=TherapyTimer.due(now,minutes)
+        check(valid() && runtime.sleepRoutine.editorRevision()==reviewedRevision) { "Routine changed; timer not armed" }
+        check(!runtime.busy.get() && runtime.sleepRoutine.state==SleepState(SleepMode.ASLEEP)) { "Therapy must complete before the timer starts" }
+        check(exactAllowed() && notificationsAllowed()) { "Allow alarms and notifications before starting the timer" }
+        try {
+            cancelAlarms()
+            check(prefs.edit().putBoolean("automaticEnabled",true).putBoolean("therapyTimer",true)
+                .putInt("therapyTimerBoot",bootCount())
+                .putBoolean("reminders",false).putLong("automaticReviewedRevision",reviewedRevision)
+                .putLong("automaticGeneration",Math.addExact(generation,1)).remove("automaticSleepDue")
+                .remove("automaticClaim").remove("automaticClaimStarted").putLong("automaticWakeDue",due)
+                .putString("automaticResult","Therapy timer started for $minutes minutes; saved Wake program follows.").commit())
+            if(backend==null) SleepReminders(context).setEnabled(false)
+            if(backend!=null) backend.schedule(false,due,generation,reviewedRevision)
+            else alarms.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,due,alarm(false,due,generation,reviewedRevision))
+            publishStatus()
+            return "Therapy timer On: $minutes minutes. The saved Wake program will play once."
+        } catch(e: Exception) {
+            disable("Therapy was sent, but the timer could not be armed. Use Wake now to end Therapy.",report=true)
+            throw e
+        }
+    }
     fun disable(result: String="Automatic therapy Off. No future automatic switches.",report: Boolean=false): String {
-        check(prefs.edit().putBoolean("automaticEnabled",false).putLong("automaticGeneration",Math.addExact(generation,1))
+        check(prefs.edit().putBoolean("automaticEnabled",false).remove("therapyTimer").putLong("automaticGeneration",Math.addExact(generation,1))
             .remove("automaticSleepDue").remove("automaticWakeDue").remove("automaticClaim").remove("automaticClaimStarted")
             .putString("automaticResult",result).commit())
         cancelAlarms()
@@ -83,11 +112,20 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
         else alarms.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,due,alarm(sleep,due,generation,revision))
     }
     /** Clock/boot/update recovery only replans future occurrences; never resumes a claim. */
-    fun refresh() {
+    fun refresh(cancelTimer: Boolean=false) {
         if(!enabled) { cancelAlarms();publishStatus();return }
         if(prefs.contains("automaticClaim")) {
             runtime.sleepRoutine.transition(SleepState(SleepMode.UNKNOWN,true))
             disable("An automatic action was interrupted. Review the aids and start automatic again; nothing was replayed.",report=true)
+            return
+        }
+        if(timerActive) {
+            if(cancelTimer || !timerBootValid() || !valid() || runtime.sleepRoutine.editorRevision()!=prefs.getLong("automaticReviewedRevision",-1) ||
+                !exactAllowed() || !notificationsAllowed() || runtime.sleepRoutine.state!=SleepState(SleepMode.ASLEEP))
+                disable("Therapy timer cancelled after a routine, clock, restart, manual or permission change. Use Wake now if needed.",report=true)
+            else if(android.os.SystemClock.elapsedRealtime()-prefs.getLong("automaticWakeDue",0)>120_000 && backend==null)
+                disable("Therapy timer expired without a completed Wake request. Use Wake now; nothing was replayed.",report=true)
+            else publishStatus() // Existing elapsed alarm survives reopening; never reschedule or replay it.
             return
         }
         try {
@@ -95,12 +133,15 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
             plan(ZonedDateTime.now());publishStatus()
         } catch(e: Exception) { disable("Automatic scheduling blocked. Review Alarms & reminders, notifications and routine choices.",report=true) }
     }
-    fun fire(sleep: Boolean,due: Long,gen: Long,revision: Long,now: Long=System.currentTimeMillis()) {
+    private fun clockNow()=if(timerActive) android.os.SystemClock.elapsedRealtime() else System.currentTimeMillis()
+    fun fire(sleep: Boolean,due: Long,gen: Long,revision: Long,now: Long=clockNow()) {
         val current=gen==generation && revision==runtime.sleepRoutine.editorRevision() &&
             prefs.getLong("automaticReviewedRevision",-1)==revision && prefs.getLong(key(sleep),0)==due
-        val decision=automaticSleepDecision(due,now,enabled,current,exactAllowed() && notificationsAllowed(),valid(),runtime.sleepRoutine.state)
+        val decision=automaticSleepDecision(due,now,enabled,current,exactAllowed() && notificationsAllowed(),
+            valid() && timerBootValid() && (!timerActive || (!sleep && runtime.sleepRoutine.state.mode==SleepMode.ASLEEP)),runtime.sleepRoutine.state)
         if(decision in listOf(AutomaticSleepDecision.DISABLED,AutomaticSleepDecision.STALE,AutomaticSleepDecision.EARLY)) return
         if(decision!=AutomaticSleepDecision.RUN) {
+            if(timerActive) { disable("Therapy timer did not switch: ${decision.name.lowercase()}. Use Wake now; no retry.",report=true);return }
             if(decision==AutomaticSleepDecision.INVALID) { disable("Automatic action blocked: review permissions and saved routine.",report=true);return }
             check(prefs.edit().remove(key(sleep)).putString("automaticResult","${if(sleep) "Bedtime" else "Morning"} skipped: ${decision.name.lowercase()}. No automatic retry.").commit())
             scheduleOne(sleep,java.time.Instant.ofEpochMilli(now).atZone(java.time.ZoneId.systemDefault()));publishStatus();return
@@ -111,17 +152,17 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
             .putBoolean("automaticClaimSleep",sleep).putLong("automaticClaimDue",due).putLong("automaticClaimGeneration",gen)
             .putLong("automaticClaimRevision",revision).commit())
         try {
-            scheduleOne(sleep,java.time.Instant.ofEpochMilli(now).atZone(java.time.ZoneId.systemDefault()))
+            if(!timerActive) scheduleOne(sleep,java.time.Instant.ofEpochMilli(now).atZone(java.time.ZoneId.systemDefault()))
             if(backend!=null) backend.dispatch(token) else AutomaticSleepService.launch(context,token)
         } catch(e: Exception) { disable("Automatic playback could not start. No retry; open the therapy routine to review.",report=true) }
     }
-    fun takeClaim(token: String,now: Long=System.currentTimeMillis()): Claim? {
+    fun takeClaim(token: String,now: Long=clockNow()): Claim? {
         if(token.isEmpty() || prefs.getString("automaticClaim",null)!=token || prefs.getBoolean("automaticClaimStarted",false)) return null
         val due=prefs.getLong("automaticClaimDue",0)
         val gen=prefs.getLong("automaticClaimGeneration",-1)
         val revision=prefs.getLong("automaticClaimRevision",-1)
         val decision=automaticSleepDecision(due,now,enabled,gen==generation && revision==runtime.sleepRoutine.editorRevision() && prefs.getLong("automaticReviewedRevision",-1)==revision,
-            exactAllowed() && notificationsAllowed(),valid(),runtime.sleepRoutine.state)
+            exactAllowed() && notificationsAllowed(),valid() && timerBootValid() && (!timerActive || runtime.sleepRoutine.state.mode==SleepMode.ASLEEP),runtime.sleepRoutine.state)
         if(decision!=AutomaticSleepDecision.RUN) { disable("Automatic playback blocked before starting: ${decision.name.lowercase()}. No retry.",report=true);return null }
         val sleep=prefs.getBoolean("automaticClaimSleep",true)
         val slot=runtime.sleepRoutine.target(sleep,requireNotNull(runtime.fitting))
@@ -133,10 +174,13 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
     fun finish(claim: Claim,text: String,success: Boolean) {
         if(prefs.getString("automaticClaim",null)!=claim.token) return
         check(prefs.edit().remove("automaticClaim").remove("automaticClaimStarted").putString("automaticResult",text).commit())
-        if(!success) disable(text,report=true) else publishStatus()
+        if(!success) disable(text,report=true)
+        else if(timerActive) disable("Therapy timer finished. $text")
+        else publishStatus()
     }
     fun publishStatus() {
-        val text=(runtime.fitting?.let { runtime.sleepRoutine.dashboard(it) } ?: "Review saved therapy routine")+
+        val text=(if(timerActive) "Therapy timer: ${timerRemainingMinutes()} minutes remaining. Saved Wake program will play once. Stop cancels the timer; Therapy remains until you choose a program."
+            else runtime.fitting?.let { runtime.sleepRoutine.dashboard(it) } ?: "Review saved therapy routine")+
             prefs.getString("automaticResult",null)?.let { "\nLast result: $it" }.orEmpty()
         if(backend!=null) backend.status(enabled,text)
         else if(!enabled) notifications.cancel(NOTIFICATION)
@@ -154,9 +198,14 @@ class AutomaticSleepScheduler internal constructor(private val context: Context,
         notifications.createNotificationChannel(NotificationChannel(CHANNEL,"Automatic therapy routine",NotificationManager.IMPORTANCE_LOW))
         val open=PendingIntent.getActivity(context,826,Intent(context,HomeActivity::class.java).putExtra("openSleep",true),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val stop=PendingIntent.getBroadcast(context,826,Intent(context,AutomaticSleepReceiver::class.java).setAction(STOP),PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(context,CHANNEL).setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle("HeySig automatic therapy")
+        return Notification.Builder(context,CHANNEL).apply {
+            if(timerActive) {
+                setWhen(System.currentTimeMillis()+(prefs.getLong("automaticWakeDue",0)-android.os.SystemClock.elapsedRealtime()).coerceAtLeast(0))
+                setUsesChronometer(true);setChronometerCountDown(true)
+            }
+        }.setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle(if(timerActive) "HeySig Therapy timer" else "HeySig automatic therapy")
             .setContentText(text).setStyle(Notification.BigTextStyle().bigText(text)).setContentIntent(open).setOngoing(true)
-            .setVisibility(Notification.VISIBILITY_PRIVATE).addAction(Notification.Action.Builder(null,"Stop automatic",stop).build()).build()
+            .setVisibility(Notification.VISIBILITY_PRIVATE).addAction(Notification.Action.Builder(null,if(timerActive) "Cancel timer" else "Stop automatic",stop).build()).build()
     }
     companion object {
         const val SLEEP="com.heysig.app.AUTO_SLEEP"
@@ -174,8 +223,10 @@ class AutomaticSleepReceiver: BroadcastReceiver() {
             when(intent.action) {
                 AutomaticSleepScheduler.SLEEP,AutomaticSleepScheduler.WAKE -> scheduler.fire(intent.action==AutomaticSleepScheduler.SLEEP,
                     intent.getLongExtra("due",0),intent.getLongExtra("generation",-1),intent.getLongExtra("revision",-1))
-                AutomaticSleepScheduler.STOP -> scheduler.disable()
-                else -> scheduler.refresh()
+                AutomaticSleepScheduler.STOP -> scheduler.disable(if(scheduler.timerActive)
+                    "Therapy timer cancelled. No timed Wake request remains; use Wake now to end Therapy."
+                    else "Automatic therapy Off. No future automatic switches.")
+                else -> scheduler.refresh(cancelTimer=true)
             }
         }.onFailure { runCatching { scheduler.disable("Automatic therapy failed before dispatch. Open the routine to review; no retry.",report=true) } }
     }

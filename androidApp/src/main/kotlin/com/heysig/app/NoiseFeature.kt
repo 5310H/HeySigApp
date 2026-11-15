@@ -251,7 +251,8 @@ class NoiseFeature(
             try { PhoneStyle.heading(activity,target,title); build() } finally { target = parent }
         }
         group("Automatic noise") {
-            line("HeySig chooses your program from how much other sound masks speech. Quiet or clear speech returns to Everyday after repeated checks. Unsure means keep the current program.")
+            line("HeySig chooses your program from how much other sound masks speech. Unsure means keep the current program.")
+            line(speechAutomatic.listeningContext())
             automaticButton=button(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") "On" else "Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
             openSoundType?.let { open -> button("Check speech and noise",open) }
             runtime = line(summary()).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_NONE; contentDescription=summary() }

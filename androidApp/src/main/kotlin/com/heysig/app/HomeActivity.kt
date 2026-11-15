@@ -227,6 +227,7 @@ class HomeActivity : Activity() {
     }
     override fun onResume() {
         super.onResume(); resumed = true; noise.resume();
+        if(page=="Sleep" && AutomaticSleepScheduler(this).timerActive && setupChanged?.invoke()!=true) show()
         if(automaticVoicePrefs.getBoolean("shake",false)) foregroundShake.start()
         runtime.stateChanged={
             if(resumed && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
@@ -713,6 +714,31 @@ class HomeActivity : Activity() {
             button("Wake now",ready && !busy.get()) { confirmSleep(false) }
             line("These buttons ask before switching immediately. They do not start a schedule, power off or mute the aids.")
             store.actionResult()?.let { line("Last program result: $it") }
+            line("Therapy timer · 5 to 60 minutes")
+            val timerDuration=Spinner(this).also {
+                it.contentDescription="Therapy timer duration"
+                it.adapter=ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,TherapyTimer.minutes.map { m -> "$m minutes" })
+                it.minimumHeight=PhoneStyle.dp(this,48)
+                content.addView(it)
+            }
+            button("Start timed Therapy",ready && !busy.get() && !automatic.timerActive) {
+                reviewTherapyTimer(TherapyTimer.minutes[timerDuration.selectedItemPosition])
+            }
+            if(automatic.timerActive) {
+                val timerStatus=line("Therapy timer On: ${automatic.timerRemainingMinutes()} minutes remaining. Wake will play once.")
+                timerStatus.postDelayed(object:Runnable {
+                    override fun run() {
+                        if(!timerStatus.isAttachedToWindow || isDestroyed || !resumed) return
+                        timerStatus.text=if(automatic.timerActive) "Therapy timer On: ${automatic.timerRemainingMinutes()} minutes remaining. Wake will play once."
+                            else "Therapy timer Off. Review the last automatic result above."
+                        if(automatic.timerActive) timerStatus.postDelayed(this,1000)
+                    }
+                },1000)
+                button("Cancel Therapy timer") {
+                    tell(automatic.disable("Therapy timer cancelled. No timed Wake request remains; use Wake now to end Therapy."),true);show("Sleep")
+                }
+            }
+            line("Starts your saved Therapy program, then switches to your saved Wake program after the chosen duration, including while locked. Starting a timer turns the daily schedule and reminders Off; their saved choices stay available. Cancel timer stops the future switch and leaves Therapy active. Manual changes cancel the timer.")
             button("Check device audio",!busy.get()) {
                 try { player.inspect();tell("Speaker audio checks passed. No command sent.",true) }
                 catch(e:Exception) { tell("Blocked: ${e.message}",true) }
@@ -818,6 +844,47 @@ class HomeActivity : Activity() {
             line("No reminder? Check that reminders are On, the routine is not paused, and Android allows HeySig notifications. No switch? Read the result at the top of this screen after confirming Switch.")
         } finally { content=parent }
 
+    }
+    private fun reviewTherapyTimer(minutes: Int) {
+        val fit=fitting ?: return
+        val store=runtime.sleepRoutine
+        val targets=runCatching { store.target(true,fit) to store.target(false,fit) }.getOrElse { tell(it.message ?: "Save both routine programs first",true);return }
+        val revision=store.editorRevision()
+        val scheduler=AutomaticSleepScheduler(this)
+        if(!scheduler.exactAllowed()) {
+            android.app.AlertDialog.Builder(this).setTitle("Allow Therapy timer alarms")
+                .setMessage("The timer needs Alarms & reminders access to request your saved Wake program while locked. Allow access, then tap Start timed Therapy again. No program changes now.")
+                .setNegativeButton("Cancel",null).setPositiveButton("Open settings") { _,_ ->
+                    runCatching { startActivity(Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,android.net.Uri.parse("package:$packageName"))) }
+                        .onFailure { tell("Open Android settings and allow Alarms & reminders for HeySig.",true) }
+                }.show();return
+        }
+        if(android.os.Build.VERSION.SDK_INT>=33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)!=android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            android.app.AlertDialog.Builder(this).setTitle("Therapy timer notification")
+                .setMessage("Allow notifications so the timer has a visible status and Stop control while locked. After allowing, tap Start timed Therapy again. No program changes now.")
+                .setNegativeButton("Cancel",null).setPositiveButton("Continue") { _,_ -> requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),768) }.show();return
+        }
+        if(!scheduler.notificationsAllowed()) { tell("Allow the Automatic therapy routine notification channel in Android settings, then try again.",true);return }
+        val deadline=SystemClock.elapsedRealtime()+60_000
+        android.app.AlertDialog.Builder(this).setTitle("Start $minutes minutes of Therapy?")
+            .setMessage("Switch to ${fit.programs.first { it.slot==targets.first }.name} now. After successful playback, count $minutes minutes, then switch once to ${fit.programs.first { it.slot==targets.second }.name}, including while locked.\n\nThis turns the daily automatic routine and reminders Off without changing saved times or programs. Keep the phone speaker near the aids, media volume at least halfway, DND off and external audio disconnected. Manual changes cancel the timer. Cancel timer leaves Therapy active. Blocked, interrupted or more than two minutes late switches are not retried. No microphone is started.")
+            .setNegativeButton("Cancel",null).setPositiveButton("Start Therapy & timer") { _,_ ->
+                if(!resumed || fitting!=fit || store.editorRevision()!=revision || SystemClock.elapsedRealtime()>deadline || busy.get()) {
+                    tell("Therapy timer review expired or setup changed. Review again; nothing sent.",true)
+                } else {
+                    scheduler.disable("Daily routine Off for timed Therapy.")
+                    SleepReminders(this).setEnabled(false)
+                    execute(listOf(ManualRequest.SelectProgram(targets.first)),false,sleepTarget=true,onComplete={ success ->
+                        if(success) {
+                            val result=runCatching { scheduler.startTimer(minutes,revision) }
+                                .getOrElse { "Therapy was sent but timer is Off: ${it.message}. Use Wake now to end Therapy." }
+                            // The executor also reports its playback result; retain timer outcome in routine status.
+                            message=result
+                            if(!isDestroyed) tell(result,true)
+                        }
+                    })
+                }
+            }.show()
     }
     private fun reviewAutomaticSleep() {
         val fit=fitting ?: return
@@ -1050,6 +1117,12 @@ class HomeActivity : Activity() {
     }
     override fun onRequestPermissionsResult(code:Int,permissions:Array<out String>,grants:IntArray) {
         super.onRequestPermissionsResult(code,permissions,grants)
+        if(code==768) {
+            show("Sleep")
+            tell(if(grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED })
+                "Tap Start timed Therapy to review and start. No program changed."
+                else "Therapy timer stays Off. Notifications are required for its visible Stop control.",true)
+        }
         if(code==767) {
             val revision=pendingNotificationSleepRevision;pendingNotificationSleepRevision=null
             if(revision!=null && grants.isNotEmpty() && grants.all { it==android.content.pm.PackageManager.PERMISSION_GRANTED }) continueAutomaticSleep(revision)

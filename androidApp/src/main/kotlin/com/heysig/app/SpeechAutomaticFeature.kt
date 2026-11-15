@@ -26,6 +26,9 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
     private var readChoices:(()->MaskingChoices)?=null
     private var renderedFitting:String?=null
     fun offStatus():String?=message ?: SpeechAutomaticService.lastStatus.takeIf { it.isNotBlank() }
+    fun listeningContext()=if(savedChoices().watchingTv)
+        "Watching TV On: clear speech uses TV; partly masked uses Noisy; heavily masked uses Very Noisy; quiet uses Universal. Change this in Choose programs when your TV session ends."
+        else "Watching TV Off: quiet or clear speech uses Universal; partly masked uses Noisy; heavily masked uses Very Noisy."
     private fun signature()=programs().sortedBy { it.slot }.joinToString("|") { "${it.slot}:${it.name}" }
     private fun savedChoices():MaskingChoices {
         val raw=prefs.getString("choices",null)
@@ -57,11 +60,11 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         check(safety().let { it.foreground && it.unlocked && it.audioFree }) { "Keep HeySig open and unlocked, and wait until speech or the current command finishes." }
         check(!activity.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) { "Unlock the phone to start Automatic" }
         val selected=saveChoices()
-        if(selected.watchingTv && !prefs.getBoolean("tvDisclosureV1",false)) {
+        if(selected.watchingTv && !prefs.getBoolean("tvSeverityDisclosureV2",false)) {
             AlertDialog.Builder(activity).setTitle("Use Watching TV for Automatic?")
-                .setMessage("You chose Watching TV. Repeated clear or masked speech checks will select your saved TV program instead of Universal, Noisy or Very Noisy. Repeated quiet checks return to your saved Universal program. Uncertain sound, including music-only passages, keeps the current program.\n\nThis is your listening choice, not automatic TV recognition. Speech heard after quiet can select TV again while Watching TV remains on. Turn Automatic Off, turn Watching TV off in Choose programs and save to resume normal speech-aware choices. Existing cooldown, manual control and Therapy priority still apply. No extra microphone access or recordings are added.")
+                .setMessage("You chose Watching TV. Repeated clear speech checks select your saved TV program. Partly masked speech selects Noisy; heavily masked speech selects Very Noisy, even while Watching TV is on. Repeated quiet checks return to Universal. Uncertain sound, including music-only passages, keeps the current program.\n\nThis is your listening choice, not automatic TV recognition. Clear speech heard after quiet can select TV again while Watching TV remains on. Turn Automatic Off, turn Watching TV off in Choose programs and save to resume normal speech-aware choices. Existing cooldown, manual control and Therapy priority still apply. No extra microphone access or recordings are added.")
                 .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
-                    if(prefs.edit().putBoolean("tvDisclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
+                    if(prefs.edit().putBoolean("tvSeverityDisclosureV2",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
                 }.show();return
         }
         val watch=watchSource()
@@ -126,10 +129,10 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         val very=choice("Very Noisy · speech heavily masked",saved.veryNoisy)
         val television=choice("TV · your saved television program",saved.television)
         tvSwitch=Switch(activity).also { control ->
-            control.text="Watching TV";control.contentDescription="Watching TV. Use TV for masked speech and Universal for quiet or clear speech."
+            control.text="Watching TV";control.contentDescription="Watching TV. Clear speech uses TV; partly masked uses Noisy; heavily masked uses Very Noisy; quiet uses Universal."
             control.isChecked=saved.watchingTv;control.minHeight=PhoneStyle.dp(activity,48);card.addView(control)
         }
-        line("For a TV session, choose your existing TV program (for example, program 5) and turn Watching TV on. Partly or heavily masked speech uses TV instead of Noisy or Very Noisy. Quiet or clear speech returns to Universal after two matching checks. TV can be selected again if speech becomes masked; this can happen during the same TV session. Uncertain checks hold. This does not detect whether a sound comes from a television. Turn Watching TV off and save to resume normal choices.")
+        line("For a TV session, choose your existing TV program (for example, program 5) and turn Watching TV on. Clear speech uses TV. Partly masked speech uses Noisy and heavily masked speech uses Very Noisy. Quiet returns to Universal after two matching checks. TV can be selected again if speech becomes clear; this can happen during the same TV session. Uncertain checks hold. This does not detect whether a sound comes from a television. Turn Watching TV off and save to resume normal choices.")
         readChoices={ fun slot(s:Spinner)=available.getOrNull(s.selectedItemPosition-1)?.slot
             MaskingChoices(slot(everyday),slot(noisy),slot(very),slot(television),tvSwitch?.isChecked==true) }
         sourceSwitch=Switch(activity).also { control ->
@@ -150,7 +153,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
             update()
         } }
         status=line("").apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
-        line("Speech detection and neural speech/background estimates must agree before a change. If they disagree, your program stays as it is. Quiet return and clear-speech return from TV use two matching checks. Other changes use your saved repeated-check count (at least two). The saved cooldown still applies. Normal listening and Watching TV return to Universal for quiet or clear speech. Manual control and Therapy take priority.")
+        line("Speech detection and neural speech/background estimates must agree before a change. If they disagree, your program stays as it is. Return to Universal uses two fresh checks agreeing on that program, including quiet followed by clear speech when Watching TV is off. Other changes use your saved repeated-check count (at least two). The saved cooldown still applies. Watching TV returns to Universal for quiet; clear speech selects TV. Noise severity still selects Noisy or Very Noisy. Manual control and Therapy take priority.")
         line("You may lock the screen while Automatic is On. Keep the phone where your aids can hear its tones. Use the notification Off button to stop. It stops after eight hours. This experimental model can make mistakes; choosing a program yourself stops Automatic.")
         handler.removeCallbacksAndMessages(null);handler.post(refresh);update()
     }

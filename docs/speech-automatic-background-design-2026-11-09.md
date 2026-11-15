@@ -153,3 +153,13 @@ and accepted potential Universal/TV changes during TV dialogue. CLEAR now maps
 to Universal in Watching TV and needs two matching checks when leaving TV;
 MODERATE/HEAVY retain TV mapping and saved entry counts. This does not identify
 a TV source. Saved cooldown still prevents rapid re-entry.
+
+## November 15: noise severity takes priority over TV context
+
+Following the owner's failed very-noisy field test with Watching TV On, CLEAR
+now selects TV in that explicit context, MODERATE selects Noisy and HEAVY selects
+Very Noisy. QUIET selects Universal. Outside TV context, quiet and clear checks
+can jointly confirm Universal. Unknown still clears confirmation and holds;
+saved cooldown and all runtime priorities remain. This supersedes the November
+13 TV target overrides above. No detector asset or capture/data flow changed.
+See the [correction record](acceptance/automatic-and-therapy-timer-2026-11-15.md).

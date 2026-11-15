@@ -120,6 +120,66 @@ object AutomaticSleepAcceptance {
             scheduler.disable();fire(true,stopped)
             check(backend.dispatched.size==count && !scheduler.enabled && backend.scheduled.isEmpty())
             check(core.getString("saved",null)==saved)
+
+            // One-shot Therapy uses elapsed time, preserves the routine, and shares the executor.
+            val routineBefore=prefs.getString("settings",null)
+            val timerRevision=store.editorRevision()
+            check(runCatching { scheduler.startTimer(5,timerRevision,1000) }.isFailure)
+            store.transition(SleepState(SleepMode.ASLEEP))
+            check(runCatching { scheduler.startTimer(6,timerRevision,1000) }.isFailure)
+            check(scheduler.startTimer(60,timerRevision,1000).startsWith("Therapy timer On"))
+            check(scheduler.timerActive && backend.scheduled.keys==setOf(false))
+            val timer=backend.scheduled.getValue(false)
+            check(timer.due==3_601_000L)
+            scheduler.refresh() // Reopening must not cancel, extend or reschedule.
+            check(scheduler.timerActive && backend.scheduled.getValue(false)==timer)
+            val timerDispatchCount=backend.dispatched.size
+            fire(false,timer,timer.due-1);check(backend.dispatched.size==timerDispatchCount)
+            fire(false,timer)
+            fire(false,timer)
+            check(backend.dispatched.size==timerDispatchCount+1 && backend.scheduled.size==1)
+            val timerToken=backend.dispatched.last()
+            val timerClaim=checkNotNull(scheduler.takeClaim(timerToken,timer.due))
+            check(!timerClaim.sleep && timerClaim.slot==1 && scheduler.authorized(timerClaim))
+            check(scheduler.takeClaim(timerToken,timer.due)==null)
+            val wakeDone=CountDownLatch(1)
+            var wakeSuccess=false
+            Handler(Looper.getMainLooper()).post {
+                runtime.execute(listOf(ManualRequest.SelectProgram(timerClaim.slot)),false,false,{false},{scheduler.authorized(timerClaim)},{},sleepTarget=false) { text,ok ->
+                    wakeSuccess=ok;scheduler.finish(timerClaim,text,ok);wakeDone.countDown()
+                }
+            }
+            check(wakeDone.await(20,TimeUnit.SECONDS) && wakeSuccess)
+            check(played==2 && runtime.requested.program==1 && store.state.mode==SleepMode.AWAKE)
+            check(!scheduler.enabled && !scheduler.timerActive && backend.scheduled.isEmpty())
+            check(!scheduler.authorized(timerClaim))
+            for(minutes in TherapyTimer.minutes) {
+                store.transition(SleepState(SleepMode.ASLEEP))
+                scheduler.startTimer(minutes,timerRevision,1000)
+                check(backend.scheduled.getValue(false).due==1000+minutes*60_000L)
+                scheduler.disable("Cancelled test timer")
+            }
+            fun arm(): Alarm {
+                store.transition(SleepState(SleepMode.ASLEEP))
+                scheduler.startTimer(5,timerRevision,1000)
+                return backend.scheduled.getValue(false)
+            }
+            val cancelledTimer=arm();scheduler.disable();fire(false,cancelledTimer)
+            check(backend.dispatched.size==timerDispatchCount+1)
+            val missedTimer=arm();fire(false,missedTimer,missedTimer.due+120001)
+            check(!scheduler.enabled && backend.scheduled.isEmpty())
+            val pausedTimer=arm();store.transition(store.state.manual());fire(false,pausedTimer)
+            check(!scheduler.enabled)
+            val blockedTimer=arm();backend.notifications=false;fire(false,blockedTimer)
+            check(!scheduler.enabled);backend.notifications=true
+            arm();scheduler.refresh(cancelTimer=true);check(!scheduler.enabled)
+            backend.scheduleFailure=true
+            store.transition(SleepState(SleepMode.ASLEEP))
+            check(runCatching { scheduler.startTimer(5,timerRevision,1000) }.isFailure)
+            check(!scheduler.enabled && backend.scheduled.isEmpty());backend.scheduleFailure=false
+            val interruptedTimer=arm();fire(false,interruptedTimer);scheduler.refresh()
+            check(!scheduler.enabled && store.state==SleepState(SleepMode.UNKNOWN,true))
+            check(prefs.getString("settings",null)==routineBefore && core.getString("saved",null)==saved && played==2)
         } finally { check(core.edit().clear().commit());check(prefs.edit().clear().commit()) }
     }
 }

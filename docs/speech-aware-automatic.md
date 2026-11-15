@@ -56,21 +56,20 @@ hearing-aid TV program, turn **Watching TV** on and save. The owner's confirmed
 TV program is slot 5; other fittings must use their actual TV slot. No TV slot
 is guessed or assigned automatically.
 
-With Watching TV selected, repeated partly or heavily masked speech evidence
-selects TV instead of Noisy or Very Noisy. Quiet or clear speech returns to your
-saved Universal choice after two matching fresh checks. Other changes use your
-saved confirmation count (at least two). Your saved cooldown applies in both
-directions. At the owner's three-second capture and ten-second pause, two checks
-remove approximately 13 seconds from the former three-check confirmation, plus
-variable inference time; this is not an exact return-time guarantee. Leaving
-Universal unassigned holds the current program instead of sending a return.
-Uncertain checks—including music-only passages—hold and reset confirmations.
+With Watching TV selected, clear speech selects TV, partly masked speech selects
+Noisy, and heavily masked speech selects Very Noisy. Quiet returns to Universal
+after two fresh checks. TV and noise entries use your saved confirmation count
+(at least two). Your saved cooldown applies in both directions. An unassigned
+role holds the current program. Uncertain checks—including music-only passages—
+hold and clear confirmations; no timeout invents a quiet result.
 
-This is your explicit listening choice, **not automatic television recognition**.
-A clear TV scene can return to Universal, and masked speech can select TV again
-later in the same session. The owner accepts this behavior. To resume
-normal speech-aware choices, turn Automatic Off, turn Watching TV off, save, then
-turn Automatic On again. Your normal three role choices remain saved. Manual
-program controls, Therapy, notification Off and all existing session stops retain
-priority. The same behavior applies when the selected watch supplies estimates;
-there is no new capture, inference model or audio transfer.
+This is an explicit listening choice, **not automatic television recognition**.
+Clear speech in a noisy TV session can return to TV once masking subsides;
+quiet returns to Universal. Outside a TV session, turn Automatic Off, turn
+Watching TV off, save, then turn Automatic On again. Quiet and clear speech can
+then jointly confirm Universal even if the two labels alternate. Existing
+manual/Therapy priority and all capture/executor protections remain.
+
+This November 15 correction replaces the earlier TV override of both noise
+roles following the owner's report of TV selected in a very noisy environment.
+It changes routing and confirmation, not detector weights or recognition accuracy.

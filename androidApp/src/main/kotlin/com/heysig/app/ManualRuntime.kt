@@ -246,7 +246,12 @@ class ManualRuntime private constructor(
                 it.sleepRoutine=SleepRoutineStore(context);it.personalPhrases=PersonalPhraseStore(context)
                 it.fitting?.let(it.personalPhrases::setupChanged);it.fitting?.let(it.sleepRoutine::setupChanged)
                 val app=context.applicationContext
-                it.sleepStateChanged={ if(AutomaticSleepService.running==null) AutomaticSleepScheduler(app).publishStatus() }
+                it.sleepStateChanged={ if(AutomaticSleepService.running==null) {
+                    val scheduler=AutomaticSleepScheduler(app)
+                    if(scheduler.timerActive && (it.sleepRoutine.state.pending || it.sleepRoutine.state.override))
+                        scheduler.disable("Therapy timer cancelled by manual control. No timed Wake request remains.")
+                    else scheduler.publishStatus()
+                } }
                 instance=it
             }
         }

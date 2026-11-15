@@ -1,5 +1,14 @@
 # Google Play readiness — audited October 16, 2026
 
+November 15: Automatic TV context no longer overrides Noisy/Very Noisy severity.
+A one-shot Therapy timer reuses existing exact-alarm access, receiver and bounded
+mediaPlayback service to send the saved Wake program after 5–60 minutes. No new
+permission, microphone use, dependency, recipient or target SDK change. See the
+[timer design](architecture/therapy-timer.md) and
+[validation record](acceptance/automatic-and-therapy-timer-2026-11-15.md). Review
+locked-screen expiry/cancellation and existing alarm/foreground-service policy
+coverage before release. No Play submission is prepared by this update.
+
 November 13: explicit Watching TV adds an optional TV program choice and listening
 context to speech-aware Automatic. It does not recognize televisions or alter
 models, permissions, capture schedule, data recipients or aid fitting. See the

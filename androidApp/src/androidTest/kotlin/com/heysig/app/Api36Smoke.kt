@@ -180,6 +180,11 @@ class Api36Smoke : Instrumentation() {
                 check(controls.any { it.text.toString() in listOf("Start automatic routine","Review automatic routine") })
                 check(controls.any { it.text.toString()=="Therapy now" })
                 check(controls.any { it.text.toString()=="Wake now" })
+                check(controls.any { it.text.toString()=="Start timed Therapy" })
+                val timer=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<android.widget.Spinner>()
+                    .single { it.contentDescription=="Therapy timer duration" }
+                check((0 until timer.count).map { timer.getItemAtPosition(it).toString() } ==
+                    (5..60 step 5).map { "$it minutes" })
             }
             capture("sleep")
             open("Settings")
@@ -268,7 +273,7 @@ class Api36Smoke : Instrumentation() {
             SleepReminderAcceptance.run(targetContext)
             result.putString("sleepReminders","PASS: isolated start clears pause, both alarm requests recorded, disable/failed scheduling clears due times, duplicate/paused/late delivery rejected, notification-only test preserves schedule; fake alarms/notifications, no playback")
             AutomaticSleepAcceptance.run(targetContext)
-            result.putString("automaticSleep","PASS: isolated exact-alarm authorization, reviewed revisions, duplicate/stale/early/late/paused/revoked occurrences, one-use claims, locked shared executor, snapshot preservation, scheduling/dispatch failure and interrupted recovery; fake alarms/transport only")
+            result.putString("automaticSleep","PASS: daily routine and 5–60 minute Therapy timer; elapsed one-shot Wake, exact-alarm authorization, reviewed revisions, duplicate/stale/early/late/paused/revoked occurrences, cancel, reopening, one-use claims, locked shared executor, snapshot preservation, scheduling/dispatch failure and interrupted recovery; fake alarms/transport only")
             SleepManagementAcceptance.run(targetContext)
             result.putString("sleepManagement","PASS: isolated saved targets, shared executor, sleep/wake completion, noise priority, manual override, partial failure, pending restart and fitting invalidation; fake transport only")
             PersonalPhraseAcceptance.run(targetContext)

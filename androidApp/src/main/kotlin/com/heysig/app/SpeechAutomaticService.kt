@@ -180,7 +180,7 @@ open class SpeechAutomaticService: Service() {
     private fun label(slot:Int?)=runtime.fitting?.programs?.find { it.slot==slot }?.name ?: "Unassigned"
     fun summary()=buildString {
         append("Speech-aware Automatic On\nMicrophone: ${if(watchMode) "watch" else "phone"}.\n$detail")
-        if(request.choices.watchingTv) append("\nWatching TV: masked speech uses ${label(request.choices.television)}; quiet or clear speech uses ${label(request.choices.everyday)}. This is your listening choice, not TV recognition.")
+        if(request.choices.watchingTv) append("\nWatching TV: clear speech uses ${label(request.choices.television)}; partly masked uses ${label(request.choices.noisy)}; heavily masked uses ${label(request.choices.veryNoisy)}; quiet uses ${label(request.choices.everyday)}. This is your listening choice, not TV recognition.")
         append("\nSound type: ${latest.soundType.label}. Masking: ${latest.severity.label}.")
         val considered=request.choices.target(latest.severity)
         append("\nProgram considered: ${if(considered!=null) label(considered) else "keep current program"}.")
