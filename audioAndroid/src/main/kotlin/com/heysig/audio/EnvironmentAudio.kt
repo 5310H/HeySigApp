@@ -93,7 +93,7 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
              private val observeEvidence: ((ShortArray,DoubleArray?,List<Map<String,Double>>)->Unit)? = null): AutoCloseable {
     private val labelBytes=context.assets.open("environment/labels.txt").use { it.readBytes() }
     private val labels=labelBytes.toString(Charsets.UTF_8).trimEnd().lines()
-    private val selectedLabels=EnvironmentClassifier.requiredLabels.associateWith { labels.indexOf(it) }
+    private val selectedLabels=(EnvironmentClassifier.requiredLabels+TelevisionSignal.labels).associateWith { labels.indexOf(it) }
     private val interpreter: Interpreter
     private val head: EnvironmentSceneHead
     private val smallGroupHead: EnvironmentSceneHead
@@ -114,7 +114,7 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
         val model=ByteBuffer.allocateDirect(bytes.size).order(ByteOrder.nativeOrder()).put(bytes).apply { rewind() }
         val candidate=Interpreter(model,Interpreter.Options().setNumThreads(1))
         try {
-            check(labels.size==521 && labels.containsAll(EnvironmentClassifier.requiredLabels) && candidate.getInputTensor(0).numElements()==15600 &&
+            check(labels.size==521 && selectedLabels.values.all { it>=0 } && candidate.getInputTensor(0).numElements()==15600 &&
                 candidate.getInputTensor(0).dataType()==DataType.FLOAT32 &&
                 candidate.getOutputTensorCount()==2 && candidate.getOutputTensor(0).numElements()==521 &&
                 candidate.getOutputTensor(0).dataType()==DataType.FLOAT32 && candidate.getOutputTensor(1).numElements()==1024 &&

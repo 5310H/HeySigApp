@@ -1,0 +1,2249 @@
+{
+  "encoderSha256": "b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4",
+  "manifestSha256": "77bb7e870c09f607c6872dcf35fd66f37d709094ee669a845bfcdee9fb89b5ac",
+  "interpretation": "Exploratory raw scores, not calibrated probabilities. No thresholds fitted. Windows from one recording are not independent sources. No device acceptance.",
+  "recordings": [
+    {
+      "id": "fs-475477",
+      "file": "475477.mp3",
+      "sha256": "c8d3410c1535ca03d72a4624bf762c4a2ae99e69e29ef5f64def1c72a89d55b5",
+      "reference": "TV",
+      "source": "https://freesound.org/people/o_ciz/sounds/475477/",
+      "author": "o_ciz",
+      "license": "CC0-1.0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "audioSource": "https://cdn.freesound.org/previews/475/475477_7009965-hq.mp3",
+      "referenceBasis": "Uploader describes indistinct ambience of a TV playing in the background; not independently verified device identity",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          30,
+          3
+        ],
+        [
+          30,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fs-260123",
+      "file": "260123.mp3",
+      "sha256": "b564989005cc845679fabe4bed1f67241e32efb1a303a5d1bb90cfddc3eaa110",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260123/",
+      "author": "SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "NON_TV",
+      "scene": "LARGE_GROUP",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fs-260124",
+      "file": "260124.mp3",
+      "sha256": "0e45102d17749ee2af11f02b4d7878ceb3326ef799984d88e3010e5c64d86011",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260124/",
+      "author": "SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "NON_TV",
+      "scene": "CONVERSATION",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fs-533833",
+      "file": "533833.mp3",
+      "sha256": "2333a18f1d6ea0526d6021d4ce92efa7cfb356512e2d2352935061816cced16e",
+      "source": "https://freesound.org/people/Angellu16/sounds/533833/",
+      "author": "Angellu16",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "NON_TV",
+      "scene": "NON_SPEECH_NOISE",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fsd-423267",
+      "file": "fsd-423267.wav",
+      "sha256": "01746441c5e4c01b68c207e2f52be36550c4ad63e86311e53cb7c48c4d35b5e4",
+      "source": "https://freesound.org/people/ANARKYA/sounds/423267/",
+      "author": "ANARKYA",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "Creator description; not independent annotation: Washing machine spinning cycle",
+      "reference": "NON_TV",
+      "scene": "NON_SPEECH_NOISE",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "ami-ES2002a",
+      "file": "ES2002a.wav",
+      "sha256": "9921f07830234526a89deace3ac49a393872437c6b36b042afc1e04db417ee5e",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "author": "AMI Project Consortium",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "NON_TV",
+      "scene": "SMALL_GROUP",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "ami-ES2003a",
+      "file": "ES2003a.wav",
+      "sha256": "25b0b38ee0c634d46607e6a8022babeb7f9764bb9787392ad6f47afb3ecfd0de",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "author": "AMI Project Consortium",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "NON_TV",
+      "scene": "SMALL_GROUP",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    }
+  ],
+  "results": [
+    {
+      "clip": "fs-475477",
+      "reference": "TV",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "rmsDbfs": -51.911870399163966,
+      "inferenceGain": 16.0,
+      "mean": {
+        "Television": 0.01171875,
+        "Radio": 0.00234375,
+        "Speech": 0.23515625,
+        "Conversation": 0.0,
+        "Music": 0.1515625,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.015625,
+      "frames": [
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.19921875,
+          "Conversation": 0.0,
+          "Music": 0.08203125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.015625,
+          "Radio": 0.00390625,
+          "Speech": 0.33203125,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.01171875,
+          "Radio": 0.00390625,
+          "Speech": 0.19921875,
+          "Conversation": 0.0,
+          "Music": 0.19921875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.01171875,
+          "Radio": 0.0,
+          "Speech": 0.03125,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.015625,
+          "Radio": 0.00390625,
+          "Speech": 0.4140625,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-475477",
+      "reference": "TV",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "rmsDbfs": -51.75977212567838,
+      "inferenceGain": 16.0,
+      "mean": {
+        "Television": 0.004523026315789474,
+        "Radio": 0.0006167763157894736,
+        "Speech": 0.2354029605263158,
+        "Conversation": 0.00020559210526315788,
+        "Music": 0.055098684210526314,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.015625,
+      "frames": [
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.19921875,
+          "Conversation": 0.0,
+          "Music": 0.08203125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.015625,
+          "Radio": 0.00390625,
+          "Speech": 0.33203125,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.01171875,
+          "Radio": 0.00390625,
+          "Speech": 0.19921875,
+          "Conversation": 0.0,
+          "Music": 0.19921875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.01171875,
+          "Radio": 0.0,
+          "Speech": 0.03125,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.015625,
+          "Radio": 0.00390625,
+          "Speech": 0.4140625,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.01171875,
+          "Radio": 0.0,
+          "Speech": 0.33203125,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0078125,
+          "Radio": 0.0,
+          "Speech": 0.19921875,
+          "Conversation": 0.0,
+          "Music": 0.01953125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.109375,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.05859375,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.109375,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.109375,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.4140625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.26171875,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.1484375,
+          "Conversation": 0.0,
+          "Music": 0.015625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.33203125,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.26171875,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.33203125,
+          "Conversation": 0.0,
+          "Music": 0.0078125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.1484375,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.00390625,
+          "Music": 0.0078125,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-475477",
+      "reference": "TV",
+      "offsetSeconds": 15,
+      "seconds": 3,
+      "rmsDbfs": -50.6453229822235,
+      "inferenceGain": 16.0,
+      "mean": {
+        "Television": 0.00234375,
+        "Radio": 0.0,
+        "Speech": 0.46015625,
+        "Conversation": 0.0,
+        "Music": 0.0421875,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.0078125,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.33203125,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.73828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0078125,
+          "Radio": 0.0,
+          "Speech": 0.05859375,
+          "Conversation": 0.0,
+          "Music": 0.19921875,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-475477",
+      "reference": "TV",
+      "offsetSeconds": 15,
+      "seconds": 10,
+      "rmsDbfs": -51.321098694380176,
+      "inferenceGain": 16.0,
+      "mean": {
+        "Television": 0.002055921052631579,
+        "Radio": 0.0,
+        "Speech": 0.39946546052631576,
+        "Conversation": 0.0014391447368421052,
+        "Music": 0.16262335526315788,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.0078125,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.33203125,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.73828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0078125,
+          "Radio": 0.0,
+          "Speech": 0.05859375,
+          "Conversation": 0.0,
+          "Music": 0.19921875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.73828125,
+          "Conversation": 0.00390625,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.01171875,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.890625,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.91796875,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.00390625,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.19921875,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0078125,
+          "Conversation": 0.0,
+          "Music": 0.08203125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.01953125,
+          "Conversation": 0.0,
+          "Music": 0.1484375,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.5,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.03125,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.01171875,
+          "Conversation": 0.0,
+          "Music": 0.66796875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0078125,
+          "Radio": 0.0,
+          "Speech": 0.0078125,
+          "Conversation": 0.0,
+          "Music": 0.5859375,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-475477",
+      "reference": "TV",
+      "offsetSeconds": 30,
+      "seconds": 3,
+      "rmsDbfs": -51.98592087180798,
+      "inferenceGain": 16.0,
+      "mean": {
+        "Television": 0.0046875,
+        "Radio": 0.0,
+        "Speech": 0.140625,
+        "Conversation": 0.00078125,
+        "Music": 0.265625,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.01171875,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.00390625,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.01171875,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.5,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0078125,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.1484375,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.26171875,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-475477",
+      "reference": "TV",
+      "offsetSeconds": 30,
+      "seconds": 10,
+      "rmsDbfs": -51.58501302219011,
+      "inferenceGain": 16.0,
+      "mean": {
+        "Television": 0.0028782894736842104,
+        "Radio": 0.0,
+        "Speech": 0.08038651315789473,
+        "Conversation": 0.00020559210526315788,
+        "Music": 0.30160361842105265,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.01171875,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.00390625,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.01171875,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.5,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0078125,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.1484375,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.26171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.03125,
+          "Conversation": 0.0,
+          "Music": 0.5,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.01953125,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.01171875,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.5859375,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.03125,
+          "Conversation": 0.0,
+          "Music": 0.4140625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.01953125,
+          "Conversation": 0.0,
+          "Music": 0.33203125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.4140625,
+          "Conversation": 0.0,
+          "Music": 0.1484375,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0078125,
+          "Radio": 0.0,
+          "Speech": 0.05859375,
+          "Conversation": 0.0,
+          "Music": 0.26171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.66796875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.26171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.26171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.109375,
+          "Conversation": 0.0,
+          "Music": 0.04296875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.015625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.05859375,
+          "Conversation": 0.0,
+          "Music": 0.08203125,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-260123",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "rmsDbfs": -44.70954666072493,
+      "inferenceGain": 8.598987890833065,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.8375,
+        "Conversation": 0.01015625,
+        "Music": 0.0078125,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.01171875,
+          "Music": 0.01953125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.66796875,
+          "Conversation": 0.0078125,
+          "Music": 0.01953125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.0078125,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98046875,
+          "Conversation": 0.01171875,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.01171875,
+          "Music": 0.0,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-260123",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "rmsDbfs": -43.67042586451674,
+      "inferenceGain": 7.629416031049106,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.8858963815789473,
+        "Conversation": 0.010896381578947368,
+        "Music": 0.004523026315789474,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.66796875,
+          "Conversation": 0.01171875,
+          "Music": 0.01953125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.73828125,
+          "Conversation": 0.0078125,
+          "Music": 0.01953125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.0078125,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.0078125,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.015625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.01171875,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98046875,
+          "Conversation": 0.03125,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.03125,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.80078125,
+          "Conversation": 0.0078125,
+          "Music": 0.015625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.890625,
+          "Conversation": 0.0078125,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.00390625,
+          "Music": 0.0078125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98046875,
+          "Conversation": 0.0078125,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.91796875,
+          "Conversation": 0.01171875,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.890625,
+          "Conversation": 0.01953125,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98046875,
+          "Conversation": 0.01171875,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.00390625,
+          "Music": 0.0078125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.00390625,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.26171875,
+          "Conversation": 0.0,
+          "Music": 0.0078125,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-260124",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "rmsDbfs": -47.56171893604947,
+      "inferenceGain": 11.941419385562988,
+      "mean": {
+        "Television": 0.0015625,
+        "Radio": 0.0,
+        "Speech": 0.94375,
+        "Conversation": 0.01328125,
+        "Music": 0.00078125,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.00390625,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.015625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.04296875,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-260124",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "rmsDbfs": -47.286367069339704,
+      "inferenceGain": 11.56880119057849,
+      "mean": {
+        "Television": 0.0006167763157894736,
+        "Radio": 0.0,
+        "Speech": 0.8460115131578947,
+        "Conversation": 0.004934210526315789,
+        "Music": 0.0030838815789473685,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.00390625,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.015625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.890625,
+          "Conversation": 0.04296875,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.00390625,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.015625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.80078125,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.00390625,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.26171875,
+          "Conversation": 0.0,
+          "Music": 0.03125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.4140625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.91796875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.94140625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.80078125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.890625,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-533833",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "rmsDbfs": -33.86263928629179,
+      "inferenceGain": 2.4666184102747235,
+      "mean": {
+        "Television": 0.00078125,
+        "Radio": 0.003125,
+        "Speech": 0.01875,
+        "Conversation": 0.0,
+        "Music": 0.0015625,
+        "Silence": 0.00078125
+      },
+      "televisionPeak": 0.00390625,
+      "frames": [
+        {
+          "Television": 0.00390625,
+          "Radio": 0.015625,
+          "Speech": 0.01953125,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0078125,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0078125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fs-533833",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "rmsDbfs": -34.71829858383747,
+      "inferenceGain": 2.721980022988007,
+      "mean": {
+        "Television": 0.00020559210526315788,
+        "Radio": 0.0014391447368421052,
+        "Speech": 0.03227796052631579,
+        "Conversation": 0.0,
+        "Music": 0.0012335526315789473,
+        "Silence": 0.00390625
+      },
+      "televisionPeak": 0.00390625,
+      "frames": [
+        {
+          "Television": 0.00390625,
+          "Radio": 0.015625,
+          "Speech": 0.01953125,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.03125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0078125,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0078125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0078125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.08203125,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.01953125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.03125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.04296875,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.00390625,
+          "Speech": 0.109375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.00390625,
+          "Speech": 0.1484375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.01171875
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.00390625,
+          "Speech": 0.015625,
+          "Conversation": 0.0,
+          "Music": 0.0078125,
+          "Silence": 0.05859375
+        }
+      ]
+    },
+    {
+      "clip": "fsd-423267",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "rmsDbfs": -11.213780008355236,
+      "inferenceGain": 1.0,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.00234375,
+        "Conversation": 0.0,
+        "Music": 0.00625,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0078125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "fsd-423267",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "rmsDbfs": -11.038842349992741,
+      "inferenceGain": 1.0,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.001850328947368421,
+        "Conversation": 0.0,
+        "Music": 0.002261513157894737,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0078125,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.01171875,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.00390625,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.0,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.00390625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "ami-ES2002a",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "rmsDbfs": -45.049413667634006,
+      "inferenceGain": 8.942123995952498,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.82421875,
+        "Conversation": 0.00234375,
+        "Music": 0.0,
+        "Silence": 0.00546875
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.01953125
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.94140625,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.890625,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        }
+      ]
+    },
+    {
+      "clip": "ami-ES2002a",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "rmsDbfs": -41.00886380616955,
+      "inferenceGain": 3.7272030651340993,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.9083059210526315,
+        "Conversation": 0.0014391447368421052,
+        "Music": 0.0,
+        "Silence": 0.01274671052631579
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.5859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.1484375
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.03125
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.91796875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.4140625,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.03125
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.8515625,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.01171875
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.99609375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98828125,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98046875,
+          "Conversation": 0.0078125,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.9921875,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.99609375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.9921875,
+          "Conversation": 0.00390625,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98046875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        }
+      ]
+    },
+    {
+      "clip": "ami-ES2003a",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 3,
+      "rmsDbfs": -41.97008052510011,
+      "inferenceGain": 6.272981844547606,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.9921875,
+        "Conversation": 0.0,
+        "Music": 0.0,
+        "Silence": 0.0
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.99609375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.99609375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.9921875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.9921875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        }
+      ]
+    },
+    {
+      "clip": "ami-ES2003a",
+      "reference": "NON_TV",
+      "offsetSeconds": 0,
+      "seconds": 10,
+      "rmsDbfs": -42.52786749957963,
+      "inferenceGain": 6.689033628213554,
+      "mean": {
+        "Television": 0.0,
+        "Radio": 0.0,
+        "Speech": 0.8922697368421053,
+        "Conversation": 0.0,
+        "Music": 0.0,
+        "Silence": 0.007606907894736842
+      },
+      "televisionPeak": 0.0,
+      "frames": [
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.99609375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.99609375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.9921875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.96875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.00390625
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.9921875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.9921875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98828125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.98046875,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.95703125,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.984375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.0
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.1484375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.05859375
+        },
+        {
+          "Television": 0.0,
+          "Radio": 0.0,
+          "Speech": 0.05859375,
+          "Conversation": 0.0,
+          "Music": 0.0,
+          "Silence": 0.08203125
+        }
+      ]
+    }
+  ]
+}

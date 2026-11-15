@@ -29,9 +29,11 @@ class SpeechSeparationDetector(private val original:SpeechMaskingHead,private va
             fun maximum(labels:Set<String>)=frames.maxOfOrNull { frame -> labels.maxOf { frame[it] ?: 0.0 } }
             val speech=setOf("Speech","Conversation","Narration, monologue","Hubbub, speech noise, speech babble","Crowd","Chatter")
             val neural=latestMeasurement
+            val television=TelevisionSignal.summarize(frames)
             latestDiagnostics="Last completed check: input ${number(input?.rmsDbfs)} dBFS, peak ${number(input?.peakDbfs)}; original ${before.severity}, flags ${input?.flags}."+
                 "\nEvent speech ${number(maximum(speech))}, music ${number(maximum(setOf("Music")))}; quiet candidate ${before.quietCandidate}."+
-                "\nNeural ${neural?.status ?: "not run"}: speech ${number(neural?.speechScore)}, activity ${number(neural?.speechActivity)}, residual speech ${number(neural?.residualSpeechScore)}, ratio ${number(neural?.retainedToResidualDb)}."
+                "\nNeural ${neural?.status ?: "not run"}: speech ${number(neural?.speechScore)}, activity ${number(neural?.speechActivity)}, residual speech ${number(neural?.residualSpeechScore)}, ratio ${number(neural?.retainedToResidualDb)}."+
+                "\nTV model score: mean ${number(television?.mean)}, peak ${number(television?.peak)}; radio ${number(television?.radioMean)}. Diagnostic only; TV recognition does not switch programs yet."
             return result
         }
         if(before.quietCandidate) {

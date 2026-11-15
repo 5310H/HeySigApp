@@ -1,0 +1,176 @@
+{
+  "encoderSha256": "b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4",
+  "purpose": "Exploratory diagnostic only; no fitting, accuracy acceptance or threshold selection",
+  "recordings": [
+    {
+      "id": "fs-475477",
+      "file": "475477.mp3",
+      "sha256": "c8d3410c1535ca03d72a4624bf762c4a2ae99e69e29ef5f64def1c72a89d55b5",
+      "reference": "TV",
+      "source": "https://freesound.org/people/o_ciz/sounds/475477/",
+      "author": "o_ciz",
+      "license": "CC0-1.0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "audioSource": "https://cdn.freesound.org/previews/475/475477_7009965-hq.mp3",
+      "referenceBasis": "Uploader describes indistinct ambience of a TV playing in the background; not independently verified device identity",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          30,
+          3
+        ],
+        [
+          30,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fs-260123",
+      "file": "260123.mp3",
+      "sha256": "b564989005cc845679fabe4bed1f67241e32efb1a303a5d1bb90cfddc3eaa110",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260123/",
+      "author": "SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "NON_TV",
+      "scene": "LARGE_GROUP",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fs-260124",
+      "file": "260124.mp3",
+      "sha256": "0e45102d17749ee2af11f02b4d7878ceb3326ef799984d88e3010e5c64d86011",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260124/",
+      "author": "SpliceSound",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "NON_TV",
+      "scene": "CONVERSATION",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fs-533833",
+      "file": "533833.mp3",
+      "sha256": "2333a18f1d6ea0526d6021d4ce92efa7cfb356512e2d2352935061816cced16e",
+      "source": "https://freesound.org/people/Angellu16/sounds/533833/",
+      "author": "Angellu16",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "NON_TV",
+      "scene": "NON_SPEECH_NOISE",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "fsd-423267",
+      "file": "fsd-423267.wav",
+      "sha256": "01746441c5e4c01b68c207e2f52be36550c4ad63e86311e53cb7c48c4d35b5e4",
+      "source": "https://freesound.org/people/ANARKYA/sounds/423267/",
+      "author": "ANARKYA",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "referenceBasis": "Creator description; not independent annotation: Washing machine spinning cycle",
+      "reference": "NON_TV",
+      "scene": "NON_SPEECH_NOISE",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "ami-ES2002a",
+      "file": "ES2002a.wav",
+      "sha256": "9921f07830234526a89deace3ac49a393872437c6b36b042afc1e04db417ee5e",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "author": "AMI Project Consortium",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "NON_TV",
+      "scene": "SMALL_GROUP",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "ami-ES2003a",
+      "file": "ES2003a.wav",
+      "sha256": "25b0b38ee0c634d46607e6a8022babeb7f9764bb9787392ad6f47afb3ecfd0de",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "author": "AMI Project Consortium",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "NON_TV",
+      "scene": "SMALL_GROUP",
+      "windows": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          10
+        ]
+      ]
+    }
+  ]
+}
