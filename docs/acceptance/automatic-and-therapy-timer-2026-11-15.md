@@ -49,3 +49,22 @@ were recorded before any update. Existing unrelated local research and
 acceptance artifacts are preserved outside this change.
 Actual noisy-room performance, TV intent, quiet-return reliability in the reported
 room and physical timed Wake reception remain unaccepted until measured.
+
+## Initial CI result and final status follow-up
+
+[CI for e4eb48e](https://github.com/5310H/HeySigApp/actions/runs/43748307475)
+passed phone/Wear debug and test-APK builds, both debug lint tasks, 37 shared
+JUnit tests, shell regressions, native APK pins/alignment and the silent API 36
+emulator runner. Timer acceptance passed with fake alarms and transport: every
+duration, single Wake request, cancel/late/revoked/manual cases, saved-state
+preservation and interruption recovery. The runner also exercised real compact
+watch layouts in isolated round contexts at font scales 1 and 2. This did not
+start microphone capture or verify physical aid reception.
+
+Final review corrects three timer status issues: append the timer arming outcome
+to the final visible/spoken playback result (including a failed-arm instruction
+to use Wake now); refresh controls after the one-shot timer finishes; and make
+the saved-routine preview describe timer mode rather than a daily automatic plan.
+An isolated acceptance assertion checks that timer preview keeps daily switches
+Off. Follow-up compilation and exact final artifact checks are recorded separately
+from the initial CI result above.

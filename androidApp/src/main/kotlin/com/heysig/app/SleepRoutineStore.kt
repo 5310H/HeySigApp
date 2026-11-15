@@ -95,6 +95,8 @@ class SleepRoutineStore internal constructor(private val prefs: android.content.
     }
     fun preview(fit: Fitting, now: ZonedDateTime=ZonedDateTime.now()): String {
         val value=validSaved(fit) ?: return "Save a valid routine to preview upcoming times."
+        if(prefs.getBoolean("automaticEnabled",false) && prefs.getBoolean("therapyTimer",false))
+            return "Therapy timer is active. Saved Wake program plays once at timer expiry. Daily bedtime and morning switches are Off; see the timer countdown."
         return SleepPreview.describe(value,now).let {
             if(prefs.getBoolean("automaticEnabled",false)) it.replace("Preview only","Automatic local-clock plan").replace("No alarms are scheduled.","See the main status for actual armed occurrences; no past events replay.")
             else if(prefs.getBoolean("reminders",false)) it.replace("Preview only","Reminder times").replace("No alarms are scheduled.","Android may delay reminders; delivery more than 15 minutes late is skipped.") else it

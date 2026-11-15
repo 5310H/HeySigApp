@@ -129,6 +129,7 @@ object AutomaticSleepAcceptance {
             check(runCatching { scheduler.startTimer(6,timerRevision,1000) }.isFailure)
             check(scheduler.startTimer(60,timerRevision,1000).startsWith("Therapy timer On"))
             check(scheduler.timerActive && backend.scheduled.keys==setOf(false))
+            check(store.preview(fit).contains("Daily bedtime and morning switches are Off"))
             val timer=backend.scheduled.getValue(false)
             check(timer.due==3_601_000L)
             scheduler.refresh() // Reopening must not cancel, extend or reschedule.

@@ -729,9 +729,13 @@ class HomeActivity : Activity() {
                 timerStatus.postDelayed(object:Runnable {
                     override fun run() {
                         if(!timerStatus.isAttachedToWindow || isDestroyed || !resumed) return
-                        timerStatus.text=if(automatic.timerActive) "Therapy timer On: ${automatic.timerRemainingMinutes()} minutes remaining. Wake will play once."
-                            else "Therapy timer Off. Review the last automatic result above."
-                        if(automatic.timerActive) timerStatus.postDelayed(this,1000)
+                        if(!automatic.timerActive) {
+                            if(setupChanged?.invoke()!=true) show("Sleep")
+                            else timerStatus.text="Therapy timer Off. Finish or discard your routine edits to refresh controls."
+                            return
+                        }
+                        timerStatus.text="Therapy timer On: ${automatic.timerRemainingMinutes()} minutes remaining. Wake will play once."
+                        timerStatus.postDelayed(this,1000)
                     }
                 },1000)
                 button("Cancel Therapy timer") {
@@ -874,14 +878,11 @@ class HomeActivity : Activity() {
                 } else {
                     scheduler.disable("Daily routine Off for timed Therapy.")
                     SleepReminders(this).setEnabled(false)
-                    execute(listOf(ManualRequest.SelectProgram(targets.first)),false,sleepTarget=true,onComplete={ success ->
+                    execute(listOf(ManualRequest.SelectProgram(targets.first)),false,sleepTarget=true,completionMessage={ success ->
                         if(success) {
-                            val result=runCatching { scheduler.startTimer(minutes,revision) }
+                            runCatching { scheduler.startTimer(minutes,revision) }
                                 .getOrElse { "Therapy was sent but timer is Off: ${it.message}. Use Wake now to end Therapy." }
-                            // The executor also reports its playback result; retain timer outcome in routine status.
-                            message=result
-                            if(!isDestroyed) tell(result,true)
-                        }
+                        } else null
                     })
                 }
             }.show()
@@ -1544,7 +1545,7 @@ class HomeActivity : Activity() {
         val slot=runCatching { runtime.sleepRoutine.target(sleep,fit) }.getOrElse { tell(it.message ?: "Review routine first",true);return }
         execute(listOf(ManualRequest.SelectProgram(slot)),false,sleepTarget=sleep)
     }
-    private fun execute(plan: List<ManualRequest>,restoring: Boolean, automatic: Boolean = false, sleepTarget: Boolean? = null, refreshing: Boolean = false, onComplete: ((Boolean) -> Unit)? = null) {
+    private fun execute(plan: List<ManualRequest>,restoring: Boolean, automatic: Boolean = false, sleepTarget: Boolean? = null, refreshing: Boolean = false, onComplete: ((Boolean) -> Unit)? = null, completionMessage: ((Boolean) -> String?)? = null) {
         soundType.stop()
         foregroundVoice.close()
         if(!automatic) { environment.manualPriority();noise.stop() }
@@ -1558,7 +1559,8 @@ class HomeActivity : Activity() {
             if(!isDestroyed) { message=text; show(); tell(text) }
         },sleepTarget=sleepTarget) { playbackResult,success ->
             environment.playbackFinished()
-            val result=if(refreshing) "${if(success) "Refresh sent." else "Refresh incomplete."} $playbackResult" else playbackResult
+            val result=(if(refreshing) "${if(success) "Refresh sent." else "Refresh incomplete."} $playbackResult" else playbackResult)+
+                completionMessage?.invoke(success)?.let { "\n$it" }.orEmpty()
             if(!automatic && plan.any { it is ManualRequest.SelectProgram }) environment.manualCompleted(success)
             onComplete?.invoke(success)
             message=result
