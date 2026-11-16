@@ -22,6 +22,7 @@ class Api36Smoke : Instrumentation() {
         var activity: Activity? = null
         try {
             check(targetContext.applicationInfo.targetSdkVersion == 36)
+            result.putString("combinedAutomatic",CombinedAutomaticAcceptance.verify(targetContext,context))
             result.putString("watchCapabilityLifecycle",WatchCapabilityAcceptance.verify(this))
             if(freshEmulator) {
                 check(Build.HARDWARE == "ranchu") { "Fresh test fitting is restricted to the Android emulator" }

@@ -1,5 +1,8 @@
 # Google Play readiness — audited October 16, 2026
 
+November 16: combined ten-second TV/noise analysis and explicitly reviewed, bounded sound-summary memory change microphone duty and retained data. See the [service amendment](speech-automatic-background-design-2026-11-09.md) and [actual validation record](acceptance/combined-automatic-2026-11-16.md). Recheck foreground-service declarations, privacy/Data safety, data export/deletion and real battery/physical results before release. No target SDK, aid transport or signing identity change. This development update does not prepare a Play submission.
+
+
 November 15: Automatic TV context no longer overrides Noisy/Very Noisy severity.
 A one-shot Therapy timer reuses existing exact-alarm access, receiver and bounded
 mediaPlayback service to send the saved Wake program after 5–60 minutes. No new

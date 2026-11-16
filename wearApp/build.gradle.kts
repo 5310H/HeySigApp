@@ -6,6 +6,7 @@ apply(from = rootProject.file("gradle/app-signing.gradle"))
 apply(from = rootProject.file("gradle/environment-model.gradle"))
 apply(from = rootProject.file("gradle/masking-model.gradle"))
 apply(from = rootProject.file("gradle/separation-model.gradle"))
+apply(from = rootProject.file("gradle/television-model.gradle"))
 
 
 val releasePublic = Properties().apply {

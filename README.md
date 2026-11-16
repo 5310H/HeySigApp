@@ -1,3 +1,5 @@
+Current Automatic behavior (November 16): [TV and noise together, with optional reviewed corrections](docs/how-automatic-noise-works.md). Ten-second capture; stronger noise takes priority over TV; uncertain sound holds. Earlier dated descriptions below remain historical.
+
 # HeySig App
 
 A Kotlin Android acoustic-control prototype and research workspace for a future replacement of the HeySig Tasker setup. Direct program, left/right battery, volume, Sound Sharpness and tinnitus requests have passed focused user acceptance on the tested Pixel/hearing-aid setup.

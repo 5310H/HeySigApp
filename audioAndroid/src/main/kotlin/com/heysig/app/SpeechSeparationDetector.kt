@@ -33,7 +33,7 @@ class SpeechSeparationDetector(private val original:SpeechMaskingHead,private va
             latestDiagnostics="Last completed check: input ${number(input?.rmsDbfs)} dBFS, peak ${number(input?.peakDbfs)}; original ${before.severity}, flags ${input?.flags}."+
                 "\nEvent speech ${number(maximum(speech))}, music ${number(maximum(setOf("Music")))}; quiet candidate ${before.quietCandidate}."+
                 "\nNeural ${neural?.status ?: "not run"}: speech ${number(neural?.speechScore)}, activity ${number(neural?.speechActivity)}, residual speech ${number(neural?.residualSpeechScore)}, ratio ${number(neural?.retainedToResidualDb)}."+
-                "\nTV model score: mean ${number(television?.mean)}, peak ${number(television?.peak)}; radio ${number(television?.radioMean)}. Diagnostic only; TV recognition does not switch programs yet."
+                "\nTV model score: mean ${number(television?.mean)}, peak ${number(television?.peak)}; radio ${number(television?.radioMean)}. Underlying event diagnostic; the combined path uses its separate pinned TV head."
             return result
         }
         if(before.quietCandidate) {

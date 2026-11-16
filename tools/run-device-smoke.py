@@ -16,7 +16,7 @@ def main():
     args = parser.parse_args()
     for apk in ('androidApp/build/outputs/apk/debug/androidApp-debug.apk',
                 'androidApp/build/outputs/apk/androidTest/debug/androidApp-debug-androidTest.apk'):
-        completed = subprocess.run(['adb','-s',args.device,'install','-r',str(ROOT/apk)],capture_output=True,text=True)
+        completed = subprocess.run(['adb','-s',args.device,'install','--no-incremental','-r',str(ROOT/apk)],capture_output=True,text=True)
         if completed.returncode or 'Success' not in completed.stdout:
             raise SystemExit('Development/test APK install failed; existing app was not uninstalled.')
     command = ['adb','-s',args.device,'shell','am','instrument','-w']

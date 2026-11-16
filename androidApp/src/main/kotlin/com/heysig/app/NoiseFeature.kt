@@ -55,7 +55,7 @@ class NoiseFeature(
     }
     private fun learningStatus(): String {
         AutomaticNoiseService.running?.learner?.let { learner=it }
-        val learned=learner ?: return "Speech-aware Automatic uses a fixed model; it does not learn or change saved thresholds."
+        val learned=learner ?: return "Automatic uses fixed models and saved thresholds. Optional Teach Automatic remembers only explicitly reviewed corrections; thresholds stay unchanged."
         return if(learned.suggest(SystemClock.elapsedRealtime())!=null) "Threshold suggestion ready · Review learned thresholds."
         else "Learning thresholds: ${learned.sampleCount} valid measurements · saved thresholds unchanged."
     }
@@ -110,6 +110,7 @@ class NoiseFeature(
     private var refreshCalibration: (() -> Unit)? = null
     private fun automaticSettings() = settings.copy(sleepProgram=settings.sleepProgram ?:
         programs().firstOrNull { isTherapyProgramName(it.name) }?.slot)
+    fun soundCheckSettings()=automaticSettings()
     private fun fittingSignature() = programs().sortedBy { it.slot }.joinToString("|") { "${it.slot}:${it.name}" }
     private var reviewedFitting = ""
     @Volatile private var quietUntil = 0L
@@ -251,7 +252,7 @@ class NoiseFeature(
             try { PhoneStyle.heading(activity,target,title); build() } finally { target = parent }
         }
         group("Automatic noise") {
-            line("HeySig chooses your program from how much other sound masks speech. Unsure means keep the current program.")
+            line("Automatic checks TV and noise together, then selects your saved program. Strong noise takes priority over TV. Unsure means keep the current program.")
             line(speechAutomatic.listeningContext())
             automaticButton=button(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") "On" else "Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
             openSoundType?.let { open -> button("Check speech and noise",open) }
@@ -399,30 +400,29 @@ class NoiseFeature(
             button("How to use") {
                 android.app.AlertDialog.Builder(activity).setTitle("Using Automatic")
                     .setMessage("""
-                        On Home, choose your usual daytime program. Open Choose programs, assign Universal, Noisy and Very Noisy, then save. For a TV session, also assign TV and turn Watching TV on; otherwise leave it off.
+                        Save Universal, Noisy, Very Noisy and TV in Choose programs. Automatic checks TV and noise together; Watching TV is an optional preference for clear sound during a TV session. TV recognition also works with that switch off.
 
                         Expected choices after repeated checks:
-                        • Quiet → Universal.
-                        • Clear speech → Universal, or TV when Watching TV is on.
-                        • Partly masked speech → Noisy.
-                        • Heavily masked speech → Very Noisy, even when Watching TV is on.
+                        • Normal or confirmed quiet → Universal.
+                        • Noisy → Noisy.
+                        • Very Noisy → Very Noisy, including while TV is playing.
+                        • Recognized TV without stronger noise → TV.
                         • Unsure or unassigned → keep the current program.
 
-                        Watching TV is your choice, not TV recognition. Turn it off and save when that session ends. A falling graph alone does not mean quiet has been confirmed.
+                        Tap red Off to start, read the microphone explanation and allow access. The green On button and notification Off stop it. Keep the phone where the aids can hear its tones; normal phone Automatic may continue with the screen locked.
 
-                        Tap the red Off button to start; it turns green and says On. Read the microphone explanation and allow the requested access. Keep the phone where the aids can hear its tones; you may lock the screen.
+                        Each capture lasts ten seconds. Three separate three-second sections measure noise and speech reduction; the whole capture supplies TV evidence. There is then at least a ten-second pause plus processing. Noisy, Very Noisy and TV need the saved confirmation count (normally three, at least two). Universal return needs two fresh agreeing checks. The saved cooldown (normally 60 seconds) must finish before fresh confirmation starts. Return may take over a minute. Unsure clears confirmation; it never becomes quiet just because time passed.
 
-                        Each capture lasts three seconds, then pauses at least ten seconds plus processing time. Noisy, Very Noisy and TV use your saved repeated-check count (normally three, at least two). Universal return uses two fresh checks agreeing on Universal. After playback, the saved cooldown (normally 60 seconds) must finish before fresh confirmation starts. Return can take over a minute; the status shows the wait. Unsure checks clear confirmation and do not turn into quiet after a timeout.
+                        Speech masking uses retained-to-removed sound estimates. Recognized background noise without reliable speech also uses the saved relative level thresholds. These are phone digital levels, not calibrated sound-pressure readings. Music, ambiguous sound and conflicting evidence may hold the current program. TV and conversation can be confused.
 
-                        The model estimates speech masking rather than loudness alone. Pure noise, music or conflicting estimates can hold the current program. It can choose wrongly or miss a quiet return. Sent means playback completed, not confirmed aid reception or improved understanding.
+                        To correct a recent result, run Check TV and noise, then open Teach Automatic within two minutes. Choose the right category and review Remember. Only then are up to 24 compact summaries and your corrections saved locally. Similar future sound may reuse a correction. Strong noise, confirmation and all priorities still apply. Memories can be disabled or forgotten. No recording or transcript is saved.
 
-                        To stop, tap green On or notification Off. Manual control and Therapy take priority. Timed Wake does not restart Noise Automatic. Sessions end after eight hours and never restart themselves.
-
-                        No calibration or learning period is required. Noise captures are processed in memory and discarded; this feature does not save or upload recordings. Voice commands have a separate disclosure.
+                        Manual controls and Therapy take priority. Timed Wake does not restart Automatic. Sessions end after eight hours and never restart themselves. Calibration and teaching are optional. Sent means playback completed; only you can confirm aid reception and listening benefit.
                     """.trimIndent())
                     .setPositiveButton("Got it",null).show()
             }
             button("Choose programs") { navigate("NoiseSetup") }
+            button("Teach Automatic") { speechAutomatic.teach() }
             button("Compare saved programs") { navigate("NoiseComparison") }
             button("Optional sound setup") { navigate("NoiseCalibration") }
         }

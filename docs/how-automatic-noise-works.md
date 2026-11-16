@@ -1,176 +1,35 @@
-# How Noise Automatic should work
+# Automatic: TV and noise together
 
-Updated November 15, 2026. This describes current speech-aware Automatic and
-what to check in real use. Software tests have passed; reliable performance in
-every environment and actual hearing-aid reception have not been established.
+Development behavior, November 16, 2026. Choose Universal, Noisy, Very Noisy and TV under Noise → Choose programs and save. Unassigned situations keep the current program. Calibration and teaching are optional.
 
-Automatic should choose your saved program when listening conditions change,
-then return when conditions improve. You choose the program assigned to each
-role. HeySig sends program-change tones; it does not change the fitting or add
-new noise reduction to your aids.
+Automatic analyzes one ten-second microphone capture. The full capture feeds a fixed local TV head; three disjoint three-second sections feed the existing speech detector, neural retained/removed-sound measurements and relative level calculations. A majority of sections is needed for a noise category. There is at least a ten-second pause plus processing between captures.
 
-## Set up a session
-
-1. On **Home**, choose your usual daytime program.
-2. Open **Noise → Choose programs**. Assign your own programs to **Universal**,
-   **Noisy**, and **Very Noisy**. An unassigned role keeps the current program.
-3. For a TV session, also assign your TV program and turn **Watching TV** on.
-   For other listening, leave Watching TV off. Save your choices.
-4. Return to Noise and tap **Off** to turn Automatic **On**. Follow its microphone
-   explanation and permission prompts. Keep the phone where the aids can hear
-   the program-change tones. The screen may be locked afterward.
-
-The phone microphone is the default. If you explicitly choose watch input,
-follow [Watch Automatic setup](watch-automatic.md); the phone still sends the
-program-change tones. Microphone position matters: sound at a phone in a pocket
-or at your wrist can differ from sound at your ears.
-
-No calibration, enrollment or learning period is required. Saved six-level
-assignments and optional level calibration remain available for older measurement
-tools; adjusting them does not retrain normal speech-aware Automatic.
-
-## Which program should be selected?
-
-The decision estimates how much background sound masks speech. A place being
-loud, or being called a restaurant, does not by itself select a program.
-
-| Repeated sound evidence | Watching TV Off | Watching TV On |
-| --- | --- | --- |
-| Quiet | Universal | Universal |
-| Speech stands out clearly | Universal | TV |
-| Speech partly masked | Noisy | Noisy |
-| Speech heavily masked | Very Noisy | Very Noisy |
-| Not sure, conflicting estimates or unusable capture | Keep current program | Keep current program |
-
-These are **your saved role assignments**, not guaranteed program names or slot
-numbers. Check the assignments if the program considered does not match what
-you intended. If the correct target is already the last program requested,
-Automatic should not send it repeatedly.
-
-**Watching TV must never override a confirmed Noisy or Very Noisy decision.**
-The November 15 correction removes that earlier routing problem.
-
-Watching TV is your listening choice, not automatic recognition of a television.
-It stays selected until you turn it off and save. If you leave it on after a TV
-session, later clear speech can still select TV. To change context, turn Automatic
-Off, change Watching TV in Choose programs, save, then turn Automatic On again.
-
-## How long should a change take?
-
-Automatic should respond to sustained changes rather than every brief sound.
-
-- Each phone capture lasts **three seconds**, followed by your saved pause of
-  **at least ten seconds**, plus processing time.
-- Entry to Noisy, Very Noisy or TV uses your saved confirmation count, with a
-  minimum of two checks. The default is **three**.
-- Return to Universal uses **two fresh checks agreeing on Universal**. With
-  Watching TV off, quiet and clear speech may jointly confirm that return.
-  With Watching TV on, clear speech means TV and quiet means Universal, so
-  alternating those results does not confirm either program.
-- After successful program playback, the saved cooldown applies in both
-  directions. Its default is **60 seconds**. Checks during cooldown do not
-  count toward the next change; fresh agreement is required afterward.
-- Uncertain, stale or interrupted checks clear confirmation progress.
-
-With a three-second capture and ten-second pause, completed checks are roughly
-13 seconds apart **before adding processing and scheduling time**. After the
-first agreeing completed check, a two-check decision needs about one more cycle;
-a three-check decision needs about two more. The initial capture, cooldown,
-playback and interruptions add time. Your saved timings may differ.
-
-A change can therefore take tens of seconds, and return shortly after a previous
-switch can take over a minute. This is not an exact deadline. Check the displayed
-confirmation count and cooldown rather than expecting an immediate switch.
-
-## What should happen when noise ends?
-
-With Watching TV off, sustained quiet or clear speech should return to Universal
-once cooldown and fresh confirmation requirements are satisfied.
-
-With Watching TV on, sustained clear speech should return to TV; sustained quiet
-should return to Universal. TV can be selected again if clear speech resumes.
-
-There is no rule that turns an uncertain result into quiet after a timeout.
-Music, competing voices, handling noise, clipping and ordinary background sounds
-can produce uncertain checks. Pure noise without reliable speech evidence can
-also hold the current program. **Very Noisy is not a simple loudness threshold.**
-A long hold may be a detector limitation; it is not evidence that Automatic
-worked correctly. If an ordinary quiet room remains unrecognized after cooldown
-and several fresh checks, record that as a missed return for investigation.
-
-## What the status means
-
-| Status | What to expect |
+| Evidence | Expected saved program |
 | --- | --- |
-| Checking again: 1 of 3 | More fresh agreement is needed; no change yet. |
-| Waiting for cooldown | The next change is being held. Confirmation starts again afterward. |
-| Not sure / estimates disagree | Keep current program; confirmation progress clears. |
-| No program chosen | No change for that role until you explicitly assign one. |
-| Current program already matches | No duplicate tones are needed. |
-| Sending / request in progress | The shared executor is handling one command. |
-| Sent / last program requested | Playback completed. Hearing-aid receipt and improved listening are not confirmed. |
-| Paused for speech or other audio | Capture waits, then needs fresh checks. |
-| Automatic Off / error | Future Automatic requests have stopped; review the reason before restarting. |
+| Sustained very noisy sound | Very Noisy, including while TV plays |
+| Sustained noisy sound | Noisy, including while TV plays |
+| Recognized TV without stronger noise | TV |
+| Normal sound or independently confirmed quiet | Universal |
+| Uncertain, invalid/clipped capture or missing assignment | Keep current program |
 
-The graph shows relative microphone level, not calibrated sound-pressure level,
-speech understanding or the actual hearing-aid program. A falling graph alone
-does not prove that quiet-return evidence has been recognized.
+For speech, retained-to-removed sound estimates must agree with the existing speech head, except a strong independently recognized machinery/traffic event can support the reduction estimate when the speech head abstains. For recognized background noise with no reliable speech, saved relative digital thresholds distinguish levels: levels 1–3 Normal, 4–5 Noisy, 6 Very Noisy, with the saved margin. This is not a calibrated SPL meter or a measurement of understanding. Quiet return needs actual low-level evidence, never an uncertainty timeout.
 
-## Stop, manual control and Therapy
+Watching TV remains a saved optional listening preference: clear sound uses TV while that preference is on, and quiet still returns to Universal. TV recognition also runs with it off. Turn the preference off and save to test automatic TV-to-normal return without that override.
 
-Tap the green **On** button to stop, or use **Off** in the Automatic notification.
-Off stops capture and future Automatic requests and cancels owned playback;
-tones already emitted cannot be undone.
+Changes need repeated fresh checks: the saved count (normally three, at least two) for TV/Noisy/Very Noisy, two agreeing targets for Universal. The saved cooldown (normally 60 seconds) clears confirmation until it finishes. A return may take over a minute. TV and Normal confirmations cannot be merged merely because both use the same speech severity. Manual controls, Therapy, phone audio and the shared validated executor retain priority. A completed send does not prove the aids received it.
 
-Manual program/control commands take priority. Therapy stops noise Automatic;
-Automatic must not switch into or out of a protected Therapy program. A Therapy
-timer can later send the saved Wake program, but it does not restart noise
-Automatic. After Therapy, choose a daytime program and explicitly start
-Automatic when you want it again.
+Phone Automatic starts from an open, unlocked app after its microphone explanation and may continue with the screen locked under its visible notification. Tap green On or notification Off to stop. Sessions stop after eight hours and never restart themselves. The standalone Check TV and noise is foreground-only, cancellable, and sends no aid command.
 
-Sessions end after eight hours. Removed microphone/notification access, changed
-fitting or saved choices, app stop, microphone/model failure, and failed or
-interrupted program playback also stop the session. It does not restart itself
-or queue a retry from old evidence.
+## Remembering a correction
 
-## A practical field check
+Run the ten-second check or use Automatic, then open Teach Automatic within two minutes. Teaching stops Automatic. Review its last situation, choose Normal/Noisy/Very Noisy/TV and tap Remember. Up to 24 compact 40-number summaries and your category are saved privately on the phone. No audio, words or transcript is saved. Saving enables reuse; you can disable memories without deleting them, or Forget remembered corrections. Changes never silently fit thresholds or rewrite program assignments.
 
-Use ordinary sounds already around you; there is no need to create very loud
-sounds. Check saved assignments before testing and allow the displayed cooldown
-and confirmation process to finish. The table describes expected outcomes when
-the detector consistently supplies the corresponding evidence.
+A correction applies only to very similar sound with the same model, phone/watch source and fitting identity. Conflicting matches abstain. Strong detected noise keeps priority over a remembered TV/Normal category; confirmations, cooldown and Therapy/manual protections remain. This is a bounded preference memory, not continuous retraining or a promise to recognize every place.
 
-| Session | Sequence to check | Expected requested programs |
-| --- | --- | --- |
-| Normal listening, Watching TV Off | Quiet → partly masked speech → heavily masked speech → quiet | Universal → Noisy → Very Noisy → Universal |
-| TV listening, Watching TV On | Clear TV speech → heavily masked speech → clear TV speech → quiet | TV → Very Noisy → TV → Universal |
-| Either session | Brief sound or uncertain evidence | Hold; no switch from that check alone. |
-| Either session | Select a program manually | Manual request wins; Automatic stops. |
-| Therapy | Start Therapy, including timed Therapy | Noise Automatic stops and stays Off after timed Wake. |
+The selected watch runs the same detector and sends scene estimates plus a compact summary through encrypted Google Wear OS Data Layer, potentially through Google servers. It sends no raw audio or transcript. Reviewed memories are stored on the phone; phone and watch experiences are separate. Both builds must share the same profile. Off/disconnection ends capture and future automatic requests.
 
-For each wrong switch, missed switch or missed return, record:
+## Known limits and actual checks
 
-- Build revision, phone/watch microphone source, Watching TV setting and saved roles.
-- Actual listening situation and the program you expected.
-- Displayed sound/masking result, program considered, confirmation/cooldown status
-  and last program requested. The latest completed-check diagnostics can help.
-- Whether the app reported playback, whether you confirmed the aid changed,
-  and whether listening improved. Record these separately.
+Public-recording development tests remain small. The expanded TV head correctly classified 48 of 52 validation windows, with two false TV windows from one conversation recording and two uncertain piano windows. Two gains of the same excerpt are correlated, not independent experiences. Most validation sources were already inspected in the initial experiment; only the newly frozen Annerie TV source is fresh validation for the expanded fit. The distant-TV example missed initially was moved into development and is no longer independent validation.
 
-A single correct switch is useful evidence, not proof across environments.
-The detector cannot identify the speaker you want, measure your understanding,
-or guarantee that another program will help. If a decision is wrong, you can
-select a program manually; that stops Automatic.
-
-## Audio and privacy
-
-Noise Automatic processes short captures locally in memory and discards the
-waveform. This feature does not save or upload recordings or transcripts. Its
-recent graph is bounded and memory-only; role choices and consent are saved
-locally. Watch input transfers compact estimates/control/status over the existing
-Wear OS Data Layer, not raw monitoring audio. Voice commands use a separate
-recognition provider and disclosure and may involve a network.
-
-See [setup details](speech-aware-automatic.md),
-[the current service/data-flow review](speech-automatic-background-design-2026-11-09.md),
-and [the November 15 correction and validation record](acceptance/automatic-and-therapy-timer-2026-11-15.md).
+Native fixture checks establish packaged-model consistency; policy checks establish confirmation/priority behavior. Neither establishes accuracy in this user's room, wrist position, hearing-aid reception or battery life. Check real TV, conversation, background noise and quiet separately and record mistakes before claiming physical acceptance.

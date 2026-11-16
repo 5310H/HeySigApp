@@ -35,7 +35,8 @@ open class SpeechAutomaticService: Service() {
     @Volatile private var rms:Double?=null
     @Volatile private var analysisCpuNanos=0L
     @Volatile private var analysisDetail=""
-    private val head by lazy { SpeechSeparationDetector.load(this) }
+    private val head by lazy { CombinedSoundAnalyzer(this) }
+    private val memory by lazy { AutomaticMemoryStore(this) }
     private fun safety()=NoiseSafety(microphoneSession=!closed && running===this,
         manualOverride=runtime.sleepRoutine.state.override,
         sleeping=runtime.sleepRoutine.state.mode!=com.heysig.sleep.SleepMode.AWAKE || runtime.sleepRoutine.state.pending,
@@ -45,11 +46,11 @@ open class SpeechAutomaticService: Service() {
     private val audio by lazy { EnvironmentAudio(this,{ !closed && safety().blocked()==null && SystemClock.elapsedRealtime()>=settleUntil },
         { cancel -> MicrophoneLease.acquire(cancel) },{ MicrophoneLease.release() },observeEvidence={ pcm,features,frames ->
             evidence=detect(pcm,features,frames)
-            rms=NoiseAccumulator(16000,3).apply { add(pcm,pcm.size) }.measurement().rmsDbfs
+            rms=NoiseAccumulator(16000,10).apply { add(pcm,pcm.size) }.measurement().rmsDbfs
         },observeInferenceCpu={ analysisCpuNanos=it },microphoneSession={ !closed && running===this }) }
     var detail="Starting speech-aware Automatic"; private set
-    protected open fun detect(pcm:ShortArray,features:DoubleArray?,frames:List<Map<String,Double>>)=head.classify(pcm,features,frames).also {
-        analysisDetail=head.latestDiagnostics
+    protected open fun detect(pcm:ShortArray,features:DoubleArray?,frames:List<Map<String,Double>>)=head.classify(pcm,features,frames,request.settings) { closed || safety().blocked()!=null }.also {
+        analysisDetail=head.detail
     }
     var samples=0;private set
     var cpuNanos=0L;private set
@@ -101,7 +102,7 @@ open class SpeechAutomaticService: Service() {
         } catch(e:Exception) { finish(e.message ?: "Could not start Automatic") }
         return START_NOT_STICKY
     }
-    private fun reset(why:String) { state=state.copy(severity=null,count=0,lastCapture=null);latest=MaskingEvidence();proposal=null;detail=why }
+    private fun reset(why:String) { state=state.copy(severity=null,count=0,lastCapture=null,candidateTarget=null);latest=MaskingEvidence();proposal=null;detail=why }
     private val tick=object:Runnable {
         override fun run() {
             if(closed) return
@@ -131,7 +132,7 @@ open class SpeechAutomaticService: Service() {
             if(safety().blocked()!=null) { audio.stop();reset(if(ownsPlayback) "Sending program change" else "Paused for speech or manual control; checking again afterward") }
             else if(!audio.busy() && now>=nextAt && now>=settleUntil) {
                 evidence=MaskingEvidence();rms=null
-                audio.sample(3) { result,error,capturedAt -> handler.post {
+                audio.sample(10) { result,error,capturedAt -> handler.post {
                     if(closed) return@post
                     nextAt=SystemClock.elapsedRealtime()+request.settings.waitSeconds.coerceAtLeast(10)*1000L
                     if(result==null || error!=null || safety().blocked()!=null) {
@@ -157,11 +158,17 @@ open class SpeechAutomaticService: Service() {
     }
     private fun watchStatus()=org.json.JSONObject().put("text",summary()).put("program",runtime.requested.program ?: 0).put("pending",ownsPlayback)
         .put("waitSeconds",request.settings.waitSeconds.coerceAtLeast(10))
+        .put("noiseBoundaries",org.json.JSONArray(request.settings.boundaries)).put("noiseMargin",request.settings.margin)
         .put("captureAllowed",watchCaptureAllowed())
     private fun acceptEvidence(capturedAt:Long) {
+        val source=if(watchMode) "watch" else "phone"
+        val scope=AutomaticMemoryStore.scope(source,request.fitting)
+        val remembered=memory.recall(scope,latest.soundContext)
+        latest=CombinedAutomatic.corrected(latest,remembered)
+        AutomaticMemoryStore.observe(source,request.fitting,latest.soundContext,latest.scene ?: AutomaticScene.UNKNOWN)
         val decision=observeMasking(state,latest,capturedAt,SystemClock.elapsedRealtime(),request.settings,request.choices,safety(),runtime.requested.program)
         state=decision.state;proposal=decision.proposed
-        detail="${latest.severity.label}. ${decision.reason}."
+        detail="${latest.scene?.label ?: latest.severity.label}. ${decision.reason}."
         decision.proposed?.let { target ->
             val token=state.token
             ownsPlayback=true;settleUntil=Long.MAX_VALUE
@@ -179,10 +186,10 @@ open class SpeechAutomaticService: Service() {
     }
     private fun label(slot:Int?)=runtime.fitting?.programs?.find { it.slot==slot }?.name ?: "Unassigned"
     fun summary()=buildString {
-        append("Speech-aware Automatic On\nMicrophone: ${if(watchMode) "watch" else "phone"}.\n$detail")
-        if(request.choices.watchingTv) append("\nWatching TV: clear speech uses ${label(request.choices.television)}; partly masked uses ${label(request.choices.noisy)}; heavily masked uses ${label(request.choices.veryNoisy)}; quiet uses ${label(request.choices.everyday)}. This is your listening choice, not TV recognition.")
+        append("Automatic · TV and noise On\nMicrophone: ${if(watchMode) "watch" else "phone"}.\n$detail")
+        if(request.choices.watchingTv) append("\nWatching TV: clear speech uses ${label(request.choices.television)}; partly masked uses ${label(request.choices.noisy)}; heavily masked uses ${label(request.choices.veryNoisy)}; quiet uses ${label(request.choices.everyday)}. This optional preference applies to clear sound; TV recognition also runs independently.")
         append("\nSound type: ${latest.soundType.label}. Masking: ${latest.severity.label}.")
-        val considered=request.choices.target(latest.severity)
+        val considered=request.choices.target(latest)
         append("\nProgram considered: ${if(considered!=null) label(considered) else "keep current program"}.")
         if(ownsPlayback) append("\nProgram request in progress: ${label(state.pending)}.")
         append("\nLast program requested: ${label(runtime.requested.program)}.")

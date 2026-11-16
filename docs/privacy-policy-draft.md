@@ -44,7 +44,11 @@ write recordings or upload noise audio. Stop or leave the app to stop capture.
 Calibration saves 18 relative level numbers and microphone/capture configuration
 locally when you save noise settings. Unfinished calibration stays in memory.
 Automatic preview simulates decisions and cooldown without sending commands.
-Automatic program switching remains locked pending physical acceptance.
+The older six-scene tools retain their existing gates. Normal TV/noise Automatic is separately enabled by explicit user consent before physical acceptance; it can make live program changes.
+
+Normal TV/noise Automatic uses ten-second local microphone checks and may continue with the screen locked under a visible notification with Off. Each session is bounded to eight hours and never restarts itself. Audio is processed in memory and discarded; no noise recording or transcript is saved or uploaded. The watch alternative sends scene estimates and a compact 40-number summary to the selected phone over Wear OS Data Layer, potentially through Google servers. New explanations precede this use.
+
+Teach Automatic is optional. Only review plus Remember saves a correction: up to 24 compact sound summaries, chosen categories, model/fitting/source scope and timestamps in private phone storage. Memories can be disabled or forgotten independently of fitting. The latest unsaved summary is eligible for review for two minutes. No continuous user-audio training or transcript history is added. Local export includes these corrections; a chosen storage provider may upload that file. Delete local app data removes them from this device; exported copies require separate deletion.
 
 Environmental monitoring is a separate, explicitly requested foreground-only
 phone/watch feature. Bounded PCM is processed locally with a bundled experimental

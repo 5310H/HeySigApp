@@ -1,67 +1,10 @@
-# Using Automatic in HeySig
+# Noise quick start
 
-Automatic chooses your hearing-aid program from how much other sound masks speech.
-See [expected choices, timing and field checks](how-automatic-noise-works.md) for current behavior.
+1. Open Noise → Choose programs. Assign Universal, Noisy, Very Noisy and TV, then save.
+2. Leave Watching TV off to test source detection. It remains an optional preference for clear sound during a TV session.
+3. Tap Off to start Automatic and read the microphone explanation. Green On and notification Off stop it.
+4. Allow repeated ten-second checks and the saved cooldown. Noisy/Very Noisy take priority over TV. Quiet/normal return needs fresh confirmation; uncertain means hold.
+5. For diagnosis, stop Automatic and use Check TV and noise at your normal listening position. This sends no hearing-aid command.
+6. To remember a mistake, open Teach Automatic within two minutes, review the right category and tap Remember. Disable or Forget if needed.
 
-## First, choose your programs
-
-First time: on **Home**, choose your usual daytime program.
-
-Then open **Noise → Choose programs**.
-
-Choose **Universal**, **Noisy** and **Very Noisy** from your own program names.
-Use **Keep current program** for any situation you want left alone. Choices save
-with **Save speech program choices**, or when you turn Automatic on here. The six older sound-level choices stay unchanged.
-
-You do not need to do the optional sound setup to start.
-
-## Turn it on
-
-On the Noise screen, tap the red **Off** button. It turns green and says **On**.
-
-The first time, follow the microphone and notification prompts. HeySig needs the
-microphone to check surrounding sound. Each check is short. Noise measurement
-uses sound in memory, then discards it; it does not save or upload recordings.
-
-Keep the phone where your hearing aids can hear its program-change tones.
-You can lock the screen or use another app while Automatic runs.
-
-## When the room gets quieter
-
-HeySig waits before changing back, so it does not keep switching programs.
-The saved cooldown (normally 60 seconds) is followed by fresh agreeing checks.
-The screen shows the wait and the program being checked. This is not an exact deadline.
-With Watching TV off, quiet or clear speech returns to Universal. With Watching TV
-on, clear speech selects TV and quiet selects Universal; noise severity still
-selects Noisy or Very Noisy.
-
-The graph rises when sound gets louder and falls when it gets quieter.
-
-## Turn it off
-
-Tap the green **On** button. It turns red and says **Off**.
-
-If you are on another screen, swipe down from the top of the phone. Find the
-HeySig message and tap **Off**.
-
-Choosing a program yourself also stops Automatic. Turn Automatic on again when
-you want it. It stops after 8 hours and does not restart by itself.
-
-Therapy stays under your control. Choose your usual daytime program after
-Therapy before turning Automatic on again.
-
-## If you need help
-
-Tap **How to use** on the Noise screen for these steps.
-
-If it stays on a noisy program, check that you chose a Universal program.
-Uncertain checks keep the current program; this experimental model can make mistakes.
-The phone's position and nearby voices or music can affect its sound checks.
-The screen reports the program sent by HeySig; it cannot confirm that the aids
-received it.
-
-## Try the new speech and noise check
-
-Open **Noise → Check speech and noise** to see what HeySig thinks it hears.
-This stops Automatic and does not change your aids. Keep the screen open.
-See [the short try-out guide](speech-and-noise-tryout.md).
+See [expected behavior and limitations](how-automatic-noise-works.md). Manual control and Therapy stop Automatic; calibration and memories are optional.

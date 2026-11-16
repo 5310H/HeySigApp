@@ -8,7 +8,9 @@ enum class MaskingSeverity(val label: String) {
 data class MaskingEvidence(val severity: MaskingSeverity=MaskingSeverity.UNKNOWN,
     val soundType: SoundType=SoundType.UNKNOWN, val score: Double=0.0, val reason: String="Uncertain sound; keep current program",
     /** Not a program decision: a separate neural absence-of-speech check must agree. */
-    val quietCandidate:Boolean=false)
+    val quietCandidate:Boolean=false,
+    val scene:AutomaticScene?=null,
+    val soundContext:AutomaticSoundContext?=null)
 
 /** No calibration, enrollment, transcript or wearer learning. Fixed, development-trained weights. */
 class SpeechMaskingHead private constructor(private val bias: DoubleArray,private val weights: List<DoubleArray>) {
@@ -141,33 +143,42 @@ data class MaskingChoices(val everyday:Int?,val noisy:Int?,val veryNoisy:Int?,
         MaskingSeverity.HEAVY -> veryNoisy
         MaskingSeverity.UNKNOWN -> null
     }
+    fun target(evidence:MaskingEvidence):Int?=when(evidence.scene) {
+        null -> target(evidence.severity)
+        AutomaticScene.VERY_NOISY -> veryNoisy
+        AutomaticScene.NOISY -> noisy
+        AutomaticScene.TV -> television
+        AutomaticScene.NORMAL -> if(watchingTv && evidence.severity!=MaskingSeverity.QUIET) television else everyday
+        AutomaticScene.UNKNOWN -> null
+    }
 }
 data class MaskingState(val severity:MaskingSeverity?=null,val count:Int=0,val lastCapture:Long?=null,
-    val lastSuccess:Long?=null,val pending:Int?=null,val token:Long=0,val halted:Boolean=false)
+    val lastSuccess:Long?=null,val pending:Int?=null,val token:Long=0,val halted:Boolean=false,val candidateTarget:Int?=null)
 data class MaskingDecision(val state:MaskingState,val proposed:Int?=null,val reason:String)
 
 /** Pure preview/live policy. Completion/dispatch is owned by the existing validated executor. */
 fun observeMasking(previous:MaskingState,evidence:MaskingEvidence,capturedAt:Long,deliveredAt:Long,
                    settings:NoiseSettings,choices:MaskingChoices,safety:NoiseSafety,lastRequested:Int?):MaskingDecision {
-    fun hold(why:String)=MaskingDecision(previous.copy(severity=null,count=0,lastCapture=null),reason=why)
+    fun hold(why:String)=MaskingDecision(previous.copy(severity=null,count=0,lastCapture=null,candidateTarget=null),reason=why)
     safety.blocked()?.let { return hold(it) }
     if(lastRequested==null) return hold("Choose a daytime program first")
     if(lastRequested==settings.sleepProgram || lastRequested in safety.protectedPrograms) return hold("Therapy has priority")
     if(previous.halted || previous.pending!=null) return hold("Previous command unresolved; restart explicitly")
+    if(evidence.scene?.matches(evidence.severity)==false) return hold("Contradictory TV/noise evidence")
     if(!evidence.score.isFinite() || evidence.score !in 0.0..1.0 ||
         (evidence.severity !in listOf(MaskingSeverity.UNKNOWN,MaskingSeverity.QUIET) && evidence.score<.65)) return hold("Invalid or weak masking evidence")
     if(!isFreshNoiseSample(capturedAt,deliveredAt,settings.freshnessSeconds) || previous.lastCapture?.let { capturedAt<=it }==true) return hold("Delayed or repeated sample; checking again")
     if(previous.lastSuccess?.let { deliveredAt<it || deliveredAt-it<settings.cooldownSeconds*1000L }==true) return hold("Waiting for your cooldown; confirmations cleared")
-    val target=choices.target(evidence.severity) ?: return hold(if(evidence.severity==MaskingSeverity.UNKNOWN) evidence.reason else "No program chosen for this situation; keeping current program")
+    val target=choices.target(evidence) ?: return hold(if(evidence.severity==MaskingSeverity.UNKNOWN) evidence.reason else "No program chosen for this situation; keeping current program")
     if(target==settings.sleepProgram || target in safety.protectedPrograms) return hold("Therapy stays under manual control")
     val fresh=previous.lastCapture?.let { capturedAt-it<=settings.freshnessSeconds*1000L }==true
     // Quiet and clear speech can agree on Universal without identical labels.
     // Never merge confirmations across different targets (including TV).
     val universalReturn=target==choices.everyday && evidence.severity in listOf(MaskingSeverity.QUIET,MaskingSeverity.CLEAR)
     val needed=if(universalReturn) 2 else maxOf(2,settings.confirmations)
-    val sameTarget=previous.severity?.let { choices.target(it)==target }==true
+    val sameTarget=if(previous.candidateTarget!=null) previous.candidateTarget==target else previous.severity?.let { choices.target(it)==target }==true
     val count=if(fresh && sameTarget) minOf(needed,previous.count+1) else 1
-    val next=previous.copy(severity=evidence.severity,count=count,lastCapture=capturedAt)
+    val next=previous.copy(severity=evidence.severity,count=count,lastCapture=capturedAt,candidateTarget=target)
     if(count<needed) return MaskingDecision(next,reason="Checking again: $count of $needed")
     if(target==lastRequested) return MaskingDecision(next,reason="Current program already matches")
     require(previous.token<Long.MAX_VALUE)

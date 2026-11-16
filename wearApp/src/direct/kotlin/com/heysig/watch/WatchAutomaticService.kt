@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.os.*
-import com.heysig.app.SpeechSeparationDetector
+import com.heysig.app.CombinedSoundAnalyzer
 import com.heysig.audio.EnvironmentAudio
 import com.heysig.noise.*
 import org.json.JSONObject
@@ -29,7 +29,8 @@ class WatchAutomaticService:Service() {
     val sentSamples get()=sequence
     private var wakeLock:PowerManager.WakeLock?=null
     private val client by lazy { WatchAutomaticClient(this) { why -> finish(why) } }
-    private val detector by lazy { SpeechSeparationDetector.load(this) }
+    private val detector by lazy { CombinedSoundAnalyzer(this) }
+    private var noiseSettings=NoiseSettings()
     @Volatile private var evidence=MaskingEvidence()
     @Volatile private var rms=-120.0
     @Volatile var samples=0;private set
@@ -38,8 +39,8 @@ class WatchAutomaticService:Service() {
     private var phoneStatus=""
     private val audio by lazy { EnvironmentAudio(this,{ !closed && connected && notificationSeen },
         observeEvidence={ pcm,pool,frames ->
-            evidence=detector.classify(pcm,pool,frames)
-            rms=NoiseAccumulator(16000,3).apply { add(pcm,pcm.size) }.measurement().rmsDbfs
+            evidence=detector.classify(pcm,pool,frames,noiseSettings) { closed }
+            rms=NoiseAccumulator(16000,10).apply { add(pcm,pcm.size) }.measurement().rmsDbfs
         },observeInferenceCpu={ cpuNanos+=it },microphoneSession={ !closed && running===this }) }
     val microphoneBusy get()=audio.busy()
     override fun onBind(intent:Intent?)=null
@@ -74,6 +75,9 @@ class WatchAutomaticService:Service() {
         if(!reply.optBoolean("active",false)) { finish(reply.optString("text","Phone Automatic stopped"));return false }
         check(reply.getString("profile")==WatchAutomaticProfile.ID)
         waitSeconds=reply.getInt("waitSeconds").also { require(it in 10..300) }
+        val boundaries=reply.getJSONArray("noiseBoundaries");require(boundaries.length()==5)
+        noiseSettings=NoiseSettings(boundaries=(0 until 5).map { boundaries.getDouble(it) },margin=reply.getDouble("noiseMargin"))
+            .also { it.validate((1..6).toSet()) }
         lastContact=SystemClock.elapsedRealtime();phoneStatus=reply.optString("text")
         return true
     }
@@ -92,14 +96,14 @@ class WatchAutomaticService:Service() {
                 else -> null
             }
             if(why!=null) { finish(why);return }
-            if(present && connected && !pendingRpc && !audio.busy() && (now>=nextCapture || now-lastContact>=10_000)) {
+            if(present && connected && !pendingRpc && ((!audio.busy() && now>=nextCapture) || now-lastContact>=10_000)) {
                 pendingRpc=true
                 client.request("status") { reply ->
                     if(closed) return@request
                     pendingRpc=false
                     if(accept(reply)) {
-                        if(SystemClock.elapsedRealtime()>=nextCapture && reply.optBoolean("captureAllowed",false)) capture()
-                        else detail=if(reply.optBoolean("captureAllowed",false)) "Microphone idle between checks" else "Paused for phone audio, settling or manual priority"
+                        if(!audio.busy() && SystemClock.elapsedRealtime()>=nextCapture && reply.optBoolean("captureAllowed",false)) capture()
+                        else detail=if(audio.busy()) "Analyzing ten-second TV and noise check" else if(reply.optBoolean("captureAllowed",false)) "Microphone idle between checks" else "Paused for phone audio, settling or manual priority"
                         publish()
                     }
                 }
@@ -109,8 +113,8 @@ class WatchAutomaticService:Service() {
     }
     private fun capture() {
         if(closed || audio.busy()) return
-        evidence=MaskingEvidence();detail="Watch microphone active · three seconds";publish()
-        audio.sample(3) { result,error,capturedAt -> handler.post {
+        evidence=MaskingEvidence();detail="Watch microphone active · ten seconds";publish()
+        audio.sample(10) { result,error,capturedAt -> handler.post {
             if(closed) return@post
             if(result==null || error!=null) { finish(error ?: "Watch microphone unavailable");return@post }
             samples++;nextCapture=SystemClock.elapsedRealtime()+waitSeconds*1000L
@@ -125,6 +129,8 @@ class WatchAutomaticService:Service() {
                 val body=JSONObject().put("profile",WatchAutomaticProfile.ID).put("sequence",sequence)
                     .put("ageMillis",age).put("severity",value.severity.name).put("type",value.soundType.name)
                     .put("score",value.score).put("rmsDbfs",level)
+                    .put("scene",(value.scene ?: AutomaticScene.UNKNOWN).name)
+                    .put("context",value.soundContext?.let { org.json.JSONArray(it.values) } ?: JSONObject.NULL)
                 client.request("sample",JSONObject().put("id",id).put("token",lease.getString("token")).put("body",body)) sampleReply@{ reply ->
                     if(closed) return@sampleReply
                     pendingRpc=false

@@ -93,6 +93,12 @@ class WatchAutomaticAcceptance:Instrumentation() {
                         val body=JSONObject().put("profile",WatchAutomaticProfile.ID).put("sequence",sequence++)
                             .put("ageMillis",SystemClock.elapsedRealtime()-captured).put("severity",severity.name).put("type","SPEECH")
                             .put("score",if(severity==MaskingSeverity.QUIET) 0.0 else .9).put("rmsDbfs",-35.0)
+                            .put("scene",when(severity) {
+                                MaskingSeverity.MODERATE -> AutomaticScene.NOISY
+                                MaskingSeverity.HEAVY -> AutomaticScene.VERY_NOISY
+                                MaskingSeverity.QUIET,MaskingSeverity.CLEAR -> AutomaticScene.NORMAL
+                                MaskingSeverity.UNKNOWN -> AutomaticScene.UNKNOWN
+                            }.name).put("context",JSONObject.NULL)
                         rpc { paired.request("sample",JSONObject().put("id",id).put("token",lease.getString("token")).put("body",body),it) }
                     }
                     for((severity,program) in listOf(MaskingSeverity.MODERATE to 2,MaskingSeverity.QUIET to 1,MaskingSeverity.HEAVY to 3)) {

@@ -1,0 +1,13 @@
+import java.security.MessageDigest
+import groovy.json.JsonSlurper
+def verifyTelevision = tasks.register('verifyTelevision') {
+    def directory=rootProject.file('audioAndroid/src/main/assets/television')
+    inputs.dir(directory)
+    doLast {
+        def pins=new JsonSlurper().parse(new File(directory,'integrity.json'))
+        assert MessageDigest.getInstance('SHA-256').digest(new File(directory,'television-head.txt').bytes).encodeHex().toString()==pins.headSha256: 'Unexpected TV head'
+        assert new File(directory,'NOTICE').isFile()
+        assert new File(directory,'sources.json').isFile()
+    }
+}
+tasks.named('preBuild') { dependsOn(verifyTelevision) }

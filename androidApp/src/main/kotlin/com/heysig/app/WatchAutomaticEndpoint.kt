@@ -74,7 +74,11 @@ internal class WatchAutomaticEndpoint(private val context:Context,private val no
                     val body=request.getJSONObject("body")
                     val (value,capturedAt)=samples.accept(node,session,body.getString("profile"),body.getLong("sequence"),
                         ageBound,lastContact,body.getString("severity"),body.getString("type"),
-                        body.getDouble("score"),body.getDouble("rmsDbfs"))
+                        body.getDouble("score"),body.getDouble("rmsDbfs"),body.getString("scene"),
+                        if(body.isNull("context")) null else body.getJSONArray("context").let { vector ->
+                            require(vector.length()==40) { "Invalid watch sound context" }
+                            (0 until vector.length()).map { vector.getDouble(it) }
+                        })
                     evidence(value,capturedAt,body.getDouble("rmsDbfs"))
                     reply(status().put("active",!closed))
                 }

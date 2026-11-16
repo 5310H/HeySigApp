@@ -1,0 +1,656 @@
+{
+  "encoderSha256": "b2fc8fc3ff9c960bde60b5fea71335d4cb2a35c4d1b011c3a80927fd64d8a2e4",
+  "recordings": [
+    {
+      "id": "tv-735222",
+      "file": "735222.mp3",
+      "author": "milcahrawr",
+      "group": "author:milcahrawr",
+      "partition": "development",
+      "reference": "TV",
+      "license": "CC0-1.0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/milcahrawr/sounds/735222/",
+      "audioSource": "https://cdn.freesound.org/previews/735/735222_11995365-hq.mp3",
+      "sha256": "9cf2dc38cede21ad504153feeeba0d1d859bacc4ae53e7b773e124136dd7a3f0",
+      "offsets": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control"
+    },
+    {
+      "id": "tv-735844",
+      "file": "735844.mp3",
+      "author": "milcahrawr",
+      "group": "author:milcahrawr",
+      "partition": "development",
+      "reference": "TV",
+      "license": "CC0-1.0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/milcahrawr/sounds/735844/",
+      "audioSource": "https://cdn.freesound.org/previews/735/735844_11995365-hq.mp3",
+      "sha256": "559e7d579423b4551dddc0dd8333430a1c5f101478b4e817db8947373ab6d5ab",
+      "offsets": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control"
+    },
+    {
+      "id": "tv-340020",
+      "file": "340020.mp3",
+      "author": "IESP",
+      "group": "author:IESP",
+      "partition": "development",
+      "reference": "TV",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/3.0/",
+      "source": "https://freesound.org/people/IESP/sounds/340020/",
+      "audioSource": "https://cdn.freesound.org/previews/340/340020_5984982-hq.mp3",
+      "sha256": "a8a113243d52e024eaa757b872b503ff51377d1f9b1c5ff3c9ce7af268e948d0",
+      "offsets": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control"
+    },
+    {
+      "id": "tv-875353",
+      "file": "875353.mp3",
+      "author": "milcahrawr",
+      "group": "author:milcahrawr",
+      "partition": "development",
+      "reference": "TV",
+      "license": "CC0-1.0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/milcahrawr/sounds/875353/",
+      "audioSource": "https://cdn.freesound.org/previews/875/875353_11995365-hq.mp3",
+      "sha256": "7c804a5c0b75c0e02dce0515e0b2806cfe8fcf09671140cd9fb6a9e0b13b4bbe",
+      "offsets": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control"
+    },
+    {
+      "id": "tv-19554",
+      "file": "19554.mp3",
+      "author": "gezortenplotz",
+      "group": "author:gezortenplotz",
+      "partition": "validation",
+      "reference": "TV",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/3.0/",
+      "source": "https://freesound.org/people/gezortenplotz/sounds/19554/",
+      "audioSource": "https://cdn.freesound.org/previews/19/19554_11536-hq.mp3",
+      "sha256": "86a7a9e0ca09fe7491983cd5f7e274a74de636b535fb33165be969cd1303696c",
+      "offsets": [
+        0,
+        10
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control"
+    },
+    {
+      "id": "tv-475477",
+      "file": "475477.mp3",
+      "author": "o_ciz",
+      "group": "author:o_ciz",
+      "partition": "development",
+      "reference": "TV",
+      "license": "CC0-1.0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/o_ciz/sounds/475477/",
+      "audioSource": "https://cdn.freesound.org/previews/475/475477_7009965-hq.mp3",
+      "sha256": "c8d3410c1535ca03d72a4624bf762c4a2ae99e69e29ef5f64def1c72a89d55b5",
+      "offsets": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control; expanded development after initial missed-TV result, no longer validation"
+    },
+    {
+      "id": "tv-490749",
+      "file": "490749.mp3",
+      "author": "Jordishaw",
+      "group": "author:Jordishaw",
+      "partition": "validation",
+      "reference": "TV",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://freesound.org/people/Jordishaw/sounds/490749/",
+      "audioSource": "https://cdn.freesound.org/previews/490/490749_9669368-hq.mp3",
+      "sha256": "ba4bfac593f04a44892e8057489b777eee67b0c15898e0aa7d4401cdf3dd1186",
+      "offsets": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control"
+    },
+    {
+      "id": "tv-687036",
+      "file": "687036.mp3",
+      "author": "monkeywrench28",
+      "group": "author:monkeywrench28",
+      "partition": "validation",
+      "reference": "OTHER",
+      "license": "CC0-1.0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/monkeywrench28/sounds/687036/",
+      "audioSource": "https://cdn.freesound.org/previews/687/687036_10316841-hq.mp3",
+      "sha256": "423be123f9e21e6d5ceab6af80cbe504fe499cbc602f71aa5472f84bd328414b",
+      "offsets": [
+        0
+      ],
+      "referenceBasis": "Uploader-described TV recording or processed public-domain TV proxy; piano source is a negative control"
+    },
+    {
+      "id": "fs-260121",
+      "file": "260121.mp3",
+      "author": "SpliceSound",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260121/",
+      "sha256": "b0b08a216892e874679d4afca0abc8857a46261728a93e62a8c189fc28c5d766",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "OTHER",
+      "originalScene": "SMALL_GROUP",
+      "group": "author:SpliceSound",
+      "offsets": [
+        0,
+        10
+      ]
+    },
+    {
+      "id": "fs-260123",
+      "file": "260123.mp3",
+      "author": "SpliceSound",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260123/",
+      "sha256": "b564989005cc845679fabe4bed1f67241e32efb1a303a5d1bb90cfddc3eaa110",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "OTHER",
+      "originalScene": "LARGE_GROUP",
+      "group": "author:SpliceSound",
+      "offsets": [
+        0,
+        10
+      ]
+    },
+    {
+      "id": "fs-260124",
+      "file": "260124.mp3",
+      "author": "SpliceSound",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/SpliceSound/sounds/260124/",
+      "sha256": "0e45102d17749ee2af11f02b4d7878ceb3326ef799984d88e3010e5c64d86011",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "OTHER",
+      "originalScene": "CONVERSATION",
+      "group": "author:SpliceSound",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fs-533833",
+      "file": "533833.mp3",
+      "author": "Angellu16",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/Angellu16/sounds/533833/",
+      "sha256": "2333a18f1d6ea0526d6021d4ce92efa7cfb356512e2d2352935061816cced16e",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "OTHER",
+      "originalScene": "NON_SPEECH_NOISE",
+      "group": "author:Angellu16",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fs-565535",
+      "file": "565535.mp3",
+      "author": "visionear",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/visionear/sounds/565535/",
+      "sha256": "00b64b3566e5596f8c4905d95dc09212bc21a69ff62d1f02db2a3b0a145c8332",
+      "referenceBasis": "creator description; not independent annotation",
+      "reference": "OTHER",
+      "originalScene": "QUIET",
+      "group": "author:visionear",
+      "offsets": [
+        0,
+        10
+      ]
+    },
+    {
+      "id": "fsd-174229",
+      "file": "fsd-174229.wav",
+      "author": "cognito perceptu",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/cognito%20perceptu/sounds/174229/",
+      "sha256": "751a3c27a186ca150a9d4218d68f1c53f4fc55fbef657e7e39e77aa23a590817",
+      "referenceBasis": "Creator description; not independent annotation: Meal served to about 80 people, jumbled voices and plates/utensils",
+      "reference": "OTHER",
+      "originalScene": "RESTAURANT",
+      "group": "author:cognito perceptu",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-212187",
+      "file": "fsd-212187.wav",
+      "author": "blaukreuz",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/blaukreuz/sounds/212187/",
+      "sha256": "793e302de8bcae9ecc12d82d495a366e5d3be49e9df105c430cb5811cd5cc4a6",
+      "referenceBasis": "Creator description; not independent annotation: Mid-range New York street traffic",
+      "reference": "OTHER",
+      "originalScene": "NON_SPEECH_NOISE",
+      "group": "author:blaukreuz",
+      "offsets": [
+        0,
+        10
+      ]
+    },
+    {
+      "id": "fsd-235249",
+      "file": "fsd-235249.wav",
+      "author": "jaredpass24",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/jaredpass24/sounds/235249/",
+      "sha256": "f9bd7b1bfd56d68e68465fa19ec50fe464238fca8356f7266823b867079bfc8e",
+      "referenceBasis": "Creator description; not independent annotation: Large printer printing in quiet room",
+      "reference": "OTHER",
+      "originalScene": "NON_SPEECH_NOISE",
+      "group": "author:jaredpass24",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-338254",
+      "file": "fsd-338254.wav",
+      "author": "leo153",
+      "partition": "validation",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/leo153/sounds/338254/",
+      "sha256": "82c4543513e96ef99f8d890c35149c171301f8dfe47f44b01a7912f492dee63e",
+      "referenceBasis": "Creator description; not independent annotation: 150 people talking in a theater before a play",
+      "reference": "OTHER",
+      "originalScene": "LARGE_GROUP",
+      "group": "author:leo153",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-348830",
+      "file": "fsd-348830.wav",
+      "author": "Yoyodaman234",
+      "partition": "validation",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/Yoyodaman234/sounds/348830/",
+      "sha256": "3fca5f34437e64f24eb29200144940c776868930fc89b659a9ad21f72c909f72",
+      "referenceBasis": "Creator description; not independent annotation: Quiet Forest Ambience by creator; slowly dripping water, provisional reference",
+      "reference": "OTHER",
+      "originalScene": "QUIET",
+      "group": "author:Yoyodaman234",
+      "offsets": [
+        0,
+        10
+      ]
+    },
+    {
+      "id": "fsd-360702",
+      "file": "fsd-360702.wav",
+      "author": "eguobyte",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/eguobyte/sounds/360702/",
+      "sha256": "8d0a6d9c2004c1185c047383e9c52aaa3d0573e1fcda916709d6cffbd3c3872f",
+      "referenceBasis": "Creator description; not independent annotation: About a thousand people chatting, no distinct dialogue",
+      "reference": "OTHER",
+      "originalScene": "LARGE_GROUP",
+      "group": "author:eguobyte",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-414297",
+      "file": "fsd-414297.wav",
+      "author": "gusgus26",
+      "partition": "validation",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/gusgus26/sounds/414297/",
+      "sha256": "04683e40bd6d4a3e894e906dc671ad50b81e04c854619e8971dd66d35b9ef944",
+      "referenceBasis": "Creator description; not independent annotation: Asian fast food restaurant, cooking and people chatting",
+      "reference": "OTHER",
+      "originalScene": "RESTAURANT",
+      "group": "author:gusgus26",
+      "offsets": [
+        0,
+        10
+      ]
+    },
+    {
+      "id": "fsd-418989",
+      "file": "fsd-418989.wav",
+      "author": "hondajkt",
+      "partition": "validation",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/hondajkt/sounds/418989/",
+      "sha256": "d39b09c51315da58a7581947d88eae47b71fe0f4bbcfe9bc9b2040e3e8baac47",
+      "referenceBasis": "Creator description; not independent annotation: Normal dialogue between a guy and a girl, Indonesian; background music annotated",
+      "reference": "OTHER",
+      "originalScene": "CONVERSATION",
+      "group": "author:hondajkt",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-423267",
+      "file": "fsd-423267.wav",
+      "author": "ANARKYA",
+      "partition": "validation",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/ANARKYA/sounds/423267/",
+      "sha256": "01746441c5e4c01b68c207e2f52be36550c4ad63e86311e53cb7c48c4d35b5e4",
+      "referenceBasis": "Creator description; not independent annotation: Washing machine spinning cycle",
+      "reference": "OTHER",
+      "originalScene": "NON_SPEECH_NOISE",
+      "group": "author:ANARKYA",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-431478",
+      "file": "fsd-431478.wav",
+      "author": "KieranKeegan",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/KieranKeegan/sounds/431478/",
+      "sha256": "775cdf0ce2ffcb1dc20664492866ff8ba9990ec9390cf5d438ade64b4d95d9d2",
+      "referenceBasis": "Creator description; not independent annotation: Lawnmower starting, idling, shutting off",
+      "reference": "OTHER",
+      "originalScene": "NON_SPEECH_NOISE",
+      "group": "author:KieranKeegan",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-50763",
+      "file": "fsd-50763.wav",
+      "author": "RutgerMuller",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/RutgerMuller/sounds/50763/",
+      "sha256": "917d49acbd5aee2473f19e18ccd8d14ca89b51870054efc0baaea2700d286bca",
+      "referenceBasis": "Creator description; not independent annotation: Vacuum cleaner in action",
+      "reference": "OTHER",
+      "originalScene": "NON_SPEECH_NOISE",
+      "group": "author:RutgerMuller",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-62478",
+      "file": "fsd-62478.wav",
+      "author": "bsumusictech",
+      "partition": "validation",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/bsumusictech/sounds/62478/",
+      "sha256": "3492056b2050cf7497c56a8d741e813461ff1bb92225257f4e9cc129d9794bd5",
+      "referenceBasis": "Creator description; not independent annotation: Conversation in lobby during choral-union break",
+      "reference": "OTHER",
+      "originalScene": "LARGE_GROUP",
+      "group": "author:bsumusictech",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "fsd-79669",
+      "file": "fsd-79669.wav",
+      "author": "labailey",
+      "partition": "development",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://freesound.org/people/labailey/sounds/79669/",
+      "sha256": "4d35f2912d085190454cc311735f050f102db40df0f03f343ed27fd5cb599c1b",
+      "referenceBasis": "Creator description; not independent annotation: Two students discussing volleyball in a dorm room",
+      "reference": "OTHER",
+      "originalScene": "CONVERSATION",
+      "group": "author:labailey",
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "id": "ami-ES2002a",
+      "file": "ES2002a.wav",
+      "author": "AMI Project Consortium",
+      "partition": "development",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "sha256": "9921f07830234526a89deace3ac49a393872437c6b36b042afc1e04db417ee5e",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "OTHER",
+      "originalScene": "SMALL_GROUP",
+      "group": "AMI:AMI/ES2002",
+      "offsets": [
+        0,
+        10,
+        20
+      ]
+    },
+    {
+      "id": "ami-ES2003a",
+      "file": "ES2003a.wav",
+      "author": "AMI Project Consortium",
+      "partition": "development",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "sha256": "25b0b38ee0c634d46607e6a8022babeb7f9764bb9787392ad6f47afb3ecfd0de",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "OTHER",
+      "originalScene": "SMALL_GROUP",
+      "group": "AMI:AMI/ES2003",
+      "offsets": [
+        0,
+        10,
+        20
+      ]
+    },
+    {
+      "id": "ami-IS1000a",
+      "file": "IS1000a.wav",
+      "author": "AMI Project Consortium",
+      "partition": "validation",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "sha256": "f2666df21b125f8cea12ea62b31a60f37f6ca34774161c38ebf9912a137f404d",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "OTHER",
+      "originalScene": "SMALL_GROUP",
+      "group": "AMI:AMI/IS1000",
+      "offsets": [
+        0,
+        10,
+        20
+      ]
+    },
+    {
+      "id": "ami-TS3003a",
+      "file": "TS3003a.wav",
+      "author": "AMI Project Consortium",
+      "partition": "validation",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://groups.inf.ed.ac.uk/ami/corpus/",
+      "sha256": "892a7c58a07ab341b34999af36aceba5553c9195285deca21510c863c40477b1",
+      "referenceBasis": "Four participants verified in corpusResources/meetings.xml; scene reference, not an assertion that all four speak in every short window.",
+      "reference": "OTHER",
+      "originalScene": "SMALL_GROUP",
+      "group": "AMI:AMI/TS3003",
+      "offsets": [
+        0,
+        10,
+        20
+      ]
+    },
+    {
+      "id": "tv-268129",
+      "author": "Annerie",
+      "source": "https://freesound.org/people/Annerie/sounds/268129/",
+      "audioSource": "https://cdn.freesound.org/previews/268/268129_5077603-hq.mp3",
+      "licenseUrl": "http://creativecommons.org/licenses/by/3.0/",
+      "file": "268129.mp3",
+      "sha256": "e8ff70f136c399e8e5957497aa53a69729300bfa9830cf4ca662f6ee7745096f",
+      "group": "author:Annerie",
+      "reference": "TV",
+      "partition": "validation",
+      "license": "CC-BY-3.0",
+      "referenceBasis": "Uploader describes actual television in room; new validation author Annerie held outside fitting and selection",
+      "offsets": [
+        0,
+        10
+      ]
+    },
+    {
+      "id": "tv-54928",
+      "author": "LG",
+      "source": "https://freesound.org/people/LG/sounds/54928/",
+      "audioSource": "https://cdn.freesound.org/previews/54/54928_36188-hq.mp3",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "file": "54928.mp3",
+      "sha256": "7be224ece07df0324bd4b06daa5be9178ff142e7aaaff2ffc9ce2f55988cd61d",
+      "group": "author:LG",
+      "reference": "TV",
+      "partition": "development",
+      "license": "CC-BY-4.0",
+      "referenceBasis": "Uploader describes actual television in room; new validation author Annerie held outside fitting and selection",
+      "offsets": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "id": "fs-363712",
+      "reason": "Shorter than ten seconds"
+    },
+    {
+      "id": "fsd-153167",
+      "reason": "Shorter than ten seconds"
+    },
+    {
+      "id": "fsd-156091",
+      "reason": "Shorter than ten seconds"
+    },
+    {
+      "id": "fsd-192347",
+      "reason": "Shorter than ten seconds"
+    },
+    {
+      "id": "fsd-201734",
+      "reason": "Shorter than ten seconds"
+    },
+    {
+      "id": "fsd-389755",
+      "reason": "Shorter than ten seconds"
+    },
+    {
+      "id": "fsd-324783",
+      "reason": "Source mirror unavailable before fit (HTTP 500/502)"
+    },
+    {
+      "id": "fsd-382575",
+      "reason": "Source mirror unavailable before fit (HTTP 500/502)"
+    },
+    {
+      "id": "fsd-152978",
+      "reason": "Source mirror unavailable before fit (HTTP 500/502)"
+    },
+    {
+      "id": "fsd-347537",
+      "reason": "Source mirror unavailable before fit (HTTP 500/502)"
+    },
+    {
+      "id": "fsd-338964",
+      "reason": "Source mirror unavailable before fit (HTTP 500/502)"
+    },
+    {
+      "id": "fsd-401794",
+      "reason": "Source mirror unavailable before fit (HTTP 500/502)"
+    },
+    {
+      "id": "fsd-17118",
+      "reason": "Source mirror unavailable before fit (HTTP 500/502)"
+    }
+  ],
+  "freeze": "Expanded after recorded initial miss: o_ciz moves to development, LG adds distant-TV development coverage. Annerie is a new validation author frozen before fitting. Previously viewed validation remains regression evidence."
+}

@@ -119,7 +119,8 @@ class HomeActivity : Activity() {
     private val soundType: SoundTypeFeature by lazy { SoundTypeFeature(this,{ noiseSafety() },{
         foregroundVoice.close();noise.stop();environment.stop()
         HandsFreeService.running?.control(HandsFreeControl.OFF)
-    },openProgramPreview={ navigate("NoiseSetup") }) }
+    },openProgramPreview={ navigate("NoiseSetup") },soundSettings={ noise.soundCheckSettings() },
+        fittingSignature={ fitting?.programs.orEmpty().sortedBy { it.slot }.joinToString("|") { "${it.slot}:${it.name}" } }) }
     private val environment: EnvironmentFeature by lazy { EnvironmentFeature(this,{ fitting?.programs.orEmpty() },{ requested.program },
         { noiseSafety() },{
             check(!busy.get() && pendingProgram==null && pendingRestore==null && !runtime.fittingWorkflow.pending && !runtime.personalPhrases.awaitingConfirmation && !runtime.sleepRoutine.hasDraft) { "Finish or cancel the current operation first" }
@@ -1036,7 +1037,7 @@ class HomeActivity : Activity() {
             android.app.AlertDialog.Builder(this).setTitle("Environmental model notices").setMessage(notices).setPositiveButton("Close",null).show()
         }
         button("Automatic speech and noise model notices") {
-            val notices=listOf("masking/NOTICE","masking/CC-BY-4.0.txt","separation/NOTICE","separation/COPYING","separation/SOURCE-NOTICES").joinToString("\n\n") { name ->
+            val notices=listOf("masking/NOTICE","masking/CC-BY-4.0.txt","separation/NOTICE","separation/COPYING","separation/SOURCE-NOTICES","television/NOTICE","television/CC-BY-4.0.txt").joinToString("\n\n") { name ->
                 assets.open(name).bufferedReader().use { it.readText() }
             }
             android.app.AlertDialog.Builder(this).setTitle("Automatic model notices").setMessage(notices).setPositiveButton("Close",null).show()
@@ -1056,7 +1057,7 @@ class HomeActivity : Activity() {
         }
         button("Export local app data",!busy.get()) {
             android.app.AlertDialog.Builder(this).setTitle("Export private settings?")
-                .setMessage("The JSON file contains hearing-aid setup, requested settings, noise configuration and retained watch replies. Save it only to a location you trust. A chosen cloud provider may upload it. Pairing secrets are excluded. HeySig cannot delete exported copies.")
+                .setMessage("The JSON file contains hearing-aid setup, requested settings, noise configuration, reviewed Automatic sound summaries and retained watch replies. Save it only to a location you trust. A chosen cloud provider may upload it. Pairing secrets are excluded. HeySig cannot delete exported copies.")
                 .setNegativeButton("Cancel",null).setPositiveButton("Choose location") { _,_ ->
                     if(busy.get() || remoteReply != null) { tell("Wait for the current result before exporting"); return@setPositiveButton }
                     try {
@@ -1064,6 +1065,8 @@ class HomeActivity : Activity() {
                             .put("createdAt",System.currentTimeMillis())
                             .put("settings",JSONObject(prefs.all))
                             .put("noise",JSONObject(getSharedPreferences("heysig-noise-v1",MODE_PRIVATE).all))
+                            .put("automaticChoices",JSONObject(getSharedPreferences("heysig-masking-v1",MODE_PRIVATE).all))
+                            .put("automaticCorrections",JSONObject(getSharedPreferences("heysig-automatic-memory-v1",MODE_PRIVATE).all))
                             .put("environmentVoice",JSONObject(automaticVoicePrefs.all))
                             .put("sleepRoutine",JSONObject(getSharedPreferences("heysig-sleep-v1",MODE_PRIVATE).all))
                             .put("handsFreeChoices",JSONObject(getSharedPreferences("heysig-handsfree",MODE_PRIVATE).all))
@@ -1079,7 +1082,7 @@ class HomeActivity : Activity() {
         }
         button("Delete local app data",!busy.get()) {
             android.app.AlertDialog.Builder(this).setTitle("Delete this device's HeySig data?")
-                .setMessage("Android will close HeySig and erase this app's private data, including fitting, requested settings, saved restoration record, noise configuration, watch selection/history and speech choices, and reset its permissions. You will need Setup again. No command is sent to the aids. Watch, provider and exported copies must be deleted separately.")
+                .setMessage("Android will close HeySig and erase this app's private data, including fitting, requested settings, saved restoration record, noise configuration, watch selection/history, reviewed Automatic corrections and speech choices, and reset its permissions. You will need Setup again. No command is sent to the aids. Watch, provider and exported copies must be deleted separately.")
                 .setNegativeButton("Keep data",null).setPositiveButton("Delete local data") { _,_ ->
                     if(busy.get() || remoteReply != null) { tell("Wait for the current result or Stop before deleting data"); return@setPositiveButton }
                     HandsFreeService.running?.control(HandsFreeControl.END); noise.stop(); disconnectCompanion(); tts?.stop()

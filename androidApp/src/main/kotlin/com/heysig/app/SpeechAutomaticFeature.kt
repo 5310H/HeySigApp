@@ -25,10 +25,13 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
     private val selectors=mutableListOf<Spinner>()
     private var readChoices:(()->MaskingChoices)?=null
     private var renderedFitting:String?=null
+    private val memory by lazy { AutomaticMemoryStore(activity) }
+    fun teach() { SpeechAutomaticService.cancel();memory.review(activity,signature()) { message=it;update() } }
+    fun forgetMemories() { SpeechAutomaticService.cancel();memory.forget(activity) { message=it;update() } }
     fun offStatus():String?=message ?: SpeechAutomaticService.lastStatus.takeIf { it.isNotBlank() }
     fun listeningContext()=if(savedChoices().watchingTv)
-        "Watching TV On: clear speech uses TV; partly masked uses Noisy; heavily masked uses Very Noisy; quiet uses Universal. Change this in Choose programs when your TV session ends."
-        else "Watching TV Off: quiet or clear speech uses Universal; partly masked uses Noisy; heavily masked uses Very Noisy."
+        "Automatic checks TV and noise together. Watching TV preference is On: clear speech also uses TV. Quiet returns to Universal."
+        else "Automatic checks TV and noise together: Normal uses Universal; noise uses Noisy or Very Noisy; recognized TV uses TV."
     private fun signature()=programs().sortedBy { it.slot }.joinToString("|") { "${it.slot}:${it.name}" }
     private fun savedChoices():MaskingChoices {
         val raw=prefs.getString("choices",null)
@@ -60,31 +63,24 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         check(safety().let { it.foreground && it.unlocked && it.audioFree }) { "Keep HeySig open and unlocked, and wait until speech or the current command finishes." }
         check(!activity.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked) { "Unlock the phone to start Automatic" }
         val selected=saveChoices()
-        if(selected.watchingTv && !prefs.getBoolean("tvSeverityDisclosureV2",false)) {
-            AlertDialog.Builder(activity).setTitle("Use Watching TV for Automatic?")
-                .setMessage("You chose Watching TV. Repeated clear speech checks select your saved TV program. Partly masked speech selects Noisy; heavily masked speech selects Very Noisy, even while Watching TV is on. Repeated quiet checks return to Universal. Uncertain sound, including music-only passages, keeps the current program.\n\nThis is your listening choice, not automatic TV recognition. Clear speech heard after quiet can select TV again while Watching TV remains on. Turn Automatic Off, turn Watching TV off in Choose programs and save to resume normal speech-aware choices. Existing cooldown, manual control and Therapy priority still apply. No extra microphone access or recordings are added.")
-                .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
-                    if(prefs.edit().putBoolean("tvSeverityDisclosureV2",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
-                }.show();return
-        }
         val watch=watchSource()
         val watchPrefs=activity.getSharedPreferences("heysig-companion",0)
         val watchNode=if(watch) watchPrefs.getString("node",null) else null
         if(watch) {
             check(watchNode!=null && watchPrefs.getBoolean("foregroundEnabledV1",false)) { "Use Watch connection to select and enable your paired watch first" }
-            if(!prefs.getBoolean("watchAutomaticDisclosureV1",false)) {
+            if(!prefs.getBoolean("watchCombinedDisclosureV1",false)) {
                 AlertDialog.Builder(activity).setTitle("Use the watch microphone for Automatic?")
-                    .setMessage("This phone will accept speech/noise estimates only from your selected watch and can send real hearing-aid program tones, including with the screen locked. The phone microphone stays idle. Next, open Automatic noise on the watch and tap On after its microphone disclosure.\n\nThe watch processes three-second audio windows locally in memory. Only compact estimates, session controls and status cross Google's encrypted Wear OS Data Layer, which may route through Google servers. No audio, cleaned audio or transcripts are transferred or saved by this feature. It cannot identify your intended speaker or measure understanding.\n\nBoth devices show notifications with Off. Off on either, disconnection, manual control, Therapy, changed settings or eight-hour expiry stops Automatic; it never restarts itself. Keep the phone where your aids can hear its tones. Starting this mode stops phone microphone analysis. Battery and wrist-position accuracy need real-world validation.")
+                    .setMessage("Your selected watch analyzes ten-second microphone captures for TV and noise together, then pauses at least ten seconds. The phone microphone stays idle. Open Automatic noise on the watch and tap On after its explanation.\n\nCompact scene estimates and a 40-number sound summary cross Google's encrypted Wear OS Data Layer, which may route through Google servers. Audio and transcripts are never transferred or saved by this feature. Teach Automatic can save up to 24 summaries and categories only after you review and tap Remember; they stay on the phone and can be disabled or forgotten.\n\nAutomatic can send real program-change tones through the phone, including with the screens locked. Both devices show Off notifications. Off, disconnection, manual control, Therapy, changed settings or eight-hour expiry stops the session. Keep the phone where your aids can hear its tones. The model can make mistakes; battery and wrist-position accuracy require physical checks.")
                     .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
-                        if(prefs.edit().putBoolean("watchAutomaticDisclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
+                        if(prefs.edit().putBoolean("watchCombinedDisclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
                     }.show();return
             }
         }
-        if(!watch && !prefs.getBoolean("disclosureV1",false)) {
-            AlertDialog.Builder(activity).setTitle("Turn on speech-aware Automatic?")
-                .setMessage("Automatic sends tones to select your chosen hearing-aid programs. It uses Universal for sustained quiet or speech that stands out, Noisy for partly masked speech, and Very Noisy for heavily masked speech. Uncertain sound or an unassigned choice keeps the current program.\n\nNo calibration, examples or learning period is needed. This experimental model can make mistakes. It cannot identify the person you want to hear or measure how clearly you understand words. Other listening features stop first.\n\nThe microphone checks for three seconds, then pauses for your saved wait time (at least ten seconds). Audio is processed on this phone in memory, then discarded. No recordings, transcripts or listening history are saved or uploaded. Only your program choices and consent are saved. Existing fitting and six sound-level choices stay unchanged.\n\nYou can lock the screen. A HeySig notification has an Off button. Tap Off here or in that notification to stop. Automatic stops after eight hours, on manual control or Therapy, if permissions/notifications are removed, or if the app is stopped. It never restarts by itself.")
+        if(!watch && !prefs.getBoolean("combinedDisclosureV1",false)) {
+            AlertDialog.Builder(activity).setTitle("Turn on Automatic for TV and noise?")
+                .setMessage("Automatic analyzes TV and noise together and sends tones for your saved Universal, Noisy, Very Noisy or TV programs. Strong noise takes priority over TV. Normal sound or quiet returns to Universal. Uncertain sound and unassigned programs hold the current program. Watching TV remains an optional preference for clear speech.\n\nEach capture lasts ten seconds, then pauses for your saved wait time (at least ten seconds) plus processing. The same capture supplies TV evidence and three noise measurements. Audio is processed in memory and discarded; no recording or transcript is saved or uploaded. Teach Automatic can save up to 24 compact summaries and your categories only after you review and tap Remember. You can disable or forget them. No learning period or calibration is required.\n\nThe model can make mistakes and cannot measure your understanding. You may lock the screen. A visible notification offers Off. Off, manual control, Therapy, permission/notification removal, app stop or eight-hour expiry ends the session. It never restarts itself. Other listening features stop first.")
                 .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
-                    if(prefs.edit().putBoolean("disclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
+                    if(prefs.edit().putBoolean("combinedDisclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
                 }.show();return
         }
         if(!watch && activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED) {
@@ -110,7 +106,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         renderedFitting=signature()
         val card=PhoneStyle.card(activity,content)
         if(index!=null) { content.removeView(card);content.addView(card,index) }
-        PhoneStyle.heading(activity,card,"Speech-aware Automatic")
+        PhoneStyle.heading(activity,card,"Automatic · TV and noise")
         fun line(value:String)=TextView(activity).also { it.text=value;PhoneStyle.text(it);it.setPadding(0,8,0,16);card.addView(it) }
         line("Choose the programs Automatic can send to your hearing aids. It checks speech and background noise before changing. No setup recordings or waiting to learn.")
         val available=programs().filterNot { isTherapyProgramName(it.name) }
@@ -132,7 +128,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
             control.text="Watching TV";control.contentDescription="Watching TV. Clear speech uses TV; partly masked uses Noisy; heavily masked uses Very Noisy; quiet uses Universal."
             control.isChecked=saved.watchingTv;control.minHeight=PhoneStyle.dp(activity,48);card.addView(control)
         }
-        line("For a TV session, choose your existing TV program (for example, program 5) and turn Watching TV on. Clear speech uses TV. Partly masked speech uses Noisy and heavily masked speech uses Very Noisy. Quiet returns to Universal after two matching checks. TV can be selected again if speech becomes clear; this can happen during the same TV session. Uncertain checks hold. This does not detect whether a sound comes from a television. Turn Watching TV off and save to resume normal choices.")
+        line("Choose your TV program to enable automatic TV selection. TV recognition runs with Watching TV off. Watching TV is an optional preference that also selects TV for clear speech; turn it off and save when that preference ends. Noisy and Very Noisy take priority; quiet returns to Universal.")
         readChoices={ fun slot(s:Spinner)=available.getOrNull(s.selectedItemPosition-1)?.slot
             MaskingChoices(slot(everyday),slot(noisy),slot(very),slot(television),tvSwitch?.isChecked==true) }
         sourceSwitch=Switch(activity).also { control ->
@@ -153,7 +149,9 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
             update()
         } }
         status=line("").apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
-        line("Speech detection and neural speech/background estimates must agree before a change. If they disagree, your program stays as it is. Return to Universal uses two fresh checks agreeing on that program, including quiet followed by clear speech when Watching TV is off. Other changes use your saved repeated-check count (at least two). The saved cooldown still applies. Watching TV returns to Universal for quiet; clear speech selects TV. Noise severity still selects Noisy or Very Noisy. Manual control and Therapy take priority.")
+        card.addView(Button(activity).apply { text="Teach Automatic";PhoneStyle.action(this);setOnClickListener { teach() } })
+        card.addView(Button(activity).apply { text="Forget remembered corrections";PhoneStyle.action(this);setOnClickListener { forgetMemories() } })
+        line("Remembered corrections: "+memory.book().experiences.size+". Teach Automatic lets you review the latest check and remember its category. Strong noise keeps priority over TV. Universal return uses two fresh matching targets; other changes use your saved repeated-check count (at least two), after cooldown. Manual control and Therapy take priority.")
         line("You may lock the screen while Automatic is On. Keep the phone where your aids can hear its tones. Use the notification Off button to stop. It stops after eight hours. This experimental model can make mistakes; choosing a program yourself stops Automatic.")
         handler.removeCallbacksAndMessages(null);handler.post(refresh);update()
     }

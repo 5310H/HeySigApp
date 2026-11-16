@@ -103,7 +103,7 @@ class SpeechAutomaticAcceptance:Instrumentation() {
             click("Noise");click("Choose programs")
             runOnMainSync {
                 val views=descendants(screen.findViewById(android.R.id.content));val text=views.filterIsInstance<TextView>().map { it.text.toString() }
-                check(text.any { it=="Speech-aware Automatic" } && text.any { it.contains("Universal ·") } && text.any { it.contains("Noisy ·") } && text.any { it.contains("Very Noisy ·") })
+                check(text.any { it=="Automatic · TV and noise" } && text.any { it.contains("Universal ·") } && text.any { it.contains("Noisy ·") } && text.any { it.contains("Very Noisy ·") })
                 check(views.filterIsInstance<Spinner>().count { it.isShown }>=3)
                 check(!SpeechMaskingValidation.qualified() && !EnvironmentReleaseGate.qualified())
             }

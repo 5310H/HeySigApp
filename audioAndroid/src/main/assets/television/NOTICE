@@ -1,0 +1,38 @@
+HeySig experimental TV head, November 16, 2026.
+Fixed logistic coefficients on the existing Apache-2.0 YAMNet encoder; no new runtime or network service. Ten-second mono 16kHz windows, pooled mean/std encoder features, bounded gain normalization; no audio/transcripts bundled. Coefficients distributed under CC BY 4.0 with source attribution below. No source author endorses HeySig.
+Training script: tools/environment/train-television.py in https://github.com/5310H/HeySigApp . Full source partitions, hashes, transformations and license URLs: sources.json. Validation recordings did not fit the coefficients. Previously inspected validation clips are regression evidence, not fresh independent acceptance. This head can confuse conversation and TV and has not passed wearer field acceptance.
+The existing speech/noise models retain their own notices. Coefficient provenance does not establish medical, hearing-aid or TV compatibility.
+
+Source credits (development and evaluation; see partition in sources.json):
+tv-735222: milcahrawr; CC0-1.0; https://freesound.org/people/milcahrawr/sounds/735222/; http://creativecommons.org/publicdomain/zero/1.0/
+tv-735844: milcahrawr; CC0-1.0; https://freesound.org/people/milcahrawr/sounds/735844/; http://creativecommons.org/publicdomain/zero/1.0/
+tv-340020: IESP; CC-BY-3.0; https://freesound.org/people/IESP/sounds/340020/; http://creativecommons.org/licenses/by/3.0/
+tv-875353: milcahrawr; CC0-1.0; https://freesound.org/people/milcahrawr/sounds/875353/; http://creativecommons.org/publicdomain/zero/1.0/
+tv-19554: gezortenplotz; CC-BY-3.0; https://freesound.org/people/gezortenplotz/sounds/19554/; http://creativecommons.org/licenses/by/3.0/
+tv-475477: o_ciz; CC0-1.0; https://freesound.org/people/o_ciz/sounds/475477/; http://creativecommons.org/publicdomain/zero/1.0/
+tv-490749: Jordishaw; CC-BY-3.0; https://freesound.org/people/Jordishaw/sounds/490749/; https://creativecommons.org/licenses/by/4.0/
+tv-687036: monkeywrench28; CC0-1.0; https://freesound.org/people/monkeywrench28/sounds/687036/; http://creativecommons.org/publicdomain/zero/1.0/
+fs-260121: SpliceSound; CC0-1.0; https://freesound.org/people/SpliceSound/sounds/260121/; https://creativecommons.org/publicdomain/zero/1.0/
+fs-260123: SpliceSound; CC0-1.0; https://freesound.org/people/SpliceSound/sounds/260123/; https://creativecommons.org/publicdomain/zero/1.0/
+fs-260124: SpliceSound; CC0-1.0; https://freesound.org/people/SpliceSound/sounds/260124/; https://creativecommons.org/publicdomain/zero/1.0/
+fs-533833: Angellu16; CC0-1.0; https://freesound.org/people/Angellu16/sounds/533833/; https://creativecommons.org/publicdomain/zero/1.0/
+fs-565535: visionear; CC0-1.0; https://freesound.org/people/visionear/sounds/565535/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-174229: cognito perceptu; CC0-1.0; https://freesound.org/people/cognito%20perceptu/sounds/174229/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-212187: blaukreuz; CC0-1.0; https://freesound.org/people/blaukreuz/sounds/212187/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-235249: jaredpass24; CC0-1.0; https://freesound.org/people/jaredpass24/sounds/235249/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-338254: leo153; CC0-1.0; https://freesound.org/people/leo153/sounds/338254/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-348830: Yoyodaman234; CC0-1.0; https://freesound.org/people/Yoyodaman234/sounds/348830/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-360702: eguobyte; CC0-1.0; https://freesound.org/people/eguobyte/sounds/360702/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-414297: gusgus26; CC0-1.0; https://freesound.org/people/gusgus26/sounds/414297/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-418989: hondajkt; CC0-1.0; https://freesound.org/people/hondajkt/sounds/418989/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-423267: ANARKYA; CC0-1.0; https://freesound.org/people/ANARKYA/sounds/423267/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-431478: KieranKeegan; CC0-1.0; https://freesound.org/people/KieranKeegan/sounds/431478/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-50763: RutgerMuller; CC0-1.0; https://freesound.org/people/RutgerMuller/sounds/50763/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-62478: bsumusictech; CC0-1.0; https://freesound.org/people/bsumusictech/sounds/62478/; https://creativecommons.org/publicdomain/zero/1.0/
+fsd-79669: labailey; CC0-1.0; https://freesound.org/people/labailey/sounds/79669/; https://creativecommons.org/publicdomain/zero/1.0/
+ami-ES2002a: AMI Project Consortium; CC-BY-4.0; https://groups.inf.ed.ac.uk/ami/corpus/; https://creativecommons.org/licenses/by/4.0/
+ami-ES2003a: AMI Project Consortium; CC-BY-4.0; https://groups.inf.ed.ac.uk/ami/corpus/; https://creativecommons.org/licenses/by/4.0/
+ami-IS1000a: AMI Project Consortium; CC-BY-4.0; https://groups.inf.ed.ac.uk/ami/corpus/; https://creativecommons.org/licenses/by/4.0/
+ami-TS3003a: AMI Project Consortium; CC-BY-4.0; https://groups.inf.ed.ac.uk/ami/corpus/; https://creativecommons.org/licenses/by/4.0/
+tv-268129: Annerie; CC-BY-3.0; https://freesound.org/people/Annerie/sounds/268129/; http://creativecommons.org/licenses/by/3.0/
+tv-54928: LG; CC-BY-4.0; https://freesound.org/people/LG/sounds/54928/; https://creativecommons.org/licenses/by/4.0/

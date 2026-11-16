@@ -87,3 +87,15 @@ Record any startup failures and short CPU/battery observations honestly; do not
 infer all-day battery, speech understanding, intended-talker identity or aid
 reception. Preserve fitting, saved choices and pre-upgrade preferences.
 See [the working checklist](watch-noise-completion-checklist.md).
+
+## November 16 combined TV/noise and reviewed-memory amendment
+
+Normal Automatic now uses bounded ten-second captures, the full 19-frame YAMNet pooled representation for a fixed local TV head, plus three disjoint three-second original speech/neural reduction analyses. No new recognition service, network inference, runtime permission or aid transport is added. Both phone and watch use the same hash-bound profile. More inference and capture duty need sustained battery/wrist-position checks; no battery qualification is claimed.
+
+Strong Noisy/Very Noisy section majorities take priority over TV. Independently recognized speech-free noise uses saved digital thresholds and margin. Confirmed quiet uses actual measurements; uncertainty never becomes quiet after elapsed time. Target-specific confirmation, cooldown, manual/Therapy priority, pending-token handling, eight-hour expiry and shared validated executor remain.
+
+New versioned phone/watch explanations precede the changed capture/data flow. Phone PCM and transient derived features remain in memory and are erased/discarded. One latest 40-number summary remains in memory for up to two minutes of eligibility. Teach Automatic stops the service and requires review plus Remember before storing any experience. Up to 24 summaries, reviewed categories, fitting/model/source scope and save timestamps persist in private phone preferences; saving enables reuse. Disable retains entries; Forget removes only these entries. No transcript/audio is stored. Fitting/program choices/thresholds are untouched. Local export includes reviewed corrections and warns before choosing a provider; Delete local app data removes them. A user-chosen export provider may upload the exported file.
+
+Watch sends the compact scene/context (40 numbers) over encrypted Wear OS Data Layer, which may route through Google servers; no PCM or transcript is sent. Phone/watch source scopes are separate. Old/new profiles reject each other; both devices require compatible updates. Heartbeats continue during inference. Staleness, lease, source and sequence validation remain in force.
+
+This is an owner-authorized development behavior change, not detector, physical, medical or Play approval. Existing six-scene gates remain unchanged. See [implementation and measured limits](acceptance/combined-automatic-2026-11-16.md).
