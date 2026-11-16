@@ -166,7 +166,8 @@ open class SpeechAutomaticService: Service() {
         val remembered=memory.recall(scope,latest.soundContext)
         latest=CombinedAutomatic.corrected(latest,remembered)
         AutomaticMemoryStore.observe(source,request.fitting,latest.soundContext,latest.scene ?: AutomaticScene.UNKNOWN)
-        val decision=observeMasking(state,latest,capturedAt,SystemClock.elapsedRealtime(),request.settings,request.choices,safety(),runtime.requested.program)
+        val policySettings=if(watchMode) watchAutomaticDecisionSettings(request.settings) else request.settings
+        val decision=observeMasking(state,latest,capturedAt,SystemClock.elapsedRealtime(),policySettings,request.choices,safety(),runtime.requested.program)
         state=decision.state;proposal=decision.proposed
         detail="${latest.scene?.label ?: latest.severity.label}. ${decision.reason}."
         decision.proposed?.let { target ->

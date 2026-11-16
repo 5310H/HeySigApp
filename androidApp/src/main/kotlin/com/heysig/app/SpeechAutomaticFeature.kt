@@ -68,11 +68,11 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
         val watchNode=if(watch) watchPrefs.getString("node",null) else null
         if(watch) {
             check(watchNode!=null && watchPrefs.getBoolean("foregroundEnabledV1",false)) { "Use Watch connection to select and enable your paired watch first" }
-            if(!prefs.getBoolean("watchCombinedDisclosureV1",false)) {
+            if(!prefs.getBoolean("watchCombinedDisclosureV2",false)) {
                 AlertDialog.Builder(activity).setTitle("Use the watch microphone for Automatic?")
-                    .setMessage("Your selected watch analyzes ten-second microphone captures for TV and noise together, then pauses at least ten seconds. The phone microphone stays idle. Open Automatic noise on the watch and tap On after its explanation.\n\nCompact scene estimates and a 40-number sound summary cross Google's encrypted Wear OS Data Layer, which may route through Google servers. Audio and transcripts are never transferred or saved by this feature. Teach Automatic can save up to 24 summaries and categories only after you review and tap Remember; they stay on the phone and can be disabled or forgotten.\n\nAutomatic can send real program-change tones through the phone, including with the screens locked. Both devices show Off notifications. Off, disconnection, manual control, Therapy, changed settings or eight-hour expiry stops the session. Keep the phone where your aids can hear its tones. The model can make mistakes; battery and wrist-position accuracy require physical checks.")
+                    .setMessage("Your selected watch analyzes ten-second microphone captures for TV and noise together, then pauses at least ten seconds. Watch processing may take up to 30 seconds after capture; repeated checks and cooldown mean changes may take a few minutes. The phone microphone stays idle. Open Automatic noise on the watch and tap On after its explanation.\n\nCompact scene estimates and a 40-number sound summary cross Google's encrypted Wear OS Data Layer, which may route through Google servers. Audio and transcripts are never transferred or saved by this feature. Teach Automatic can save up to 24 summaries and categories only after you review and tap Remember; they stay on the phone and can be disabled or forgotten.\n\nAutomatic can send real program-change tones through the phone, including with the screens locked. Both devices show Off notifications. Off, disconnection, manual control, Therapy, changed settings or eight-hour expiry stops the session. Keep the phone where your aids can hear its tones. The model can make mistakes; battery and wrist-position accuracy require physical checks.")
                     .setNegativeButton("Not now",null).setPositiveButton("Continue") { _,_ ->
-                        if(prefs.edit().putBoolean("watchCombinedDisclosureV1",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
+                        if(prefs.edit().putBoolean("watchCombinedDisclosureV2",true).commit()) runCatching { start() }.onFailure { message=it.message;update() }
                     }.show();return
             }
         }
@@ -136,7 +136,7 @@ class SpeechAutomaticFeature(private val activity:Activity,private val programs:
             control.isChecked=prefs.getString("captureSource","phone")=="watch"
             control.minHeight=PhoneStyle.dp(activity,48);card.addView(control)
         }
-        line("Phone microphone is the default. For watch input, select and enable your watch in Watch connection, save this choice, turn Automatic On here, then open Automatic noise on the watch and tap On. Both screens may sleep after the sessions start.")
+        line("Phone microphone is the default. For watch input, select and enable your watch in Watch connection, save this choice, turn Automatic On here, then open Automatic noise on the watch and tap On. Both screens may sleep after the sessions start. Watch analysis is slower than the phone: processing may take up to 30 seconds, and repeated checks plus cooldown can take a few minutes. Individual watch results older than 30 seconds are discarded.")
         saveButton=Button(activity).also { button ->
             button.text="Save speech program choices";PhoneStyle.action(button);card.addView(button)
             button.setOnClickListener { runCatching { saveChoices();message="Your speech program choices are saved. You can go back to Noise and turn Automatic on." }.onFailure { message=it.message };update() }

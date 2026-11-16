@@ -23,20 +23,24 @@ class CombinedSoundAnalyzer(private val context:Context) {
         lastSections=emptyList()
         check(!cancelled()) { "Sound check cancelled" }
         val sections=mutableListOf<CombinedSection>()
-        for(start in listOf(0,48000,96000)) {
-            check(!cancelled()) { "Sound check cancelled" }
-            val section=pcm.copyOfRange(start,start+48000)
-            try {
-                var input:CombinedSection?=null
-                Yamnet(context,observeEvidence={ sound,features,events ->
-                    val masking=detector.classify(sound,features,events)
-                    val neural=detector.latestMeasurement ?: NeuralSeparation().measure(sound)
-                    val measurement=NoiseAccumulator(16000,3).apply { add(sound,sound.size) }.measurement()
-                    val noise=CombinedNoiseEvents.score(events)
-                    input=CombinedSection(masking,neural,measurement,noise,events.map { it.getValue("Music") }.average())
-                }).use { it.classify(section,cancelled) }
-                sections+=checkNotNull(input) { "Incomplete sound section" }
-            } finally { section.fill(0) }
+        var input:CombinedSection?=null
+        // Reuse one stateless encoder for all three matched sections. No audio is retained.
+        Yamnet(context,observeEvidence={ sound,features,events ->
+            val masking=detector.classify(sound,features,events)
+            val neural=detector.latestMeasurement ?: NeuralSeparation().measure(sound)
+            val measurement=NoiseAccumulator(16000,3).apply { add(sound,sound.size) }.measurement()
+            input=CombinedSection(masking,neural,measurement,CombinedNoiseEvents.score(events),
+                events.map { it.getValue("Music") }.average())
+        }).use { encoder ->
+            for(start in listOf(0,48000,96000)) {
+                check(!cancelled()) { "Sound check cancelled" }
+                val section=pcm.copyOfRange(start,start+48000)
+                try {
+                    input=null
+                    encoder.classify(section,cancelled)
+                    sections+=checkNotNull(input) { "Incomplete sound section" }
+                } finally { section.fill(0) }
+            }
         }
         check(!cancelled()) { "Sound check cancelled" }
         val levels=sections.map { CombinedAutomatic.section(it,settings,bands) }

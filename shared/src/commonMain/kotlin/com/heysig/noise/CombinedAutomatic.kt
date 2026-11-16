@@ -13,7 +13,7 @@ fun AutomaticScene.matches(severity:MaskingSeverity)=when(this) {
 enum class TelevisionPresence { PRESENT, ABSENT, UNKNOWN }
 
 object CombinedAutomaticProfile {
-    const val ID="combined-10s-tv-7e9d09bb8726-memory-v2"
+    const val ID="combined-10s-tv-7e9d09bb8726-memory-v3"
     const val CAPTURE_SECONDS=10
 }
 

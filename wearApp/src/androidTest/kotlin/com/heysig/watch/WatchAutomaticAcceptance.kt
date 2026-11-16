@@ -29,9 +29,12 @@ class WatchAutomaticAcceptance:Instrumentation() {
     }
     override fun onStart() {
         val result=Bundle();var activity:Activity?=null;var client:WatchAutomaticClient?=null
+        var fixtureWakeLock:PowerManager.WakeLock?=null
         fun descendants(v:View):List<View> = listOf(v)+if(v is ViewGroup) (0 until v.childCount).flatMap { descendants(v.getChildAt(it)) } else emptyList()
         try {
             check(mode in listOf("native","controlled","capture","watchOff")) { "Unknown watch test mode; no capture started" }
+            if(fixtures) fixtureWakeLock=targetContext.getSystemService(PowerManager::class.java)
+                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"HeySig:NativeFixtureCheck").apply { acquire(180_000L) }
             val manifest=JSONObject(context.assets.open("masking-fixtures/manifest.json").bufferedReader().use { it.readText() })
             val fixtures=manifest.getJSONArray("fixtures");val detector=SpeechSeparationDetector.load(targetContext);val denoiser=com.heysig.app.NeuralSeparation()
             val classes=mutableListOf<String>();var nativeCpu=0L
@@ -57,7 +60,7 @@ class WatchAutomaticAcceptance:Instrumentation() {
                         val longer=ShortArray(160000) { pcm[it%pcm.size] }
                         try {
                             var combined:MaskingEvidence?=null
-                            val started=SystemClock.elapsedRealtime()
+                            val started=SystemClock.elapsedRealtime();val cpuStarted=Debug.threadCpuTimeNanos()
                             val analyzer=com.heysig.app.CombinedSoundAnalyzer(targetContext)
                             Yamnet(targetContext,observeEvidence={ capture,pool,frames ->
                                 check(frames.size==19)
@@ -66,6 +69,7 @@ class WatchAutomaticAcceptance:Instrumentation() {
                             val elapsed=SystemClock.elapsedRealtime()-started
                             val value=checkNotNull(combined)
                             check(checkNotNull(value.scene).matches(value.severity) && value.soundContext!=null && analyzer.lastSections.size==3)
+                            result.putString("combinedNativeTiming","Elapsed "+elapsed+"ms; CPU "+((Debug.threadCpuTimeNanos()-cpuStarted)/1_000_000)+"ms; bounded partial wake lock matches Automatic service")
                             check(elapsed<WatchAutomaticProfile.MAX_AGE_MILLIS) { "Combined native inference exceeds watch evidence age: "+elapsed+"ms" }
                             result.putString("combinedNative","PASS: ten-second recorded fixture, three sections, valid scene/context; inference "+elapsed+"ms before RPC. No microphone or command; not wrist-position accuracy or battery qualification.")
                         } finally { longer.fill(0) }
@@ -161,6 +165,6 @@ class WatchAutomaticAcceptance:Instrumentation() {
             result.putString("result","PASS: watch Automatic $mode; no claim of field accuracy, battery endurance or physical aid reception")
             finish(Activity.RESULT_OK,result)
         } catch(e:Throwable) { result.putString("result","FAIL: ${e.message}");result.putString("watchStatus",WatchAutomaticService.lastStatus);finish(Activity.RESULT_CANCELED,result) }
-        finally { runOnMainSync { client?.close();WatchAutomaticService.stop(targetContext);activity?.finish() } }
+        finally { if(fixtureWakeLock?.isHeld==true) fixtureWakeLock?.release(); runOnMainSync { client?.close();WatchAutomaticService.stop(targetContext);activity?.finish() } }
     }
 }

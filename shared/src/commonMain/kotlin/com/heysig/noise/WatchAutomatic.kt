@@ -6,7 +6,7 @@ object WatchAutomaticProfile {
     const val PATH="/heysig/watch-automatic/v1"
     const val CAPABILITY="heysig_watch_automatic_phone_v1"
     const val MAX_BYTES=4096
-    const val MAX_AGE_MILLIS=15_000L
+    const val MAX_AGE_MILLIS=30_000L
     const val CONTACT_TIMEOUT_MILLIS=45_000L
 }
 
@@ -41,3 +41,11 @@ fun watchAutomaticAgeBound(reported:Long,grantElapsed:Long):Long {
     require(reported in 0..WatchAutomaticProfile.MAX_AGE_MILLIS && grantElapsed in 0..4999) { "Watch sample or grant expired" }
     return (reported+grantElapsed).also { require(it<=WatchAutomaticProfile.MAX_AGE_MILLIS) { "Watch sample expired in transit" } }
 }
+
+/** Ten-second capture + bounded watch inference + wait + conservative five-second lease.
+ * This extends confirmation continuity, not the independent 30-second evidence-age gate.
+ * Saved legacy timing is never rewritten. Phone microphone decisions retain their own settings.
+ */
+fun watchAutomaticDecisionSettings(saved:NoiseSettings):NoiseSettings = saved.copy(
+    freshnessSeconds=maxOf(saved.freshnessSeconds,saved.waitSeconds.coerceAtLeast(10)+
+        CombinedAutomaticProfile.CAPTURE_SECONDS+(WatchAutomaticProfile.MAX_AGE_MILLIS/1000).toInt()+5))
