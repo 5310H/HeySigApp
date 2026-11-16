@@ -2,7 +2,7 @@
 
 Owner request: finish one integrated Normal/Noisy/Very Noisy/TV flow, detect background-only noise, return after noise ends, and remember reviewed experiences. Built-in TV speakers are the first physical target. Live enablement remains authorized, not accepted accuracy.
 
-Implementation: ten-second bounded capture; full-window fixed TV head; three separate three-second speech/neural sections; independent recognized background-noise fallback using saved thresholds; strong noise priority; target-specific confirmations and actual quiet evidence. Memory is explicit review/Remember, cap24, 40 scalars, source/model/fitting scoped, disable/forget, no saved waveform or transcript. Existing program assignments, fitting, shared executor, manual/Therapy priority and cooldown retained. See [guide](../how-automatic-noise-works.md) and service amendment.
+Implementation: ten-second bounded capture; full-window fixed TV head; three separate three-second speech/neural sections; independent recognized background-noise fallback (including white/pink noise, static and hiss) using saved thresholds; strong noise priority; target-specific confirmations and actual quiet evidence. Memory is explicit review/Remember, cap24, 40 scalars, source/model/fitting scoped, disable/forget, no saved waveform or transcript. Existing program assignments, fitting, shared executor, manual/Therapy priority and cooldown retained. See [guide](../how-automatic-noise-works.md) and service amendment.
 
 ## TV experiment and limitations
 

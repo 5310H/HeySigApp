@@ -23,8 +23,6 @@ class CombinedSoundAnalyzer(private val context:Context) {
         lastSections=emptyList()
         check(!cancelled()) { "Sound check cancelled" }
         val sections=mutableListOf<CombinedSection>()
-        val noiseLabels=setOf("Vehicle","Traffic noise, roadway noise","Engine","Tools","Mechanisms",
-            "Dishes, pots, and pans","Vacuum cleaner","Water","Wind","Mechanical fan")
         for(start in listOf(0,48000,96000)) {
             check(!cancelled()) { "Sound check cancelled" }
             val section=pcm.copyOfRange(start,start+48000)
@@ -34,7 +32,7 @@ class CombinedSoundAnalyzer(private val context:Context) {
                     val masking=detector.classify(sound,features,events)
                     val neural=detector.latestMeasurement ?: NeuralSeparation().measure(sound)
                     val measurement=NoiseAccumulator(16000,3).apply { add(sound,sound.size) }.measurement()
-                    val noise=events.map { f -> noiseLabels.maxOf { f.getValue(it) } }.average()
+                    val noise=CombinedNoiseEvents.score(events)
                     input=CombinedSection(masking,neural,measurement,noise,events.map { it.getValue("Music") }.average())
                 }).use { it.classify(section,cancelled) }
                 sections+=checkNotNull(input) { "Incomplete sound section" }

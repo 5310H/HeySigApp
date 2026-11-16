@@ -13,13 +13,25 @@ fun AutomaticScene.matches(severity:MaskingSeverity)=when(this) {
 enum class TelevisionPresence { PRESENT, ABSENT, UNKNOWN }
 
 object CombinedAutomaticProfile {
-    const val ID="combined-10s-tv-7e9d09bb8726-memory-v1"
+    const val ID="combined-10s-tv-7e9d09bb8726-memory-v2"
     const val CAPTURE_SECONDS=10
 }
 
 /** One disjoint three-second section. All measurements are relative digital levels. */
 data class CombinedSection(val masking:MaskingEvidence,val separation:SpeechNoiseEstimate,
     val measurement:NoiseMeasurement,val noiseScore:Double,val musicScore:Double)
+
+/** Fixed local event support, including broadband noise rather than speech alone. */
+object CombinedNoiseEvents {
+    val labels=setOf("Vehicle","Traffic noise, roadway noise","Engine","Tools","Mechanisms",
+        "Dishes, pots, and pans","Vacuum cleaner","Water","Wind","Mechanical fan",
+        "Noise","Environmental noise","Static","White noise","Pink noise","Hiss","Rustle")
+    fun score(frames:List<Map<String,Double>>):Double {
+        if(frames.size!=5 || frames.any { f -> !f.keys.containsAll(labels) ||
+            labels.any { label -> !f.getValue(label).isFinite() || f.getValue(label) !in 0.0..1.0 } }) return Double.NaN
+        return frames.map { f -> labels.maxOf { f.getValue(it) } }.average()
+    }
+}
 
 object CombinedAutomatic {
     fun corrected(evidence:MaskingEvidence,learned:AutomaticScene?):MaskingEvidence {

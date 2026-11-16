@@ -12,7 +12,7 @@ Automatic analyzes one ten-second microphone capture. The full capture feeds a f
 | Normal sound or independently confirmed quiet | Universal |
 | Uncertain, invalid/clipped capture or missing assignment | Keep current program |
 
-For speech, retained-to-removed sound estimates must agree with the existing speech head, except a strong independently recognized machinery/traffic event can support the reduction estimate when the speech head abstains. For recognized background noise with no reliable speech, saved relative digital thresholds distinguish levels: levels 1–3 Normal, 4–5 Noisy, 6 Very Noisy, with the saved margin. This is not a calibrated SPL meter or a measurement of understanding. Quiet return needs actual low-level evidence, never an uncertainty timeout.
+For speech, retained-to-removed sound estimates must agree with the existing speech head, except a strong independently recognized machinery/traffic/broadband-noise event can support the reduction estimate when the speech head abstains. For recognized background noise with no reliable speech, saved relative digital thresholds distinguish levels: levels 1–3 Normal, 4–5 Noisy, 6 Very Noisy, with the saved margin. This is not a calibrated SPL meter or a measurement of understanding. Quiet return needs actual low-level evidence, never an uncertainty timeout.
 
 Watching TV remains a saved optional listening preference: clear sound uses TV while that preference is on, and quiet still returns to Universal. TV recognition also runs with it off. Turn the preference off and save to test automatic TV-to-normal return without that override.
 

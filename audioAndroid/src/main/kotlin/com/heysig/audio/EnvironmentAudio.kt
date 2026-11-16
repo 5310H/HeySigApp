@@ -93,7 +93,7 @@ class Yamnet(context: Context, private val observeScores: ((Map<String,Double>)-
              private val observeEvidence: ((ShortArray,DoubleArray?,List<Map<String,Double>>)->Unit)? = null): AutoCloseable {
     private val labelBytes=context.assets.open("environment/labels.txt").use { it.readBytes() }
     private val labels=labelBytes.toString(Charsets.UTF_8).trimEnd().lines()
-    private val selectedLabels=(EnvironmentClassifier.requiredLabels+TelevisionSignal.labels).associateWith { labels.indexOf(it) }
+    private val selectedLabels=(EnvironmentClassifier.requiredLabels+TelevisionSignal.labels+CombinedNoiseEvents.labels).associateWith { labels.indexOf(it) }
     private val interpreter: Interpreter
     private val head: EnvironmentSceneHead
     private val smallGroupHead: EnvironmentSceneHead

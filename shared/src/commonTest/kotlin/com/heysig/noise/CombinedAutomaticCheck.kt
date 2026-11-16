@@ -1,6 +1,12 @@
 package com.heysig.noise
 
 fun main() {
+    for(label in listOf("White noise","Pink noise","Static","Vehicle")) {
+        val frame=CombinedNoiseEvents.labels.associateWith { if(it==label) .9 else 0.0 }
+        check(kotlin.math.abs(CombinedNoiseEvents.score(List(5) { frame })-.9)<1e-9)
+        check(CombinedNoiseEvents.score(List(5) { frame-label }).isNaN())
+    }
+
     val settings=NoiseSettings(programs=listOf(1,1,2,2,3,3))
     val bands=SeparationMaskingBands(-4.0,8.0)
     val absent=SpeechNoiseEstimate(SeparationStatus.NO_RELIABLE_SPEECH,speechScore=.05,speechActivity=0.0)
