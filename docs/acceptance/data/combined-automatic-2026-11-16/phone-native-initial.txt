@@ -1,0 +1,5 @@
+Performing Streamed Install
+Success
+INSTRUMENTATION_RESULT: combinedAutomatic=PASS: combined fixture elapsed 2693ms; pinned TV head and combined ten-second/three-section native fixture, valid scene/context, cancellation and unchanged input; isolated reviewed-memory restart, disable, source isolation and corrupt-byte preservation. No microphone or commands; consistency, not field accuracy.
+INSTRUMENTATION_RESULT: result=PASS: combined native fixture and isolated memory; no microphone, UI changes or aid commands
+INSTRUMENTATION_CODE: -1

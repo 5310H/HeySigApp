@@ -1,0 +1,19 @@
+{
+  "phone": {
+    "installedApkSha256": "62da411d8cfa5b9f60968e5a73aa2c4cadaff645dd593fa4722d0e3704a9cfd9",
+    "sdk": "37",
+    "preferenceFilesPreserved": 8,
+    "afterNativePreferencesUnchanged": true
+  },
+  "watch": {
+    "installedApkSha256": "99614e48b0bc733287005f22a27e4ea437b2fa6951dd54c6c1653b634a192b87",
+    "sdk": "37",
+    "preferenceFilesPreserved": 1,
+    "afterNativePreferencesUnchanged": true
+  },
+  "sourceCommit": "963c3216e32cd50cbf9c723573d6d0124f4a701c",
+  "ciRun": "https://github.com/5310H/HeySigApp/actions/runs/43912161047",
+  "certificateSha256": "16a30331844bf27b7b809fc894040d9e9a08bb52fcd307fda1af21973d9f8fdb",
+  "microphoneUsed": false,
+  "hearingAidCommandsSent": false
+}
