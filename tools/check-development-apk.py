@@ -30,7 +30,8 @@ if __name__ == '__main__':
                                 if name.startswith('classes') and name.endswith('.dex')))
     required = {'Lcom/heysig/app/HomeActivity;', 'Lcom/heysig/app/ManualRuntime;',
                 'Lcom/heysig/app/voice/HandsFreeService;', 'Lcom/heysig/app/EnvironmentFeature;',
-                'Lcom/heysig/app/voice/ForegroundVoice;', 'Lcom/heysig/audio/Yamnet;'}
+                'Lcom/heysig/app/voice/ForegroundVoice;', 'Lcom/heysig/audio/Yamnet;',
+                'Lcom/heysig/app/AcousticCheckAnalyzer;'}
     missing = required - defined
     if missing:
         sys.exit('APK missing required classes: ' + ', '.join(sorted(missing)))

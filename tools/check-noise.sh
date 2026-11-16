@@ -11,6 +11,7 @@ java -cp shared/build/noise-check.jar com.heysig.noise.NoiseMeasurementCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.NoiseObserveCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.SoundTypeCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.TelevisionEvidenceCheckKt
+java -cp shared/build/noise-check.jar com.heysig.noise.AcousticCheckTestKt
 java -cp shared/build/noise-check.jar com.heysig.noise.SpeechMaskingCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.QuietRoomReturnCheckKt
 java -cp shared/build/noise-check.jar com.heysig.noise.SpeechNoiseSeparationCheckKt

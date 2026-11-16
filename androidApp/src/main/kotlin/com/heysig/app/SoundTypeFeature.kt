@@ -26,18 +26,23 @@ class SoundTypeFeature(
     private var nextAt=0L
     private var observation=SoundTypeObservation()
     @Volatile private var capturedType=SoundType.UNKNOWN
+    @Volatile private var detailedCheck=false
+    @Volatile private var capturedCheck:AcousticCheckResult?=null
     private var status="Off. Your hearing-aid programs will not change."
     private var statusView: TextView?=null
     private var toggle: Button?=null
     private fun allowed()=active && safety().let { it.foreground && it.unlocked && it.audioFree }
     private val audio=EnvironmentAudio(activity,{allowed()},
         { cancelled -> MicrophoneLease.acquire(cancelled) },{ MicrophoneLease.release() },
-        observeFrames={ frames -> capturedType=SoundTypeClassifier.classify(frames) })
+        observeFrames={ frames -> capturedType=SoundTypeClassifier.classify(frames) },
+        observeEvidence={ pcm,_,frames ->
+            if(detailedCheck) capturedCheck=AcousticCheckAnalyzer(activity).analyze(pcm,frames) { !allowed() }
+        })
     val running get()=active
     val busy get()=audio.busy()
     fun stop(reason: String="Off. Sound checks stopped.") {
         active=false;generation++;audio.stop();handler.removeCallbacksAndMessages(null)
-        observation=SoundTypeObservation();capturedType=SoundType.UNKNOWN;status=reason;update()
+        observation=SoundTypeObservation();capturedType=SoundType.UNKNOWN;detailedCheck=false;capturedCheck=null;status=reason;update()
     }
     fun detach() { statusView=null;toggle=null }
     private fun update() {
@@ -70,24 +75,63 @@ class SoundTypeFeature(
         observation=SoundTypeObservation();status="Listening… A description appears after two matching checks."
         handler.postDelayed(tick,500);update()
     }
+    private fun detailed() {
+        if(active || audio.busy()) { stop("Sound check cancelled. Wait for the microphone to stop, then try again.");return }
+        AlertDialog.Builder(activity).setTitle("Check TV and noise for ten seconds?")
+            .setMessage("Keep this screen open and the phone unlocked, near your usual listening position. The phone microphone will listen for ten seconds, then analyze TV evidence and three sections of noise-reduction measurements. Processing can take a little longer.\n\nSound stays in memory and is discarded. This check saves no recording, transcript or sound history and uploads no audio. Leaving this screen or tapping On to turn it Off cancels the check.\n\nStarting stops Automatic and other listening features. Your hearing-aid programs and fitting will not change.")
+            .setNegativeButton("Cancel",null).setPositiveButton("Start check") { _,_ ->
+                if(activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED) {
+                    activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO),402)
+                    status="Allow microphone access, then tap Check TV and noise again.";update()
+                } else if(!safety().let { it.foreground && it.unlocked && it.audioFree } || audio.busy()) {
+                    status="Keep HeySig open and unlocked. Wait until other audio or commands finish.";update()
+                } else {
+                    prepare();active=true;detailedCheck=true;capturedCheck=null;generation++
+                    endsAt=SystemClock.elapsedRealtime()+120_000;nextAt=0
+                    status="Listening for ten seconds, then analyzing TV and noise… Tap On to cancel."
+                    handler.post(tick);update()
+                }
+            }.show()
+    }
+    private fun describe(check:AcousticCheckResult):String {
+        fun number(value:Double?)=value?.let { "%.3f".format(java.util.Locale.US,it) } ?: "unavailable"
+        fun level(severity:MaskingSeverity)=when(severity) {
+            MaskingSeverity.QUIET -> "Quiet"
+            MaskingSeverity.CLEAR -> "Normal"
+            MaskingSeverity.MODERATE -> "Noisy"
+            MaskingSeverity.HEAVY -> "Very Noisy"
+            MaskingSeverity.UNKNOWN -> "Uncertain"
+        }
+        return "Ten-second check complete. No program changed.\n"+
+            "Current detector: ${level(check.agreement())}. Noise-reduction estimate: ${level(check.agreement(true))}.\n"+
+            "TV identity is not established. Model score: ${number(check.television?.mean)} mean, ${number(check.television?.peak)} peak; radio ${number(check.television?.radioMean)}. These are raw scores, not probabilities.\n"+
+            check.windows.mapIndexed { index,w ->
+                "Section ${index+1}: detector ${level(w.masking)}, reduction ${level(w.reductionSeverity)}; retained/background ${number(w.separation.retainedToResidualDb)} dB; retained ${number(w.separation.retainedDbfs)}, removed ${number(w.separation.residualDbfs)} dBFS; speech ${number(w.separation.speechScore)}; ${w.separation.status}."
+            }.joinToString("\n")+
+            "\nThe three sections cover seconds 0–9. The full ten seconds supply TV evidence. Removed sound can include speech; these estimates do not measure what you understand."
+    }
     private val tick=object: Runnable {
         override fun run() {
             if(!active) return
             val now=SystemClock.elapsedRealtime()
-            if(now>=endsAt) { stop("Five-minute check finished. Tap Off to try again.");return }
+            if(now>=endsAt) { stop(if(detailedCheck) "Sound check timed out. No program changed." else "Five-minute check finished. Tap Off to try again.");return }
             if(!safety().let { it.foreground && it.unlocked }) { stop("Check stopped. Keep HeySig open and unlocked to try again.");return }
             if(!allowed()) {
                 observation=SoundTypeObservation();status="Paused while the phone is speaking or busy.";update()
             } else if(!audio.busy() && now>=nextAt) {
                 val token=generation
                 capturedType=SoundType.UNKNOWN;nextAt=now+10_000
-                audio.sample(3) { result,error,capturedAt ->
+                val detailed=detailedCheck
+                audio.sample(if(detailed) 10 else 3) { result,error,capturedAt ->
                     val type=capturedType
+                    val check=capturedCheck
                     handler.post {
                         if(!active || token!=generation) return@post
                         if(!allowed()) { observation=SoundTypeObservation();status="Check interrupted. Waiting to try again." }
                         else if(result==null || error!=null) {
                             stop("Could not check the sound. Make sure the microphone is available, then try again.");return@post
+                        } else if(detailed) {
+                            stop(check?.let { describe(it) } ?: "Sound check incomplete. No program changed.");return@post
                         } else {
                             observation=observation.next(type,capturedAt,SystemClock.elapsedRealtime())
                             status=if(observation.shown!=SoundType.UNKNOWN) observation.shown.label
@@ -111,6 +155,9 @@ class SoundTypeFeature(
             card.addView(button);button.setOnClickListener { if(active) stop() else start() }
         }
         statusView=line(status).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
+        card.addView(Button(activity).apply {
+            text="Check TV and noise (10 seconds)";PhoneStyle.action(this);setOnClickListener { detailed() }
+        })
         line("Mostly speech • Speech and noise • Mostly noise\nIf HeySig cannot tell, it says Not sure yet.")
         line("Point the phone toward what you are listening to. Keep this screen open and the phone unlocked. Use comfortable, everyday sounds. You do not need to make loud sounds for this check.")
         line("This is a try-out. Detecting speech does not mean knowing whether you can understand it. This check never changes programs. To use Automatic afterward, go back to Noise and turn it on.")

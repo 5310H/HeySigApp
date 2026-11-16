@@ -75,6 +75,22 @@ class SpeechAutomaticAcceptance:Instrumentation() {
                     val actual=checkNotNull(evidence)
                     if(actual.severity.name!=fixture.getString("severity") || kotlin.math.abs(actual.score-fixture.getDouble("score"))>=.01) driftFailures.add("${fixture.getString("file")}: expected ${fixture.getString("severity")}/${fixture.getDouble("score")}, actual $actual")
                     native.add("${fixture.getString("file")}: ${actual.severity}")
+                    if(i==0) {
+                        val longer=ShortArray(160000) { pcm[it%pcm.size] }
+                        val before=digest(raw)
+                        try {
+                            var checked:AcousticCheckResult?=null
+                            Yamnet(targetContext,observeEvidence={ input,_,frames ->
+                                checked=AcousticCheckAnalyzer(targetContext).analyze(input,frames) { false }
+                            }).use { it.classify(longer) }
+                            val detailed=checkNotNull(checked)
+                            check(detailed.television?.frames==19 && detailed.windows.size==3)
+                            check(detailed.windows.all { it.masking==actual.severity })
+                            check(longer.indices.all { longer[it]==pcm[it%pcm.size] } && digest(raw)==before)
+                            check(runCatching { AcousticCheckAnalyzer(targetContext).analyze(longer,emptyList()) { true } }.isFailure)
+                            result.putString("acousticCheck","PASS: ten-second TV evidence, three disjoint matched neural/model sections, cancellation and unchanged input; no microphone or command")
+                        } finally { longer.fill(0) }
+                    }
                 } finally { pcm.fill(0);raw.fill(0) }
             }
             result.putString("native",native.joinToString("; ")+"; consistency, not accuracy acceptance")
