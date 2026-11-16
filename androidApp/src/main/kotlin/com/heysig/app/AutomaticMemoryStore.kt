@@ -7,6 +7,7 @@ import android.os.SystemClock
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Spinner
+import android.widget.ScrollView
 import android.widget.TextView
 import com.heysig.noise.*
 import org.json.JSONArray
@@ -50,7 +51,7 @@ class AutomaticMemoryStore(context:Context, private val prefs:android.content.Sh
             "Turn Automatic on or run the ten-second check first, then review its latest situation here within two minutes."
             else "Last situation: "+last.scene.label+". Choose what it should recognize next time. Remember saves a compact sound summary and your category. No recording or transcript is saved. Up to 24 corrections are kept. Strong noise, confirmation, cooldown and manual/Therapy priority still apply." })
         body.addView(selector)
-        val dialog=AlertDialog.Builder(activity).setTitle("Teach Automatic").setView(body)
+        val dialog=AlertDialog.Builder(activity).setTitle("Teach Automatic").setView(ScrollView(activity).apply { addView(body) })
             .setNegativeButton("Cancel",null)
             .setNeutralButton(if(enabled()) "Disable memories" else "Enable memories") { _,_ ->
                 if(prefs.edit().putBoolean("enabled",!enabled()).commit()) report("Remembered corrections "+if(enabled()) "enabled." else "disabled.")
