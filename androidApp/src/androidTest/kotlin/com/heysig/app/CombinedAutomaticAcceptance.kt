@@ -17,10 +17,12 @@ object CombinedAutomaticAcceptance {
         try {
             val analyzer=CombinedSoundAnalyzer(app)
             var result:MaskingEvidence?=null
+            val started=android.os.SystemClock.elapsedRealtime()
             Yamnet(app,observeEvidence={ sound,pool,frames ->
                 check(frames.size==19)
                 result=analyzer.classify(sound,pool,frames,NoiseSettings())
             }).use { it.classify(pcm) }
+            val elapsed=android.os.SystemClock.elapsedRealtime()-started
             val evidence=checkNotNull(result)
             check(checkNotNull(evidence.scene).matches(evidence.severity))
             check(analyzer.lastSections.size==3)
@@ -38,7 +40,7 @@ object CombinedAutomaticAcceptance {
             check(restored.recall(scope,row.context)==null && restored.book().experiences==listOf(row))
             check(prefs.edit().putString("experiences","corrupt").commit())
             check(restored.book().experiences.isEmpty() && prefs.getString("experiences",null)=="corrupt")
-            return "PASS: pinned TV head and combined ten-second/three-section native fixture, valid scene/context, cancellation and unchanged input; isolated reviewed-memory restart, disable, source isolation and corrupt-byte preservation. No microphone or commands; consistency, not field accuracy."
+            return "PASS: combined fixture elapsed "+elapsed+"ms; pinned TV head and combined ten-second/three-section native fixture, valid scene/context, cancellation and unchanged input; isolated reviewed-memory restart, disable, source isolation and corrupt-byte preservation. No microphone or commands; consistency, not field accuracy."
         } finally { pcm.fill(0);raw.fill(0);check(prefs.edit().clear().commit()) }
     }
 }

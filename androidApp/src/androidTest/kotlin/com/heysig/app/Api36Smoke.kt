@@ -13,9 +13,11 @@ import android.view.ViewGroup
 class Api36Smoke : Instrumentation() {
     private var captureScreens = false
     private var freshEmulator = false
+    private var combinedOnly = false
     override fun onCreate(arguments: Bundle?) {
         super.onCreate(arguments); captureScreens = arguments?.getString("screenshots") == "true"
-        freshEmulator = arguments?.getString("freshEmulator") == "true"; start()
+        freshEmulator = arguments?.getString("freshEmulator") == "true"
+        combinedOnly = arguments?.getString("combinedOnly") == "true"; start()
     }
     override fun onStart() {
         val result = Bundle()
@@ -23,6 +25,7 @@ class Api36Smoke : Instrumentation() {
         try {
             check(targetContext.applicationInfo.targetSdkVersion == 36)
             result.putString("combinedAutomatic",CombinedAutomaticAcceptance.verify(targetContext,context))
+            if(combinedOnly) { result.putString("result","PASS: combined native fixture and isolated memory; no microphone, UI changes or aid commands");finish(Activity.RESULT_OK,result);return }
             result.putString("watchCapabilityLifecycle",WatchCapabilityAcceptance.verify(this))
             if(freshEmulator) {
                 check(Build.HARDWARE == "ranchu") { "Fresh test fitting is restricted to the Android emulator" }

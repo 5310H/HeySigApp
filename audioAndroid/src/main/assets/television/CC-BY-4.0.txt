@@ -100,7 +100,7 @@ adopted on December 20, 1996, and/or similar international agreements.
 
 e. Exceptions and Limitations means fair use, fair dealing, and/or any
 other exception or limitation to Copyright and Similar Rights that
-applies to Your use of the Licensed Material.  
+applies to Your use of the Licensed Material.
 
 f. Licensed Material means the artistic or literary work, database, or
 other material to which the Licensor applied this Public License.
@@ -383,6 +383,3 @@ the avoidance of doubt, this paragraph does not form part of the
 public licenses.
 
 Creative Commons may be contacted at creativecommons.org.
-
-
-

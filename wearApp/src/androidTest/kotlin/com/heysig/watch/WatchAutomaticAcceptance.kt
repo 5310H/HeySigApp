@@ -53,6 +53,23 @@ class WatchAutomaticAcceptance:Instrumentation() {
                     }).use { it.classify(pcm) }
                     check(evidence?.severity?.name==fixture.getString("severity") && kotlin.math.abs(checkNotNull(evidence).score-fixture.getDouble("score"))<.01) { "Native watch decision differs: $evidence" }
                     classes.add("${fixture.getString("file")}: ${evidence?.severity}")
+                    if(i==0) {
+                        val longer=ShortArray(160000) { pcm[it%pcm.size] }
+                        try {
+                            var combined:MaskingEvidence?=null
+                            val started=SystemClock.elapsedRealtime()
+                            val analyzer=com.heysig.app.CombinedSoundAnalyzer(targetContext)
+                            Yamnet(targetContext,observeEvidence={ capture,pool,frames ->
+                                check(frames.size==19)
+                                combined=analyzer.classify(capture,pool,frames,NoiseSettings())
+                            }).use { it.classify(longer) }
+                            val elapsed=SystemClock.elapsedRealtime()-started
+                            val value=checkNotNull(combined)
+                            check(checkNotNull(value.scene).matches(value.severity) && value.soundContext!=null && analyzer.lastSections.size==3)
+                            check(elapsed<WatchAutomaticProfile.MAX_AGE_MILLIS) { "Combined native inference exceeds watch evidence age: "+elapsed+"ms" }
+                            result.putString("combinedNative","PASS: ten-second recorded fixture, three sections, valid scene/context; inference "+elapsed+"ms before RPC. No microphone or command; not wrist-position accuracy or battery qualification.")
+                        } finally { longer.fill(0) }
+                    }
                 } finally { pcm.fill(0);raw.fill(0) }
                 sendStatus(0,Bundle().apply { putString("phase","Native fixture ${i+1} of ${fixtures.length()} passed") })
             }

@@ -8,6 +8,7 @@ fun main() {
     check(book.recall("phone",sound)==null)
     book=book.remember(AutomaticExperience("phone",sound,AutomaticScene.TV,1000))
     check(book.recall("phone",sound)==AutomaticScene.TV)
+    check(AutomaticMemory(listOf(AutomaticExperience("phone",sound,AutomaticScene.TV,1),AutomaticExperience("phone",sound,AutomaticScene.NORMAL,2))).recall("phone",sound)==null)
     check(book.recall("watch",sound)==null && book.recall("phone",changed)==null)
     book=book.remember(AutomaticExperience("phone",sound,AutomaticScene.NORMAL,2000))
     check(book.experiences.size==1 && book.recall("phone",sound)==AutomaticScene.NORMAL)
