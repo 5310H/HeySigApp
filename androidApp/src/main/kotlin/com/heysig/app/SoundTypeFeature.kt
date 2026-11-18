@@ -48,7 +48,7 @@ class SoundTypeFeature(
                 capturedCombined=result
                 capturedScene=result.scene ?: AutomaticScene.UNKNOWN
                 val bands=activity.assets.open("separation/bands.txt").bufferedReader().use { SeparationMaskingBands.decode(it.readText()) }
-                capturedCheck=AcousticCheckResult(TelevisionSignal.summarize(frames),analyzer.lastSections.map {
+                capturedCheck=AcousticCheckResult(null,analyzer.lastSections.map {
                     AcousticCheckWindow(it.masking.severity,it.separation,bands.severity(it.separation))
                 })
             }
@@ -92,18 +92,18 @@ class SoundTypeFeature(
     }
     private fun detailed() {
         if(active || audio.busy()) { stop("Sound check cancelled. Wait for the microphone to stop, then try again.");return }
-        AlertDialog.Builder(activity).setTitle("Check TV and noise for ten seconds?")
-            .setMessage("Keep this screen open and the phone unlocked, near your usual listening position. The phone microphone will listen for ten seconds, then analyze TV evidence and three sections of noise-reduction measurements. Processing can take a little longer.\n\nSound stays in memory and is discarded. This check saves no recording or transcript and uploads no audio. Its latest compact summary stays in memory for two minutes; Teach Automatic saves a correction only after you review and tap Remember. Leaving this screen or tapping On to turn it Off cancels the check.\n\nStarting stops Automatic and other listening features. Your hearing-aid programs and fitting will not change.")
+        AlertDialog.Builder(activity).setTitle("Estimate noise for ten seconds?")
+            .setMessage("Keep this screen open and the phone unlocked, near your usual listening position. The phone microphone will listen for ten seconds, then estimate speech masking and noise in three sections. Processing can take a little longer.\n\nSound stays in memory and is discarded. This check saves no recording or transcript and uploads no audio. Its latest compact summary stays in memory for two minutes; Teach Automatic saves a correction only after you review and tap Remember. Leaving this screen or tapping On to turn it Off cancels the check.\n\nStarting stops Automatic and other listening features. Your hearing-aid programs and fitting will not change.")
             .setNegativeButton("Cancel",null).setPositiveButton("Start check") { _,_ ->
                 if(activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED) {
                     activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO),402)
-                    status="Allow microphone access, then tap Check TV and noise again.";update()
+                    status="Allow microphone access, then tap Estimate noise again.";update()
                 } else if(!safety().let { it.foreground && it.unlocked && it.audioFree } || audio.busy()) {
                     status="Keep HeySig open and unlocked. Wait until other audio or commands finish.";update()
                 } else {
                     prepare();active=true;detailedCheck=true;capturedCheck=null;capturedCombined=null;capturedScene=AutomaticScene.UNKNOWN;generation++
                     endsAt=SystemClock.elapsedRealtime()+120_000;nextAt=0
-                    status="Listening for ten seconds, then analyzing TV and noise… Tap On to cancel."
+                    status="Listening for ten seconds, then estimating noise levels… Tap On to cancel."
                     handler.post(tick);update()
                 }
             }.show()
@@ -119,11 +119,10 @@ class SoundTypeFeature(
         }
         return "Ten-second check complete. No program changed.\nCombined Automatic result: "+capturedScene.label+".\n"+
             "Current detector: ${level(check.agreement())}. Noise-reduction estimate: ${level(check.agreement(true))}.\n"+
-            "Underlying TV event score: ${number(check.television?.mean)} mean, ${number(check.television?.peak)} peak; radio ${number(check.television?.radioMean)}. Combined Automatic also uses its trained TV head and reviewed corrections.\n"+
             check.windows.mapIndexed { index,w ->
                 "Section ${index+1}: detector ${level(w.masking)}, reduction ${level(w.reductionSeverity)}; retained/background ${number(w.separation.retainedToResidualDb)} dB; retained ${number(w.separation.retainedDbfs)}, removed ${number(w.separation.residualDbfs)} dBFS; speech ${number(w.separation.speechScore)}; ${w.separation.status}."
             }.joinToString("\n")+
-            "\nThe three sections cover seconds 0–9. The full ten seconds supply TV evidence. Removed sound can include speech; these estimates do not measure what you understand."
+            "\nThe three sections cover seconds 0–9. Removed sound can include speech; these estimates do not measure what you understand."
     }
     private val tick=object: Runnable {
         override fun run() {
@@ -164,16 +163,16 @@ class SoundTypeFeature(
     }
     fun render(content: LinearLayout) {
         val card=PhoneStyle.card(activity,content)
-        PhoneStyle.heading(activity,card,"What does HeySig hear?")
+        PhoneStyle.heading(activity,card,"Noise estimate")
         fun line(value:String)=TextView(activity).also { it.text=value;PhoneStyle.text(it);it.setPadding(0,8,0,16);card.addView(it) }
-        line("Try a sound check. It only shows a description. Your hearing aids will not change.")
-        openProgramPreview?.let { open -> card.addView(Button(activity).apply { text="Choose Automatic programs for speech";setOnClickListener { stop();open() } }) }
+        line("This estimates speech masking and background noise. It only shows a description; your hearing aids will not change.")
+        openProgramPreview?.let { open -> card.addView(Button(activity).apply { text="Choose Automatic noise programs";setOnClickListener { stop();open() } }) }
         toggle=Button(activity).also { button ->
             card.addView(button);button.setOnClickListener { if(active) stop() else start() }
         }
         statusView=line(status).apply { accessibilityLiveRegion=android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE }
         card.addView(Button(activity).apply {
-            text="Check TV and noise (10 seconds)";PhoneStyle.action(this);setOnClickListener { detailed() }
+            text="Estimate noise (10 seconds)";PhoneStyle.action(this);setOnClickListener { detailed() }
         })
         line("Mostly speech • Speech and noise • Mostly noise\nIf HeySig cannot tell, it says Not sure yet.")
         line("Point the phone toward what you are listening to. Keep this screen open and the phone unlocked. Use comfortable, everyday sounds. You do not need to make loud sounds for this check.")

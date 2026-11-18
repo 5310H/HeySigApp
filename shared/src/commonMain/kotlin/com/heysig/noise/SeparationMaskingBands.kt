@@ -1,8 +1,9 @@
 package com.heysig.noise
 
 /** Development-calibrated speech/residual bands, not wearer calibration or clinical SNR.
- * A neural denoiser can remove wanted speech or retain competing talkers. Its ratio
- * may corroborate the original masking detector; it cannot replace speech evidence.
+ * The estimate is used only when speech status, activity and score pass the checks below.
+ * A neural denoiser can remove wanted speech or retain competing talkers, so this is
+ * an estimate of masking rather than an intelligibility or hearing-aid cancellation measure.
  */
 data class SeparationMaskingBands(val heavyMaximumDb:Double,val clearMinimumDb:Double,val marginDb:Double=2.0) {
     init {

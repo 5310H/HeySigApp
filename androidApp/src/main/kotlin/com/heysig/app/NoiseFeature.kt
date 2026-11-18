@@ -252,7 +252,7 @@ class NoiseFeature(
             try { PhoneStyle.heading(activity,target,title); build() } finally { target = parent }
         }
         group("Automatic noise") {
-            line("Automatic checks TV and noise together, then selects your saved program. Strong noise takes priority over TV. Unsure means keep the current program.")
+            line("Automatic estimates how much speech is masked. Partly masked speech selects Noisy; heavily masked speech selects Very Noisy. Clear or quiet sound returns to Universal. Unsure means keep the current program.")
             line(speechAutomatic.listeningContext())
             automaticButton=button(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") "On" else "Off") { handle(if(SpeechAutomaticService.active || AutomaticNoiseService.active || mode=="Automatic") NoiseCommand.Stop else NoiseCommand.Automatic) }
             openSoundType?.let { open -> button("Check speech and noise",open) }
@@ -400,22 +400,21 @@ class NoiseFeature(
             button("How to use") {
                 android.app.AlertDialog.Builder(activity).setTitle("Using Automatic")
                     .setMessage("""
-                        Save Universal, Noisy, Very Noisy and TV in Choose programs. Automatic checks TV and noise together; Watching TV is an optional preference for clear sound during a TV session. TV recognition also works with that switch off.
+                        Save Universal, Noisy and Very Noisy in Choose programs. Automatic uses estimated speech masking to choose between them. TV is no longer detected as a separate Automatic situation; any legacy TV program choice remains saved but is ignored.
 
                         Expected choices after repeated checks:
-                        • Normal or confirmed quiet → Universal.
-                        • Noisy → Noisy.
-                        • Very Noisy → Very Noisy, including while TV is playing.
-                        • Recognized TV without stronger noise → TV.
+                        • Clear speech or confirmed quiet → Universal.
+                        • Partly masked speech → Noisy.
+                        • Heavily masked speech → Very Noisy.
                         • Unsure or unassigned → keep the current program.
 
                         Tap red Off to start, read the microphone explanation and allow access. The green On button and notification Off stop it. Keep the phone where the aids can hear its tones; normal phone Automatic may continue with the screen locked.
 
-                        Each capture lasts ten seconds. Three separate three-second sections measure noise and speech reduction; the whole capture supplies TV evidence. There is then at least a ten-second pause plus processing. Noisy, Very Noisy and TV need the saved confirmation count (normally three, at least two). Universal return needs two fresh agreeing checks. The saved cooldown (normally 60 seconds) must finish before fresh confirmation starts. Return may take over a minute. Unsure clears confirmation; it never becomes quiet just because time passed.
+                        Each capture lasts ten seconds. Three separate three-second sections estimate speech masking and background noise. There is then at least a ten-second pause plus processing. Noisy and Very Noisy need the saved confirmation count (normally three, at least two). Universal return needs two fresh agreeing checks. The saved cooldown (normally 60 seconds) must finish before fresh confirmation starts. Return may take over a minute. Unsure clears confirmation; it never becomes quiet just because time passed.
 
-                        Speech masking uses retained-to-removed sound estimates. Recognized background noise without reliable speech also uses the saved relative level thresholds. These are phone digital levels, not calibrated sound-pressure readings. Music, ambiguous sound and conflicting evidence may hold the current program. TV and conversation can be confused.
+                        Speech masking uses a phone-side model and retained-to-removed sound estimates; it does not read the hearing aids' internal noise cancellation. Recognized background noise without reliable speech also uses the saved relative level thresholds. These are phone digital levels, not calibrated sound-pressure readings. Music, ambiguous sound and conflicting evidence may hold the current program.
 
-                        To correct a recent result, run Check TV and noise, then open Teach Automatic within two minutes. Choose the right category and review Remember. Only then are up to 24 compact summaries and your corrections saved locally. Similar future sound may reuse a correction. Strong noise, confirmation and all priorities still apply. Memories can be disabled or forgotten. No recording or transcript is saved.
+                        To correct a recent result, run Estimate noise, then open Teach Automatic within two minutes. Choose the right noise category and review Remember. Only then are up to 24 compact summaries and your corrections saved locally. Similar future sound may reuse a correction. Strong noise, confirmation and all priorities still apply. Older TV corrections remain saved but are ignored. Memories can be disabled or forgotten. No recording or transcript is saved.
 
                         Manual controls and Therapy take priority. Timed Wake does not restart Automatic. Sessions end after eight hours and never restart themselves. Calibration and teaching are optional. Sent means playback completed; only you can confirm aid reception and listening benefit.
                     """.trimIndent())

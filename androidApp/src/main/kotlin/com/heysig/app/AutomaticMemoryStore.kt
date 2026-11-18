@@ -41,7 +41,7 @@ class AutomaticMemoryStore(context:Context, private val prefs:android.content.Sh
         val body=LinearLayout(activity).apply { orientation=LinearLayout.VERTICAL;setPadding(24,16,24,8) }
         body.addView(TextView(activity).apply { text="Remembered corrections: "+book().experiences.size+
             ". "+if(enabled()) "Enabled." else "Disabled." })
-        val labels=listOf(AutomaticScene.NORMAL,AutomaticScene.NOISY,AutomaticScene.VERY_NOISY,AutomaticScene.TV)
+        val labels=listOf(AutomaticScene.NORMAL,AutomaticScene.NOISY,AutomaticScene.VERY_NOISY)
         val selector=Spinner(activity).apply {
             contentDescription="What should Automatic have recognized?"
             adapter=ArrayAdapter(activity,android.R.layout.simple_spinner_dropdown_item,labels.map { it.label })
@@ -49,7 +49,7 @@ class AutomaticMemoryStore(context:Context, private val prefs:android.content.Sh
         }
         body.addView(TextView(activity).apply { text=if(last==null)
             "Turn Automatic on or run the ten-second check first, then review its latest situation here within two minutes."
-            else "Last situation: "+last.scene.label+". Choose what it should recognize next time. Remember saves a compact sound summary and your category. No recording or transcript is saved. Up to 24 corrections are kept. Strong noise, confirmation, cooldown and manual/Therapy priority still apply." })
+            else "Last situation: "+last.scene.label+". Choose the noise category it should recognize next time. Remember saves a compact sound summary and your category. No recording or transcript is saved. Up to 24 corrections are kept. Strong noise, confirmation, cooldown and manual/Therapy priority still apply." })
         body.addView(selector)
         val dialog=AlertDialog.Builder(activity).setTitle("Teach Automatic").setView(ScrollView(activity).apply { addView(body) })
             .setNegativeButton("Cancel",null)

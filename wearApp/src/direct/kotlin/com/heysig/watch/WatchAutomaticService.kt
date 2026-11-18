@@ -103,7 +103,7 @@ class WatchAutomaticService:Service() {
                     pendingRpc=false
                     if(accept(reply)) {
                         if(!audio.busy() && SystemClock.elapsedRealtime()>=nextCapture && reply.optBoolean("captureAllowed",false)) capture()
-                        else detail=if(audio.busy()) "Analyzing ten-second TV and noise check" else if(reply.optBoolean("captureAllowed",false)) "Microphone idle between checks" else "Paused for phone audio, settling or manual priority"
+                        else detail=if(audio.busy()) "Analyzing ten-second noise check" else if(reply.optBoolean("captureAllowed",false)) "Microphone idle between checks" else "Paused for phone audio, settling or manual priority"
                         publish()
                     }
                 }

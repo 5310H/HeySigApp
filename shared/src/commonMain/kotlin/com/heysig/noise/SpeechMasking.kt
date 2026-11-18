@@ -129,7 +129,7 @@ object MaskingSignal {
     }
 }
 
-/** Watching TV is an explicit listening choice, never an inferred sound-source identity. */
+/** Legacy TV fields remain readable so saved choices survive upgrades; Automatic uses noise roles only. */
 data class MaskingChoices(val everyday:Int?,val noisy:Int?,val veryNoisy:Int?,
     val television:Int?=null,val watchingTv:Boolean=false) {
     init {
@@ -138,7 +138,7 @@ data class MaskingChoices(val everyday:Int?,val noisy:Int?,val veryNoisy:Int?,
     }
     fun target(severity:MaskingSeverity)=when(severity) {
         MaskingSeverity.QUIET -> everyday
-        MaskingSeverity.CLEAR -> if(watchingTv) television else everyday
+        MaskingSeverity.CLEAR -> everyday
         MaskingSeverity.MODERATE -> noisy
         MaskingSeverity.HEAVY -> veryNoisy
         MaskingSeverity.UNKNOWN -> null
@@ -147,8 +147,9 @@ data class MaskingChoices(val everyday:Int?,val noisy:Int?,val veryNoisy:Int?,
         null -> target(evidence.severity)
         AutomaticScene.VERY_NOISY -> veryNoisy
         AutomaticScene.NOISY -> noisy
-        AutomaticScene.TV -> television
-        AutomaticScene.NORMAL -> if(watchingTv && evidence.severity!=MaskingSeverity.QUIET) television else everyday
+        // Legacy evidence and saved corrections must never route Automatic to TV.
+        AutomaticScene.TV -> target(evidence.severity)
+        AutomaticScene.NORMAL -> everyday
         AutomaticScene.UNKNOWN -> null
     }
 }

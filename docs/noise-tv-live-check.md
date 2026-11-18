@@ -1,13 +1,9 @@
-# Physical TV/noise check
+# Physical noise check
 
-November 16 combined detector. [Expected behavior](how-automatic-noise-works.md).
+The standalone room diagnostic is now called Estimate noise. It uses the foreground phone microphone for ten seconds, then reports three section estimates. It saves no audio, sends no hearing-aid command and does not alter saved fitting or program choices.
 
-Use ordinary comfortable room levels. Do not generate excessive sound for testing.
+Use ordinary comfortable sounds. Compare clear/quiet sound, partly masked speech and sustained louder background noise separately. Record the result, each section's estimate, the actual source and any mistake. Do not treat a single passing check as acceptance.
 
-- At the usual listening position, run the foreground ten-second Check TV and noise with built-in TV speakers playing. Record scene, TV evidence, three noise sections and any error; no aid command is sent.
-- Repeat with TV off and ordinary conversation, then actual background noise and quiet. An uncertain result is a hold, not a successful classification.
-- Review and Remember a correction only when the wearer knows the correct category. Do not save guessed corrections just to test persistence.
-- After confirming saved program assignments, the wearer may explicitly start live Automatic. Record TV → Noisy → Very Noisy → TV/Normal transitions, confirmation count, cooldown and physical aid reception separately. Leave Watching TV off for source-detection return tests.
-- Stop with notification Off. Confirm the microphone stops and no future automatic request is sent. Manual/Therapy interruption and watch disconnection also require device checks.
+The earlier TV check reported TV both while built-in TV speakers played and while the owner confirmed people were talking with the TV off. That TV-versus-conversation comparison failed. Automatic no longer routes sound to the TV program. This does not validate the noise stages or their return behavior.
 
-Packaged-fixture and emulator tests do not replace this physical record. Longer capture and optional memories do not establish real-world reliability by themselves.
+Only after the wearer chooses to start live Automatic should an aid-response check record Universal → Noisy → Very Noisy → Universal, the confirmation count, cooldown, manual/Therapy interruption, and actual physical aid reception separately. Stop with notification Off. A completed tone send does not confirm reception or listening benefit.

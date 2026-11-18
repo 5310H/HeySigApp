@@ -59,11 +59,13 @@ fun main() {
     check(duplicate.proposed==null)
     check(observeMasking(MaskingState(),before,1000,1010,settings,choices,safety,5).state.count==0)
     var interrupted=observeMasking(MaskingState(),quiet,1000,1010,settings,choices,safety,5).state
-    interrupted=observeMasking(interrupted,MaskingEvidence(MaskingSeverity.CLEAR,score=.9),14000,14010,settings,choices,safety,5).state
+    val clearReturn=observeMasking(interrupted,MaskingEvidence(MaskingSeverity.CLEAR,score=.9),14000,14010,settings,choices,safety,5)
+    check(clearReturn.proposed==1 && clearReturn.state.pending==1)
+    interrupted=clearReturn.state
     val firstQuiet=observeMasking(interrupted,quiet,27000,27010,settings,choices,safety,5)
-    check(firstQuiet.state.count==1 && firstQuiet.proposed==null)
+    check(firstQuiet.state.count==0 && firstQuiet.proposed==null)
     recordedQuietChecks()
-    println("PASS: quiet room with low Silence score; per-frame activity/level/invalid/muted vetoes; neural speech and residual corroboration; cooldown and two-check TV return, no Unknown timeout")
+    println("PASS: quiet room with low Silence score; per-frame activity/level/invalid/muted vetoes; neural speech and residual corroboration; cooldown and two-check Universal return, no Unknown timeout")
 }
 
 private fun recordedQuietChecks() {
