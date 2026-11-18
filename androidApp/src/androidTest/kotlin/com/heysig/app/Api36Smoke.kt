@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.view.View
 import android.view.ViewGroup
 
@@ -47,6 +48,20 @@ class Api36Smoke : Instrumentation() {
             result.putString("buttonFeedback","PASS: phone roles, watch actions and dialog buttons invert on press and restore after release/cancel; disabled actions stay inactive")
             fun descendants(view:View): List<View> = listOf(view) + if(view is ViewGroup)
                 (0 until view.childCount).flatMap { descendants(view.getChildAt(it)) } else emptyList()
+            val runtime = ManualRuntime.get(targetContext)
+            val originalRequested = runtime.requested
+            runOnMainSync {
+                runtime.requested = originalRequested.copy(program = 2)
+                runtime.stateChanged?.invoke()
+                val programStatus = descendants(screen.findViewById(android.R.id.content))
+                    .filterIsInstance<TextView>().single { it.tag == "requested-program-status" }
+                check(programStatus.text.toString().contains("CI Noisy (program 2)")) {
+                    "Program status did not refresh after an Automatic request"
+                }
+                runtime.requested = originalRequested
+                runtime.stateChanged?.invoke()
+            }
+            result.putString("requestedProgramUi", "PASS: program status refreshes after a request; no command or persistence")
             fun shellInput(command: String) {
                 uiAutomation.executeShellCommand(command).use { descriptor ->
                     java.io.FileInputStream(descriptor.fileDescriptor).use { it.readBytes() }
@@ -125,6 +140,17 @@ class Api36Smoke : Instrumentation() {
             capture("volume")
             open("‹ Back")
             open("Noise")
+            runOnMainSync {
+                runtime.requested = originalRequested.copy(program = 3)
+                runtime.stateChanged?.invoke()
+                val programStatus = descendants(screen.findViewById(android.R.id.content))
+                    .filterIsInstance<TextView>().single { it.tag == "requested-program-status" }
+                check(programStatus.text.toString().contains("CI Very Noisy (program 3)")) {
+                    "Program status did not refresh on the Noise screen"
+                }
+                runtime.requested = originalRequested
+                runtime.stateChanged?.invoke()
+            }
             capture("noise")
             runOnMainSync {
                 val buttons=descendants(screen.findViewById(android.R.id.content)).filterIsInstance<Button>()

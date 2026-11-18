@@ -71,6 +71,11 @@ class HomeActivity : Activity() {
     private var pendingNotificationSleepRevision: Long?=null
     private var seenRuntimeRevision=0L
     private var statusRow: LinearLayout? = null
+    private var requestedProgramStatus: TextView? = null
+    private fun requestedProgramStatusText(): String = requested.program?.let { slot ->
+        val name = fitting?.programs?.find { it.slot == slot }?.name ?: "Unknown program"
+        "Last program requested: $name (program $slot). Aid receipt is not confirmed."
+    } ?: "Last program requested: none recorded."
     private fun speechStatusText() = "Prompts ${if(voiceEnabled("voicePrompts")) "on" else "off"} · Replies ${if(voiceEnabled("spokenResponses")) "on" else "off"}"
     private var backCallback: android.window.OnBackInvokedCallback? = null
     @Volatile private var remoteReply: ((JSONObject) -> Unit)? = null
@@ -231,6 +236,7 @@ class HomeActivity : Activity() {
         if(page=="Sleep" && AutomaticSleepScheduler(this).timerActive && setupChanged?.invoke()!=true) show()
         if(automaticVoicePrefs.getBoolean("shake",false)) foregroundShake.start()
         runtime.stateChanged={
+            if(resumed) requestedProgramStatus?.text=requestedProgramStatusText()
             if(resumed && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
         }
         if(seenRuntimeRevision!=runtime.revision && page in listOf("Home","Volume","Balance","Tinnitus","Batteries","Sleep") && !(page=="Sleep" && setupChanged?.invoke()==true)) { seenRuntimeRevision=runtime.revision;message=runtime.lastResult;show() }
@@ -387,6 +393,13 @@ class HomeActivity : Activity() {
             else -> "Settings"
         }
         line(title).apply { PhoneStyle.text(this,minOf(25f,40f/resources.configuration.fontScale),true); isAccessibilityHeading = true }
+        requestedProgramStatus = TextView(this).apply {
+            tag = "requested-program-status"
+            text = requestedProgramStatusText()
+            PhoneStyle.text(this, 13f, color = PhoneStyle.secondary)
+            accessibilityLiveRegion = android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
+            content.addView(this)
+        }
         if(page in listOf("Home","Settings")) line("Build ${BuildConfig.GIT_BUILD_ID} · ${BuildConfig.GIT_BUILD_DATE}")
         val statusCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
