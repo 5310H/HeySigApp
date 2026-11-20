@@ -169,14 +169,27 @@ fun observeMasking(previous:MaskingState,evidence:MaskingEvidence,capturedAt:Lon
     if(!evidence.score.isFinite() || evidence.score !in 0.0..1.0 ||
         (evidence.severity !in listOf(MaskingSeverity.UNKNOWN,MaskingSeverity.QUIET) && evidence.score<.65)) return hold("Invalid or weak masking evidence")
     if(!isFreshNoiseSample(capturedAt,deliveredAt,settings.freshnessSeconds) || previous.lastCapture?.let { capturedAt<=it }==true) return hold("Delayed or repeated sample; checking again")
-    if(previous.lastSuccess?.let { deliveredAt<it || deliveredAt-it<settings.cooldownSeconds*1000L }==true) return hold("Waiting for your cooldown; confirmations cleared")
     val target=choices.target(evidence) ?: return hold(if(evidence.severity==MaskingSeverity.UNKNOWN) evidence.reason else "No program chosen for this situation; keeping current program")
     if(target==settings.sleepProgram || target in safety.protectedPrograms) return hold("Therapy stays under manual control")
+    // A confirmed clear return is a safety-improving downshift, so do not make
+    // the user wait through the upward-change cooldown. It still needs two
+    // consecutive fresh clear/quiet captures below.
+    val universalReturn=target==choices.everyday && evidence.severity in listOf(MaskingSeverity.QUIET,MaskingSeverity.CLEAR)
+    if(previous.lastSuccess?.let { deliveredAt<it }==true)
+        return hold("Delayed sound check; checking again")
+    if(!universalReturn && previous.lastSuccess?.let { deliveredAt-it<settings.cooldownSeconds*1000L }==true)
+        return hold("Waiting for your cooldown; confirmations cleared")
     val fresh=previous.lastCapture?.let { capturedAt-it<=settings.freshnessSeconds*1000L }==true
     // Quiet and clear speech can agree on Universal without identical labels.
     // Never merge confirmations across different targets (including TV).
-    val universalReturn=target==choices.everyday && evidence.severity in listOf(MaskingSeverity.QUIET,MaskingSeverity.CLEAR)
-    val needed=if(universalReturn) 2 else maxOf(2,settings.confirmations)
+    // Heavy evidence has generated false Very Noisy proposals in offline
+    // crowd controls. Require five repeated fresh captures before that route;
+    // keep the user's ordinary confirmation setting for Noisy and other routes.
+    val needed=when {
+        universalReturn -> 2
+        target==choices.veryNoisy -> maxOf(5,settings.confirmations)
+        else -> maxOf(2,settings.confirmations)
+    }
     val sameTarget=if(previous.candidateTarget!=null) previous.candidateTarget==target else previous.severity?.let { choices.target(it)==target }==true
     val count=if(fresh && sameTarget) minOf(needed,previous.count+1) else 1
     val next=previous.copy(severity=evidence.severity,count=count,lastCapture=capturedAt,candidateTarget=target)

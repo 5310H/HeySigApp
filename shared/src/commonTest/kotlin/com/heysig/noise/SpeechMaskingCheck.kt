@@ -7,7 +7,8 @@ fun main() {
     fun evidence(s:MaskingSeverity)=MaskingEvidence(s,SoundType.UNKNOWN,.9,"test scalar evidence")
     fun feed(severity:MaskingSeverity,current:Int=1,start:Long=1000,initial:MaskingState=MaskingState(),config:NoiseSettings=settings,mapping:MaskingChoices=choices,guard:NoiseSafety=safe):MaskingDecision {
         var state=initial;var last=MaskingDecision(state,reason="")
-        for(i in 0 until if(severity in listOf(MaskingSeverity.QUIET,MaskingSeverity.CLEAR)) 2 else 3) { val t=start+i*10000;last=observeMasking(state,evidence(severity),t,t+20,config,mapping,guard,current);state=last.state }
+        val checks=when(severity) { MaskingSeverity.QUIET,MaskingSeverity.CLEAR -> 2;MaskingSeverity.HEAVY -> 5;else -> 3 }
+        for(i in 0 until checks) { val t=start+i*10000;last=observeMasking(state,evidence(severity),t,t+20,config,mapping,guard,current);state=last.state }
         return last
     }
     check(feed(MaskingSeverity.MODERATE).proposed==2)
@@ -37,7 +38,7 @@ fun main() {
         MaskingSeverity.HEAVY to 3,MaskingSeverity.CLEAR to 1)) {
         val decision=feed(severity,current,at,session,mapping=tv)
         check(decision.proposed==target)
-        session=completeMasking(decision.state,decision.state.token,true,at+22000)
+        session=completeMasking(decision.state,decision.state.token,true,at+if(severity==MaskingSeverity.HEAVY) 42000 else 22000)
         current=target;at+=83000
     }
     // Normal quiet/clear labels alternate, but both independently select Universal.
@@ -58,13 +59,28 @@ fun main() {
     check(feed(MaskingSeverity.MODERATE,current=3,guard=safe.copy(protectedPrograms=setOf(3))).proposed==null)
     check(feed(MaskingSeverity.HEAVY,guard=NoiseSafety(audioFree=true,microphoneSession=true)).proposed==3)
     check(feed(MaskingSeverity.HEAVY,guard=NoiseSafety(audioFree=true)).proposed==null)
+    var heavy=MaskingState();var heavyDecision=MaskingDecision(heavy,reason="")
+    for(i in 0..3) {
+        val t=1000L+i*10000
+        heavyDecision=observeMasking(heavy,evidence(MaskingSeverity.HEAVY),t,t+20,settings,choices,safe,1)
+        heavy=heavyDecision.state
+        check(heavyDecision.proposed==null && heavy.count==i+1)
+    }
+    heavyDecision=observeMasking(heavy,evidence(MaskingSeverity.HEAVY),41000,41020,settings,choices,safe,1)
+    check(heavyDecision.proposed==3 && heavyDecision.state.count==5)
+    // Clear return remains available during the cooldown following a confirmed change.
+    val changed=completeMasking(heavyDecision.state,heavyDecision.state.token,true,42000)
+    val clearFirst=observeMasking(changed,evidence(MaskingSeverity.CLEAR),43000,43020,settings,choices,safe,3)
+    check(clearFirst.proposed==null && clearFirst.state.count==1)
+    val clearSecond=observeMasking(clearFirst.state,evidence(MaskingSeverity.QUIET),53000,53020,settings,choices,safe,3)
+    check(clearSecond.proposed==1)
     val pending=feed(MaskingSeverity.HEAVY).state
     check(feed(MaskingSeverity.HEAVY,initial=pending).proposed==null)
     check(completeMasking(pending,pending.token+1,true,22000)==pending)
-    val complete=completeMasking(pending,pending.token,true,22000)
-    check(feed(MaskingSeverity.QUIET,current=3,start=23000,initial=complete).state.count==0)
+    val complete=completeMasking(pending,pending.token,true,42000)
+    check(feed(MaskingSeverity.QUIET,current=3,start=23000,initial=complete).proposed==null)
     check(feed(MaskingSeverity.QUIET,current=3,start=83000,initial=complete).proposed==1)
-    val failed=completeMasking(pending,pending.token,false,22000)
+    val failed=completeMasking(pending,pending.token,false,42000)
     check(failed.halted && feed(MaskingSeverity.QUIET,current=3,start=83000,initial=failed).proposed==null)
     var first=observeMasking(MaskingState(),evidence(MaskingSeverity.MODERATE),1000,1100,settings,choices,safe,1).state
     check(first.count==1)

@@ -38,12 +38,13 @@ fun main() {
         combine(MaskingSeverity.HEAVY,TelevisionPresence.PRESENT) to 3,
         combine(MaskingSeverity.CLEAR,TelevisionPresence.PRESENT) to 1)) {
         var result=MaskingDecision(state,reason="")
-        for(i in 0..2) {
+        val checks=if(evidence.severity==MaskingSeverity.HEAVY) 5 else 3
+        for(i in 0 until checks) {
             result=observeMasking(result.state,evidence,at+i*20000,at+i*20000+10,settings,choices,safe,current)
             if(result.proposed!=null) break
         }
         check(result.proposed==target)
-        state=completeMasking(result.state,result.state.token,true,at+41000);current=target;at+=110000
+        state=completeMasking(result.state,result.state.token,true,at+if(evidence.severity==MaskingSeverity.HEAVY) 81000 else 41000);current=target;at+=110000
     }
     // TV presence no longer changes a clear result or routes it away from Universal.
     val first=observeMasking(MaskingState(),combine(MaskingSeverity.CLEAR,TelevisionPresence.PRESENT),1000,1010,settings,choices,safe,3)

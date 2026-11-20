@@ -1,6 +1,6 @@
 # Automatic noise behavior
 
-Development behavior, November 17, 2026. Choose Universal, Noisy and Very Noisy under Noise → Choose programs and save. Automatic no longer identifies TV as a separate situation or selects the saved TV role. Existing TV program choices and Watching TV preference remain in saved settings for compatibility, but Automatic ignores them. Manual program selection still works.
+Development behavior, November 19, 2026. Choose Universal, Noisy and Very Noisy under Noise → Choose programs and save. Automatic no longer identifies TV as a separate situation or selects the saved TV role. Existing TV program choices and Watching TV preference remain in saved settings for compatibility, but Automatic ignores them. Manual program selection still works.
 
 Automatic uses a ten-second microphone capture. Three separate three-second sections estimate speech masking, retained sound, removed sound and background noise. A majority is needed for a noise category. It does not measure the hearing aids' internal noise cancellation; the phone estimates how much speech is masked from its own microphone.
 
@@ -11,7 +11,7 @@ Automatic uses a ten-second microphone capture. Three separate three-second sect
 | Speech heavily masked / stronger noise requiring more support | Very Noisy |
 | Uncertain, invalid/clipped capture or missing assignment | Keep current program |
 
-With repeated checks, Automatic can move from Universal to Noisy when speech is partly masked, then to Very Noisy if later evidence shows heavier masking. As masking falls, fresh clear or quiet evidence returns it to Universal. A single short quiet gap does not cause a return. Noisy destinations use the saved confirmation count (normally three, at least two); Universal return needs two fresh matching checks. The saved cooldown (normally 60 seconds) clears confirmation until it finishes. A change or return can take over a minute. Uncertain evidence clears confirmation; it never becomes quiet merely because time passed.
+With repeated checks, Automatic can move from Universal to Noisy when speech is partly masked, then to Very Noisy if later evidence shows heavier masking. Very Noisy now requires five consecutive fresh Heavy checks, even when the saved confirmation count is lower. Noisy destinations use the saved confirmation count (normally three, at least two). As masking falls, two fresh clear or quiet checks return it to Universal; these checks can proceed during the saved cooldown, but samples must be newer than the last completed change. A single short quiet gap does not cause a return. The saved cooldown (normally 60 seconds) still gates noisy changes. Uncertain evidence clears confirmation; it never becomes quiet merely because time passed.
 
 Speech masking uses a local model and retained-to-removed sound estimates. Recognized background noise without reliable speech uses saved relative digital thresholds (levels 1–3 Normal, 4–5 Noisy, 6 Very Noisy, with the saved margin). These phone levels are not calibrated sound-pressure readings. Music, ambiguous sound and conflicting evidence may hold the current program. The estimates do not measure understanding or identify a target talker. A missed or false classification remains possible.
 

@@ -48,7 +48,7 @@ fun main() {
     val choices=MaskingChoices(1,3,6,5,true)
     val safety=NoiseSafety(foreground=true,unlocked=true,audioFree=true)
     var state=MaskingState(lastSuccess=0)
-    check(observeMasking(state,quiet,30000,30010,settings,choices,safety,5).state.count==0)
+    check(observeMasking(state,quiet,30000,30010,settings,choices,safety,5).state.count==1)
     for(i in 0..1) {
         val at=61000L+i*13000
         val decision=observeMasking(state,quiet,at,at+10,settings,choices,safety,5)

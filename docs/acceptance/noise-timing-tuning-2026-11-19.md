@@ -1,0 +1,7 @@
+# Noise switching timing adjustment — November 19, 2026
+
+Status: shared-policy change with regression coverage; not physical acceptance. The owner reported that live noise switching reached Very Noisy too readily and that return to Universal felt slow. Existing offline crowd evidence also found background-only Very Noisy proposals and non-monotonic intermediate results.
+
+The classifier, noise thresholds, saved assignments, and saved confirmation settings are unchanged. The shared decision policy now requires five consecutive fresh Heavy observations before selecting Very Noisy. Noisy continues to use the saved confirmation count, with a minimum of two. A return to Universal still needs two consecutive fresh clear/quiet observations, but those observations and the resulting return can occur during the saved post-change cooldown. Samples delivered before the most recent successful change remain rejected. Manual control, Therapy priority, protected-program checks, unresolved-command handling, and the validated executor are unchanged.
+
+`bash tools/check-noise.sh` passed all listed shared noise checks, including new regressions for five-check Very Noisy confirmation, early but post-change Universal return, stale evidence rejection, and the full Universal → Noisy → Very Noisy → Universal sequence. `./gradlew :shared:test` passed 37 tests. These checks validate policy behavior, not detector accuracy or real-world timing. The acoustic thresholds were not retuned or re-evaluated, and physical acceptance remains unverified.
